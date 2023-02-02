@@ -46,6 +46,6 @@ $$
 
 {\frac{d}{dx}f(x)}_{x\to 1^-}  = 2 \\
 {\frac{d}{dx}f(x)}_{x\to 1^+}  = 2 \\
-&=& \therefore \frac{d}{dx} x^2 = 2  \\
+& \frac{d}{dx} x^2 = 2  \\
 \end{align*}
 $$

@@ -108,19 +108,19 @@ Therefore $a=-16$, $b=100$, and $c=6$
 ##### Given $f(x) = x^2$, find the Limit of $f(x)$ at $x=3$
 
 $$
-\begin{align}
+\begin{align*}
 \text{As x} \rightarrow 3^-, \text{ } f(x) \text{->} 9 \\
 \text{As x} \rightarrow 3^+, \text{ } f(x) \text{->} 9
-\end{align}
+\end{align*}
 $$
 
 Or
 
 $$
-\begin{align}
+\begin{align*}
 \lim_{x\rightarrow3^-} f(x) =9 \\
 \lim_{x\rightarrow3^+} f(x) = 9
-\end{align}
+\end{align*}
 $$
 
 The first $9$ is known as the left limit of $f(x)$ and the other $9$ is known as the right limit of $f(x)$
@@ -128,9 +128,9 @@ The first $9$ is known as the left limit of $f(x)$ and the other $9$ is known as
 The Limit of $f(x)$ at $x=3$
 
 $$
-\begin{align}
+\begin{align*}
 \lim_{x\rightarrow3} f(x) = 9
-\end{align}
+\end{align*}
 $$
 
 This is because the left limit and right limit converge.
@@ -138,37 +138,37 @@ This is because the left limit and right limit converge.
 ###### In the case where:
 
 $$
-\begin{align}
+\begin{align*}
 \lim_{x\rightarrow1^-} f(x) = 5 \\
 \lim_{x\rightarrow1^+} f(x) = 4
-\end{align}
+\end{align*}
 $$
 
 The left and right limits do not converge so there is no limit of $f(x)$ for $x = 1$
 
 $$
-\begin{align}
+\begin{align*}
 \lim_{x\rightarrow1} f(x) = \text{No such unique number} \\
 \therefore \text{The limit of } f(x) \text{ at } x= 1 \text{ does not exist}
-\end{align}
+\end{align*}
 $$
 
 ###### In the case where the one limit does not exist (increasing without bounds):
 
 $$
-\begin{align}
+\begin{align*}
 \lim_{x\rightarrow1^-} f(x) \rightarrow \infin \\
 \lim_{x\rightarrow1^+} f(x) \rightarrow 4
-\end{align}
+\end{align*}
 $$
 
 The limit does not exist because the left limit does not exist.
 
 $$
-\begin{align}
+\begin{align*}
 \lim_{x\rightarrow1} f(x) = \text{does not exist} \\
 \because \text{ the left limit does not exist}
-\end{align}
+\end{align*}
 $$
 
 ### Graphical

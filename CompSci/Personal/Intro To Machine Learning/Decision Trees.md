@@ -64,12 +64,63 @@ The idea behind this is that each tree might to a relatively good job of predict
 To build a random forest, each decision tree build should do an acceptable job of predicting the target and be different from the other trees. We get build trees to have some randomness by:
 
 - Selection the data points used to build a tree
+
 - Selection the features in each split test
 
-	##### Building
+	###### Building
 
 - Number of trees to build - `n_estimators`
+
 - Bootstrap sample 
   - Taking a data point randomly from `n_samples`, `n_samples` times.
+  
 - The number of trees is built using the bootstrap sample
-- 
+
+##### Strengths, Weaknesses and Parameters
+
+###### Parameters
+
+- `n_estimators` - Number of trees to build. Larger = better
+- `n_jobs`- Used to set the number of cores for CPU core parallelization.
+- `max_features` - Determines how random each generated tree is. `max_features = sqrt(n_features)` for classification and `max_features = n_features` for regression.
+
+###### Strengths
+
+- Work well without heavy tuning of parameters
+- Doesn't require data scaling
+- Works well on very large data sets
+- Training can easily be  parallelized over many CPU cores
+
+###### Weaknesses
+
+- Basically Impossible to interpret a large number of trees in detail
+- Don't tend to perform on very high dimensional, sparse data such as text data.
+- Require more memory and are slower to train and predict than linear models.
+
+#### Gradient Boosted Regression Trees (GBRT)
+
+> Works by building trees in a serial manner where each tree tries to correct the mistakes of the previous one.
+
+By default there is no randomization in GBRTs, instead strong pre-pruning is used. GBRTs usually use shallow trees of depth one to five making the model smaller in terms of memory and makes predictions faster. The idea of GB is to combine many simple models (weak learners). 
+
+An important parameter of GB is the `learning_rate` which controls how strongly each tree tries to correct the mistakes of previous trees. A higher learning rate means each tree makes stronger corrections allowing for more complex models. 
+
+
+
+##### Strengths, Weaknesses, and Parameters
+
+###### Parameters
+
+- `n_estimators`
+- `learning_rate` - Controls how strongly each tree tries to correct the mistakes of previous trees
+- `max_depth` - Usually set very low, not deeper than five splits
+
+###### Strengths
+
+- Works well without scaling
+
+###### Weaknesses
+
+- Require careful tuning of parameters
+- Can take a long time to train
+

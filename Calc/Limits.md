@@ -173,6 +173,4 @@ $$
 
 ### Graphical
 
-2023-01-27
-
 Given $f(x) = x^2$, evaluate the Limit of $f(x)$ at $x=3$ using the graphical approach.

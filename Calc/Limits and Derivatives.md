@@ -53,7 +53,7 @@ $$
 2. Investigate the existence or otherwise the derivatives if the following functions:
 
 $$
-\begin{align}
+\begin{align*}
 f(x) =\begin{cases}
 x^2, & \text{if } \leq 2  \\
 &&& \text{at }x=2  \\
@@ -66,7 +66,7 @@ g(x) = |x| = \begin{cases}
 &&& \text{at } x= 0 \\
 x, & \text{if } x \geq 0
 \end{cases}
-\end{align}
+\end{align*}
 $$
 
 Q1.
@@ -155,5 +155,126 @@ $$
  \frac{1}{2\sqrt{x}} \\
 
     & \frac{df}{dx} = \lim_{h \to 0} \frac{f(x+h) -f(x)}{h} = \frac{1}{2\sqrt{x}} \\
+\end{align*}
+$$
+
+### Techniques of Differentiation
+
+#### Power Rule
+
+$$
+\begin{align*}
+    y = x^n, \text{ n is a real number}\\
+    \frac{dy}{dx} = nx^{n-1} \\
+
+\end{align*}
+$$
+
+Questions
+
+$$
+\begin{align}
+    y = x^2 \\
+    y = \frac{1}{x^2} \\
+    y = \frac{1}{\sqrt{x}} +x^3-1 \\
+    y = x^{-8} + 3x^2 \\
+\end{align}
+$$
+
+Q1.
+
+$$
+\begin{align*}
+    y = x^2, \text{ n = 2}\\
+    \frac{dy}{dx} =2x^{2-1}\\
+&= 2x^1 \\
+&= 2x \\
+\end{align*}
+$$
+
+Q2.
+
+$$
+\begin{align*}
+    y = \frac{1}{x^2} \\
+    y = x^{-2}, \text{ n = -2} \\
+    & y\prime = -2x
+\end{align*}
+$$
+
+Q3.
+
+$$
+\begin{align*}
+    y = \sqrt{x} \\
+    y = x^{\frac{1}{2}} \\
+    y\prime = \frac{x^{-\frac{1}{2}}}{2} \\
+    y\prime = \frac{1}{2\sqrt{x}}
+\end{align*}
+$$
+
+Q4.
+
+$$
+\begin{align*}
+    y = \frac{1}{\sqrt{x}} + x^3 -1 \\
+    y\prime = x^{-\frac{1}{2}} +x^3 -1 \\
+    y\prime = -\frac{1}{2}x^{-\frac{3}{2}} + 3x^2 \\
+
+\end{align*}
+$$
+
+Qi.
+
+$$
+\begin{align*}
+y = -x^{-8} + 3x^2 \\
+y\prime = -8x^{-9} + 6x
+
+\end{align*}
+$$
+
+<br>
+
+#### Chain Rule
+
+###### Chain Function
+
+> A composite function i.e. $f[g]$
+
+$$
+\begin{align*}
+
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    y = (2x+1)^2 \\
+    y\prime = 4(2x+1) \\
+\end{align*}
+$$
+
+$$
+\begin{align*}
+    y = (3x^2+2x)^5 \\
+    y = (5)(6x+2)(3x^2+2x)^4 \\
+    y= (30x+10)(3x^2+2x)
+\end{align*}
+$$
+
+#### Product Rule
+
+$$
+\begin{align*}
+
+\end{align*}
+$$
+
+#### Quotient Rule
+
+$$
+\begin{align*}
+
 \end{align*}
 $$

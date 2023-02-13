@@ -202,7 +202,7 @@ $$
 \begin{align*}
     y = \frac{1}{x^2} \\
     y = x^{-2}, \text{ n = -2} \\
-    & y\prime = -2x
+    & y^{\prime} = -2x
 \end{align*}
 $$
 
@@ -212,8 +212,8 @@ $$
 \begin{align*}
     y = \sqrt{x} \\
     y = x^{\frac{1}{2}} \\
-    y\prime = \frac{x^{-\frac{1}{2}}}{2} \\
-    y\prime = \frac{1}{2\sqrt{x}}
+    y^{\prime} = \frac{x^{-\frac{1}{2}}}{2} \\
+    y^{\prime} = \frac{1}{2\sqrt{x}}
 \end{align*}
 $$
 
@@ -222,8 +222,8 @@ Q4.
 $$
 \begin{align*}
     y = \frac{1}{\sqrt{x}} + x^3 -1 \\
-    y\prime = x^{-\frac{1}{2}} +x^3 -1 \\
-    y\prime = -\frac{1}{2}x^{-\frac{3}{2}} + 3x^2 \\
+    y^{\prime} = x^{-\frac{1}{2}} +x^3 -1 \\
+    y^{\prime} = -\frac{1}{2}x^{-\frac{3}{2}} + 3x^2 \\
 
 \end{align*}
 $$
@@ -233,7 +233,7 @@ Qi.
 $$
 \begin{align*}
 y = -x^{-8} + 3x^2 \\
-y\prime = -8x^{-9} + 6x
+y^{\prime} = -8x^{-9} + 6x
 
 \end{align*}
 $$
@@ -255,7 +255,7 @@ $$
 $$
 \begin{align*}
     y = (2x+1)^2 \\
-    y\prime = 4(2x+1) \\
+    y^{\prime} = 4(2x+1) \\
 \end{align*}
 $$
 
@@ -298,9 +298,9 @@ Q1. $y=(x^2+1)(x^3-x)$
 $$
 \begin{align*}
     y = (x^2+1)(x^3-x)\\
-    y\prime = (2x)(x^3-x) + (x^2+1)(3x^2-1) \\
-    y\prime = 2x^4 - 2x^2 + 3x^4 +2x^2-1 \\
-    & y\prime = 5x^4 -1
+    y^{\prime} = (2x)(x^3-x) + (x^2+1)(3x^2-1) \\
+    y^{\prime} = 2x^4 - 2x^2 + 3x^4 +2x^2-1 \\
+    & y^{\prime} = 5x^4 -1
 \end{align*}
 $$
 
@@ -308,9 +308,9 @@ Q2. $y=(6x^3-x)(10-20x)$
 
 $$
 \begin{align*}
-    y\prime = (18x^2-1)(10-20x) + (-20)(6x^3-x) \\
-    y\prime = 180x^2 -10 -360x^3 + 20x  - 120x^3+20x \\
-y\prime  &= -480x^3+ 180x^2+ 40x - 10
+    y^{\prime} = (18x^2-1)(10-20x) + (-20)(6x^3-x) \\
+    y^{\prime} = 180x^2 -10 -360x^3 + 20x  - 120x^3+20x \\
+y^{\prime}  &= -480x^3+ 180x^2+ 40x - 10
 \end{align*}
 $$
 
@@ -328,8 +328,20 @@ $$
 
 #### Quotient Rule
 
+Where $\large{y=\frac{f(x)}{g(x)}}$
+
 $$
 \begin{align*}
-
+    \frac{dy}{dx} = \frac{g(x) \times f^{^{\prime}}(x) - f(x) \times g^{^{\prime}}(x)}{(g(x))^2}
 \end{align*}
 $$
+
+Where $\large {y=\frac{u}{v}}$
+
+$$
+\begin{align*}
+y^{\prime} = \frac{v \times u^{\prime} - u \times v^{\prime}}{v^2}
+\end{align*}
+$$
+
+#### Questions

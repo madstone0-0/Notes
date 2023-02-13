@@ -248,12 +248,6 @@ $$
 
 $$
 \begin{align*}
-
-\end{align*}
-$$
-
-$$
-\begin{align*}
     y = (2x+1)^2 \\
     y^{\prime} = 4(2x+1) \\
 \end{align*}
@@ -283,13 +277,77 @@ $$
 \end{align*}
 $$
 
+Q1. $y = 15x^9 - 3x^{12} +5x - 46$
+
+$$
+    y^{\prime} = 185x^{8} - 36x^{11} +5
+$$
+
+Q2. $y = 2t^6+7t^{-6}$
+
+$$
+    y^{\prime} = 12t^{5} = 42t^{-7}
+$$
+
+Q3. $y = 8x^3-\frac{1}{3x^5} + x- 23$
+
+$$
+\begin{align*}
+    y = 8x^3 - \frac{1}{3x^{5}} + x -23 \\
+    y = 8x^3 - \frac{1}{3}x^{-5} + x -23 \\
+    y^{\prime} = 24x^2 + \frac{5}{3}x^{-6} + 1
+\end{align*}
+$$
+
+Q4. $y = \sqrt{x} + 9\sqrt[3]{x^4} - \frac{2}{\sqrt[5]{x^2}}$
+
+$$
+\begin{align*}
+    y = \sqrt{x} + 9\sqrt[3]{7} - \frac{2}{\sqrt[5]{x^2}} \\
+    y = x^{\frac{1}{2}} + 9(x^{7})^{\frac{1}{3}} - 2(x^2)^{-\frac{1}{5}} \\
+    y = x^{\frac{1}{2}} + 9x^{\frac{7}{3}} - 2x^{-\frac{2}{5}} \\
+    y^{\prime} = \frac{1}{2}x^{-\frac{1}{2}} +21x^{\frac{4}{3}} + \frac{4}{5}x^{-\frac{7}{5}} \\
+    y^{\prime} = \frac{1}{2\sqrt{x}} + 21x^{\frac{4}{3}} + \frac{4}{5}x^{-\frac{7}{5}}
+\end{align*}
+$$
+
+Q5. $y = \sqrt[3]{x^2}(2x-x^2)$
+
+$$
+\begin{align*}
+    y = (x^2)^{\frac{1}{3}}(2x-x^2) \\
+    y = x^{\frac{2}{3}}(2x-x^2) \\
+    y = 2x^{\frac{5}{3}} - x^{\frac{2}{3}}\\
+    y^{\prime} = \frac{10}{3}x^{\large\frac{2}{3}} - \frac{8}{3}x^{\large\frac{5}{3}}
+\end{align*}
+$$
+
+Q6. $\large{y = \frac{2t^5+t^2-5}{t^2}}$
+
+$$
+\begin{align*}
+y = 2t^3 + 1 -\frac{5}{t^2} \\
+y = 2t^3 + 1 - 5t^{-2} \\
+y^{\prime} = 6t^2 + 10t^{-3}
+\end{align*}
+$$
+
+Q7. $y = 2x^3 + \large{\frac{300}{x^3}} + 4$
+
+$$
+\begin{align*}
+    y = 2x^3 + 300x^{-3} + 4\\
+    y^{\prime} = 6x^2 - 900x^{-4}
+\end{align*}
+$$
+
 #### Product Rule
 
 Given $y=u\times v$
 
 $$
 \begin{align*}
-\frac{dy}{dx} = u\prime \times v + v\prime \times u
+\frac{dy}{dx} = u^{\prime} \times v + v^{\prime} \times u
 \end{align*}
 $$
 
@@ -323,6 +381,61 @@ $$
     y = (4-t^2)(1+5t^2)\\
     y = (x-\frac{2}{x^2})(7-2x^3) \\
     y = (3-x)(1-2x+x^2)
+\end{align*}
+$$
+
+Q1. $y = (4t^2-t)(t^3-8t^2+12)$
+
+$$
+\begin{align*}
+    y^{\prime} = (8t- 1)(t^3-8t^2+12) + (3t^2-16t)(4t^2-t) \\
+    y^{\prime} = 8t^{4} - 64t^3 + 96t - t^3 + 8t^2 -12 + 12t^{4} - 3t^3 - 64t^3 + 16t^2\\
+    y^{\prime} = 20t^{4} -132t^3 + 24t^2 +96t -12 \\
+\end{align*}
+
+
+$$
+
+Q2. $y = (1+\sqrt{x^3})(x^{-3}-2\sqrt[3]{x})$
+
+$$
+\begin{align*}
+y = (1+(x^3)^{\frac{1}{2}})(x^{-3}-2\sqrt[3]{x}) \\
+y = (1+x^{\frac{1}{2}})(x^{-3}-2(x^{\frac{1}{3}})) \\
+y^{\prime} = (\frac{3}{2}x^{\frac{1}{2}})(x^{-3}-2x^{\frac{1}{3}}) + (-3x^{4} - \frac{2}{3}x^{-\frac{2}{3}}-\frac{2}{3}x^{\frac{5}{6}}) \\y^{\prime} = \frac{3}{2}x^{-\frac{5}{2}}-3x^{\frac{5}{6}} - 3x^{-4}-3x^{-\frac{5}{2}} - \frac{2}{3}x^{-\frac{2}{3}} - \frac{2}{3}x^{\frac{5}{6}} \\
+y^{\prime} = -\frac{11}{3}x^{\frac{5}{6}} - \frac{3}{2}x^{-\frac{5}{2}} - \frac{2}{3}x^{-\frac{2}{3}} - 3x^{-4}
+\end{align*}
+$$
+
+Q3. $y = (4-t^2)(1+5t^2)$
+
+$$
+\begin{align*}
+    y^{\prime} = (-2t)(1+5t^2) + (10t)(4-t^2) \\
+    y^{\prime} = -2t - 10t^3 + 40t - 10t^3\\
+    y^{\prime} = 20t^3 + 38t
+\end{align*}
+$$
+
+Q4. $y = (x-\frac{2}{x^2})(7-2x^3)$
+
+$$
+\begin{align*}
+    y = (x-2x^{-2})(7-2x^3)\\
+    y^{\prime} = (1+4x^{-3})(7-2x^3) + (-6x^2)(x-2x^{-2})\\
+    y^{\prime} = 7 - 2x^3 + 28x^{-3} - 8x^{0} - 6x^3 + 12x^0\\
+y^{\prime} = 7 - 2x^3 + 28x^{-3} - 8 - 6x^3 + 12\\
+&y^{\prime} = -8x^3+\frac{28}{x^3}+11
+\end{align*}
+$$
+
+Q5. $y = (3-x)(1-2x+x^2)$
+
+$$
+\begin{align*}
+    y^{\prime} = (-1)(1-2x+x^2) + (2x-2)(3-x) \\
+    y^{\prime} = -1 + 2x -x^2 + 6x-2x^2 - 6 +2x\\
+y^{\prime} &= -7 + 10x - 3x^2
 \end{align*}
 $$
 

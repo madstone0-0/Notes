@@ -1,0 +1,9 @@
+/*
+!.gitignore
+
+!/_Raws
+/_Raws/*
+!/_Raws/Calc
+!/_Raws/CompSci
+
+!/_Exported/

@@ -7,9 +7,9 @@ A Limit of a function is not necessarily one of the function's output values.
 A Limit of a function can be one of the function values.
 
 $$
-\begin{align*}
+\begin{aligned}
 \lim_{x\to a} f(x) = f(a) \\
-\end{align*}
+\end{aligned}
 $$
 
 Then we can say that function is continuous at $x = a$
@@ -21,9 +21,9 @@ This means for a function to be continued at $x=a$
 -   $\lim_{x\to a} f(x) = f(a)$
 
 $$
-\begin{align*}
+\begin{aligned}
 \lim_{x\to1} (x^2+2x+1)
-\end{align*}
+\end{aligned}
 $$
 
 This function is continuous.
@@ -36,4 +36,4 @@ A graph with no breaks is continuous. Graphically a continuous function should h
 
 -   Holes - A holes in a graph are called removable discontinuity, because they can be determined by studying neighbouring values using Limits.
 -   Jumps - Jump discontinuity, due to a sudden change in values.
-    -   $$ \begin{align*}\begin{cases} x^2, & \text{if } x <1 \\ x+ 4, & \text{if } x \geq 1 \end{cases} \\ \end{align*} $$
+    -   $$ \begin{aligned}\begin{cases} x^2, & \text{if } x <1 \\ x+ 4, & \text{if } x \geq 1 \end{cases} \\ \end{aligned} $$

@@ -3,11 +3,11 @@
 ## Sine
 
 $$
-\begin{align*}
+\begin{aligned}
 f(x) = \sin(x)\\
 -1 \leq \sin(x) \leq 1\\
 \sin(0) = 0
-\end{align*}
+\end{aligned}
 $$
 
 For all integer multiples of $\pi$, $\sin$ attains 0
@@ -29,7 +29,7 @@ $$
 ###### Proof
 
 $$
-\begin{align*}
+\begin{aligned}
     y^{\prime} = \lim_{h \to 0} \frac{f(x+h) -f(x)}{h} \\
  \frac{\sin(x+h) -\sin(x)}{h} \\
     \therefore \frac{\sin(x+h) -\sin(x)}{h} \\
@@ -41,24 +41,24 @@ $$
 \because \lim_{x \to a} f(x) + \lim_{x \to a} g(x) = \lim_{x \to a}(f(x) + g(x))    \\
  = \sin(x)\lim_{h \to 0}  \frac{\cos(h -1 )}{h} \\
  \because \lim_{x \to a} (kf(x)) = k \lim_{x \to a} f(x)
-\end{align*}
+\end{aligned}
 $$
 
 ## Cosine
 
 $$
-\begin{align*}
+\begin{aligned}
 f(x) = \cos(x)\\
 -1 \leq \cos(x) \leq 1 \\
 \cos(0) = 1
-\end{align*}
+\end{aligned}
 $$
 
 ## Relationships
 
 $$
-\begin{align*}
+\begin{aligned}
 \cos(x-\frac{\pi}{2}) = \sin(x) \\
 \sin(x + \frac{\pi}{2}) = \cos(x)
-\end{align*}
+\end{aligned}
 $$

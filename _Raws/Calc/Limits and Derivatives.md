@@ -33,7 +33,6 @@ This function is called a linear function.
 Changing input values result in a non constant change in output values
 
 $$
-
 \Delta f(x) = \text{ not constant}
 $$
 
@@ -53,7 +52,6 @@ $$
 2. Investigate the existence or otherwise the derivatives if the following functions:
 
 $$
-
 \begin{aligned}
 f(x) =\begin{cases}
 x^2, & \text{if } \leq 2  \\
@@ -98,7 +96,7 @@ $$
 
 -   Slope or Gradient of a non-linear function
 -   Derivative = $dy\over dx$ = Instantaneous rate of change of a function
--   Slope of a line = $\Delta y\over\Delta x$ = Average rate of change
+-   Slope of a line = $\Delta y\over \Delta x$ = Average rate of change
 -   Leverage average rate of change to obtain the instantaneous rate of change = **First Principle**
     $$
     \begin{aligned}
@@ -260,7 +258,6 @@ $$
     y= (30x+10)(3x^2+2x)
 \end{aligned}
 
-
 $$
 
 #### Questions
@@ -392,7 +389,6 @@ $$
     y^{\prime} = 8t^{4} - 64t^3 + 96t - t^3 + 8t^2 -12 + 12t^{4} - 3t^3 - 64t^3 + 16t^2\\
     y^{\prime} = 20t^{4} -132t^3 + 24t^2 +96t -12 \\
 \end{aligned}
-
 
 $$
 

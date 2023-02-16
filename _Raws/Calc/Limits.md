@@ -22,33 +22,6 @@ f(x+h) - f(x) \over h \\
 \end{aligned}
 $$
 
-Left
-| $x$ | $y$|
-|---|---|
-|1.1||
-|1.2||
-|1.3 | |
-|1.4 | |
-|1.5 | |
-|1.6 | |
-|1.7 | |
-|1.8 | |
-|1.9 | |
-|1.99 | |
-
-Right
-| $x$ | $y$|
-|---|---|
-|2.9||
-|2.8||
-|2.7 | |
-|2.6 | |
-|2.5 | |
-|2.4 | |
-|2.3 | |
-|2.2 | |
-|2.1 | |
-|2.11 | |
 
 ##### Proof
 
@@ -109,8 +82,8 @@ Therefore $a=-16$, $b=100$, and $c=6$
 
 $$
 \begin{aligned}
-\text{As x} \rightarrow 3^-, \text{ } f(x) \text{->} 9 \\
-\text{As x} \rightarrow 3^+, \text{ } f(x) \text{->} 9
+\text{As x} \to 3^-, \text{ } f(x) \text{->} 9 \\
+\text{As x} \to 3^+, \text{ } f(x) \text{->} 9
 \end{aligned}
 $$
 
@@ -118,8 +91,8 @@ Or
 
 $$
 \begin{aligned}
-\lim_{x\rightarrow3^-} f(x) =9 \\
-\lim_{x\rightarrow3^+} f(x) = 9
+\lim_{x\to3^-} f(x) =9 \\
+\lim_{x\to3^+} f(x) = 9
 \end{aligned}
 $$
 
@@ -129,7 +102,7 @@ The Limit of $f(x)$ at $x=3$
 
 $$
 \begin{aligned}
-\lim_{x\rightarrow3} f(x) = 9
+\lim_{x\to3} f(x) = 9
 \end{aligned}
 $$
 
@@ -139,8 +112,8 @@ This is because the left limit and right limit converge.
 
 $$
 \begin{aligned}
-\lim_{x\rightarrow1^-} f(x) = 5 \\
-\lim_{x\rightarrow1^+} f(x) = 4
+\lim_{x\to1^-} f(x) = 5 \\
+\lim_{x\to1^+} f(x) = 4
 \end{aligned}
 $$
 
@@ -148,7 +121,7 @@ The left and right limits do not converge so there is no limit of $f(x)$ for $x 
 
 $$
 \begin{aligned}
-\lim_{x\rightarrow1} f(x) = \text{No such unique number} \\
+\lim_{x\to1} f(x) = \text{No such unique number} \\
 \therefore \text{The limit of } f(x) \text{ at } x= 1 \text{ does not exist}
 \end{aligned}
 $$
@@ -157,8 +130,8 @@ $$
 
 $$
 \begin{aligned}
-\lim_{x\rightarrow1^-} f(x) \rightarrow \infin \\
-\lim_{x\rightarrow1^+} f(x) \rightarrow 4
+\lim_{x \to 1^-} f(x) \to \infty \\
+\lim_{x \to 1^+} f(x) \to 4
 \end{aligned}
 $$
 
@@ -166,7 +139,7 @@ The limit does not exist because the left limit does not exist.
 
 $$
 \begin{aligned}
-\lim_{x\rightarrow1} f(x) = \text{does not exist} \\
+\lim_{x\to1} f(x) = \text{does not exist} \\
 \because \text{ the left limit does not exist}
 \end{aligned}
 $$

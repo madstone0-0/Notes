@@ -1,4 +1,4 @@
-#Trigonometry and Derivatives
+# Trigonometry and Derivatives
 
 ## Sine
 
@@ -39,8 +39,23 @@ $$
     y^{\prime} = \lim_{h \to 0} \frac{\sin(\cos(h) -1 )}{h} + \frac{\cos(x)\sin(h)}{h}\\
  = \lim_{h \to 0} \frac{\sin(\cos(h) -1 )}{h} + \lim_{h \to 0} \frac{\cos(x)\sin(h)}{h}\\
 \because \lim_{x \to a} f(x) + \lim_{x \to a} g(x) = \lim_{x \to a}(f(x) + g(x))    \\
- = \sin(x)\lim_{h \to 0}  \frac{\cos(h -1 )}{h} \\
- \because \lim_{x \to a} (kf(x)) = k \lim_{x \to a} f(x)
+ = \sin(x)\lim_{h \to 0}  \frac{\cos(h) -1 }{h} + \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h} \\
+ \because \lim_{x \to a} (kf(x)) = k \lim_{x \to a} f(x) \\
+
+ \lim_{h \to 0^{-}}\frac{\cos(h) -1 }{h} = 0 \\
+ \lim_{h \to 0^{+}} \frac{\cos(h) -1 }{h} = 0 \\
+ \therefore  \lim_{h \to 0} \frac{\cos(h) -1 }{h} =  0\\
+ = \sin(x) \times 0 +\cos(x)\lim_{h \to 0} \frac{\sin(h)}{h}\\
+= \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h}\\
+\lim_{h \to 0^{-}} \frac{\sin(h)}{h} = 1 \\
+\lim_{h \to 0^{+}} \frac{\sin(h)}{h} = 1 \\
+\therefore \lim_{h \to 0} \frac{\sin(h)}{h} = 1 \\
+\therefore \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h} = \cos(x) \times 1\\
+&= \cos(x) \\
+
+
+
+
 \end{aligned}
 $$
 

@@ -115,12 +115,87 @@ y^{\prime} = 1 + \tan^2(x)\\
 \end{aligned}
 $$
 
+## Secant
+
+$$
+\begin{aligned}
+f(x) = \sec(x) \\
+ \\
+\sec(0) = 1
+\end{aligned}
+$$
+
+### Derivative of $\sec(x)$
+
+If $y=\sec(x)$
+
+$$
+y^{\prime} = \tan(x)\sec(x)
+$$
+
 ## Relationships
 
 $$
 \begin{aligned}
 \cos(x-\frac{\pi}{2}) = \sin(x) \\
 \sin(x + \frac{\pi}{2}) = \cos(x)
+\end{aligned}
+$$
+
+## Identities
+
+###### Reciprocal Identities
+
+$$
+\begin{aligned}
+   \sin(\theta) = \frac{1}{\cosec(\theta)} \text{ or } \cosec(\theta) = \frac{1}{\sin(\theta)} \\
+\cos(\theta) = \frac{1}{\sec(\theta)} \text{ or } \sec(\theta) = \frac{1}{\cos(\theta)} \\
+\tan(\theta) = \frac{1}{\cot(\theta)} \text{ or } \cot(\theta) = \frac{1}{\tan(\theta)}
+\end{aligned}
+$$
+
+###### Pythagorean Identities
+
+$$
+\begin{aligned}
+   \sin^2(\theta) + \cos^2(\theta) = 1\\
+   1 + \tan^2(\theta) = \sec^2(\theta) \\
+   \cosec^2(\theta) = 1 + \cot^2(\theta)
+\end{aligned}
+$$
+
+###### Ratio Identities
+
+$$
+\begin{aligned}
+   \tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)} \\
+   \cot(\theta) = \frac{\cos(\theta)}{\sin(\theta)}
+\end{aligned}
+$$
+
+###### Sum and Difference of Angles
+
+$$
+\begin{aligned}
+   \sin(\alpha + \beta) = \sin(\alpha) \times \cos(\beta) + \cos(\alpha) \times \cos(\beta) \\
+   \sin(\alpha-\beta) = \sin(\alpha)  \times \cos(\beta) - \cos(\alpha)  \times \sin(\beta) \\
+   \cos(\alpha+\beta) = \cos(\alpha)  \times \cos(\beta) - \sin(\alpha)  \times  \sin(\beta) \\
+   \cos(\alpha - \beta) = \cos(\alpha)  \times \cos(\beta) + \sin(\alpha)  \times  \sin(\beta) \\
+   \tan(\alpha + \beta) = \frac{\tan(\alpha) + \tan(\beta)}{1- \tan(\alpha)  \times  \tan(\beta)} \\
+   \tan(\alpha - \beta) = \frac{\tan(\alpha) - \tan(\beta)}{1+ \tan(\alpha)  \times  \tan(\beta)}
+
+\end{aligned}
+$$
+
+###### Double Angles
+
+$$
+\begin{aligned}
+   \sin(2\theta) = 2\sin(\theta) \cos(\theta) \\
+   \cos(2\theta) = \cos^2(\theta) - \sin^2(\theta) \\
+   = 2\cos^2(\theta) - 1 \\
+   = 1- 2 \sin^2(\theta) \\
+   \tan(2\theta)= \frac{2\tan(\theta)}{1 - \tan^2(\theta)}
 \end{aligned}
 $$
 
@@ -139,5 +214,95 @@ $y = \cos(5x+4)$
 $$
 \begin{aligned}
    y^{\prime} = -5\sin (5x+4)
+\end{aligned}
+$$
+
+<br/>
+
+$$
+\begin{align}
+   g(x) = 3 \sec(x) - 10 \tan(x) \\
+   h(x) = 3w^{-4} - w^2 \tan(w) \\
+   y = 5 \sin(x) \cos(x) + 9 \sec(x) \\
+   y = \frac{\sin(t)}{3-2 \cos(t)}\\
+   y = \sin(10x) \\
+   f(w) = \tan(w) \sec(w) \\
+   y = 2 \sin(3x+ \tan(x))\\
+   h(z) = \sin(z^{6}) + \sin^{6}(2) \\
+   f(t) = \sin(2t) + \cos(4t) \\
+   f(x) = [\sqrt[3]{2x} + \sin^2(3x)]^{-\frac{1}{2}} \\
+   y = \frac{4 \sin(x^2)}{\cos(x^2)} \\
+   h(x) = x^2 \cos(x^3) \\
+   y = \sqrt{5z+ \tan(4z)}
+\end{align}
+$$
+
+Q1. $g(x) = 3 \sec(x) -10 \tan(x)$
+
+$$
+\begin{aligned}
+   g^{\prime}(x) = 3(\tan(x) \sec(x)) - 10 \sec(x) \\
+   = 3 \tan(x) \sec(x) - 10 \sec^2(x) \\
+   = \sec(x) (3 \tan(x) - 10 \sec(x)) \\
+&   g^{\prime}(x) = \sec(x) (3 \tan(x) - 10 \sec(x))
+\end{aligned}
+$$
+
+Q2. $h(w) = 3w^{-4} -w^2 \tan(w)$
+
+$$
+\begin{aligned}
+   h^{\prime}(w) = -12w^{-5} - (2w)(\tan(w)) + (w^2)(\sec^2(w)) \\
+&   h^{\prime}(w) = -12w^{-5} - 2w \tan(w) - w^2 \sec^2(w)
+\end{aligned}
+$$
+
+Q3. $y=5 \sin(x) \cos(x) + 4 \sec(x)$
+
+$$
+\begin{aligned}
+   y^{\prime} = 5[\cos(x) \times \cos(x) - \sin(x)  \times  \sin(x)]  + 4 \tan(x) \sec(x)\\
+   y^{\prime} = 5(\cos^2(x) - \sin^2(x)) + 4 \tan(x) \sec(x) \\
+   &y^{\prime} = 5 \cos(2x) + 4 \tan(x) \sec(x)
+\end{aligned}
+$$
+
+Q4. $y= \frac{\sin(t)}{3-2 \cos(t)}$
+
+$$
+\begin{aligned}
+   y^{\prime}  =\frac{(\cos(t) (3-2 \cos(t))) - (2 \sin(t))(\sin(t))}{(3-2 \cos(t))^2} \\
+   y^{\prime} = \frac{3 \cos(t) - 2 \cos^2(t) - 2 \sin^2(t)}{(3-2 \cos(t))^2} \\
+   y^{\prime} = \frac{3 \cos(t) - 2(\cos^2(t) + \sin^2(t))}{(3-2 \cos(t))^2} \\
+ & y^{\prime} = \frac{3 \cos(t) - 2}{(3-2 \cos(t))^2}
+\end{aligned}
+$$
+
+Q5. $y = \frac{\sin(10z)}{z}$
+
+$$
+\begin{aligned}
+   y^{\prime} = \frac{(10 \cos(10z))(z) - (1)(\sin(10z))}{z^2} \\
+   &y^{\prime} = \frac{10z \cos(10z) - \sin(10z)}{z^2}
+\end{aligned}
+$$
+
+Q6. $f(w) = \tan(w) \sec(w)$
+
+$$
+\begin{aligned}
+   f^{\prime}(w) = (\sec^2(w))(\sec(w)) + (\sec(w) \tan(w))(\tan(w)) \\
+   = \sec^3(w) + \sec(w) \tan^2(w)\\
+   & f^{\prime}(w) = \sec(w) (\sec^2(w) + \tan^2(w))
+\end{aligned}
+$$
+
+Q14. $y = \sqrt{5z +\tan(4z)}$
+
+$$
+\begin{aligned}
+   y = (5z + \tan(4z))^{\frac{1}{2}} \\
+   y^{\prime} = (\frac{1}{2})(5+4 \sec^2(4z))(5z+ \tan(4z))^{-\frac{1}{2}} \\
+&   y^{\prime} = \frac{\frac{5}{2} + 2 \sec^2(4z)}{\sqrt{5z+\tan(4z)}}
 \end{aligned}
 $$

@@ -74,7 +74,6 @@ $$
    & \sin(x) = 0
 \end{aligned}
 
-
 $$
 
 ###### Vertical Asymptote
@@ -148,7 +147,7 @@ $$
 
 $$
 \begin{aligned}
-   \sin(\theta) = \frac{1}{\cosec(\theta)} \text{ or } \cosec(\theta) = \frac{1}{\sin(\theta)} \\
+   \sin(\theta) = \frac{1}{\csc(\theta)} \text{ or } \csc(\theta) = \frac{1}{\sin(\theta)} \\
 \cos(\theta) = \frac{1}{\sec(\theta)} \text{ or } \sec(\theta) = \frac{1}{\cos(\theta)} \\
 \tan(\theta) = \frac{1}{\cot(\theta)} \text{ or } \cot(\theta) = \frac{1}{\tan(\theta)}
 \end{aligned}
@@ -160,7 +159,7 @@ $$
 \begin{aligned}
    \sin^2(\theta) + \cos^2(\theta) = 1\\
    1 + \tan^2(\theta) = \sec^2(\theta) \\
-   \cosec^2(\theta) = 1 + \cot^2(\theta)
+   \csc^2(\theta) = 1 + \cot^2(\theta)
 \end{aligned}
 $$
 

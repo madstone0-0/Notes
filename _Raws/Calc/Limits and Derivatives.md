@@ -175,12 +175,12 @@ $$
 #### Questions
 
 $$
-\begin{align}
+\begin{aligned}
     y = x^2 \\
     y = \frac{1}{x^2} \\
     y = \frac{1}{\sqrt{x}} +x^3-1 \\
     y = x^{-8} + 3x^2 \\
-\end{align}
+\end{aligned}
 $$
 
 Q1.
@@ -262,7 +262,7 @@ $$
 
 $$
 \begin{aligned}
-     y = 15x^9 - 3x^{12} +5x - 46 \\
+    y = 15x^9 - 3x^{12} +5x - 46 \\
     y = 2t^6+7t^{-6}\\
     y = 8x^3-\frac{1}{3x^5} + x- 23 \\
     y = \sqrt{x} + 9\sqrt[3]{x^4} - \frac{2}{\sqrt[5]{x^2}} \\

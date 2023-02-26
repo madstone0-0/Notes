@@ -119,7 +119,6 @@ y^{\prime} = \frac{\cos^2(x)}{\cos^2(x)} + \frac{\sin^2(x)}{\cos^2(x)}\\
 y^{\prime} = 1 + (\frac{\sin(x)}{\cos(x)})^2\\
 y^{\prime} = 1 + \tan^2(x)\\
 &= \sec^2(x)
-
 \end{aligned}
 $$
 
@@ -128,7 +127,6 @@ $$
 $$
 \begin{aligned}
 f(x) = \sec(x) \\
- \\
 \sec(0) = 1
 \end{aligned}
 $$
@@ -227,7 +225,7 @@ $$
 <br/>
 
 $$
-\begin{align}
+\begin{aligned}
    g(x) = 3 \sec(x) - 10 \tan(x) \\
    h(x) = 3w^{-4} - w^2 \tan(w) \\
    y = 5 \sin(x) \cos(x) + 9 \sec(x) \\
@@ -241,7 +239,7 @@ $$
    y = \frac{4 \sin(x^2)}{\cos(x^2)} \\
    h(x) = x^2 \cos(x^3) \\
    y = \sqrt{5z+ \tan(4z)}
-\end{align}
+\end{aligned}
 $$
 
 Q1. $g(x) = 3 \sec(x) -10 \tan(x)$

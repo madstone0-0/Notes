@@ -81,8 +81,6 @@ $$
    y = &\tan(x) = 0\\
    & \sin(x) = 0
 \end{aligned}
-
-
 $$
 
 ###### Vertical Asymptote

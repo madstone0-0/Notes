@@ -222,7 +222,6 @@ $$
     y = \frac{1}{\sqrt{x}} + x^3 -1 \\
     y^{\prime} = x^{-\frac{1}{2}} +x^3 -1 \\
     y^{\prime} = -\frac{1}{2}x^{-\frac{3}{2}} + 3x^2 \\
-
 \end{aligned}
 $$
 

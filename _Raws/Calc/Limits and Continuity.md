@@ -1,4 +1,12 @@
-# Limits and Continuity
+---
+title: Limits and Continuity
+author: Madiba Hudson-Quansah
+creator: Madiba Hudson-Quansah
+subject: Calculus 1
+tags:
+    - Calculus
+    - Limits
+---
 
 A function's limit can be one of it's own outputs. When this happens the function called a continuous function.
 

@@ -1,3 +1,14 @@
+---
+title: Chapter 3
+author: Madiba Hudson-Quansah
+creator: Madiba Hudson-Quansah
+subject: Introduction to Computing and Information Systems
+tags:
+    - Information Systems
+    - Software
+    - Computing
+---
+
 # Software
 
 > The Set of Instructions that tell the hardware what to do.

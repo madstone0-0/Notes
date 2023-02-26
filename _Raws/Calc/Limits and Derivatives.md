@@ -1,4 +1,13 @@
-# Limits and Derivatives
+---
+title: Limits and Derivatives
+author: Madiba Hudson-Quansah
+creator: Madiba Hudson-Quansah
+subject: Calculus 1
+tags:
+    - Calculus
+    - Limits
+    - Derivatives
+---
 
 ###### Case 1
 
@@ -42,7 +51,6 @@ $$
 
 $$
 \begin{aligned}
-
 {\frac{d}{dx}f(x)}_{x\to 1^-}  = 2 \\
 {\frac{d}{dx}f(x)}_{x\to 1^+}  = 2 \\
 & \frac{d}{dx} x^2 = 2  \\
@@ -75,7 +83,6 @@ Q1.
 
 $$
 \begin{aligned}
-
 \frac{d}{dx}f(x)_{x\to 2^{-}}  = 4 \\
 \frac{d}{dx}f(x)_{x\to 2^{+}}  = \text{is not constant}
 \end{aligned}
@@ -85,7 +92,6 @@ Q2.
 
 $$
 \begin{aligned}
-
 \frac{d}{dx}g(x)_{x\to 0^-} = 1 \\
 \frac{d}{dx}g(x)_{x \to 0^+} = 1 \\
 &= \frac{d}{dx}g(x) = 1
@@ -127,7 +133,6 @@ Q2. Find the derivative of $f(x) = \frac{1}{x}$ using first principle
 
 $$
 \begin{aligned}
-
     \frac{df}{dx} = \lim_{h \to 0} \frac{f(x+h) -f(x)}{h} \\
     \frac{df}{dx} = \lim_{h \to 0} (\frac{1}{(x+h)} - \frac{1}{x}) \div h \\
   \frac{-h}{x^2+hx} \div h \\
@@ -135,8 +140,6 @@ $$
   -\frac{1}{x^2+hx} \\
   -\frac{1}{x^2+0x} \\
 & \frac{df}{dx} = \lim_{h \to 0} \frac{f(x+h) -f(x)}{h} =   -\frac{1}{x^2} \\
-
-
 \end{aligned}
 $$
 
@@ -146,7 +149,6 @@ Q3. Find the derivative of $f(x)=\sqrt{x}$
 
 $$
 \begin{aligned}
-
     \frac{df}{dx} = \lim_{h \to 0} \frac{f(x+h) -f(x)}{h} \\
 \frac{df}{dx} = \lim_{h \to 0}  = \frac{\sqrt{x+h} -\sqrt{x}}{h} \times \frac{\sqrt{x+h}+\sqrt{x}}{\sqrt{x+h}+\sqrt{x}} \\
 \frac{df}{dx} = \lim_{h \to 0} = \frac{(\sqrt{x+h}- \sqrt{x}) - (\sqrt{x+h}+ \sqrt{x})}{h(\sqrt{x+h}+ \sqrt{x})} \\
@@ -155,7 +157,6 @@ $$
  \frac{df}{dx} = \lim_{h \to 0} = \frac{1}{\sqrt{x+h} +\sqrt{x}} \\
  \frac{1}{\sqrt{x+0} +\sqrt{x}} \\
  \frac{1}{2\sqrt{x}} \\
-
     & \frac{df}{dx} = \lim_{h \to 0} \frac{f(x+h) -f(x)}{h} = \frac{1}{2\sqrt{x}} \\
 \end{aligned}
 $$
@@ -168,7 +169,6 @@ $$
 \begin{aligned}
     y = x^n, \text{ n is a real number}\\
     \frac{dy}{dx} = nx^{n-1} \\
-
 \end{aligned}
 $$
 
@@ -232,7 +232,6 @@ $$
 \begin{aligned}
 y = -x^{-8} + 3x^2 \\
 y^{\prime} = -8x^{-9} + 6x
-
 \end{aligned}
 $$
 
@@ -257,7 +256,6 @@ $$
     y = (5)(6x+2)(3x^2+2x)^4 \\
     y= (30x+10)(3x^2+2x)
 \end{aligned}
-
 $$
 
 #### Questions
@@ -389,7 +387,6 @@ $$
     y^{\prime} = 8t^{4} - 64t^3 + 96t - t^3 + 8t^2 -12 + 12t^{4} - 3t^3 - 64t^3 + 16t^2\\
     y^{\prime} = 20t^{4} -132t^3 + 24t^2 +96t -12 \\
 \end{aligned}
-
 $$
 
 Q2. $y = (1+\sqrt{x^3})(x^{-3}-2\sqrt[3]{x})$

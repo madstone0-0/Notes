@@ -1,6 +1,14 @@
-# Limit of a Function
+---
+title: Limit of a Function
+author: Madiba Hudson-Quansah
+creator: Madiba Hudson-Kansai
+subject: Calculus 1
+tags:
+    - Calculus
+    - Limit
+---
 
-Reporting about the behavior of a function within the range of its dangerous values.
+Reporting about the behaviour of a function within the range of its dangerous values.
 
 $$
 f(x) = x^2 + {1\over x}
@@ -21,7 +29,6 @@ $$
 f(x+h) - f(x) \over h \\
 \end{aligned}
 $$
-
 
 ##### Proof
 

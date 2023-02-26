@@ -1,4 +1,13 @@
-# Trigonometry and Derivatives
+---
+title: Trigonometry and Derivatives
+author: Madiba Hudson-Quansah
+creator: Madiba Hudson-Quansah
+subject: Calculus 1
+tags:
+    - Calculus
+    - Derivatives
+    - Trigonometry
+---
 
 ## Sine
 
@@ -41,7 +50,6 @@ $$
 \because \lim_{x \to a} f(x) + \lim_{x \to a} g(x) = \lim_{x \to a}(f(x) + g(x))    \\
  = \sin(x)\lim_{h \to 0}  \frac{\cos(h) -1 }{h} + \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h} \\
  \because \lim_{x \to a} (kf(x)) = k \lim_{x \to a} f(x) \\
-
  \lim_{h \to 0^{-}}\frac{\cos(h) -1 }{h} = 0 \\
  \lim_{h \to 0^{+}} \frac{\cos(h) -1 }{h} = 0 \\
  \therefore  \lim_{h \to 0} \frac{\cos(h) -1 }{h} =  0\\
@@ -73,6 +81,7 @@ $$
    y = &\tan(x) = 0\\
    & \sin(x) = 0
 \end{aligned}
+
 
 $$
 
@@ -182,7 +191,6 @@ $$
    \cos(\alpha - \beta) = \cos(\alpha)  \times \cos(\beta) + \sin(\alpha)  \times  \sin(\beta) \\
    \tan(\alpha + \beta) = \frac{\tan(\alpha) + \tan(\beta)}{1- \tan(\alpha)  \times  \tan(\beta)} \\
    \tan(\alpha - \beta) = \frac{\tan(\alpha) - \tan(\beta)}{1+ \tan(\alpha)  \times  \tan(\beta)}
-
 \end{aligned}
 $$
 

@@ -1,4 +1,13 @@
-# Chapter 2
+---
+title: Chapter 2
+author: Madiba Hudson-Quansah
+creator: Madiba Hudson-Quansah
+subject: Introduction to Computing and Information Systems
+tags:
+    - Information Systems
+    - Hardware
+    - Computing
+---
 
 ## Hardware
 

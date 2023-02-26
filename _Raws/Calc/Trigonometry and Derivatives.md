@@ -46,19 +46,19 @@ $$
     \frac{\sin(\cos(h)-1) + \cos(x)\sin(h)}{h} \\
     y^{\prime} = \lim_{h \to 0} \frac{\sin(\cos(h)-1) + \cos(x)\sin(h)}{h} \\
     y^{\prime} = \lim_{h \to 0} \frac{\sin(\cos(h) -1 )}{h} + \frac{\cos(x)\sin(h)}{h}\\
- = \lim_{h \to 0} \frac{\sin(\cos(h) -1 )}{h} + \lim_{h \to 0} \frac{\cos(x)\sin(h)}{h}\\
-\because \lim_{x \to a} f(x) + \lim_{x \to a} g(x) = \lim_{x \to a}(f(x) + g(x))    \\
- = \sin(x)\lim_{h \to 0}  \frac{\cos(h) -1 }{h} + \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h} \\
- \because \lim_{x \to a} (kf(x)) = k \lim_{x \to a} f(x) \\
+ = \lim_{h \to 0} \frac{\sin(\cos(h) -1 )}{h} + \lim_{h \to 0} \frac{\cos(x)\sin(h)}{h}\\[20pt]
+\because \lim_{x \to a} f(x) + \lim_{x \to a} g(x) = \lim_{x \to a}(f(x) + g(x))    \\[20pt]
+ = \sin(x)\lim_{h \to 0}  \frac{\cos(h) -1 }{h} + \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h} \\[20pt]
+ \because \lim_{x \to a} (kf(x)) = k \lim_{x \to a} f(x) \\[20pt]
  \lim_{h \to 0^{-}}\frac{\cos(h) -1 }{h} = 0 \\
  \lim_{h \to 0^{+}} \frac{\cos(h) -1 }{h} = 0 \\
  \therefore  \lim_{h \to 0} \frac{\cos(h) -1 }{h} =  0\\
  = \sin(x) \times 0 +\cos(x)\lim_{h \to 0} \frac{\sin(h)}{h}\\
 = \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h}\\
 \lim_{h \to 0^{-}} \frac{\sin(h)}{h} = 1 \\
-\lim_{h \to 0^{+}} \frac{\sin(h)}{h} = 1 \\
+\lim_{h \to 0^{+}} \frac{\sin(h)}{h} = 1 \\[20pt]
 \therefore \lim_{h \to 0} \frac{\sin(h)}{h} = 1 \\
-\therefore \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h} = \cos(x) \times 1\\
+\therefore \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h} = \cos(x) \times 1\\[20pt]
 &= \cos(x) \\
 \end{aligned}
 $$
@@ -109,8 +109,8 @@ $$
 
 $$
 \begin{aligned}
-    y = \tan(x) = \frac{\sin(x)}{\cos(x)} \\
-y^{\prime} = \frac{\cos(x)(\cos(x))- \sin(x)(-\sin(x))}{(\cos(x))^2} \\
+    y = \tan(x) = \frac{\sin(x)}{\cos(x)} \\[20pt]
+y^{\prime} = \frac{\cos(x)(\cos(x))- \sin(x)(-\sin(x))}{(\cos(x))^2} \\[20pt]
 \because y^{\prime} = \frac{v \times u^{\prime} - u \times v^{\prime}}{v^2} \\
 y^{\prime} = \frac{\cos^2(x) + \sin^2(x)}{\cos^2(x)} \\
 y^{\prime} = \frac{\cos^2(x)}{\cos^2(x)} + \frac{\sin^2(x)}{\cos^2(x)}\\
@@ -152,8 +152,8 @@ $$
 
 $$
 \begin{aligned}
-   \sin(\theta) = \frac{1}{\csc(\theta)} \text{ or } \csc(\theta) = \frac{1}{\sin(\theta)} \\
-\cos(\theta) = \frac{1}{\sec(\theta)} \text{ or } \sec(\theta) = \frac{1}{\cos(\theta)} \\
+   \sin(\theta) = \frac{1}{\csc(\theta)} \text{ or } \csc(\theta) = \frac{1}{\sin(\theta)} \\[20pt]
+\cos(\theta) = \frac{1}{\sec(\theta)} \text{ or } \sec(\theta) = \frac{1}{\cos(\theta)} \\[20pt]
 \tan(\theta) = \frac{1}{\cot(\theta)} \text{ or } \cot(\theta) = \frac{1}{\tan(\theta)}
 \end{aligned}
 $$
@@ -202,7 +202,7 @@ $$
 \end{aligned}
 $$
 
-## Q
+## Questions
 
 $y = (\sin x)^{2}$
 
@@ -224,18 +224,18 @@ $$
 
 $$
 \begin{aligned}
-   g(x) = 3 \sec(x) - 10 \tan(x) \\
-   h(x) = 3w^{-4} - w^2 \tan(w) \\
-   y = 5 \sin(x) \cos(x) + 9 \sec(x) \\
-   y = \frac{\sin(t)}{3-2 \cos(t)}\\
-   y = \sin(10x) \\
-   f(w) = \tan(w) \sec(w) \\
-   y = 2 \sin(3x+ \tan(x))\\
-   h(z) = \sin(z^{6}) + \sin^{6}(2) \\
-   f(t) = \sin(2t) + \cos(4t) \\
-   f(x) = [\sqrt[3]{2x} + \sin^2(3x)]^{-\frac{1}{2}} \\
-   y = \frac{4 \sin(x^2)}{\cos(x^2)} \\
-   h(x) = x^2 \cos(x^3) \\
+   g(x) = 3 \sec(x) - 10 \tan(x) \\[20pt]
+   h(x) = 3w^{-4} - w^2 \tan(w) \\[20pt]
+   y = 5 \sin(x) \cos(x) + 9 \sec(x) \\[20pt]
+   y = \frac{\sin(t)}{3-2 \cos(t)}\\[20pt]
+   y = \sin(10x) \\[20pt]
+   f(w) = \tan(w) \sec(w) \\[20pt]
+   y = 2 \sin(3x+ \tan(x))\\[20pt]
+   h(z) = \sin(z^{6}) + \sin^{6}(2) \\[20pt]
+   f(t) = \sin(2t) + \cos(4t) \\[20pt]
+   f(x) = [\sqrt[3]{2x} + \sin^2(3x)]^{-\frac{1}{2}} \\[20pt]
+   y = \frac{4 \sin(x^2)}{\cos(x^2)} \\[20pt]
+   h(x) = x^2 \cos(x^3) \\[20pt]
    y = \sqrt{5z+ \tan(4z)}
 \end{aligned}
 $$

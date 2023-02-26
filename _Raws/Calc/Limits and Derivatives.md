@@ -143,8 +143,6 @@ $$
 \end{aligned}
 $$
 
-<br>
-
 Q3. Find the derivative of $f(x)=\sqrt{x}$
 
 $$
@@ -233,8 +231,6 @@ y = -x^{-8} + 3x^2 \\
 y^{\prime} = -8x^{-9} + 6x
 \end{aligned}
 $$
-
-<br>
 
 #### Chain Rule
 

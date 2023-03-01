@@ -50,3 +50,46 @@ $f(x)$ is increasing if the slope on any point on it's graph is positive through
 $f(x)$ is decreasing whenever $x_1 < x_2$ and $f(x_1) > f(x_2)$, .I.e as you go up the $x$ axis the $y$ or function values decrease
 
 $f(x)$ is increasing if the slope on any point on it's graph is negative throughout the function's entire domain.
+
+## Critical Points
+
+-   Points where the gradient is equal 0, i.e. $f^{\prime}(x) = 0$
+-   Points where the gradient does not exist, i.e. $f^{\prime}(x) = \emptyset$
+
+## Examples
+
+$t \sqrt[3]{t^2 - 4}$
+
+$$
+\begin{aligned}
+    g(t) = t \sqrt[3]{t^2 - 4} \\
+    g(t) = t(t^2-4)^{\frac{1}{3}} \\
+    g^{\prime}(t) = (1)(t^2-4)^{\frac{1}{3}} + (\frac{1}{3}) (2t) (t^2-4)  \times (t) \\
+    g^{\prime}(t) = (t^2-4)^{\frac{1}{3}} + \frac{2}{3}t^2(t^2-4)^{-\frac{2}{3}} \\
+     g^{\prime}(t)= (t^2-4)^{\frac{1}{3}} + \frac{2t^2}{3(t^2-4)^{\frac{2}{3}}} \\
+     g^{\prime}(t)= \frac{(t^2-4)^{\frac{1}{3}}}{1} + \frac{2t^2}{3(t^2-4)^{\frac{2}{3}}} \\
+    g^{\prime}(t) = \frac{3(t^2-4)+t^2}{3(t^2-4)^{\frac{2}{3}}} \\
+    0 = \frac{3(t^2-4)+t^2}{3(t^2-4)^{\frac{2}{3}}} \\
+    0 = 3t^2-12+2t^2\\
+    0 = 5t^2-12 \\
+    12 = 5t^2\\
+    \frac{12}{5} =t^2 \\
+    \pm \sqrt{\frac{12}{5 }} =t \\
+    3(t^2-4)^{\frac{2}{3}} = 0 \\
+    (t^2-4)^{\frac{2}{3}} = 0 \\
+    t = \pm 2 \\[20pt]
+
+\begin{array}{|c|c|c|}
+    \hline \text{Interval} & \text{Test Value}  & \text{Slope}_{g^{\prime}(x)} \\
+    \hline x < -2   & -3          & +\\
+    \hline -2<x< -\sqrt{\frac{12}{5}} & -1.7 & + \\
+    \hline -\sqrt{\frac{12}{5}} < x < \sqrt{\frac{12}{5}} & 0 & -\\
+    \hline \sqrt{\frac{12}{5}} < x <2 & 2 & + \\
+    \hline x > 2 &  7 & + \\
+    \hline
+\end{array}\\
+    \therefore \text{When } g^{\prime}(x) = 0,\; x=-\sqrt{\frac{12}{5} }, \; x=\sqrt{\frac{12}{5}} \\[10pt]
+    \therefore \text{Increasing } (-\infty, -2) ,\; (2, \infty), \; (-2, -\sqrt{\frac{12}{5}}), \; (\sqrt{\frac{12}{5}}, 2) \\[10pt]
+    \text{Decreasing } (-\sqrt{\frac{12}{5}}, \sqrt{\frac{12}{5}})
+\end{aligned}
+$$

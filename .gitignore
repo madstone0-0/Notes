@@ -5,6 +5,7 @@
 /_Raws/*
 !/_Raws/Calc
 !/_Raws/CompSci
+!/_Raws/Personal
 
 !/_Exported/
 !/Templates/

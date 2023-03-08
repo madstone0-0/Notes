@@ -23,3 +23,20 @@ for file in ./_Raws/CompSci/Runestone/*.md; do
 	filename=$(basename "$file" .md)
 	pandoc "$file" -o "./_Exported/CompSci/Runestone Notes/$filename.pdf" --template=./Templates/eisvogel.tex --listings
 done
+
+# Personal Notes
+# Intro to Machine Learning
+mkdir -p "./_Exported/Personal/Intro To Machine Learning"
+for file in ./_Raws/CompSci/Personal/Intro\ To\ Machine\ Learning/*.md; do
+	echo "$file"
+	filename=$(basename "$file" .md)
+	pandoc "$file" -o "./_Exported/Personal/Intro To Machine Learning/$filename.pdf" --template=./Templates/eisvogel.tex --listings
+done
+
+# Algorithms
+mkdir -p "./_Exported/Personal/Algorithms"
+for file in ./_Raws/CompSci/Personal/Algorithms/*.md; do
+	echo "$file"
+	filename=$(basename "$file" .md)
+	pandoc "$file" -o "./_Exported/Personal/Algorithms/$filename.pdf" --template=./Templates/eisvogel.tex --listings
+done

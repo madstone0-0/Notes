@@ -78,7 +78,6 @@ $$
     3(t^2-4)^{\frac{2}{3}} = 0 \\
     (t^2-4)^{\frac{2}{3}} = 0 \\
     t = \pm 2 \\[20pt]
-
 \begin{array}{|c|c|c|}
     \hline \text{Interval} & \text{Test Value}  & \text{Slope}_{g^{\prime}(x)} \\
     \hline x < -2   & -3          & +\\

@@ -99,3 +99,32 @@ $$
     \text{Absolute Minimum is } -1
 \end{aligned}
 $$
+
+### Concavity
+
+Let $f$ be a function that is differentiable over an open interval $I$
+
+-   If $f^{\prime}$ is increasing over $I$, we say $f$ is concave up over $I$, i.e. $f^{\prime\prime} > 0$
+-   If $f^{\prime}$ is decreasing over $I$, we say $f$ is concave down over $I$, i.e $f^{\prime\prime} < 0$
+
+#### Inflection
+
+A point where a function switches concavity, i.e
+
+$$
+\begin{gathered}
+    f^{\prime\prime}(x^{-}) = +\text{ve } \; \text{to } \; f^{\prime\prime}(x^{+}) = -\text{ve }\\
+    \text{or } \\
+    f^{\prime\prime}(x^{-}) = -\text{ve } \; \text{to } \; f^{\prime\prime}(x^{+}) = +\text{ve }
+\end{gathered}
+$$
+
+#### Curvature
+
+###### Concave Up
+
+The cave is facing up
+
+###### Concave down
+
+The cave is facing down

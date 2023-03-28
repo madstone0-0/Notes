@@ -1,0 +1,77 @@
+\documentclass[12pt letter]{article}
+\title{Limits}
+\author{Madiba Hudson-Quansah}
+\usepackage{amsmath}
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+\part{Limits}
+Reporting about the behaviour of function within the range of its dangerous values
+
+\begin{displaymath}
+	f(x) = x^2 + \frac{1}{x}
+\end{displaymath}
+
+Input variable = $x$
+
+Output variable = $f(x)$
+
+Name of function = $f$
+
+
+"Acceptable"/Permissible input values of x - All real numbers except zero
+
+\begin{gather*}
+	(x, f(x)), (x+h, f(x+h))      \\
+	f(x+h) - \frac{f(x)}{x+h-x} \\
+	f(x+h) - \frac{f(x)}{h}         \\
+\end{gather*}
+
+\subsection{Proof}
+
+\[y = -16t^2+100t+6\]
+
+Points used:
+$(0, 6) \; (1, 90) \; (3,162)$
+
+When $t = 0$ and $y = 6$
+
+\begin{align*}
+	y = at^2 + bt+c      \\
+	6 = a(0)^2 + b(0) +c \\
+	 & c = 6
+\end{align*}
+
+When $t=1$ and $y=90$
+
+\begin{align*}
+	90 = a(1)^2 +b +6 \\
+	90 = a + b + 6    \\
+	84 = a + b        \\
+	84 - b = a
+\end{align*}
+
+When $t=3$ and $y=162$
+
+\begin{align*}
+	162 = a(3)^2 + b + 6     \\
+	162 = 9a + 3b + 6        \\
+	162 = 9(84 - b) + 3b + 6 \\
+	162 = 756 - 9b +3b +6    \\
+	-594 = -6b +6            \\
+	-600 = -6b               \\
+	 & b = 100\\[20pt]
+	 \therefore b = 100
+\end{align*}
+
+\begin{align*}
+	84 - 100 = a \\
+	 & a = -16
+\end{align*}
+
+Therefore $a=16$, $b=100$ and $c=6$
+\pagebreak
+
+\large{Given $f(x) = x^2$ find the Limit of $f(x)$ at $x=3$}
+
+\end{document}

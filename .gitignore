@@ -6,13 +6,10 @@
 !/_Raws/Calc
 !/_Raws/CompSci
 !/_Raws/Personal
-*.aux
-*.fdb_latexmk
-*.log
-*.synctex.gz
-*.toc
-*.fls
 
 !/_Exported/
+/_Exported/Calc/*
+!/_Exported/Calc/*.pdf
 !/Templates/
 !/build.sh
+!.latexmkrc

@@ -8,5 +8,7 @@
 !/_Raws/Personal
 
 !/_Exported/
+/_Exported/*
+!/_Exported/*.pdf
 !/Templates/
 !/build.sh

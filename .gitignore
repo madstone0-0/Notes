@@ -6,6 +6,12 @@
 !/_Raws/Calc
 !/_Raws/CompSci
 !/_Raws/Personal
+*.aux
+*.fdb_latexmk
+*.log
+*.synctex.gz
+*.toc
+*.fls
 
 !/_Exported/
 !/Templates/

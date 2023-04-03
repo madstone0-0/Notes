@@ -34,11 +34,211 @@ The graph of sine is periodic with a period of $2\pi$, meaning it repeats itself
 
 \subsection{Derivative of $\sin(x)$}
 
-if $y=\sin(x)$
+\dfn{$\sin(x)$}{
+	if $y=\sin(x)$
 
+	\[
+		y^{\prime} = \cos(x)
+	\]
+}
+
+\begin{myproof}
+	\begin{align*}
+		y^{\prime} = \lim_{h \to 0} \frac{f(x+h) -f(x)}{h}                                              \\
+		\frac{\sin(x+h) -\sin(x)}{h}                                                                    \\
+		\therefore \frac{\sin(x+h) -\sin(x)}{h}                                                         \\
+		\frac{\sin(x)\cos\left(h\right) + \cos\left(x\right)\sin\left(h\right) - \sin\left(x\right)}{h} \\
+		\frac{\sin(\cos(h)-1) + \cos(x)\sin(h)}{h}                                                      \\
+		y^{\prime} = \lim_{h \to 0} \frac{\sin(\cos(h)-1) + \cos(x)\sin(h)}{h}                          \\
+		y^{\prime} = \lim_{h \to 0} \frac{\sin(\cos(h) -1 )}{h} + \frac{\cos(x)\sin(h)}{h}              \\
+		= \lim_{h \to 0} \frac{\sin(\cos(h) -1 )}{h} + \lim_{h \to 0} \frac{\cos(x)\sin(h)}{h}          \\[20pt]
+		\because \lim_{x \to a} f(x) + \lim_{x \to a} g(x) = \lim_{x \to a}(f(x) + g(x))                \\[20pt]
+		= \sin(x)\lim_{h \to 0}  \frac{\cos(h) -1 }{h} + \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h}        \\[20pt]
+		\because \lim_{x \to a} (kf(x)) = k \lim_{x \to a} f(x)                                         \\[20pt]
+		\lim_{h \to 0^{-}}\frac{\cos(h) -1 }{h} = 0                                                     \\
+		\lim_{h \to 0^{+}} \frac{\cos(h) -1 }{h} = 0                                                    \\
+		\therefore  \lim_{h \to 0} \frac{\cos(h) -1 }{h} =  0                                           \\
+		= \sin(x) \times 0 +\cos(x)\lim_{h \to 0} \frac{\sin(h)}{h}                                     \\
+		= \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h}                                                       \\
+		\lim_{h \to 0^{-}} \frac{\sin(h)}{h} = 1                                                        \\
+		\lim_{h \to 0^{+}} \frac{\sin(h)}{h} = 1                                                        \\[20pt]
+		\therefore \lim_{h \to 0} \frac{\sin(h)}{h} = 1                                                 \\
+		\therefore \cos(x)\lim_{h \to 0} \frac{\sin(h)}{h} = \cos(x) \times 1                           \\[20pt]
+		 & = \cos(x)                                                                                    \\
+	\end{align*}
+\end{myproof}
+
+\section{Cosine}
+
+\begin{align*}
+	f(x) = \cos(x)                \\
+	-1 \leq        \cos(x) \leq 1 \\
+	\cos(0) = 1                   \\
+\end{align*}
+
+\section{Tangent}
+
+\begin{align*}
+	f(x) = \tan(x)                \\
+	-1 \leq        \tan(x) \leq 1 \\
+	\tan(0) = 0                   \\
+\end{align*}
+
+\subsection{Vertical Asymptote}
+
+\begin{note}
+	A vertical line $(x, 0)$ where the values of a function rise or fall infinitely
+\end{note}
+
+The line $x=a$ is a vertical asymptote of $f(x)$ if
 \[
-	y^{\prime} = \cos(x)
+	\lim_{x \to a} f(x) = \pm \infty
 \]
 
-\
+The zero points of $\cos(x)$ create a vertical asymptote in relation to $\tan(x)$
+
+\subsection{Derivative of $\tan(x)$}
+
+\dfn{$\tan(x)$}{
+	if $y=\tan(x)$
+	\[
+		y^{\prime} = \sec^2(x)
+	\]
+}
+
+\begin{myproof}
+	\begin{align*}
+		y = \tan(x) = \frac{\sin(x)}{\cos(x)}                                       \\[20pt]
+		y^{\prime} = \frac{\cos(x)(\cos(x))- \sin(x)(-\sin(x))}{(\cos(x))^2}        \\[20pt]
+		\because y^{\prime} = \frac{v \times u^{\prime} - u \times v^{\prime}}{v^2} \\
+		y^{\prime} = \frac{\cos^2(x) + \sin^2(x)}{\cos^2(x)}                        \\
+		y^{\prime} = \frac{\cos^2(x)}{\cos^2(x)} + \frac{\sin^2(x)}{\cos^2(x)}      \\
+		y^{\prime} = 1 + (\frac{\sin(x)}{\cos(x)})^2                                \\
+		y^{\prime} = 1 + \tan^2(x)                                                  \\
+		 & = \sec^2(x)
+	\end{align*}
+\end{myproof}
+
+\section{Secant}
+
+\begin{align*}
+	f(x) = \sec(x)               \\
+	1 \leq        \sec(x) \leq 1 \\
+	\sec(0) = 1                  \\
+\end{align*}
+
+\subsection{Derivative of $\sec(x)$}
+\dfn{$\sec(x)$}{
+	if $y=\sec(x)$
+	\[
+		y^{\prime} = \sec(x)\tan(x)
+	\]
+}
+
+\chapter{}
+
+\section{Inverse Trigonometric Functions}
+In the case where
+\[
+	f[g(x)] = x
+\] and
+\[
+	g[f(x)] = x
+\]
+When can say the function $f$ is the inverse of function $g$, due to the function $g$ being able to extract the origninal input of the function $f$.
+
+Therefore the derivative of the inverse function $y = \sin^{-1}(x)$ is as follows:
+\begin{align*}
+	\sin(y) = x                                          \\
+	\frac{d}{dx}\sin(y) = \frac{d}{dx} x                 \\
+	\cos(y)\frac{dy}{dx} = 1                             \\
+	\frac{dy}{dx} = \frac{1}{\cos(y)}                    \\[20pt]
+	\text{Using the identity } \cos^2(y) + \sin^2(y) = 1 \\
+	\cos(x) = \sqrt{1 - \sin^2(x)}                       \\
+	\frac{dy}{dx} = \frac{1}{\sqrt{1 - \sin^2(y)}}       \\
+	\text{And since } x = \sin(y)                        \\
+	\sin^2(y) = x^2                                      \\
+	 & \frac{dy}{dx} = \frac{1}{\sqrt{1 - x^2}}          \\
+\end{align*}
+
+\pagebreak
+
+\ex{Find the derivative of $\cos^{-1}(x)$}{
+	\begin{align*}
+		y = \cos^{-1}(x)                                     \\
+		\cos(y) = x                                          \\
+		-\sin(y)\frac{dy}{dx} = 1                            \\
+		\frac{dy}{dx} = -\frac{1}{\sin(y)}                   \\
+		\text{Using the identity } \cos^2(y) + \sin^2(y) = 1 \\
+		\sin(y) = \sqrt{1 - \cos^2(y)}                       \\
+		\frac{dy}{dx} = -\frac{1}{\sqrt{1 - \cos^2(y)}}      \\
+		\text{And since } x = \cos(y)                        \\
+		\cos^2(y) = x^2                                      \\
+		 & =  \frac{dy}{dx} = -\frac{1}{\sqrt{1 - x^2}}      \\
+	\end{align*}
+}
+
+\ex{Find the derivative of $\tan^{-1}(x)$}{
+	\begin{align*}
+		\tan(y) = x                                         \\
+		\sec^2(y)\frac{dy}{dx} = 1                          \\
+		\frac{dy}{dx} = \frac{1}{\sec^2(y)}                 \\
+		\text{From the identity } 1 + \tan^2(y) = \sec^2(y) \\
+		\frac{dy}{dx} = \frac{1}{1 + \tan^2(y)}             \\
+		\text{And since } x = \tan(y)                       \\
+		\tan^2(y) = x^2                                     \\
+		 & = \frac{dy}{dx} = \frac{1}{1 + x^2}              \\
+	\end{align*}
+}
+
+\chapter{}
+\section{Relationships}
+
+\begin{align*}
+	\cos(x-\frac{\pi}{2}) = \sin(x) \\
+	\sin(x + \frac{\pi}{2}) = \cos(x)
+\end{align*}
+
+\section{Identities}
+\subsection{Reciprocal Identities}
+
+\begin{align*}
+	\sin(\theta) = \frac{1}{\csc(\theta)} \;\; \text{or} \;\; \csc(\theta) = \frac{1}{\sin(\theta)} \\[20pt]
+	\cos(\theta) = \frac{1}{\sec(\theta)}\;\; \text{or} \;\;\sec(\theta) = \frac{1}{\cos(\theta)}   \\[20pt]
+	\tan(\theta) = \frac{1}{\cot(\theta)}\;\; \text{or} \;\; \cot(\theta) = \frac{1}{\tan(\theta)}
+\end{align*}
+
+\subsection{Pythagorean Identities}
+
+\begin{align*}
+	\sin^2(\theta) + \cos^2(\theta) = 1 \\
+	1 + \tan^2(\theta) = \sec^2(\theta) \\
+	\csc^2(\theta) = 1 + \cot^2(\theta)
+\end{align*}
+
+\subsection{Ratio Identities}
+\begin{align*}
+	\tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)} \\
+	\cot(\theta) = \frac{\cos(\theta)}{\sin(\theta)}
+\end{align*}
+
+\subsection{Sum and Difference of Angles}
+\begin{align*}
+	\sin(\alpha + \beta) = \sin(\alpha) \times \cos(\beta) + \cos(\alpha) \times \cos(\beta)       \\
+	\sin(\alpha-\beta) = \sin(\alpha)  \times \cos(\beta) - \cos(\alpha)  \times \sin(\beta)       \\
+	\cos(\alpha+\beta) = \cos(\alpha)  \times \cos(\beta) - \sin(\alpha)  \times  \sin(\beta)      \\
+	\cos(\alpha - \beta) = \cos(\alpha)  \times \cos(\beta) + \sin(\alpha)  \times  \sin(\beta)    \\
+	\tan(\alpha + \beta) = \frac{\tan(\alpha) + \tan(\beta)}{1- \tan(\alpha)  \times  \tan(\beta)} \\
+	\tan(\alpha - \beta) = \frac{\tan(\alpha) - \tan(\beta)}{1+ \tan(\alpha)  \times  \tan(\beta)}
+\end{align*}
+
+\subsection{Double Angles}
+\begin{align*}
+	\sin(2\theta) = 2\sin(\theta) \cos(\theta)      \\
+	\cos(2\theta) = \cos^2(\theta) - \sin^2(\theta) \\
+	= 2\cos^2(\theta) - 1                           \\
+	= 1- 2 \sin^2(\theta)                           \\
+	\tan(2\theta)= \frac{2\tan(\theta)}{1 - \tan^2(\theta)}
+\end{align*}
+
 \end{document}

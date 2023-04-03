@@ -1,12 +1,18 @@
 #!/bin/bash
 
+basedir=$(pwd)
 # Calculus Notes
 mkdir -p ./_Exported/Calc
-for file in ./_Raws/Calc/*.md; do
+cd ./_Raws/Calc || exit 1
+for file in ./*.tex; do
 	echo "$file"
-	filename=$(basename "$file" .md)
-	pandoc "$file" -o "./_Exported/Calc/$filename.pdf" --template=./Templates/eisvogel.tex --listings
+	filename=$(basename "$file" .tex)
+	pdflatex -output-directory="../../_Exported/Calc" "$file" >>"$basedir/latex.log"
 done
+cd "$basedir" || exit 1
+
+echo "Cleaning Calc dir"
+rm ./_Exported/Calc/*.aux ./_Exported/Calc/*.fls ./_Exported/Calc/*.toc ./_Exported/Calc/*.synctex.gz ./_Exported/Calc/*.fdb_latexmk ./_Exported/Calc/*.log
 
 # Intro to Computing Info Systems Beyond Notes
 mkdir -p "./_Exported/CompSci/Information Systems For Business and Beyond Notes"

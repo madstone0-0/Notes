@@ -1,0 +1,137 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Optimization}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{March 2023}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\chapter{Maximum and Minimum}
+\nt{
+	Local - Subsection of range\\
+	Global - Whole range
+}
+
+\section{Maximize}
+\[
+	R(x) = 45 - \frac{x^2}{3}, \; 0 \leq x \leq 1
+\]
+\begin{center}
+	Find all local maximum \underline{values}\\
+	Find the global maximum \underline{value}
+\end{center}
+
+\section{Minimize}
+
+\begin{itemize}
+	\item Local Minimum - Minimum in specified range
+	\item Global Minimum - Overall minimum
+\end{itemize}
+
+\section{Local/Relative Maximum/Minimum (Optimum)}
+
+\begin{itemize}
+	\item Find the critical values of the function:
+	      \subitem Stationary points, i.e. $f^{\prime}(?) = 0$
+	      \subitem Undefined points, i.e. $f^{\prime}(?) = \emptyset$
+	\item Assess them for potential local maximum/minimum:
+	      \subitem Find the first derivative, input values from the left and right of the critical points and check the change in signs:
+	      \subsubitem $+$ to $-$: Maximum
+	      \subsubitem $-$ to $+$: Minimum
+	      \subitem Find second derivative, input the critical values and check the sign:
+	      \subsubitem $-$: Minimum
+	      \subsubitem $+$: Maximum
+\end{itemize}
+\pagebreak
+
+\section{Global/Absolute Maximum/Minimum (Optima)}
+To find the Absolute Optima of a function whose domain is unrestricted:
+
+\begin{align*}
+	\begin{array}{c c}
+		\lim_{x \to \infty} f(x) & \lim_{x \to -\infty} f(x)
+	\end{array}
+\end{align*}
+
+\subsection{Conditions for finding the Absolute Optima easily}
+
+\begin{enumerate}
+	\item Closed Domain, i.e. $[x_1,x_2]$
+	\item Function is continuous for the duration of the closed domai
+\end{enumerate}
+
+\label{thm:evt}\thm{Extreme Value Theorem}{
+	If a real valued function $f$ is continuous on the closed interval $[a,b]$, the $f$ must attain a maximum and minimum at least once.
+	\begin{gather*}
+		f(c) \geq f(x) \geq F(d) \\
+		\forall x \in [a,b]
+	\end{gather*}
+	Where $f(c)$ is the function's minimum value and $F(d)$ is the function's maximum value.
+}
+
+\ex{}{
+\[
+	f(x)=x^3 \;\; \text{on} \;\; [-1,10]
+\]
+
+\begin{itemize}
+	\item $f(x)$ is continuous due to it being a polynomial
+	\item The function's domain is closed due to the end values being included in the domain
+\end{itemize}
+
+
+By EVT(\ref{thm:evt}) $f(x)$ must attain absolute maximum and minimum at least once on the interval. Possibly at:
+\begin{enumerate}
+	\item End points of the domain
+	\item Critical values of $f(x)$
+\end{enumerate}
+
+\begin{align*}
+	f(x) = x^3                                  \\
+	f^{\prime}(x) = 3x^2                        \\
+	0 = 3x^2                                    \\
+	\frac{0}{3} = x^2                           \\
+	0 = x                                       \\[10pt]
+	f(-1) = -1                                  \\
+	f(10) = 1000                                \\[20pt]
+	\therefore \text{Absolute Maximum is } 1000 \\
+	\text{Absolute Minimum is } -1
+\end{align*}
+}
+\pagebreak
+
+\chapter{Concavity}
+Let $f$ be a function that is differentiable over an open interval $I$
+
+\begin{itemize}
+	\item If $f^{\prime}$ is increasing over $I$, we say $f$ is concave up over $I$, i.e. $f^{\prime\prime} > 0$
+	\item If $f^{\prime}$ is decreasing over $I$, we say $f$ is concave down over $I$, i.e $f^{\prime\prime} < 0$
+\end{itemize}
+
+\section{Inflection}
+
+A point where a function switches concavity, i.e:
+
+\begin{gather*}
+	f^{\prime\prime}(x^{-}) = +\text{ve } \; \text{to } \; f^{\prime\prime}(x^{+}) = -\text{ve }\\
+	\text{or } \\
+	f^{\prime\prime}(x^{-}) = -\text{ve } \; \text{to } \; f^{\prime\prime}(x^{+}) = +\text{ve }
+\end{gather*}
+
+\section{Curvature}
+\subsection{Concave Up}
+The \underline{cave} is facing up
+
+\subsection{Concave Down}
+The \underline{cave} is facing down
+
+\end{document}

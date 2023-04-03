@@ -1,0 +1,44 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Implicit Differentiation}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{March 2023}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\chapter{Implicity}
+\section{Explicit vs Implicit}
+
+\[
+	y = x^2 +x+1
+\]
+The dependent variable $y$ is separate from the independent variable $x$, making this function explicitly written.
+
+\[
+	x^2+y^2 = 1
+\]
+
+The dependent variable $y$ is not separate from the independent variable $x$, making this function implicitly written.
+
+\section{Implicit Differentiation}
+Given an implicitly written function, $2x^3+2y^3 = 9xy$. We can find the derivative by doing the following:
+
+\begin{align*}
+	2x^3+2y^3 = 9xy                                       \\
+	\frac{d}{dx}(2x^3+2^3) = \frac{d}{dx}(9xy)            \\
+	6x^2 + 6y^2\frac{dy}{dx} = (9)(y) + (9x)\frac{dy}{dx} \\
+	6x^2=9y = 9x\frac{dy}{dx} - 6y^2\frac{dy}{dx}         \\
+	6x^2=9y= (9x-6y^2)\frac{dy}{dx}                       \\
+	 & =  \frac{6x^2-9y}{9x-6y^2} = \frac{dy}{dx}
+\end{align*}
+
+\end{document}

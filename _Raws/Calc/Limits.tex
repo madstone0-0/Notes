@@ -1,0 +1,134 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Limits}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\chapter{}
+\section{The Limit of a Function}
+Reporting about the behaviour of function within the range of its dangerous values
+
+
+\begin{displaymath}
+	f(x) = x^2 + \frac{1}{x}
+\end{displaymath}
+
+Input variable = $x$
+
+Output variable = $f(x)$
+
+Name of function = $f$
+
+
+"Acceptable"/Permissible input values of x - All real numbers except zero
+
+\begin{gather*}
+	x, f(x) \;\; x+h, f(x+h)      \\
+	f(x+h) - \frac{f(x)}{x+h-x} \\
+	f(x+h) - \frac{f(x)}{h}         \\
+\end{gather*}
+
+\subsection{Proof}
+
+\[y = -16t^2+100t+6\]
+
+Points used:
+$(0, 6) \; (1, 90) \; (3,162)$
+
+When $t = 0$ and $y = 6$
+
+\begin{align*}
+	y = at^2 + bt+c      \\
+	6 = a(0)^2 + b(0) +c \\
+	 & c = 6
+\end{align*}
+
+When $t=1$ and $y=90$
+
+\begin{align*}
+	90 = a(1)^2 +b +6 \\
+	90 = a + b + 6    \\
+	84 = a + b        \\
+	84 - b = a
+\end{align*}
+
+When $t=3$ and $y=162$
+
+\begin{align*}
+	162 = a(3)^2 + b + 6     \\
+	162 = 9a + 3b + 6        \\
+	162 = 9(84 - b) + 3b + 6 \\
+	162 = 756 - 9b +3b +6    \\
+	-594 = -6b +6            \\
+	-600 = -6b               \\
+	 & b = 100               \\[20pt]
+	\therefore b = 100
+\end{align*}
+
+\begin{align*}
+	84 - 100 = a \\
+	 & a = -16
+\end{align*}
+
+Therefore $a=16$, $b=100$ and $c=6$
+
+\qs{}{Given $f(x) = x^2$ find the Limit of $f(x)$ at $x=3$}
+\sol{}{
+	\begin{align*}
+		\text{As x} \to 3^-, \text{ } f(x) \text{->} 9 \\
+		\text{As x} \to 3^+, \text{ } f(x) \text{->} 9
+	\end{align*}
+	Or
+	\begin{align*}
+		\lim_{x\to3^-} f(x) =9 \\
+		\lim_{x\to3^+} f(x) = 9
+	\end{align*}
+	The first $9$ is known as the left limit of $f(x)$ and the other $9$ is known as the right limit of $f(x)$
+
+	Therefore the limit of $f(x)$ at $x=3$ is:
+	\begin{align*}
+		\lim_{x\to3} f(x) = 9
+	\end{align*}
+
+	This is because the left limit and right limit converge.
+}
+
+\noindent\large{In the case where:}
+
+\begin{align*}
+	\lim_{x\to1^-} f(x) = 5 \\
+	\lim_{x\to1^+} f(x) = 4
+\end{align*}
+
+\noindent The left and right limits do not converge so there is no limit of $f(x)$ for $x = 1$ and is written as:
+
+\[
+	\lim_{x\to1} f(x) = \text{No such unique number}
+	.\]
+\pagebreak
+
+\noindent\large{In the case where one limit does not exist, i.e. Increasing without bounds:}
+
+\begin{align*}
+	\lim_{x \to 1^-} f(x) \to \infty \\
+	\lim_{x \to 1^+} f(x) \to 4
+\end{align*}
+
+The limit does not exist because the left limit does not exist. This is written as:
+
+\begin{align*}
+	\lim_{x\to1} f(x) = \text{does not exist} \\
+\end{align*}
+
+\end{document}

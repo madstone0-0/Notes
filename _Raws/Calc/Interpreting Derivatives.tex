@@ -1,0 +1,98 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Interpreting Derivatives}}
+\author{\huge{Malibu Hudson-Kansai}}
+\date{March 2023}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{to}
+\tableofcontents
+\pagebreak
+
+\chapter{}
+\section{Instantaneous Rate of Change}
+
+In the case where $f$ is a function of $x$ $f^{\prime}(x)$ measures the instantaneous rate of change of $f$ with respect to $x$.
+
+\ex{}{
+	The term widget is an economic term for a generic unit of manufacturing output. Suppose a company produces widgets and knows that the market supports a price of \$10 per unit.
+	Let $P(n)$ give the profit, in dollars, earned by manufacturing and selling n widgets, The company likely cannot make a (positive) profit making just one widget; the start--up costs will likely exceed \$10. Mathematically, we would write this as $P(1)<0$.
+	\\
+	What do $P(1000)=500$ and $P^{\prime}(1000) = 0.25$ mean?. Approximate $P(1100)$
+
+	\sol{
+		\\The equation $P(1000)=500$ means that selling 1,000 widgets returns a profit of \$500.\\
+		We interpret $P^{\prime}(1000)=0.25$ as meaning that the profit is increasing at the rate of \$0.25 per widget (the units are "dollars per widget").\\
+		Since we have no other information to use, out best approximation for $P(1100)$ is:
+		\begin{align*}
+			P(1100) \approx P(1000) + P^{\prime} (1000)  \times 100 \\
+			= P(1000) + P^{\prime}(1000)  \times  100               \\
+			= 500 + 0.25 \times 100                                 \\
+			 & = 525                                                \\
+		\end{align*}
+		We approximate that selling 1.100 widgets returns a profit of \$525
+	}
+}
+\section{The Slope of the Tangent Line}
+
+We can measure the instantaneous rate of change at a given $x$ value $c$ of a non-linear function by computing $f^{\prime}(c)$. We can determine the behaviour of the function $f$ by observing the slopes of its tangent lines.
+
+\section{Increasing and Decreasing Functions}
+\subsection{Increasing Functions}
+
+$f(x)$ is increasing whenever $x_1 < x_2$ and $f(x_1) < f(x_2)$, I.e as you go up the $x$ axis the $y$ or function values increase.
+
+$f(x)$ is increasing if the slope on any point on it's graph is positive throughout the function's entire domain.
+
+\subsection{Decreasing Functions}
+$f(x)$ is decreasing whenever $x_1 < x_2$ and $f(x_1) > f(x_2)$, .I.e as you go up the $x$ axis the $y$ or function values decrease
+
+$f(x)$ is increasing if the slope on any point on it's graph is negative throughout the function's entire domain.
+
+\subsection{Critical Points}
+
+\begin{itemize}
+	\item Points where the gradient is equal to 0, i.e. $f^{\prime}(x) = 0$
+	\item Points where the gradient does not exist, i.e. $f^{\prime}(x) = \emptyset$
+\end{itemize}
+
+\ex{$t \sqrt[3]{t^2 - 4}$}{
+	\begin{align*}
+		g(t) = t \sqrt[3]{t^2 - 4}                                                                                                 \\
+		g(t) = t(t^2-4)^{\frac{1}{3}}                                                                                              \\
+		g^{\prime}(t) = (1)(t^2-4)^{\frac{1}{3}} + (\frac{1}{3}) (2t) (t^2-4)  \times (t)                                          \\
+		g^{\prime}(t) = (t^2-4)^{\frac{1}{3}} + \frac{2}{3}t^2(t^2-4)^{-\frac{2}{3}}                                               \\
+		g^{\prime}(t)= (t^2-4)^{\frac{1}{3}} + \frac{2t^2}{3(t^2-4)^{\frac{2}{3}}}                                                 \\
+		g^{\prime}(t)= \frac{(t^2-4)^{\frac{1}{3}}}{1} + \frac{2t^2}{3(t^2-4)^{\frac{2}{3}}}                                       \\
+		g^{\prime}(t) = \frac{3(t^2-4)+t^2}{3(t^2-4)^{\frac{2}{3}}}                                                                \\
+		0 = \frac{3(t^2-4)+t^2}{3(t^2-4)^{\frac{2}{3}}}                                                                            \\
+		0 = 3t^2-12+2t^2                                                                                                           \\
+		0 = 5t^2-12                                                                                                                \\
+		12 = 5t^2                                                                                                                  \\
+		\frac{12}{5} =t^2                                                                                                          \\
+		\pm \sqrt{\frac{12}{5 }} =t                                                                                                \\
+		3(t^2-4)^{\frac{2}{3}} = 0                                                                                                 \\
+		(t^2-4)^{\frac{2}{3}} = 0                                                                                                  \\
+		t = \pm 2                                                                                                                  \\[20pt]
+		\begin{array}{|c|c|c|}
+			\hline \text{Interval}                                & \text{Test Value} & \text{Slope}_{g^{\prime}(x)} \\
+			\hline x < -2                                         & -3                & +                            \\
+			\hline -2<x< -\sqrt{\frac{12}{5}}                     & -1.7              & +                            \\
+			\hline -\sqrt{\frac{12}{5}} < x < \sqrt{\frac{12}{5}} & 0                 & -                            \\
+			\hline \sqrt{\frac{12}{5}} < x <2                     & 2                 & +                            \\
+			\hline x > 2                                          & 7                 & +                            \\
+			\hline
+		\end{array} \\
+		\therefore \text{When } g^{\prime}(x) = 0,\; x=-\sqrt{\frac{12}{5} }, \; x=\sqrt{\frac{12}{5}}                             \\[10pt]
+		\therefore \text{Increasing } (-\infty, -2) ,\; (2, \infty), \; (-2, -\sqrt{\frac{12}{5}}), \; (\sqrt{\frac{12}{5}}, 2)    \\[10pt]
+		\text{Decreasing } (-\sqrt{\frac{12}{5}}, \sqrt{\frac{12}{5}})
+	\end{align*}
+}
+
+\end{document}

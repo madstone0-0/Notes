@@ -8,7 +8,10 @@
 !/_Raws/Personal
 
 !/_Exported/
+/_Exported/Calc/*
+!/_Exported/Calc/*.pdf
 /_Exported/*
 !/_Exported/*.pdf
 !/Templates/
 !/build.sh
+!.latexmkrc

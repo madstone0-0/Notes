@@ -62,3 +62,21 @@ def searchBinary(my_list, item):
                 first = mid + 1
     return foundFlag
 ```
+
+# Validating Algorithms
+
+###### Deterministic Algorithm
+
+A particular input always generates the exact same output
+
+###### Randomized Algorithm
+
+A random sequence of numbers is taken along with an input which alters the output every time the algorithm is run.
+
+###### Exact Algorithm
+
+Algorithms expected to produce a precise solution without introducing any assumptions or approximations
+
+###### Approximate Algorithm
+
+Algorithms that deal with a complex problem by making assumptions.

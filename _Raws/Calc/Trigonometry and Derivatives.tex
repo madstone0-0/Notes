@@ -36,7 +36,7 @@ The graph of sine is periodic with a period of $2\pi$, meaning it repeats itself
 
 \dfn{$\sin(x)$}{
 	if $y=\sin(x)$
-
+	
 	\[
 		y^{\prime} = \cos(x)
 	\]
@@ -189,6 +189,46 @@ Therefore the derivative of the inverse function $y = \sin^{-1}(x)$ is as follow
 		\tan^2(y) = x^2                                     \\
 		 & = \frac{dy}{dx} = \frac{1}{1 + x^2}              \\
 	\end{align*}
+}
+
+\subsection{Questions}
+
+
+\qs{}{
+	\[
+		y = \sin^{-1}(5x+9)
+	\]
+}
+\sol{
+	\begin{align*}
+		\sin(y) = 5x + 9                                     \\
+		\cos(y)\frac{dy}{dx} = 5                             \\
+		\frac{dy}{dx} = \frac{5}{\cos(y)}                    \\
+		\text{Using the identity } \cos^2(y) + \sin^2(y) = 1 \\
+		\cos(y) = \sqrt{1 - \sin^2(y)}                       \\
+		\frac{dy}{dx} = \frac{5}{\sqrt{1 - \sin^2(y)}}       \\
+		\text{And since } x = \sin(y)                        \\
+		\frac{dy}{dx} = \frac{5}{\sqrt{1 - (5x+9)^2}}        \\
+		
+	\end{align*}
+}
+
+\qs{}{
+	\[
+		y = \sin^{-1}(x)
+	\]
+}
+\sol{
+
+}
+
+\qs{}{
+	\[
+		y = \cos^{-1}(x)
+	\]
+}
+\sol{
+
 }
 
 \chapter{}

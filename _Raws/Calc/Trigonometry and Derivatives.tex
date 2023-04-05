@@ -36,7 +36,7 @@ The graph of sine is periodic with a period of $2\pi$, meaning it repeats itself
 
 \dfn{$\sin(x)$}{
 	if $y=\sin(x)$
-	
+
 	\[
 		y^{\prime} = \cos(x)
 	\]
@@ -190,7 +190,7 @@ Therefore the derivative of the inverse function $y = \sin^{-1}(x)$ is as follow
 		 & = \frac{dy}{dx} = \frac{1}{1 + x^2}              \\
 	\end{align*}
 }
-
+\pagebreak
 \subsection{Questions}
 
 
@@ -218,6 +218,16 @@ Therefore the derivative of the inverse function $y = \sin^{-1}(x)$ is as follow
 	\]
 }
 \sol{
+	\begin{align*}
+		\sin(y) = x                                          \\
+		\cos(y)\frac{dy}{dx} = 1                             \\
+		\frac{dy}{dx} = \frac{1}{\cos(y)}                    \\
+		\text{Using the identity } \cos^2(y) + \sin^2(y) = 1 \\
+		\cos(y) = \sqrt{1 - \sin^2(y)}                       \\
+		\frac{dy}{dx} = \frac{1}{\sqrt{1 - \sin^2(y)}}       \\
+		\text{And since } x = \sin(y)                        \\
+		\frac{dy}{dx} = \frac{1}{\sqrt{1 - x^2}}             \\
+	\end{align*}
 
 }
 
@@ -227,6 +237,16 @@ Therefore the derivative of the inverse function $y = \sin^{-1}(x)$ is as follow
 	\]
 }
 \sol{
+	\begin{align*}
+		\cos(y) = x                                          \\
+		-\sin(y)\frac{dy}{dx} = 1                            \\
+		\frac{dy}{dx} = -\frac{1}{\sin(y)}                   \\
+		\text{Using the identity } \cos^2(y) + \sin^2(y) = 1 \\
+		\sin(y) = \sqrt{1 - \cos^2(y)}                       \\
+		\frac{dy}{dx} = -\frac{1}{\sqrt{1 - \cos^2(y)}}      \\
+		\text{And since } x = \cos(y)                        \\
+		\frac{dy}{dx} = -\frac{1}{\sqrt{1 - x^2}}            \\
+	\end{align*}
 
 }
 

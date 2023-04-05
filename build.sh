@@ -7,7 +7,7 @@ cd ./_Raws/Calc || exit 1
 for file in ./*.tex; do
 	echo "$file"
 	filename=$(basename "$file" .tex)
-	pdflatex -output-directory="../../_Exported/Calc" "$file" >>"$basedir/latex.log"
+	latexmk -pdf -synctex=1 -interaction=nonstopmode -outdir="../../_Exported/Calc" "$file" &>"$basedir/latex.log"
 done
 cd "$basedir" || exit 1
 

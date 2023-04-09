@@ -1,0 +1,56 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Logarithmic Functions and Derivatives}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{April 2023}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{}
+\section{Derivatives of Logarithmic Functions}
+\dfn{Logarithmic Functions}{
+	Functions in the form:
+	\[
+		y = \log_{a}[f(x)] \;\; \text{ or } \;\; y = \ln[f(x)]
+	\]
+}
+
+\subsection{Derivate of $\ln(x)$}
+
+\[
+	y^{\prime} = \frac{f^{\prime}(x)}{f(x)} \;\; \text{ or } \;\; \frac{x^{\prime}}{x}
+\]
+\begin{myproof}
+	\begingroup
+	\allowdisplaybreaks
+	\begin{align*}
+		\frac{dy}{dx} = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}                                                    \\[10pt]
+		\text{Where } f(x) = \ln(x) \;\; \text{ and } \;\; f(x+h) = \ln(x+h)                                      \\[10pt]
+		\frac{dy}{dx} = \lim_{h \to 0} \frac{\ln(x+h) - \ln(x)}{h}                                                \\
+		\frac{dy}{dx} = \lim_{h \to 0} \frac{\ln(x+h) - \ln(x)}{h}                                                \\
+		\frac{dy}{dx} = \lim_{h \to 0} \frac{\ln(\frac{x+h}{x})}{h}                                               \\
+		\frac{dy}{dx} = \lim_{h \to 0} \frac{\ln(1+\frac{h}{x})}{h}                                               \\
+		\frac{dy}{dx} = \lim_{h \to 0} \frac{1}{h}(\ln(1+\frac{h}{x}))                                            \\[10pt]
+		\text{Let } v = \frac{h}{x} \;\; \therefore h = vx \;\; \implies \;\; \text{As } \;\; h\to 0 \;\; v \to 0 \\[10pt]
+		\pagebreak
+		\frac{dy}{dx} = \lim_{v \to 0} \frac{1}{vx}(\ln(1+v))                                                     \\
+		\frac{dy}{dx} = \lim_{v \to 0} \frac{1}{v}  \times \frac{1}{x}\ln(1+v)                                    \\
+		\frac{dy}{dx} = \frac{1}{x} \lim_{v \to 0} \frac{1}{v} \ln(1+v)                                           \\
+		\frac{dy}{dx}= \frac{1}{x} \lim_{v \to 0} \ln(1+v)^{\frac{1}{v}}                                          \\
+		\frac{dy}{dx} = \frac{1}{x}\ln[\lim_{v \to 0} (1+v)^{\frac{1}{v}} ]                                       \\
+		\frac{dy}{dx} = \frac{1}{x}\ln[e]                                                                         \\
+		\frac{dy}{dx} = \frac{1}{x}                                                                               \\
+	\end{align*}
+	\endgroup
+\end{myproof}
+
+\end{document}

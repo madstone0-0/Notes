@@ -1,0 +1,267 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\begin{document}
+\qs{}{
+	Find the derivatives of the given functions.
+	\begin{enumerate}
+		\item \[
+			      y = \sin^{-1}(\sqrt{2})
+		      \]
+		\item \[
+			      y = \tan^{-1}(\pi x)
+		      \]
+		\item \[
+			      y = e^{x} \tan^{-1}(x)
+		      \]
+		\item \[
+			      f(x) = \ln(\sin^{-1}(x))
+		      \]
+		\item \[
+			      y = \tan^{-1}(\ln(x)) + \pi
+		      \]
+		\item \[
+			      h(x) = \frac{\sin^{-1}(x)}{1+x}
+		      \]
+		\item \[
+			      y = \sin(x) + x^2 \tan^{-1}(x)
+		      \]
+		\item \[
+			      f(t) = 4 \cos^{-1}(t) - 10 \tan^{-1}(t)
+		      \]
+		\item \[
+			      h(t) = \frac{t}{1 - e^{t}}
+		      \]
+		\item \[
+			      f(x) = \frac{1+5x}{\ln(x)}
+		      \]
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      y = \sin^{-1}(\sqrt{2x})        \\
+			      y = \sin^{-1}(2x^{\frac{1}{2}}) \\
+			      y^{\prime} = \frac{2x^{-\frac{1}{2}}}{\sqrt{1-2x}}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      y = \tan^{-1}(\pi x) \\
+			      y^{\prime} = \frac{\pi}{1+\pi^2 x^2}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      y = e^{x} \tan^{-1}(x)                                      \\
+			      y^{\prime} = e^{x} (\tan^{-1}(x)) + (\frac{1}{1+x^2}) e^{x} \\
+			      y^{\prime} = e^{x} (\tan^{-1}(x)) + (\frac{1}{1+x^2}) e^{x}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      f(x) = \ln(\sin^{-1}(x)) \\
+			      f(x) = \frac{\frac{1}{\sqrt{1+x^2}}}{\sin^{-1}(x)}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      y = \tan^{-1}(\ln(x)) + \pi \\
+			      y^{\prime} = \frac{\frac{1}{x}}{1+(\ln(x))^2}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      h(x) = \frac{\sin^{-1}(x)}{1+x} \\
+			      h^{\prime}(x) = \frac{(1+x)(\frac{1}{\sqrt{1-x^2}}) - (1)(\sin^{-1}(x))}{(1+x)^2}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      y = \sin(x) + x^2 \tan^{-1}(x) \\
+			      y^{\prime} = \cos(x) + 2x \tan^{-1}(x) + \frac{x^2}{1+x^2}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      f(t) = 4 \cos^{-1}(t) - 10 \tan^{-1}(t)                          \\
+			      f^{\prime}(t) = 4(-\frac{1}{\sqrt{1-t^2}}) - 10(\frac{1}{1+t^2}) \\
+			      f^{\prime}(t) = -\frac{4}{\sqrt{1-t^2}} - \frac{10}{1+t^2}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      h(t) = \frac{t}{1 - e^{t}} \\
+			      h^{\prime}(t) = \frac{(1)(1-e^{t}) - (t)(-e^{t})}{(1-e^{t})^2}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      f(x) = \frac{1+5x}{\ln(x)}                                           \\
+			      f^{\prime}(x) = \frac{(\ln(x))(5) - (\frac{1}{x})(1+5x)}{(\ln(x))^2} \\
+			      f^{\prime}(x) = \frac{5\ln(x) - \frac{1+5x}{x}}{(\ln(x))^2}
+		      \end{align*}
+	\end{enumerate}
+}
+
+\qs{}{
+	In 2009, the population of Hungary was approximated by $P = 9.906(0.997)^{t}$ , where
+	$P$ is in millions and $t$ is in years since 2009. Assume the trend continues.
+	\begin{itemize}
+		\item What does this model predict for the population of Hungary in the year 2020?
+		\item How fast (in people/year) does this model predict Hungary’s population will
+		      be changing in 2020?
+	\end{itemize}
+}
+
+\sol{
+	\begin{itemize}
+		\item
+		      \begin{align*}
+			      P = 9.906(0.997)^{t}  \\
+			      t = 2020 - 2009       \\
+			      t = 11                \\
+			      P = 9.906(0.997)^{11} \\
+			       & P = 9.584
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      P^{\prime} = (0.997^{t}  \times  (1)  \times  \ln(0.997))  \times 9.906 \\
+			      P^{\prime} = 9.906\ln(0.997)  \times 0.997^{11}                         \\
+			       & P^{\prime} = -0.0288
+		      \end{align*}
+	\end{itemize}
+}
+
+\qs{}{
+	Find the equation of the tangent line to the graph of $y = \ln(x) \log_2(x)$ at $x = 2$
+}
+
+\sol{
+	\begin{align*}
+		y = \ln(x) \log_2(x)                                          \\
+		y^{\prime} = \frac{1}{x} \log_2(x) + \ln(x) \frac{1}{x\ln(2)} \\[10pt]
+		y = \ln(2)\log_2(2)                                           \\[10pt]
+		y^{\prime} = \frac{\log_2(x)}{x} + \frac{\ln(x)}{x\ln(2)}     \\
+		y^{\prime} = \frac{1}{2} + \frac{1}{2}                        \\
+		y^{\prime} = 1                                                \\[10pt]
+		\ln(2)\log_2(2) = 2+c                                         \\
+		\ln(2)\log_2(2) -2 = c                                        \\
+		 & y = x + (\ln(2)\log_2(2) -2)
+	\end{align*}
+}
+
+\qs{}{
+	Find the tangent line to $f(x) = 7^{x} + 4e^{x}$ at $x = 0$
+}
+\sol {
+	\begin{align*}
+		f(x) = 7^{x} + 4e^{x}                 \\
+		f^{\prime}(x) = 7^{x} \ln(7) + 4e^{x} \\
+		f^{\prime}(0) = 7^{0} \ln(7) + 4e^{0} \\
+		f^{\prime}(0) = 1 \ln(7) + 4          \\
+		f^{\prime}(0) = \ln(7) + 4            \\[10pt]
+		y = 5                                 \\[10pt]
+		5 = 0(\ln(7) + 4) + c                 \\
+		5 = c                                 \\
+		 & y = (\ln(7) + 4)x + 5
+	\end{align*}
+}
+
+\qs{}{
+	The cost of producing a quantity, $q$, of a product is given by $C(q) = 1000 + 30e^{0.05q}$ dollars. Find the cost and the marginal cost when $q = 50$. Interpret these answers in economic terms.
+}
+
+\sol{
+	\begin{align*}
+		C(q) = 1000 + 30e^{0.05q}            \\
+		C(50) = 1000 + 30e^{0.05(50)}        \\
+		C(50) = 1365.47                      \\[10pt]
+		C^{\prime}(q) = \frac{3}{2}e^{0.05q} \\
+		 & C^{\prime}(50) = 18.27            \\[10pt]
+	\end{align*}
+	$\therefore$ When the business produces 50 units of a good it's cost incurred is \$1365.47 and the rate at which the cost increases is \$18.27
+
+}
+
+\qs{}{
+	At a time $t$ hours after it was administered, the concentration of a drug in the body is $f(t) = 27e^{-0.14t}$ mg/ml.
+	\begin{itemize}
+		\item What is the concentration 4 hours after it was administered?
+		\item At what rate is the concentration changing at that time?
+	\end{itemize}
+}
+
+\sol {
+	\begin{itemize}
+		\item
+		      \begin{align*}
+			      f(t) = 27e^{-0.14t}                \\
+			      f(4) = 27e^{-0.14(4)}              \\
+			       & f(4) = 15.42 \;\; \frac{mg}{ml}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      f^{\prime}(t) = -3.78e^{-0.14t}            \\
+			       & f^{\prime}(4) = -2.16 \;\; \frac{mg}{h}
+		      \end{align*}
+	\end{itemize}
+}
+
+\qs{}{
+	For the cost function $C = 1000 + 300\ln(q)$ (in dollars), find the cost and marginal cost at a production level of 500. Interpret your answers in economic terms.
+}
+
+\sol{
+	\begin{align*}
+		C = 1000 + 300\ln(q)       \\
+		C = 1000 + 300\ln(500)     \\
+		C = 2864.38                \\[10pt]
+		C^{\prime} = \frac{300}{q} \\
+		 & C^{\prime} = 0.6
+	\end{align*}
+	$\therefore$ At a production level of 500 the business is incurring a cost of \$2864.38 and this cost is increasing at a rate of \$0.6
+}
+
+\qs{}{
+Carbon-14 is a radioactive isotope used to date objects. If $A_0$ represents the initial amount of carbon-14 in the object, then the quantity remaining at time, $t$, in years, is $A(t) = A_0e^{-0.000121t}$ . A tree, originally 185 micrograms of carbon-14, is now 500 years old. At what rate is the carbon-14 decaying now?
+}
+
+\sol {
+	\begin{align*}
+		A(t) = A_0e^{-0.000121t}                           \\
+		A^{\prime}(t) = -0.000121A_0e^{-0.000121t}         \\
+		A^{\prime}(500) = -0.000121(185)e^{-0.000121(500)} \\
+		 & A^{\prime}(500) = -0.0211 \;\; \frac{\mu g}{y}
+	\end{align*}
+}
+
+\qs{}{
+	In 2009, the population of Mexico was 111 million and growing 1.13\% annually, while the population of the US was 307 million and growing 0.975\% annually. If we measure growth rates in people/year, which population was growing faster in 2009?
+}
+
+\sol{
+	\begin{align*}
+		M = 111 + 1.13x       \\
+		U = 307 + 0.975x      \\[10pt]
+		M^{\prime} = 1.13     \\
+		 & U^{\prime} = 0.975 \\[10pt]
+	\end{align*}
+	$\therefore$ Mexico's population is growing faster than the US's population
+}
+
+\pagebreak
+\qs{}{
+	With $t$ in years since January 1, 2010, the population $P$ of Slim Chance is predicted by $P = 35000(0.98)^{t}$ . At what rate will the population be changing on January 1, 2023?
+}
+\sol {
+	\begin{align*}
+		t = 2023 - 2010                                        \\
+		t = 13                                                 \\[10pt]
+		P = 35000(0.98)^{13}                                   \\
+		P^{\prime} = 35000  \times 0.98^{13}  \times \ln(0.98) \\
+		 & P^{\prime} = 543.772 \;\; \frac{people}{year}
+	\end{align*}
+}
+
+
+\end{document}

@@ -134,4 +134,45 @@ The \underline{cave} is facing up
 \subsection{Concave Down}
 The \underline{cave} is facing down
 
+\pagebreak
+
+\section{Questions}
+\qs{}{
+	A closed box with a square base is to contain 252 cubic feet. The bottom costs \$ 5 per square foot, the top costs \$2 per square foot, and the sides costs \$ 3 per square foot. Find the dimensions that minimize the cost.
+}
+
+\sol{
+	\begin{align*}
+		V = L  \times B  \times H                                 \\
+		V = L  \times L  \times  H                                \\
+		V = 252                                                   \\
+		\therefore 252 = L^2 H                                    \\[10pt]
+		\text{Cost of the top (CT) } = 2L^2                       \\
+		\text{Cost of the bottom (CB)} = 5L^2                     \\
+		\text{Cost of one side (CS) } = 3HL                       \\
+		\text{Total cost (TC)} = CT + CB + 4(CS)                  \\[10pt]
+		TC = 2L^2 + 4(3HL) + 5L^2                                 \\
+		H = \frac{252}{L^2}                                       \\
+		TC = 7L^2 + 12(\frac{252}{L^2})L                          \\
+		TC = 7L^2 + \frac{3024}{L}                                \\[10pt]
+		TC^{\prime} = 14L - \frac{3024}{L^2}                      \\
+		0 = 14L^2 - \frac{3024}{L^2}                              \\
+		0 = 14L^3 - 3024                                          \\
+		216 = L^3                                                 \\
+		6 = L                                                     \\[10pt]
+		TC^{\prime\prime} = 14 + \frac{6048}{L^3}                 \\
+		TC^{\prime\prime}(6) = 42 \;\; \therefore \text{Minimum } \\[10pt]
+		H = \frac{252}{(6)^2}                                     \\
+		H = 7                                                     \\[10pt]
+	\end{align*}
+	$\therefore$ at a width of 6 ft and a height of 7 ft the total cost is minimized
+}
+\pagebreak
+\qs{}{
+	A wire 16 ft long has to be formed into a rectangle. What dimensions should  the rectangle have to maximize area?
+}
+\sol{
+
+}
+
 \end{document}

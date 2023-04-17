@@ -29,6 +29,13 @@
 \[
 	y^{\prime} = \frac{f^{\prime}(x)}{f(x)} \;\; \text{ or } \;\; \frac{x^{\prime}}{x}
 \]
+Where $y = \log_a[f(x)]$
+
+\[
+	y^{\prime} = \frac{f^{\prime}(x)}{x\ln(a)}
+\]
+
+
 \begin{myproof}
 	\begingroup
 	\allowdisplaybreaks
@@ -52,5 +59,40 @@
 	\end{align*}
 	\endgroup
 \end{myproof}
+
+\subsubsection{Questions}
+\qs{}{
+	\[
+		y = 4^x - 5 \log_{7}x
+	\]
+}
+\sol {
+	\begin{align*}
+		y^{\prime} = 4^x \ln(4) - \frac{5}{\ln(7)x}
+	\end{align*}
+}
+
+\qs{}{
+	\[
+		f(t) = 4 \log_{3}(t) - \ln(t)
+	\]
+}
+\sol{
+	\begin{align*}
+		f^{\prime}(t) = \frac{4}{\ln(3)t} - \frac{1}{t}
+	\end{align*}
+}
+
+\qs{}{
+	\[
+		y = 3^x\log(x)
+	\]
+}
+\sol{
+	\begin{align*}
+		y^{\prime} = (3^x\ln(3))(\log(x)) + (3^x)(\frac{1}{\ln(10)x}) \\
+		y^{\prime} = 3^x\ln(3)\log(x) + \frac{3^x}{\ln(10)x}
+	\end{align*}
+}
 
 \end{document}

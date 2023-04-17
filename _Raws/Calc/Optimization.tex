@@ -48,8 +48,8 @@
 	      \subsubitem $+$ to $-$: Maximum
 	      \subsubitem $-$ to $+$: Minimum
 	      \subitem Find second derivative, input the critical values and check the sign:
-	      \subsubitem $-$: Minimum
-	      \subsubitem $+$: Maximum
+	      \subsubitem $-$: Maximum
+	      \subsubitem $+$: Minimum
 \end{itemize}
 \pagebreak
 
@@ -142,6 +142,13 @@ The \underline{cave} is facing down
 }
 
 \sol{
+	\begin{figure}[ht]
+		\centering
+		\incfig{box}
+		\caption{Box}
+		\label{fig:box}
+	\end{figure}
+
 	\begin{align*}
 		V = L  \times B  \times H                                 \\
 		V = L  \times L  \times  H                                \\
@@ -172,7 +179,29 @@ The \underline{cave} is facing down
 	A wire 16 ft long has to be formed into a rectangle. What dimensions should  the rectangle have to maximize area?
 }
 \sol{
-
+	\begin{figure}[h]
+		\centering
+		\incfig{square}
+		\caption{Square}
+		\label{fig:square}
+	\end{figure}
+	\begin{align*}
+		A = L  \times B                   \\
+		2L + 2B = 16                      \\
+		2(L + B) = 16                     \\
+		L + B = 8                         \\
+		B = 8 - L                         \\[10pt]
+		A = L(8 - L)                      \\
+		A = 8L - L^2                      \\
+		A^{\prime} = -2L + 8              \\
+		0 = -2L + 8                       \\
+		L = 4                             \\[10pt]
+		A^{\prime\prime} = -2             \\
+		\therefore L = 4 \text{ Maximum } \\[10pt]
+		B = 8 - 4                         \\
+		B = 4
+	\end{align*}
+	$\therefore$ at a length of 4 ft and a width of 4 ft the area is maximized
 }
 
 \end{document}

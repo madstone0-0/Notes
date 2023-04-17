@@ -37,8 +37,8 @@
 \newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{blue}{#1}}
 \SetCommentSty{mycommfont}
 \newcommand{\incfig}[1]{%
-    \def\svgwidth{\columnwidth}
-    \import{./figures/}{#1.pdf_tex}
+	\def\svgwidth{\columnwidth}
+	\import{./figures/}{#1.pdf_tex}
 }
 
 \usepackage{tikzsymbols}
@@ -648,34 +648,34 @@
 \newsavebox\diffdbox
 \newcommand{\slantedromand}{{\mathpalette\makesl{d}}}
 \newcommand{\makesl}[2]{%
-\begingroup
-\sbox{\diffdbox}{$\mathsurround=0pt#1\mathrm{#2}$}%
-\pdfsave
-\pdfsetmatrix{1 0 0.2 1}%
-\rlap{\usebox{\diffdbox}}%
-\pdfrestore
-\hskip\wd\diffdbox
-\endgroup
+	\begingroup
+	\sbox{\diffdbox}{$\mathsurround=0pt#1\mathrm{#2}$}%
+	\pdfsave
+	\pdfsetmatrix{1 0 0.2 1}%
+	\rlap{\usebox{\diffdbox}}%
+	\pdfrestore
+	\hskip\wd\diffdbox
+	\endgroup
 }
 \newcommand{\dd}[1][]{\ensuremath{\mathop{}\!\ifstrempty{#1}{%
-\slantedromand\@ifnextchar^{\hspace{0.2ex}}{\hspace{0.1ex}}}%
-{\slantedromand\hspace{0.2ex}^{#1}}}}
+			\slantedromand\@ifnextchar^{\hspace{0.2ex}}{\hspace{0.1ex}}}%
+		{\slantedromand\hspace{0.2ex}^{#1}}}}
 \ProvideDocumentCommand\dv{o m g}{%
-  \ensuremath{%
-    \IfValueTF{#3}{%
-      \IfNoValueTF{#1}{%
-        \frac{\dd #2}{\dd #3}%
-      }{%
-        \frac{\dd^{#1} #2}{\dd #3^{#1}}%
-      }%
-    }{%
-      \IfNoValueTF{#1}{%
-        \frac{\dd}{\dd #2}%
-      }{%
-        \frac{\dd^{#1}}{\dd #2^{#1}}%
-      }%
-    }%
-  }%
+	\ensuremath{%
+		\IfValueTF{#3}{%
+			\IfNoValueTF{#1}{%
+				\frac{\dd #2}{\dd #3}%
+			}{%
+				\frac{\dd^{#1} #2}{\dd #3^{#1}}%
+			}%
+		}{%
+			\IfNoValueTF{#1}{%
+				\frac{\dd}{\dd #2}%
+			}{%
+				\frac{\dd^{#1}}{\dd #2^{#1}}%
+			}%
+		}%
+	}%
 }
 \providecommand*{\pdv}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}
 %  - others
@@ -775,4 +775,3 @@
 	  \end{tikzpicture}}%
 	\@starttoc{toc}}
 \makeatother
-

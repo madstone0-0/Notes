@@ -8,6 +8,8 @@
 \usepackage{parskip}
 
 \begin{document}
+
+\chapter{Optimization}
 \qs{}{
 	Find the derivatives of the given functions.
 	\begin{enumerate}
@@ -263,6 +265,147 @@ Carbon-14 is a radioactive isotope used to date objects. If $A_0$ represents the
 		 & P^{\prime} = 543.772 \;\; \frac{people}{year}
 	\end{align*}
 }
+
+\chapter{Differential Equations}
+
+\qs{}{
+	A company earns revenue (income) and also makes payroll payments. Assume that revenue is
+	earned continuously, that payroll payments are made continuously, and that the only factors of
+	affecting net worth are revenue and payroll. The company’s revenue is earned at a continuous
+	annual rate of 5\% times the net worth. At the same time, the company’s payroll obligations are
+	paid out at a constant rate of 200 million dollars a year. Use this information to write a
+	differential equation to model the net worth of the company, $W$, in millions of dollars, as a
+	function of time, $t$, in years.
+}
+\sol{
+	Let $R$ be the company's revenue
+
+	Let $W$ be the company's net worth
+
+	Let $\frac{dR}{dt}$ be the change in revenue
+
+	Let $\frac{dP}{dt}$ be the change in payroll paid
+	\begin{align*}
+		\frac{dW}{dt} = 0.05W - 200   \\
+		dW = (0.05W - 200)dt          \\
+		 & \frac{dW}{0.05W -100} = dt
+	\end{align*}
+}
+
+
+\qs{}{
+	A patient having major surgery is given the antibiotic Vancomycin intravenously at a rate of
+	85 $mg$ per hour. The rate at which the drug is excreted from the body is proportional to the
+	quantity present, with proportionality constant 0.1 if time is in hours. Write a differential
+	equation for the quantity, $Q$ in mg of Vancomycin in the body after $t$ hours.
+}
+\sol{
+	Let $\frac{dQ}{dt}$ be the rate at which the antibiotic is administered
+
+	Let $\frac{dE}{dt}$ be the rate at which the antibiotic is excreted
+
+	\begin{align*}
+		\frac{dQ}{dt} = 85 - \frac{dE}{dt} \\
+		\frac{dE}{dt} \propto Q            \\
+		\frac{dE}{dt} = KQ                 \\
+		\frac{dE}{dt} = 0.1Q               \\
+		\frac{dQ}{dt} = 85 - 0.1Q          \\
+		 & \frac{dQ}{85 - 0.1Q} = dt       \\
+	\end{align*}
+}
+
+
+\qs{}{
+	Money in a bank account earns interest at a continuous annual rate of 5\% times the current
+	balance. Write a differential equation for the balance, $B$, in the account as a function of time, $t$,
+	in years.
+}
+\sol{
+	Let $\frac{dB}{dt}$ be the change in balance
+	\begin{align*}
+		\frac{dB}{dt} = 0.05B    \\
+		 & \frac{dB}{B} = 0.05dt
+	\end{align*}
+}
+
+
+\qs{}{
+	A bank account that initially contains \$25,000 earns interest at a continuous rate of 4\% per
+	year. Withdrawals are made out of the account at a constant rate of \$2,000 per year. Write a
+	differential equation for the balance, $B$, in the account as a function of the number of years, $t$.
+}
+\sol{
+	Let $B_0$ be the principal
+
+	Let $\frac{dB}{dt}$ be the change in balance
+
+	Let $\frac{dW}{dt}$ be the rate of withdrawal
+
+	\begin{align*}
+		B_0 = 25000                     \\
+		\frac{dW}{dt} = 2000            \\
+		\frac{dB}{dt} = 0.04B - 2000    \\
+		dB = (0.04B - 2000)dt           \\
+		 & \frac{dB}{0.04B - 2000} = dt
+	\end{align*}
+}
+
+\pagebreak
+\qs{}{
+	Morphine is administered to a patient intravenously at a rate of 2.5 $mg$ per hour. About 34.7\%
+	of the morphine is metabolized and leaves the body each hour. Write a differential equation for
+	the amount of morphine, $M$, in milligrams, in the body as a function of time, $t$, in hours.
+}
+\sol{
+	Let $\frac{dM}{dt}$ be the rate at which the morphine is administered
+
+	Let $\frac{dMet}{dt}$ be the rate at which the morphine is metabolized
+
+	\begin{align*}
+		\frac{dM}{dt} = 2.5           \\
+		\frac{dMet}{dt} = 0.347M      \\
+		\frac{dM}{dt} = 2.5 - 0.347M  \\
+		 & \frac{dM}{2.5-0.347M} = dt \\
+	\end{align*}
+}
+
+
+\qs{}{
+	A cup of coffee contains about 100 $mg$ of caffeine. Caffeine is metabolized and leaves the body
+	at a continuous rate of about 17\% every hour. Write a differential equation for the amount, $A$,
+	of caffeine in the body as a function of the number of hours, $t$ since the coffee was consumed.
+}
+\sol{
+	Let $A_0$ be the initial amount of caffeine ingested
+
+	Let $\frac{dMet}{dt}$ be the rate the caffeine is metabolized
+
+	Let $\frac{dA}{dt}$ be the rate at which the amount of caffeine in the body is changing
+
+	\begin{align*}
+		A_0 = 100                 \\
+		\frac{dMet}{dt} = 0.17A   \\
+		\frac{dA}{dt} = -0.17A    \\
+		\frac{dA}{dt} = -0.17A    \\
+		 & \frac{dA}{A} = -0.17dt
+	\end{align*}
+}
+
+
+\qs{}{
+	A person deposits money into an account at a continuous rate of \$6000 a year, and the account
+	earns interest at a continuous rate of 7\% per year. Write a differential equation for the balance
+	in the account, $B$, in dollars, as a function of years, $t$.
+}
+\sol{
+	Let $\frac{dB}{dt}$ be the change in balance
+
+	\begin{align*}
+		\frac{dB}{dt} = 6000 + 0.07B  \\
+		 & \frac{dB}{6000+0.07B} = dt
+	\end{align*}
+}
+
 
 
 \end{document}

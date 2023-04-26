@@ -266,6 +266,37 @@ Carbon-14 is a radioactive isotope used to date objects. If $A_0$ represents the
 	\end{align*}
 }
 
+\qs{}{
+	Two nonnegative numbers are such that the first plus the square of the second is 10.
+	Find the numbers if their sum is as large as possible.
+}
+\sol{
+	\begin{align*}
+		a \geq 0                                     \\
+		b \geq 0                                     \\[10pt]
+		a + b^2 = 10                                 \\
+		a = 10 - b^2
+		b = \sqrt{10 - a}                            \\[10pt]
+		S = a + b                                    \\
+		S = 10 - b^2 + \sqrt{10 - a}                 \\
+		S = 10 - b^2 + \sqrt{10 - (10 - b^2)}        \\
+		S = 10 - b^2 + \sqrt{10-10+b^2}              \\
+		S = 10 -b^2 + \sqrt{b^2}                     \\
+		S = 10 -b^2 + b                              \\
+		S^{\prime} = -2b + 1                         \\
+		0 = -2b + 1                                  \\
+		2b = 1                                       \\
+		b = \frac{1}{2}                              \\
+		S^{\prime\prime} = -2
+		\therefore b = \frac{1}{2} \;\; \text{ Max } \\[10pt]
+		a = 10 - (\frac{1}{2})^2                     \\
+		a = \frac{39}{4}                             \\
+	\end{align*}
+	\[
+		\therefore a = \frac{39}{4} \;\; b = \frac{1}{2}
+	\]
+}
+
 \chapter{Differential Equations}
 
 \qs{}{
@@ -406,6 +437,47 @@ Carbon-14 is a radioactive isotope used to date objects. If $A_0$ represents the
 	\end{align*}
 }
 
+\chapter{L'hopital's Rule}
+\qs{}{
+	\[
+		\lim_{x \to 0} (\frac{1}{x} - \frac{1}{\sin(x)})
+	\]
+}
 
+\sol{
+	\begin{align*}
+		\lim_{x \to 0} (\frac{1}{x} - \frac{1}{\sin(x)})                                                                        \\
+		\frac{1}{x} - \frac{1}{\sin(x)}                                                                                         \\
+		\frac{\sin(x) - x}{x\sin(x)}                                                                                            \\
+		\lim_{x \to 0} (\frac{\sin(x) -x}{x\sin(x)})                                                                            \\
+		\text{\large{Using L'hopital's Rule} }                                                                                  \\
+		\lim_{x \to 0} \frac{\frac{dy}{dx}(\sin(x) -x)}{\frac{dy}{dx}(x\sin(x))} \implies \frac{0}{0}                           \\
+		\lim_{x \to 0}  \frac{\frac{dy}{dx}(\cos(x)-1)}{\frac{dy}{dx}(x\cos(x) + \sin(x))} \implies \frac{0}{0}                 \\
+		\lim_{x \to 0} \frac{-\sin(x)}{-x\sin(x) +\cos(x) + \cos(x)}                                            = \frac{0}{0+2} \\
+		\frac{0}{2}                                                                                                             \\
+		 & = 0                                                                                                                  \\
+	\end{align*}
+	\[
+		\therefore \lim_{x \to 0} (\frac{1}{x} - \frac{1}{\sin(x)}) = 0
+	\]
+}
+
+\qs{}{
+	\[
+		\lim_{x \to \infty} \frac{e^{x}}{x^2}
+	\]
+}
+\sol{
+	\begin{align*}
+		\lim_{x \to \infty} \frac{e^{x}}{x^2}                                                                \\
+		\lim_{x \to \infty} \frac{e^{x}}{x^2} \implies \frac{e^{\infty}}{x^{\infty}} = \frac{\infty}{\infty} \\
+		\lim_{x \to \infty} \frac{e^{x}}{2x} \implies \frac{e^{\infty}}{2(\infty)} = \frac{\infty}{\infty}   \\
+		\lim_{x \to \infty} \frac{e^{x}}{2} \implies \frac{e^{\infty}}{2} = \frac{\infty}{2}                 \\
+	\end{align*}
+	\[
+		\therefore \lim_{x \to \infty} \frac{e^{x}}{x^2} \text{ does not exist }
+	\]
+}
 
 \end{document}
+

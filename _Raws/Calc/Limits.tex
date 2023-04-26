@@ -131,4 +131,20 @@ The limit does not exist because the left limit does not exist. This is written 
 	\lim_{x\to1} f(x) = \text{does not exist} \\
 \end{align*}
 
+\section{L'hopital's Rule }
+\thm{L'hopital's Rule }{
+	If \[
+		\lim_{x \to a} \frac{f(x)}{g(x)} \implies \frac{0}{0} \;\; \text{ or } \;\; 	\frac{\pm\infty}{\pm\infty}
+	\]
+	Then \[
+		\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f^{\prime}(x)}{g^{\prime}(x)} \;\; \text{, provided } \;\; \frac{f^{\prime}(x)}{g^{\prime}(x)} \neq 0
+	\]
+	If \[
+		\lim_{x \to a} \frac{f^{\prime}(x)}{g^{\prime}(x)} = \frac{0}{0} \;\; \text{ or } \;\; \frac{\pm\infty}{\pm\infty}
+	\]
+	Then \[
+		\lim_{x \to a} \frac{f^{\prime}(x)}{g^{\prime}(x)} = \lim_{x \to a} \frac{f^{\prime\prime}(x)}{g^{\prime\prime}(x)} \;\; \text{, provided } \frac{f^{\prime\prime}(x)}{g^{\prime\prime}(x)} \neq 0
+	\]
+}
+
 \end{document}

@@ -23,20 +23,20 @@ done
 cd "$basedir" || exit 1
 
 # Intro to Computing Info Systems Beyond Notes
-mkdir -p "./_Exported/CompSci/Information Systems For Business and Beyond Notes"
-for file in ./_Raws/CompSci/Information_Systems/*.md; do
-	echo "$file"
-	filename=$(basename "$file" .md)
-	(pandoc --pdf-engine=tectonic "$file" -o "./_Exported/CompSci/Information Systems For Business and Beyond Notes/$filename.pdf" --template=./Templates/eisvogel.tex --listings) &
-done
+# mkdir -p "./_Exported/CompSci/Information Systems For Business and Beyond Notes"
+# for file in ./_Raws/CompSci/Information_Systems/*.md; do
+# 	echo "$file"
+# 	filename=$(basename "$file" .md)
+# 	(pandoc --pdf-engine=tectonic "$file" -o "./_Exported/CompSci/Information Systems For Business and Beyond Notes/$filename.pdf" --template=./Templates/eisvogel.tex --listings) &
+# done
 
 # Intro to Computing Runestone Notes
-mkdir -p "./_Exported/CompSci/Runestone Notes"
-for file in ./_Raws/CompSci/Runestone/*.md; do
-	echo "$file"
-	filename=$(basename "$file" .md)
-	(pandoc --pdf-engine=tectonic "$file" -o "./_Exported/CompSci/Runestone Notes/$filename.pdf" --template=./Templates/eisvogel.tex --listings) &
-done
+# mkdir -p "./_Exported/CompSci/Runestone Notes"
+# for file in ./_Raws/CompSci/Runestone/*.md; do
+# 	echo "$file"
+# 	filename=$(basename "$file" .md)
+# 	(pandoc --pdf-engine=tectonic "$file" -o "./_Exported/CompSci/Runestone Notes/$filename.pdf" --template=./Templates/eisvogel.tex --listings) &
+# done
 
 # Personal Notes
 # Intro to Machine Learning

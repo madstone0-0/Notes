@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from pathlib import Path
 from subprocess import Popen, PIPE
 import shutil
@@ -120,7 +121,7 @@ def compileMany(dirs: list[str]):
 if __name__ == "__main__":
     dirs = [
         "Calc",
-        "Calc/Semester_1",
+        # "Calc/Semester_1",
         "CompSci/Personal/Intro_To_Machine_Learning",
         "CompSci/Personal/Algorithms",
         "CompSci/Personal/Discrete_Math",

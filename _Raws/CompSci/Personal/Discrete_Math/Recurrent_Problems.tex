@@ -15,6 +15,52 @@
 \tableofcontents
 \pagebreak
 
-\section{Introduction}
+\chapter{Introduction}
+
+Problems that have been investigated repeatedly by mathematicians and whose solutions use the idea of recurrence, i.e.
+the solution to each problem depends on the solutions to smaller instances of the same problem.
+
+\section{Tower of Hanoi}
+
+Invented by French mathematician Edouard Lucas in 1883. The problem consists of a tower of eight disks initially stacked
+in decreasing size on one of three pegs.
+The objective is to transfer the entire tower to one of the other pegs, moving only one disk at a time and never moving
+a larger one onto a smaller.
+
+\textbf{LOOK AT SMALL CASES} - The first step in solving this is to generalize the question, i.e Let $n$ be the number of disks initially stacked.
+
+\textbf{NAME AND CONQUER} - The next step is to introduce appropriate notation, i.e. Let $T_n$ be the minimum number of moves that will transfer $n$
+disks from one peg to another. Therefore $T_0 = 0$, $T_1= 1$ and $T_2 = 3$.
+
+The next step is to use this generalization to scale to different disk numbers. Through trial and error we can see that
+the best strategy for transferring $n$ disks is to first transfer the $n - 1$ smallest disk to a different peg, requiring
+$T_{n-1}$ moves. Then move the largest disk to the last peg, also requiring one move. Then finally transfer the $n-1$
+smallest back onto the third peg where the largest disk already is, requiring another $T_{n-1}$ moves.
+
+Thus we can transfer $n$ disks (where $n > 0$) in at most $2T_{n-1} + 1$ moves, i.e. :
+
+\[
+	T_n \leq 2T_{n-1} + 1 \quad n > 0
+\]
+
+$\leq$ instead of $=$ due to our construction only proving that $2T_{n-1} + 1$ moves work, not that all $2T_{n-1} + 1$
+moves are necessary. The however is the optimal solution, due to us having to move the largest disk at least once and
+having to have the $n-1$ smallest disk be alone on one peg every time we do move the largest disk, requiring $T_{n-1}$
+moves every time.
+
+The result factoring in the base condition of $T_0 = 0$ is:
+
+\begin{gather*}
+	T_0 = 0\\
+	T_n = 2T_{n-1} + 1 \quad n > 0
+\end{gather*}
+
+These sets of in equalities is called a recurrence / recurrence relation / recursion relation. It gives a boundary value
+and an equation for the general value in terms of the earlier ones.
+
+Computing from recurrence for a large value of $n$ takes too long so we need a \textit{closed form} for $T_n$ that lets
+us compute large $n$s quickly
+
+
 
 \end{document}

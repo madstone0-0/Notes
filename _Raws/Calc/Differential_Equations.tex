@@ -1,0 +1,311 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Differential Equations}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{\today}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\dfn{Differential Equation}{
+	A differential equation is an equation in the form
+	\[
+		y = f(x)
+	\]
+
+	Where $f(x)$ is an unknown function and including one or more of it's derivatives, i.e. $f^{\prime}(x)$.
+
+	A solution to such an equation is a function $f(x)$ that satisfies the differential equation when $f$ and it's
+	derivatives are substituted into the equation.
+
+}
+
+\qs{}{
+	Verify that the function $y = e ^{-3x} + 2x + 3$ is a solution to the differential equation $y^{\prime} + 3y = 6x +
+		11$
+}
+
+\sol{
+	\begin{align*}
+		y = e ^{-3x} + 2x + 3                                                      \\
+		y^{\prime} = -3e ^{-3x} + 2                                                \\
+		\\
+		\text{Let } y^{\prime} = -3e ^{-3x} + 2 \text{ and } y = e ^{-3x} + 2x + 3 \\
+		(-3e^{-3x} + 2) + 3(e ^{-3x} + 2x + 3) = 6x + 11                           \\
+		-3e ^{-3x} + 2 + 3e ^{-3x} + 6x + 9 = 6x + 11                              \\
+		6x + 11 = 6x + 11                                                          \\
+		\text{Lhs } = \text{Rhs  } \therefore \text{ y is a solution}
+	\end{align*}
+}
+
+\pagebreak
+\qs{}{
+	Verify that $y = 2e ^{3x} - 2x -2$ is a solution to the differential equation $y^{\prime} - 3y = 6x+ 4$
+}
+
+\sol{
+	\begin{align*}
+		y = 2e ^{3x} - 2x -2                                                  \\
+		y^{\prime} = 6e ^{3x}-2                                               \\
+		\\
+		\text{Let } y^{\prime} = 6e ^{3x}-2 \text{ and } y = 2e ^{3x} - 2x -2 \\
+		(6e ^{3x}-2) - 3(2e ^{3x} - 2x -2) = 6x+ 4                            \\
+		6e ^{3x} - 2 -6e ^{3x} + 6x + 6 = 6x + 4                              \\
+		7x + 4 = 6x + 4                                                       \\
+		\text{Lhs } = \text{Rhs  } \therefore \text{ y is a solution}
+	\end{align*}
+}
+
+\section{Order of a differential equation}
+
+\dfn{Order of a differential equation}{
+The order of a differential equation is the highest order of any derivate of the unknown function that appears in
+the equation. I.e. the order of the differential equation:
+\[
+	x^2y^{\prime\prime\prime} - 3xy^{\prime\prime} + xy^{\prime} - 3y = \sin(x)
+\]
+is 3 because the highest order of any derivate of $y$ is $y^{\prime\prime\prime}$
+}
+
+\chapter{General and Particular Solutions}
+
+\dfn{General Solution}{
+	The general solution of a differential equation is a solution that contains an arbitrary constant. I.e. the general
+	solution of the differential equation
+	\[
+		y^{\prime} = 2x
+	\]
+	is
+	\[
+		y = x^2 + c
+	\]
+	where $c$ is an arbitrary constant.
+}
+
+\dfn{Particular Solution}{
+	A particular solution of a differential equation is a solution that does not contain an arbitrary constant. I.e. the
+	particular solution of the differential equation
+	\[
+		y^{\prime} = 2x
+	\]
+	is
+	\[
+		y = x^2 + 1
+	\]
+}
+
+\qs{}{
+	Find the particular and general solution to the differential equation $y^{\prime} = 2x$ passing through the point
+	$\left( 2,7 \right) $
+}
+
+\sol{
+	\begin{align*}
+		y^{\prime} = 2x                           \\
+		\frac{dy}{dx} = 2x                        \\
+		\mathrm{d}y = 2x \enspace \mathrm{d}x     \\
+		\int 1  \mathrm{d}y = \int 2x \mathrm{d}x \\
+		y = x^2 + c                               \\
+		\text{General equation } y = x^2 + c      \\
+		\\
+		\left( 2, 7 \right)                       \\
+		7 = (2)^2 + c                             \\
+		c = 3                                     \\
+		\text{Particular equation } y = x^2 + 3
+	\end{align*}
+}
+
+\section{Initial Value Problems}
+
+\dfn{Initial Value Problem}{
+	An initial value problem is a differential equation with an initial condition. I.e. the initial value problem
+	\[
+		y^{\prime} = 2x \text{ with } y(2) = 7
+	\]
+}
+
+\qs{}{
+	Verify that the function $y = 2e^{-2t} + e^{t}$ is a solution to the initial-value problem
+	\[
+		y^{\prime} + 2y = 3e^{t} \text{ with } y(0) = 3
+	\]
+}
+
+\sol{
+	\begin{align*}
+		y = 2e^{-2t} + e^{t}                                                         \\
+		y^{\prime} = -4e^{-2t} + e^{t}                                               \\
+		\\
+		\text{Let } y^{\prime} = -4e^{-2t} + e^{t} \text{ and } y = 2e^{-2t} + e^{t} \\
+		(-4e^{-2t} + e^{t}) + 2(2e^{-2t} + e^{t}) = 3e^{t}                           \\
+		-4e^{-2t} + e^{t} + 4e^{-2t} + 2e^{t} = 3e^{t}                               \\
+		3e^{t} = 3e^{t}                                                              \\
+		\text{Lhs } = \text{Rhs  } \therefore \text{ y is a solution}                \\
+		\\
+		y(0) = 2e^{0} + e^{0}                                                        \\
+		y(0) = 3                                                                     \\
+		\therefore \text{ y is a solution to the initial value problem}
+	\end{align*}
+}
+
+\pagebreak
+\qs{}{
+Verify that $y=3e^{2t} + 4\sin (t)$ is a solution to the initial-value problem
+\[
+	y^{\prime} - 2y = 4\cos (t) - 8\sin (t) \text{ with } y(0) = 3
+\]
+}
+
+\sol{
+	\begin{align*}
+		y = 3e^{2t} + 4 \sin(t)                                                \\
+		y^{\prime} = 6e^{2t} + 4\cos(t)                                        \\
+		\\
+		(6e^{2t} + 4 \cos(t)) - 2(3e^{2t} + 4 \sin(t)) = 4 \cos(t) - 8 \sin(t) \\
+		6e^{2t} + 4 \cos(t) -6e^{2t}- 8 \sin(t) = 4 \cos(t) - 8 \sin(t)        \\
+		4 \cos(t) - 8 \sin(t) = 4 \cos(t) - 8 \sin(t)                          \\
+		\text{Lhs } = \text{Rhs  } \therefore \text{ y is a solution}          \\
+		\\
+		y(0) = 3e^{0} + 4 \sin(0)                                              \\
+		y(0) = 3 + 0                                                           \\
+		y(0) = 3                                                               \\
+		\therefore \text{ y is a solution to the initial value problem}
+	\end{align*}
+}
+
+\qs{}{
+	Solve the following initial-value problem
+	\[
+		y^{\prime} = x^2 - 4x + 3 - 6e^{x} \text{ with } y(0) = 8
+	\]
+}
+
+\sol{
+	\begin{align*}
+		y^{\prime} = x^2 - 4x + 3 - 6e^{x}                                              \\
+		\frac{dy}{dx} = x^2 - 4x + 3 - 6e^{x}                                           \\
+		1 \enspace \mathrm{d}y = (x^2 - 4x + 3 - 6e^{x}) \enspace \mathrm{d}x           \\
+		\int 1 \enspace \mathrm{d}y = \int (x^2 - 4x + 3 - 6e^{x}) \enspace \mathrm{d}x \\
+		y = \frac{1}{3}x^3 - 2x^2 + 3x - 6e^{x} + c                                     \\
+		y(0) = \frac{1}{3}(0)^3 - 2(0)^2 + 3(0) - 6e^{0} + c                            \\
+		8 = -6 + c                                                                      \\
+		c = 14                                                                          \\
+		 & y = \frac{1}{3}x^3 - 2x^2 + 3x - 6e^{x} + 14
+	\end{align*}
+}
+
+\chapter{Application}
+
+\section{Physics}
+
+In Physics we use the knowledge that the forces acting on an object may result in motion and Newton's second law of
+motion $F = ma$, where $F$ represents force, $m$ represents mass, and $a$ represents acceleration, to derive an equation
+that can be solved to find the velocity of an object at a given time.
+
+For instance if we have an object with mass $m$ falling or rising from/to a height, the acceleration due to gravity will be approx.
+$g= 9.8 m/ s^2$. Then representing the velocity of the object as $v(t)$, we can represent the object falling as $v(t) <
+	0$ and rising as $v(t) > 0$.
+
+We can then setup an initial-value problem to find the velocity $v(t)$ at any time $t$.Therefore using Newton's second
+law of motion $F = ma$ we can represent acceleration $a$ as the derivate of the object's velocity at a given time
+$v^{\prime}(t)$ giving us
+\[
+	F = mv^{\prime}(t)
+\]
+However this force $F$ is the force of gravity acting on the object, therefore again using Newton's second law, we can
+represent this force as
+\[
+	F_g = -mg
+\]
+$-$ negative since the force of gravity always works downwards. Therefore we obtain the equation
+
+\[
+	F = F_g
+\]
+Which then becomes
+
+
+\begin{align*}
+	mv^{\prime}(t) = -mg  \\
+	 & v^{\prime}(t) = -g \\
+\end{align*}
+
+With the initial-value being the initial velocity i.e. when $t = 0$ giving us the complete initial-value problem.
+
+\[
+	v^{\prime}(t) = -g \text{ with } v(0) = v_0
+\]
+
+
+\pagebreak
+\qs{}{
+	Suppose a rock falls from rest from a height of 100 meters and the only force acting on it is gravity. Find a
+	equation for the velocity $v(t)$ as a function of time, measured in meters per second.
+}
+
+\sol{
+	\begin{align*}
+		v^{\prime}(t) = -g \text{ with } v(0) = v_0 \\
+		\int v^{\prime}(t) \enspace  \mathrm{d}t = \int -9.8 \enspace  \mathrm{d}t
+		v(t) = -9.8t + c                            \\
+		\\
+		v(0) = -9.8(0) + c                          \\
+		v(0) = c                                    \\
+		c = 0                                       \\
+		 & v(t) = -9.8t
+	\end{align*}
+}
+
+Another question to ask is how high the object will be above the earth's surface at a given point in time. Let $s(t)$
+represent the height above the Earth's  surface of the object. Then using the knowledge that $s(t) = \int v(t)$ /
+$s^{\prime}(t) = v(t)$ we can generate an initial-value problem
+
+\[
+	s^{\prime}(t) = v(t) \text{ with } s(0) = s_0
+\]
+
+\qs{}{
+	A baseball is thrown upward from a height of 3 meters above the Earth's surface with an initial velocity of 10 $m/s$, and the only force acting on it is gravity. The ball has a mass of 0.15 $kg$.
+	\begin{enumerate}
+		\item Find the position $s(t)$ of the baseball at time $t$.
+		\item What is its height after 2 seconds?
+	\end{enumerate}
+}
+
+\sol {
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      s^{\prime}(t) = v(t)                                \\
+			      \text{Let } v(t) = -9.8t + 10 \text{ and } s(0) = 3 \\
+			      \int s^{\prime}() = \int (-9.8t + 10)               \\
+			      s(t) = -4.9t^2 + 10t + c                            \\
+			      \\
+			      s(0) = -4.9(0)^2 + 10(0) + c                        \\
+			      3 = c
+			      s(t) = -4.9t^2 + 10t + 3
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      t = 2
+			      s(2) = -4.9(2)^2 + 10(2) + 3 \\
+			      s(2) = -19.6 + 20 + 3        \\
+			      s(2) = 3.4 m
+		      \end{align*}
+	\end{enumerate}
+}
+
+
+
+
+\end{document}

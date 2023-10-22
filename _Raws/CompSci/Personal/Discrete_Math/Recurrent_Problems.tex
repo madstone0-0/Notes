@@ -27,6 +27,8 @@ in decreasing size on one of three pegs.
 The objective is to transfer the entire tower to one of the other pegs, moving only one disk at a time and never moving
 a larger one onto a smaller.
 
+\subsection{Look at small cases}\label{small}
+
 \textbf{LOOK AT SMALL CASES} - The first step in solving this is to generalize the question, i.e Let $n$ be the number of disks initially stacked.
 
 \textbf{NAME AND CONQUER} - The next step is to introduce appropriate notation, i.e. Let $T_n$ be the minimum number of moves that will transfer $n$
@@ -36,6 +38,8 @@ The next step is to use this generalization to scale to different disk numbers. 
 the best strategy for transferring $n$ disks is to first transfer the $n - 1$ smallest disk to a different peg, requiring
 $T_{n-1}$ moves. Then move the largest disk to the last peg, also requiring one move. Then finally transfer the $n-1$
 smallest back onto the third peg where the largest disk already is, requiring another $T_{n-1}$ moves.
+
+\subsection{Find and prove a mathematical expression}\label{expression}
 
 Thus we can transfer $n$ disks (where $n > 0$) in at most $2T_{n-1} + 1$ moves, i.e. :
 
@@ -59,8 +63,50 @@ These sets of in equalities is called a recurrence / recurrence relation / recur
 and an equation for the general value in terms of the earlier ones.
 
 Computing from recurrence for a large value of $n$ takes too long so we need a \textit{closed form} for $T_n$ that lets
-us compute large $n$s quickly
+us compute large $n$s quickly. With a closed form we can understand what $T_n$ really is.
 
+\subsection{Find and prove a closed form for our expression}\label{closed}
+
+One way of solving a recurrence is to guess a solution, them prove our guess is correct. To do this we look again at
+small cases. By successively computing $T_n$:
+
+\begin{align*}
+	T_3 = 2  \times  3 + 1 = 7   \\
+	T_4 = 2  \times  7 + 1 = 15  \\
+	T_5 = 2  \times  15 + 1 = 31 \\
+	T_6 = 2  \times  31 + 1 = 63 \\
+\end{align*}
+
+We can see it looks like: when $n \leq 6$
+
+\[
+	T_n = 2^{n} - 1 \quad n \geq 0
+\]
+
+This technique is called \textit{Mathematical induction}. First we prove the \textit{basis}\label{basis} (when $n$ is at its least
+i.e. $n_0$), then we prove the statement for $n > n_0$ assuming that it has already been proved for all values between
+$n_0$ and $n - 1$ inclusive, i.e. the \textit{induction}\label{induction}.
+
+Applying this to our recurrence:
+
+\begin{align*}
+	T_n = 2T_{n-1} + 1       \\
+	\\
+	T_n = 2^{n} - 1          \\
+	\\
+	T_n = 2(2^{n-1} -1 ) + 1 \\
+	T_n = 2^{n} -2 + 1       \\
+	\therefore               \\
+	T_n = 2^n -1             \\
+\end{align*}
+
+The Tower of Hanoi highlights the steps needed to find a closed-form expression for some quantity of interest:
+
+\begin{itemize}
+	\item Look at small cases (\ref{small}).
+	\item Find and prove a mathematical expression for he quantity of interest (\ref{expression}).
+	\item Find and prove a closed form for our mathematical expression (\ref{closed}).
+\end{itemize}
 
 
 \end{document}

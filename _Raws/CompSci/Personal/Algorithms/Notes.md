@@ -384,3 +384,43 @@ def ShellSort(list):
 -   $O(N)$ when dataset is partially sorted
 
 Similar to the bubble sort but instead of comparing immediate neighbours each pass, elements are selected and compared according to a fixed gap, i.e. a pair of elements in the initial pass (sub-list). In the subsequent passes the number of items in each sub-list increase by the factor of number items in the previous sub-list. This continues until the number of sub-lists is equal to 1. At this point we assume the list to be sorted.
+
+#### QuickSort
+
+```
+Function QuickSort(Dataset, Low, High)
+    IF Size of dataset is less than two THEN
+        RETURN
+    ENDIF
+
+    IF Low >= High THEN
+        RETURN
+    ENDIF
+
+    Pivot := Last item in dataset
+    PivotIndex := Index of last item in datasets
+    FOR Index := Index of first item in list to last
+        IF Dataset[Index] <= Pivot THEN
+            INCREMENT PivotIndex
+            Swap the values of Dataset[PivotIndex] and Dataset[Index]
+        ENDIF
+    ENDFOR
+    INCREMENT PivotIndex
+    Swap the values of Dataset[PivotIndex] and Dataset[High]
+
+    QuickSort(Dataset, Low, DECREMENT PivotIndex)
+    QuickSort(Dataset, INCREMENT PivotIndex, High)
+```
+
+```python
+def QuickSort(list):
+    if len(dataset) < 2:
+        return dataset
+
+    pivot = dataset[0]
+    less = [item for item in dataset[1:] if item <= pivot]
+    greater = [item for item in dataset[1:] if item >= pivot]
+    return QuickSort(less) + [pivot] + QuickSort(greater)
+```
+
+- Speed depends on pivot choice but generally $O(n \log n)$ and worst case $O(n^2)$

@@ -17,4 +17,335 @@
 
 \chapter{Indefinite Integration}
 
+\section{Anti-derivatives}
+
+A derivative $f^{\prime}(x)$ is the result of performing differentiation on a function $f(x)$.
+
+An anti-derivative $f(x)$ is the result of performing integration on a derivative $f^{\prime}(x)$.
+
+The result of an indeterminate integration on a derivate is a family of functions, each of which has a possibility of
+being the derivative's source function.
+
+\begin{align*}
+	\int f^{\prime}(x) \enspace  \mathrm{d}x \\
+	 & = f(x) + c                            \\
+	\\
+\end{align*}
+
+I.e.
+
+\begin{align*}
+	\int x^{n} \enspace  \mathrm{d}x \\
+	 & = \frac{x^{n+1}}{n+1}         \\
+\end{align*}
+
+\pagebreak
+
+\chapter{Integration Techniques}
+
+\section{Integration by Substitution}
+
+\qs{}{
+	\[
+		\int x^2 \sqrt{x^3 + 5} \enspace  \mathrm{d}x \text{using } u = x^3 + 5
+	\]
+}
+
+\sol {
+	\begin{align*}
+		\int x^2 \sqrt{u} \enspace  \mathrm{d}x                       \\
+		\\
+		\frac{du}{dx} = x^3 + 5                                       \\
+		\frac{du}{dx} = 3x^2                                          \\
+		\frac{1}{3} \enspace  \mathrm{d}u = x^2 \enspace  \mathrm{d}x \\
+		\\
+		\int \sqrt{u} \frac{1}{3} \enspace  \mathrm{d}u               \\
+		\frac{1}{3} \int u \frac{1}{2} \enspace  \mathrm{d}u          \\
+		\frac{1}{3}  \times (\frac{u^{\frac{3}{2}}}{\frac{3}{2}}) + c \\
+		\frac{2u^{\frac{3}{2}}}{9} + c                                \\
+		 & = \frac{2}{9}  \times  (x^3 + 5)^{\frac{3}{2}} +c          \\
+	\end{align*}
+}
+
+\pagebreak
+\section{Integration by Parts}
+\huge{LIATE} \label{liate:1} \normalsize
+
+\label{lg:1}Logarithm
+
+\label{in:1}Inverse function
+
+\label{al:1}Algebra
+
+\label{tr:1}Trigonometry
+
+\label{ex:1}Exponent
+
+\qs{}{
+	\[
+		\int x e^{x} \enspace  \mathrm{d}x
+	\]
+}
+
+\sol{
+	$\int x e^{x}\enspace  \mathrm{d}x$ where $u = x$ and $\frac{dv}{dx} = e^{x}$ due to A \ref{al:1} coming before E
+	\ref{ex:1} in LIATE \ref{liate:1}
+	\begin{align*}
+		u = x                                                                     \\
+		u^{\prime} = 1                                                            \\
+		v = \int \frac{dv}{dx} \enspace  \mathrm{d}x                              \\
+		v = \int e^{x} \enspace  \mathrm{d}x                                      \\
+		v = e^{x}                                                                 \\
+		\\
+		u  \times  v - \int v  \times u^{\prime} \enspace  \mathrm{d}x \therefore \\
+		\\
+		x  \times  e^{x} - \int e^{x}  \times  1 \enspace  \mathrm{d}x            \\
+		xe^{x} - e^{x} + c                                                        \\
+		 & = e^{x}(x-1) + c                                                       \\
+	\end{align*}
+}
+
+\chapter{Applications of Integration}
+
+\section{Economics}
+
+\section{Probability}
+
+\subsection{Probability Density Function (P.D.F)}
+
+For a continuous random variable $X$, a Probability Density Function (P.D.F.) is a function $f(x)$ such that over a
+given interval $[a,b]$ / $a \leq x \leq b$:
+
+\begin{itemize}
+	\item $f(x)$ must be continuous over the domain $[a,b]$
+	\item $f(x) \geq 0$ for all $x$ in $[a,b]$
+	\item $\int_{a}^{b} f(x) \enspace  \mathrm{d}x = 1$
+
+\end{itemize}
+
+\qs{}{
+	Let
+	\[
+		f(x) = \begin{cases}
+			\frac{3}{4}(2x-x^2), & 0 \leq x \leq 2  \\
+			0,                   & \text{otherwise}
+		\end{cases}
+	\]
+	\begin{enumerate}
+		\item Show that $f(x)$ is a probability density function.
+		\item Find \begin{enumerate}
+			      \item $P\left( 0.3 \leq x \leq 1.5 \right) $
+			      \item $P\left( x \leq 0.25 \right) $
+			      \item $P\left( x \geq 1.4 \right) $
+			      \item $P\left( x > 0.25 \right) $
+		      \end{enumerate}
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item \begin{description}
+			      \item[Cond 1:] $f(x)$ is continuous for all real numbers.
+			      \item[Cond 2:] $f(x) \geq 0$ for all real numbers / $\left( -\infty, \infty \right)$\\Check:
+				      \begin{align*}
+					      x=1                   \\
+					      \frac{3}{4}(2x - x^2) \\
+					      f(x) = 0.75           \\
+					      \\
+					      x = -1                \\
+					      f(x) = 0              \\
+					      \\
+					      x = 3                 \\
+					      f(x) = 0              \\
+					      \\
+				      \end{align*}
+			      \item[Cond 3:] $\int^{b}_{a} f(x) = 1$\\
+				      Check:
+				      \begin{align*}
+					      \int^0_{-\infty} f(x) \enspace  \mathrm{d}x + \int^2_0 f(x) \enspace  \mathrm{d}x +
+					      \int^{\infty}_2 f(x) \enspace  \mathrm{d}x              \\
+					      \int^{0}_{-\infty} 0 \enspace  \mathrm{d}x + \int^2_0 \frac{3}{4}(2x-x^2) \enspace
+					      \mathrm{d}x + \int^{\infty}_{2} 0 \enspace  \mathrm{d}x \\
+					      0 + 1 + 1                                               \\
+					      \therefore \int^{\infty}_{-\infty} f(x) \enspace  \mathrm{d}x = 1
+				      \end{align*}
+		      \end{description}
+		\item
+		      \begin{align*}
+			      P \left( 0.3 \leq x \leq 1.5 \right)  = \int^{1.5}_{0.3} \frac{3}{4}(2x+x^2) \enspace  \mathrm{d}x \\
+			      \frac{3}{4}[x^2 - \frac{1}{3}x^3]^{1.5}_{0.3}                                                      \\
+			      \frac{3}{4}( \frac{9}{8} - \frac{81}{1000} )                                                       \\
+			       & P \left( 0.3 \leq x \leq 1.5  \right)  = 0.7830                                                 \\
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      P\left(  x\leq 0.25 \right)  = \int^{0.25}_{-\infty} f(x) \enspace  \mathrm{d}x                    \\
+			      \int^0_{-\infty} 0 \enspace  \mathrm{d}x + \int^{0.25}_0 \frac{3}{4}(2x+x^2) \enspace  \mathrm{d}x \\
+			      \frac{3}{4}x^2 - \frac{1}{4}x^3|^{0.25}_0                                                          \\
+			       & P\left(  x\leq 0.25 \right)  =
+		      \end{align*}
+	\end{enumerate}
+}
+
+\qs{}{
+	The continuous random variable $X$ has a P.D.F. given by
+	\[
+		f(x) = \begin{cases}
+			2x + k, & 3 \leq x \leq_4   \\
+			0,      & \text{otherwise }
+		\end{cases}
+	\]
+
+	\begin{enumerate}
+		\item Show that $k = -6$
+		\item Determine \begin{enumerate}
+			      \item  $P\left( x > 3.5 \right) $
+			      \item $P\left( 2.5 \leq x \leq 3.5 \right) $
+			      \item $P\left( x > 6 \right) $
+		      \end{enumerate}
+		\item Find the expected value of $X$
+	\end{enumerate}
+}
+
+\sol{
+
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      \int^4_3 f(x) \enspace  \mathrm{d}x = 1 \\
+			      \int^4_3 2x+k \enspace  \mathrm{d}x = 1 \\
+			      x^2 + kx |^4_3 = 1                      \\
+			      16 + 4k - 9 - 3k = 1                    \\
+			       & k = -6                               \\
+		      \end{align*}
+		\item \begin{enumerate}
+			      \item
+			            \begin{align*}
+				            \int ^{\infty}_{3.5} f(x) \enspace  \mathrm{d}x \\
+				            \int ^{4}_{3.5} 2x - 6 \enspace  \mathrm{d}x    \\
+				            x^2 - 6x |^{4}_{3.5}                            \\
+				             & = 0.7560                                     \\
+			            \end{align*}
+			      \item
+			            \begin{align*}
+				            \int ^{3.5}_{2.5} f(x) \enspace  \mathrm{d}x   \\
+				            \int ^{3.5}_{2.5} 2x - 6 \enspace  \mathrm{d}x \\
+				            x^2 - 6x |^{3.5}_{2.5}                         \\
+				             & = 0.2580                                    \\
+			            \end{align*}
+		      \end{enumerate}
+	\end{enumerate}
+}
+
+\chapter{Improper Integrals}
+
+\section{Infinite Limits}
+For
+\[
+	\int^{\infty}_{a} \frac{1}{x^{p}} \enspace  \mathrm{d}x
+\]
+
+\begin{itemize}
+	\item If $a > 0$ and $p > 1$, then the integral is Convergent.
+	\item If $a > 0$ an $p \leq 1$, then the integral is Divergent.
+\end{itemize}
+
+
+\qs{}{
+	\[
+		\int^{\infty}_{a} f(x) \enspace  \mathrm{d}x
+	\]
+}
+
+\sol{
+	\begin{align*}
+		\int^{\infty}_{1} \frac{1}{x} \enspace  \mathrm{d}x                     \\
+		{\int^{t}_{1}}_{\lim_{t \to \infty} } \frac{1}{x} \enspace  \mathrm{d}x \\
+		\ln (x) |^{t}_{1}                                                       \\
+		\lim_{t \to \infty} \ln (t) - \ln (1)                                   \\
+		\ln (\infty) \implies \infty                                            \\
+		\infty - 0                                                              \\
+		\lim_{t \to \infty} \ln (t) - \ln (1) = \infty                          \\
+		 & \int^{\infty}_{1} \frac{1}{x} \enspace  \mathrm{d}x = \infty         \\
+	\end{align*}
+	Since the limit of the integral is $\infty$, the integral is said to be \textbf{Divergent}.
+
+}
+
+
+\pagebreak
+\qs{}{
+	\[
+		\int^{\infty}_{1} \frac{1}{x^2} \enspace  \mathrm{d}x
+	\]
+}
+
+\sol{
+	\begin{align*}
+		\int^{\infty}_{1} \frac{1}{x^2} \enspace  \mathrm{d}x                   \\
+		\lim_{t \to \infty} \int^{t}_{1} \frac{1}{x^2} \enspace  \mathrm{d}x    \\
+		-\frac{1}{x} |^{t}_{1}                                                  \\
+		\lim_{t \to \infty} [-\frac{1}{t} + \frac{1}{1} ]                       \\
+		0 - (-1)                                                                \\
+		 & \therefore \int^{\infty}_{1} \frac{1}{x^2} \enspace  \mathrm{d}x = 1 \\
+	\end{align*}
+	Since the limit of the integral is infinite, the integral is said to be \textbf{Convergent}
+}
+
+\qs{}{
+	\[
+		\int_{-\infty}^{\infty} \frac{1}{x^2} \enspace  \mathrm{d}x
+	\]
+}
+
+\sol{
+	\begin{align*}
+		\int_{-\infty}^{\infty} \frac{1}{x^2} \enspace  \mathrm{d}x                                                    \\
+		\\
+		\int_{-\infty}^{3} \frac{1}{x^2} \enspace  \mathrm{d}x + \int_{3}^{\infty} \frac{1}{x^2} \enspace  \mathrm{d}x \\
+		\\
+		\lim_{t \to -\infty} \int_{t}^{3} \frac{1}{x^2} \enspace  \mathrm{d}x                                          \\
+		-\frac{1}{x}|_{t}^{3}                                                                                          \\
+		\lim_{t \to -\infty} [-\frac{1}{3} + \frac{1}{t} ]                                                             \\
+		\lim_{t \to -\infty} [-\frac{1}{3} + \frac{1}{t^2}]                                                            \\
+		-\frac{1}{3} + \frac{1}{-\infty}                                                                               \\
+		-\frac{1}{-\infty} \implies 0                                                                                  \\
+		\int_{-\infty}^{3} \frac{1}{x^2} \enspace  \mathrm{d}x = -\frac{1}{3}                                          \\
+		\\
+		\lim_{t \to \infty} \int_{3}^{t} \frac{1}{x^2} \enspace  \mathrm{d}x                                           \\
+		\lim_{t \to \infty} [ -\frac{1}{t} + \frac{1}{3} ]                                                             \\
+		-\frac{1}{\infty} + \frac{1}{3}                                                                                \\
+		-\frac{1}{\infty} \implies \infty                                                                              \\
+		\int_{3}^{\infty} \frac{1}{x^2} \enspace  \mathrm{d}x = \infty + \frac{1}{3}                                   \\
+		\\
+		\\
+		\int_{-\infty}^{\infty} \frac{1}{x^2} \enspace  \mathrm{d}x = -\frac{1}{3} + \infty + \frac{1}{3}              \\
+		\therefore \int_{-\infty}^{\infty} \frac{1}{x^2} \enspace  \mathrm{d}x = \infty                                \\
+	\end{align*}
+	Since the overall integral is infinite, the integral is Divergent / Since one of the sub-integrals are Divergent the
+	overall integral is Divergent
+}
+\pagebreak
+
+\qs{}{
+	\[
+		\int_{0}^{3} \frac{1}{x -3} \enspace  \mathrm{d}x
+	\]
+}
+
+\sol{
+	\begin{align*}
+		\int_{0}^{3} \frac{1}{x -3} \enspace  \mathrm{d}x                 \\
+		\lim_{t \to 3}  \int_{0}^{t} \frac{1}{x -3} \enspace  \mathrm{d}x \\
+		\lim_{t \to 3} \left( \ln |x-3| \right)_{0}^{t}                   \\ \lim_{t \to 3}  \left( \ln | t- 3 | - \ln
+		| -3 |\right)                                                     \\
+		\ln(0) - \ln(3)                                                   \\
+		\ln(0) \implies -\infty                                           \\
+		\int_{0}^{3} \frac{1}{x -3} \enspace  \mathrm{d}x = -\infty       \\
+	\end{align*}
+	Since the limit of the integral is infinite, the integral is \textbf{Divergent}
+}
+
+
+
 \end{document}

@@ -1,0 +1,592 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Logic and Proofs}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Propositional Logic}
+
+\dfn{}{
+	\begin{itemize}
+		\item Proof - A correct mathematical argument.
+		\item Theorem - A proven mathematical statement.
+
+	\end{itemize}
+}
+
+\section{Proposition}
+
+\dfn{A Proposition}{
+	A declarative sentence that is either true or false, but not both. e.g.
+	\begin{itemize}
+		\item $1 + 1 = 2$ True
+		\item $2 + 2 = 3$ False
+	\end{itemize}
+}
+
+Propositional variables / Statement variables are used to represent propositions, by convention one of these variables
+$p, q, r, s \ldots$ The truth value of a position can be denoted by $T$ if it is a \textbf{true proposition} and $F$ if it is
+a \textbf{false proposition}.
+
+
+Therefore, Let $p$ be a proposition. The \textit{negation of} $p$, denoted by $\neg p$ / $\overline{p}$, is the
+statement
+
+"It is not the case that $p$"
+
+The proposition $\neg p$ is read "not p", therefore the truth value of the negation of $p$ is the inverse of the truth
+value of $p$
+
+\ex{}{
+	\qs{}{
+		Find the negation of the proposition
+
+		"Michael's PC runs Linux"
+
+		and express this in simple English.
+	}
+	\sol{
+		"Michael's PC does not run Linux"
+	}
+}
+
+\pagebreak
+\ex{}{
+	\qs{}{
+		Find the negation of the proposition
+
+		"Vandana's smartphone has at least 32GB of memory"
+
+		and express this in simple English.
+	}
+	\sol{
+		"Vandana's has less than 32GB of memory"
+	}
+}
+
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		$p$ & $\neg p$ \\[0.5ex]
+		\hline
+		\hline
+		$T$ & $F$      \\
+		$F$ & $T$      \\
+		\hline
+	\end{tabular}
+	\caption{The truth table for the negation of a proposition}
+	\label{tab:1}
+\end{table}
+
+The negation of a proposition can also be considered the result of the operation of the \textit{negation operator} on
+the proposition.
+
+\section{Logical Operators / Connectives}
+
+\subsection{Conjunction}
+\dfn{Conjunction}{
+	Let $p$ and $q$ be propositions. The \textit{conjunction} of $p$ and $q$, denoted by $p \wedge q$, is the proposition
+	"$p \text{ and } q$". $p \wedge q$ is $T$ when both $q$ and $p$ are $T$ and is $F$ otherwise
+}
+
+\begin{table}[h!]
+	\caption{The truth table of $p \wedge q$}\label{tab:2}
+	\begin{center}
+		\begin{tabular}{|c c|c|}
+			\hline
+			$p$ & $q$ & $p \wedge q$ \\[0.5ex]
+			\hline
+			\hline
+			$T$ & $T$ & $T$          \\
+			$T$ & $F$ & $F$          \\
+			$F$ & $T$ & $F$          \\
+			$F$ & $F$ & $F$          \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+
+\subsection{Disjunction}
+\dfn{Disjunction}{
+	Let $p$ and $q$ be propositions. The \textit{disjunction} of $p$ and $q$, dented by $p \vee q $, is the proposition, "$p
+		\text{ or } q$". The \textit{disjunction} $p \vee q$ is $F$ when both $p$ and $q$ are $F$ and $T$ otherwise.
+}
+
+\begin{table}[h!]
+	\caption{The truth table of $p \vee q$}\label{tab:3}
+	\begin{center}
+		\begin{tabular}{|c c|c|}
+			\hline
+			$p$ & $q$ & $p \vee q$ \\[0.5ex]
+			\hline
+			\hline
+			$T$ & $T$ & $T$        \\
+			$T$ & $F$ & $T$        \\
+			$F$ & $T$ & $T$        \\
+			$F$ & $F$ & $F$        \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+The use of the \textbf{connective} \textit{or} in a disjunction corresponds to one of the two ways the word \textit{or}
+is used in English. \textbf{Inclusive or} and \textbf{Exclusive or}, e.g.
+
+"Students who have taken calculus or computer science can take this class"
+
+
+"Students who have taken calculus or computer science, but not both can take this class"
+
+Respectively. Therefore taking the disjunction $p \vee q$ an \textbf{Exclusive or} disjunction will $F$ when $q = T
+	\text{ and } p = T$ or $q = F \text{ and } p = F$, and $T$ only when $q = T \text{ and } p = F$ or $q = F \text{ and
+	} p = T$
+
+
+\subsubsection{Exclusive or}
+\dfn{Exclusive Or}{
+	Let $p$ and $q$ be propositions. The \textit{exclusive or} of $p$ and $q$, denoted by $p \oplus q$, is the proposition
+	that is $T$ when exactly one of $p$ and $q$ is $T$ and is $F$ otherwise.
+}
+
+\begin{table}[h!]
+	\caption{The truth table of $p \oplus q$}\label{tab:4}
+	\begin{center}
+		\begin{tabular}{|c c|c|}
+			\hline
+			$p$ & $q$ & $p \oplus q$ \\[0.5ex]
+			\hline
+			\hline
+			$T$ & $T$ & $F$          \\
+			$T$ & $F$ & $T$          \\
+			$F$ & $T$ & $T$          \\
+			$F$ & $F$ & $F$          \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\subsection{Conditional Statement / Implication}
+
+\dfn{Conditional Statement / Implication}{
+	Let $p$ and $q$ be propositions. The \textit{conditional statement} $p \to q$ is the proposition "if $p$, then $q$". $p
+		\to q$ is $F$ when $p$ is $T$ and $q$ is $F$, and $T$ otherwise. In this connective, $p$ is called the
+	\textit{hypothesis / antecedent / premise} and $q$ is called the \textit{conclusion / consequence}.
+}
+
+\begin{table}[h!]
+	\caption{The truth table of $p \to  q$}\label{tab:5}
+	\begin{center}
+		\begin{tabular}{|c c|c|}
+			\hline
+			$p$ & $q$ & $p \to q$ \\[0.5ex]
+			\hline
+			\hline
+			$T$ & $T$ & $T$       \\
+			$T$ & $F$ & $F$       \\
+			$F$ & $T$ & $T$       \\
+			$F$ & $F$ & $T$       \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+$p \to q$ is called a conditional statement because, it asserts that $q$ is $T$ on the condition that $p$ holds.
+$p \to q$ is $T$ when $p$ is $F$ no matter the value of $q$.
+
+Conditional statements can be expressed in various ways, some are listed below.
+
+"if $p$, then $q$"
+
+"if $p$, $q$"
+
+"$p$ is sufficient for $q$"
+
+"$q$ if $p$"
+
+"$q$ when $p$"
+
+"a necessary condition for $p$ is $q$"
+
+"$q$ unless $\neg p$"
+
+
+"$p$ imples $q$"
+
+"$p$ only if $q$"
+
+"a sufficient condition for $q$ is $p$"
+
+"$q$ whenever $p$"
+
+"$q$ is necessary for $p$"
+
+"$q$ follows from $p$"
+
+For the more confusing statements "$p$ only if $q$" and "$q$ unless $\neg p$", the explanation follows.
+
+"$p$ only if $q$" corresponds to "if $p$, then $q$", because "$p$ only if $q$" says that $p$ cannot be $T$ when $q$ is not
+$T$, i.e. the statement is $F$ when is $p$ is $T$ but $q$ is $F$. If $p$ is $F$ $q$ maybe either $F$ or $T$ because the
+statement says nothing about the value of $q$.
+
+"$q$ unless $\neg p$" expresses the same conditional statement as "if $p$, then $q$", because "$q$ unless $\neg p$"
+means that if if $\neg p$ is $F$ then $q$ must be $T$, That is the statement "$q$ unless $\neg p$" is $F$ when $p$ is
+$T$ but $q$ is $F$, but $T$ otherwise.
+
+\ex{}{
+	\qs{}{
+		Let $p$ be the statement "Maria learns discrete mathematics" and $q$ be the statement "Maria will find a good
+		job". Express the statement $p \to q$ as  a statement in English.
+	}
+
+	\sol{
+
+		"Maria will find a good job, if she learns discrete mathematics"
+
+		"For Maria to get a good job, it is sufficient for her to learn discrete mathematics"
+
+		"Maria will find a good job unless she does not learn discrete mathematics"
+	}
+}
+
+We can form new conditional statements from a given conditional statement, lets say $p \to q$. These are
+
+\begin{itemize}
+	\item \textbf{Converse} - $q \to  p$
+	\item \textbf{Contrapositive} - $\neg q \to \neg p$
+	\item \textbf{Inverse} - $\neg p \to \neg q$
+\end{itemize}
+
+\dfn{Equivalence}{
+	When two compound propositions always have the same truth value.
+}
+
+\subsubsection{Contrapositive}
+
+\dfn{Contrapositive}{
+	The \textit{contrapositive} of the conditional statement $p \to q$ is the conditional statement $\neg q \to \neg p$
+}
+
+In this statement, the hypothesis ,$p$, and conclusion , $q$, are reversed and negated. This results in an identical
+truth table, as the contrapositive is only $F$ when $\neg p$ is $F$ and $\neg q$ is $T$.
+
+\nt{
+	A \textbf{Conditional Statement} ( $p \to q$ ) is equivalent to it's \textbf{Contrapositive} ( $\neg q \to  \neg p$ )
+
+}
+
+\begin{table}[h!]
+	\caption{The truth table of $\neg q \to  \neg p$}\label{tab:6}
+	\begin{center}
+		\begin{tabular}{|c c|c c|c|}
+			\hline
+			$p$ & $q$ & $ \neg p $ & $\neg q$ & $\neg q \to  \neg p$ \\[0.5ex]
+			\hline
+			\hline
+			$T$ & $T$ & $F$        & $F$      & $T$                  \\
+			$T$ & $F$ & $F$        & $T$      & $F$                  \\
+			$F$ & $T$ & $T$        & $F$      & $T$                  \\
+			$F$ & $F$ & $T$        & $T$      & $T$                  \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+
+\subsubsection{Inverse}
+
+\dfn{Inverse}{
+	The  inverse of the conditional statement $p \to q$ is the conditional statement $\neg p \to \neg q$
+}
+
+In this statement, the hypothesis ,$p$, and conclusion ,$q$, are negated. This results in a truth table differing from
+the original conditional statement but equivalent to the statement's \textbf{converse}.
+
+\nt{
+	A conditional statement's ( $p \to q$ ) \textbf{Inverse} ( $\neg p \to \neg q$ ) is equivalent to its \textbf{Converse} ( $q \to p$ )
+}
+
+\begin{table}[h!]
+	\caption{The truth table of $\neg p \to  \neg q$}\label{tab:7}
+	\begin{center}
+		\begin{tabular}{|c c|c c|c|}
+			\hline
+			$p$ & $q$ & $ \neg p $ & $\neg q$ & $\neg p \to  \neg q$ \\[0.5ex]
+			\hline
+			\hline
+			$T$ & $T$ & $F$        & $F$      & $T$                  \\
+			$T$ & $F$ & $F$        & $T$      & $T$                  \\
+			$F$ & $T$ & $T$        & $F$      & $F$                  \\
+			$F$ & $F$ & $T$        & $T$      & $T$                  \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\subsubsection{Converse}
+
+\dfn{Converse} {
+	The converse of the conditional statement $p \to q$ is the conditional statement $q \to p$
+}
+
+In this statement, the hypothesis , $p$ and conclusion, , $q$, are reversed. This results in a truth table equivalent to
+the conditional statement's inverse.
+
+\nt {
+	A conditional statement's ( $p \to q$ ) \textbf{Converse} ( $q \to p$ ) is equivalent to its \textbf{Inverse} (
+	$\neg p \to \neg q$ )
+}
+
+
+\begin{table}[h!]
+	\caption{The truth table of $q \to p$}\label{tab:8}
+	\begin{center}
+		\begin{tabular}{|c c|c|}
+			\hline
+			$p$ & $q$ & $q \to p$ \\[0.5ex]
+			\hline
+			\hline
+			$T$ & $T$ & $T$       \\
+			$T$ & $F$ & $T$       \\
+			$F$ & $T$ & $F$       \\
+			$F$ & $F$ & $T$       \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+
+\pagebreak
+\ex{}{
+	\qs{}{
+		What are the contrapositive, converse, and inverse of the conditional statement
+
+		"The home team wins whenever it is raining?"
+	}
+
+	\sol{
+		\begin{align*}
+			p \to q                                           \\
+			q \text{ whenever } p                             \\
+			q = \text{Home team wins }                        \\
+			p = \text{It is raining }                         \\
+			 & = \text{If it is raining, the home team wins }
+		\end{align*}
+		\begin{itemize}
+			\item Contrapositive - If the home team loses, then it's not raining.
+			\item Inverse - If its not raining then the home team loses.
+			\item Converse - If the home team wins, then it is raining.
+		\end{itemize}
+	}
+}
+
+\subsection{Biconditionals / Bi-implications}
+Another way to combine proposition that expresses they have the same truth value.
+
+\dfn{Biconditionals / Bi-implications}{
+	Let $p$ and $q$ be propositions. The \textit{biconditional statement} $p \leftrightarrow q$ is the proposition "$p$
+	if and only if $q$". The biconditional statement $p \leftrightarrow q$ is $T$ when $p$ and $q$ have the same truth
+	values, and is $F$ otherwise.
+}
+
+$p \leftrightarrow q$ breaks down to $ \left( p \to q \right)  \wedge  \left( q \to p \right)  $, and can be expressed as below
+
+"$p$ is necessary and sufficient for $q$"
+
+"if $p$ then $q$, and conversely"
+
+"$p \text{ iff } q$"
+
+\nt{
+	"iff" - If and only If
+}
+
+\begin{table}[h!]
+	\caption{The truth table of $p \leftrightarrow q$}\label{tab:9}
+	\begin{center}
+		\begin{tabular}{|c c|c|}
+			\hline
+			$p$ & $q$ & $p \leftrightarrow q$ \\ [0.5ex]
+			\hline
+			\hline
+			$T$ & $T$ & $T$                   \\
+			$T$ & $F$ & $F$                   \\
+			$F$ & $T$ & $F$                   \\
+			$F$ & $F$ & $T$                   \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\ex{}{
+	Let $p$ be the statement "You can take the flight" and let $q$ be the statement "You buy a ticket".
+
+	Then $p \leftrightarrow q$ is the statement:
+
+	"You can take the flight if and only if you buy a ticket"
+}
+
+\pagebreak
+\section{Compound Propositions}
+
+\qs{}{
+	Construct the truth table of the compound proposition
+	\[
+		\left( p \vee \neg q  \right) \to \left( p \wedge q \right)
+	\]
+}
+
+\sol{
+	\begin{table}[h!]
+		\begin{center}
+			\begin{tabular}{|c c|c|c|c|c|}
+				\hline
+				$p$ & $q$ & $\neg q$ & $p \vee \neg q $ & $p \wedge q$ & $\left( p \vee \neg q  \right) \to \left( p \wedge q \right)$ \\ [0.5ex]
+				\hline
+				\hline
+				$T$ & $T$ & $F$      & $T$              & $T$          & $T$                                                           \\
+				$T$ & $F$ & $T$      & $T$              & $F$          & $F$                                                           \\
+				$F$ & $T$ & $F$      & $F$              & $F$          & $T$                                                           \\
+				$F$ & $F$ & $T$      & $T$              & $F$          & $F$                                                           \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+}
+
+\subsection{Precedence of Logical Operators}
+
+\begin{table}[h!]
+	\caption{Precedence Table}\label{tab:prec}
+	\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			Operator          & Precedence \\ [0.5ex]
+			\hline
+			\hline
+			$\neg$            & 1          \\
+			$\wedge$          & 2          \\
+			$\vee$            & 3          \\
+			$\to$             & 4          \\
+			$\leftrightarrow$ & 5          \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+Precedence shown from 1 to 5, with 1 having the highest precedence and 5 having the lowest precedence. Operators with
+higher precedence are evaluated before operators with lower precedence. Precedence can be overridden by using parentheses.
+
+\subsection{Logic and Bit Operations}
+
+
+\begin{table}[h!]
+	\caption{Truth value to bit table}\label{tab:bit}
+	\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			Truth value & Bit \\ [0.5ex]
+			\hline
+			\hline
+			$T$         & 1   \\
+			$F$         & 0   \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+A bit can be used to represent a truth value due to its \textit{binary} nature. A variable representing a truth value
+can be called a \textit{boolean variable}. Computer bit operations correspond to logical operations, with the operations
+\textit{OR}, \textit{AND}, and \textit{XOR} corresponding to the connectives, $\vee$, $\wedge$, and $\oplus$ respectively.
+
+\begin{table}[h!]
+	\caption{Bit operations table}\label{tab:ops}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			$x$ & $y$ & $x \wedge y$ & $x \vee y$ & $x \oplus y$ \\ [0.5ex]
+			\hline
+			\hline
+			$1$ & $1$ & $1$          & $1$        & $0$          \\
+			$1$ & $0$ & $0$          & $1$        & $1$          \\
+			$0$ & $1$ & $0$          & $1$        & $1$          \\
+			$0$ & $0$ & $0$          & $0$        & $0$          \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+\dfn{Bit String}{
+	A sequence of zero or more bits. The \textit{length} of this string is the number of bits in the string.
+
+	\ex{}{
+		$101010011$ is a bit string with a length of $9$.
+	}
+}
+
+
+Extending bit operations to bit strings we can define \textit{bitwise AND}, \textit{bitwise OR}, and \textit{bitwise XOR} of two strings of the same length. The new bit string created can be called the \textit{AND}, \textit{OR}, and
+\textit{XOR} of the two strings respectively.
+
+\ex{}{
+	\qs{}{
+		Find the bitwise AND, OR, and XOR of the bit strings 01 1011 0110 and 11 0001 1101.
+	}
+
+	\sol{
+
+		\begin{center}
+			\textit{AND}
+			\begin{align*}
+				\begin{split}
+					01 1011 0110 \\
+					11 0001 1101 \\
+					\hline
+					01 0001 0100 \\
+				\end{split}
+			\end{align*}
+
+			\textit{OR}
+			\begin{align*}
+				\begin{split}
+					01 1011 0110 \\
+					11 0001 1101 \\
+					\hline
+					11 1011 1111 \\
+				\end{split}
+			\end{align*}
+
+			\textit{XOR}
+			\begin{align*}
+				\begin{split}
+					01 1011 0110 \\
+					11 0001 1101 \\
+					\hline
+					10 1010 1011 \\
+				\end{split}
+			\end{align*}
+		\end{center}
+	}
+}
+
+
+\chapter{Applications of Propositional Logic}
+
+
+
+\end{document}

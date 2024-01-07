@@ -587,6 +587,298 @@ Extending bit operations to bit strings we can define \textit{bitwise AND}, \tex
 
 \chapter{Applications of Propositional Logic}
 
+Statements in natural language are often imprecise and ambigous, to make these statements more precise they can be
+represented with propositional logic.
+
+\subsection{Translating English Sentences}
+
+\ex{}{
+	\qs{}{
+		How can this English sentence be translated into a logical expression?
+
+		"You can access the Internet from campus only if you are a computer science major or you are not a freshman".
+	}
+
+	\sol{
+
+		Let $p$ be "You can access the internet from campus"
+
+		Let $q$ be "You are a computer science major"
+
+		Let $r$ be "You are a freshman"
+
+		Therefore the sentence can be translated as
+		\[
+			p \to \left( q \vee \neg r \right)
+		\]
+	}
+}
+
+\ex{}{
+	\qs{}{
+		How can this English sentence be translated into a logical expression?
+
+		“You cannot ride the roller coaster if you are under 4 feet tall unless you are older than 16 years old.”
+	}
+
+	\sol {
+
+		Let $p$ be "You can ride the roller coaster"
+
+		Let $q$ be "You are under 4 feet tall"
+
+		Let $r$ "You are at least 16 years old"
+
+		Therefore the sentence can be translated as
+
+		\[
+			\left( q \vee \neg r  \right)  \to \neg p
+		\]
+	}
+}
+
+\subsection{System Specifications}
+
+In system specifications, we can use propositional logic to express requirements given in natural language in precise
+and unambiguous specifications that can serve as the basis for system development.
+
+\ex{}{
+	\qs{}{
+		Express the specification "The automated reply cannot be sent when the file system is full" using logical
+		connectives
+	}
+
+	\sol{
+
+		Let $p$ be "The automated reply can be sent"
+
+		Let $q$ be "The file system is full"
+
+		Therefore the specification can be expressed as
+		\[
+			q \to \neg p
+		\]
+	}
+}
+
+System specifications should be consistent, and therefore should not contain contradictory requirements.
+
+\pagebreak
+% \ex{}{
+\qs{}{
+	Determine whether these system specifications are consistent:
+
+	“The diagnostic message is stored in the buffer or it is retransmitted.”
+
+	“The diagnostic message is not stored in the buffer.”
+
+	“If the diagnostic message is stored in the buffer, then it is retransmitted.”
+}
+
+\sol{
+
+	Let	$p$ be "The diagnostic message is stored in the buffer"
+
+	Let $q$ be "The diagnostic message is retransmitted"
+
+	Therefore the specifications can be expressed as:
+	\begin{align*}
+		p \vee q \\
+		\neg p   \\
+		p \to q
+	\end{align*}
+
+	To have all these specifications be consistent, it must be possible for them to all be $T$ at the same time.
+	In this case making $p = T$ and $q = T$  will result in $\neg p$ being $F$, which would cause the only the first
+	and second specifications to pass. But making $p = F$ and $q = T$ would result in all the specifications being
+	$T$, as proven by the truth table below.
+
+	\begin{table}[h!]
+		\begin{center}
+			\begin{tabular}{|c c|c|c|c|c|}
+				\hline
+				$p$ & $q$ & $p \vee q$ & $\neg p$ & $p \to q$ & $\left( p \vee  q \right) \wedge \neg p \wedge \left( p \to q \right)$ \\ [0.5ex]
+				\hline
+				\hline
+				$T$ & $T$ & $T$        & $F$      & $T$       & $F$                                                                    \\
+				$T$ & $F$ & $T$        & $F$      & $F$       & $F$                                                                    \\
+				$F$ & $T$ & $T$        & $T$      & $T$       & $T$                                                                    \\
+				$F$ & $F$ & $F$        & $T$      & $T$       & $F$                                                                    \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+}
+% }
+
+\qs{}{
+	Do the system specifications in the previous example remain consistent if the specification “The diagnostic message is not retransmitted” is added?
+}
+
+\sol{
+	With the addition of the specification represented logically by $\neg q$ it would make it impossible for all the
+	specifications to evaluate to $T$, therefore the specifications would be inconsistent.
+}
+
+\subsection{Boolean Searches}
+
+Boolean searches are used to search for information in large collections, such as web page indexes and databases. These
+searches usually use the connectives \textit{AND}, \textit{OR}, and \textit{NOT / AND NOT}.
+
+\pagebreak
+\subsection{Logic Puzzles}
+Puzzles that can be solved using logical reasoning.
+
+\qs{}{
+	On an island with two types of people, knights and knaves, knights always tell the truth and knaves always lie.
+	You encounter two people \textit{A} and \textit{B}. What are \textit{A} and \textit{B} if \textit{A} says
+	"\textit{B} is a knight" and \textit{B} says "The two of us are opposite types"?
+}
+
+\sol{
+
+	Let $r$ be "\textit{A} is a knight"
+
+	Let $q$ be "\textit{B} is a knight"
+
+	Let $\neg r$ be "\textit{A} is a knave"
+
+	Let $\neg q$ be "B is a knave"
+
+	First we consider the case where $r = T$. In this case \textit{A} is a knight making everything he says true meaning
+	\textit{B} is a knight too. But in \textit{B} being a knight everything he says is also true but that cannot be as in
+	this scenario both \textit{A} and \textit{B} are knights, making this scenario invalid.
+
+	Next we consider the case where $\neg r = T$. In this case \textit{A} is a knave meaning he is lying about \textit{B}
+	being a knight. Following this we can conclude that \textit{B} is also a knave and everything they also say is a lie,
+	which is valid.
+
+	Next we consider the case where $q = T$. In this case \textit{B} is a knight making everything he says true and thus
+	\textit{A} is a knave. But as \textit{A} is a knave everything they say is false which calls \textit{B}'s knighthood
+	into question, rendering this scenario invalid.
+
+	Finally we consider the case where $\neg q = T$. This is case \textit{B} is a knave making everything they say false.
+	This allows us to conclude that \textit{A} and \textit{B} are not of opposite types, and since \textit{A} is believed to
+	be a knave further supports \textit{B} being a knave, making this scenario valid.
+
+	Concluding we see in the scenario's we've gone through there are only two valid paths and both point to both \textit{A}
+	and \textit{B} being knaves.
+
+
+}
+
+\qs{}{
+	A father tells his two children, a boy and a girl, to play in their backyard without getting dirty.
+	However, while playing, both children get mud on their foreheads. When the children stop
+	playing, the father says “At least one of you has a muddy forehead,” and then asks the children
+	to answer “Yes” or “No” to the question: “Do you know whether you have a muddy forehead?”
+	The father asks this question twice. What will the children answer each time this question is
+	asked, assuming that a child can see whether his or her sibling has a muddy forehead, but cannot
+	see his or her own forehead? Assume that both children are honest and that the children answer
+	each question simultaneously.
+}
+
+\sol{
+
+	Let $q$ be "boy has muddy forehead"
+
+	Let $r$ be "girl has muddy forehead"
+
+	The first time the question is asked both children answer "No" because as they can see each other's foreheads they
+	can tell if the other has a muddy forehead but cannot tell if they do, the boy and girl know $r = T$ but not the
+	vale of $q$ and $q = T$ but not the value of $r$.
+
+	The second time the question is asked taking account of the answer of either sibling for the first question and the
+	condition that at least one of them has a muddy forehead the children can infer that since they can see mud on their
+	sibling's forehead but they answered no but for statement the father made which can be put as $q \vee r$ to be true
+	at least one of the propositions have to be true, resoling in them both answering "Yes".
+}
+
+\subsection{Logic Circuits}
+
+A logic circuit receives input signals $p_1, p_2\ldots p_n$, each a bit, either $1$ or $0$, and produces output signals
+$s_1, s_2\ldots s_n$, each also a bit.
+
+Complicated digital circuits can be constructed from three basic circuits, called \textbf{gates}. These are:
+
+\begin{itemize}
+	\item Inverter / NOT gate - Takes an input bit $p$ and produces $\neg p$ as output.
+	\item OR gate - Takes two input signals $p$ and $q$ and produces the output signal $p \vee q$.
+	\item AND gate - Takes two input signals $p$ and $q$ and produces the output signal $p \wedge q$.
+\end{itemize}
+
+Given a circuit built from these gates we can determine the output by tracing through the circuit.
+
+\subsubsection{Exercises}
+
+\large{Translate the given statements into propositional logic}
+\qs{}{
+	You cannot edit a protected Wikipedia entry unless you
+	are an administrator. Express your answer in terms of e:
+	“You can edit a protected Wikipedia entry” and a: “You
+	are an administrator.”
+}
+
+\sol{
+
+	$e \to a$
+}
+
+\qs{}{
+	You can see the movie only if you are over 18 years old
+	or you have the permission of a parent. Express your answer in terms of m: “You can see the movie,” e: “You are
+	over 18 years old,” and p: “You have the permission of a
+	parent.”
+}
+
+\sol {
+	$m \to  \left( e \vee p \right) $
+}
+
+
+\qs{}{
+	You can graduate only if you have completed the requirements of your major and you do not owe money to the
+	university and you do not have an overdue library book.
+	Express your answer in terms of g: “You can graduate,”
+	m: “You owe money to the university,” r: “You have completed the requirements of your major,” and b: “You have
+	an overdue library book.”
+}
+
+\sol{
+	$g \to  \left( r \wedge  \neg m \wedge \neg b \right) $
+}
+
+\qs{}{
+	To use the wireless network in the airport you must pay
+	the daily fee unless you are a subscriber to the service.
+	Express your answer in terms of w: “You can use the wire-
+	less network in the airport,” d: “You pay the daily fee,”
+	and s: “You are a subscriber to the service.”
+}
+
+\sol{
+	$w \to  \left( d \vee s \right) $
+}
+
+\qs{}{
+	You can upgrade your operating system only if you have
+	a 32-bit processor running at 1 GHz or faster, at least
+	1 GB RAM, and 16 GB free hard disk space, or a 64-
+	bit processor running at 2 GHz or faster, at least 2 GB
+	RAM, and at least 32 GB free hard disk space. Express
+	you answer in terms of u: “You can upgrade your operating system,” b32: “You have a 32-bit processor,” b64:
+	“You have a 64-bit processor,” g1: “Your processor runs
+	at 1 GHz or faster,” g2: “Your processor runs at 2 GHz or
+	faster,” r1: “Your processor has at least 1 GB RAM,” r2:
+	“Your processor has at least 2 GB RAM,” h16: “You have
+	at least 16 GB free hard disk space,” and h32: “You have
+	at least 32 GB free hard disk space.”
+}
+
+\sol{
+	$u \to  \left( b_{32} \wedge  g_1 \wedge r_1 \wedge h_{16}  \right) \vee \left( b_{64} \wedge g_2 \wedge r_2
+		\wedge h_{32}\right) $
+}
 
 
 \end{document}

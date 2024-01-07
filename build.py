@@ -16,7 +16,11 @@ exportPath = basedir / "_Exported"
 
 def cleanLatexArtifacts(startDir: Path):
     artifacts = [".aux", ".fls", ".toc", ".synctex.gz", ".fdb_latexmk", ".log", ".gz"]
-    for file in (item for item in startDir.rglob("*") if item.is_file() and item.suffix in artifacts):
+    for file in (
+        item
+        for item in startDir.rglob("*")
+        if item.is_file() and item.suffix in artifacts
+    ):
         try:
             file.unlink()
         except FileNotFoundError:
@@ -120,13 +124,14 @@ def compileMany(dirs: list[str]):
 
 if __name__ == "__main__":
     dirs = [
-        "Calc",
+        # "Calc",
         # "Calc/Semester_1",
         "CompSci/Personal/Intro_To_Machine_Learning",
         "CompSci/Personal/Algorithms",
         "CompSci/Personal/Discrete_Math",
-        "FDE",
+        # "FDE",
     ]
+
     compileMany(dirs)
     cleanLatexArtifacts(rawPath)
     cleanLatexArtifacts(exportPath)

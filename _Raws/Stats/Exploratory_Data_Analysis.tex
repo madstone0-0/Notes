@@ -1,0 +1,365 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+
+\title{\Huge{Exploratory Data Analysis}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\dfn{Data}{
+	Pieces of information about individuals (specific person / object) organized into variables (specific characteristic
+	of the individual).
+}
+
+\dfn{Dataset} {
+	A set of data identified with particular circumstances.
+}
+
+Variables can be classified into one of two types:
+
+\begin{itemize}
+	\item Categorical / Qualitative
+	\item Quantitative
+\end{itemize}
+
+\dfn{Categorical / Quantitative Variable} {
+	Take category or label values and places an individual into one of several mutually exclusive groups.
+}
+
+\dfn{Quantitative Variable} {
+	Take numerical values and represents a measurement.
+}
+
+\chapter{Module 4: Examining Distributions}
+
+\dfn{Distribution} {
+	The distribution of a variable tells us what values the variable takes and how often it takes these values.
+}
+
+\section{Distribution of One Categorical Variable}
+
+In order to summarize the distribution of a categorical variable we must first create a table of all the values the
+category can take (categories) and how often it takes these values (counts). This is called a \textbf{frequency table}.
+
+
+In order to visualize the summaries we've made we can use one of two graphs:
+
+\begin{itemize}
+	\item Pie Chart
+	\item Bar Graph
+\end{itemize}
+
+\section{Distribution of One Quantitative Variable}
+
+To visualize a summary of a quantitative variable we can use one of three graphs:
+\begin{itemize}
+	\item Histogram
+	\item Stem plot
+	\item Box plot
+\end{itemize}
+
+\subsection{Histogram}
+
+To construct a histogram we must first divide the range of our data into equal sized intervals called \textbf{bins} /
+\textbf{classes}. We then count how many observation fall into each bin and construct a frequency table with the bins
+and counts. We then plot the bin on the $x$-axis and the count on the $y$-axis.
+
+\dfn{Relative Frequency} {
+	The proportion of observations in a category. Calculated by dividing the count of observations in a category by the
+	total number of observations.
+}
+
+In interpreting the histogram we must consider the following features of the distribution:
+\begin{itemize}
+	\item Shape
+	\item Centre
+	\item Spread
+	\item Outliers
+\end{itemize}
+
+Where the first three describe the distribution as a whole and the patterns found within and the last highlights deviations from that pattern.
+
+\subsubsection{Shape}
+
+The shape of a distribution is described by its \textbf{modality / peakedness} and \textbf{symmetry/skewness}.
+
+\dfn{Modality}{
+	Number of peaks (modes) in a distribution.
+}
+
+\dfn{Symmetric Distribution}{
+	A distribution is symmetric if the right and left sides of the histogram are approximately mirror images of each
+	other.
+}
+
+\dfn{Skewed Distribution}{
+	A distribution is skewed if one of its tails is longer than the other.
+
+	\begin{itemize}
+		\item \textbf{Right Skewed} if the right tail is longer.
+		\item \textbf{Left Skewed} if the left tail is longer.
+	\end{itemize}
+}
+
+\dfn{Unimodal}{
+	A distribution with one mode, i.e. a central peak the observations are concentrated around.
+}
+
+\dfn{Bimodal}{
+	A distribution with two modes, i.e. two central peaks the observations are concentrated around.
+}
+
+\dfn{Multimodal}{
+	A distribution with more than two modes, i.e. more than two central peaks the observations are concentrated around.
+}
+
+\dfn{Uniform}{
+	A distribution with no mode, i.e. the observations are evenly distributed across the range of the data.
+}
+
+\subsubsection{Centre}
+
+The value that divides the distribution so that approximately half the observations take smaller values, and half
+take larger values.
+
+\subsubsection{Spread}
+
+The approximate range covered by the data. i.e. The smallest value to largest value.
+
+\subsubsection{Outliers}
+
+Observations that fall outside the overall pattern of the distribution.
+
+\subsection{Stem Plot / Stem and Leaf Plot}
+
+To construct a stem plot we must
+\begin{itemize}
+	\item Separate each observation into a \textbf{stem} and a \textbf{leaf}. The stem being everything except the right post digit and the leaf being the right most digit, e.g. 123 would have a stem of 12 and a leaf of 3.
+	\item Write the stems in a vertical column in ascending order.
+	\item Go through the data points and match each leaf to its stem in ascending order.
+\end{itemize}
+
+\qs{}{
+	Construct a stem plot for the following Dataset
+
+	34 34 27 37 42 41 36 32 41 33 31 74 33 49 38 61 21 41 26 80 42 29 33 36 45 49 39 34 26 25 33 35 35 28 30 29 61 32 33 45 29 62 22 44
+}
+
+\sol{
+	\begin{table}[h!]
+		% \begin{center}
+		\begin{tabular}{c|c}
+			2 & 1 2 5 6 6 7 8 9 9                   \\
+			3 & 0 1 2 2 3 3 3 3 3 4 4 5 5 6 6 7 8 9 \\
+			4 & 1 1 1 2 2 4 4 5 9 9                 \\
+			5 &                                     \\
+			6 & 1 1 2                               \\
+			7 & 4                                   \\
+			8 & 0                                   \\
+		\end{tabular}
+		% \end{center}
+	\end{table}
+
+	\begin{table}[h!]
+		% \begin{center}
+		\begin{tabular}{c|c}
+			2 & 1 2                   \\
+			2 & 5 6 6 7 8 9 9         \\
+			3 & 0 1 2 2 3 3 3 3 3 4 4 \\
+			3 & 5 5 6 6 7 8 9         \\
+			4 & 1 1 1 2 2 4 4         \\
+			4 & 5  9 9                \\
+			5 &                       \\
+			5 &                       \\
+			6 & 1 1 2                 \\
+			6 &                       \\
+			7 & 4                     \\
+			7 &                       \\
+			8 & 0                     \\
+		\end{tabular}
+		% \end{center}
+	\end{table}
+}
+
+
+When skewed right the stem plot can be visualize to identify the skewness.
+
+\nt{
+	The advantages of the stem plot are:
+	\begin{itemize}
+		\item It preserves the original data.
+		\item It sorts the data.
+		\item It is easy to construct for small datasets.
+	\end{itemize}
+}
+
+\section{Numerical Measures}
+
+To get a more accurate description of a discrete quantitative variable we can use numerical measures.
+
+\subsection{Measures of Centre}
+
+The numerical measure of a distribution's centre is basically telling us what is a typical value for the variable. The three main numerical measures of centre are the \textbf{mean}, \textbf{median} and \textbf{mode}.
+
+\subsubsection{Mode}
+
+The most common occurring value in a distribution.
+
+\subsubsection{Mean}
+
+The average of a set of observations i.e. the sum of all the observations divided by the number of observations. i.e.
+\[
+	\bar{x} = \frac{\sum{f}}{n}
+\]
+
+Where $f$ is the frequency of the observation and $n$ is the number of observations.
+
+\subsubsection{Median}
+
+The midpoint of a distribution. i.e. the value that divides the distribution so that approximately half the observations take smaller values, and half take larger values.
+
+It can be found by:
+\begin{itemize}
+	\item First Ordering the observations in ascending order.
+	\item Consider whether $n$ (number of observations) is even or odd. If:
+	      \begin{itemize}
+		      \item Even - The median is the average of the two middle observations, i.e.
+		            \[
+			            \frac{M_1 + M_2}{2}
+		            \]  where
+		            $M_1$ and $M_2$ are the two middle observations, and where $M_1$ and $M_2$ found at the $\frac{n}{2}$ and $\frac{n}{2} + 1$ positions respectively.
+		      \item Odd - The median is the middle observation. i.e. $M$ where $M$ is found at the $\frac{n + 1}{2}$
+		            position
+	      \end{itemize}
+\end{itemize}
+
+\subsubsection{Comparing the Mean and Median}
+
+The mean is being the average of all the observations is more sensitive to outliers than the median. This means that for:
+\begin{itemize}
+	\item A symmetric distribution with no outliers - $\overline{x}$ (the mean) $\approx$ (approximately equal) $M$ (the median).
+	\item A right skewed distribution and/or datasets with high outliers - $\overline{x} > M$
+	\item A left skewed distribution and/or datasets with low outliers - $\overline{x} < M$
+\end{itemize}
+
+Therefore it is best to use mean ($\overline{x}$) as a measure of centre for symmetrical distributions with no outliers, Otherwise
+median ($M$) is a better measure of centre.
+
+\subsection{Measures of Spread}
+
+The numerical measure of a distribution's spread is basically telling us how spread out the data is. The three main numerical measures of spread are the \textbf{range}, \textbf{interquartile range} and \textbf{standard deviation}.
+
+\subsubsection{Range}
+
+The range of a distribution is the difference between the largest and smallest observations. i.e. $R = x_{max} - x_{min}$
+
+\subsubsection{Interquartile Range}
+
+The interquartile range (IQR) measures variability of a distribution by giving us the range covered by the middle 50\% of the
+observations instead of the whole range covered by all the observations. To calculate the IQR we must
+
+\begin{itemize}
+	\item Arrange the observations in ascending order.
+	\item Find the median.
+	\item Find the median of the lower 50\% of observations also called the first/lower quartile (Q1). We can find the
+	      position of the lower quartile using the formula:
+	      \[
+		      Q1_{th} = \frac{1}{4}(n + 1)
+	      \]
+	\item Find the median of the upper 50\% of observations also called the third/upper quartile (Q3). We can find the
+	      position of the upper quartile using the formula:
+	      \[
+		      Q3_{th} = \frac{3}{4}(n + 1)
+	      \]
+	\item Calculate the IQR by subtracting Q1 from Q3. i.e. $IQR = Q3 - Q1$
+\end{itemize}
+
+
+\paragraph{Using the IQR to Identify Outliers.}
+
+The IQR is used as the basis for a rule of thumb for identifying outliers called the \textbf{1.5 $\times$ IQR Rule}. According to this rule, observations that fall more than 1.5 $\times$ IQR above the third quartile or below the first quartile are considered outliers.
+
+
+\paragraph{Box Plot.}
+
+
+A box plot is a graphical display of the five number summary. It is constructed by drawing a box with the first side at
+the lower quartile and the second side at the upper quartile, then drawing a line through the box at the median. Finally
+we draw vertical lines at the maximum and minimum values and connect them to the box with horizontal lines.
+
+\dfn{Five Number Summary}{
+	The combination of the minimum, lower quartile, median, upper quartile and maximum of a distribution.
+}
+
+
+
+Another way of constructing box plots is the \textbf{Tukey method}. This consists of:
+\begin{itemize}
+	\item Calculating the IQR
+	\item Finding 1.5 $\times$ IQR and adding it to the upper quartile. If the value is greater than or equal to the
+	      maximum value of the distribution then the maximum value is used as the upper whisker. Otherwise the largest
+	      value in the distribution that
+	      is less than the upper quartile $+$ 1.5 $\times$ IQR is used as the upper whisker.
+	\item Subtracting 1.5 $\times$ IQR from the lower quartile. If the value is less than or equal to the minimum value of
+	      the distribution then the minimum value is used as the lower whisker. Otherwise the smallest value in the
+	      distribution that is greater than
+	      the lower quartile $-$ 1.5 $\times$ IQR is used as the lower whisker.
+	\item If the maximum or minimum values are not used as the whiskers of the boxplot they are instead denoted by
+	      asterisks (*).
+\end{itemize}
+
+\subsubsection{Standard Deviation}
+
+The standard deviation measures how far the observations are from their mean $\overline{x}$ .i.e. the average distance
+between a data point and the mean. The standard deviation of a sample is denoted by $s$ and is calculated by:
+\[
+	s = \sqrt{\frac{\sum{(X - \overline{x}})^2}{n - 1}}
+\]
+
+Where $X$ is the observation, $\overline{x}$ is the mean of the observations and $n$ is the number of observations.
+
+\nt {
+	The standard deviation is always positive.
+}
+
+\nt{
+	Since the SD is dependent on the mean, it should be used as a measure of spread only when the mean is used as a measure of centre.
+	Also due to the SD's dependence on the mean it is also sensitive to outliers.
+}
+
+\thm{Standard Deviation Rule / Empirical Rule}{
+	For a symmetric bell shaped distribution, i.e. normal distribution, the following rule applies:
+	\begin{itemize}
+		\item Approximately 68\% of the observations fall within 1 SD of the mean .i.e $68\%  \times n$ lies between $\overline{x} \pm s$
+		\item Approximately 95\% of the observations fall within 2 SD of the mean .i.e. $95\%  \times n$ lies between $\overline{x} \pm 2s$
+		\item Approximately 99.7\% of the observations fall within 3 SD of the mean. .i.e. $99.7\%  \times n$ lies between $\overline{x} \pm 3s$
+	\end{itemize}
+}
+
+\subsection{Choosing Numerical Measures}
+
+Use $\overline{x}$ and $s$ as measures of centre and spread only for reasonably symmetric distributions with no
+outliers. Otherwise use $M$ and IQR.
+
+
+\chapter{Module 5: Examining Relationships}
+
+
+
+
+
+\end{document}

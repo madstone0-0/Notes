@@ -46,7 +46,7 @@ def compileLatex(file: Path, exportDir: Path) -> str:
                 "-synctex=1",
                 "-interaction=nonstopmode",
                 f"-outdir={exportDir}",
-                f"'{file}'",
+                f"{file}",
             ],
             stdout=PIPE,
             stderr=PIPE,
@@ -129,6 +129,7 @@ if __name__ == "__main__":
         "CompSci/Personal/Intro_To_Machine_Learning",
         "CompSci/Personal/Algorithms",
         "CompSci/Personal/Discrete_Math",
+        "Stats",
         # "FDE",
     ]
 

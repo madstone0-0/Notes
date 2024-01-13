@@ -7,11 +7,14 @@
 !/_Raws/CompSci
 !/_Raws/Personal
 !/_Raws/Liberal
+!/_Raws/Stats
+!/_Raws/Econs
 
 !/_Exported/
 # /_Exported/Calc/*
 !/_Exported/Calc
 # !/_Exported/Calc/Semester_1/*.pdf
+!/_Exported/Stats
 !/Templates/
 !/build.sh
 !/build.py

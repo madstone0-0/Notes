@@ -77,6 +77,10 @@ value of $p$
 	}
 }
 
+\dfn{Truth Table} {
+	Displays the relationships between the truth values of propositions.
+}
+
 
 \begin{table}[h!]
 	\centering
@@ -245,8 +249,17 @@ $T$, i.e. the statement is $F$ when is $p$ is $T$ but $q$ is $F$. If $p$ is $F$ 
 statement says nothing about the value of $q$.
 
 "$q$ unless $\neg p$" expresses the same conditional statement as "if $p$, then $q$", because "$q$ unless $\neg p$"
-means that if if $\neg p$ is $F$ then $q$ must be $T$, That is the statement "$q$ unless $\neg p$" is $F$ when $p$ is
+means that if "if $\neg p$" is $F$ then $q$ must be $T$, That is the statement "$q$ unless $\neg p$" is $F$ when $p$ is
 $T$ but $q$ is $F$, but $T$ otherwise.
+
+Or
+
+\begin{align*}
+	q \text{ unless } \neg p  \\
+	q \text{ if } \neg \neg p \\
+	q \text{ if } p           \\
+	\therefore \text{if } p \text{ then } q
+\end{align*}
 
 \ex{}{
 	\qs{}{
@@ -395,6 +408,43 @@ the conditional statement's inverse.
 	}
 }
 
+\ex{}{
+	\qs{}{
+		Find the converse, inverse and contrapositive of "Raining is a sufficient condition for my not going to town"
+	}
+
+	\sol{
+
+		If it is raining, then I will not go to town
+
+		$p \to q$
+
+		$p$ = It is raining
+
+		$q$ = I will not go to town
+
+		Converse
+
+		$q \to p$
+
+		If I am not going to town, then it is raining
+
+		Contrapositive
+
+		$\neg q \to \neg p $
+
+		If I am going to town, then it is not raining
+
+		Inverse
+
+		$\neg p \to \neg q$
+
+		If it is not raining, then I am going to town
+
+	}
+}
+
+
 \subsection{Biconditionals / Bi-implications}
 Another way to combine proposition that expresses they have the same truth value.
 
@@ -463,6 +513,36 @@ $p \leftrightarrow q$ breaks down to $ \left( p \to q \right)  \wedge  \left( q 
 				$T$ & $F$ & $T$      & $T$              & $F$          & $F$                                                           \\
 				$F$ & $T$ & $F$      & $F$              & $F$          & $T$                                                           \\
 				$F$ & $F$ & $T$      & $T$              & $F$          & $F$                                                           \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+}
+
+\qs{}{
+	Construct
+
+	\[
+		p \vee q \to \neg r
+	\]
+}
+
+\sol {
+	\begin{table}[h!]
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				$p$ & $q$ & $r$ & $\neg r$ & $p \vee q$ & $p \vee q \to \neg r$ \\ [0.5ex]
+				\hline
+				\hline
+				$T$ & $T$ & $T$ & $F$      & $T$        & $F$                   \\
+				$T$ & $T$ & $F$ & $T$      & $T$        & $T$                   \\
+				$T$ & $F$ & $F$ & $T$      & $T$        & $T$                   \\
+				$T$ & $F$ & $T$ & $F$      & $T$        & $F$                   \\
+				$F$ & $F$ & $F$ & $T$      & $F$        & $T$                   \\
+				$F$ & $T$ & $T$ & $F$      & $T$        & $F$                   \\
+				$F$ & $F$ & $T$ & $F$      & $F$        & $T$                   \\
+				$F$ & $T$ & $F$ & $T$      & $T$        & $T$                   \\
 				\hline
 			\end{tabular}
 		\end{center}
@@ -879,6 +959,7 @@ Given a circuit built from these gates we can determine the output by tracing th
 	$u \to  \left( b_{32} \wedge  g_1 \wedge r_1 \wedge h_{16}  \right) \vee \left( b_{64} \wedge g_2 \wedge r_2
 		\wedge h_{32}\right) $
 }
+
 
 
 \end{document}

@@ -130,6 +130,7 @@ if __name__ == "__main__":
         "CompSci/Personal/Algorithms",
         "CompSci/Personal/Discrete_Math",
         "Stats",
+        "Econs",
         # "FDE",
     ]
 

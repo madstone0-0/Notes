@@ -1,0 +1,152 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Producing Data}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\dfn{Sample}{
+	A subset of a larger population
+}
+
+In order to reliably draw conclusions about a population, we must ensure that our chosen sample is truly representative
+of the population.
+
+\dfn{Sampling Bias}{
+	A sample that is not representative of a population due to systematic under or over estimation of the values of the
+	variable of interest.
+}
+
+\chapter{Module 6: Sampling}
+
+\section{Sampling Methods}
+
+\subsection{Simple Random Sampling}
+
+\dfn{Simple Random Sampling}{
+	The simplest probability sampling method. Each member of the population has an equal chance of being selected.
+}
+
+\subsection{Cluster Sampling}
+
+\dfn{Cluster Sampling}{
+	Used when the population is naturally divided into groups / clusters. A simple random sample of clusters is selected
+	and we use all the individuals in the selected clusters as our sample.
+}
+
+\subsection{Stratified Sampling}
+
+\dfn{Stratified Sampling}{
+	Used when the population is naturally divide into sub populations / strata, e.g. gender. A simple random sample is
+	selected from each stratum and the results are combined to form the sample.
+}
+
+
+\chapter{Module 7: Designing Studies}
+
+
+\section{Introduction}
+
+\dfn{Observational Study}{
+	The variable(s) of interest are recorded as they naturally occur, with no interference from the researchers
+	conducting the study
+}
+
+\dfn{Sample Survey}{
+	A type of observational study where subjects report variables' values themselves, frequently giving their opinions.
+}
+
+\dfn{Experiment}{
+	The researchers interfere with the variable(s) of interest, assigning the values of the independent variable to the
+	subjects.
+}
+
+\section{Observational Study}
+
+There are two types of observational studies:
+\begin{itemize}
+	\item Prospective
+	\item Retrospective
+\end{itemize}
+
+\section{Causation and Observational Studies}
+
+As a result of the nature of observational studies they come with one glaring weakness: differing factors among subjects
+could be lurking variables, affecting the results of the study. To contend with this observational studies often have to
+control of the effects of lurking variables by separating each study group by similar possible lurking variables. But
+even with this attempt at control it is impossible to account for a near unlimited amount of potential lurking
+variables, so the claims of a causation based on an observational study can never be 100\% accurate.
+
+
+
+\section{Causation and Experiments}
+
+\dfn{Factor}{
+	A variable whose levels are controlled by the experimenter / Independent variable
+}
+
+\dfn{Treatments / $ttt$}{
+	Different imposed values of the factor
+}
+
+\dfn{Control Group}{
+	A group of subjects that are not given any treatment
+}
+
+\dfn{Subjects}{
+	Individuals on which the experiment is performed
+}
+
+\dfn{Treatment Group}{
+	A group of subjects that are given a treatment
+}
+
+\subsection{Randomized Controlled Experiments}
+
+\dfn{Randomized Controlled Experiment}{
+	An experiment where subjects are randomly assigned to treatment groups
+}
+
+Under a randomized controlled experiment, the only difference between the treatment and control groups should be the
+treatment itself. This allows us to draw conclusions about the effects of the treatment on the subjects.
+
+\subsection{Blind and Double-Blind Experiments}
+
+\dfn{Blind Experiment}{
+	An experiment where the subjects do not know which treatment they are receiving
+}
+
+\dfn{Double-Blind Experiment}{
+	An experiment where neither the subjects nor the researchers know which treatment the subjects are receiving
+}
+
+\subsection{Modifications to Randomization}
+
+In some cases the design of an experiment may be enhanced by relaxing the requirement of total randomization and
+blocking the subjects first.
+
+\dfn{Block}{
+	A group of subjects that are similar in ways that are expected to affect the response to the treatments
+}
+
+\dfn{Matched Pairs}{
+	A type of blocking where each subject receives both treatments in a random order
+}
+
+
+
+
+
+\end{document}

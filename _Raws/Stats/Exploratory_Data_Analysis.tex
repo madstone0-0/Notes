@@ -294,7 +294,7 @@ observations instead of the whole range covered by all the observations. To calc
 The IQR is used as the basis for a rule of thumb for identifying outliers called the \textbf{1.5 $\times$ IQR Rule}. According to this rule, observations that fall more than 1.5 $\times$ IQR above the third quartile or below the first quartile are considered outliers.
 
 
-\paragraph{Box Plot.}
+\paragraph{Box and Whisker / Box Plot.}
 
 
 A box plot is a graphical display of the five number summary. It is constructed by drawing a box with the first side at
@@ -358,6 +358,200 @@ outliers. Otherwise use $M$ and IQR.
 
 \chapter{Module 5: Examining Relationships}
 
+\dfn{Independent / Explanatory Variable}{
+	The variable that claims to explain, predict or affect the response variable.
+}
+
+\dfn{Dependent / Response Variable}{
+	The variable that measures an outcome or result of a study.
+}
+
+Further classification of variables:
+
+\begin{itemize}
+	\item Categorical Explanatory / Quantitative response, $C \to Q$
+	\item Categorical Explanatory / Categorical response, $C \to C$
+	\item Quantitative Explanatory / Quantitative response, $Q \to Q$
+	\item Quantitative Explanatory / Categorical response, $Q \to C$
+\end{itemize}
+
+
+When confronted with a research question that involves exploiting the relationship between two variables, the first step
+should be determining which of the four cases above applies to the variables in question. This will help us determine
+what statistical methods to use to answer the question.
+
+\section{Case $C \to Q$ }
+
+In this case we essentially compare the distributions of the quantitative response variable for each category of the
+explanatory variable. This can be done using side by side \textbf{Boxplots} and  \textbf{Descriptive Statistics / Five
+	Number Summary}.
+
+
+\section{Case $C \to C$ }
+
+In this case we essentially compare the distributions of the categorical response variable for each category of the
+explanatory variable. This can be done using a two way table comparing the counts of each category of the response
+variable for each category of the explanatory variable, and finding the proportions of each category of the response variable for each category of the explanatory variable.
+
+\section{Case $Q \to Q$}
+
+In this case we examin the relationship between the two quantitative variables by plotting the explanatory variable on
+the $x$-axis and the response variable on the $y$-axis. We then look for patterns in a \textbf{Scatter plot}.
+
+\subsection{Scatter Plot}
+
+\subsubsection{Interpreting the Scatter plot}
+
+When interpreting a scatter plot we must consider the following features of the distribution:
+
+\begin{itemize}
+	\item Direction
+	\item Form
+	\item Strength
+	\item Outliers
+\end{itemize}
+
+\paragraph{Direction}
+
+The direction of a scatter plot can be classified as either \textbf{positive}, \textbf{negative} or \textbf{no
+	relationship}.
+
+\dfn{Positive relationship}{
+	An increase in one of the variables is associated with an increase in the other.
+}
+
+\dfn{Negative Relationship}{
+	An increase in one of the variables is associated with a decrease in the other.
+}
+
+\dfn{No Relationship}{
+	There is no apparent relationship between the two variables.
+}
+
+\paragraph{Form}
+
+The general shape of the relationship. Some common shapes \textbf{Linear}, \textbf{Curvilinear} and \textbf{Clusters}.
+
+\dfn{Linear}{
+	Looks like points scattered around a straight line.
+}
+
+
+\dfn{Curvilinear}{
+	Looks like points scattered around a curved line.
+}
+
+\dfn{Clusters}{
+	Looks like points gathered around a particular point.
+}
+
+\paragraph{Strength}
+
+How closely the data follows the form of the relationship. A relationship's strength can be classified as either \textbf{Strong}, \textbf{Moderate} or \textbf{Weak}.
+
+\dfn{Strong}{
+	The points follow the form of the relationship very closely.
+}
+
+\dfn{Moderate}{
+	The points follow the form of the relationship moderately closely.
+}
+
+\dfn{Weak}{
+	The points follow the form of the relationship weakly.
+}
+
+\paragraph{Outliers}
+
+Data points that deviate from the pattern of the relationship.
+
+\subsection{Linear Relationships}
+
+\subsubsection{The Correlation Coefficient ($r$)}
+
+\dfn{Correlation Coefficient ($r$)}{
+	A numerical measure of the strength and direction of a linear relationship between two quantitative variables.
+}
+
+It is calculated by:
+
+\[
+	r = \frac{1}{n - 1} \sum^{n}_{i = 1} \left( \frac{x_{i} - \overline{x}}{S_{x}} \right) - \left( \frac{y_{i} -
+		\overline{y}}{S_{y}} \right)
+\]
+
+Where $x_{i}$ and $y_{i}$ are the $i$th observations of the explanatory and response variables respectively, $S_{x}$ and
+
+$r$ can take values between -1 and 1. Where:
+
+\begin{itemize}
+	\item $r > 0$ - Positive relationship
+	\item $r < 0 $ - Negative relationship
+	\item $r = 0$ - No relationship
+\end{itemize}
+
+The closer $r$ is to 1 or -1 the stronger the relationship. The closer $r$ is to 0 the weaker the relationship.
+
+As a numerical measure $r$ has several properties to take note of:
+
+\begin{itemize}
+	\item $r$ is not dependent on the units of measurement of the variables.
+	\item $r$ only measures the strength of a linear relationship, so it is not appropriate for non-linear relationships
+	      as it tries to fit a straight line to a non-linear relationship.
+	\item $r$ by itself is not sufficient to determine the form of a relationship between two variables.
+	\item $r$ is strongly affected by outliers.
+\end{itemize}
+
+
+\pagebreak
+\subsubsection{Linear Regression}
+
+\dfn{Regression}{
+	The technique that specifies the dependence of the response / dependent variable on the explanatory / independent variable.
+}
+
+\dfn{Linear Regression / Line of Best Fit}{
+	Regression in the form of a linear function.
+}
+
+In constructing the line of best fit there are may methods that can be used. The most common method is the \textbf{Least
+	Squares Method}.
+
+
+\dfn{Least Square Method / Criterion}{
+	The method of finding the line of best fit by minimizing the sum of squared vertical deviations of the data points from the line.
+}
+
+The resulting line of best fit is called the \textbf{Least-Squares Regression Line}. As with all straight lines it's
+equation is of the form
+\[
+	Y = a + bX
+\]
+
+Where $Y$ is the response variable, $X$ is the explanatory variable, $a$ is the $y$-intercept and $b$ is the slope of the line.
+To calculate the $y$-intercept and slope we need the following:
+\begin{itemize}
+	\item $\overline{X}$ - Mean of the independent variables
+	\item $S_{X}$ - Standard deviation of the independent variables
+	\item $\overline{Y}$ - Mean of the dependent variables
+	\item $S_{Y}$ - Standard deviation of the dependent variables
+	\item $r$ - Correlation coefficient.
+\end{itemize}
+
+Given these values we can thus find $a$ and $b$ using the following formulas:
+\begin{align*}
+	b = r \left( \frac{S_{Y}}{S_{X}} \right) \\
+	a = \overline{Y} - b \overline{X}
+\end{align*}
+
+\section{Causation and Lurking Variables}
+
+Association between two variables does not imply causation. There may be lurking variables that may be responsible for the observed relationship between the two variables.
+
+\dfn{Lurking Variable}{
+	A variable that is not among the independent or dependent variables in a study by could substantially influence the
+	interpretation of the relationship among those variables.
+}
 
 
 

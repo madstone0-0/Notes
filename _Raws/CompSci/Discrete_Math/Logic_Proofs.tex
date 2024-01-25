@@ -230,7 +230,7 @@ Conditional statements can be expressed in various ways, some are listed below.
 "$q$ unless $\neg p$"
 
 
-"$p$ imples $q$"
+"$p$ implies $q$"
 
 "$p$ only if $q$"
 
@@ -665,9 +665,11 @@ Extending bit operations to bit strings we can define \textit{bitwise AND}, \tex
 }
 
 
+
+
 \chapter{Applications of Propositional Logic}
 
-Statements in natural language are often imprecise and ambigous, to make these statements more precise they can be
+Statements in natural language are often imprecise and ambiguous, to make these statements more precise they can be
 represented with propositional logic.
 
 \subsection{Translating English Sentences}
@@ -889,7 +891,7 @@ Complicated digital circuits can be constructed from three basic circuits, calle
 
 Given a circuit built from these gates we can determine the output by tracing through the circuit.
 
-\subsubsection{Exercises}
+\section{Exercises}
 
 \large{Translate the given statements into propositional logic}
 \qs{}{
@@ -959,6 +961,634 @@ Given a circuit built from these gates we can determine the output by tracing th
 	$u \to  \left( b_{32} \wedge  g_1 \wedge r_1 \wedge h_{16}  \right) \vee \left( b_{64} \wedge g_2 \wedge r_2
 		\wedge h_{32}\right) $
 }
+
+\qs{}{
+	Constuct a tructh table for the compound proposition below
+	\[
+		\left( p \to q \right) \vee 		\left( \neg p \to r \right)
+	\]
+
+}
+
+\sol{
+	\begin{table}[h!]
+		\begin{center}
+			\begin{tabular}{|c c c c|c|c|c|}
+				\hline
+				$p$ & $q$ & $r$ & $\neg r$ & $ p \to q $ & $\neg p \to r$ & $ \left( p \to q \right) \vee 		\left( \neg p \to r \right) $ \\ [0.5ex]
+				\hline
+				\hline
+
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+}
+
+\chapter{Logical Equivalences}
+
+\dfn{Tautology}{
+	A proposition that is always $T$.
+	e.g. $p \vee  \neg  p$
+}
+
+\dfn{Contradiction}{
+	A proposition that is always $F$
+	e.g. $p \wedge  \neg p$
+}
+
+\dfn{Contingency}{
+	A proposition that is neither a tautology or a contradiction.
+	e.g.. $p$
+}
+
+\begin{table}[h!]
+	\caption{Demonstration}\label{tab:}
+	\begin{center}
+		\begin{tabular}{|c c|c|}
+			\hline
+			\\ [0.5ex]
+			\hline
+			\hline
+
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+Two compound propositions $p$ and $q$ are logically equivalent if $p \leftrightarrow q$, where $q$ and $p$ are compound propositions.
+
+\section{Equivalence Laws}
+
+\subsection{Logical Equivalences Involving Conditional Statements}
+
+\begin{align*}
+	p \to q \equiv \neg p \vee q                                                                  \\
+	p \to q \equiv \neg q \to \neg p                                                              \\
+	p \vee q \equiv \neg p \to q                                                                  \\
+	p \wedge q \equiv \neg \left( p \to \neg q  \right)                                           \\
+	\neg  \left( p \to q \right) \equiv p \wedge \neg q                                           \\
+	\left( p \to q  \right)  \wedge \left( p \to r \right) \equiv p \to \left( q \wedge r \right) \\
+	\left( p \to r \right)  \wedge \left( q \to r \right)  \equiv \left( p \vee q \right) \to r   \\
+	\left( p \to q  \right) \vee \left( p \to r \right) \equiv p \to \left( q \vee r \right)      \\
+	\left( p \to r \right) \vee \left( q \to r \right) \equiv \left( p \wedge q \right) \to r     \\
+\end{align*}
+
+\subsection{Logical Equivalences Involving Biconditional Statements}
+
+\begin{align*}
+	p \leftrightarrow q \equiv \left( p\to q \right) \wedge \left( q \to   p \right)              \\
+	p \leftrightarrow q \equiv \neg p \leftrightarrow \neg q                                      \\
+	p \leftrightarrow q \equiv \left( p \wedge q \right) \vee \left( \neg p \wedge \neg q \right) \\
+	\neg \left( p \leftrightarrow q \right) \equiv p \leftrightarrow \neg q                       \\
+\end{align*}
+
+\subsection{Identity Laws}
+
+\begin{align*}
+	p \wedge T \equiv p \\
+	p \vee F  \equiv p
+\end{align*}
+
+\subsection{Domination Laws}
+
+\begin{align*}
+	p \vee T \equiv T    \\
+	p \wedge  F \equiv F \\
+\end{align*}
+
+\subsection{Double negation Law}
+
+\[
+	\neg \left( \neg p \right) \equiv p
+\]
+
+\subsection{Idempotent Laws}
+
+\begin{align*}
+	p \vee p  \equiv p  \\
+	p \wedge p \equiv p \\
+\end{align*}
+
+\subsection{Commutative Laws}
+
+\begin{align*}
+	p \vee q \equiv q \vee p \\
+	p \wedge q \equiv q \wedge p
+\end{align*}
+
+\subsection{Associative Laws}
+
+\begin{align*}
+	\left( p \vee q \right)  \vee  r \equiv p \vee \left( q \vee r \right) \\
+	\left( p \wedge q \right) \wedge  r \equiv p \wedge \left( q \wedge r \right)
+\end{align*}
+
+\subsection{Distributive Laws}
+
+\begin{align*}
+	p \vee \left( q \wedge r \right) \equiv \left( p \vee q \right)  \wedge \left( p \vee r \right) \\
+	p \wedge \left( q \vee r  \right)  \equiv \left( p \wedge q  \right) \vee \left( p \wedge r \right)
+\end{align*}
+
+\subsection{De Morgan's Laws}
+
+\begin{align*}
+	\neg \left( p \wedge q \right) \equiv \neg p \vee \neg  q \\
+	\neg \left( p \vee q  \right) \equiv \neg p \wedge \neg q
+\end{align*}
+
+\subsection{Absorption Laws}
+
+\begin{align*}
+	p \vee \left( p \wedge q  \right)  \equiv p \\
+	p \wedge \left( p \vee q  \right) \equiv p
+\end{align*}
+
+\subsection{Negation Laws}
+
+\begin{align*}
+	p \vee \neg p \equiv T \\
+	p \wedge \neg p \equiv F
+\end{align*}
+
+\section{Exercises}
+
+\ex{}{
+	\qs{}{
+		Show that $\neg \left( p \vee \left( \neg p \wedge q \right)  \right) $ is logically equivalent to $\neg p \wedge
+			\neg q$
+	}
+
+	\sol{
+		\begin{align*}
+			\neg \left( p \vee \left( \neg p \wedge q \right)  \right) & =  \neg p \wedge \neg \left( \neg p \wedge q
+			\right) \tag*{By the Second De Morgan's Law}                                                                                     \\
+			                                                           & = \neg p \wedge \left( \neg \left(\neg p\right) \vee \neg q \right)
+			\tag*{By First De Morgan's Law}                                                                                                  \\
+			                                                           & =\neg p \wedge \left( p \vee \neg q \right)
+			\tag*{By Double Negation Law}                                                                                                    \\
+			                                                           & = \left( \neg p \wedge p   \right) \vee \left(
+			\neg p \wedge \neg q \right) \tag*{By Second
+			Distributive Law}                                                                                                                \\
+			                                                           & = F \vee \left( \neg p \wedge \neg q  \right)
+			\tag*{By Second Negation Law}                                                                                                    \\
+			                                                           & = \left( \neg p \wedge \neg q  \right) \vee F
+			\tag*{By First Commutative Law}                                                                                                  \\
+			                                                           & =   \neg p \wedge \neg q   \tag*{By
+				Second Identity Law}
+		\end{align*}
+	}
+
+}
+
+\qs{}{
+	Show that
+	\[
+		(p \wedge q) \to (p \vee q)
+	\]
+	is a tautology
+}
+
+\sol{
+	\begin{align*}
+		(p \wedge q) \to (p \vee q) & \equiv \neg (p \wedge q ) \vee (p \vee q) \tag*{Conditional Disjunction Equivalence}                       \\
+		                            & \equiv (\neg p \vee \neg q) \vee (p \vee q) \tag*{By the First De Morgan's law}                            \\
+		                            & \equiv \left( \neg p \vee p \right)  \vee \left( \neg q \vee q \right) \tag*{By the First Associative law} \\
+		                            & \equiv \left( p \vee \neg p \right) \vee \left( q \vee \neg q \right) \tag*{By the First Commutative law}  \\
+		                            & \equiv \left( p \vee \neg p \right)  \vee T \tag*{By the First Negation Law}                               \\
+		                            & \equiv T \vee T \tag*{By the First Negation Law}                                                           \\
+		                            & \equiv T \tag*{By the First Domination Law}
+	\end{align*}
+}
+
+\qs{}{
+	Use logical equivalences to prove that each of these conitional statements is a tautology
+	\begin{align}
+		\left( p \wedge q \right) \to p              \\
+		\neg p \to \left( p \to q\right)             \\
+		[\neg p \vee \left( p \vee q \right) ] \to q \\
+		[p \wedge \left( p \to q \right) ] \to q
+	\end{align}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		\item \begin{align*}
+			      \neg p \to  \left( p \to q  \right) & \equiv \neg \left( \neg p \right) \vee \left( p \to q \right)
+			      \tag*{Conditional Disjunction Equivalence}                                                                           \\
+			                                          & \equiv p \vee \left( p \to q \right) \tag*{By the Double Negation law}         \\
+			                                          & \equiv p \vee ( \neg p \vee q)\tag*{Conditional Disjunction Equivalence}       \\
+			                                          & \equiv q \vee (\neg p \vee p) \tag*{By the First Associative Law}              \\
+			                                          & \equiv q \vee \left( p \vee \neg p \right) \tag*{By the First Commutative Law} \\
+			                                          & \equiv q \vee T \tag*{By the First Negation Law}                               \\
+			                                          & \equiv T \tag*{By the First Domination Law}                                    \\
+		      \end{align*}
+		\item
+		\item
+		      \begin{align*}
+			      [p \wedge \left( p \to q \right) ] \to q & \equiv [p \wedge \left( \neg p \vee q \right) ] \to q
+			      \tag*{Conditional Disjunction Equivalence}                                                                                               \\
+			                                               & \equiv \neg [p \wedge \left( \neg p \vee q \right) ] \vee q
+			      \tag*{Conditional Disjunction Equivalence}                                                                                               \\
+			                                               & \equiv [\neg p \vee \neg \left( \neg p \vee q \right) ]
+			      \vee q \tag*{By the First De Morgan's Law}                                                                                               \\
+			                                               & \equiv [\neg p \vee \left( \neg \left( \neg p \right)
+				      \wedge \neg q \right) ] \vee q \tag*{By the Second De
+			      Morgan's Law}                                                                                                                            \\
+			                                               & \equiv [\neg p \vee \left( p \wedge \neg q \right) ] \vee q \tag*{By the Double Negation Law} \\
+			                                               & \equiv [ \left( \neg p \vee p \right) \wedge \left( \neg p
+			      \vee \neg q \right)  ] \vee  q \tag*{By the First Distributive Law}                                                                      \\
+			                                               & \equiv \left( p \vee \neg p \right) \wedge \left( \neg p
+			      \vee \neg q \right) \vee q \tag*{By the First Commutative
+			      Law}                                                                                                                                     \\
+			                                               & \equiv T \wedge \left( \neg p \vee \neg q \right) \vee q
+			      \tag*{By the First Negation Law}                                                                                                         \\
+			                                               & \equiv T \wedge (q \vee \neg q) \vee p \tag*{By the First
+			      Associative Law and the First Commutative Law}                                                                                           \\
+			                                               & \equiv T \wedge  T \vee  p \tag*{By the First Negation Law}                                   \\
+			                                               & \equiv T \vee p \tag*{By the First Identity Law}                                              \\
+			                                               & \equiv T \tag*{By the First Domination Law}
+		      \end{align*}
+	\end{enumerate}
+}
+
+\chapter{Predicates and Quantifiers}
+
+Predicate logic uses the following features:
+
+\begin{itemize}
+	\item Variables
+	\item Predicates
+	\item Quantifiers
+\end{itemize}
+
+\section{Propositional Function}
+
+\dfn{Propositional Function}{
+	Generalization of propositions / A proposition containing variables
+}
+
+
+\noindent A propositional function is made up of three components:
+\begin{itemize}
+	\item Variables
+	\item Subject
+	\item Predicate
+\end{itemize}
+
+\dfn{Subject}{
+	The main variable  in the function
+}
+
+
+\dfn{Predicate}{
+	Describes the property or properties of a subject
+}
+
+
+\pagebreak
+
+\ex{}{
+	\qs{}{
+		\[
+			x \text{ is friends with } y
+		\]
+	}
+
+	\sol{
+		In this example the predicate is "is friends with", and the variables are $x$ and $y$ where $x$ is the subject. This
+		function can be denoted by:
+		\[
+			Q(x, y)
+		\]
+
+		Where $Q$ is the predicate "is friends with".
+	}
+}
+
+
+
+
+Propositional function become propositions when their variables are each replaced by a value from the domain ( $U$ ) or bound by
+a quantifier.
+
+The statement $P(x)$ is said to be the value of the propositional function $P$ at $x$
+
+\ex{}{
+	\qs{}{
+		Let $x + y = z$ be denoted by $R(x,y,z)$ and $U$ (for all three variables) be integers. Find the truth value of
+
+		\[
+			R(2,-1,5)
+		\]
+	}
+
+	\sol{
+		\begin{align*}
+			R(2,-1,5)     \\
+			x = 2         \\
+			y = -1        \\
+			z = 5         \\
+			2 + -1 \neq 5 \\
+			\therefore R(2,-1,5) = F
+		\end{align*}
+	}
+
+}
+
+\ex{}{
+	\qs{}{
+		If $P(x)$ denotes $x \ge 0$, find this truth value
+
+		\[
+			P(3) \to \neg P(-1)
+		\]
+	}
+}
+
+\sol{
+	\begin{align*}
+		P(3) = 3 > 0            \\
+		P(3) = T                \\ \\
+		P(-1) = -1 > 0          \\
+		P(-1) = F               \\ \\
+		\therefore T \to \neg F \\
+		 & = T \to T            \\
+		 & = T                  \\
+	\end{align*}
+}
+
+\ex{}{
+	\qs{}{
+		Let $A\left(c, n\right)$ denote the statement “Computer $c$ is connected to network $n$,” where $c$ is a variable
+		representing a computer and $n$ is a variable representing a network. Suppose that the computer
+		MATH1 is connected to network CAMPUS2, but not to network CAMPUS1. What are the
+		values of $A\left(\text{MATH1}, \text{CAMPUS1}\right)$ and $A\left(\text{MATH1}, \text{CAMPUS2}\right)$?
+	}
+	\sol{
+		\begin{align*}
+			A\left(\text{MATH1}, \text{CAMPUS1}\right) = \text{Computer MATH1 is connected to network CAMPUS1} \\
+			A\left(\text{MATH1}, \text{CAMPUS1}\right) & = F                                                   \\ \\
+			A\left(\text{MATH1}, \text{CAMPUS2}\right) = \text{Computer MATH1 is connected to network CAMPUS2} \\
+			A\left(\text{MATH1}, \text{CAMPUS2}\right) & = T
+		\end{align*}
+	}
+
+}
+
+\subsection{Preconditions and Postconditions}
+
+Predicates are also used to establish the correctness of computer programs, i.e. Verifying that programs always produce
+the desired output when given a valid input.
+
+\dfn{Precondition}{
+	Statements that describe valid input for a computer program
+}
+
+\dfn{Postcondition}{
+	Conditions the output of a computer program should satisfy when run.
+}
+
+\ex{}{
+	\qs{}{
+		Consider this program designed to swap the values of two variables $x$ and $y$.
+		\begin{algorithm}[H]
+			temp $:= x$\;
+			$x := y$\;
+			$y :=$ temp\;
+		\end{algorithm}
+		Find predicates that we can use as the precondition and the postcondition to verify the correctness
+		of this program. Then explain how to use them to verify that for all valid input the program does
+		what is intended.
+	}
+
+	\sol{
+
+		Let $P \left( x, y \right) $ be the statement $x = a \text{ and } y = b$, where $a$ and $b$ are the values of
+		$x$ and $y$ before the program is run.
+
+		Let $Q \left( x,y \right) $ be the statement $ x = b \text{ and } y = a$
+
+		To verify this program we need to show that $P \left( x, y \right) \to Q \left( x, y \right) $ is a tautology.
+
+
+		We can prove this by following the program's execution. First we assume $P \left( x, y \right) = T$. In the
+		first step of the program $\text{temp} := x$ assigns the value of $x$ to temp, so at this point the state of the
+		program is $x := a, \text{temp}:= a, y:= b$. In the second step of the program $x := y$ assigns the value of
+		$y$ to $x$, so the state is now $ x := b, y := b, \text{temp} := a$. And the final step of the program $y :=
+			\text{temp}$ assigns the value of temp to $y$, so the final state is $x := b, y := a, \text{temp} := a$, making
+		$Q \left( x, y \right) = T $
+	}
+
+}
+
+
+\section{Quantifiers}
+
+\dfn{Quantifiers}{
+	Used to express the meaning of English words such as "all", "some", "none", "there exists", "for one and only one", etc.
+}
+
+\dfn{Domain of Discourse / Universe of Discourse / Domain}{
+	The range of all values a variable can take. Denoted as $U$. Without a specified domain we cannot determine the
+	truth value of a Propositional Function.
+}
+
+
+\subsection{Universal Quantifier}
+\dfn{Universal Quantifier}{
+	"For all": $\forall$
+
+	Meaning for every variable in the domain ($U$), the propositional function is true.
+
+	\ex{}{
+		\[
+			\forall x P(x)
+		\]
+
+		Asserts $P(x)$ is true for every x in $U$
+
+		So if $P(x): x \text{ has stripes}$, and $x$ is a zebra then $\forall x P(x)$ means "Every zebra has stripes" or
+		"All zebras have stripes"
+	}
+
+	The Universal Quantifier is equivalent to the conjunction of the propositional function for all values in its
+	specified domain. i.e. Where $P \left( x \right) $ is the statement $x > 0$ and $U$ is all positive real numbers
+	\[
+		\forall x P \left( x \right) \equiv P \left( x_{1} \right) \wedge P \left( x_2 \right) \wedge P \left( x_3 \right)
+		\wedge \dots \wedge  P \left( x_{n} \right)
+	\]
+}
+
+\ex{}{
+	\begin{enumerate}
+		\item If $P(x)$ denotes $x > 0$ and $U$ is the integers then, $\forall x P(x)$ is false.
+		\item If $P(x)$ denotes $x > 0$ and $U$ is the positive integers, then $\forall x P(x)$ is true
+	\end{enumerate}
+}
+
+\ex{}{
+	\qs{}{
+		What is the truth value if $\forall x P \left( x \right) $, where $P \left( x \right) $ is the statement $x^2 < 10$
+		and the domain consists of the positive integers not exceeding 4.
+	}
+
+	\sol{
+		\begin{align*}
+			\forall x P \left( x \right) \equiv P \left( 1 \right) \wedge P \left( 2 \right)  \wedge P \left( 3 \right)
+			\wedge P \left( 4 \right)                      \\
+			\\
+			P \left( 4 \right) = (4)^2 < 10                \\
+			           & = 16 < 10                         \\
+			\therefore P \left( 4 \right) = F              \\
+			\therefore & \forall x P \left( x \right)  = F
+		\end{align*}
+	}
+}
+
+\subsection{Existential Quantifier}
+\dfn{Existential Quantifier}{
+	"There exists": $\exists$
+
+	Meaning for some variables in $U$, the propositional function is true.
+
+	\ex{}{
+		\[
+			\exists xP(x)
+		\]
+		Asserts $P(x)$ is true for some $x$ in $U$
+	}
+
+	The Existential Quantifier is equivalent to the disjunction of the propositional function for all values in its
+	specified domain. i.e. Where $P \left( x \right) $ is the statement $x > 5$ and $U$ is all positive real numbers
+	\[
+		\exists x P \left( x \right) \equiv P \left( x_1 \right) \vee P \left( x_2 \right)  \vee P \left( x_3 \right) \vee
+		\ldots P \left( x_{n} \right)
+	\]
+
+}
+
+\ex{}{
+	\begin{enumerate}
+		\item If $P(x)$ denotes $x > 0$ and $U$ is the integers, then $\exists x P\left(x \right) $ is true. It is also
+		      true if $U$ is the positive integers
+		\item If $P(x)$ denotes $x < 0$ is the positive integers, then $\exists x P \left( x \right)  $ is false
+	\end{enumerate}
+}
+
+\subsection{Uniqueness Quantifier}
+\dfn{Uniqueness Quantifier}{
+	"There exists one and only one": $\exists !$
+	\ex{}{
+		\[
+			\exists ! P \left( x \right)
+		\]
+		Asserts $P \left( x \right) $ is only true for one $x$ in $U$
+	}
+}
+
+\subsection{Quantifiers with Restricted Domains}
+
+The notation for a restricted domain is in the form:
+
+\begin{center}
+	QUANTIFIER VARIABLE "CONDITION A VARIABLE MUST SATISFY"
+\end{center}
+
+\ex{}{
+	\begin{enumerate}
+		\item $\forall x < 0 \left( x^2 > 0 \right) $
+		\item $\forall y \neq 0 \left( y^{3} \neq 0 \right) $
+		\item $\exists z > 0 \left( z^2 = 2 \right) $
+	\end{enumerate}
+
+	\noindent Means:
+
+	\begin{enumerate}
+		\item The square of all negative integers is positive
+		\item The cube of every nonzero number is nonzero.
+	\end{enumerate}
+
+}
+
+\subsection{De Morgan's Laws for Quantifiers}
+
+
+
+\subsection{Negating Quantifications}
+
+Consider $\forall x F \left( x \right) $, where $F \left( x \right) $ is " $x$ has taken a course in Java " and $U$ is
+students in your class.
+
+The negation of this follows
+
+\begin{align*}
+	\neg  \forall x F \left( x \right) & \equiv \exists x \neg F \left( x \right) \tag*{By De Morgan's Law}
+\end{align*}
+
+\ex{}{
+	\qs{}{
+
+		Let $R \left( x \right) $ be $x$ is a rabbit
+
+		Let $H \left( x \right) $ be $x$ hops
+
+		Let $U$ consists of all animals
+
+		\begin{enumerate}
+			\item $\forall x \left( R \left( x \right) \to H \left( x \right)   \right) $
+			\item $\forall \left( R \left( x \right) \wedge H \left( x \right)   \right) $
+			\item $\exists x \left( R \left( x \right) \to H \left( x \right)   \right) $
+			\item $\exists x \left( R \left( x \right) \wedge H \left( x \right)   \right) $
+		\end{enumerate}
+	}
+
+	\sol{
+		\begin{enumerate}
+			\item For all animals, if they are a rabbit then they hop.
+			\item All animals are rabbits and they hop.
+			\item There exists some animals, if they are a rabbit then they hop.
+			\item There exists some animals that are rabbits and hop.
+		\end{enumerate}
+	}
+}
+
+\pagebreak
+\section{Nested Quantifiers}
+
+\dfn{Nested Quantifier}{
+	A situation where one quantifier is within the scope of another.
+}
+
+\[
+	\forall x \exists y \left( x + y = 0 \right)
+\]
+
+$ \left( x + y = 0 \right)  $ can be made the propositional function $P \left( x, y \right) $ giving us
+
+\[
+	\forall x \exists y P \left( x, y \right)
+\]
+We can then make $\exists y P \left( x, y \right) $ another propositional function $Q \left( x, y \right) $ giving us
+
+\[
+	\forall x Q \left( x, y \right)
+\]
+
+This statement can be written as For all $x$ there exists some $y$ where $x + y = 0$
+
+
+\subsection{Negating Nested Quantifiers}
+
+\begin{align*}
+	\neg  \forall x \exists y P \left( x, y \right) \equiv \exists x \forall y \neg P \left( x, y \right) \tag*{
+		By De Morgan's Law
+	}
+\end{align*}
+
+
 
 
 

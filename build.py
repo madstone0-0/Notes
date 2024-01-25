@@ -132,6 +132,8 @@ if __name__ == "__main__":
         "CompSci/OOP",
         "Stats",
         "Econs",
+        "Homework/Discrete",
+        "Homework/OOP",
         # "FDE",
     ]
 

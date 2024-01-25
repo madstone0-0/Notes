@@ -1,0 +1,107 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\usepackage{enumitem}
+\title{\Huge{Assignment 1}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{January 2024}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+	\begin{align}
+		p \to \neg p \\
+		\left( p \leftrightarrow q  \right)  \oplus  \left( q \to \neg p  \right)
+	\end{align}
+
+}
+
+\sol{
+	\noindent\begin{enumerate}
+		\item
+		      \begin{table}[h!]
+			      \begin{center}
+				      \begin{tabular}{|c c|c|}
+					      \hline
+					      $p$ & $\neg p$ & $p \to \neg p$ \\ [0.5ex]
+					      \hline
+					      \hline
+					      $T$ & $F$      & $F$            \\
+					      $F$ & $T$      & $T$            \\
+					      \hline
+				      \end{tabular}
+			      \end{center}
+		      \end{table}
+
+		\item
+		      \begin{table}[h!]
+			      \begin{center}
+				      \begin{tabular}{|c c c|c|c|c|}
+					      \hline
+					      $q$ & $p$ & $\neg p$ & $p \leftrightarrow q$ & $q \to \neg p$ & $\left( p \leftrightarrow q  \right)  \oplus  \left( q \to \neg p  \right)$ \\ [0.5ex]
+					      \hline
+					      \hline
+					      $T$ & $T$ & $F$      & $T$                   & $F$            & $T$                                                                         \\
+					      $T$ & $F$ & $T$      & $F$                   & $T$            & $T$                                                                         \\
+					      $F$ & $T$ & $F$      & $F$                   & $T$            & $T$                                                                         \\
+					      $F$ & $F$ & $T$      & $T$                   & $T$            & $F$                                                                         \\
+					      \hline
+				      \end{tabular}
+			      \end{center}
+		      \end{table}
+
+	\end{enumerate}
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item
+		      Willy gets caught whenever he cheats.
+		\item A positive integer is a prime only if it has no divisors other than 1 and itself
+		\item To be a citizen of this country, it is sufficient that you were born in the United States.
+		\item Getting elected follows from knowing the right people.
+		\item For you to get an A in this course, it is necessary that you learn how to solve discrete mathematics problems.
+		\item Abena will go to Accra unless she misses the bus.
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item If Willy cheats, then he will get caught.
+		\item If a positive number is a prime, then it has no divisors other than 1 and itself.
+		\item If you were born in the United States, then you can be a citizen of this country
+		\item If you know the right people, then you can get elected.
+		\item If you are to get an A in this course, then you must learn to solve discrete mathematics problems.
+		\item If Abena does not miss the bus, then she will go to Accra.
+	\end{enumerate}
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item  If 1 +  1 =  3, then unicorns exist.
+		\item If 1 +  1 =  2, then dogs can fly.
+		\item 0 >  1 if and only if 2 >  1.
+		\item 1 +  1 =  3 if and only if 2 < 1.
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item True. This is because the premise is false rendering the whole statement true.
+		\item False. This is because the premise is true but the conclusion is false rendering the whole statement
+		      false.
+		\item False. This is because this is a biconditional statement which requires both propositions to
+		      have the same truth value, but here the first proposition is false but the second is true.
+		\item True. This is because this is a biconditional statement which requires both propositions to have the same
+		      truth value, and here both propositions have the same truth value of False.
+	\end{enumerate}
+}
+
+
+\end{document}

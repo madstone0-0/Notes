@@ -948,7 +948,7 @@ Given a circuit built from these gates we can determine the output by tracing th
 	1 GB RAM, and 16 GB free hard disk space, or a 64-
 	bit processor running at 2 GHz or faster, at least 2 GB
 	RAM, and at least 32 GB free hard disk space. Express
-	you answer in terms of u: “You can upgrade your operating system,” b32: “You have a 32-bit processor,” b64:
+	you answer in terms of: “You can upgrade your operating system,” b32: “You have a 32-bit processor,” b64:
 	“You have a 64-bit processor,” g1: “Your processor runs
 	at 1 GHz or faster,” g2: “Your processor runs at 2 GHz or
 	faster,” r1: “Your processor has at least 1 GB RAM,” r2:
@@ -963,7 +963,7 @@ Given a circuit built from these gates we can determine the output by tracing th
 }
 
 \qs{}{
-	Constuct a tructh table for the compound proposition below
+	Construct a truth table for the compound proposition below
 	\[
 		\left( p \to q \right) \vee 		\left( \neg p \to r \right)
 	\]
@@ -1005,12 +1005,13 @@ Given a circuit built from these gates we can determine the output by tracing th
 \begin{table}[h!]
 	\caption{Demonstration}\label{tab:}
 	\begin{center}
-		\begin{tabular}{|c c|c|}
+		\begin{tabular}{|c c|c|c|}
 			\hline
-			\\ [0.5ex]
+			$p$ & $\neg p$ & $p \vee \neg p$ & $p \wedge \neg p$ \\ [0.5ex]
 			\hline
 			\hline
-
+			$T$ & $F$      & $T$             & $F$               \\
+			$F$ & $T$      & $T$             & $F$               \\
 			\hline
 		\end{tabular}
 	\end{center}
@@ -1162,8 +1163,9 @@ Two compound propositions $p$ and $q$ are logically equivalent if $p \leftrighta
 	\end{align*}
 }
 
+\pagebreak
 \qs{}{
-	Use logical equivalences to prove that each of these conitional statements is a tautology
+	Use logical equivalences to prove that each of these conditional statements is a tautology
 	\begin{align}
 		\left( p \wedge q \right) \to p              \\
 		\neg p \to \left( p \to q\right)             \\
@@ -1174,7 +1176,15 @@ Two compound propositions $p$ and $q$ are logically equivalent if $p \leftrighta
 
 \sol{
 	\begin{enumerate}
-		\item
+		\item \begin{align*}
+			      \left( p \wedge q \right)  \to p & \equiv \neg \left( p \wedge q \right) \vee p \tag*{Conditional Disjunction Equivalence} \\
+			                                       & \equiv \left( \neg p \vee \neg q \right) \vee p \tag*{By the First De Morgan's Law}     \\
+			                                       & \equiv \left( \neg p \vee p \right) \vee \neg q \tag*{By the First Associative Law}     \\
+			                                       & \equiv \left( p \vee \neg p \right) \vee \neg q \tag*{By the First Commutative Law}     \\
+			                                       & \equiv T \vee \neg q \tag*{By the First Negation Law}                                   \\
+			                                       & \equiv \neg q \vee  T \tag*{By the First Commutative Law}                               \\
+			                                       & \equiv T \tag*{By the First Domination Law}
+		      \end{align*}
 		\item \begin{align*}
 			      \neg p \to  \left( p \to q  \right) & \equiv \neg \left( \neg p \right) \vee \left( p \to q \right)
 			      \tag*{Conditional Disjunction Equivalence}                                                                           \\
@@ -1185,7 +1195,24 @@ Two compound propositions $p$ and $q$ are logically equivalent if $p \leftrighta
 			                                          & \equiv q \vee T \tag*{By the First Negation Law}                               \\
 			                                          & \equiv T \tag*{By the First Domination Law}                                    \\
 		      \end{align*}
-		\item
+		\item \begin{align*}
+			      [\neg p \vee \left( p \vee q \right) ] \to q & \equiv \neg \left[ \neg  p \vee \left( p \vee q \right)
+			      \right] \vee  q \tag*{Conditional Disjunction Equivalence}                                                                      \\
+			                                                   & \equiv \left[ \neg \left( \neg p \right) \wedge \neg
+				      \left( p \vee q \right)   \right] \vee  q \tag*{By the Second De
+			      Morgan's Law}                                                                                                                   \\
+			                                                   & \equiv \left[ p \wedge \neg \left( p \vee q \right)
+			      \right]  \vee q \tag*{By the Double Negation Law}                                                                               \\
+			                                                   & \equiv \left[ p \wedge \left( \neg p \wedge \neg q
+			      \right)   \right] \vee q \tag*{By the Second De Morgan's Law}                                                                   \\
+			                                                   & \equiv \left[ \neg q \wedge \left( \neg p \wedge p
+				      \right)   \right] \vee q \tag*{By the Second Associative
+			      Law}                                                                                                                            \\
+			                                                   & \equiv \left[ \neg q \wedge \left( p \wedge \neg p
+				      \right)   \right] \vee q \tag*{By the Second Commutative
+			      Law}                                                                                                                            \\
+			                                                   & \equiv \left[ \neg q \wedge F  \right] \vee  q \tag*{By the Second Negation Law} \\
+		      \end{align*}
 		\item
 		      \begin{align*}
 			      [p \wedge \left( p \to q \right) ] \to q & \equiv [p \wedge \left( \neg p \vee q \right) ] \to q
@@ -1224,7 +1251,48 @@ Predicate logic uses the following features:
 	\item Quantifiers
 \end{itemize}
 
+\section{Set Definitions}
+
+\subsection{Natural Numbers}
+
+All numbers starting from 1.
+
+\[
+	\mathbb{N} = \left\{ 1,2,3,4\ldots \right\}
+\]
+
+\subsection{Whole Numbers}
+
+All natural numbers and 0.
+
+\[
+	\mathbb{W} = \left\{ 0,1,2,3\dots \right\}
+\]
+
+\subsection{Rational Numbers}
+
+Numbers that can be written in the form $\frac{x}{y}$ where $y \neq 0$. Denoted by $\mathbb{Q}$
+
+\subsection{Real Numbers}
+
+All rational and irrational numbers. (All numbers on the number line). Denoted by $\mathbb{R}$
+
+\subsection{Irrational Numbers}
+
+Numbers that cannot be written in the form $\frac{x}{y}$ where $y \neq 0$. Denoted by $\mathbb{R} - \mathbb{Q}$
+
+
+\subsection{Integers}
+
+All whole numbers and negative of all natural numbers.
+
+\[
+	\mathbb{Z} = \left\{ -\infty, -3, -2, -1, 0, 1, 2, 3, \infty \right\}
+\]
+
+
 \section{Propositional Function}
+
 
 \dfn{Propositional Function}{
 	Generalization of propositions / A proposition containing variables
@@ -1507,16 +1575,55 @@ The notation for a restricted domain is in the form:
 	\noindent Means:
 
 	\begin{enumerate}
-		\item The square of all negative integers is positive
-		\item The cube of every nonzero number is nonzero.
+		\item The square of all negative integers is positive, or $\forall x \left( x < 0 \to x^2 > 0 \right) $
+		\item The cube of every nonzero number is nonzero, or $\forall y \left( y \neq 0 \to y^3 \neq 0 \right) $
+		\item There is a positive square root of 2, or $\exists z \left( z > 0 \to z^2 = 2 \right) $
 	\end{enumerate}
 
 }
 
-\subsection{De Morgan's Laws for Quantifiers}
+\nt{
+	The restriction of a universal quantifier is the same as the universal quantification of a conditional statement,
+	i.e. $\forall x < 0 \left( x^2 > 0 \right) $ is just s way of expressing $\forall x \left( x < 0 \to x^2 > 0 \right) $
+}
 
+\subsection{Binding Variables}
 
+\dfn{Binding}{
+	The process of assigning a value to a variable, through quantification or value assignment.
+}
 
+\dfn{Bound Variable}{
+	A variable that has been assigned a value through quantification or value assignment.
+}
+
+\dfn{Free Variable}{
+	A variable that has not been assigned a value through quantification or value assignment.
+}
+
+\dfn{Scope of a Quantifier}{
+	The part of a statement that is affected by a quantifier.
+}
+
+\ex{}{
+	In the statement $\exists x \left( x + y = 1 \right) $, $x$ is bound by the existential quantifier $\exists x$ and
+	$y$ is free.\\
+
+	In the statement $\exists x \left( P \left( x \right) \wedge Q \left( x \right)   \right) \vee  \forall x R \left( x \right)  $
+	all variables are bound. The scope of the first quantifier $\exists x$ is the expression
+	$P \left( x \right) \wedge Q \left( x \right)  $ and the scope of the second quantifier $\forall x$ is the expression $R \left( x \right)  $.
+
+}
+
+\subsection{Logical Equivalences Involving Quantifiers}
+
+\dfn{Logically Equivalent}{
+	When two statements have the same truth value no matter which predicates are substituted into these statements and
+	which the domain $U$ is used for the variables in these propositional functions. The notation $S \equiv T$ is used
+	to indicate that two statements $S$ and $T$ that have predicates are logically equivalent.
+}
+
+\pagebreak
 \subsection{Negating Quantifications}
 
 Consider $\forall x F \left( x \right) $, where $F \left( x \right) $ is " $x$ has taken a course in Java " and $U$ is
@@ -1525,33 +1632,37 @@ students in your class.
 The negation of this follows
 
 \begin{align*}
-	\neg  \forall x F \left( x \right) & \equiv \exists x \neg F \left( x \right) \tag*{By De Morgan's Law}
+	\neg  \forall x F \left( x \right) & \equiv \exists x \neg F \left( x \right) \tag*{By De Morgan's Law}  \\
+	\neg \exists x F \left( x \right)  & \equiv \forall x \neg F \left( x \right)  \tag*{By De Morgan's Law}
 \end{align*}
+
+
+\subsection{Translating from English to Logical Expressions}
 
 \ex{}{
 	\qs{}{
-
-		Let $R \left( x \right) $ be $x$ is a rabbit
-
-		Let $H \left( x \right) $ be $x$ hops
-
-		Let $U$ consists of all animals
-
-		\begin{enumerate}
-			\item $\forall x \left( R \left( x \right) \to H \left( x \right)   \right) $
-			\item $\forall \left( R \left( x \right) \wedge H \left( x \right)   \right) $
-			\item $\exists x \left( R \left( x \right) \to H \left( x \right)   \right) $
-			\item $\exists x \left( R \left( x \right) \wedge H \left( x \right)   \right) $
-		\end{enumerate}
+		Express the statement "Every student in this class has studied calculus" using predicates and quantifiers
 	}
 
 	\sol{
-		\begin{enumerate}
-			\item For all animals, if they are a rabbit then they hop.
-			\item All animals are rabbits and they hop.
-			\item There exists some animals, if they are a rabbit then they hop.
-			\item There exists some animals that are rabbits and hop.
-		\end{enumerate}
+
+		\noindent Let $U$ be "students in this class"\\
+		Let $C \left( x \right) $ be "$x$ has studied calculus"\\
+
+		\[
+			\forall x C \left( x \right)
+		\]
+
+		Or\\ \\
+		\noindent Let $U$ be "all people"\\
+		Let $S \left( x \right) $ be "$x$ is a student in this class"
+		Let $C \left( x \right) $ be "$x$ has studied calculus"
+
+		\[
+			\forall x \left( S \left( x \right) \to  C \left( x \right)   \right)
+		\]
+
+
 	}
 }
 
@@ -1579,7 +1690,6 @@ We can then make $\exists y P \left( x, y \right) $ another propositional functi
 
 This statement can be written as For all $x$ there exists some $y$ where $x + y = 0$
 
-
 \subsection{Negating Nested Quantifiers}
 
 \begin{align*}
@@ -1587,6 +1697,153 @@ This statement can be written as For all $x$ there exists some $y$ where $x + y 
 		By De Morgan's Law
 	}
 \end{align*}
+
+
+\section{Exercises}
+
+\ex{}{
+	\qs{}{
+		Translate these statements into English, where $C \left( x \right) $ is " $x$ is a comedian " and $F \left( x
+			\right) $ is " $x$ is funny " and the domain consists of all people.
+		\begin{enumerate}
+			\item $\forall x \left( C \left( x \right) \to F \left( x \right)   \right) $
+			\item $\forall x \left( C \left( x \right) \wedge F \left( x \right)   \right) $
+			\item $\exists x \left( C \left( x \right) \to F \left( x \right)   \right) $
+			\item $\exists x \left( C \left( x \right) \wedge F \left( x \right)   \right) $
+		\end{enumerate}
+
+	}
+
+	\sol{
+		\begin{enumerate}
+			\item Everyone that is a comedian is funny.
+			\item All people are comedians and they are funny.
+			\item There exits some people, If they are comedians, then they are funny.
+			\item There exists some people that are comedians and are funny.
+		\end{enumerate}
+	}
+}
+
+\ex{}{
+	\qs{}{
+		Determine the truth value of each of these statements if the domain of each variable consists of all real numbers.
+		\begin{enumerate}
+			\item $\exists x \left( x^2 = 2 \right) $
+			\item $\exists x \left( x^2 = -1 \right) $
+			\item $\forall x \left( x^2 + 2 \geq 1 \right) $
+			\item $\forall  x \left( x^2 = x \right) $
+		\end{enumerate}
+	}
+
+	\sol{
+		\begin{enumerate}
+			\item $T$
+			\item $F$
+			\item $T$
+			\item $F$
+		\end{enumerate}
+	}
+}
+
+\ex{}{
+	\qs{}{
+
+		Let $R \left( x \right) $ be $x$ is a rabbit
+
+		Let $H \left( x \right) $ be $x$ hops
+
+		Let $U$ consists of all animals
+
+		\begin{enumerate}
+			\item $\forall x \left( R \left( x \right) \to H \left( x \right)   \right) $
+			\item $\forall x \left( R \left( x \right) \wedge H \left( x \right)   \right) $
+			\item $\exists x \left( R \left( x \right) \to H \left( x \right)   \right) $
+			\item $\exists x \left( R \left( x \right) \wedge H \left( x \right)   \right) $
+		\end{enumerate}
+	}
+
+	\sol{
+		\begin{enumerate}
+			\item For all animals, if they are a rabbit then they hop.
+			\item All animals are rabbits and they hop.
+			\item There exists some animals, if they are a rabbit then they hop.
+			\item There exists some animals that are rabbits and hop.
+		\end{enumerate}
+	}
+}
+
+\pagebreak
+\qs{}{
+	Let $C(x)$ be the statement " $x$ has a cat," let $D(x)$ be the
+	statement "$x$ has a dog," and let $F(x)$ be the statement "$x$
+	has a ferret." Express each of these statements in terms of
+	$C(x)$, $D(x)$, $F(x)$, quantifiers, and logical connectives.
+	Let the domain consist of all students in your class.
+
+	\begin{enumerate}
+		\item A student in your class has a cat, a dog, and a ferret.
+		\item All students in your class have a cat, a dog, or a ferret.
+		\item Some student in your class has a cat and a ferret, but not a dog.
+		\item No student in your class has a cat, a dog, and a ferret.
+		\item For each of the three animals, cats, dogs, and ferrets, there is a student in your class who has this animal as a pet.
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $\exists x \left( C \left( x \right) \wedge D \left( x \right) \wedge F \left( x \right)    \right) $
+		\item $\forall x \left( C \left( x \right) \wedge D \left( x \right) \wedge F \left( x \right)  \right) $
+		\item $\exists x \left( C \left( x \right) \wedge F \left( x \right) \wedge \neg D \left( x \right)    \right) $
+		\item $\neg \exists x \left( C \left( x \right) \wedge D \left( x \right) \wedge  F \left( x \right)    \right) $
+		\item $ \left(    \exists x C \left( x \right) \right) \wedge \left( \exists x D \left( x \right) \right) \wedge  \left( \exists x F \left( x \right) \right)    $
+	\end{enumerate}
+
+}
+
+\qs{}{
+	Determine the truth value of each of these statements if
+	the domain consists of all integers.
+	\begin{enumerate}
+		\item $\forall n \left( n + 1 > n  \right) $
+		\item $\exists n \left( 2n = 3n \right) $
+		\item $\exists n \left( n = -n\right) $
+		\item $\forall n \left( 3n \leq 4n \right) $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $T$. Because any $1 +$ any integer is greater than that integer.
+		\item $T$. $n = 0$, $2 \left( 0 \right) = 3 \left( 0 \right)  $
+		\item $T$. $n = 0$, $0 = -0$, $0 = 0$
+		\item $T$. $n = 0$, $3 \left( 0 \right) \leq 4 \left( 0 \right)  $
+	\end{enumerate}
+}
+
+\pagebreak
+\qs{}{
+	Suppose that the domain of the propositional function
+	P(x) consists of the integers 1, 2, 3, 4, and 5. Express
+	these statements without using quantifiers, instead using
+	only negations, disjunctions, and conjunctions.
+	\begin{enumerate}
+		\item $\exists x P \left( x \right) $
+		\item $\forall x P \left( x \right) $
+		\item $\neg \exists x P \left( x \right) $
+		\item $\neg  \forall x P \left( x \right) $
+		\item $\forall x \left( \left( x \neq 3 \right) \to P \left( x \right)   \right) \vee \exists x \neg P \left( x \right)  $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $P \left( 1 \right) \vee P \left( 2 \right) \vee P \left( 2 \right) \vee P \left( 3 \right) \vee P \left( 4\right) \vee P \left( 5 \right)      $
+		\item $P \left( 1 \right) \wedge P \left( 2 \right) \wedge P \left( 3 \right) \wedge  P \left( 4 \right) \wedge P \left( 5 \right) $
+		\item $\forall x \neg P \left( x \right) \therefore $ $\neg P \left( 1 \right) \wedge \neg P \left( 2 \right) \wedge  \neg P \left( 3 \right) \wedge  \neg P \left( 4 \right) \wedge \neg P \left( 5 \right)      $
+		\item $\exists x \neg  P \left( x \right) \therefore $ $\neg P \left( 1 \right) \vee \neg P \left( 2 \right) \vee \neg P \left( 3 \right) \wedge \neg P \left( 4 \right) \wedge \neg  P \left( 5 \right)       $
+		\item $ \left( P \left( 1 \right) \wedge  P \left( 2 \right) \wedge P \left( 4 \right) \wedge P \left( 5 \right)     \right)   \vee  \left( \neg P \left( 1 \right) \vee \neg  P \left( 2 \right) \vee \neg  P \left( 3 \right) \vee \neg  P \left( 4 \right) \vee  \neg P \left( 5 \right)       \right) $
+	\end{enumerate}
+}
 
 
 

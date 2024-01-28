@@ -1,0 +1,75 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\title{\Huge{Assignment 2}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+	\[
+		\left( p \to q \right) \wedge \left( p \to r \right) \equiv p \to  \left( q \wedge r \right)
+	\]
+}
+
+\sol{
+	\begin{align*}
+		\left( p \to q \right) \wedge  \left( p \to r \right) & \equiv \left( \neg p \vee q \right) \wedge \left( \neg p
+		\vee r \right) \tag*{Conditional Disjunction Equivalence}                                                        \\
+		                                                      & \equiv \neg p \vee \left( q \wedge r \right) \tag*{By
+		the First Distributive Law}                                                                                      \\
+		                                                      & \equiv p \to \left( q \wedge r \right) \tag*{Conditional
+			Conjunction Equivalence}
+	\end{align*}
+}
+
+\qs{}{
+	\[
+		p \wedge p \equiv p
+	\]
+}
+
+\sol{
+	\begin{align*}
+		p & \equiv p \wedge T \tag*{By the First Identity Law}                                                         \\
+		  & \equiv p \wedge \left( p \vee \neg p \right) \tag*{By the First Negation Law}                              \\
+		  & \equiv \left( p \wedge p \right) \vee \left( p \wedge \neg p \right) \tag*{By the Second Distributive Law} \\
+		  & \equiv \left( p \wedge p \right) \vee F \tag*{By the Second Negation Law}                                  \\
+		  & \equiv p \wedge p \tag*{By the Second Identity Law}
+	\end{align*}
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item $\exists x N \left( x \right) $
+		\item $\forall x N \left( x \right) $
+		\item $\neg \exists x N \left( x \right) $
+		\item $\exists x \neg N \left( x \right) $
+		\item $\neg \forall x N \left( x \right) $
+		\item $\forall x \neg N \left( x \right) $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item There are some students in my school that have visited North Dakota
+		\item All students in my school have visited North Dakota
+		\item $\neg \exists x N \left( x \right) \equiv \forall x \neg N \left( x \right)$ $\therefore$ All the students
+		      in my class have not visited North Dakota
+		\item There are some students in my school that have not visited North Dakota
+		\item $\neg \forall x N \left( x \right) \equiv \exists x \neg N \left( x \right)   $ $\therefore$ There
+		      are some students in my school that have not visited North Dakota
+		\item All the students in my class have not visited North Dakota
+	\end{enumerate}
+}
+
+
+
+\end{document}

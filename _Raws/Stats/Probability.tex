@@ -1,0 +1,84 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Probability}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Module 8: Introduction}
+
+\section{Introduction To Probability}
+
+\dfn{Probability}{
+	A mathematical description of randomness and uncertainty / The likelihood of an event occurring.
+
+	The notation for Probability is $P \left( X \right) $ where $X$ is the event.
+
+	Probability is always between $0 \leq P \left( X \right) \leq 1$ or $0\% \leq P \left( X \right) \leq 100\%$.
+}
+
+There are two ways of determining probability:
+
+\begin{itemize}
+	\item Theoretical / Classical - Determined by the nature of the experiment
+	\item Empirical / Observational - Determined by the results of the experiment
+\end{itemize}
+
+\section{Relative Frequency}
+
+\dfn{Relative Frequency}{
+	Relative frequency is the number of times an event occurs divided by the total number of trials.
+
+	\[
+		P \left( X \right) = \frac{\text{Number of times event occurs}}{\text{Total number of trials}}
+	\]
+}
+
+\thm{The Law of Large Numbers}{
+	As the number of trials increases, the relative frequency of an event approaches the theoretical probability of the event.
+}
+
+
+\chapter{Module 9: Find the Probability of Events}
+
+\section{Sample Spaces and Events}
+
+\dfn{Random Experiment}{
+	An experiment whose outcome is determined by chance.
+}
+
+\dfn{Sample Space}{
+	The list of possible outcomes of a random experiment, denoted by $S$.
+}
+
+\dfn{Event}{
+	A statement about the nature of the outcome after the experiment has been conducted, denoted by any capital letter
+	except $S$.
+}
+
+\section{Equally Likely Outcomes}
+
+\[
+	P \left( A \right) = \frac{\text{Number of outcomes in }A}{\text{Number of outcomes in } S}
+\]
+
+Where $A$ is an event and $S$ is the sample space.
+
+
+
+
+
+
+
+
+\end{document}

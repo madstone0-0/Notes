@@ -22,9 +22,9 @@
 \dfn{Probability}{
 	A mathematical description of randomness and uncertainty / The likelihood of an event occurring.
 
-	The notation for Probability is $P \left( X \right) $ where $X$ is the event.
+	The notation for Probability is $\mathbb{P} \left( X \right) $ where $X$ is the event.
 
-	Probability is always between $0 \leq P \left( X \right) \leq 1$ or $0\% \leq P \left( X \right) \leq 100\%$.
+	Probability is always between $0 \leq \mathbb{P} \left( X \right) \leq 1$ or $0\% \leq \mathbb{P} \left( X \right) \leq 100\%$.
 }
 
 There are two ways of determining probability:
@@ -40,7 +40,7 @@ There are two ways of determining probability:
 	Relative frequency is the number of times an event occurs divided by the total number of trials.
 
 	\[
-		P \left( X \right) = \frac{\text{Number of times event occurs}}{\text{Total number of trials}}
+		\mathbb{P} \left( X \right) = \frac{\text{Number of times event occurs}}{\text{Total number of trials}}
 	\]
 }
 
@@ -69,16 +69,101 @@ There are two ways of determining probability:
 \section{Equally Likely Outcomes}
 
 \[
-	P \left( A \right) = \frac{\text{Number of outcomes in }A}{\text{Number of outcomes in } S}
+	\mathbb{P} \left( A \right) = \frac{\text{Number of outcomes in }A}{\text{Number of outcomes in } S}
 \]
 
 Where $A$ is an event and $S$ is the sample space.
 
+\section{Probability Rules}
+
+\subsection{Rule 1: Probability is a Number Between 0 and 1}
+
+For any event $A$, $0 \le \mathbb{P} \left( A \right) \le 1$.
 
 
+\subsection{Rule 2: Addition Rule}
+
+$\mathbb{P} \left( S \right) = 1 $, that is the sum of the probabilities of all possible outcomes is 1.
+
+\subsection{Rule 3: Complement Rule}
+
+$\mathbb{P} \left( A' \right) = 1 - \mathbb{P} \left( A \right)  $, that is the probability of the complement of an event is 1 minus the
+probability the event occurs.
 
 
+\subsection{Rule 4: Addition Rule for Mutually Exclusive Events}
+
+\dfn{Mutually Exclusive / Disjoint events}{
+	Events that cannot happen at the same time.
+
+}
+
+$\mathbb{P} \left( A \text{ or } B \right) = \mathbb{P} \left( \text{ event } A \text{ occurs or event } B \text{ occurs
+		or both occur} \right)  $\\
 
 
+\noindent If $A$ and $B$ are mutually exclusive, then $\mathbb{P} \left( A \text{ or } B \right) = \mathbb{P} \left( A
+	\right) + \mathbb{P} \left( B \right)   $
+
+\subsection{Rule 5: Multiplication Rule for Independent Events}
+$\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( \text{ event } A \text{ occurs and event } B \text{
+		occurs } \right)  $
+
+\dfn{Independent Events}{
+	Two events $A$ and $B$ are said to be independent if the occurrence of one event does not affect the probability of the
+	other event occurring.
+
+}
+
+\dfn{Dependent Events}{
+	Two events $A$ and $B$ are said to be dependent if the occurrence of one event affects the probability of the other event
+	occurring.
+
+}
+
+\nodindent If $A$ and $B$ are two independent events, then $\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A
+	\right)  \times \mathbb{P} \left( B \right)  $
+
+\subsection{Rule 6: General Addition Rule}
+
+For any two events $A$ and $B$, $\mathbb{P} \left( A \text{ or } B \right) = \mathbb{P} \left( A \right) + \mathbb{P}
+	\left( B \right) - \mathbb{P} \left( A \text{ and } B \right)    $
+
+
+\chapter{Conditional Probability and Independence}
+
+\dfn{Conditional Probability}{
+	The probability an event occurs as a result of another event. i.e. probability of event $B$, given event event $A$
+	is,
+
+	\[
+		\mathbb{P} \left( B  \mid  A \right)  = \frac{\mathbb{P} \left( A \text{ and } B \right) }{P \left( A \right) }
+	\]
+}
+
+\section{Independence}
+
+When two events are independent, the probability of one event occurring does not affect the probability of the other
+event, i.e.
+
+\begin{align*}
+	\mathbb{P} \left( B  \mid  A \right) = \mathbb{P} \left( B \right)           \\
+	\mathbb{P} \left( A  \mid B \right)  = \mathbb{P} \left( A \right)           \\
+	\mathbb{P} \left( B  \mid A \right)  = \mathbb{P} \left( B  \mid A'  \right) \\
+	\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A \right)  \times \mathbb{P} \left( B \right)
+\end{align*}
+
+\section{The General Multiplication Rule}
+
+For any two events $A$ and $B$
+\[
+	\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A \right) \times \mathbb{P} \left( B  \mid A \right)
+\]
+
+\section{Probability Trees}
+
+\dfn{Probability Tree}{
+	A diagram that shows the sample space of a random experiment and the probability of each outcome.
+}
 
 \end{document}

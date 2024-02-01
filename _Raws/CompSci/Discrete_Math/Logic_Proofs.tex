@@ -7,8 +7,17 @@
 \author{\huge{Madiba Hudson-Quansah}}
 \date{}
 \usepackage{parskip}
+\usepackage{proof}
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
+
+\usepackage{xcolor,colortbl,array,amssymb}
+
+\newenvironment{deduction}
+  {\begin{tabular}{@{}>{$}c<{$}@{\enspace}>{$}l<{$}@{}}\arrayrulecolor{blue!50}}
+  {\end{tabular}}
+\newcommand{\premise}[1]{&#1\\}
+\newcommand{\conclusion}[1]{\cline{2-2}\therefore&#1}
 
 \begin{document}
 \maketitle
@@ -1339,14 +1348,14 @@ All whole numbers and negative of all natural numbers.
 
 
 
-Propositional function become propositions when their variables are each replaced by a value from the domain ( $U$ ) or bound by
+Propositional function become propositions when their variables are each replaced by a value from the domain ( $\mathbb{U}$ ) or bound by
 a quantifier.
 
 The statement $P(x)$ is said to be the value of the propositional function $P$ at $x$
 
 \ex{}{
 	\qs{}{
-		Let $x + y = z$ be denoted by $R(x,y,z)$ and $U$ (for all three variables) be integers. Find the truth value of
+		Let $x + y = z$ be denoted by $R(x,y,z)$ and $\mathbb{U}$ (for all three variables) be integers. Find the truth value of
 
 		\[
 			R(2,-1,5)
@@ -1460,7 +1469,7 @@ the desired output when given a valid input.
 }
 
 \dfn{Domain of Discourse / Universe of Discourse / Domain}{
-	The range of all values a variable can take. Denoted as $U$. Without a specified domain we cannot determine the
+	The range of all values a variable can take. Denoted as $\mathbb{U}$. Without a specified domain we cannot determine the
 	truth value of a Propositional Function.
 }
 
@@ -1469,21 +1478,21 @@ the desired output when given a valid input.
 \dfn{Universal Quantifier}{
 	"For all": $\forall$
 
-	Meaning for every variable in the domain ($U$), the propositional function is true.
+	Meaning for every variable in the domain ($\mathbb{U}$), the propositional function is true.
 
 	\ex{}{
 		\[
 			\forall x P(x)
 		\]
 
-		Asserts $P(x)$ is true for every x in $U$
+		Asserts $P(x)$ is true for every x in $\mathbb{U}$
 
 		So if $P(x): x \text{ has stripes}$, and $x$ is a zebra then $\forall x P(x)$ means "Every zebra has stripes" or
 		"All zebras have stripes"
 	}
 
 	The Universal Quantifier is equivalent to the conjunction of the propositional function for all values in its
-	specified domain. i.e. Where $P \left( x \right) $ is the statement $x > 0$ and $U$ is all positive real numbers
+	specified domain. i.e. Where $P \left( x \right) $ is the statement $x > 0$ and $\mathbb{U}$ is all positive real numbers
 	\[
 		\forall x P \left( x \right) \equiv P \left( x_{1} \right) \wedge P \left( x_2 \right) \wedge P \left( x_3 \right)
 		\wedge \dots \wedge  P \left( x_{n} \right)
@@ -1492,8 +1501,8 @@ the desired output when given a valid input.
 
 \ex{}{
 	\begin{enumerate}
-		\item If $P(x)$ denotes $x > 0$ and $U$ is the integers then, $\forall x P(x)$ is false.
-		\item If $P(x)$ denotes $x > 0$ and $U$ is the positive integers, then $\forall x P(x)$ is true
+		\item If $P(x)$ denotes $x > 0$ and $\mathbb{U}$ is the integers then, $\forall x P(x)$ is false.
+		\item If $P(x)$ denotes $x > 0$ and $\mathbb{U}$ is the positive integers, then $\forall x P(x)$ is true
 	\end{enumerate}
 }
 
@@ -1520,17 +1529,17 @@ the desired output when given a valid input.
 \dfn{Existential Quantifier}{
 	"There exists": $\exists$
 
-	Meaning for some variables in $U$, the propositional function is true.
+	Meaning for some variables in $\mathbb{U}$, the propositional function is true.
 
 	\ex{}{
 		\[
 			\exists xP(x)
 		\]
-		Asserts $P(x)$ is true for some $x$ in $U$
+		Asserts $P(x)$ is true for some $x$ in $\mathbb{U}$
 	}
 
 	The Existential Quantifier is equivalent to the disjunction of the propositional function for all values in its
-	specified domain. i.e. Where $P \left( x \right) $ is the statement $x > 5$ and $U$ is all positive real numbers
+	specified domain. I.e. Where $P \left( x \right) $ is the statement $x > 5$ and $\mathbb{U}$ is all positive real numbers
 	\[
 		\exists x P \left( x \right) \equiv P \left( x_1 \right) \vee P \left( x_2 \right)  \vee P \left( x_3 \right) \vee
 		\ldots P \left( x_{n} \right)
@@ -1540,8 +1549,8 @@ the desired output when given a valid input.
 
 \ex{}{
 	\begin{enumerate}
-		\item If $P(x)$ denotes $x > 0$ and $U$ is the integers, then $\exists x P\left(x \right) $ is true. It is also
-		      true if $U$ is the positive integers
+		\item If $P(x)$ denotes $x > 0$ and $\mathbb{U}$ is the integers, then $\exists x P\left(x \right) $ is true. It is also
+		      true if $\mathbb{U}$ is the positive integers
 		\item If $P(x)$ denotes $x < 0$ is the positive integers, then $\exists x P \left( x \right)  $ is false
 	\end{enumerate}
 }
@@ -1553,7 +1562,7 @@ the desired output when given a valid input.
 		\[
 			\exists ! P \left( x \right)
 		\]
-		Asserts $P \left( x \right) $ is only true for one $x$ in $U$
+		Asserts $P \left( x \right) $ is only true for one $x$ in $\mathbb{U}$
 	}
 }
 
@@ -1619,14 +1628,14 @@ The notation for a restricted domain is in the form:
 
 \dfn{Logically Equivalent}{
 	When two statements have the same truth value no matter which predicates are substituted into these statements and
-	which the domain $U$ is used for the variables in these propositional functions. The notation $S \equiv T$ is used
+	which the domain $\mathbb{U}$ is used for the variables in these propositional functions. The notation $S \equiv T$ is used
 	to indicate that two statements $S$ and $T$ that have predicates are logically equivalent.
 }
 
 \pagebreak
 \subsection{Negating Quantifications}
 
-Consider $\forall x F \left( x \right) $, where $F \left( x \right) $ is " $x$ has taken a course in Java " and $U$ is
+Consider $\forall x F \left( x \right) $, where $F \left( x \right) $ is " $x$ has taken a course in Java " and $\mathbb{U}$ is
 students in your class.
 
 The negation of this follows
@@ -1646,7 +1655,7 @@ The negation of this follows
 
 	\sol{
 
-		\noindent Let $U$ be "students in this class"\\
+		\noindent Let $\mathbb{U}$ be "students in this class"\\
 		Let $C \left( x \right) $ be "$x$ has studied calculus"\\
 
 		\[
@@ -1654,7 +1663,7 @@ The negation of this follows
 		\]
 
 		Or\\ \\
-		\noindent Let $U$ be "all people"\\
+		\noindent Let $\mathbb{U}$ be "all people"\\
 		Let $S \left( x \right) $ be "$x$ is a student in this class"
 		Let $C \left( x \right) $ be "$x$ has studied calculus"
 
@@ -1690,6 +1699,10 @@ We can then make $\exists y P \left( x, y \right) $ another propositional functi
 
 This statement can be written as For all $x$ there exists some $y$ where $x + y = 0$
 
+\subsection{Order of Quantifiers}
+
+The order of quantifiers is important when all quantifiers are not of the same type, i.e. $\forall x \exists y P \left( x, y \right) $ is not the same as $\exists y \forall x P \left( x, y \right) $
+
 \subsection{Negating Nested Quantifiers}
 
 \begin{align*}
@@ -1697,6 +1710,144 @@ This statement can be written as For all $x$ there exists some $y$ where $x + y 
 		By De Morgan's Law
 	}
 \end{align*}
+
+\subsection{Translating Mathematical Statements into Statements Involving Nested Quantifiers}
+
+\ex{}{
+	\qs{}{
+		Translate the statement "The sum of two positive integers is always positive" into a logical
+		expression.
+	}
+
+	\sol{
+		\begin{align*}
+			\mathbb{U}_{x,y} \text{: All integers} \\
+			\\
+			\forall x \forall y \left( \left( \left( x > 0 \right) \wedge \left( y > 0 \right)  \right) \to  \left( x +
+				y > 0\right)  \right)
+		\end{align*}
+	}
+}
+
+\ex{}{
+	\qs{}{
+		Use quantifiers to express the definition of the limit of a real-valued
+		function $f \left( x \right) $ of a real variable $x$ at a point $a$ in its domain.
+	}
+
+	\sol{
+
+	}
+}
+
+\subsection{Translating from Nested Quantifiers into English}
+
+\ex{}{
+	\qs{}{
+		Translate this statement
+		\[
+			\forall x \left( C \left( x \right) \vee \exists y \left( C \left( y \right) \wedge  F \left( x,y \right)   \right)   \right)
+		\]
+		\noindent Into English where $C \left( x \right) $ is "$x$ has a computer", $F \left( x,y \right) $ is "$x$ and
+		$y$ are friends," and $\mathbb{U}$ for both $x$ and $y$ consists of all students in your school.
+	}
+
+	\sol{
+
+		First we write the statement verbosely:\\
+
+		For all students in my school, $x$, $x$ has a computer or There exists some student in my school, $y$, where $x$
+		and $y$ are friends.\\
+
+		\noindent This can be simplified to:\\
+
+		Every student in my school has a computer or has a friend who who has a computer.
+	}
+}
+
+\ex{}{
+	\qs{}{
+		Translate this statement
+		\[
+			\exists x \forall y \forall z \left( \left( F \left( x, y \right) \wedge F \left( x, z \right) \wedge \left( y
+			\neq z \right)    \right) \to \neg F \left( y,z \right)   \right)
+		\]
+		into English, where $F \left( x,y \right) $ $x$ and $y$ are friends and $\mathbb{U}$ for $x$, $y$ and $z$
+		consists of all students in your school.
+	}
+
+	\sol{
+
+		There exists some student $x$, For all students $y$ and $z$, If $x$ and $y$ are friends and $x$ and $z$ are
+		friends and $y \neq z$, then $y$ and $z$ are not friends.\\
+
+		There is a student in my school who has no friends who are friends with each other.
+
+	}
+}
+
+\subsection{Translating English sentences into Logical Expressions}
+
+
+\ex{}{
+	\qs{}{
+		Express the statement "If a person is female and is a parent, then this person is someone’s
+		mother" as a logical expression involving predicates, quantifiers with a domain consisting of all
+		people, and logical connectives.
+	}
+
+	\sol{
+		\begin{align*}
+			\mathbb{U}_{x,y} \text{: All people}              \\
+			\\
+			F \left( x \right) \text{: $x$ is female}         \\
+			P \left( x \right) \text{: $x$ is a parent}       \\
+			M \left( x,y \right) \text{: $x$ is $y$'s mother} \\
+			\\
+			\forall x \left( \left( P \left( x \right) \wedge F \left( x \right)   \right) \to  \exists y M \left( x,y \right)   \right)
+		\end{align*}
+	}
+}
+
+\ex{}{
+	\qs{}{
+		Express the statement "Everyone has exactly one best friend" as a logical expression involving
+		predicates, quantifiers with a domain consisting of all people, and logical connectives.
+	}
+
+	\sol{
+		\begin{align*}
+			\mathbb{U}_{x,y} \text{: All people}                   \\
+			\\
+			B \left( x,y \right) \text{: $x$ is $y$'s best friend} \\ \\
+			\forall x \exists y \left( B \left( x,y \right) \wedge \forall z \left( \left( y \neq z \right) \to \neg B
+			\left( x, z \right)  \right)    \right)                \\
+			\text{Or }
+			\forall x \exists! y B \left( x, y \right)
+		\end{align*}
+	}
+}
+
+\ex{}{
+	\qs{}{
+		Use quantifiers to express the statement "There is a woman who has taken a flight on every
+		airline in the world."
+	}
+
+	\sol{
+
+		\begin{align*}
+			\mathbb{U}_{w} \text{: All women}                     \\
+			\mathbb{U}_{a} \text{: All airlines}                  \\
+			\mathbb{U}_{f} \text{: All flights}                   \\
+			\\
+			F \left( w, f \right) \text{: $w$ has taken $f$ }     \\
+			Q \left( f, a \right): \text{ $f$ is a flight on $a$} \\
+			\\
+			\exists w \forall a \exists f \left( F \left( w, f \right) \wedge  Q \left( f, a \right)  \right)
+		\end{align*}
+	}
+}
 
 
 \section{Exercises}
@@ -1752,7 +1903,7 @@ This statement can be written as For all $x$ there exists some $y$ where $x + y 
 
 		Let $H \left( x \right) $ be $x$ hops
 
-		Let $U$ consists of all animals
+		Let $\mathbb{U}$ consists of all animals
 
 		\begin{enumerate}
 			\item $\forall x \left( R \left( x \right) \to H \left( x \right)   \right) $
@@ -1845,8 +1996,177 @@ This statement can be written as For all $x$ there exists some $y$ where $x + y 
 	\end{enumerate}
 }
 
+\qs{}{
+	Translate in two ways each of the statements into logical expressions using predicates, quantifiers, and logical
+	connectives. First let the domain consist of the students in your class, and second let the domain consist of all people.
+	\begin{enumerate}
+		\item Everyone in your class has a cellular phone.
+		\item Somebody in your class has seen a foreign movie.
+		\item There is a person in your class who cannot swim.
+		\item All students in your class can solve quadratic equations.
+		\item Some student in your class
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      \mathbb{U} = \text{ students in your class}                   \\
+			      C \left( x \right)  \text{ be "$x$ has a cellular phone"}     \\
+			      \forall x C \left( x \right)                                  \\ \\
+			      \mathbb{U} = \text{ all people}                               \\
+			      S \left( x \right) \text{be "$x$ is a student in your class"} \\
+			      C \left( x \right) \text{ be "$x$ has a cellular phone"}      \\
+			      \forall x \left( S \left( x \right) \to C \left( x \right)   \right)
+		      \end{align*}
+	\end{enumerate}
+}
+
+\pagebreak
+\qs{}{
+	Express each of these statements using quantifiers. Then form the negation of the statement so
+	that no negation is to the left of a quantifier. Next, express the negation in simple English. (Do
+	not simply use the phrase “It is not the case that.”)
+	\begin{enumerate}
+		\item There is a horse that can add.
+		\item Every koala can climb.
+		\item No monkey can speak French.
+		\item There exists a pig that can swim and catch fish.
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      \mathbb{U} = \text{ all horses}             \\
+			      A \left( x \right) \text{ be "$x$ can add"} \\
+			      \exists x A \left( x \right)                \\ \\
+			      \neg \exists x A \left( x \right) \equiv \forall x \neg A \left( x \right) \tag*{By De Morgan's Law of
+			      Quantifiers}                                \\
+			       & \text{All horses cannot add}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      \mathbb{U} = \text{ all koalas}                  \\
+			      C \left( x \right) \text{ be "$x$ can climb"}    \\
+			      \forall x C \left( x \right)                     \\
+			      \neg \forall x C \left( x \right) \equiv \exists x \neg C \left( x \right) \tag*{By De Morgan's Law for
+			      Quantifiers}                                     \\
+			       & \text{There exists a koala that cannot climb}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      \mathbb{U} = \text{ all monkeys}                     \\
+			      F \left( x \right) \text{ be "$x$ can speak French"} \\
+			      \neg \exists x F \left( x \right) \equiv \forall x \neg F \left( x \right)  \tag*{By De Morgan's Law
+			      for Quantifiers}                                     \\
+			       & \text{All monkeys cannot speak French}
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      \mathbb{U} = \text{ all pigs}                                                                          \\
+			      S \left( x \right) \text{ be "$x$ can swim"}                                                           \\
+			      C \left( x \right) \text{ be "$x$ can catch fish"}                                                     \\
+			      \exists x \left( S \left( x \right) \wedge C \left( x \right)   \right)                                \\
+			      \neg \exists x \left( S \left( x \right) \wedge C \left( x \right)   \right) & \equiv \forall x \neg
+			      \left( S \left( x \right) \wedge  C \left( x \right)   \right)
+			      \tag*{By De Morgan's Law for Quantifiers}                                                              \\
+			                                                                                   & \equiv \forall x \left(
+			      \neg S \left( x \right)
+			      \vee \neg C \left( x \right)  \right)
+			      \tag*{By the First De Morgan's Law}                                                                    \\
+			                                                                                   & \text{All pigs cannot
+				      swim or catch fish}
+		      \end{align*}
+	\end{enumerate}
+}
+
+\qs{}{
+	Assume that the universe for $x$ is all people and the universe for $y$ is the set of all movies. Write
+	the English statement using the following predicates and any needed quantifiers: \\
+	$S \left( x, y \right) $: $x$ saw $y$\\
+	$L \left( x, y \right) $: $x$ liked $y$\\
+	$A \left( y \right) $: $y$ won an award\\
+	$C \left( y \right) $: $y$ is a comedy\\
+
+	\begin{enumerate}
+		\item No comedy won an award.
+		\item Lois saw Casablanca but did not like it.
+		\item Some people have seen every comedy.
+		\item No one liked every movie he has seen.
+		\item Ben has never seen a movie that won an award.
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $\neg \exists y \left( C \left( y \right) \wedge  A \left( y \right)   \right) $
+		\item $ S \left( \text{Lois}, \text{Casablanca} \right) \wedge \neg L \left( \text{Lois}, \text{Casablanca} \right) $
+		\item $\exists x \forall y \left( C \left( y \right) \to S \left( x, y \right)    \right) $
+		\item $\forall  x \exists  y \left( S \left( x,y \right) \to \neg L \left( x,y \right)   \right) $
+		\item $\forall y \left( A \left( y \right) \to \neg S \left( \text{Ben}, y \right)   \right) $
+	\end{enumerate}
+}
 
 
+\chapter{Rules of Inference}
 
+\dfn{Argument}{
+	A sequence of statements that end with a conclusion.
+}
+
+\dfn{Valid Argument}{
+	An argument is valid if the conclusion follows logically from the preceding statements
+
+}
+
+\section{Valid Arguments in Propositional Logic}
+
+\section{Rues of Inference}
+
+\subsection{Modus Ponens}
+
+\begin{deduction}
+	\premise{p}
+	\premise{p \to q}
+	\conclusion{q}
+\end{deduction}
+
+\subsection{Modus Tollens}
+
+\subsection{Hypothetical Syllogism}
+
+\subsection{Disjunctive Syllogism}
+
+\subsection{Addition}
+
+\subsection{Simplification}
+
+\subsection{Conjunction}
+
+\subsection{Resolution}
+
+\section{Exercises}
+
+\ex{}{
+	\qs{}{
+		Show that the premises "If you send me an e-mail message, then I will finish writing the
+		program," "If you do not send me an e-mail message, then I will go to sleep early," and "If I go
+		to sleep early, then I will wake up feeling refreshed" lead to the conclusion "If I do not finish
+		writing the program, then I will wake up feeling refreshed."
+	}
+
+	\sol{
+		\begin{align*}
+			p \text{: You send me an email message}      \\
+			q \text{: I will finish writing the program} \\
+			r \text{: I will go to sleep early}          \\
+			s \text{: I will wake up feeling refreshed}  \\
+			\\
+		\end{align*}
+	}
+}
 
 \end{document}

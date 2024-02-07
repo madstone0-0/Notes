@@ -12,12 +12,8 @@
 \setcounter{secnumdepth}{4}
 
 \usepackage{xcolor,colortbl,array,amssymb}
+\usepackage{ebproof}
 
-\newenvironment{deduction}
-  {\begin{tabular}{@{}>{$}c<{$}@{\enspace}>{$}l<{$}@{}}\arrayrulecolor{blue!50}}
-  {\end{tabular}}
-\newcommand{\premise}[1]{&#1\\}
-\newcommand{\conclusion}[1]{\cline{2-2}\therefore&#1}
 
 \begin{document}
 \maketitle
@@ -1260,44 +1256,6 @@ Predicate logic uses the following features:
 	\item Quantifiers
 \end{itemize}
 
-\section{Set Definitions}
-
-\subsection{Natural Numbers}
-
-All numbers starting from 1.
-
-\[
-	\mathbb{N} = \left\{ 1,2,3,4\ldots \right\}
-\]
-
-\subsection{Whole Numbers}
-
-All natural numbers and 0.
-
-\[
-	\mathbb{W} = \left\{ 0,1,2,3\dots \right\}
-\]
-
-\subsection{Rational Numbers}
-
-Numbers that can be written in the form $\frac{x}{y}$ where $y \neq 0$. Denoted by $\mathbb{Q}$
-
-\subsection{Real Numbers}
-
-All rational and irrational numbers. (All numbers on the number line). Denoted by $\mathbb{R}$
-
-\subsection{Irrational Numbers}
-
-Numbers that cannot be written in the form $\frac{x}{y}$ where $y \neq 0$. Denoted by $\mathbb{R} - \mathbb{Q}$
-
-
-\subsection{Integers}
-
-All whole numbers and negative of all natural numbers.
-
-\[
-	\mathbb{Z} = \left\{ -\infty, -3, -2, -1, 0, 1, 2, 3, \infty \right\}
-\]
 
 
 \section{Propositional Function}
@@ -1698,6 +1656,33 @@ We can then make $\exists y P \left( x, y \right) $ another propositional functi
 \]
 
 This statement can be written as For all $x$ there exists some $y$ where $x + y = 0$
+
+\noindent $\forall x \forall y P \left( x, y \right) $ where $\mathbb{U}_{x} = \left\{ 0, 2, 3 \right\} $ and $\mathbb{U}_{y} =
+	\left\{ 1,3 \right\} $ can be expressed as
+\[
+	P \left( 0,1 \right)  \wedge P \left( 0,3 \right) \wedge P \left( 2,1 \right)  \wedge P \left( 2,3 \right)  \wedge P
+	\left( 3,1 \right)  \wedge P \left( 3,3 \right)
+\]
+
+\noindent $\exists y \forall x P \left( x,y \right) $ using the same domains can be expressed as
+\begin{align*}
+	\exists y \forall x P \left( x,y \right) \equiv \forall x P \left( x,1 \right)  \wedge \forall x P \left( x,3
+	\right)                                                                                         \\
+	\forall x \left[ P \left( x, 1 \right) \wedge  P \left( x, 1 \right) \wedge  P \left( x,1 \right)    \right]  \vee
+	\left[ P \left( x,3 \right) \wedge  P \left( x,3 \right) \wedge P \left( x,3 \right)    \right] \\
+	\left[ P \left( 0,1 \right) \wedge  P \left( 2,1 \right) \wedge P \left( 3,1 \right)    \right]  \vee
+	\left[ P \left( 0,3 \right) \wedge  P \left( 2,3 \right) \wedge  P \left( 3,3 \right)    \right]
+\end{align*}
+
+
+Or
+\begin{align*}
+	\exists y \forall x P \left( x,y \right) \equiv \forall x P \left( x,1 \right)  \vee \forall x P \left( x,3 \right)
+	\\
+	\exists y \left( P \left( 0, y \right) \wedge P \left( 2, y \right) \wedge P \left( 3, y \right)    \right) \\
+	\left[ P \left( 0,1 \right) \wedge P \left( 2, 1 \right) \wedge P \left( 3, 1 \right)  \right] \vee \left[ P \left(
+		0,3\right) \wedge P \left( 2,3 \right) \wedge P \left( 3,3 \right)     \right]
+\end{align*}
 
 \subsection{Order of Quantifiers}
 
@@ -2136,37 +2121,449 @@ The order of quantifiers is important when all quantifiers are not of the same t
 
 \subsection{Modus Tollens}
 
+\begin{math}
+	\begin{deduction}
+		\premise{ \neg q }
+		\premise{ p \to q }
+		\conclusion{ \neg p }
+	\end{deduction}
+\end{math}
+
+
 \subsection{Hypothetical Syllogism}
 
+\begin{math}
+	\begin{deduction}
+		\premise{ p \to q }
+		\premise{ q \to r }
+		\conclusion{ p \to  r}
+	\end{deduction}
+\end{math}
+
+
 \subsection{Disjunctive Syllogism}
+\begin{math}
+	\begin{deduction}
+		\premise{ p \vee q }
+		\premise{ \neg  p }
+		\conclusion{ q }
+	\end{deduction}
+\end{math}
 
 \subsection{Addition}
+\begin{math}
+	\begin{deduction}
+		\premise{ p }
+		\conclusion{ p \vee  q }
+	\end{deduction}
+\end{math}
 
 \subsection{Simplification}
+\begin{math}
+	\begin{deduction}
+		\premise{ p \wedge q }
+		\conclusion{ p }
+	\end{deduction}
+\end{math}
 
 \subsection{Conjunction}
+\begin{math}
+	\begin{deduction}
+		\premise{ p }
+		\premise{ q }
+		\conclusion{ p \wedge q }
+	\end{deduction}
+\end{math}
 
 \subsection{Resolution}
+\begin{math}
+	\begin{deduction}
+		\premise{ p \vee q }
+		\premise{ \neg p \vee r }
+		\conclusion{ q \vee r }
+	\end{deduction}
+\end{math}
+
+\section{Rules of Inference for Quantified Statements}
+
+\subsection{Universal Instantiation}
+
+\begin{align*}
+	\begin{deduction}
+		\premise{\forall x P \left( x \right) }
+		\conclusion{P \left( c \right) }
+	\end{deduction}
+\end{align*}
+
+\subsection{Universal Generalization}
+
+\begin{align*}
+	\begin{deduction}
+		\premise{P \left( c \right) \text{ for an arbitrary } c }
+	\end{deduction}
+\end{align*}
+
+\subsection{Existential Instantiation}
+\begin{align*}
+	\begin{deduction}
+		\premise{\exists x P \left( c \right) }
+		\conclusion{P \left( c \right) \text{ for some element } c }
+	\end{deduction}
+\end{align*}
+
+\subsection{Existential Generalization}
+
+\begin{align*}
+	\begin{deduction}
+		\premise{P \left( c \right) \text{ for some element } c }
+		\conclusion{\exists x P \left( c \right) }
+	\end{deduction}
+\end{align*}
+
+\begin{align*}
+	\begin{deduction}
+		\premise{}
+	\end{deduction}
+\end{align*}
 
 \section{Exercises}
 
+\qs{}{
+	Show that the premises "If you send me an e-mail message, then I will finish writing the
+	program," "If you do not send me an e-mail message, then I will go to sleep early," and "If I go
+	to sleep early, then I will wake up feeling refreshed" lead to the conclusion "If I do not finish
+	writing the program, then I will wake up feeling refreshed."
+}
+
+\sol{
+	\begin{align*}
+		p \text{: You send me an email message}      \\
+		q \text{: I will finish writing the program} \\
+		r \text{: I will go to sleep early}          \\
+		s \text{: I will wake up feeling refreshed}  \\
+		\\
+	\end{align*}
+}
+
+\qs{}{
+	For each of these arguments, explain which rules of inference are used for each step.
+	\begin{enumerate}
+		\item Each of the five room-mates, Melissa, Aaron, Ralph, Veneesha and Keeshawn, has taken a course in discrete
+		      mathematics. Every student who has taken a course in discrete mathematics can take a course in algorithms.
+		      Therefore, all five room-mates can take a course in algorithms next year.
+		\item All moves produced by John Sayles are wonderful. John Sayles produced a movie about coal miners.
+		      Therefore, there is a wonderful movie about coal miners.
+		\item
+		\item There is someone in this class who has been to France. Everyone who goes to France visits the
+		      Louvre. Therefore, someone in this class has visited the Louvre.
+	\end{enumerate}
+}
+
+\sol{
+
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      \mathbb{U}_{x} \text{: All students}                                        \\
+			      \\
+			      D \left( x \right)  \text{: $x$ has taken a course in discrete mathematics} \\
+			      A \left( x \right) \text{: x can take a course in algorithms}               \\
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      \mathbb{U}_{m} \text{: All movies}                                       \\
+			      \\
+			      P \left(m \right) \text{: $m$ is produced by John Sayles }               \\
+			      W \left( m \right) \text{: $m$ is wonderful}                             \\
+			      C \left( m  \right)  \text{: $m$ is about coal miners}                   \\
+			      \\
+			      \forall m \left( P \left( m \right) \to W \left( m \right)    \right)    \\
+			      \exists m \left( P \left( m \right) \wedge  C \left( m \right)   \right) \\
+			      \exists m \left( W \left( m \right) \wedge C \left( m \right)    \right) \\
+			      \\
+			      \begin{prooftree}
+				      \hypo{&\forall m \left( P \left( m \right) \to W \left( m \right)   \right) }
+				      \infer[no rule]1{&\exists m \left( P \left( m \right) \wedge  C \left( m \right)   \right) }
+				      \infer1{& \therefore \exists m \left( W \left( m \right) \wedge  C \left( m \right)   \right) }
+			      \end{prooftree}
+		      \end{align*}
+		\item
+		\item
+		      \begin{align*}
+			      \mathbb{U}_{x} \text{: All people}                                       \\
+			      \\
+			      C \left( x \right) \text{: $x$ is someone in this class}                 \\
+			      F \left( x \right) \text{: $x$ has visited France}                       \\
+			      L \left( x \right) \text{: $x$ has visited the Louvre}                   \\
+			      \\
+			      \exists x \left( C \left( x \right) \wedge  F \left( x \right)   \right) \\
+			      \forall x \left( F \left( x \right) \to  L \left( x \right)   \right)    \\
+			      \exists x \left( C \left( x \right) \wedge L \left( x \right)   \right)  \\
+			      \\
+			      \begin{deduction}
+				      \premise{\exists x \left( C \left( x \right) \wedge F \left( x \right)  \right) }
+				      \premise{\forall x \left( F \left( x \right) \to L \left( x \right)   \right) }
+				      \conclusion{\exists x \left( C \left( x \right) \wedge  L \left( x \right)   \right) }
+			      \end{deduction}
+		      \end{align*}
+		      \begin{table}[h!]
+			      \begin{center}
+				      \begin{tabular}{| @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+					      \hline
+					      Steps                                                                      & Reasons
+					      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}                                       \\ [0.5ex]
+					      \hline
+					      \hline
+					      $\exists x \left( C \left( x \right) \wedge F \left( x \right)   \right) $ & Premise                         \\
+					      $\forall x \left( F \left( x \right) \to  L \left( x \right)   \right) $   & Premise                         \\
+					      $C \left( c \right) \wedge F \left( c \right)  $                           & Existential Instantiation on 1. \\
+					      $F \left( c \right) \to L \left( c \right)  $                              & Universal Instantiation on 2.   \\
+					      $F \left( c \right) $                                                      & Simplification on
+					      3.                                                                                                           \\
+
+					      \hline
+				      \end{tabular}
+			      \end{center}
+		      \end{table}
+	\end{enumerate}
+}
+
+\chapter{Proofs}
+
+
+\dfn{Proof}{
+	A valid argument that establishes the truth of a statement.
+}
+
+\dfn{Theorem}{
+	A statement that can be shown to be true, using:
+	\begin{itemize}
+		\item
+	\end{itemize}
+
+	\noindent Less important theorems are sometimes called \textbf{propositions}.
+}
+
+\dfn{Axiom / Postulate}{
+	A statement that is assumed to be true.
+}
+
+\dfn{Lemma}{
+	A less important theorem that is helpful in proving a more important theorem.
+}
+
+\dfn{Corollary}{
+	A result that follows directly from a theorem.
+}
+
+\dfn{Conjecture}{
+	A statement that is being proposed as a theorem to be proved. Once a conjecture is proved, it becomes a theorem.
+}
+
+\noindent Theorems are usually stated in the form:
+\[
+	\forall x \left( P \left( x \right) \to  Q \left( x \right)   \right)
+\]
+
+\noindent Where $P \left( x \right) $ is some condition and $Q \left( x \right) $ is the conclusion.
+
+\section{Set Definitions}
+
+\subsection{Natural Numbers}
+
+All numbers starting from 1. Denoted by $\mathbb{N}$
+
+\[
+	\mathbb{N} = \left\{ 1,2,3,4\ldots \right\}
+\]
+
+\subsection{Whole Numbers}
+
+All natural numbers and 0. Denoted by $\mathbb{W}$
+
+\[
+	\mathbb{W} = \left\{ 0,1,2,3\dots \right\}
+\]
+
+\subsection{Rational Numbers}
+
+Numbers that can be written in the form $\frac{x}{y}$ where $y \neq 0$. Denoted by $\mathbb{Q}$
+
+\subsection{Real Numbers}
+
+All rational and irrational numbers. (All numbers on the number line). Denoted by $\mathbb{R}$
+
+\subsection{Irrational Numbers}
+
+Numbers that cannot be written in the form $\frac{x}{y}$ where $y \neq 0$. Denoted by $\mathbb{R} - \mathbb{Q}$
+
+
+\subsection{Integers}
+
+All whole numbers and negative of all natural numbers. Denoted by $\mathbb{Z}$
+
+\[
+	\mathbb{Z} = \left\{ -\infty, -3, -2, -1, 0, 1, 2, 3, \infty \right\}
+\]
+
+\section{Types of Proofs}
+
+\subsection{Direct Proof}
+
+Given the statement:
+\[
+	p \to q
+\]
+We assume $p$ as true and by forming a sequence of known facts, definitions and other theorems, we show that $q$ is true.
+
 \ex{}{
 	\qs{}{
-		Show that the premises "If you send me an e-mail message, then I will finish writing the
-		program," "If you do not send me an e-mail message, then I will go to sleep early," and "If I go
-		to sleep early, then I will wake up feeling refreshed" lead to the conclusion "If I do not finish
-		writing the program, then I will wake up feeling refreshed."
+		Give a direct proof of the theorem "If $n$ is an odd integer, then $n^2$ is an odd integer."
 	}
 
 	\sol{
 		\begin{align*}
-			p \text{: You send me an email message}      \\
-			q \text{: I will finish writing the program} \\
-			r \text{: I will go to sleep early}          \\
-			s \text{: I will wake up feeling refreshed}  \\
+			\text{Assume $n$ is odd }                               \\
+			\text{Then } \exists k \, \in \, \mathbb{Z}, n = 2k + 1 \\
+			n^2 = 2t + 1 \text{ for some integer $t$}               \\
 			\\
+			n^2  = \left( 2k + 1 \right)^2                          \\
+			n^2  = 4k^2 + 4k + 1                                    \\
+			n^2  = 2 \left( 2k^2 + 2k \right)  + 1                  \\
+			\text{Let $r = 2k^2 + 2k$}                              \\
+			n^2 & = 2r + 1                                          \\
+			\\
+			\text{Because $k$ is an integer, $r$ is an integer}     \\
 		\end{align*}
+
 	}
 }
+
+
+\subsection{Indirect Proof}
+
+Any proof that is not a direct proof. This includes:
+
+\begin{itemize}
+	\item Contraposition: i.e. $p \to q \equiv \neg q \to \neg p$
+	\item Contradiction: Assume $p$ and $\neg q$ and show that this leads to a contradiction.
+	\item Vacuous Proof: Show that $p$ is false, and thereby show that $p \to q$ is true.
+\end{itemize}
+
+
+\dfn{Even / Odd integers \& Rational Numbers}{
+	An integer $n$ is even if there exists an integer $k$a such that $n = 3k$ and $n$ is odd if there exists an integer
+	such that $n = 2k + 1$. \\
+
+	\noindent An integer $n$ is even if $\exists $ integer $k$ such that $n = 2k$. \\
+	\noindent An integer $n$ is odd id $\exists $ integer $k$ such that $n = 2k + 1$. \\
+
+	A real number $x$ is rational if $\exists $ integers $p$, $q$ with $q \neq 0$, such that $x = \frac{p}{q}$.
+
+
+
+}
+
+\section{Exercises}
+
+\nt{
+	Using a direct proof is difficult if the consequence is a function of the premise. In such cases, an indirect proof
+	is used.
+}
+
+\qs{}{
+	Prove that the sum of two rational numbers is rational.
+}
+
+\begin{myproof}
+	We will show with a direct proof that, if $a$ and $b$ are rational numbers, then $a + b$ is a rational number. \\
+	Assume that $a$ and $b$ are rational numbers. \\
+	Then there exist integers $p$, $q$, $r$, and $s$ with $q \neq 0$ and $s \neq 0$ such that $a = \frac{p}{q}$ and $b =
+		\frac{r}{s}$.\\
+	For $a + b$ to be rational
+	\begin{align*}
+		a + b & = \frac{p}{q} + \frac{r}{s}  \\
+		      & = \frac{ps + qr}{qs}         \\
+		\text{Let $t =qr + ps$ and $u = qs$} \\
+		      & = \frac{t}{u}
+	\end{align*}
+	Where $u \neq 0$ and $t$ and $u$ are integers. We can conclude $t$ and $u$ are integers because $q$,$r$,$p$,$s$ are
+	integers. And $u\neq 0$ because it is the product of two integers $q$ and $s$ which are both nonzero which are both
+	nonzero.\\
+	$\therefore \, a + b$ is rational
+	Hence if $a$ and $b$ are rational numbers, then $a + b$ is a rational number.
+\end{myproof}
+
+\qs{}{
+	Prove that if $n$ is an integer and $3n + 2$ is odd then $n$ is odd.
+}
+
+\begin{myproof}
+	We will show with a contrapositive proof that, if $n$ is an integer and $3n + 2$ is odd then $n$ is odd. \\
+	Therefore let $q$ be the statement "$3n + 2$ is odd" and $q$ be the statement "$n$ is odd". i.e. $p \to q$ \\
+	Therefore the contrapositive will be
+	\[
+		\neg q \to \neg p
+	\]
+	" If $n$ is even then, $3n + 2$ is even "\\
+	Then $\exists k \in \mathbb{Z},\, n = 2k$
+	\begin{align*}
+		3n + 2 & = 3 \left( 2k \right)  + 2 \\
+		       & = 6k + 2                   \\
+		       & = 2 \left( 3k + 1 \right)  \\
+		\text{Let } t = 3k + 1              \\
+		       & = 2t                       \\
+	\end{align*}
+	Since $3$, $k$ and $1$ are integers $t$ is an integer.\\
+	$\therefore \, 3k + 1$ is even \\
+	Hence if $n$ is even then $3n + 2$ is even. \\
+\end{myproof}
+
+
+\qs{}{
+	Give a proof by contradiction of the theorem "If $3n + 2$ is odd, then $n$ is odd"
+}
+
+\begin{myproof}
+	Let $p$ be "$3n + 2$ is odd" and $q$ be "$n$ is odd". To construct a proof by contradiction, we need to show that
+	$p \wedge \neg q \equiv F$.i.e. $3n + 2$ is odd and $n$ is even.\\
+	First we must assume both $q$ and $p$ are $T$\\
+	Because $n$ is even $\exists k \in \mathbb{Z} n = 2k$
+	\begin{align*}
+		3n + 2 & = 3 \left( 2k \right)  + 2 \\
+		       & = 6k + 2                   \\
+		       & = 2 \left( 3k + 1 \right)  \\
+		\text{Let $t = 3k + 1$}             \\
+		       & = 2t                       \\
+	\end{align*}
+	Since $3$, $k$ and $1$ are integers $t$ is an integer.\\
+	Since $3n + 2$ can be written in the form $2t$ where $t$ is an integer, $3n + 2$ is even.\\
+	We now have $3n + 2$ to be both even and odd ($p \wedge \neg p$). This is a contradiction.\\
+	$\therefore$ If $3n + 2$ is odd, then $n$ is odd.
+\end{myproof}
+
+\qs{}{
+	Use a direct proof to show that the sum of two even integers is even.
+}
+
+\begin{myproof}
+	If $a$ and $b$ are even then $a + b$ is even\\
+	We assume that $a$ and $b$ are even\\
+	Then $\exists k \in \mathbb{Z} \, a = 2k$ and $\exists t \in \mathbb{Z} \, b = 2t$\\
+
+	\noindent For $a + b$ to be even\\
+	\[
+		a + b = 2z
+	\]
+	Where $z$ is an integer
+	\begin{align*}
+		a + b & = 2k + 2t                \\
+		      & = 2 \left( k + t \right) \\
+		\text{Let } z =  k + t           \\
+		      & = 2z
+	\end{align*}
+	Since $z$ is the sum of two integers $k$ and $t$, $z$ is an integer\\
+	Hence if $a$ and $b$ are even then $a + b$ is even.
+\end{myproof}
 
 \end{document}

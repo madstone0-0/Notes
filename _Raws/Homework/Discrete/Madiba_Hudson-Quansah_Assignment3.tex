@@ -1,0 +1,117 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\title{\Huge{Assignment 3}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{January 2024}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+	\begin{enumerate}
+		\item $\exists x P \left( x, 4 \right) $
+		\item $\forall y \neg P \left( 1, y \right) $
+		\item $\exists y \forall x P \left( x, y \right) $
+		\item $\forall x \exists y P \left( x,y \right) $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      \exists x P \left( x, 4 \right) & \equiv P \left( x,4 \right) \vee P \left( x, 4 \right) \vee P \left( x, 4
+			      \right)                                                                                                           \\
+			                                      & \equiv P \left( 1,4 \right) \vee P \left( 2,4 \right) \vee P \left( 3,4 \right)
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      \forall y \neg P \left( 1,y \right) & \equiv P \left( 1,y \right) \wedge P \left( 1,y \right)  \\
+			                                          & \equiv P \left( 1,3 \right) \wedge  P \left( 1,4 \right)
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      \exists y \forall x P \left( x,y \right) & \equiv \forall x P \left( x, 3 \right) \vee  \forall x P
+			      \left( x,4 \right)                                                                                  \\
+			                                               & \equiv \left[ P \left( 1,3 \right) \wedge  P \left( 2,3
+				      \right) \wedge P \left( 3,3 \right)    \right]  \vee \left[ P
+				      \left( 1,4 \right) \wedge  P \left( 2,4 \right) \wedge  P \left(
+				      3,4\right)   \right]
+		      \end{align*}
+
+		\item
+		      \begin{align*}
+			      \forall x \exists y P \left( x,y \right) & \equiv \exists y P \left( 1,y \right) \wedge  \exists y P
+			      \left( 2, y \right)  \wedge \exists y P \left( 3,y \right)                                           \\
+			                                               & \equiv \left[ P \left( 1,3 \right) \vee P \left( 1,4
+				      \right)   \right] \wedge  \left[ P \left( 2,3 \right) \vee P
+				      \left( 2,4 \right) \right] \wedge \left[ P \left( 3,3 \right) \vee P \left( 3,4 \right)   \right]
+		      \end{align*}
+	\end{enumerate}
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item All clear explanations are satisfactory.
+		\item Some excuses are not satisfactory.
+		\item Some excuses are not clear explanations.
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $\forall  x \left( P \left( x \right) \to Q \left( x \right)   \right) $
+		\item $\exists x \left( R \left( x \right) \wedge  \neg Q \left( x \right)   \right) $
+		\item $\exists x \left( R \left( x \right) \wedge \neg P \left( x \right)   \right) $
+	\end{enumerate}
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item $\exists x S \left( x, \text{open} \right) $
+		\item $\forall x \left( S \left( x, \text{malfunctioning} \right) \vee  S \left( x, \text{diagnostic} \right)   \right) $
+		\item $\exists x S \left( x, \text{open} \right) \vee \exists x S \left( x, \text{diagnostic} \right)   $
+		\item $\exists x \neg S \left( x, \text{available} \right) $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item There exists a system that is in state open.
+		\item All systems are either malfunctioning or in diagnostic state.
+		\item There exists a system that is in state open  or there exists a system that is in state diagnostic.
+		\item There exists a system that is not in state available.
+	\end{enumerate}
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item Everybody can fool Fred.
+		\item Evelyn can fool Everybody.
+		\item Everybody can fool somebody.
+		\item No one can fool everybody.
+		\item Everyone can be fooled by somebody.
+		\item No one can fool himself or herself.
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $\forall x F \left( x, \text{Fred} \right) $
+		\item $\forall y F \left( \text{Evelyn}, y \right) $
+		\item $\forall x \exists y F \left( x,y \right) $
+		\item $\neg \exists x \forall y F \left( x, y \right) $
+		\item $\exists x \forall y F \left( x, y \right) $
+		\item $\neg \exists x F \left( x, x \right) $
+	\end{enumerate}
+}
+
+
+
+\end{document}

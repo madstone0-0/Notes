@@ -1,0 +1,128 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\title{\Huge{Assignment 4}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+\gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+
+\qs{}{
+	\begin{math}
+		\begin{deduction}
+			\premise{ \left( p \wedge t \right) \to  \left( r \vee s \right)   }
+			\premise{ q \to \left( u \wedge t \right)  }
+			\premise{ u \to p }
+			\premise{ \neg s }
+			\premise{ q }
+			\conclusion{ r }
+		\end{deduction}
+	\end{math}
+}
+
+\sol{
+	\begin{table}[h!]
+		\begin{center}
+			\begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+				\hline
+
+				\multicolumn{1}{ | @{\makebox[3em][r]} |c| }{Steps}         & \multicolumn{1}{|c|}{Reasons}          \\
+				\hline
+				\hline
+				$ \left( p \wedge t \right) \to \left( r \vee s \right)   $ & Premise 1                              \\
+				$q \to \left( u \wedge t \right) $                          & Premise 2                              \\
+				$u \to p$                                                   & Premise 3                              \\
+				$\neg s$                                                    & Premise 4                              \\
+				$q$                                                         & Premise 5                              \\
+				$u \wedge  t$                                               & By Modus Ponens from 2 and 5           \\
+				$u$                                                         & By Simplification from 6               \\
+				$p$                                                         & By Modus Ponens from 3 and 7           \\
+				$t$                                                         & By Simplification from 6               \\
+				$p \wedge t$                                                & By Conjunction from 8 and 9            \\
+				$r \vee s$                                                  & By Modus Ponens from 1 and 10          \\
+				$r$                                                         & By Disjunctive Syllogism from 11 and 4 \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+}
+
+\qs{}{
+	"Jane is a student in this class. Jane grew up in a family of entrepreneurs. Everyone who grew up
+	in a family of entrepreneurs can build a thriving business. Therefore, someone in this class can
+	build a thriving business."
+}
+
+\sol{
+
+	\begin{align*}
+		\mathbb{U}_{x} \text{: All people}                                      \\
+		\\
+		S \left( x \right)  \text{: $x$ is a student in this class.}            \\
+		E \left( x \right)  \text{: $x$ grew up in a family of entrepreneurs. } \\
+		B \left( x \right)  \text{: $x$ can build a thriving business}          \\
+		\begin{deduction}
+			\premise{ S \left( \text{Jane} \right)  }
+			\premise{ E \left( \text{Jane} \right)  }
+			\premise{ \forall x \left( E \left( x \right) \to B \left( x \right)   \right)  }
+			\conclusion{ \exists x \left( S \left( x \right) \wedge B \left( x \right)   \right)  }
+		\end{deduction}
+	\end{align*}
+
+	\begin{table}[h!]
+		\begin{center}
+			\begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+				\hline
+				\multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps}                      & \multicolumn{1}{|c|}{Reasons} \\
+				\hline
+				\hline
+				$S \left( \text{Jane} \right)  $                                            & Premise 1                     \\
+				$E \left( \text{Jane} \right)  $                                            & Premise 2                     \\
+				$\forall x \left( E \left( x \right) \to B \left( x \right)   \right) $     & Premise 3                     \\
+				$E \left( \text{Jane} \right) \to B \left( \text{Jane} \right)  $           & Universal Instantiation from
+				3.                                                                                                          \\
+				$B \left( \text{Jane} \right) $                                             & By Modus Ponens from 2 and 4. \\
+				$S \left( \text{Jane} \right) \wedge B \left( \text{Jane} \right)  $        & By Conjunction from 1 and 5.
+				\\
+				$\exists x \left( S \left( x \right) \wedge  B \left( x \right)   \right) $ & Existential Generalization
+				from 6.                                                                                                     \\
+
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+}
+
+\qs{}{
+	The product of two odd numbers is odd
+}
+
+\begin{myproof}
+	Using a direct proof I will show that if $x$ and $y$ are odd, then $x \times  y$ is odd.\\
+	Assume that $x$ and $y$ are odd.\\
+	Then $\exists k \in \mathbb{Z} \, x = 2k + 1 $ and $\exists t \in \mathbb{Z} \, y = 2t + 1$\\
+	For $x \times y$ to be odd
+	\[
+		x \times y = 2z + 1
+	\]
+	Where $z$ is an integer\\
+	\begin{align*}
+		x \times y & = \left( 2k + 1 \right) \times \left( 2t + 1 \right) \\
+		           & = 4kt + 2k + 2t + 1                                  \\
+		           & = 2(2kt + k + t) + 1                                 \\
+		\text{Let } z = 2kt + k + t                                       \\
+		           & = 2z + 1                                             \\
+	\end{align*}
+	Since $z$ is the sum of integers it is an integer.\\
+	Hence If $x$ and $y$ are odd, then $x \times y$ is odd.
+\end{myproof}
+
+
+\end{document}

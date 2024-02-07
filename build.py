@@ -4,6 +4,8 @@ from subprocess import Popen, PIPE
 import shutil
 from sys import exit
 from os import chdir
+from hashlib import md5
+import json
 
 # from icecream import ic
 from multiprocessing import SimpleQueue
@@ -12,6 +14,40 @@ from concurrent.futures import Future, as_completed, ThreadPoolExecutor
 basedir = Path.cwd()
 rawPath = basedir / "_Raws"
 exportPath = basedir / "_Exported"
+checksumPath = basedir / "checksums.json"
+
+
+def genChecksum(filepath: Path):
+    checksum = md5()
+    with open(filepath, "rb") as f:
+        for chunk in iter(lambda: f.read(1024), b""):
+            checksum.update(chunk)
+    return checksum.hexdigest()
+
+
+def writeChecksumJSON(filepaths: list[Path]):
+    checksums = {}
+    for file in filepaths:
+        if file.is_dir():
+            for item in file.rglob("*.tex"):
+                if item.is_file():
+                    checksums[str(item)] = genChecksum(item)
+            for item in file.rglob("*.md"):
+                if item.is_file():
+                    checksums[str(item)] = genChecksum(item)
+
+    with open(checksumPath, "w") as f:
+        f.write(json.dumps(checksums, indent=4))
+
+
+def readChecksumJSON():
+    checksums = {}
+    try:
+        with open(checksumPath, "r") as f:
+            checksums = json.loads(f.read())
+    except FileNotFoundError:
+        return checksums
+    return checksums
 
 
 def cleanLatexArtifacts(startDir: Path):
@@ -88,14 +124,17 @@ def compileMarkdown(file, exportDir) -> str:
 
 
 def compileOne(dir: str) -> list[str]:
+    checksums = readChecksumJSON()
     out: list[str] = []
     newPath = exportPath / dir
     Path.mkdir(newPath, parents=True, exist_ok=True)
     workingDir = rawPath / Path(dir)
     for file in workingDir.glob("*.tex"):
-        out.append(compileLatex(file, exportPath / dir))
+        if genChecksum(file) != checksums[str(file)]:
+            out.append(compileLatex(file, exportPath / dir))
     for file in workingDir.glob("*.md"):
-        out.append(compileMarkdown(file, exportPath / dir))
+        if genChecksum(file) != checksums[str(file)]:
+            out.append(compileMarkdown(file, exportPath / dir))
     return out
 
 
@@ -116,7 +155,9 @@ def compileMany(dirs: list[str]):
 
     try:
         for future in as_completed(todo_list_map):
-            futureString = "\n".join(future.result())
+            futureString = (
+                "\n".join(future.result()) if future.result() else "No work done."
+            )
             print(f"{todo_list_map[future]:10}: {futureString}")
     except BaseException as be:
         print(be)
@@ -140,3 +181,4 @@ if __name__ == "__main__":
     compileMany(dirs)
     cleanLatexArtifacts(rawPath)
     cleanLatexArtifacts(exportPath)
+    writeChecksumJSON([rawPath / Path(dir) for dir in dirs])

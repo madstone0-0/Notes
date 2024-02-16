@@ -2,7 +2,7 @@
 from pathlib import Path
 from subprocess import Popen, PIPE
 import shutil
-from sys import exit
+from sys import exit, argv
 from os import chdir
 from hashlib import md5
 import json
@@ -123,22 +123,22 @@ def compileMarkdown(file, exportDir) -> str:
     return out
 
 
-def compileOne(dir: str) -> list[str]:
+def compileOne(dir: str, force: bool) -> list[str]:
     checksums = readChecksumJSON()
     out: list[str] = []
     newPath = exportPath / dir
     Path.mkdir(newPath, parents=True, exist_ok=True)
     workingDir = rawPath / Path(dir)
     for file in workingDir.glob("*.tex"):
-        if genChecksum(file) != checksums[str(file)]:
+        if genChecksum(file) != checksums[str(file)] or force:
             out.append(compileLatex(file, exportPath / dir))
     for file in workingDir.glob("*.md"):
-        if genChecksum(file) != checksums[str(file)]:
+        if genChecksum(file) != checksums[str(file)] or force:
             out.append(compileMarkdown(file, exportPath / dir))
     return out
 
 
-def compileMany(dirs: list[str]):
+def compileMany(dirs: list[str], force: bool):
     FolderQueue: SimpleQueue[str] = SimpleQueue()
     todo_list_map = {}
     with ThreadPoolExecutor(10) as exc:
@@ -148,7 +148,7 @@ def compileMany(dirs: list[str]):
         if not FolderQueue.empty():
             while True:
                 folder = FolderQueue.get()
-                job: Future = exc.submit(compileOne, folder)
+                job: Future = exc.submit(compileOne, folder, force)
                 todo_list_map[job] = folder
                 if FolderQueue.empty():
                     break
@@ -164,6 +164,7 @@ def compileMany(dirs: list[str]):
 
 
 if __name__ == "__main__":
+    args = argv[1:]
     dirs = [
         # "Calc",
         # "Calc/Semester_1",
@@ -178,7 +179,12 @@ if __name__ == "__main__":
         # "FDE",
     ]
 
-    compileMany(dirs)
+    force = False
+    if len(args) > 0:
+        if args[0] == "force":
+            force = True
+
+    compileMany(dirs, force)
     cleanLatexArtifacts(rawPath)
     cleanLatexArtifacts(exportPath)
     writeChecksumJSON([rawPath / Path(dir) for dir in dirs])

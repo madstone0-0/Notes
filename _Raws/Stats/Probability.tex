@@ -7,6 +7,8 @@
 \author{\huge{Madiba Hudson-Quansah}}
 \date{}
 \usepackage{parskip}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
 
 \begin{document}
 \maketitle
@@ -121,7 +123,7 @@ $\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( \text{ event } A
 
 }
 
-\nodindent If $A$ and $B$ are two independent events, then $\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A
+\noindent If $A$ and $B$ are two independent events, then $\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A
 	\right)  \times \mathbb{P} \left( B \right)  $
 
 \subsection{Rule 6: General Addition Rule}
@@ -130,10 +132,10 @@ For any two events $A$ and $B$, $\mathbb{P} \left( A \text{ or } B \right) = \ma
 	\left( B \right) - \mathbb{P} \left( A \text{ and } B \right)    $
 
 
-\chapter{Conditional Probability and Independence}
+\chapter{Module 10: Conditional Probability and Independence}
 
 \dfn{Conditional Probability}{
-	The probability an event occurs as a result of another event. i.e. probability of event $B$, given event event $A$
+	The probability an event occurs as a result of another event. I.e. Probability of event $B$, given event event $A$
 	is,
 
 	\[
@@ -165,5 +167,203 @@ For any two events $A$ and $B$
 \dfn{Probability Tree}{
 	A diagram that shows the sample space of a random experiment and the probability of each outcome.
 }
+
+\subsection{Bayes' Theorem}
+
+\[
+	\mathbb{P} \left( A  \mid B \right)  = \frac{\mathbb{P} \left( A \right) \times P \left( B  \mid A \right)   }{
+		\mathbb{P} \left( A \right) \times \mathbb{P} \left( B  \mid A \right) + \mathbb{P} \left( A' \right) \times \mathbb{P}
+		\left( B  \mid A' \right) }
+\]
+
+\chapter{Module 11: Random Variables}
+
+\dfn{Random Variable}{
+	Assigns a unique numerical value to the outcome of a random experiment.
+}
+
+\dfn{Discrete Random Variable}{
+	A random variable that can take on a finite number of values. Discrete random variables are usually counts.
+}
+
+\dfn{Continuous Random Variable}{
+	A random variable that can take on an infinite number of values. Continuous random variables are usually measurements.
+
+}
+
+\section{Discrete Random Variables}
+
+\subsection{Notation}
+
+For a given event $X$, the probability of $X$ is denoted by $\mathbb{P} \left( X \right) $. For a given value $x$, the
+probability of $X$ is denoted by $\mathbb{P} \left( X = x \right) $, i.e. the probability that $X$ takes on the value $x$.
+
+\subsection{Probability Distribution}
+
+\dfn{Probability Distribution}{
+	The list of all possible values of a random variable and their corresponding probabilities.
+}
+
+Any probability distribution must satisfy the following two conditions:
+
+\begin{itemize}
+	\item $0 \leq \mathbb{P} \left( X = x  \right) \leq 1 $ - The probability of any value of $X$ is between 0 and 1.
+	\item $\Sigma_x \,  \mathbb{P} \left( X = x \right) = 1 $ - The sum of the probabilities of all possible values of $X$ is 1.
+\end{itemize}
+
+\subsection{Key Words}
+
+\begin{itemize}
+	\item At least / No less than - $ x \geq$
+	\item At most / No more than - $x \leq$
+	\item Less than / fewer than - $ x <$
+	\item  More than / greater than - $ x >$
+	\item Exactly - $ x =$
+\end{itemize}
+
+\subsection{Mean and Variance of a Discrete Random Variable}
+
+\subsubsection{Mean}
+
+\dfn{Mean / Expected value of a Discrete Random Variable}{
+	The average value of a random variable, denoted by $\mu$.
+}
+
+For a given random variable $X$, the mean is given by
+
+\[
+	\mu_{X} = \Sigma_{i=1}^{n} x_i p_i
+\]
+
+Where $x_i$ is the value of $X$ and $p_i$ is the probability of $X$ taking on the value $x_i$.
+
+
+\paragraph{Applications of the Mean}
+
+\begin{itemize}
+	\item The mean of a random variable is the long-term average value of the random variable.
+	\item The mean of a random variable is the centre of the probability distribution of the random variable.
+\end{itemize}
+
+\subsubsection{Variance}
+
+\dfn{Variance}{
+	The average of the squared differences between each value of a random variable and the mean of the random variable,
+	denoted by $\sigma^2$.
+}
+
+For a given random variable $X$, the variance is given by
+\[
+	\sigma_{X}^2 = \Sigma_{i=1}^{n} \left( x_i - \mu_{X} \right)^2 p_i
+\]
+And standard deviation is given by
+\[
+	\sigma_{X} = \sqrt{\sigma_{X} ^2}
+\]
+Where $x_i$ is the value of $X$ and $p_i$ is the probability of $X$ taking on the value $x_i$.
+
+
+\subsubsection{Rules for Mean and Variance of Random Discrete Variables}
+
+\nparagraph{Adding or Subtracting a Constant to a Random Variable}
+
+If $Y = X + c$, then $\mu_{Y} = \mu_{X} + c$, $\sigma_{Y}^2 = \sigma_{X}^2$ and $\sigma_{Y} = \sigma{X}$. \\
+
+If $Y = X - c$, then $\mu_{Y} = \mu_{X} - c$, $\sigma_{Y}^2 = \sigma_{X}^2$ and $\sigma_{Y} = \sigma{X}$. \\
+
+\nparagraph{Multiplying a Random Variable by a Constant $> 1$} \\
+If $Y = cX\, , c > 1$, then $\mu_{Y} = c \mu_{X}$, $\sigma_{Y}^2 = c^2 \sigma_{X}^2$ and $\sigma_{Y} = c \sigma_{X}$ \\
+
+\nparagraph{Multiplying a Random Variable by a Constant $< 1$}
+
+If $Y = cX\, , c < 1$, then $\mu_{Y} = c \mu_{X}$, $\sigma_{Y}^2 = c^2 \sigma_{X}^2$ and $\sigma_{Y} = c \sigma_{X}$ \\
+
+\nparagraph{Linear Transformation of a Random Variable}
+
+If $Y = a + bX$, then $\mu_{Y} = a + b \mu_{X}$, $\sigma_{Y}^2 = b^2 \sigma_{X}^2$ and $\sigma_{Y} = \abs{b} \sigma_{X}$ \\
+
+\nparagraph{Sum of Two Random Variables}
+
+If $Z = X + Y$, then $\mu_{Z} = \mu_{X} + \mu_{Y}$, $\sigma_{Z}^2 = \sigma_{X}^2 + \sigma_{Y}^2$ and $\sigma_{Z} =
+	\sqrt{\sigma_{X}^2 + \sigma_{Y}^2}$. Only if $X$ and $Y$ are independent. \\
+
+\subsection{Binomial Random Variables}
+
+\dfn{Binomial Random Variable}{
+	A random variable that counts the number of successes in a fixed number of independent trials, denoted by $X \sim
+		\text{Bin} \left( n, p \right) $.
+	Where $n$ is the number of trials and $p$ is the probability of success.
+}
+
+\dfn{Binomial Experiment}{
+	Random experiments that satisfy the following conditions:
+	\begin{itemize}
+		\item A fixed number of trials, denoted by $n$.
+		\item Each trial is independent of the others.
+		\item There are only two possible outcomes for each trial, success or failure.
+		\item There is a constant probability of success, denoted by $p$, for each trial, which can be expressed as the
+		      complement of the probability of failure, $q = 1 - p$.
+	\end{itemize}
+
+	\nt{
+		The number $\left( X \right) $ of success in a sample of size $n$ taken without replacement from a population with
+		proportion $p$ of successes is approximately binomial with $n$ and $p$ as long as the sample size is at most $10\%$
+		of the population size $\left( N \right) $. I.e.
+		\[
+			n \leq 0.1N
+		\]
+		Or
+		\[
+			N \geq 10n
+		\]
+	}
+}
+
+To calculate the probability of a binomial random variable, we use the formula
+\[
+	\mathbb{P} \left( X = x \right) = \binom{n}{x} p^x q^{n-x}, \text{ where } x = 0, 1, 2, \ldots, n
+\]
+
+Where $n$ is the number of trials, $x$ is the number of successes, $p$ is the probability of success and $q$ is the
+probability of failure. \\
+
+If $X$ is Binomial with parameters $n$ and $p$, then
+\[
+	\mu_{X} = np
+\]
+
+And
+\begin{align*}
+	\sigma^2_{X} = np \left( 1 - p \right) \\
+	\sigma_{X} = \sqrt{np \left( 1 - p \right) }
+\end{align*}
+
+\section{Continuous Random Variables}
+% TODO
+
+
+\subsection{Uniform Distribution}
+
+\dfn{Uniform Distribution}{
+	,denoted by $X \sim U \left( a,b \right) $
+}
+
+For a random variable $X$, if is uniformly distributed over the interval $a$ and $b$ then its probability distribution
+density function is given by
+\[
+	f \left( x \right)  = \begin{cases}
+		\frac{1}{b - a}, \, a < x < b \\
+		0, \, \text{otherwise}
+	\end{cases}
+\]
+
+The mean and variance of a uniformly distributed random variable is given by
+\begin{align*}
+	\mu_X = \frac{a + b}{2}                         \\
+	\sigma^2_X = \frac{\left( b - a \right)^2 }{12} \\
+	\sigma_X = \sqrt{\frac{\left( b - a \right)^2 }{12}}
+\end{align*}
+
+
 
 \end{document}

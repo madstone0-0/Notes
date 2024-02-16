@@ -1,0 +1,118 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\title{\Huge{Assignment 5}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+	\begin{enumerate}
+		\item A proof by contraposition.
+		\item A proof by contradiction.
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{myproof}
+			      The contraposition of the statement "If $3n + 2$ is even, then $n$ is even", in the form $p \to q$,
+			      where $p$ is "$3n + 2$ is even" and $q$ is "$n$ is even", is $\neg q \to \neg p$, i.e. "If $n$ is odd,
+			      then $3n + 2$ is odd ".\\
+			      Assume $n$ is odd. \\
+			      Then $\exists k \in \mathbb{Z} \left( n = 2k + 1 \right) $. \\
+			      For $3n + 2$ to be odd
+			      \[
+				      \exists t \in  \mathbb{Z} \left( 3n + 2 = 2t + 1 \right)
+			      \]
+			      \begin{align*}
+				      3n + 1        & = 3 \left( 2k +1 \right)  + 2 \\
+				                    & = 6k + 3 + 2                  \\
+				                    & = 6k + 4 + 1                  \\
+				                    & = 2 \left( 3k + 2 \right)  +1 \\
+				      \text{Let } t & = 3k + 2                      \\
+				                    & = 2t + 1
+			      \end{align*}
+			      Since $t$ is made up of the sum of the product of integers $3$, $k$, and $2$, $t$ is an integer. \\
+			      $\therefore$ If $n$ is odd, then $3n + 2$ is odd. \\
+			      Hence by contraposition if $3n +2$ is even, then $n$ is even
+		      \end{myproof}
+		\item
+		      \begin{myproof}
+			      The negation of the statement "If $3n + 2$ is even, then $n$ is even", in the form $p \to q$, where $p$
+			      is "$3n + 2$ is even" and $q$ is "$n$ is even", is $p \wedge \neg q$, I.e., "$3n +2$ is even and $n$ is
+			      odd".\\
+			      Assume $3n + 2$ is even and $n$ is odd. \\
+			      Then $\exists t \in \mathbb{Z} \left( n =
+				      2t + 1 \right) $
+			      \begin{align*}
+				      3n + 2        & = 3 \left( 2t +1 \right)  +2  \\
+				                    & = 6t + 3 +2                   \\
+				                    & = 6t + 4 + 1                  \\
+				                    & = 2 \left( 3t + 2 \right) + 1 \\
+				      \text{Let } k & = 3t + 2                      \\
+				                    & = 2k +1                       \\
+			      \end{align*}
+			      Since $k$ is made up of the sum of the product of integers $3$, $t$, and $2$, $k$ is an integer.\\
+			      Since $3n + 2$ can be expressed in the form $2k + 1$, where $k \in \mathbb{Z}$, $3n + 2$ is odd.\\
+			      We now have $3n +2$ being odd by our proof and even by our initial assumption, ( $p \wedge \neg p$ ),
+			      which is a contradiction. \\
+			      $\therefore$ $3n + 2$ is even and $n$ is odd is false.\\
+			      Hence the statement if $3n + 2$ is even, then $n$ is even is true.
+		      \end{myproof}
+	\end{enumerate}
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item $B \times C \times A$
+		\item $B \times B \times B$
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \[
+			      B \times C \times A = \left\{ \left( x,0,a \right), \left( x,0,b \right), \left( x,1,a \right), \left( x,1,b
+			      \right), \left( y,0,a \right), \left( y,0,b \right), \left( y,1,a \right), \left( y,1,b \right)         \right\}
+		      \]
+		\item
+		      \[
+			      B^3 = \left\{ \left( x,x,x \right), \left( x,x,y \right), \left( x,y,x \right),  \left( x,y,y \right), \left( y,y,y \right),
+			      \left( y,y,x \right), \left( y,x,y \right), \left( y,x,x \right)        \right\}
+		      \]
+	\end{enumerate}
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item $\O \in \left\{ \O, \left\{ \O \right\}  \right\} $
+		\item $\left\{ \O \right\} \in \left\{ \O \right\}  $
+		\item $\left\{ \O \right\} \subset \left\{ \O, \left\{ \O \right\}  \right\}  $
+		\item $\left\{ \left\{ \O \right\}  \right\} \subset \left\{ \O, \left\{ \O \right\}  \right\}  $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item True. $\O$ is an element of the set $\left\{ \O, \left\{ \O \right\}  \right\} $
+		\item False. A set cannot be an element of itself.
+		\item True. All elements found in $\left\{ \O \right\} $ are also found in $\left\{ \O, \left\{ \O \right\}
+			      \right\} $ and $\left\{ \O \right\} $ is not equal to $\left\{ \O, \left\{ \O \right\}  \right\} $
+		\item True. All elements found in $\left\{ \left\{ \O \right\}  \right\} $ are also found in $\left\{ \O, \left\{ \O \right\}
+			      \right\} $ and $\left\{ \left\{ \O \right\}  \right\} $ is not equal to $\left\{ \O, \left\{ \O \right\}  \right\} $
+	\end{enumerate}
+}
+
+
+
+\end{document}

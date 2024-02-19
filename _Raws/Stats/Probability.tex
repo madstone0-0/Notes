@@ -7,8 +7,8 @@
 \author{\huge{Madiba Hudson-Quansah}}
 \date{}
 \usepackage{parskip}
-\setcounter{tocdepth}{4}
-\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
 
 \begin{document}
 \maketitle
@@ -129,7 +129,9 @@ $\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( \text{ event } A
 \subsection{Rule 6: General Addition Rule}
 
 For any two events $A$ and $B$, $\mathbb{P} \left( A \text{ or } B \right) = \mathbb{P} \left( A \right) + \mathbb{P}
-	\left( B \right) - \mathbb{P} \left( A \text{ and } B \right)    $
+	\left( B \right) - \mathbb{P} \left( A \text{ and } B \right)    $. If the event are mutually exclusive, then
+$\mathbb{P} \left( A \text{ and } B \right) = 0 $, giving us $\mathbb{P} \left( A \text{ or } B \right) =
+	\mathbb{P}\left( A \right) + \mathbb{P} \left( B \right)   $, i.e. the addition rule for mutually exclusive events.
 
 
 \chapter{Module 10: Conditional Probability and Independence}
@@ -157,7 +159,7 @@ event, i.e.
 
 \section{The General Multiplication Rule}
 
-For any two events $A$ and $B$
+For any two dependent events $A$ and $B$
 \[
 	\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A \right) \times \mathbb{P} \left( B  \mid A \right)
 \]
@@ -267,9 +269,9 @@ Where $x_i$ is the value of $X$ and $p_i$ is the probability of $X$ taking on th
 
 \nparagraph{Adding or Subtracting a Constant to a Random Variable}
 
-If $Y = X + c$, then $\mu_{Y} = \mu_{X} + c$, $\sigma_{Y}^2 = \sigma_{X}^2$ and $\sigma_{Y} = \sigma{X}$. \\
+If $Y = X + c$, then $\mu_{Y} = \mu_{X} + c$, $\sigma_{Y}^2 = \sigma_{X}^2$ and $\sigma_{Y} = \sigma_{X}$. \\
 
-If $Y = X - c$, then $\mu_{Y} = \mu_{X} - c$, $\sigma_{Y}^2 = \sigma_{X}^2$ and $\sigma_{Y} = \sigma{X}$. \\
+If $Y = X - c$, then $\mu_{Y} = \mu_{X} - c$, $\sigma_{Y}^2 = \sigma_{X}^2$ and $\sigma_{Y} = \sigma_{X}$. \\
 
 \nparagraph{Multiplying a Random Variable by a Constant $> 1$} \\
 If $Y = cX\, , c > 1$, then $\mu_{Y} = c \mu_{X}$, $\sigma_{Y}^2 = c^2 \sigma_{X}^2$ and $\sigma_{Y} = c \sigma_{X}$ \\
@@ -339,7 +341,77 @@ And
 \end{align*}
 
 \section{Continuous Random Variables}
-% TODO
+
+\subsection{Probability Distribution}
+
+For a continuous random variable $X$, the probability distribution is given by the \textit{probability density
+	function}, whose properties are
+
+\begin{itemize}
+	\item $f \left( x \right) \geq 0$ for all $x$.
+	\item $\int_{-\infty}^{\infty} f \left( x \right) \, dx = 1$
+	\item The probability that $X$ takes on a value between $a$ and $b$ is given by
+	      \[
+		      \mathbb{P} \left( a \leq X \leq b \right) = \int_{a}^{b} f \left( x \right) \, dx
+	      \]
+\end{itemize}
+
+\nt{
+	\begin{itemize}
+		\item The probability that a continuous random variable takes on a specific value is always 0.
+		\item The strictness of the inequality does not matter, i.e. $\mathbb{P} \left( X \geq a \right) = \mathbb{P} \left( X > a \right)$
+	\end{itemize}
+}
+
+\subsection{Normal Random Variables}
+
+\dfn{Normal Random Variable}{
+	A random variable that has a bell-shaped probability distribution, denoted by $X \sim N \left( \mu, \sigma^2 \right) $.
+}
+
+For a normally distributed random variable $X$:
+
+\begin{itemize}
+	\item There is a $68\%$ chance that $X$ takes on a value within one standard deviation of the mean, i.e. $0.68 = \mathbb{P}
+		      \left( \mu - \sigma < X < \mu + \sigma  \right) $
+	\item There is a $95\%$ chance that $X$ takes on a value within two standard deviations of the mean, i.e. $0.95 = \mathbb{P}
+		      \left( \mu - 2 \sigma < X \mu + 2 \sigma  \right) $
+	\item There is a $99.7\%$ chance that $X$ takes on a value within three standard deviations of the mean, i.e. $0.997 = \mathbb{P}
+		      \left( \mu - 3 \sigma < X \mu + 3 \sigma  \right) $
+\end{itemize}
+
+\subsubsection{Finding Probabilities for Normal Random Variables}
+
+\nparagraph{Standardizing Values}
+
+\dfn{$z$-score}{
+	The number of standard deviations a value is from the mean of a normal random variable, denoted by $z$.
+
+}
+
+To standardize a normal random variable $X$, we must find its $z$-score, given by
+
+\[
+	z - \frac{x - \mu }{\sigma }
+\]
+
+\nparagraph{Finding Probabilities with the $z$-score}
+
+\dfn{Normal Table}{
+	A table that shows the probability that a standard normal random variable takes on a value less than a given $z$-score.
+}
+
+Using the $z$-score we can find the probability that a normal random variable takes on a value less than a given value
+$x$, by tracing the $z$-score to the normal table.
+
+\[
+	\mathbb{P} \left( X < x \right) = \mathbb{P} \left( Z < z \right)
+\]
+
+On a standard normal table $z$-score are written to two decimal places as row headers and for additional precision the
+column headers are the first two decimal places of the $z$-score.
+
+
 
 
 \subsection{Uniform Distribution}
@@ -348,8 +420,8 @@ And
 	,denoted by $X \sim U \left( a,b \right) $
 }
 
-For a random variable $X$, if is uniformly distributed over the interval $a$ and $b$ then its probability distribution
-density function is given by
+For a random variable $X$, if is uniformly distributed over the interval $a$ and $b$ then its \textit{probability distribution
+	density function} is given by
 \[
 	f \left( x \right)  = \begin{cases}
 		\frac{1}{b - a}, \, a < x < b \\

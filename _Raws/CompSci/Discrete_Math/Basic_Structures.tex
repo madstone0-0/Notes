@@ -7,7 +7,6 @@
 \author{\huge{Madiba Hudson-Quansah}}
 \date{}
 \usepackage{parskip}
-\usepackage{parskip}
 \usepackage{proof}
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
@@ -45,7 +44,8 @@ There are several ways to describe a set:
 }
 
 \dfn{Empty / Null Set}{
-	A set with no elements, denoted by $\O$ or $ \left\{  \right\}  $
+	A set with no elements, denoted by $\O$ or $ \left\{  \right\}  $. Can be expressed as $\{x \mid F \} $
+
 }
 
 \dfn{Singleton Set}{
@@ -111,7 +111,7 @@ Or
 \subsection{Venn Diagrams}
 
 \dfn{Universal Set}{
-	The set of all objects under consideration, denoted by $U$.
+	The set of all objects under consideration, denoted by $\mathbb{U}$. Can be expressed as $\{x  \mid T\} $
 }
 
 Sets can be graphically represented using Venn diagrams. A Venn diagram is a collection of simple closed curves, especially
@@ -397,6 +397,109 @@ shorthand for $\forall x \left( x \in S \to P \left( x \right)  \right) $
 	$\exists x P \left( x \right) $ is $T$ over the domain $\mathbb{U}$ if and only if the truth set of $P$ is not empty.
 }
 
+\section{Exercises}
+
+\qs{}{
+	List the members of these sets
+	\begin{enumerate}
+		\item $\left\{ x  \mid x \text{ is the square of an integer and } x < 100 \right\} $
+		\item $\left\{ x  \mid x \text{ is an integer such that } x^2 = 2 \right\} $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $\left\{ 1, 4, 9, 16, 25, 36, 49, 64, 81 \right\} $
+		\item $\O$
+	\end{enumerate}
+}
+
+\qs{}{
+	Use set builder notation to describe the following sets
+	\begin{enumerate}
+		\item $\left\{ -3,-2,-1,0,1,2,3 \right\} $
+		\item $\left\{ m,n,o,p \right\} $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $\left\{ x  \mid -3 \leq x \leq 3  \right\} $
+		\item $\left\{ x  \mid x \text{ is a letter in the word monopoly excluding "l" and "y" } \right\} $
+	\end{enumerate}
+}
+
+\qs{}{
+	Suppose that $A = \left\{ 2, 4, 6 \right\} $, $B = \left\{ 2, 6 \right\} $, $C = \left\{ 4, 6 \right\} $ and $D =
+		\left\{ 4,6,8 \right\} $. Determine which of these sets are subsets of which other sets.
+}
+
+\sol{
+	\begin{align*}
+		B \subseteq  A \\
+		C \subseteq A  \\
+		C \subseteq D  \\
+	\end{align*}
+}
+
+\qs{}{
+	Suppose that $A$, $B$, $C$, are sets such that $A \subseteq B$ and $B \subseteq C$. Show that $A \subseteq C$
+}
+
+\sol{
+
+	\begin{align*}
+		A \subseteq B  \text{ means } \forall x \left( x \in A \to x \in  B \right) \\
+		B \subseteq C \text{ means } \forall x \left( x \in B \to x \in C \right)   \\
+		A \subseteq C \text{ means } \forall x \left( x \in A \to x \in  C \right)  \\
+	\end{align*}
+
+	\begin{align*}
+		\begin{deduction}
+			\premise{ \forall x \left( x \in  A \to x \in  B \right)  }
+			\premise{ \forall x \left( x \in  B \to x \in C \right) }
+			\conclusion{ \forall x \left( x \in A \to x \in C \right) }
+		\end{deduction}
+	\end{align*}
+
+	\gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+	\begin{table}[h!]
+		\begin{center}
+			\begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+				\hline
+				\multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons}        \\
+				\hline
+				\hline
+				$ \forall x \left( x \in  A \to x \in  B \right)  $    & Premise 1                            \\
+				$ \forall x \left( x \in  B \to x \in C \right) $      & Premise 2                            \\
+				$x \in  A \to x \in  B$                                & Universal Instantiation of 1         \\
+				$x \in B \to x \in C$                                  & Universal Instantiation of 2         \\
+				$x \in A \to x \in C$                                  & By Hypothetical Syllogism of 3 and 4 \\
+				$\forall x \left( x \in A \to x \in C \right) $        & Universal generalization of 5        \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+}
+
+\qs{}{
+	Find the power set of each of these sets, where $a$ and $b$ are distinct elements.
+	\begin{enumerate}
+		\item $\{a\} $
+		\item $\{a, b\} $
+		\item $\{\O, \{\O\} \} $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $\mathcal{P}\left( \{a\}  \right)  = \{\O, \{a\} \} $
+		\item $\mathcal{P}(\{a,b\} ) = \{\O, \{a\}, \{b\}, \{a,b\}   \} $
+		\item $\mathcal{P}(\{\O, \{\O\} \} ) = \{\O, \{\O\}\, \{\{\O\} \}, \{\O, \{\O\} \}   \} $
+	\end{enumerate}
+}
+
+
 \chapter{Set Operations}
 
 \section{Set Operations}
@@ -529,6 +632,67 @@ The cardinality of the union of two sets $A$ and $B$ is given by
 	\overline{A \cup B } = \overline{A} \cap \overline{B}
 \end{align*}
 
+\subsection{Proving Set Identities}
+
+There are different ways to prove set identities, these include:
+\begin{itemize}
+	\item Proving each set is a subset of the other
+	\item Using set builder notation and propositional logic
+	\item Using Membership tables
+\end{itemize}
+
+\dfn{Membership Table}{
+	A table that shows the truth value of a predicate for all possible combinations of truth values of its variables.
+}
+
+\ex{}{
+	\qs{}{
+		Prove that
+		\[
+			\overline{A \cap B} = \overline{A} \cup \overline{B}
+		\]
+	}
+
+	\noindent Using propositional logic:
+	\begin{myproof}
+		We prove this identity by showing that each set is a subset of the other. I.e.\\
+		\[
+			\overline{A \cap  B} \subseteq \overline{A} \cup  \overline{B} \wedge \overline{A} \cap \overline{B} \subseteq
+			\overline{A \cap B}
+		\]
+		\begin{align*}
+			\overline{A \cap B} \subseteq \overline{A} \cup \overline{B} \text{ means } \forall x \left( x \in
+			\overline{A \cap B} \to x \in \overline{A} \cup  \overline{B} \right) \\
+			\overline{A} \cup \overline{B} \subseteq \overline{A \cap B} \text{ means } \forall x \left( x \in
+			\overline{A} \cup \overline{B} \to x \in \overline{A \cap B} \right)  \\
+		\end{align*}
+		Assume that $x \in  \overline{A \cap  B}$\\
+		\begin{align*}
+			x = \overline{A \cap B}                               \tag*{Assumption}               \\
+			x \notin A \cap B                                     \tag*{Definition of Complement} \\
+			\neg \left( x \in A \cap B \right)                    \tag*{Definition of $\notin$ }  \\
+			\neg \left( x \in A \wedge x \in B \right)   \tag*{Definition of intersection}        \\
+			\neg \left( x \in A \right) \vee \neg \left( x \in  B  \right) \tag*{ By First De Moragn's Law for propositional
+			logic}                                                                                \\
+			x \notin A \vee x \notin B \tag*{Definition of Complement}                            \\
+			x \in \overline{A} \cup \overline{B} \tag*{Definition of union}
+		\end{align*}
+
+	\end{myproof}
+	\noindent Using set builder notation
+	\begin{align*}
+		\overline{A \cap B} & = \{ x  \mid x \notin A \cap B\} \tag*{Definition of Complement}                                                \\
+		                    & = \{x  \mid \neg \left( x \in \left( A \cap B \right)  \right) \} \tag*{Definition of $\notin$}                 \\
+		                    & = \{x  \mid \neg \left( x \in A \wedge x \in B \right) \} \tag*{Defintion of Intersection}                      \\
+		                    & = \{x  \mid \neg \left( x \in A \right) \vee \neg \left( x \in B \right)  \} \tag*{By First De Morgan's Law for
+		propositional logic}                                                                                                                  \\
+		                    & = \{x  \mid x \notin A \vee x \notin B\} \tag*{Definition of Complement}                                        \\
+		                    & = \{x | x \in \overline{A} \cup \overline{B}\} \tag*{Definition of union}                                       \\
+		                    & = \overline{A} \cup \overline{B}                                                                                \\
+	\end{align*}
+}
+
+
 \section{Exercises}
 
 \qs{}{
@@ -549,6 +713,40 @@ The cardinality of the union of two sets $A$ and $B$ is given by
 		\item
 		\item
 		\item $ \O $
+	\end{enumerate}
+}
+
+\qs{}{
+	Use set builder notation to show that:
+	\begin{enumerate}
+		\item $A \cup \mathbb{U} = \mathbb{U}$
+		\item $A \cap \O = \O$
+		\item $A \cup  \overline{A} = \mathbb{U}$
+		\item $A \cap \overline{A} = \O$
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      A \cup \mathbb{U} & = \{ x  \mid x \in A \cup \mathbb{U}\} \tag*{Set builder notation}        \\
+			                        & = \{x  \mid x \in A \vee   x \in \mathbb{U} \} \tag*{Definition of Union} \\
+			                        & = \{x  \mid  x \in A \vee  T\} \tag*{Definition of Universal Set}         \\
+			                        & = \{x  \mid T \} \tag*{By Domination law for propositional logic}         \\
+			                        & = \mathbb{U} \tag*{Definition of Universal Set}                           \\
+		      \end{align*}
+		\item
+		\item
+		\item
+		      \begin{align*}
+			      A \cap \overline{A} & = \{ x  \mid x \in A \cap \overline{A}\} \tag*{Set builder notation}                     \\
+			                          & = \{x  \mid x \in A \wedge x \in \overline{A} \} \tag*{Definition of intersection}       \\
+			                          & = \{x  \mid x \in A \wedge \left( x \notin A \right)  \} \tag*{Definition of Complement} \\
+			                          & = \{x | x \in A \wedge  \neg \left( x \in  A \right) \} \tag*{Definition of $\O$}        \\
+			                          & = \{x  \mid F\} \tag*{By Identity law of propositional logic}                            \\
+			                          & = \O \tag*{Definition of $\O$}                                                           \\
+		      \end{align*}
 	\end{enumerate}
 }
 

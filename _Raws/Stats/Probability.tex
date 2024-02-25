@@ -366,7 +366,8 @@ For a continuous random variable $X$, the probability distribution is given by t
 \subsection{Normal Random Variables}
 
 \dfn{Normal Random Variable}{
-	A random variable that has a bell-shaped probability distribution, denoted by $X \sim N \left( \mu, \sigma^2 \right) $.
+	A random variable that has a bell-shaped probability distribution, denoted by $X \sim N \left( \mu, \sigma^2 \right)
+	$. Where $\mu $ is the mean and $\sigma^2$ is the variance.
 }
 
 For a normally distributed random variable $X$:
@@ -375,9 +376,9 @@ For a normally distributed random variable $X$:
 	\item There is a $68\%$ chance that $X$ takes on a value within one standard deviation of the mean, i.e. $0.68 = \mathbb{P}
 		      \left( \mu - \sigma < X < \mu + \sigma  \right) $
 	\item There is a $95\%$ chance that $X$ takes on a value within two standard deviations of the mean, i.e. $0.95 = \mathbb{P}
-		      \left( \mu - 2 \sigma < X \mu + 2 \sigma  \right) $
+		      \left( \mu - 2 \sigma < X < \mu + 2 \sigma  \right) $
 	\item There is a $99.7\%$ chance that $X$ takes on a value within three standard deviations of the mean, i.e. $0.997 = \mathbb{P}
-		      \left( \mu - 3 \sigma < X \mu + 3 \sigma  \right) $
+		      \left( \mu - 3 \sigma < X < \mu + 3 \sigma  \right) $
 \end{itemize}
 
 \subsubsection{Finding Probabilities for Normal Random Variables}
@@ -392,7 +393,7 @@ For a normally distributed random variable $X$:
 To standardize a normal random variable $X$, we must find its $z$-score, given by
 
 \[
-	z - \frac{x - \mu }{\sigma }
+	z = \frac{x - \mu }{\sigma }
 \]
 
 \nparagraph{Finding Probabilities with the $z$-score}
@@ -429,13 +430,99 @@ For a random variable $X$, if is uniformly distributed over the interval $a$ and
 	\end{cases}
 \]
 
-The mean and variance of a uniformly distributed random variable is given by
+The mean, variance, and standard deviation of a uniformly distributed random variable is given by
 \begin{align*}
 	\mu_X = \frac{a + b}{2}                         \\
 	\sigma^2_X = \frac{\left( b - a \right)^2 }{12} \\
 	\sigma_X = \sqrt{\frac{\left( b - a \right)^2 }{12}}
 \end{align*}
 
+\chapter{Module 12: Sampling Distributions}
+
+\section{Parameters vs. Statistics}
+
+\dfn{Parameter}{
+	A numerical value that describes a characteristic of a population, denoted by a Greek letter, e.g. $\mu, \sigma^2$.
+}
+
+\dfn{Statistic}{
+	A numerical value that describes a characteristic of a sample, denoted by a Roman letter, e.g $\bar{x}, s^2$.
+
+}
+
+\dfn{Proportion}{
+	A statistic that estimates the proportion of a population or sample that has a certain characteristic, denoted by
+	$p$ for a population and $\hat{p}$ for a sample.
+}
+
+\dfn{Sampling Variability}{
+	The variability of a statistic from one sample to another.
+}
+
+\section{Behaviour of Sample Proportion $\hat{p}$}
+
+\subsection{Centre}
+
+The mean of the sample proportion is the same as the population proportion, i.e.
+\[
+	\mu_{\hat{p}} = p
+\]
+As it is reasonable to expect all the sample proportions in repeated samples to average out to the underlying population.
+
+\subsection{Spread}
+
+The sample size has an effect on the spread of the distribution of the sample proportion, i.e. the \textbf{larger the sample
+	size, the less spread out the distribution} of the sample proportion and \textbf{more spread for smaller sample
+	sizes}. We can describe the spread of the distribution of the sample proportion more precisely by finding the actual
+standard deviation of the sample proportion. i.e.
+\[
+	\sigma_{\hat{p}} = \sqrt{\frac{p \left( 1 - p \right) }{n}}
+\]
+Where $p$ is the population proportion and $n$ is the sample size.
+
+\subsection{Shape}
+
+The shape of the distribution of the sample proportion is approximately normal if the sample size is large enough. I.e.
+if
+\[
+	np \geq 10 \text{ and } n \left( 1 - p \right) \geq 10
+\]
+
+\dfn{Sampling of Distribution of $\hat{p}$}{
+	The distribution of the values of the sample proportions $\hat{p}$ in repeated samples.
+
+}
+
+\section{Behaviour of Sample Mean $\overline{X}$}
+
+\subsection{Centre}
+
+The mean of the sample mean is the same as the population mean, i.e.
+\[
+	\mu_{\overline{X}} = \mu
+\]
+
+\subsection{Spread}
+
+The sample size has an effect on the spread of the distribution of the sample mean, i.e. the \textbf{larger the sample
+	size, the less spread out the distribution} of the sample mean and \textbf{more spread for smaller sample sizes}. We can
+describe the spread of the distribution of the sample mean more precisely by finding the actual standard deviation of the
+sample mean. i.e.
+\[
+	\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}
+
+\]
+
+\subsection{Shape}
+
+The shape of the distribution of the sample mean is approximately normal if the sample size is large enough. I.e. if
+\[
+	n \geq 30
+\]
+
+\dfn{Sampling of Distribution of $\overline{X}$}{
+	The distribution of the values of the sample mean $\overline{X}$ in repeated samples.
+}
 
 
 \end{document}

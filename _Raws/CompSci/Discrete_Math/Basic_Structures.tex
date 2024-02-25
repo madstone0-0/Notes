@@ -111,7 +111,7 @@ Or
 \subsection{Venn Diagrams}
 
 \dfn{Universal Set}{
-	The set of all objects under consideration, denoted by $\mathbb{U}$. Can be expressed as $\{x  \mid T\} $
+	The set of all objects under consideration, denoted by $U$. Can be expressed as $\{x  \mid T\} $
 }
 
 Sets can be graphically represented using Venn diagrams. A Venn diagram is a collection of simple closed curves, especially
@@ -167,9 +167,19 @@ Shown graphically: \\
 			      We will prove that $\O \subseteq S$, using a vacuous proof \\
 			      Let $S$ be a set. \\
 			      To show $\O \subseteq S$ we must show that $\forall x \left( x \in \O \to x \in S \right) $ is $T$. \\
-			      Because $\O$ contains no elements $x \in  \O$ is always $F$/ \\
+			      Because $\O$ contains no elements $x \in  \O$ is always $F$ \\
 			      This follows that the implication $x \in \O \to x \in S$ is always $T$ \\
 			      Hence $\O \subseteq S$ \\
+		      \end{myproof}
+		\item
+		      \begin{myproof}
+			      We will prove that $S \subseteq S$, using a direct proof \\
+			      Let $S$ be a set\\
+			      To show $S \subseteq S$ we must show that $\forall x \left( x \in S \to x \in S \right) $ is $T$ \\
+			      Assume $x \in S$ \\
+			      Because $x \in S$ is always $T$, the implication $x \in S \to x \in S$ is always $T$ \\
+			      $\therefore$ $\forall x \left( x \in S \to x \in S \right) $ is $T$\\
+			      Hence $S \subseteq S$ \\
 		      \end{myproof}
 
 	\end{enumerate}
@@ -392,9 +402,9 @@ shorthand for $\forall x \left( x \in S \to P \left( x \right)  \right) $
 }
 
 \nt {
-	$\forall x P \left( x \right) $ is $T$ over the domain $\mathbb{U}$ if and only if the truth set of $P$ is $\mathbb{U}$.
+	$\forall x P \left( x \right) $ is $T$ over the domain $U$ if and only if the truth set of $P$ is $U$.
 	\\
-	$\exists x P \left( x \right) $ is $T$ over the domain $\mathbb{U}$ if and only if the truth set of $P$ is not empty.
+	$\exists x P \left( x \right) $ is $T$ over the domain $U$ if and only if the truth set of $P$ is not empty.
 }
 
 \section{Exercises}
@@ -527,10 +537,10 @@ shorthand for $\forall x \left( x \in S \to P \left( x \right)  \right) $
 \subsection{Complement}
 
 \dfn{Complement}{
-	Let $A$ be a set. The \textit{complement} of the set A (with respect to $\mathbb{U}$), denoted by $\overline{A}$ is the set
-	$\mathbb{U} - A$. I.e.
+	Let $A$ be a set. The \textit{complement} of the set A (with respect to $U$), denoted by $\overline{A}$ is the set
+	$U - A$. I.e.
 	\[
-		\overline{A} = \left\{ x \in \mathbb{U}  \mid x \notin A \right\}
+		\overline{A} = \left\{ x \in U  \mid x \notin A \right\}
 	\]
 }
 
@@ -561,8 +571,8 @@ shorthand for $\forall x \left( x \in S \to P \left( x \right)  \right) $
 \ex{}{
 	\qs{}{
 		\begin{align*}
-			\mathbb{U} = \left\{ 0,1,2,3,4,5,6,7,8,9,10 \right\} \\
-			A = \left\{ 1,2,3,4,5 \right\}                       \\
+			U = \left\{ 0,1,2,3,4,5,6,7,8,9,10 \right\} \\
+			A = \left\{ 1,2,3,4,5 \right\}              \\
 			B = \left( 4,5,6,7,8 \right)
 		\end{align*}
 		What is $A \oplus B$
@@ -587,14 +597,14 @@ The cardinality of the union of two sets $A$ and $B$ is given by
 \subsection{Identity Laws}
 
 \begin{align*}
-	A \cap   \mathbb{U} = A \\
+	A \cap   U = A \\
 	A \cup  \O = A
 \end{align*}
 
 \subsection{Domination Laws}
 
 \begin{align*}
-	A \cup \mathbb{U} = \mathbb{U} \\
+	A \cup U = U \\
 	A \cap \O = \O
 \end{align*}
 
@@ -604,6 +614,11 @@ The cardinality of the union of two sets $A$ and $B$ is given by
 	A \cup A = A \\
 	A \cap A = A
 \end{align*}
+
+\subsection{Complementation Law}
+\[
+	\overline{\left( \overline{A} \right) } = A
+\]
 
 \subsection{Commutative Laws}
 
@@ -623,13 +638,25 @@ The cardinality of the union of two sets $A$ and $B$ is given by
 
 \begin{align*}
 	A \cup \left( B \cap C \right)  = \left( A \cup B \right)  \cap \left( A \cup C \right) \\
-	A \cap \left( B \cup  \right)  = \left( A \cap B \right)  \cup \left( A \cap C \right)
+	A \cap \left( B \cup C  \right)  = \left( A \cap B \right)  \cup \left( A \cap C \right)
 \end{align*}
 
 \subsection{De Morgan's Laws}
 \begin{align*}
 	\overline{A \cap  B} = \overline{A} \cup \overline{B} \\
 	\overline{A \cup B } = \overline{A} \cap \overline{B}
+\end{align*}
+
+\subsection{Absorption Laws}
+\begin{align*}
+	A \cup \left( A \cap B \right) = A \\
+	A \cap  \left( A \cup B  \right)  = A
+\end{align*}
+
+\subsection{Complement Laws}
+\begin{align*}
+	A \cup \overline{A} = U \\
+	A \cap \overline{A} = \O
 \end{align*}
 
 \subsection{Proving Set Identities}
@@ -644,6 +671,7 @@ There are different ways to prove set identities, these include:
 \dfn{Membership Table}{
 	A table that shows the truth value of a predicate for all possible combinations of truth values of its variables.
 }
+
 
 \ex{}{
 	\qs{}{
@@ -668,7 +696,7 @@ There are different ways to prove set identities, these include:
 		\end{align*}
 		Assume that $x \in  \overline{A \cap  B}$\\
 		\begin{align*}
-			x = \overline{A \cap B}                               \tag*{Assumption}               \\
+			x \in  \overline{A \cap B}                               \tag*{Assumption}            \\
 			x \notin A \cap B                                     \tag*{Definition of Complement} \\
 			\neg \left( x \in A \cap B \right)                    \tag*{Definition of $\notin$ }  \\
 			\neg \left( x \in A \wedge x \in B \right)   \tag*{Definition of intersection}        \\
@@ -677,13 +705,23 @@ There are different ways to prove set identities, these include:
 			x \notin A \vee x \notin B \tag*{Definition of Complement}                            \\
 			x \in \overline{A} \cup \overline{B} \tag*{Definition of union}
 		\end{align*}
+		Then we assume $x \in \overline{A} \cup \overline{B}$
+		\begin{align*}
+			x \in \overline{A} \cup \overline{B} \tag*{Assumption}                                               \\
+			x \notin A \vee x \notin B \tag*{Definition of union}                                                \\
+			\neg \left( x \in A \right)  \vee  \neg \left( x \in B \right)  \tag*{Definition of Complement}      \\
+			\neg \left( x \in A \wedge  x \in B \right) \tag*{By Second De Morgan's Law for propositional logic} \\
+			x \notin A \wedge x \notin B \tag*{Definition of Complement}                                         \\
+			x \notin A \cap B \tag*{Definition of intersection}                                                  \\
+			x \in \overline{A \cap B} \tag*{Definition of Complement}
+		\end{align*}
 
 	\end{myproof}
 	\noindent Using set builder notation
 	\begin{align*}
 		\overline{A \cap B} & = \{ x  \mid x \notin A \cap B\} \tag*{Definition of Complement}                                                \\
 		                    & = \{x  \mid \neg \left( x \in \left( A \cap B \right)  \right) \} \tag*{Definition of $\notin$}                 \\
-		                    & = \{x  \mid \neg \left( x \in A \wedge x \in B \right) \} \tag*{Defintion of Intersection}                      \\
+		                    & = \{x  \mid \neg \left( x \in A \wedge x \in B \right) \} \tag*{Definition of Intersection}                     \\
 		                    & = \{x  \mid \neg \left( x \in A \right) \vee \neg \left( x \in B \right)  \} \tag*{By First De Morgan's Law for
 		propositional logic}                                                                                                                  \\
 		                    & = \{x  \mid x \notin A \vee x \notin B\} \tag*{Definition of Complement}                                        \\
@@ -692,6 +730,67 @@ There are different ways to prove set identities, these include:
 	\end{align*}
 }
 
+\section{Generalized Unions and Intersections}
+
+\dfn{Generalized Union}{
+	The union of a collection of sets  that contains those elements that are members of at least one set in the
+	collection. Denoted by
+	\[
+		A_1 \cup A_2 \cup \ldots \cup A_n = \bigcup_{i = 1} ^n A_i
+	\]
+	Where $A_1 \cup A_2 \cup  \ldots A_n$ is the union of sets $A_1,A_2,\ldots,A_n$
+}
+
+\dfn{Generalized Intersection}{
+	The intersection of a collection of sets that contains those elements that are members of all the sets in the
+	collection. Denoted by
+	\[
+		A_1 \cap A_2 \cap \ldots A_n = \bigcap_{i = 1} ^n A_i
+	\]
+	Where $A_1 \cap A_2 \cap \ldots \cap A_n$ is the intersection of sets $A_1,A_2,\ldots,A_n$
+}
+
+\ex{}{
+	For $i = 1,2,\ldots,$ let $A_i = \{i,i+1,i+2,\ldots\} $. Then.
+	\[
+		\bigcup_{i = 1} ^n A_i = \bigcup_{i = 1} ^n \{i, i+1, i+2,\ldots\} = \{1,2,3,\ldots\}
+	\]
+	and
+	\[
+		\bigcap_{i = 1} ^{n}A_i = \bigcap_{i = 1} ^{n}\{i,i+1,i+2,\ldots\} = \{n, n+1, n+2\} = A_n
+	\]
+}
+
+We can extend this notation to other families of sets I.e.
+\[
+	A_1 \cup A_2 \cup \ldots \cup A_n \cup \ldots = \bigcup_{i = 1} ^{\infty}A_i
+\]
+Denotes the union of the sets $A_1,A_2,\ldots,A_n,\ldots$, and the intersection of these sets is denoted by
+\[
+	A_1 \cap A_2 \cap \ldots \cap A_n \cap \ldots = \bigcap_{i = 1} ^{\infty}A_i
+\]
+
+Generally when $I$ is set, the notations $\bigcap_{i \in  I}A_i $ and $\bigcup_{i \in  I}A_i $ are used to denote the
+intersection and union of the sets $A_i$ for $i \in I$, respectively, where
+\[
+	\bigcap_{i \in  I} A_i = \{x  \mid \forall i \in I \left( x \in A_i \right) \}
+\]
+and
+\[
+	\bigcup_{i \in  I}  A_i = \{x  \mid \exists i \in I \left( x \in A_i \right) \}
+\]
+
+\ex{}{
+	Suppose $A_i = \{1,2,3,\ldots,i\} $ for $i = \{1,2,3,\ldots\} $ Then
+	\[
+		\bigcup_{i = 1} ^{\infty} A_i = \bigcup_{i = 1}^{\infty}  \{1,2,3,\ldots,i\}  = \mathbb{Z}^{+}
+	\]
+
+	and
+	\[
+		\bigcap_{i = 1} ^{\infty}A_i = \bigcap_{i = 1} ^{\infty} \{1,2,3,\ldots,i\}  = \{1\}
+	\]
+}
 
 \section{Exercises}
 
@@ -699,9 +798,8 @@ There are different ways to prove set identities, these include:
 	List the members of these sets
 	\begin{enumerate}
 		\item  $\left\{ x  \mid x \text{ is a real number such that } x^2 = 1 \right\}$
-		\item
-		\item
-		\item
+		\item $\{x | x \text{ is a positive integer less than 12}\} $
+		\item $\{x | x \text{ is the square of an integer and } x < 100\} $
 		\item $ \left\{ x  \mid  x \text{ is an integer such that } x^2 = 2 \right\} $
 	\end{enumerate}
 }
@@ -711,7 +809,6 @@ There are different ways to prove set identities, these include:
 		\item $\left\{ -1, 1 \right\} $
 		\item
 		\item
-		\item
 		\item $ \O $
 	\end{enumerate}
 }
@@ -719,9 +816,9 @@ There are different ways to prove set identities, these include:
 \qs{}{
 	Use set builder notation to show that:
 	\begin{enumerate}
-		\item $A \cup \mathbb{U} = \mathbb{U}$
+		\item $A \cup U = U$
 		\item $A \cap \O = \O$
-		\item $A \cup  \overline{A} = \mathbb{U}$
+		\item $A \cup  \overline{A} = U$
 		\item $A \cap \overline{A} = \O$
 	\end{enumerate}
 }
@@ -730,11 +827,11 @@ There are different ways to prove set identities, these include:
 	\begin{enumerate}
 		\item
 		      \begin{align*}
-			      A \cup \mathbb{U} & = \{ x  \mid x \in A \cup \mathbb{U}\} \tag*{Set builder notation}        \\
-			                        & = \{x  \mid x \in A \vee   x \in \mathbb{U} \} \tag*{Definition of Union} \\
-			                        & = \{x  \mid  x \in A \vee  T\} \tag*{Definition of Universal Set}         \\
-			                        & = \{x  \mid T \} \tag*{By Domination law for propositional logic}         \\
-			                        & = \mathbb{U} \tag*{Definition of Universal Set}                           \\
+			      A \cup U & = \{ x  \mid x \in A \cup U\} \tag*{Set builder notation}         \\
+			               & = \{x  \mid x \in A \vee   x \in U \} \tag*{Definition of Union}  \\
+			               & = \{x  \mid  x \in A \vee  T\} \tag*{Definition of Universal Set} \\
+			               & = \{x  \mid T \} \tag*{By Domination law for propositional logic} \\
+			               & = U \tag*{Definition of Universal Set}                            \\
 		      \end{align*}
 		\item
 		\item
@@ -746,6 +843,118 @@ There are different ways to prove set identities, these include:
 			                          & = \{x | x \in A \wedge  \neg \left( x \in  A \right) \} \tag*{Definition of $\O$}        \\
 			                          & = \{x  \mid F\} \tag*{By Identity law of propositional logic}                            \\
 			                          & = \O \tag*{Definition of $\O$}                                                           \\
+		      \end{align*}
+	\end{enumerate}
+}
+
+\qs{}{
+	Let $A$ and $B$ be sets. Show that
+	\begin{enumerate}
+		\item $\left( A \cap B \right) \subseteq A $
+		\item $A \subseteq \left( A \cup B \right) $
+		\item $A \subseteq \left( A \cup B \right) $
+		\item $A - B \subseteq A$
+		\item $A \cap \left( B - A \right) = \O $
+		\item $A \cup \left( B - A \right) = A \cup B $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      \left( A \cap B \right) \subseteq A \text{ means } \forall x \left( x \in \left( A \cap B \right) \to x \in A  \right)
+		      \end{align*}
+		      Assume $x \in \left( A \cap B \right) $
+		      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+		      \begin{table}[h!]
+			      \begin{center}
+				      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+					      \hline
+					      \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons} \\
+					      \hline
+					      \hline
+					      $x \in A \cap B$                                       & Assumption                    \\
+					      $x \in A \wedge x \in B$                               & Definition of intersection    \\
+					      $x \in A$                                              & Simplification of 2           \\
+					      \hline
+				      \end{tabular}
+			      \end{center}
+		      \end{table}
+		      \\
+		      $\therefore$ $x \in \left( A \cap B \right) \to x \in A $\\
+		      Conclusion: $\left( A \cap B \right) \subseteq A $
+		\item
+		      \begin{myproof}
+			      \[
+				      A \subseteq \left( A \cup B \right)  \text{ means } \forall x \left( x \in A \to x \in A \cup B \right)
+			      \]
+			      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+			      \begin{table}[h!]
+				      \begin{center}
+					      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+						      \hline
+						      \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons} \\
+						      \hline
+						      \hline
+						      $x \in A$                                              & Premise                       \\
+						      $x \in A \wedge x \in B$                               & Addition                      \\
+						      $x \in A \cup B $                                      & Definition of Union           \\
+						      \hline
+					      \end{tabular}
+				      \end{center}
+			      \end{table}\\
+			      $\therefore$ $x \in A \to x \in A \cup B$\\
+			      Conclusion: $A \subseteq A \cup B$
+		      \end{myproof}
+		\item
+		      \begin{myproof}
+
+		      \end{myproof}
+
+		\item
+		      \begin{myproof}
+
+		      \end{myproof}
+
+		\item
+		      \begin{myproof}
+
+		      \end{myproof}
+
+		\item
+		      \begin{myproof}
+
+		      \end{myproof}
+
+	\end{enumerate}
+}
+
+\qs{}{
+	Show that if $A$ is a subset of a universal set $U$, then
+	\begin{enumerate}
+		\item $A \oplus A = \O$
+		\item $A \oplus  \O = A$
+		\item $A \oplus U = \overline{A}$
+		\item $A \oplus \overline{A} = U$
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      A \oplus A & = \left( A - A \right)  \cup \left( A - A \right) \tag*{Definition of Symmetric Difference}        \\
+			                 & = \{x  \mid  \left( x \in A \wedge x \notin A \right) \cup \left( x \in A \wedge x \notin A
+			      \right)  \} \tag*{Definition of Difference}                                                                     \\
+			                 & = \{x  \mid  \left( x \in A \wedge x \in \overline{A} \right) \cup  \left( x \in A \wedge
+			      x \in \overline{A}\right)  \} \tag*{Definition of Complement}
+			      \\
+			                 & = \{x  \mid \left( x \in A \cap \overline{A} \right)\cup  \left( x \in A \cap \overline{A} \right)
+			      \} \tag*{Definition of Intersection}                                                                            \\
+			                 & = \{x  \mid \O \cup \O\} \tag*{By Second Complement Law}                                           \\
+			                 & = \{x  \mid \O \} \tag*{By First Idempotent Law}                                                   \\
+			                 & = \O \tag*{By Definition of $\O$}                                                                  \\
 		      \end{align*}
 	\end{enumerate}
 }

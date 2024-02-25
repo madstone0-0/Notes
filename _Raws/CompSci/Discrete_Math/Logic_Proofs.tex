@@ -978,12 +978,19 @@ Given a circuit built from these gates we can determine the output by tracing th
 \sol{
 	\begin{table}[h!]
 		\begin{center}
-			\begin{tabular}{|c c c c|c|c|c|}
+			\begin{tabular}{|c c c  c|c|c|c|}
 				\hline
-				$p$ & $q$ & $r$ & $\neg r$ & $ p \to q $ & $\neg p \to r$ & $ \left( p \to q \right) \vee 		\left( \neg p \to r \right) $ \\ [0.5ex]
+				$p$ & $q$ & $r$ & $\neg p$ & $ p \to q $ & $\neg p \to r$ & $ \left( p \to q \right) \vee 		\left( \neg p \to r \right) $ \\ [0.5ex]
 				\hline
 				\hline
-
+				$T$ & $T$ & $T$ & $F$      & $T$         & $T$            & $T$                                                           \\
+				$T$ & $T$ & $F$ & $F$      & $T$         & $T$            & $T$                                                           \\
+				$T$ & $F$ & $T$ & $F$      & $F$         & $T$            & $T$                                                           \\
+				$F$ & $T$ & $T$ & $T$      & $T$         & $T$            & $T$                                                           \\
+				$F$ & $F$ & $F$ & $T$      & $T$         & $F$            & $T$                                                           \\
+				$F$ & $F$ & $T$ & $T$      & $T$         & $T$            & $T$                                                           \\
+				$F$ & $T$ & $T$ & $T$      & $T$         & $T$            & $T$                                                           \\
+				$T$ & $F$ & $F$ & $F$      & $F$         & $T$            & $T$                                                           \\
 				\hline
 			\end{tabular}
 		\end{center}

@@ -1,0 +1,121 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\title{\Huge{Assignment 6}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{February 2024}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+	\begin{enumerate}
+		\item $A \cup \O = A$
+		\item $A \cap U = A$
+	\end{enumerate}
+
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      A \cup \O & = \{ x  \mid x \in A \vee    x \in \O \}  \tag*{Definition of Union} \\
+			                & = \{x  \mid x \in A \vee   \O \} \tag*{Definition of empty set}      \\
+			                & = \{x  \mid  x \in A \cup \O\} \tag*{Definition of Union}            \\
+			                & = \{x  \mid x \in A\} \tag*{By Second Identity Law}                  \\
+			                & = A \tag*{Defintion of the set $A$}                                  \\
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      A \cap  U & = \{x  \mid x \in A \wedge   x \in U\} \tag*{Defintion of Intersection} \\
+			                & = \{x  \mid x \in A \wedge  U  \} \tag*{Definition of Universal Set}    \\
+			                & = \{x  \mid x \in A \cap  U\} \tag*{Definition of Intersection}         \\
+			                & = \{x | x \in A\} \tag*{By First Identity Law}                          \\
+			                & = A \tag*{Definition of the set $A$}                                    \\
+		      \end{align*}
+	\end{enumerate}
+
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item $\left( A \cup B \right) \subseteq \left( A \cup B \cup C \right)  $
+		\item $\left( A \cap B \cap C \right) \subseteq \left( A \cap B \right)  $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      $\left( A \cup B \right) \subseteq \left( A \cup B \cup C \right)  $ means $\forall x \left( x \in \left( A
+				      \cup B\right) \to x \in  \left( A \cup B \cup C \right)   \right) $
+		      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+		      \begin{table}[h!]
+			      \begin{center}
+				      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+					      \hline
+					      \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons} \\
+					      \hline
+					      \hline
+					      $x \in A \cup B$                                       & Premise                       \\
+					      $x \in A \vee  x \in B $                               & Definition of Union           \\
+					      $x \in A \vee  x \in B \vee  x \in C$                  & By Addition on 2              \\
+					      $x \in A \cup B \cup C$                                & Definition of Union           \\
+					      \hline
+				      \end{tabular}
+			      \end{center}
+		      \end{table} \\
+		      $\therefore$ $x \in \left( A \cup B \right) \to x \in \left( A \cup B \cup C \right)  $ \\
+		      Hence $\left( A \cup B \right) \subseteq \left( A \cup B \cup C \right)  $
+
+
+		\item $\left( A \cap B \cap C \right) \subseteq \left( A \cap B \right)$ means  $\forall x \left( x \in \left( A
+				      \cap B \cap C \right) \to x \in  \left( A \cap B \right)   \right)$
+		      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+		      \begin{table}[h!]
+			      \begin{center}
+				      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+					      \hline
+					      \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons} \\
+					      \hline
+					      \hline
+					      $x \in A \cap B \cap C$                                & Premise                       \\
+					      $x \in A \wedge x \in B \wedge  x \in C$               & Definition of Intersection    \\
+					      $x \in A \wedge x \in B$                               & By Simplification on 2        \\
+					      $x \in A \cap B $                                      & Definition of Intersection    \\
+					      \hline
+				      \end{tabular}
+			      \end{center}
+		      \end{table} \\
+		      $\therefore$ $x \in \left( A \cap B \cap C \right) \to x \in \left( A \cap B \right)  $ \\
+		      Hence $\left( A \cap B \cap C \right) \subseteq \left( A \cap B \right)  $
+	\end{enumerate}
+}
+
+\qs{}{
+	\begin{enumerate}
+		\item $x \cdot 1 = 0$
+		\item $x + x = 0$
+		\item $x \cdot 1 = x$
+		\item $x \cdot \overline{x} = 1$
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $0$
+		\item $0$
+		\item $0$ and $1$
+		\item $0$ and $1$
+	\end{enumerate}
+}
+
+
+
+\end{document}

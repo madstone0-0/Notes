@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
+from collections.abc import Callable
 from pathlib import Path
 from subprocess import Popen, PIPE
 import shutil
 from sys import exit, argv
 from os import chdir
 from hashlib import md5
+import datetime
 import json
 
 # from icecream import ic
@@ -107,6 +109,8 @@ def compileMarkdown(file, exportDir) -> str:
             [
                 f"{pandocPath}",
                 "--pdf-engine=tectonic",
+                # "--pdf-engine=latexmk",
+                "-s",
                 f"{file}",
                 "-o",
                 f"{exportDir}/{filename}.pdf",
@@ -123,22 +127,35 @@ def compileMarkdown(file, exportDir) -> str:
     return out
 
 
-def compileOne(dir: str, force: bool) -> list[str]:
+def compileOne(dir: str, force: bool, mtime: bool) -> list[str]:
     checksums = readChecksumJSON()
     out: list[str] = []
     newPath = exportPath / dir
     Path.mkdir(newPath, parents=True, exist_ok=True)
     workingDir = rawPath / Path(dir)
-    for file in workingDir.glob("*.tex"):
-        if genChecksum(file) != checksums[str(file)] or force:
-            out.append(compileLatex(file, exportPath / dir))
-    for file in workingDir.glob("*.md"):
-        if genChecksum(file) != checksums[str(file)] or force:
-            out.append(compileMarkdown(file, exportPath / dir))
+    now = datetime.datetime.now()
+
+    def walkDir(suffix: str, f: Callable[[Path], str]):
+        for file in workingDir.rglob(f"*{suffix}"):
+            modTime = file.stat().st_mtime
+            nowUpper = now + datetime.timedelta(minutes=5)
+            nowUpper = nowUpper.timestamp()
+            nowLower = now - datetime.timedelta(minutes=5)
+            nowLower = nowLower.timestamp()
+
+            if (
+                genChecksum(file) != checksums[str(file)]
+                or force
+                or (mtime and (modTime > nowLower and modTime < nowUpper))
+            ):
+                out.append(f(file, exportPath / dir))
+
+    walkDir(".tex", compileLatex)
+    walkDir(".md", compileMarkdown)
     return out
 
 
-def compileMany(dirs: list[str], force: bool):
+def compileMany(dirs: list[str], force: bool, mtime: bool):
     FolderQueue: SimpleQueue[str] = SimpleQueue()
     todo_list_map = {}
     with ThreadPoolExecutor(10) as exc:
@@ -148,7 +165,7 @@ def compileMany(dirs: list[str], force: bool):
         if not FolderQueue.empty():
             while True:
                 folder = FolderQueue.get()
-                job: Future = exc.submit(compileOne, folder, force)
+                job: Future = exc.submit(compileOne, folder, force, mtime)
                 todo_list_map[job] = folder
                 if FolderQueue.empty():
                     break
@@ -180,11 +197,22 @@ if __name__ == "__main__":
     ]
 
     force = False
+    clean = False
+    mtime = False
     if len(args) > 0:
         if args[0] == "force":
             force = True
+        elif args[0] == "clean":
+            clean = True
+        elif args[0] == "mtime":
+            mtime = True
 
-    compileMany(dirs, force)
+    if clean:
+        cleanLatexArtifacts(rawPath)
+        cleanLatexArtifacts(exportPath)
+        exit(0)
+
+    compileMany(dirs, force, mtime)
     cleanLatexArtifacts(rawPath)
     cleanLatexArtifacts(exportPath)
     writeChecksumJSON([rawPath / Path(dir) for dir in dirs])

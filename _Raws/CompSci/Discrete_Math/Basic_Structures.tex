@@ -807,8 +807,8 @@ and
 \sol{
 	\begin{enumerate}
 		\item $\left\{ -1, 1 \right\} $
-		\item
-		\item
+		\item $\{1,2,3,4,5,6,7,8,9,10,11\} $
+		\item $\{0, 1, 4, 9, 16, 25, 36, 49, 64, 81\} $
 		\item $ \O $
 	\end{enumerate}
 }
@@ -827,21 +827,37 @@ and
 	\begin{enumerate}
 		\item
 		      \begin{align*}
-			      A \cup U & = \{ x  \mid x \in A \cup U\} \tag*{Set builder notation}         \\
-			               & = \{x  \mid x \in A \vee   x \in U \} \tag*{Definition of Union}  \\
-			               & = \{x  \mid  x \in A \vee  T\} \tag*{Definition of Universal Set} \\
-			               & = \{x  \mid T \} \tag*{By Domination law for propositional logic} \\
-			               & = U \tag*{Definition of Universal Set}                            \\
+			      A \cup U & = \{ x  \mid x \in A \cup U\} \tag*{Set builder notation}               \\
+			               & = \{x  \mid x \in A \vee   x \in U \} \tag*{Definition of Union}        \\
+			               & = \{x  \mid  x \in A \vee  T\} \tag*{Definition of Universal Set}       \\
+			               & = \{x  \mid T \} \tag*{By First Domination law for propositional logic} \\
+			               & = U \tag*{Definition of Universal Set}                                  \\
 		      \end{align*}
 		\item
+		      \begin{align*}
+			      A \cap \O & = \{ x \mid x \in A \cap \O\}  \tag*{Set builder notation}               \\
+			                & = \{x  \mid x \in A \wedge x \in \O \} \tag*{Definition of Intersection} \\
+			                & = \{x  \mid x \in A \wedge  F\} \tag*{Definition of Empty set}           \\
+			                & = \{x  \mid F\} \tag*{By Second Domination Law for propositional logic}  \\
+			                & = \O \tag*{Definition of Empty set}                                      \\
+		      \end{align*}
 		\item
+		      \begin{align*}
+			      A \cup \overline{A} & = \{x  \mid x \in A \cap \overline{A}\}  \tag*{Set builder notation}                       \\
+			                          & = \{x  \mid x \in A \vee  x \in \overline{A}\} \tag*{Definition of Union}                  \\
+			                          & = \{x  \mid x \in A \vee  x \notin A\} \tag*{Definition of Complement}                     \\
+			                          & = \{x  \mid x  \in A \vee  \neg \left( x \in A \right)  \} \tag*{Definition of Complement} \\
+			                          & = \{x  \mid T\} \tag*{By First Negation Law for propositional logic}                       \\
+			                          & = U \tag*{Definition of Universal set}                                                     \\
+		      \end{align*}
 		\item
 		      \begin{align*}
 			      A \cap \overline{A} & = \{ x  \mid x \in A \cap \overline{A}\} \tag*{Set builder notation}                     \\
 			                          & = \{x  \mid x \in A \wedge x \in \overline{A} \} \tag*{Definition of intersection}       \\
 			                          & = \{x  \mid x \in A \wedge \left( x \notin A \right)  \} \tag*{Definition of Complement} \\
-			                          & = \{x | x \in A \wedge  \neg \left( x \in  A \right) \} \tag*{Definition of $\O$}        \\
-			                          & = \{x  \mid F\} \tag*{By Identity law of propositional logic}                            \\
+			                          & = \{x | x \in A \wedge  \neg \left( x \in  A \right) \} \tag*{Definition of
+			      Complement}                                                                                                    \\
+			                          & = \{x  \mid F\} \tag*{By Second Negation law of propositional logic}                     \\
 			                          & = \O \tag*{Definition of $\O$}                                                           \\
 		      \end{align*}
 	\end{enumerate}
@@ -851,7 +867,6 @@ and
 	Let $A$ and $B$ be sets. Show that
 	\begin{enumerate}
 		\item $\left( A \cap B \right) \subseteq A $
-		\item $A \subseteq \left( A \cup B \right) $
 		\item $A \subseteq \left( A \cup B \right) $
 		\item $A - B \subseteq A$
 		\item $A \cap \left( B - A \right) = \O $
@@ -907,25 +922,49 @@ and
 			      $\therefore$ $x \in A \to x \in A \cup B$\\
 			      Conclusion: $A \subseteq A \cup B$
 		      \end{myproof}
-		\item
-		      \begin{myproof}
-
-		      \end{myproof}
 
 		\item
 		      \begin{myproof}
-
+			      $A - B \subseteq A$ means $\forall x \left( x \in A - B \to x \in  A \right) $ \\
+			      Assume $ x \in A - B$\\
+			      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+			      \begin{table}[h!]
+				      \begin{center}
+					      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+						      \hline
+						      \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons} \\
+						      \hline
+						      \hline
+						      $x \in A - B$                                          & Assumption                    \\
+						      $x \in A \wedge x \notin B$                            & Definition of Difference      \\
+						      $x \in A$                                              & By Simplification on 2        \\
+						      \hline
+					      \end{tabular}
+				      \end{center}
+			      \end{table}\\
+			      $\therefore$ $x \in A - B \to x \in A$ \\
+			      Hence $A - B \subseteq A$
 		      \end{myproof}
 
 		\item
-		      \begin{myproof}
-
-		      \end{myproof}
+		      \begin{align*}
+			      A \cap \left( B - A \right) & =  A \cap \left( B \cap \overline{A} \right) \tag*{Definition of Difference} \\
+			                                  & = B \cap \left( A \cap \overline{A} \right) \tag*{By Second Associative Law} \\
+			                                  & = B \cap \O \tag*{By Second Complement Law}                                  \\
+			                                  & = \O \tag*{By Second Domination Law}                                         \\
+		      \end{align*}
+		      Hence $A \cap \left( B - A \right) = \O $
 
 		\item
-		      \begin{myproof}
-
-		      \end{myproof}
+		      \begin{align*}
+			      A \cup \left( B - A \right) & = A \cup \left( B \cap \overline{A} \right)  \tag*{Definition of Difference}                       \\
+			                                  & = \left( A \cup B \right) \cap \left( A \cup \overline{A} \right) \tag*{By First Distributive Law} \\
+			                                  & = \left( A \cup B \right) \cap U  \tag*{By First Complement Law}                                   \\
+			                                  & = \left( A \cap U \right) \cup \left( B \cap U  \right) \tag*{By Second
+			      Distributive Law}                                                                                                                \\
+			                                  & = A \cup B \tag*{By First Identity Law}                                                            \\
+		      \end{align*}
+		      Hence $A \cup \left( B - A \right) = A \cup B $
 
 	\end{enumerate}
 }
@@ -944,18 +983,198 @@ and
 	\begin{enumerate}
 		\item
 		      \begin{align*}
-			      A \oplus A & = \left( A - A \right)  \cup \left( A - A \right) \tag*{Definition of Symmetric Difference}        \\
-			                 & = \{x  \mid  \left( x \in A \wedge x \notin A \right) \cup \left( x \in A \wedge x \notin A
-			      \right)  \} \tag*{Definition of Difference}                                                                     \\
-			                 & = \{x  \mid  \left( x \in A \wedge x \in \overline{A} \right) \cup  \left( x \in A \wedge
-			      x \in \overline{A}\right)  \} \tag*{Definition of Complement}
-			      \\
-			                 & = \{x  \mid \left( x \in A \cap \overline{A} \right)\cup  \left( x \in A \cap \overline{A} \right)
-			      \} \tag*{Definition of Intersection}                                                                            \\
-			                 & = \{x  \mid \O \cup \O\} \tag*{By Second Complement Law}                                           \\
-			                 & = \{x  \mid \O \} \tag*{By First Idempotent Law}                                                   \\
-			                 & = \O \tag*{By Definition of $\O$}                                                                  \\
+			      A \oplus A & = \{x  \mid A \oplus A\} \tag*{Set Builder Notation}                                                   \\
+			                 & = \{x  \mid x \in \left( A - A \right) \cup \left( A - A \right)  \} \tag*{Definition of Symmetric
+			      Difference}                                                                                                         \\
+			                 & = \{x  \mid \left( x \in A - A \right) \vee \left( x \in A - A \right)   \} \tag*{Definition of Union} \\
+			                 & = \{x  \mid x \in A - A\} \tag*{By Idempotent Law for propositional logic}                             \\
+			                 & =  \{ x  \mid \left( x \in A \right) \wedge \left( x \notin A \right)   \}
+			      \tag*{Definition of Difference}                                                                                     \\
+			                 & = \{x  \mid \left( x \in A \right) \wedge \neg \left( x \in A \right)  \}
+			      \tag*{Definition of Complement}                                                                                     \\
+			                 & = \{x  \mid F\} \tag*{By First Negation Law for propositional logic }                                  \\
+			                 & = \O                                                                                                   \\
 		      \end{align*}
+		      Hence $A \oplus A = \O$
+		\item
+		      \begin{align*}
+			      A \oplus \O & = \{ x  \mid A \oplus \O\} \tag*{Set Builder Notation}                                               \\
+			                  & = \{x  \mid x \in \left( A - \O \right) \cup \left( \O - A \right)  \} \tag*{Definition of Symmetric
+			      Difference}                                                                                                        \\
+			                  & = \{x  \mid x \in \left( A - \O \right) \vee  x \in \left( \O - A \right)  \} \tag*{Definition of
+			      Union}                                                                                                             \\
+			                  & = \{x  \mid \left( x \in A \wedge  x \notin \O \right)\vee  \left( x \in \O \wedge x \notin A
+			      \right)   \} \tag*{Definition of Difference}                                                                       \\
+			                  & = \{x  \mid \left( x \in A \wedge  \neg \left( x \in \O \right)  \right) \vee  \left( x
+			      \in \O \wedge
+			      \neg  \left( x \in A \right) \right)  \} \tag*{Definition of Complement}                                           \\
+			                  & = \{x  \mid \left( x \in A \wedge  \neg \left( F \right)  \right) \vee \left( F \wedge \neg \left( x
+			      \in A\right)   \right)   \} \tag*{Definition of $\in $}                                                            \\
+			                  & = \{x  \mid \left( x \in A \wedge T \right) \vee \left( F \right)  \} \tag*{By Second Domination Law
+			      for propositional logic}                                                                                           \\
+			                  & = \{x \mid x \in A \vee F\} \tag*{By First Identity Law for propositional logic}                     \\
+			                  & = \{x  \mid x \in A\} \tag*{By Second Identity Law for propositional logic}                          \\
+			                  & = A \tag*{Definition of set $A$}                                                                     \\
+		      \end{align*}
+		      By set identities:
+		      \begin{align*}
+			      A \oplus \O & = \left( A - \O \right)  \cup \left( \O - A \right)  \tag*{Definition of Symmetric Difference}       \\
+			                  & = \left( A \cap \overline{\O} \right) \cup \left( \O \cap \overline{A} \right) \tag*{Definition of
+			      Difference}                                                                                                        \\
+			                  & = \left( A \cap U \right) \cup \left( \O \cap \overline{A} \right) \tag*{Complementation of an Empty
+			      set}                                                                                                               \\
+			                  & = \left( A \right) \cup \left( \O \cap \overline{A} \right) \tag*{By First Identity Law}             \\
+			                  & = A \cup \left( \overline{A} \cap \O \right) \tag*{By Second Commutative Law}                        \\
+			                  & = A \cup \O \tag*{By Second Domination Law}                                                          \\
+			                  & = A \tag*{By Second Identity Law}                                                                    \\
+		      \end{align*}
+		      Hence $A \oplus \O = A$
+		\item
+		      \begin{align*}
+			      A \oplus U & = \left( A - U \right) \cup \left( U - A \right) \tag*{Definition of Symmetric Difference}       \\
+			                 & = \left( A \cap \overline{U} \right) \cup \left( U \cap \overline{A} \right) \tag*{Definition of
+			      Difference}                                                                                                   \\
+			                 & = \left( A \cap \O \right) \cup \left( U \cap \overline{A} \right) \tag*{Complementation of the
+			      Universal set}                                                                                                \\
+			                 & = \O \cup \left( U \cap \overline{A} \right) \tag*{By Second Domination Law }                    \\
+			                 & = \O \cup \left( \overline{A} \cap U  \right) \tag*{By Second Commutative Law}                   \\
+			                 & = \O \cup \overline{A} \tag*{By First Identity Law}                                              \\
+			                 & = \overline{A} \tag*{By Second Identity Law}                                                     \\
+		      \end{align*}
+		      Hence $A \oplus U = \overline{A}$
+		\item
+		      \begin{align*}
+			      A \oplus \overline{A} & = \left( A - \overline{A} \right) \cup \left( \overline{A} - A \right)
+			      \tag*{Definition of Symmetric Difference}                                                                                     \\
+			                            & = \left( A \cap \overline{\overline{A}} \right) \cup \left( \overline{A} \cap \overline{A} \right)
+			      \tag*{Definition of Difference}                                                                                               \\
+			                            & = \left( A \cap A \right) \cup \left( \overline{A} \cap \overline{A} \right) \tag*{By Complementation
+			      Law}                                                                                                                          \\
+			                            & = A \cup \overline{A} \tag*{By Second Idempotent Law}                                                 \\
+			                            & = U \tag*{By First Complement Law}                                                                    \\
+		      \end{align*}
+		      Hence $A \oplus \overline{A} = U$
+	\end{enumerate}
+}
+
+\qs{}{
+	Find two sets $A$ and $B$ such that $A \in B$ and $A \subseteq B$
+}
+
+\sol{
+	\begin{align*}
+		\text{Let } A & = \O     \\
+		B             & = \{\O\} \\
+	\end{align*}
+}
+
+\qs{}{
+	Find the power set of each of these sets, where $a$ and $b$ are distinct elements.
+	\begin{enumerate}
+		\item $\{a,b\} $
+		\item $\{\O, \{\O\} \} $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \[
+			      \mathcal{P}\left(\{a,b\}   \right) = \{\O, \{a\}, \{b\}, \{a,b\}   \}
+		      \]
+		\item
+		      \[
+			      \mathcal{P}\left( \{\O, \{\O\} \}  \right) = \{\O, \{\O\}, \{\{\O\} \}, \{\O, \{\O\} \}   \}
+		      \]
+	\end{enumerate}
+}
+
+\qs{}{
+	Find the truth set of each of these predicates where the domain is the set of integers
+	\begin{enumerate}
+		\item $Q \left( x \right) $: $x^2 = 2$
+		\item $R \left( x \right) $: $x < x^2$
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item $\O$
+		\item $\{ x \in \mathbb{Z} \mid x \neq 0 \wedge x \neq 1 \} $
+	\end{enumerate}
+}
+
+\qs{}{
+	Let $A$ and $B$ be sets. Show that
+	\begin{enumerate}
+		\item $A \subseteq \left( A \cup B \right) $
+		\item $A - B \subseteq A$
+		\item $A \cap \left( B - A \right) = \O $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{myproof}
+			      \begin{align*}
+				      A \subseteq \left( A \cup B \right) \text{ means } \forall x \left( x \in A \to x \in A \cup B \right)
+			      \end{align*}
+			      Assume $x \in A$\\
+			      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+			      \begin{table}[h!]
+				      \begin{center}
+					      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+						      \hline
+						      \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons} \\
+						      \hline
+						      \hline
+						      $x \in A$                                              & Assumption                    \\
+						      $x \in A \vee x \in B$                                 & Addition on 1                 \\
+						      $x \in A \cup B$                                       & Definition of Union           \\
+						      \hline
+					      \end{tabular}
+				      \end{center}
+			      \end{table}\\
+			      $\therefore$ $x \in A \to x \in A \cup B $\\
+			      Hence $A \subseteq \left( A \cup B \right) $
+		      \end{myproof}
+		\item
+		      \begin{myproof}
+			      \begin{align*}
+				      A - B \subseteq A \text{ means } \forall x \left( x \in A - B \to x \in A \right)
+			      \end{align*}
+			      Assume $x \in A - B$\\
+			      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+			      \begin{table}[h!]
+				      \begin{center}
+					      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+						      \hline
+						      \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons} \\
+						      \hline
+						      \hline
+						      $x \in A - B$                                          & Assumption                    \\
+						      $x \in A \wedge x \notin B$                            & Definition of Difference      \\
+						      $x \in A$                                              & Simplification of 2           \\
+						      \hline
+					      \end{tabular}
+				      \end{center}
+			      \end{table} \\
+			      $\therefore$ $x \in A - B \to x \in A$\\
+			      Hence $A - B \subseteq A$
+		      \end{myproof}
+
+		\item
+		      \begin{align*}
+			      A \cap \left( B - A \right) & = A \cap \left(B \cap \overline{A}  \right) \tag*{Definition of Difference}   \\
+			                                  & = B \cap \left( A \cap \overline{A} \right) \tag*{By Second Distributive Law} \\
+			                                  & = B \cap \O \tag*{By Second Complement Law}                                   \\
+			                                  & = \O  \tag*{By Second Identity Law}                                           \\
+		      \end{align*}
+		      Hence $A \cap \left( B - A \right) = \O $
+
+
+
 	\end{enumerate}
 }
 

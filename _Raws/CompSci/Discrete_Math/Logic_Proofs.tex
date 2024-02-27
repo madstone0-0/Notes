@@ -1253,6 +1253,43 @@ Two compound propositions $p$ and $q$ are logically equivalent if $p \leftrighta
 	\end{enumerate}
 }
 
+\qs{}{
+	Prove the first Idempotent law
+	\[
+		p \vee p \equiv p
+	\]
+}
+
+\sol{
+	\begin{align*}
+		p & \equiv p \vee F \tag*{By Second Identity Law}                                                       \\
+		  & \equiv  p \vee \left( p \wedge \neg p \right) \tag*{By Second Negation Law}                         \\
+		  & \equiv \left( p \vee p \right) \wedge \left( p \vee \neg p \right) \tag*{By First Distributive Law} \\
+		  & \equiv \left( p \vee p \right) \wedge T \tag*{By First Negation Law}                                \\
+		  & \equiv p \vee p \tag*{By First Identity Law}
+	\end{align*}
+}
+
+\qs{}{
+	Prove the first Absorption Law
+	\[
+		p \vee \left( p \wedge q \right) \equiv p
+	\]
+}
+
+\sol{
+	\begin{align*}
+		p & \equiv p \vee p \tag*{By First Idempotent Law}                                                            \\
+		  & \equiv p \vee \left( p \wedge T \right) \tag*{By First Identity Law}                                      \\
+		  & \equiv p \vee \left( p \wedge \left( q \vee T \right)  \right)  \tag*{By First Domination Law}            \\
+		  & \equiv p \vee \left( \left( p \wedge q  \right) \vee \left( p \wedge T \right)    \right) \tag*{By Second
+		Distributive Law}                                                                                             \\
+		  & \equiv p \vee \left( \left( p \wedge q \right) \vee p  \right) \tag*{By First Identity Law}               \\
+		  & \equiv p \vee p \vee  \left( p \wedge q  \right)  \tag*{By First Commutative Law}                         \\
+		  & \equiv p \vee \left( p \wedge q \right)  \tag*{By First Idempotent Law}
+	\end{align*}
+}
+
 \chapter{Predicates and Quantifiers}
 
 Predicate logic uses the following features:
@@ -1673,7 +1710,7 @@ This statement can be written as For all $x$ there exists some $y$ where $x + y 
 
 \noindent $\exists y \forall x P \left( x,y \right) $ using the same domains can be expressed as
 \begin{align*}
-	\exists y \forall x P \left( x,y \right) \equiv \forall x P \left( x,1 \right)  \wedge \forall x P \left( x,3
+	\exists y \forall x P \left( x,y \right) \equiv \forall x P \left( x,1 \right)  \vee \forall x P \left( x,3
 	\right)                                                                                         \\
 	\forall x \left[ P \left( x, 1 \right) \wedge  P \left( x, 1 \right) \wedge  P \left( x,1 \right)    \right]  \vee
 	\left[ P \left( x,3 \right) \wedge  P \left( x,3 \right) \wedge P \left( x,3 \right)    \right] \\
@@ -1996,7 +2033,6 @@ The order of quantifiers is important when all quantifiers are not of the same t
 		\item Somebody in your class has seen a foreign movie.
 		\item There is a person in your class who cannot swim.
 		\item All students in your class can solve quadratic equations.
-		\item Some student in your class
 	\end{enumerate}
 }
 
@@ -2011,6 +2047,38 @@ The order of quantifiers is important when all quantifiers are not of the same t
 			      S \left( x \right) \text{be "$x$ is a student in your class"} \\
 			      C \left( x \right) \text{ be "$x$ has a cellular phone"}      \\
 			      \forall x \left( S \left( x \right) \to C \left( x \right)   \right)
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      \mathbb{U} = \text{ students in your class}                     \\
+			      F \left( x \right) \text{ be "$x$ has seen a foreign movie"}    \\
+			      \exists x F \left( x \right)                                    \\ \\
+			      \mathbb{U} = \text{ all people}                                 \\
+			      S \left( x \right)  \text{ be "$x$ is a student in your class"} \\
+			      F \left( x \right) \text{ be "$x$ has seen a foreign movie"}    \\
+			      \exists x \left( S \left( x \right) \to F \left( x \right)   \right)
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      \mathbb{U} = \text{ students in your class}                     \\
+			      S \left( x \right)  \text{ be "$x$ can swim"}                   \\
+			      \exists x \neg S \left( x \right)                               \\
+			      \\
+			      \mathbb{U} = \text{ all people}                                 \\
+			      S \left( x \right)  \text{ be "$x$ is a student in your class"} \\
+			      W \left( x \right) \text{ be "$x$ can swim"}                    \\
+			      \exists x \left( S \left( x \right) \to \neg W \left( x \right)  \right)
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      \mathbb{U} = \text{ students in your class}                          \\
+			      Q \left( x \right) \text{ be "$x$ can solve quadratic equations" }   \\
+			      \forall x Q \left( x \right)                                         \\
+			      \\
+			      \mathbb{U} = \text{ all people}                                      \\
+			      S \left( x \right)  \text{ be "$x$ is a student in your class"}      \\
+			      Q \left( x \right) \text{ be "$x$ can solve quadratic equations" }   \\
+			      \forall x \left( S \left( x \right) \to Q \left( x \right)   \right) \\
 		      \end{align*}
 	\end{enumerate}
 }
@@ -2052,7 +2120,8 @@ The order of quantifiers is important when all quantifiers are not of the same t
 		      \begin{align*}
 			      \mathbb{U} = \text{ all monkeys}                     \\
 			      F \left( x \right) \text{ be "$x$ can speak French"} \\
-			      \neg \exists x F \left( x \right) \equiv \forall x \neg F \left( x \right)  \tag*{By De Morgan's Law
+			      \neg \exists x F \left( x \right)                    \\
+			      \neg \left( \neg \exists x F \left( x \right) \right)  \equiv \exists  x F \left( x \right)  \tag*{By De Morgan's Law
 			      for Quantifiers}                                     \\
 			       & \text{All monkeys cannot speak French}
 		      \end{align*}
@@ -2468,14 +2537,21 @@ $P \left( c\right) = T $
 					      \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps}                      & \multicolumn{1}{|c|}{Reasons}  \\
 					      \hline
 					      \hline
-					      $\forall m \left( P \left( m \right) \to W \left( m \right)   \right) $     & Premise 1                      \\
-					      $\exists m \left( P \left( m \right) \wedge  C \left( m \right)   \right) $ & Premise 2                      \\
+					      $\forall m \left( P \left( m \right) \to W \left( m \right)    \right) $    & Premise 1                      \\
+					      $\exists m \left( P \left( m \right) \wedge C \left( m \right)   \right) $  & Premise 2                      \\
 					      $P \left( c \right) \wedge C \left( c \right)  $                            & Existential Instantiation of 2 \\
+					      $P \left( c \right) \to W \left( c \right)  $                               & Universal Instantiation of 1   \\
+					      $P \left( c \right) $                                                       & By Simplification of 3         \\
+					      $C \left( c \right) $                                                       & By Simplification of 3         \\
+					      $W \left(c \right) $                                                        & By Modus Ponens on 5 and 4     \\
+					      $W \left( c \right) \wedge C \left( c \right)  $                            & By Conjunction on 7 and 6      \\
+					      $\exists m \left( W \left( m  \right) \wedge C \left( m \right)   \right) $ & Existential
+					      Generalization on 8                                                                                          \\
+
 					      \hline
 				      \end{tabular}
 			      \end{center}
 		      \end{table}
-		\item
 		\item
 		      \begin{align*}
 			      \mathbb{U}_{x} \text{: All people}                                       \\
@@ -2494,20 +2570,24 @@ $P \left( c\right) = T $
 				      \conclusion{\exists x \left( C \left( x \right) \wedge  L \left( x \right)   \right) }
 			      \end{deduction}
 		      \end{align*}
+		      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
 		      \begin{table}[h!]
 			      \begin{center}
-				      \begin{tabular}{| @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+				      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
 					      \hline
-					      Steps                                                                      & Reasons
-					      \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}                                       \\ [0.5ex]
+					      \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps}                     & \multicolumn{1}{|c|}{Reasons}  \\
 					      \hline
 					      \hline
-					      $\exists x \left( C \left( x \right) \wedge F \left( x \right)   \right) $ & Premise                         \\
-					      $\forall x \left( F \left( x \right) \to  L \left( x \right)   \right) $   & Premise                         \\
-					      $C \left( c \right) \wedge F \left( c \right)  $                           & Existential Instantiation on 1. \\
-					      $F \left( c \right) \to L \left( c \right)  $                              & Universal Instantiation on 2.   \\
-					      $F \left( c \right) $                                                      & Simplification on
-					      3.                                                                                                           \\
+					      $\exists x \left( C \left( x \right) \wedge F \left( x \right)   \right) $ & Premise 1                      \\
+					      $\forall x \left( F \left( x \right) \to L \left( x \right)   \right) $    & Premise 2                      \\
+					      $C \left( c \right) \wedge F \left( c \right)  $                           & Existential Instantiation of 1 \\
+					      $F \left( c \right) \to L \left( c \right)  $                              & Universal Instantiation of 2   \\
+					      $C \left( c \right)$                                                       & By Simplification on 3         \\
+					      $F \left( c \right) $                                                      & By Simplification on 3         \\
+					      $L \left( c \right) $                                                      & By Modus Ponens on 6 and 4     \\
+					      $C \left( c \right) \wedge L \left( c \right)  $                           & By Conjunction on 5 and 7      \\
+					      $\exists x \left( C \left( x \right) \wedge L \left( x \right)   \right) $ & Existential
+					      Generalization on 8                                                                                         \\
 
 					      \hline
 				      \end{tabular}
@@ -2737,8 +2817,7 @@ To prove a theorem is a biconditional statement, that is $p \leftrightarrow q$, 
 		      & = \frac{t}{u}
 	\end{align*}
 	Where $u \neq 0$ and $t$ and $u$ are integers. We can conclude $t$ and $u$ are integers because $q$,$r$,$p$,$s$ are
-	integers. And $u\neq 0$ because it is the product of two integers $q$ and $s$ which are both nonzero which are both
-	nonzero.\\
+	integers. And $u\neq 0$ because it is the product of two integers $q$ and $s$ which are both nonzero\\
 	$\therefore \, a + b$ is rational
 	Hence if $a$ and $b$ are rational numbers, then $a + b$ is a rational number.
 \end{myproof}
@@ -3012,11 +3091,55 @@ To prove a theorem is a biconditional statement, that is $p \leftrightarrow q$, 
 	\end{align*}
 	Since $v$ is made up of integers $5$, $k$ ,and $3$ $v$ is an integer.\\
 	$\therefore$ If $n$ is even, then $5n + 6$ is even.\\
-	Hence If $5n + 6$ is odd, then $n$ is odd.
+	Hence, If $5n + 6$ is odd, then $n$ is odd.
 	\\
-	Hence if $n$ is a positive integer, then $n$ is odd if and only if $5n + 6$ is odd.
+	Hence, if $n$ is a positive integer, then $n$ is odd if and only if $5n + 6$ is odd.
 
 
 \end{myproof}
+
+\qs{}{
+	Use a proof by contraposition to show that if $x + y \geq 2$, where $x$ and $y$ are real numbers then $x \geq 1$ or $y
+		\geq 1$
+}
+
+\begin{myproof}
+	The contraposition of the statement If $x + y \geq 2$, then $x \geq 1$ or $y \geq 1$, in the form $p \to q$, is
+	$\neg q \to \neg p$, I.e. If $x < 1$ and $y < 1$, then $x + y < 2$.\\
+	Assume $x < 1$ and $y < 1$ is $T$ \\
+	\begin{align*}
+		\left( x < 1 \right) + \left( y < 1 \right) & = x + y < 2
+	\end{align*}
+	$\therefore$ If $x < 1$ and $y < 1$, then $x + y < 2$\\
+	Hence if $x + y \geq 2$, then $x \geq 1$ or $y \geq 1$
+\end{myproof}
+
+\qs{}{
+	Prove that if $m$ and $n$ are integers and $mn$ is even, then $m$ is even or $n$ is even.
+}
+
+\begin{myproof}
+	I will prove this using contraposition. The contraposition of the statement If $mn$ is even, then $m$ is even or $n$
+	is even, in the form $p \to q$, is $\neg q \to \neg p$, I.e. If $m$ is odd and $n$ is odd, then $mn$ is odd. \\
+	Assume $m$ is odd and $n$ is odd is $T$.\\
+	\\
+	Then $\exists k \in \mathbb{Z} \left( m = 2k + 1 \right) $ and $\exists t \in \mathbb{Z} \left( n = 2t + 1 \right) $\\
+	For $mn$ to be odd\\
+	\[
+		\exists v \in \mathbb{Z} \left( mn = 2v +1 \right)
+	\]
+	\begin{align*}
+		mn            & = \left( 2k + 1 \right) \times  \left( 2t + 1  \right) \\
+		              & = 4kt + 2k + 2t + 1                                    \\
+		              & = 2 \left( 2kt + k + t \right) +1                      \\
+		\text{Let } v & = 2kt + k + 1                                          \\
+		              & = 2v + 1                                               \\
+	\end{align*}
+	Since $v$ is the sum of products of integers $2$, $v$, and $1$, $v$ is an integer\\
+	$\therefore$ If $m$ is odd and $n$ is odd, then $mn$ is odd.\\
+	Hence if $mn$ is even, then $m$ is even or $n$ is even.
+
+\end{myproof}
+
 
 \end{document}

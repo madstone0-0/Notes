@@ -116,7 +116,7 @@ A function $f:B^{n} \to B$ is called a \textit{Boolean function} of degree $n$. 
 	The complement of a Boolean function $F$ is denoted by $\overline{F}$ and is defined by:
 
 	\[
-		\overline{F} \left( x_1,x_2,\ldots,x_n \right) = \overline{f \left( x_1,x_2,\ldots,x_n \right)}
+		\overline{F} \left( x_1,x_2,\ldots,x_n \right) = \overline{F \left( x_1,x_2,\ldots,x_n \right)}
 	\]
 
 }
@@ -246,6 +246,73 @@ $F^{d}$
 }
 
 \section{Exercises}
+
+\qs{}{
+	Show that these identities hold
+	\begin{enumerate}
+		\item $x \oplus y = \left( x + y \right)\overline{\left( xy \right) } $
+		\item $x \oplus  y = \left( x\overline{y} \right) + \left( \overline{x}y \right)  $
+	\end{enumerate}
+}
+
+\sol{
+	\begin{table}[h!]
+		\begin{center}
+			\begin{tabular}{|c c c c|c|c|c|c|c|c|c|}
+				\hline
+				$x$             & $y$                                                             & $\overline{x}$ & $\overline{y}$                                        & $x + y$ & $\overline{\left( xy \right) }$ &
+				$x\overline{y}$ & $\overline{x}y$                                                 & $x \oplus y$   & $\left( x + y \right) \overline{\left( xy \right) } $
+				                & $\left( x\overline{y} \right) + \left( \overline{x}y \right)  $                                                                                                                          \\ [0.5ex]
+				\hline
+				\hline
+				1               & 1                                                               & 0              & 0
+				                & 1                                                               & 0              & 0
+				                & 0                                                               & 0              & 0
+				                & 0                                                                                                                                                                                        \\
+				1               & 0                                                               & 0              & 1                                                     & 1       & 1                               & 1
+				                & 0                                                               & 1              & 1
+				                & 1                                                                                                                                                                                        \\
+				0               & 0                                                               & 1              & 1                                                     & 0       & 1                               & 0
+				                & 1                                                               & 0              & 0
+				                & 0                                                                                                                                                                                        \\
+				0               & 1                                                               & 1              & 0                                                     & 1       & 1                               & 0
+				                & 0                                                               & 1              & 1
+				                & 1                                                                                                                                                                                        \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{table}
+}
+
+\qs{}{
+	Show that you obtain De Morgan's Laws for propositions when you transform De Morgan's Laws for boolean algebra into
+	logical equivalences
+}
+
+\sol{
+	\begin{align*}
+		\overline{\left( xy \right) } = \overline{x} + \overline{y}       \\
+		\text{Let $x$ be $p$ and $y$ be $q$}                              \\
+		\neg \left( p \wedge  q \right) = \neg  p \vee \neg q             \\
+		\\
+		\overline{\left( x + y \right) }= \overline{x} \cdot \overline{y} \\
+		\neg \left( p \vee q \right) = \neg p \wedge  \neg q
+	\end{align*}
+}
+
+\qs{}{
+	Show that in a boolean algebra, the Idempotent laws $x \vee v = x$ and $x \wedge  x = x$ hold for every element $x$
+}
+
+\sol{
+	\begin{align*}
+		x & = x \vee 0 \tag*{By First Identity Law}                                                          \\
+		  & = x \vee \left( x \wedge \neg x \right) \tag*{By Second Complement Law}                          \\
+		  & = \left( x \vee  x \right) \wedge  \left( x \vee \neg x \right) \tag*{By First Distributive Law} \\
+		  & = \left( x \vee x  \right) \wedge 1 \tag*{By First Complement Law}                               \\
+		  & = x \vee x \tag*{By Second Identity Law}                                                         \\
+	\end{align*}
+}
 
 \chapter{Representing Boolean Functions}
 
@@ -455,7 +522,21 @@ A product of sums expansion is the dual of a sum of product expansion.
 \sol{
 	\begin{enumerate}
 		\item
+		      \begin{align*}
+			      F \left( x, y \right) & = x + y                                                                                           \\
+			                            & = x\cdot 1 + y \cdot 1 \tag*{By Second Identity Law}                                              \\
+			                            & = x \cdot \left( y + \overline{y} \right) + y \cdot \left( x + \overline{x} \right) \tag*{By Unit
+			      Property}                                                                                                                 \\
+			                            & = xy + x\overline{y} + xy + \overline{x}y \tag*{By Second Distributive Law}                       \\
+			                            & = xy + xy + x\overline{y} + \overline{x}y \tag*{By First Commutative Law}                         \\
+			                            & = xy + x\overline{y}+ \overline{x}y \tag*{By First Idempotent Law}                                \\
+		      \end{align*}
 		\item
+		      \begin{align*}
+			      F \left( x, y \right) & = xy                                                    \\
+			                            & = x \left( y + y \right) \tag*{By First Idempotent Law} \\
+			                            & = xy                                                    \\
+		      \end{align*}
 		\item
 		      \begin{align*}
 			      F \left( x, y \right) & = 1                                                                       \\
@@ -476,8 +557,60 @@ A product of sums expansion is the dual of a sum of product expansion.
 			                            & = xy + xy + y + y \tag*{By First Commutative Law}                                            \\
 			                            & = xy + y \tag*{By First Idempotent Law}                                                      \\
 			                            & =  xy + y \cdot 1 \tag*{By Second Identity Law}                                              \\
+			                            & = xy + y \cdot \left( x + \overline{x} \right) \tag*{By Unit Property Law}                   \\
+			                            & = xy + xy + y\overline{x} \tag*{By Second Distributive Law}                                  \\
+			                            & = xy + y\overline{x} \tag*{By First Idempotent Law }                                         \\
 		      \end{align*}
 	\end{enumerate}
+
+	\qs{}{
+		Find the sum of products and the product of sums expansion of the Boolean function $F \left( x,y,z \right) $ that
+		equals 1 if and only if
+		\begin{enumerate}
+			\item $xy = 0$
+			\item $x + y = 0$
+			\item $xyz = 0$
+		\end{enumerate}
+	}
+
+
+	\sol{
+
+		\begin{table}[h!]
+			\begin{center}
+				\begin{tabular}{|c c c|c|c|c|c|c|c|c|c|}
+					\hline
+					$x$ & $y$ & $z$ & $xy$ & $F \left( x,y,z \right) $ & $x + y$ & $F \left( x,y,z \right) $ & $xyz$ & $F \left( x,y,z \right) $ \\ [0.5ex]
+					\hline
+					\hline
+					1   & 1   & 1   & 1    & 0                         & 1       & 0                         & 1     & 0                         \\
+					1   & 1   & 0   & 1    & 0                         & 1       & 0                         & 0     & 1                         \\
+					1   & 0   & 0   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
+					1   & 0   & 1   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
+					0   & 1   & 1   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
+					0   & 0   & 0   & 0    & 1                         & 0       & 1                         & 0     & 1                         \\
+					0   & 0   & 1   & 0    & 1                         & 0       & 1                         & 0     & 1                         \\
+					0   & 1   & 0   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
+					\hline
+				\end{tabular}
+			\end{center}
+		\end{table}
+
+
+		\begin{enumerate}
+			\item
+			      DNF - $x\overline{y}\overline{z} + x\overline{y}z + \overline{x}yz +
+				      \overline{x}\overline{y}\overline{z} + \overline{x}\overline{y}z + \overline{x}y\overline{z} $ \\
+			      CNF - $\left( \overline{x} + \overline{y} + \overline{z} \right) \cdot \left( \overline{x} +
+				      \overline{y} + z \right)  $
+			\item
+			      DNF - $\overline{x}\overline{y}\overline{z} + \overline{x}\overline{y}z$ \\
+			      CNF - $\left( x + y + z \right) \cdot \left( x + y + \overline{z} \right) \cdot \left( x + \overline{y}
+				      + \overline{z}\right) \cdot \left( x + \overline{y} + z \right) \cdot \left( \overline{x} + y + z
+				      \right) \cdot \left( \overline{x} + y + \overline{z} \right)      $
+
+		\end{enumerate}
+	}
 }
 
 

@@ -792,6 +792,61 @@ and
 	\]
 }
 
+\section{Computer Representation Of Sets}
+
+Assume that the universal set $U$ is finite. First, specify an arbitrary ordering of the elements of $U$, e.g. $a_1, a_2,
+	a_3, \ldots,a_n$. Represent subset $A$ of $U$ with the bit string of length $n$, where the $i$th bit in this string is
+$1$ if $a_i$ belongs to $A$ and is $0$ if $a_i$ does not belong to $A$.
+
+\ex{}{
+	\qs{}{
+		Let $U = \{1,2,3,4,5,6,7,8,9,10\} $ and the ordering of the elements of $U$ has the elements in increasing order,
+		i.e. $a_i = i$. What bit strings represent the subset of all odd integers in $U$, the subset of all even integers in
+		$U$, and the subset of all integers not exceeding $5$ in $U$.
+	}
+
+	\sol{
+		Odd integers - $1010101010$\\
+		Even integers - $0101010101$\\
+		Less than or equal to $5$ - $1111100000$
+
+	}
+}
+
+To find the bit strings that represent the union, intersection, and complement of two sets, we can use the bitwise OR,
+bitwise AND, and bitwise NOT operations, respectively.
+
+\ex{}{
+	\qs{}{
+		The bit strings for the sets $\{1,2,3,4,5\} $ and $\{1,3,5,7,9\} $ are $1111100000$ and $1010101010$ respectively.
+		Find the union and intersection of these sets.
+	}
+
+	\sol{
+
+		\begin{align*}
+			\vee \quad
+			\begin{split}
+				11\,1110\,0000 \\
+				10\,1010\,1010 \\
+				\hline
+				11\,1110\,1010 \\
+			\end{split}
+		\end{align*}
+
+		\begin{align*}
+			\wedge \quad
+			\begin{split}
+				11\,1110\,0000 \\
+				10\,1010\,1010 \\
+				\hline
+				10\,1010\,0000 \\
+			\end{split}
+		\end{align*}
+
+	}
+}
+
 \section{Exercises}
 
 \qs{}{

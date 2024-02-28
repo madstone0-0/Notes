@@ -1898,7 +1898,7 @@ The order of quantifiers is important when all quantifiers are not of the same t
 		\begin{enumerate}
 			\item Everyone that is a comedian is funny.
 			\item All people are comedians and they are funny.
-			\item There exits some people, If they are comedians, then they are funny.
+			\item There exists some people, If they are comedians, then they are funny.
 			\item There exists some people that are comedians and are funny.
 		\end{enumerate}
 	}
@@ -2168,6 +2168,44 @@ The order of quantifiers is important when all quantifiers are not of the same t
 		\item $\exists x \forall y \left( C \left( y \right) \to S \left( x, y \right)    \right) $
 		\item $\forall  x \exists  y \left( S \left( x,y \right) \to \neg L \left( x,y \right)   \right) $
 		\item $\forall y \left( A \left( y \right) \to \neg S \left( \text{Ben}, y \right)   \right) $
+	\end{enumerate}
+}
+
+\pagebreak
+\qs{}{
+	Express each of these statements using quantifiers. Then form the negation of the statement so that no negation is to the left of a quantifier. Next, express the negation in simple English. (Do not simply use the phrase "It is not the case that.")
+	\begin{enumerate}
+		\item Every Ashesi student has taken some math course
+		\item No one knows everyone
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      \mathbb{U}_{x} = \text{ all Ashesi students}        \\
+			      \mathbb{U}_{y} = \text{ all math courses}           \\
+			      T \left( x, y \right) \text{be "$x$ has taken $y$"} \\
+			      \\
+			      \forall x \exists y \,T \left( x, y \right)         \\
+			      \\
+			      \neg \forall x \exists y \,  T \left( x, y \right)  \equiv \exists x \forall  y \neg T \left( x, y
+			      \right) \tag*{By De Morgan's law for quantifiers}   \\
+		      \end{align*}
+		      There exists an Ashesi student who has not taken any math courses
+
+		\item
+		      \begin{align*}
+			      \mathbb{U}_{x, y} = \text{ all people}                \\
+			      K \left( x, y  \right) \text{ be "$x$ knows $y$"}     \\
+			      \\
+			      \neg \exists x \forall y\, K \left( x, y \right)      \\
+			      \\
+			      \neg \left( \neg \exists x \forall y \, K \left( x,y \right)  \right)  \equiv \exists x \forall y \, K \left(
+			      x, y\right) \tag*{By De Morgan's Law for quantifiers} \\
+			      \text{There exists someone who knows everyone}
+		      \end{align*}
 	\end{enumerate}
 }
 

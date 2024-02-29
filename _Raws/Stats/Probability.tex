@@ -289,6 +289,41 @@ If $Y = a + bX$, then $\mu_{Y} = a + b \mu_{X}$, $\sigma_{Y}^2 = b^2 \sigma_{X}^
 If $Z = X + Y$, then $\mu_{Z} = \mu_{X} + \mu_{Y}$, $\sigma_{Z}^2 = \sigma_{X}^2 + \sigma_{Y}^2$ and $\sigma_{Z} =
 	\sqrt{\sigma_{X}^2 + \sigma_{Y}^2}$. Only if $X$ and $Y$ are independent. \\
 
+\subsection{Poisson Random Variables}
+
+\dfn{Poisson Random Variable}{
+	A random variable that counts the number of events that occur in a fixed interval of time or space, denoted by $X \sim
+		\text{Poisson} \left( \lambda \right) $.
+	Where $\lambda$ is the average number of events that occur in the interval.
+}
+
+\dfn{Poisson Experiment}{
+	Random experiments that satisfy the following conditions:
+	\begin{itemize}
+		\item The number of trials tends to infinity.
+		\item The probability of success tends to zero.
+		\item $np = 1$ is finite
+	\end{itemize}
+}
+
+\[
+	\mathbb{P} \left( X = x \right) = \frac{\left( e^{-\lambda} \times \lambda^{x} \right) }{x!}
+\]
+
+Where $e$ is the base of the natural logarithm, $\lambda$ is the average number of events that occur in the interval and $x$
+is the number of events that occur in the interval.
+
+If $X$ is Poisson with parameter $\lambda$, then
+\[
+	\mu_{X} = \lambda
+\]
+
+And
+\begin{align*}
+	\sigma^2_{X} = \mu = \lambda \\
+	\sigma_{X} = \sqrt{\sigma^2}
+\end{align*}
+
 \subsection{Binomial Random Variables}
 
 \dfn{Binomial Random Variable}{
@@ -510,7 +545,6 @@ describe the spread of the distribution of the sample mean more precisely by fin
 sample mean. i.e.
 \[
 	\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}
-
 \]
 
 \subsection{Shape}
@@ -523,6 +557,258 @@ The shape of the distribution of the sample mean is approximately normal if the 
 \dfn{Sampling of Distribution of $\overline{X}$}{
 	The distribution of the values of the sample mean $\overline{X}$ in repeated samples.
 }
+
+\chapter{Exercises}
+
+\qs{}{
+	Three cards are drawn with replacement from a well-shuffled deck of 52 cards. Find the probability distribution of the number of aces drawn. Also, find the mean and variance of the distribution.
+}
+
+\sol{
+
+	\begin{table}[h!]
+		\begin{center}
+			\begin{tabular}{|c|c|}
+				\hline
+				$x$ & $P \left( x \right) $                                                                            \\ [0.5ex]
+				\hline
+				\hline
+				0   & $\binom{3}{0}\left( \frac{4}{52} \right)^{0} \left( 1 - \frac{4}{52} \right)^{3 - 0} = 0.7865  $ \\
+				1   & $\binom{3}{1}\left( \frac{4}{52} \right)^{1} \left( 1 - \frac{4}{52} \right)^{3 - 1} =  0.1966$  \\
+				2   & $\binom{3}{2}\left( \frac{4}{52} \right)^{2} \left( 1 - \frac{4}{52} \right)^{3 - 2} =  0.0164$  \\
+				3   & $\binom{3}{3}\left( \frac{4}{52} \right)^{3} \left( 1 - \frac{4}{52} \right)^{3 - 3} =  0.0005$  \\
+				\hline
+			\end{tabular}\\
+		\end{center}
+	\end{table}
+
+	\begin{align*}
+		\mu      & = \sum_{i=1}^{4} x_i \times p_i                                                                   \\
+		         & = \left( 0 \times 0.7865 \right) + \left( 1 \times 0.1966 \right)  + \left( 2
+		\times 0.0164\right) + \left( 3 \times 0.0005 \right)                                                        \\
+		         & =  0.2309                                                                                         \\
+		         & = 0                                                                                               \\
+		\\
+		\\
+		\sigma^2 & = \sum_{i=1}^{4} \left( x_i - \mu  \right)^2 p_i                                                  \\
+		         & = \left( \left( 0 - 0.2309 \right)^2 \times 0.7865  \right) + \left( \left( 1 - 0.2309  \right)^2
+		\times 0.1966  \right) + \left( \left( 2 - 0.2309 \right)^2 \times 0.0164  \right) + \left( \left( 3 -
+		0.2309 \right)^2 \times 0.0005  \right)                                                                      \\
+		         & = 0.21338519                                                                                      \\
+		         & = 0.2134                                                                                          \\
+	\end{align*}
+
+
+}
+
+\qs{}{
+	Paper clips are produced in a variety of colours The proportion of red paper clips produced is 0.20, Determine the probability that, in a random sample of 50 coloured paper clips, the number of red clips is:
+	\begin{enumerate}
+		\item Fewer than 10
+		\item   At least 8 but at most 12
+	\end{enumerate}
+}
+
+\sol{
+	\[
+		X \sim B \left( 50, 0.20 \right)                                                                               \\
+	\]
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      P \left( X < 10 \right) & = \sum_{i=0}^{9} \binom{50}{i} \left( 0.2 \right) ^{i} \left( 1 - 0.20 \right)^{50 -
+			      i}                                                                                                             \\
+			                              & = 0.4437                                                                             \\
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      P \left( 8 \leq X \leq 12 \right) & = P \left( X \leq 12 \right) - P \left( X \leq 8 \right)        \\
+			                                        & = \sum_{i=8}^{12} \binom{50}{i} \left( 0.20 \right)^i \left( 1-
+			      0.20 \right)^{50 -i}                                                                                \\
+			                                        & = 0.6235                                                        \\
+		      \end{align*}
+	\end{enumerate}
+}
+
+\qs{}{
+	A recent large-scale survey established that 15 percent of cars have fully functioning brake lights
+	\begin{enumerate}
+		\item  Calculate the probability that, in a random sample of 18 cars, exactly 2 cars have faulty brake lights.
+		\item Determine the probability that, in a random sample of 50 cars, more than 5 cars but fewer than 10 cars have faulty brake lights.
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      X \sim B \left( 18, 0.15 \right)                                                                \\
+			      P \left( X = 2 \right) & = \binom{18}{2} \left( 0.15 \right)^2 \left( 1 - 0.15 \right)^{18 - 2} \\
+			                             & = 0.2556                                                               \\
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      X \sim B \left( 50, 0.20 \right)                                                                                    \\
+			      P \left( 5 < X < 10 \right) & = P \left( X < 10 \right) - P \left( X < 5 \right)                                    \\
+			                                  & = \sum_{i=6}^{9} \binom{50}{i} \left( 0.15 \right)^i \left( 1 - 0.15 \right)^{50 - i} \\
+			                                  & = 0.5717                                                                              \\
+		      \end{align*}
+	\end{enumerate}
+
+}
+
+\pagebreak
+\qs{}{
+	You are diagnosed with an uncommon disease. You know that there only is a 1\% chance. Use the letter $D$ for the event
+	"you have a disease" and $T$ for "the test says so". It is known that the test is perfect. $P \left( T  \mid D \right) =
+		0.98$ and $P \left( T'  \mid  D' \right) = 0.95 $
+	\begin{enumerate}
+		\item      Given that you test positive, what is the probability that you really have the disease?
+		\item You obtain a second opinion: in an independent repetition of the test. You test positive again. Given this, what is the probability that you really have the disease.
+	\end{enumerate}
+}
+
+\sol{
+\tikzstyle{level 1}=[level distance=3.5cm, sibling distance=3.5cm]
+\tikzstyle{level 2}=[level distance=3.5cm, sibling distance=2cm]
+\tikzstyle{bag} = [text width=4em, text centered]
+\tikzstyle{end} = [circle, minimum width=3pt,fill, inner sep=0pt]
+\begin{tikzpicture}[grow=right, sloped]
+	\node[bag] {}
+	child {
+	node[bag] {$D$}
+	child {
+	node[end, label=right:
+	{$T'$}] {}
+	edge from parent
+	node[below] {0.95}
+	}
+	child {
+	node[end, label=right:
+	{$T$}] {}
+	edge from parent
+	node[above] {0.05}
+	}
+	edge from parent
+	node[below] {0.99}
+	}
+	child {
+	node[bag] {$D'$}
+	child {
+	node[end, label=right:
+	{$T'$}] {}
+	edge from parent
+	node[below] {0.02}
+	}
+	child {
+	node[end, label=right:
+	{$T$}] {}
+	edge from parent
+	node[above] {0.98}
+	}
+	edge from parent
+	node[above] {0.01}
+	};
+\end{tikzpicture}
+\begin{enumerate}
+	\item
+	      \begin{align*}
+		      P \left( D  \mid T \right) & = \frac{P \left( D \cap T \right) }{P \left( T \right) }                                              \\
+		                                 & = \frac{P \left( D \right) \times P \left( T  \mid D \right)   }{P \left( D \right) \times P \left( T
+		      \mid D \right) + P \left( D' \right) \times P \left( T  \mid D' \right)    }                                                       \\
+		                                 & = \frac{0.01 \times 0.98}{\left( 0.01 \times 0.98 \right) + \left( 0.99 \times
+		      0.05\right)  }                                                                                                                     \\
+		                                 & = 0.1653                                                                                              \\
+	      \end{align*}
+	\item
+	      \begin{align*}
+		      P \left( \left( D  \mid T \right) \cap \left( D  \mid T \right)   \right) & = 0.1653 \times 0.1653 \\
+		                                                                                & = 0.0273               \\
+	      \end{align*}
+\end{enumerate}
+}
+
+\qs{}{
+	Selorm, arriving at a bus stop, just misses the bus. Suppose that he decides to walk if the (next) bus takes longer than
+	5 minutes to arrive. Suppose also that the time in minutes between the arrivals of buses at the bus stop is a continuous
+	random variable with a $U(4,6)$. Let $X$ be the time Selorm will wait.
+	\begin{enumerate}
+		\item What is the probability that $X$ is less than $4 \frac{1}{2}$ minutes
+		\item  What is the probability that $X$ equals 5 minutes?
+		\item Is $X$ a discrete random variable or a continuous random variable?
+	\end{enumerate}
+}
+
+\sol{
+	\begin{enumerate}
+		\item
+		      \begin{align*}
+			      f \left( x \right)               & = \frac{1}{ 6- 4}                   \\
+			      f \left( x \right)               & = 0.5                               \\
+			      P \left( X < \frac{9}{2} \right) & = \left( 4.5 - 4 \right) \times 0.5 \\
+			                                       & = 0.25                              \\
+		      \end{align*}
+		\item
+		      \begin{align*}
+			      P \left( X = 5 \right) = 0
+		      \end{align*}
+
+
+
+	\end{enumerate}
+}
+
+\qs{}{
+	If random variable $X$ follows a Poisson distribution with mean $3.4$. Find $P \left( X = 6 \right) $
+}
+
+\sol{
+	\begin{align*}
+		X \sim \text{Poisson} \left( 3.4 \right)                      \\
+		P \left( X = 6  \right) & = \frac{e^{-3.4}\times 3.4^{6}}{6!} \\
+		                        & = 0.0716                            \\
+	\end{align*}
+}
+
+\qs{}{
+	Cretan Airlines services which arrive late to Athens Airport on a typical week can be modelled by a Poisson distribution with mean of 4.5
+	\begin{enumerate}
+		\item Determine the probability that on a given week there will be
+		      \begin{enumerate}
+			      \item four late arrivals
+			      \item less than four late arrivals
+			      \item at least seven late arrivals
+		      \end{enumerate}
+		\item Determine the probability that on a given two week period there will be between eight and thirteen (inclusive) late arrivals.
+	\end{enumerate}
+}
+
+\sol{
+	$X \sim \text{Poisson} \left( 4.5 \right) $
+	\begin{enumerate}
+		\item
+		      \begin{enumerate}
+			      \item
+			            \begin{align*}
+				            P \left( X = 4 \right) & = \frac{e^{-4.5}\times 4.5^{4}}{4!} \\
+				                                   & = 0.18980                           \\
+			            \end{align*}
+			      \item
+			            \begin{align*}
+				            P \left( X < 4 \right) & = \sum_{i=0}^{3} \frac{e^{-4.5}\times 4.5^{i}}{i!} \\
+				                                   & = 0.3423                                           \\
+			            \end{align*}
+			      \item
+			            \begin{align*}
+				            P \left( X \geq 7 \right) & = 1 - P \left( X < 7 \right)                           \\
+				                                      & = 1 - \sum_{i=0}^{6} \frac{e^{-4.5}\times 4.5^{i}}{i!} \\
+				                                      & = 1 - 0.8311                                           \\
+				                                      & = 0.1689                                               \\
+			            \end{align*}
+		      \end{enumerate}
+	\end{enumerate}
+}
+
 
 
 \end{document}

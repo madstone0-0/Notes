@@ -26,70 +26,70 @@
 Boolean Algebra provides the operations and rules for working with the set $\{0,1\} $. The three operations that will be
 discussed are the:
 \begin{itemize}
-	\item Boolean sum (\textbf{OR}) - $0 + 1 = 1$
-	\item Boolean product (\textbf{AND}) - $0 \cdot 1 = 0$
-	\item Complementation (\textbf{NOT}) - $\overline{0} = 1$
+  \item Boolean sum (\textbf{OR}) - $0 + 1 = 1$
+  \item Boolean product (\textbf{AND}) - $0 \cdot 1 = 0$
+  \item Complementation (\textbf{NOT}) - $\overline{0} = 1$
 \end{itemize}
 
 \subsection{Boolean Product (AND)}
 
 \dfn{Boolean Product}{
-	The Boolean product of two variables $x$ and $y$ is denoted by $x \cdot  y$ and is defined by the following values:
-	\begin{align*}
-		1 \cdot 1 = 1 \\
-		1 \cdot 0 = 0 \\
-		0 \cdot 1 = 0 \\
-		0 \cdot 0 = 0 \\
-	\end{align*}
+  The Boolean product of two variables $x$ and $y$ is denoted by $x \cdot  y$ and is defined by the following values:
+  \begin{align*}
+    1 \cdot 1 = 1 \\
+    1 \cdot 0 = 0 \\
+    0 \cdot 1 = 0 \\
+    0 \cdot 0 = 0 \\
+  \end{align*}
 }
 
 \subsection{Boolean Sum (OR)}
 
 \dfn{Boolean Sum}{
-	The Boolean sum of two variables $x$ and $y$ is denoted by $x + y$ and is defined by the following values:
-	\begin{align*}
-		1 + 1 = 1 \\
-		1 + 0 = 1 \\
-		0 + 1 = 1 \\
-		0 + 0 = 0 \\
-	\end{align*}
+  The Boolean sum of two variables $x$ and $y$ is denoted by $x + y$ and is defined by the following values:
+  \begin{align*}
+    1 + 1 = 1 \\
+    1 + 0 = 1 \\
+    0 + 1 = 1 \\
+    0 + 0 = 0 \\
+  \end{align*}
 }
 
 \subsection{Complementation (NOT)}
 
 \dfn{Complementation}{
-	The complement of a variable $x$ is denoted by $\overline{x}$ and is defined by the following values:
-	\begin{align*}
-		\overline{1} = 0 \\
-		\overline{0} = 1 \\
-	\end{align*}
+  The complement of a variable $x$ is denoted by $\overline{x}$ and is defined by the following values:
+  \begin{align*}
+    \overline{1} = 0 \\
+    \overline{0} = 1 \\
+  \end{align*}
 }
 
 \ex{}{
-	\qs{}{
-		Find the value of $1 \cdot 0 + \overline{\left( 0 + 1 \right) }$
-	}
+  \qs{}{
+    Find the value of $1 \cdot 0 + \overline{\left( 0 + 1 \right) }$
+  }
 
-	\sol{
-		\begin{align*}
-			1 \cdot 0 + \overline{\left( 0 + 1 \right) } & = 1 \cdot 0 + \overline{1} \\
-			                                             & = 0 + \overline{1}         \\
-			                                             & = 0 + 0                    \\
-			                                             & = 0                        \\
-		\end{align*}
-	}
+  \sol{
+    \begin{align*}
+      1 \cdot 0 + \overline{\left( 0 + 1 \right) } & = 1 \cdot 0 + \overline{1} \\
+                                                   & = 0 + \overline{1}         \\
+                                                   & = 0 + 0                    \\
+                                                   & = 0                        \\
+    \end{align*}
+  }
 }
 
 \ex{}{
-	\qs{}{
-		Translate $1 \cdot 0 + \overline{\left( 0 + 1 \right) } = 0$, into a logical equivalence.
-	}
+  \qs{}{
+    Translate $1 \cdot 0 + \overline{\left( 0 + 1 \right) } = 0$, into a logical equivalence.
+  }
 
-	\sol{
-		\[
-			T \wedge F \vee \neg \left( F \vee  T \right) \equiv F
-		\]
-	}
+  \sol{
+    \[
+      T \wedge F \vee \neg \left( F \vee  T \right) \equiv F
+    \]
+  }
 }
 
 \section{Boolean Expressions and Functions}
@@ -98,26 +98,26 @@ Let $B = \{0,1\} $, then $B^{n} = \{\left( x_1,x_2,\ldots,x_n \right)  \mid x_i 
 is the set of all possible $n$-tuples of 0's and 1's. The variable $x$ is a \textit{Boolean variable}.
 
 \dfn{Boolean variable}{
-	A variable that can take on the values 0 or 1.
+  A variable that can take on the values 0 or 1.
 }
 
 \dfn{Boolean Function}{
 A function $f:B^{n} \to B$ is called a \textit{Boolean function} of degree $n$. I.e. takes $n$ inputs and returns a single output.
 
 \ex{}{
-	The function $F \left( x, y \right) = x $ from the set of ordered pairs of Boolean variables to the set $\{0,1\} $,
-	has a degree of 2.
+  The function $F \left( x, y \right) = x $ from the set of ordered pairs of Boolean variables to the set $\{0,1\} $,
+  has a degree of 2.
 }
 }
 
 \subsection{Complement of a Boolean function}
 
 \dfn{Complement of a Boolean function}{
-	The complement of a Boolean function $F$ is denoted by $\overline{F}$ and is defined by:
+  The complement of a Boolean function $F$ is denoted by $\overline{F}$ and is defined by:
 
-	\[
-		\overline{F} \left( x_1,x_2,\ldots,x_n \right) = \overline{F \left( x_1,x_2,\ldots,x_n \right)}
-	\]
+  \[
+    \overline{F} \left( x_1,x_2,\ldots,x_n \right) = \overline{F \left( x_1,x_2,\ldots,x_n \right)}
+  \]
 
 }
 
@@ -126,192 +126,192 @@ A function $f:B^{n} \to B$ is called a \textit{Boolean function} of degree $n$. 
 \subsection{Law of Double Complement}
 
 \[
-	\overline{\overline{x}} = x
+  \overline{\overline{x}} = x
 \]
 
 \subsection{Idempotent Laws}
 
 \begin{align*}
-	x + x = x \\
-	x \cdot x = x
+  x + x = x \\
+  x \cdot x = x
 \end{align*}
 
 \subsection{Identity Laws}
 
 \begin{align*}
-	x + 0 = x     \\
-	x \cdot 1 = x \\
+  x + 0 = x     \\
+  x \cdot 1 = x \\
 \end{align*}
 
 \subsection{Domination Laws}
 
 \begin{align*}
-	x + 1 = 1 \\
-	x \cdot 0 = 0
+  x + 1 = 1 \\
+  x \cdot 0 = 0
 \end{align*}
 
 \subsection{Commutative Laws}
 
 \begin{align*}
-	x + y = y + x \\
-	xy = yx
+  x + y = y + x \\
+  xy = yx
 \end{align*}
 
 \subsection{Associative Laws}
 
 \begin{align*}
-	x + \left( y + z \right)  = \left( x + y \right)  + z \\
-	x \left( yz \right)  = \left( xy \right) z
+  x + \left( y + z \right)  = \left( x + y \right)  + z \\
+  x \left( yz \right)  = \left( xy \right) z
 \end{align*}
 
 \subsection{Distributive Laws}
 
 \begin{align*}
-	x + yz = \left( x + y \right) \left( x + z \right) \\
-	x \left( y + z \right) = xy + xz
+  x + yz = \left( x + y \right) \left( x + z \right) \\
+  x \left( y + z \right) = xy + xz
 \end{align*}
 
 \subsection{De Morgan's Laws}
 
 \begin{align*}
-	\overline{\left( xy \right) } = \overline{x} + \overline{y} \\
-	\overline{\left( x + y \right) } = \overline{x} \cdot \overline{y}
+  \overline{\left( xy \right) } = \overline{x} + \overline{y} \\
+  \overline{\left( x + y \right) } = \overline{x} \cdot \overline{y}
 \end{align*}
 
 \subsection{Absorption Laws}
 \begin{align*}
-	x + xy = x \\
-	x \left( x + y \right)  = x
+  x + xy = x \\
+  x \left( x + y \right)  = x
 \end{align*}
 
 \subsection{Unit Property}
 
 \[
-	x + \overline{x} = 1
+  x + \overline{x} = 1
 \]
 
 \subsection{Zero Property}
 \[
-	x \overline{x} = 0
+  x \overline{x} = 0
 \]
 
 \section{Duality}
 
 \dfn{Dual}{
-	The dual of a Boolean expression is obtained by replacing the \textbf{AND} operation with \textbf{OR} and the
-	\textbf{OR} operation with \textbf{AND}, and interchanging 1s and 0s.
+  The dual of a Boolean expression is obtained by replacing the \textbf{AND} operation with \textbf{OR} and the
+  \textbf{OR} operation with \textbf{AND}, and interchanging 1s and 0s.
 
 }
 
 \ex{}{
-	\qs{}{
-		Find the duals of $x \left( y + 0 \right) $ and $\overline{x} \cdot 1 + \left( \overline{y} + z \right) $
-	}
+  \qs{}{
+    Find the duals of $x \left( y + 0 \right) $ and $\overline{x} \cdot 1 + \left( \overline{y} + z \right) $
+  }
 
-	\sol{
-		\begin{align*}
-			x \left( y + 0 \right)                                 & = x + \left( y \cdot 1  \right)                                       \\
-			\\
-			\overline{x} \cdot 1 + \left( \overline{y} + z \right) & = \left( \overline{x} + 0 \right)  \cdot \left( \overline{y}z \right)
-		\end{align*}
-	}
+  \sol{
+    \begin{align*}
+      x \left( y + 0 \right)                                 & = x + \left( y \cdot 1  \right)                                       \\
+      \\
+      \overline{x} \cdot 1 + \left( \overline{y} + z \right) & = \left( \overline{x} + 0 \right)  \cdot \left( \overline{y}z \right)
+    \end{align*}
+  }
 }
 
 The dual of a boolean function $F$ is the function representing the dual of the expression representing $F$, denoted by
 $F^{d}$
 
 \dfn{Duality Principle}{
-	An identity between functions represented by boolean expressions remains valid when the duals of both sides of the
-	expression are taken.
+  An identity between functions represented by boolean expressions remains valid when the duals of both sides of the
+  expression are taken.
 }
 
 \ex{}{
-	\qs{}{
-		Construct an identity from the absorption law $x \left( x + y \right) = x $ by taking duals
-	}
+  \qs{}{
+    Construct an identity from the absorption law $x \left( x + y \right) = x $ by taking duals
+  }
 
-	\sol{
-		\begin{align*}
-			x \left( x + y \right)  = x                                                                      \\
-			\text{Let } F \left( x,y \right)  = x \left( x + y \right)  \text{ and } G \left( x \right)  = x \\
-			\\
-			F \left( x,y \right)  = G \left( x \right)                                                       \\
-			F^{d} \left( x,y \right)  = G^{d} \left( x \right)                                               \\
-			F^{d} \left( x, y \right)  = x + xy                                                              \\
-			G^{d} \left( x \right) = x                                                                       \\
-			\\
-			x + xy = x                                                                                       \\
-		\end{align*}
-	}
+  \sol{
+    \begin{align*}
+      x \left( x + y \right)  = x                                                                      \\
+      \text{Let } F \left( x,y \right)  = x \left( x + y \right)  \text{ and } G \left( x \right)  = x \\
+      \\
+      F \left( x,y \right)  = G \left( x \right)                                                       \\
+      F^{d} \left( x,y \right)  = G^{d} \left( x \right)                                               \\
+      F^{d} \left( x, y \right)  = x + xy                                                              \\
+      G^{d} \left( x \right) = x                                                                       \\
+      \\
+      x + xy = x                                                                                       \\
+    \end{align*}
+  }
 }
 
 \section{Exercises}
 
 \qs{}{
-	Show that these identities hold
-	\begin{enumerate}
-		\item $x \oplus y = \left( x + y \right)\overline{\left( xy \right) } $
-		\item $x \oplus  y = \left( x\overline{y} \right) + \left( \overline{x}y \right)  $
-	\end{enumerate}
+  Show that these identities hold
+  \begin{enumerate}
+    \item $x \oplus y = \left( x + y \right)\overline{\left( xy \right) } $
+    \item $x \oplus  y = \left( x\overline{y} \right) + \left( \overline{x}y \right)  $
+  \end{enumerate}
 }
 
 \sol{
-	\begin{table}[h!]
-		\begin{center}
-			\begin{tabular}{|c c c c|c|c|c|c|c|c|c|}
-				\hline
-				$x$             & $y$                                                             & $\overline{x}$ & $\overline{y}$                                        & $x + y$ & $\overline{\left( xy \right) }$ &
-				$x\overline{y}$ & $\overline{x}y$                                                 & $x \oplus y$   & $\left( x + y \right) \overline{\left( xy \right) } $
-				                & $\left( x\overline{y} \right) + \left( \overline{x}y \right)  $                                                                                                                          \\ [0.5ex]
-				\hline
-				\hline
-				1               & 1                                                               & 0              & 0
-				                & 1                                                               & 0              & 0
-				                & 0                                                               & 0              & 0
-				                & 0                                                                                                                                                                                        \\
-				1               & 0                                                               & 0              & 1                                                     & 1       & 1                               & 1
-				                & 0                                                               & 1              & 1
-				                & 1                                                                                                                                                                                        \\
-				0               & 0                                                               & 1              & 1                                                     & 0       & 1                               & 0
-				                & 1                                                               & 0              & 0
-				                & 0                                                                                                                                                                                        \\
-				0               & 1                                                               & 1              & 0                                                     & 1       & 1                               & 0
-				                & 0                                                               & 1              & 1
-				                & 1                                                                                                                                                                                        \\
-				\hline
-			\end{tabular}
-		\end{center}
-	\end{table}
+  \begin{table}[h!]
+    \begin{center}
+      \begin{tabular}{|c c c c|c|c|c|c|c|c|c|}
+        \hline
+        $x$             & $y$                                                             & $\overline{x}$ & $\overline{y}$                                        & $x + y$ & $\overline{\left( xy \right) }$ &
+        $x\overline{y}$ & $\overline{x}y$                                                 & $x \oplus y$   & $\left( x + y \right) \overline{\left( xy \right) } $
+                        & $\left( x\overline{y} \right) + \left( \overline{x}y \right)  $                                                                                                                          \\ [0.5ex]
+        \hline
+        \hline
+        1               & 1                                                               & 0              & 0
+                        & 1                                                               & 0              & 0
+                        & 0                                                               & 0              & 0
+                        & 0                                                                                                                                                                                        \\
+        1               & 0                                                               & 0              & 1                                                     & 1       & 1                               & 1
+                        & 0                                                               & 1              & 1
+                        & 1                                                                                                                                                                                        \\
+        0               & 0                                                               & 1              & 1                                                     & 0       & 1                               & 0
+                        & 1                                                               & 0              & 0
+                        & 0                                                                                                                                                                                        \\
+        0               & 1                                                               & 1              & 0                                                     & 1       & 1                               & 0
+                        & 0                                                               & 1              & 1
+                        & 1                                                                                                                                                                                        \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
 }
 
 \qs{}{
-	Show that you obtain De Morgan's Laws for propositions when you transform De Morgan's Laws for boolean algebra into
-	logical equivalences
+  Show that you obtain De Morgan's Laws for propositions when you transform De Morgan's Laws for boolean algebra into
+  logical equivalences
 }
 
 \sol{
-	\begin{align*}
-		\overline{\left( xy \right) } = \overline{x} + \overline{y}       \\
-		\text{Let $x$ be $p$ and $y$ be $q$}                              \\
-		\neg \left( p \wedge  q \right) = \neg  p \vee \neg q             \\
-		\\
-		\overline{\left( x + y \right) }= \overline{x} \cdot \overline{y} \\
-		\neg \left( p \vee q \right) = \neg p \wedge  \neg q
-	\end{align*}
+  \begin{align*}
+    \overline{\left( xy \right) } = \overline{x} + \overline{y}       \\
+    \text{Let $x$ be $p$ and $y$ be $q$}                              \\
+    \neg \left( p \wedge  q \right) = \neg  p \vee \neg q             \\
+    \\
+    \overline{\left( x + y \right) }= \overline{x} \cdot \overline{y} \\
+    \neg \left( p \vee q \right) = \neg p \wedge  \neg q
+  \end{align*}
 }
 
 \qs{}{
-	Show that in a boolean algebra, the Idempotent laws $x \vee v = x$ and $x \wedge  x = x$ hold for every element $x$
+  Show that in a boolean algebra, the Idempotent laws $x \vee v = x$ and $x \wedge  x = x$ hold for every element $x$
 }
 
 \sol{
-	\begin{align*}
-		x & = x \vee 0 \tag*{By First Identity Law}                                                          \\
-		  & = x \vee \left( x \wedge \neg x \right) \tag*{By Second Complement Law}                          \\
-		  & = \left( x \vee  x \right) \wedge  \left( x \vee \neg x \right) \tag*{By First Distributive Law} \\
-		  & = \left( x \vee x  \right) \wedge 1 \tag*{By First Complement Law}                               \\
-		  & = x \vee x \tag*{By Second Identity Law}                                                         \\
-	\end{align*}
+  \begin{align*}
+    x & = x \vee 0 \tag*{By First Identity Law}                                                          \\
+      & = x \vee \left( x \wedge \neg x \right) \tag*{By Second Complement Law}                          \\
+      & = \left( x \vee  x \right) \wedge  \left( x \vee \neg x \right) \tag*{By First Distributive Law} \\
+      & = \left( x \vee x  \right) \wedge 1 \tag*{By First Complement Law}                               \\
+      & = x \vee x \tag*{By Second Identity Law}                                                         \\
+  \end{align*}
 }
 
 \chapter{Representing Boolean Functions}
@@ -319,16 +319,16 @@ $F^{d}$
 \section{Sum of Products Expansion}
 
 \dfn{Literal}{
-	A variable or its complement.
+  A variable or its complement.
 }
 
 \dfn{Minterm}{
-	A product of literals in which each variable appears exactly once. I.e. the minterm of boolean variables
-	$x_1,x_2,\ldots,x_n$ is a boolean product $y_1 \cdot y_2 \cdot \ldots \cdot  y_n$, where
-	\[
-		y_i = x_i \text{ or } y_i = \overline{x_i}
-	\]
-	I.e. $y_1 \cdot y_2 \cdot \ldots \cdot  y_n$ is a minterm in of the variables $x_1,x_2,\ldots,x_n$
+  A product of literals in which each variable appears exactly once. I.e. the minterm of boolean variables
+  $x_1,x_2,\ldots,x_n$ is a boolean product $y_1 \cdot y_2 \cdot \ldots \cdot  y_n$, where
+  \[
+    y_i = x_i \text{ or } y_i = \overline{x_i}
+  \]
+  I.e. $y_1 \cdot y_2 \cdot \ldots \cdot  y_n$ is a minterm in of the variables $x_1,x_2,\ldots,x_n$
 }
 
 
@@ -337,78 +337,78 @@ $F^{d}$
 Form a product (using logical and) term for each row in the truth table where the function is 1. Then sum (using logical or) all the terms together.
 
 \begin{table}[h!]
-	\begin{center}
-		\begin{tabular}{|c c c|c|c|}
-			\hline
-			$x$ & $y$ & $z$ & $F \left( x, y, z \right) $ & $G \left( x,y,z \right) $ \\ [0.5ex]
-			\hline
-			\hline
-			1   & 1   & 1   & 0                           & 0                         \\
-			1   & 1   & 0   & 0                           & 1                         \\
-			1   & 0   & 1   & 1                           & 0                         \\
-			1   & 0   & 0   & 0                           & 0                         \\
-			0   & 1   & 1   & 0                           & 0                         \\
-			0   & 1   & 0   & 0                           & 1                         \\
-			0   & 0   & 1   & 0                           & 0                         \\
-			0   & 0   & 0   & 0                           & 0                         \\
-			\hline
-		\end{tabular}
-	\end{center}
+  \begin{center}
+    \begin{tabular}{|c c c|c|c|}
+      \hline
+      $x$ & $y$ & $z$ & $F \left( x, y, z \right) $ & $G \left( x,y,z \right) $ \\ [0.5ex]
+      \hline
+      \hline
+      1   & 1   & 1   & 0                           & 0                         \\
+      1   & 1   & 0   & 0                           & 1                         \\
+      1   & 0   & 1   & 1                           & 0                         \\
+      1   & 0   & 0   & 0                           & 0                         \\
+      0   & 1   & 1   & 0                           & 0                         \\
+      0   & 1   & 0   & 0                           & 1                         \\
+      0   & 0   & 1   & 0                           & 0                         \\
+      0   & 0   & 0   & 0                           & 0                         \\
+      \hline
+    \end{tabular}
+  \end{center}
 \end{table}
 
 
 
 \ex{}{
-	\qs{}{
-		Find Boolean expressions that represent the functions, using the truth table above.
-		\begin{enumerate}
-			\item $F \left( x,y,z \right) $
-			\item $G \left( x,y,z \right) $
-		\end{enumerate}
+  \qs{}{
+    Find Boolean expressions that represent the functions, using the truth table above.
+    \begin{enumerate}
+      \item $F \left( x,y,z \right) $
+      \item $G \left( x,y,z \right) $
+    \end{enumerate}
 
 
-	}
+  }
 
-	\sol{
-		\begin{enumerate}
-			\item First we look for the rows where $F$ is 1. There is only one row, row 3. Then we determine the minterm for
-			      this row which is $x\overline{y}z$. Then we boolean sum all the found minterms to derive the
-			      function's boolean expression but since there is only one minterm the result is simply
-			      \[
-				      F \left( x,y,z \right) = x\overline{y}z
-			      \]
-			\item We repeat the same process for the function $G$, and as there are two rows where $G$ is 1 we will
-			      have two minterms, $xy\overline{z}$ and $\overline{x}y\overline{z}$, making the boolean expression
-			      expression
-			      \[
-				      G \left( x, y,z \right) = xy\overline{z} + \overline{x}y\overline{z}
-			      \]
-		\end{enumerate}
-	}
+  \sol{
+    \begin{enumerate}
+      \item First we look for the rows where $F$ is 1. There is only one row, row 3. Then we determine the minterm for
+            this row which is $x\overline{y}z$. Then we boolean sum all the found minterms to derive the
+            function's boolean expression but since there is only one minterm the result is simply
+            \[
+              F \left( x,y,z \right) = x\overline{y}z
+            \]
+      \item We repeat the same process for the function $G$, and as there are two rows where $G$ is 1 we will
+            have two minterms, $xy\overline{z}$ and $\overline{x}y\overline{z}$, making the boolean expression
+            expression
+            \[
+              G \left( x, y,z \right) = xy\overline{z} + \overline{x}y\overline{z}
+            \]
+    \end{enumerate}
+  }
 
 }
 
 
 \ex{}{
-	\qs{}{
-		Find the sum-of-products of the expansion for the function $F \left( x,y,z \right) = \left( x + y \right)
-			\overline{z}  $
-	}
+  \qs{}{
+    Find the sum-of-products of the expansion for the function $F \left( x,y,z \right) = \left( x + y \right)
+      \overline{z}  $
+  }
 
-	\sol{
-		\begin{align*}
-			F \left( x,y,z \right) & = \left( x + y \right)\overline{z}                                                                                                  \\
-			                       & = x\overline{z} + y \overline{x} \tag*{By Second Distributive Law}                                                                  \\
-			                       & = x1\overline{z} + y1\overline{z} \tag*{By Second Identity Law}                                                                     \\
-			                       & = x \left( y + \overline{y} \right) \overline{z} + y \left( x + \overline{x} \right) \overline{z} \tag*{By First Unit Property Law} \\
-			                       & = xy\overline{z} + x\overline{y}\overline{z} + xy\overline{z} + \overline{x}y\overline{z} \tag*{By Second
-			Distributive Law}                                                                                                                                            \\
-			                       & =  xy\overline{z} + xy\overline{z} + x\overline{y}\overline{z} +
-			\overline{x}y\overline{z} \tag*{By Second Commutative Law}                                                                                                   \\
-			                       & = xy\overline{z} + x\overline{y}\overline{z} + \overline{x}y\overline{z} \tag*{By First Idempotent Law}                             \\
-		\end{align*}
-		$\therefore$ $F \left( x,y,z \right) = xy\overline{z} + x\overline{y}\overline{z}+ \overline{x}y\overline{z} $
-	}
+  \sol{
+    \begin{align*}
+      F \left( x,y,z \right) & = \left( x + y \right)\overline{z}                                                                                                  \\
+                             & = x\overline{z} + y \overline{x} \tag*{By Second Distributive Law}                                                                  \\
+                             & = x1\overline{z} + y1\overline{z} \tag*{By Second Identity Law}                                                                     \\
+                             & = x \left( y + \overline{y} \right) \overline{z} + y \left( x + \overline{x} \right) \overline{z} \tag*{By First Unit Property Law} \\
+                             & = xy\overline{z} + x\overline{y}\overline{z} + xy\overline{z} + \overline{x}y\overline{z} \tag*{By Second
+      Distributive Law}                                                                                                                                            \\
+                             & =  xy\overline{z} + xy\overline{z} + x\overline{y}\overline{z} +
+      \overline{x}y\overline{z} \tag*{By Second Commutative Law}                                                                                                   \\
+                             & = xy\overline{z} + x\overline{y}\overline{z} + \overline{x}y\overline{z} \tag*{By First Idempotent Law}                             \\
+    \end{align*}
+    $\therefore$ $F \left( x,y,z \right) = xy\overline{z} + x\overline{y}\overline{z}+ \overline{x}y\overline{z} $
+  }
 }
 
 
@@ -418,199 +418,205 @@ Form a product (using logical and) term for each row in the truth table where th
 A product of sums expansion is the dual of a sum of product expansion.
 
 \ex{}{
-	$F \left( x,y,z \right) = xy\overline{z} + x\overline{y}\overline{z} + \overline{x}y\overline{z} $ can be expressed as a product of sums expansion
-	\[
-		F \left( x,y,z \right) =\left( x + y + \overline{z} \right)  \cdot \left( x + \overline{y} + \overline{z} \right)
-		\cdot \left( \overline{x} + y + \overline{z} \right)
-	\]
+  $F \left( x,y,z \right) = xy\overline{z} + x\overline{y}\overline{z} + \overline{x}y\overline{z} $ can be expressed as a product of sums expansion
+  \[
+    F \left( x,y,z \right) =\left( x + y + \overline{z} \right)  \cdot \left( x + \overline{y} + \overline{z} \right)
+    \cdot \left( \overline{x} + y + \overline{z} \right)
+  \]
 }
 
 \section{Exercises}
 
 
 \qs{}{
-	Use truth tables to prove the domination laws for Boolean.
+  Use truth tables to prove the domination laws for Boolean.
 }
 
 \sol{
-	\begin{table}[h!]
-		\begin{center}
-			\begin{tabular}{|c|c|c|c|c|}
-				\hline
-				$x$ & 1 & 0 & $x + 1$ & $x \cdot 0$ \\ [0.5ex]
-				\hline
-				\hline
-				1   & 1 & 0 & 1       & 0           \\
-				0   & 1 & 0 & 1       & 0           \\
-				\hline
-			\end{tabular}
-		\end{center}
-	\end{table}
-	Conclusion: $x + 1 = 1$ from column 2 and 4 and $x \cdot 0 = 0$ from column 3 and 5.
+  \begin{table}[h!]
+    \begin{center}
+      \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $x$ & 1 & 0 & $x + 1$ & $x \cdot 0$ \\ [0.5ex]
+        \hline
+        \hline
+        1   & 1 & 0 & 1       & 0           \\
+        0   & 1 & 0 & 1       & 0           \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+  Conclusion: $x + 1 = 1$ from column 2 and 4 and $x \cdot 0 = 0$ from column 3 and 5.
 }
 
 \qs{}{
-	The Boolean operator $\oplus$, called \textbf{XOR} is defined by $1 \oplus 1 = 0$, $1 \oplus 0 = 1$
-	\begin{enumerate}
-		\item $x \oplus x$
-		\item $x \oplus \overline{x}$
-	\end{enumerate}
+  The Boolean operator $\oplus$, called \textbf{XOR} is defined by $1 \oplus 1 = 0$, $1 \oplus 0 = 1$
+  \begin{enumerate}
+    \item $x \oplus x$
+    \item $x \oplus \overline{x}$
+  \end{enumerate}
 }
 
 \sol{
-	\begin{enumerate}
-		\item
-		      \begin{align*}
-			      x \oplus x        \\
-			      \\
-			      \text{When } x= 1 \\
-			      1 \oplus 1 = 0    \\
-			      \\
-			      \text{When } x= 0 \\
-			      0 \oplus 0 = 0    \\
-			      \\
-			      x \oplus x = 0
-		      \end{align*}
-		\item
-		      \begin{align*}
-			      x \oplus \overline{x} \\
-			      \\
-			      \text{When } x= 1     \\
-			      1 \oplus \overline{1} \\
-			      1 \oplus 0 = 1        \\
-			      \\
-			      \text{When } x = 0    \\
-			      0 \oplus \overline{0} \\
-			      0 \oplus 1            \\
-			      0 \oplus 1 = 1        \\
-			      \\
-			      x \oplus \overline{x} = 1
-		      \end{align*}
-	\end{enumerate}
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            x \oplus x        \\
+            \\
+            \text{When } x= 1 \\
+            1 \oplus 1 = 0    \\
+            \\
+            \text{When } x= 0 \\
+            0 \oplus 0 = 0    \\
+            \\
+            x \oplus x = 0
+          \end{align*}
+    \item
+          \begin{align*}
+            x \oplus \overline{x} \\
+            \\
+            \text{When } x= 1     \\
+            1 \oplus \overline{1} \\
+            1 \oplus 0 = 1        \\
+            \\
+            \text{When } x = 0    \\
+            0 \oplus \overline{0} \\
+            0 \oplus 1            \\
+            0 \oplus 1 = 1        \\
+            \\
+            x \oplus \overline{x} = 1
+          \end{align*}
+  \end{enumerate}
 }
 
 \qs{}{
-	Prove the absorption law $x + xy = x$ using the other boolean identities
+  Prove the absorption law $x + xy = x$ using the other boolean identities
 }
 
 \sol{
-	\begin{align*}
-		x + xy & = x \cdot 1 + xy \tag*{By Second Identity Law}             \\
-		       & = x \left( 1 + y \right) \tag*{By Second Distributive Law} \\
-		       & = x \cdot 1 \tag*{By First Domination Law}                 \\
-		       & = x \tag*{By Second Identity Law}                          \\
-	\end{align*}
+  \begin{align*}
+    x + xy & = x \cdot 1 + xy \tag*{By Second Identity Law}             \\
+           & = x \left( 1 + y \right) \tag*{By Second Distributive Law} \\
+           & = x \cdot 1 \tag*{By First Domination Law}                 \\
+           & = x \tag*{By Second Identity Law}                          \\
+  \end{align*}
 
-	\begin{align*}
-		x \left( x + y \right) & = \left( x + 0 \right) \left( x + y \right) \tag*{By First Identity Law} \\
-		                       & = x + 0 \cdot y \tag*{By First Distributive Law }                        \\
-		                       & = x + 0 \tag*{By Second Domination Law}                                  \\
-		                       & = x \tag*{By First Identity Law}                                         \\
-	\end{align*}
+  \begin{align*}
+    x \left( x + y \right) & = \left( x + 0 \right) \left( x + y \right) \tag*{By First Identity Law} \\
+                           & = x + 0 \cdot y \tag*{By First Distributive Law }                        \\
+                           & = x + 0 \tag*{By Second Domination Law}                                  \\
+                           & = x \tag*{By First Identity Law}                                         \\
+  \end{align*}
 }
 
 \qs{}{
-	Find the sum of products expansion of these Boolean functions
-	\begin{enumerate}
-		\item $F \left( x, y \right) = x + y $
-		\item $F \left( x, y \right) = xy $
-		\item $F \left( x,y \right) = 1 $
-		\item $F \left( x,y \right) = y $
-	\end{enumerate}
+  Find the sum of products expansion of these Boolean functions
+  \begin{enumerate}
+    \item $F \left( x, y \right) = x + y $
+    \item $F \left( x, y \right) = xy $
+    \item $F \left( x,y \right) = 1 $
+    \item $F \left( x,y \right) = y $
+  \end{enumerate}
 }
 
 \sol{
-	\begin{enumerate}
-		\item
-		      \begin{align*}
-			      F \left( x, y \right) & = x + y                                                                                           \\
-			                            & = x\cdot 1 + y \cdot 1 \tag*{By Second Identity Law}                                              \\
-			                            & = x \cdot \left( y + \overline{y} \right) + y \cdot \left( x + \overline{x} \right) \tag*{By Unit
-			      Property}                                                                                                                 \\
-			                            & = xy + x\overline{y} + xy + \overline{x}y \tag*{By Second Distributive Law}                       \\
-			                            & = xy + xy + x\overline{y} + \overline{x}y \tag*{By First Commutative Law}                         \\
-			                            & = xy + x\overline{y}+ \overline{x}y \tag*{By First Idempotent Law}                                \\
-		      \end{align*}
-		\item
-		      \begin{align*}
-			      F \left( x, y \right) & = xy                                                    \\
-			                            & = x \left( y + y \right) \tag*{By First Idempotent Law} \\
-			                            & = xy                                                    \\
-		      \end{align*}
-		\item
-		      \begin{align*}
-			      F \left( x, y \right) & = 1                                                                       \\
-			                            & = x + \overline{x} \tag*{By Unit Property}                                \\
-			                            & = x \cdot 1 + \overline{x} \cdot 1 \tag*{By Second Identity Law}          \\
-			                            & = x \cdot \left( y + \overline{y} \right) + \overline{x} \cdot \left( y +
-			      \overline{y} \right) \tag*{By Unit Property}                                                      \\
-			                            & =  xy + x\overline{y} + \overline{x}y + \overline{x}\overline{y} \tag*{By
-			      Second Distributive Law}                                                                          \\
-		      \end{align*}
-		\item
-		      \begin{align*}
-			      F \left( x, y \right) & = y                                                                                          \\
-			                            & = y + y \tag*{By First Idempotent Law}                                                       \\
-			                            & = y\cdot 1 + y \cdot 1 \tag*{By Second Identity Law}                                         \\
-			                            & = y \cdot \left( x + 1 \right) + y\cdot  \left( x + 1 \right) \tag*{By First Domination Law} \\
-			                            & = xy + y + xy + y \tag*{By Second Distributive Law}                                          \\
-			                            & = xy + xy + y + y \tag*{By First Commutative Law}                                            \\
-			                            & = xy + y \tag*{By First Idempotent Law}                                                      \\
-			                            & =  xy + y \cdot 1 \tag*{By Second Identity Law}                                              \\
-			                            & = xy + y \cdot \left( x + \overline{x} \right) \tag*{By Unit Property Law}                   \\
-			                            & = xy + xy + y\overline{x} \tag*{By Second Distributive Law}                                  \\
-			                            & = xy + y\overline{x} \tag*{By First Idempotent Law }                                         \\
-		      \end{align*}
-	\end{enumerate}
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            F \left( x, y \right) & = x + y                                                                                           \\
+                                  & = x\cdot 1 + y \cdot 1 \tag*{By Second Identity Law}                                              \\
+                                  & = x \cdot \left( y + \overline{y} \right) + y \cdot \left( x + \overline{x} \right) \tag*{By Unit
+            Property}                                                                                                                 \\
+                                  & = xy + x\overline{y} + xy + \overline{x}y \tag*{By Second Distributive Law}                       \\
+                                  & = xy + xy + x\overline{y} + \overline{x}y \tag*{By First Commutative Law}                         \\
+                                  & = xy + x\overline{y}+ \overline{x}y \tag*{By First Idempotent Law}                                \\
+          \end{align*}
+    \item
+          \begin{align*}
+            F \left( x, y \right) & = xy                                                    \\
+                                  & = x \left( y + y \right) \tag*{By First Idempotent Law} \\
+                                  & = xy                                                    \\
+          \end{align*}
+    \item
+          \begin{align*}
+            F \left( x, y \right) & = 1                                                                       \\
+                                  & = x + \overline{x} \tag*{By Unit Property}                                \\
+                                  & = x \cdot 1 + \overline{x} \cdot 1 \tag*{By Second Identity Law}          \\
+                                  & = x \cdot \left( y + \overline{y} \right) + \overline{x} \cdot \left( y +
+            \overline{y} \right) \tag*{By Unit Property}                                                      \\
+                                  & =  xy + x\overline{y} + \overline{x}y + \overline{x}\overline{y} \tag*{By
+            Second Distributive Law}                                                                          \\
+          \end{align*}
+    \item
+          \begin{align*}
+            F \left( x, y \right) & = y                                                                                          \\
+                                  & = y + y \tag*{By First Idempotent Law}                                                       \\
+                                  & = y\cdot 1 + y \cdot 1 \tag*{By Second Identity Law}                                         \\
+                                  & = y \cdot \left( x + 1 \right) + y\cdot  \left( x + 1 \right) \tag*{By First Domination Law} \\
+                                  & = xy + y + xy + y \tag*{By Second Distributive Law}                                          \\
+                                  & = xy + xy + y + y \tag*{By First Commutative Law}                                            \\
+                                  & = xy + y \tag*{By First Idempotent Law}                                                      \\
+                                  & =  xy + y \cdot 1 \tag*{By Second Identity Law}                                              \\
+                                  & = xy + y \cdot \left( x + \overline{x} \right) \tag*{By Unit Property Law}                   \\
+                                  & = xy + xy + y\overline{x} \tag*{By Second Distributive Law}                                  \\
+                                  & = xy + y\overline{x} \tag*{By First Idempotent Law }                                         \\
+          \end{align*}
+  \end{enumerate}
 
-	\qs{}{
-		Find the sum of products and the product of sums expansion of the Boolean function $F \left( x,y,z \right) $ that
-		equals 1 if and only if
-		\begin{enumerate}
-			\item $xy = 0$
-			\item $x + y = 0$
-			\item $xyz = 0$
-		\end{enumerate}
-	}
-
-
-	\sol{
-
-		\begin{table}[h!]
-			\begin{center}
-				\begin{tabular}{|c c c|c|c|c|c|c|c|c|c|}
-					\hline
-					$x$ & $y$ & $z$ & $xy$ & $F \left( x,y,z \right) $ & $x + y$ & $F \left( x,y,z \right) $ & $xyz$ & $F \left( x,y,z \right) $ \\ [0.5ex]
-					\hline
-					\hline
-					1   & 1   & 1   & 1    & 0                         & 1       & 0                         & 1     & 0                         \\
-					1   & 1   & 0   & 1    & 0                         & 1       & 0                         & 0     & 1                         \\
-					1   & 0   & 0   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
-					1   & 0   & 1   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
-					0   & 1   & 1   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
-					0   & 0   & 0   & 0    & 1                         & 0       & 1                         & 0     & 1                         \\
-					0   & 0   & 1   & 0    & 1                         & 0       & 1                         & 0     & 1                         \\
-					0   & 1   & 0   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
-					\hline
-				\end{tabular}
-			\end{center}
-		\end{table}
+  \qs{}{
+    Find the sum of products and the product of sums expansion of the Boolean function $F \left( x,y,z \right) $ that
+    equals 1 if and only if
+    \begin{enumerate}
+      \item $xy = 0$
+      \item $x + y = 0$
+      \item $xyz = 0$
+    \end{enumerate}
+  }
 
 
-		\begin{enumerate}
-			\item
-			      DNF - $x\overline{y}\overline{z} + x\overline{y}z + \overline{x}yz +
-				      \overline{x}\overline{y}\overline{z} + \overline{x}\overline{y}z + \overline{x}y\overline{z} $ \\
-			      CNF - $\left( \overline{x} + \overline{y} + \overline{z} \right) \cdot \left( \overline{x} +
-				      \overline{y} + z \right)  $
-			\item
-			      DNF - $\overline{x}\overline{y}\overline{z} + \overline{x}\overline{y}z$ \\
-			      CNF - $\left( x + y + z \right) \cdot \left( x + y + \overline{z} \right) \cdot \left( x + \overline{y}
-				      + \overline{z}\right) \cdot \left( x + \overline{y} + z \right) \cdot \left( \overline{x} + y + z
-				      \right) \cdot \left( \overline{x} + y + \overline{z} \right)      $
+  \sol{
 
-		\end{enumerate}
-	}
+    \begin{table}[h!]
+      \begin{center}
+        \begin{tabular}{|c c c|c|c|c|c|c|c|c|c|}
+          \hline
+          $x$ & $y$ & $z$ & $xy$ & $F \left( x,y,z \right) $ & $x + y$ & $F \left( x,y,z \right) $ & $xyz$ & $F \left( x,y,z \right) $ \\ [0.5ex]
+          \hline
+          \hline
+          1   & 1   & 1   & 1    & 0                         & 1       & 0                         & 1     & 0                         \\
+          1   & 1   & 0   & 1    & 0                         & 1       & 0                         & 0     & 1                         \\
+          1   & 0   & 0   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
+          1   & 0   & 1   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
+          0   & 1   & 1   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
+          0   & 0   & 0   & 0    & 1                         & 0       & 1                         & 0     & 1                         \\
+          0   & 0   & 1   & 0    & 1                         & 0       & 1                         & 0     & 1                         \\
+          0   & 1   & 0   & 0    & 1                         & 1       & 0                         & 0     & 1                         \\
+          \hline
+        \end{tabular}
+      \end{center}
+    \end{table}
+
+
+    \begin{enumerate}
+      \item
+            DNF - $x\overline{y}\overline{z} + x\overline{y}z + \overline{x}yz +
+              \overline{x}\overline{y}\overline{z} + \overline{x}\overline{y}z + \overline{x}y\overline{z} $ \\
+            CNF - $\left( \overline{x} + \overline{y} + \overline{z} \right) \cdot \left( \overline{x} +
+              \overline{y} + z \right)  $
+      \item
+            DNF - $\overline{x}\overline{y}\overline{z} + \overline{x}\overline{y}z$ \\
+            CNF - $\left( x + y + z \right) \cdot \left( x + y + \overline{z} \right) \cdot \left( x + \overline{y}
+              + \overline{z}\right) \cdot \left( x + \overline{y} + z \right) \cdot \left( \overline{x} + y + z
+              \right) \cdot \left( \overline{x} + y + \overline{z} \right)      $
+
+    \end{enumerate}
+  }
+
+  \section{Boolean Circuits}
+
+  \[
+    \overline{\left( \overline{x} y z \right) } \left( \overline{x} + y + \overline{z} \right)
+  \]
 }
 
 

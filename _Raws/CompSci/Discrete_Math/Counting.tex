@@ -1,0 +1,366 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Counting}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Basics of Counting}
+
+\section{Basic Counting Principles}
+
+\subsection{Product Rule}
+\dfn{Product Rule}{
+  This rule applies when a procedure is made up of separate tasks. Suppose that a procedure can be broken down into
+  two tasks. If there are $n_1$ ways to do task 1 and for each of these ways of doing task 1, there are $n_2$ ways to
+  do task 2, then there are $n_1n_2$ ways to do the procedure.
+}
+If $A_1, A_2, \ldots, A_m$ are finite sets, then the number of elements in the Cartesian product of these sets in the
+product of the number of elements of each set. \\
+Therefore it follows that the product rule then becomes
+\[
+  \mid A_1 \times A_2 \times \ldots \times A_m  \mid  =  \mid A_1  \mid  \cdot  \mid A_2  \mid \cdot \ldots \cdot   \mid A_m  \mid
+\]
+\ex{}{
+  \qs{}{
+    A new company with just two employees, Sanchez and Patel, rents a floor of a building with 12 offices. How many ways
+    are there to assign different offices to these two employees.
+  }
+
+  \sol{
+    This procedure is made up of two tasks, assigning an office to Sanchez, then assigning an office to Patel. The
+    first task can be done in 12 ways, and the second can be done in 11 since one office would be occupied. this comes
+    to $12 \times 11$ ways
+  }
+}
+
+\subsection{Sum Rule}
+\dfn{Sum Rule}{
+  If a task can be done in either one of $n_1$ ways or in one of $n_2$ ways, where none of the set $n_1$ ways is the
+  same of any of the set of $n_2$ ways, then there are $n_1 + n_2$ ways to do the task
+}
+The sum rule can be phrased in terms of sets
+\[
+  \mid A \cup B  \mid  =  \mid A \mid +  \mid B \mid + \ldots +  \mid A_m  \mid   \text{ as long as $A$ and $B$ are disjoint sets}
+\]
+
+Or
+
+\[
+  \mid A_1 \cup A_2 \cup \ldots\cup A_{m}  \mid =  \mid A_1 \mid  +  \mid A_2  \mid \text{ when } A_{i} \cap A_{j} = \O
+  \text{ for all } i, j
+\]
+
+\ex{}{
+  \qs{}{
+    The mathematics depart must choose either a student or a faculty member as a representative for a university committee.
+    How many choices are there for this representative if there are 37 member of the mathematics faculty and 83 math
+    majors and no one is both a faculty member and a student.
+  }
+
+  \sol{
+    \[
+      37 + 83 = 120
+    \]
+  }
+}
+
+\ex{}{
+  \qs{}{
+    How many bit strings are there of length 6 or less, not including the empty strings
+  }
+
+  \sol{
+    First we add all the bit strings of lengths 6, 5, 4, 3, 2, 1. \\
+    To find the number of bit string of each length we use the product rule, i.e.
+    \begin{align*}
+      \displaystyle\sum_{i = 1}^{6} 2^{n} & = 2^{1} + 2^{2} + 2^{3} + 2^{4} + 2^{5} + 2^{6} \\
+                                          & = 126                                           \\
+    \end{align*}
+  }
+}
+
+\subsection{Subtraction Rule}
+
+
+\section{Combining the sum and product rule}
+
+\ex{}{
+  \qs{}{
+    Count all passwords of length 6,7,or 8. \\
+    A character in a password can either be an upper-case letter or a digit \\
+    A password must contain at least 1 digit
+  }
+
+  \sol{
+    Passwords of length 6 with either upper-case letter or digit - $\left( 26 + 10 \right) ^{6}$ \\
+    Minus number of passwords that are only made up letters - $\left( 26 + 10 \right) ^{6}$ \\
+    Times the number of digit orders - $10 \times 6$
+    \[
+      \left( 26 + 10 \right)^{6} - 26^{6}
+    \]
+    Passwords of length 6 with either upper-case letter or digit - $\left( 26 + 10 \right)^{7}$ \\
+    Minus number of passwords that are only made up letters - $26^{7}$ \\
+    \[
+      \left( 26 + 10 \right)^{7} - 26^{7}
+    \]
+    Passwords of length 6 with either upper-case letter or digit - $\left( 26 + 10 \right)^{8}$ \\
+    Minus number of passwords that are only made up letters - $26^{8}$ \\
+    \[
+      \left( 26 + 10 \right)^{8} - 26^{8}
+    \]
+
+    \[
+      \left( 26 + 10 \right)^{6} - 26^{6} +       \left( 26 + 10 \right)^{7} - 26^{7} +       \left( 26 + 10 \right)^{8} - 26^{8}
+    \]
+  }
+}
+
+\qs{}{
+  How many bit strings of length 8 start with a 1 or end with a 00
+}
+
+\sol{
+  \[
+    2^{7} + 2^{6} - 2^{5}
+  \]
+  Number of bit strings that start with 1 + Number of bit strings that end with 00 - Number of the intersection of both
+}
+
+
+
+
+\section{The Pigeon-hole Principle}
+
+\dfn{Pigeon-hole Principle}{
+  If $k$ is a positive integer and $k+1$ or more objects are placed into $k$ boxes, then there is at least one box
+  containing two or more of the objects
+}
+
+\cor{
+  A function $f$ from a set with $k + 1$ or more elements to a set with $k$ elements is not one-to-one
+}
+
+\subsection{Generalized Pigeon-hole Principle}
+
+\dfn{Generalized Pigeon-hole Principle}{
+  If $N$ objects are placed into $k$ boxes, then there is at least one box containing at least $\lceil \frac{N}{k} \rceil$
+  objects. i.e.
+  \[
+    k \left( \left\lceil \frac{N}{k} - 1 \right\rceil  \right)  < k \left( \left( \frac{N}{k} + 1 \right) - 1  \right) = N
+  \]
+}
+
+\ex{}{
+  \qs{}{
+    Among 100 people how many must be born in the same month
+  }
+
+  \sol{
+    \begin{align*}
+      \left\lceil \frac{100}{12} \right\rceil & = 9 \\
+    \end{align*}
+  }
+}
+
+\section{Permutations and Combinations}
+
+\subsection{Permutations}
+
+\dfn{Permutation}{
+  An arrangement of $r$ objects from a set of $n$ objects is called a permutation of $n$ objects taken $r$ at a time,
+  where the order of the objects is important. The number of permutations of $n$ objects taken $r$ at a time is denoted
+  by $P(n, r)$ and is given by
+  \[
+    P(n, r) = \frac{n!}{(n - r)!}
+  \]
+}
+
+\ex{}{
+  \qs{}{
+    How many permutations of the letters ABCDEFGH contain the string ABC
+  }
+
+  \sol{
+    We treat the string ABC as a single object, then we have 6 objects to permute. \\
+    \begin{align*}
+      P \left( 6, 6 \right) & = 6!  \\
+                            & = 720 \\
+    \end{align*}
+  }
+}
+
+\subsection{Combinations}
+
+\dfn{Combination}{
+  An arrangement of $r$ objects from a set of $n$ objects is called a combination of $n$ objects taken $r$ at a time,
+  where the order of the objects is not important. The number of combinations of $n$ objects taken $r$ at a time is
+  denoted by $C(n, r)$ and is given by
+  \[
+    C(n, r) = \frac{n!}{r! \left( n - r \right)!}
+  \]
+}
+
+\ex{}{
+  \qs{}{
+    How many 2-combinations of the set $\{a,b,c,d\} $ are there.
+
+  }
+
+  \sol{
+    \begin{align*}
+      C \left( 4, 2 \right) & = \frac{4!}{2! \left( 4 - 2 \right)! } \\
+                            & = 6                                    \\
+    \end{align*}
+  }
+}
+
+\ex{}{
+  \qs{}{
+    Suppose that there are 9 faculty members in the mathematics department. How many ways are there to select a committee
+    and 11 in the computer science department. How many ways are there to develop a discrete mathematics course at a school
+    if the committee is to consist of three faculty member from the mathematics department and four from the computer
+    science?
+  }
+
+  \sol{
+    Using the product rule, we can split the problem into two tasks, selecting the committee from the math department
+    and selecting the committee from the computer science department, giving us \\
+    \begin{align*}
+      C \left( 9, 3 \right) \times C \left( 11, 4 \right) & = \frac{9!}{\left( 9 - 3 \right)! \times 3! } \times \frac{11!}{\left(
+      11 - 4\right)! \times  4! }                                                                                                  \\
+                                                          & = 27,720                                                               \\
+    \end{align*}
+  }
+}
+
+
+\section{Exercises}
+
+\qs{}{
+  There are four major auto routes from Boston to Detroit and six from Detroit to Los Angeles. How many major auto routes
+  are there from Boston to Los Angeles via Detroit.
+}
+
+\sol{
+
+  \noindent Using the product rule we can split the trips into two steps, Boston to Detroit $\left( 4 \right) $ and
+  Detroit to Los Angeles $\left( 6 \right) $, giving us
+  \[
+    4 \times 6 =  24
+  \]
+}
+
+\qs{}{
+  \begin{enumerate}
+    \item How many different three-letter initials can people have
+    \item How many different three letter initials with none of the letters repeated can people have
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item $26^3 = 17576$
+    \item $26 \times 25 \times 24 = 15600 $
+  \end{enumerate}
+}
+
+\qs{}{
+  \begin{enumerate}
+    \item How many bit strings of length ten both begin and end with a 1
+    \item How many bit strings of length $n$, where $n$ is a positive integer, start and end with 1s
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item $2^8$
+    \item $2^{n - 2}$ where $n \geq 2$ and when $n = 1$, there is one bit string
+  \end{enumerate}
+}
+
+
+\qs{}{
+  How many stings are there of four letters that have the letter x in them
+}
+
+\sol{
+  \begin{align*}
+    26^{4} - 25^{4} & = 66351 \\
+  \end{align*}
+}
+
+\qs{}{
+  Suppose that a password for a computer system must  have at least 8 but no more 12, characters where each character in
+  the password is a lower-case English letter, an upper-case English letter, a digit, or one of the six special characters,
+  *, >, <, !, + and =
+  \begin{enumerate}
+    \item How many different passwords are available for this computer system
+    \item How many of these passwords contain at least one occurrence of at least one of the six special characters.
+    \item Using your answer to part 1., determine how long it takes a hacker to try every possible password assuming that
+          it takes one nanosecond for a hacker to check each possible password
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          The possible number of ways to choose one character is $26 + 26 + 10 + 6 = 68$
+          \begin{align*}
+            8: 68^8     \\
+            9: 68^9     \\
+            10: 68^{10} \\
+            11: 68^{10} \\
+            12: 68^{12} \\
+            \displaystyle\sum_{12}^{i = 8} 68^{i}
+          \end{align*}
+    \item
+          \begin{align*}
+            \displaystyle\sum_{12}^{i = 8} 68^i - \displaystyle\sum_{12}^{i = 8} 62^{i}
+          \end{align*}
+  \end{enumerate}
+}
+
+\qs{}{
+  Show that if there are 30 students in a class, then at least two have last names that begin with the same letter
+}
+
+\sol{
+  $N = 30$ objects to be placed into $k = 26$ boxes \\
+  According to the generalized pigeon hole principle:
+  \begin{align*}
+    \left\lceil \frac{30}{26} \right\rceil & = 2 \\
+  \end{align*}
+  $\therefore$ at least 2
+}
+
+\qs{}{
+  Show that there are at least siz people in California (population: 37 million) with the same three initials who were
+  born on the same day of the year (but not necessarily in the same year). Assume that everyone has three initials
+}
+
+\sol{
+  $N = 37 \text{ million}$ to be place into $k$ boxes \\
+  $k = 26^3 \times 366$ \\
+  According to the generalized pigeon hole principle:
+  \begin{align*}
+    \left\lceil \frac{37,000,000}{26^3 \times 366} \right\rceil & = 6 \\
+  \end{align*}
+  $\therefore$ at least 6
+
+}
+
+\end{document}

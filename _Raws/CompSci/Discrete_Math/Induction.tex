@@ -1,0 +1,559 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Mathematical Induction }}
+\author{\huge{Madiba Hudson-Kansai}}
+\date{March 2024}
+\usepackage{parskip}
+\usepackage{proof}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Mathematical Induction}
+
+\section{Introduction}
+
+\dfn{Mathematical Induction}{
+  Mathematical induction  can be used to prove statements that assert $P \left( n \right) $ is true for all positive
+  integers $n$, where $P \left( n \right) $ is a propositional function. A proof by mathematical induction has two
+  parts, a \textbf{basis step}, where we show that $P \left( 1 \right) $ is true and an \textbf{inductive step}, where
+  we show that for all positive integers $k$ if $P \left( k \right) $ is true then $P \left( k + 1 \right) $ is also
+  true.
+}
+
+Mathematical Induction can be expressed as the rule of inference $P \left( 1 \right) \wedge \left( P \left( k \right)
+  \to P \left( k + 1 \right)   \right) \to  \forall n P \left( n \right)   $, where the domain is the set of positive
+integers.\\
+
+\ex{}{
+  \qs{}{
+    Show that
+    \[
+      P \left( n \right): 1 + 2 + 3 + \ldots + n = \frac{n \left( n + 1 \right) }{2}
+    \]
+  }
+
+  \sol{
+    We first start with the basis step, $P \left( 1 \right) $, which is
+    \begin{align*}
+      P \left( 1 \right) : 1 & = \frac{1 \left( 1 + 1 \right) }{2} \\
+      1                      & =  1                                \\
+    \end{align*}
+    $\therefore$ $P \left( 1 \right) $ is true.\\
+    Next is the inductive step, where we need to show that $P \left( k \right) \to P \left( k + 1 \right)  $ \\
+    We assume
+    \[
+      P \left( k \right) : 1 + 2 + 3 + \ldots + k = \frac{k \left( k + 1 \right) }{2}
+    \]
+    and prove
+    \[
+      P \left( k + 1 \right): 1 + 2 + 3 + \ldots + \left( k + 1 \right) = \frac{\left( k + 1 \right) \left(  k +
+        2  \right)  }{2}
+    \]
+    To prove this we need to relate these two predicates. And because $P \left( k + 1 \right) $ can be expressed as
+    $P \left( k \right) + \left( k + 1 \right)  $ we can write
+    \[
+      P \left( k + 1 \right): 1 + 2 + 3 + \ldots + \left( k + 1 \right) = \frac{k \left( k + 1 \right) }{2} + \left( k
+      + 1\right)
+    \]
+    So we simplify
+    \begin{align*}
+      \frac{k \left( k + 1 \right) }{2} + \left( k + 1 \right) & = \frac{k \left( k + 1 \right) + 2 \left( k + 1
+      \right)  }{2}                                                                                                      \\
+                                                               & = \frac{\left( k + 1 \right) \left( k + 2 \right)  }{2} \\
+    \end{align*}
+  }
+
+}
+
+
+\ex{}{
+  \qs{}{
+    Show that
+    \[
+      P \left( n \right) : 1 + 3 + 5 + \ldots + \left( 2n - 1 \right)  = n^2 \, \, \forall n \in \mathbb{Z}
+    \]
+  }
+
+  \sol{
+    The basis step is $P \left( 1 \right) $
+    \[
+      P \left( n \right) : 1 = 1^2
+    \]
+
+    Assume
+    \[
+      P \left( k \right) : 1 + 3 + 5 + \ldots + \left( 2k - 1 \right)  = k^2
+    \]
+    and show that
+    \[
+      P \left( k + 1 \right) : 1 + 3 + 5 + \ldots + \left( 2 \left( k + 1 \right) - 1  \right) = \left( k + 1
+      \right)^2
+    \]
+    $P \left( k + 1 \right) $ can be expressed as $P \left( k \right) + \left( 2k + 1 \right)   $
+    \begin{align*}
+      P \left( k + 1 \right) & : 1 + 3 + 5 \ldots + \left( 2k - 1 \right) + \left( 2k + 1 \right) \\
+                             & = k^2 + 2k + 1                                                     \\
+                             & = \left( k + 1 \right)^2                                           \\
+    \end{align*}
+    $\therefore$ $P \left( k + 1 \right) $ is true\\
+    Conclusion: Having completed the basis and induction steps we can conclude that $1 + 3 + 5 + \ldots + \left( 2n - 1
+      \right) = n^2 $
+  }
+}
+
+\section{Why Mathematical Induction is Valid}
+
+\dfn{Well Ordering Property of Positive Integers}{
+  This axiom states that every non-empty subset of positive integers has a least element
+}
+
+
+The validity of mathematical induction as a proof technique comes from the well ordering property, as an axiom of
+positive integers. So suppose we know that $P \left( 1 \right) $ is true for all positive integers $n$ and that the
+proposition $P \left( k \right) \to P \left( k + 1 \right)  $ is true for all positive integers $k$. To show that $P
+  \left( n \right) $ must be true for all positive integers $n$ we can use a proof by contradiction. \\
+
+We first assume that there is at least positive integer for which $P \left( n \right) $ is false, i.e. $\exists x \in
+  \mathbb{Z}^{+}\, \neg P \left( x \right) $ \\
+
+Then the set of positive integers for which $P \left( n \right) $ is false, let this be $S$, is non-empty. Thus by the
+well ordering property, $S$ has a least element, which we will denote as $m$. \\
+
+We know that $m$ cannot be 1, because $P \left( 1 \right) $ is true, and since $m$ is a positive integer it must be
+greater than one ergo $m - 1$ is also a positive integer. \\
+
+Again due to well ordering property we know the least value in $S$ is $m$ therefore $m - 1$ is not in set $S$, as a
+result $P \left( m - 1 \right) $ is true. \\
+
+Because the statements $P \left( m - 1 \right) \to P \left( m \right)  $ is also true, it must be the case that $P
+  \left( m \right) $ is true, which is a contradiction of the statement that $P \left( m \right) $ must be false. \\
+
+Hence $P \left( n \right) $ must be true for every positive integer.
+
+\section{Examples of Proofs by Mathematical Induction}
+
+\subsection{Proving Summation Formulae}
+
+
+\qs{}{
+  Conjecture a formula for the sum of the first $n$ positive odd integers. Then prove your conjecture using mathematical induction.
+}
+
+\sol{
+  The sums of the first $n$ positive odd integers for $n = 1,2,3,4,5$ are
+  \begin{align*}
+    1                 & = 1  \\
+    1 + 3             & = 4  \\
+    1 + 3 + 5         & = 9  \\
+    1 + 3 + 5 + 7     & = 16 \\
+    1 + 3 + 5 + 7 + 9 & = 25 \\
+  \end{align*}
+
+  \noindent From these values it is reasonable to conjecture that the sum of the first $n$ odd integers is $n^2$, i.e.
+  \[
+    1+3+5+\ldots+ (2n - 1) = n^2
+  \]
+
+  Let $P \left( n \right) $ be $1+3+5+\ldots+ \left( 2n - 1 \right) = n^2 $ \\
+
+  \noindent\underline{Basis Step}:\\
+  \\
+
+  \begin{align*}
+    P \left( 1 \right): 1 & = 1^2 \\
+  \end{align*}
+
+  \noindent\underline{Inductive Step}: \\
+  \\
+  To complete this step we need to prove that $\forall k \in \mathbb{Z}^{+}\, \, \left( P \left( k \right) \to P
+    \left( k + 1 \right) \right)   $ \\
+
+  \noindent Assume $\exists k \in Z^{+}\, P \left( k \right) = T $, then
+
+  \[
+    P \left( k \right) : 1 + 3 + 5 + \ldots + \left( 2k - 1 \right) = k^2                        \\
+  \]
+
+  \begin{align*}
+    P \left( k + 1 \right): 1 + 3 + 5 + \ldots + \left( 2k +1 \right)                          & = \left( k + 1 \right) ^2                  \\
+    P \left( k + 1 \right): 1 + 3 + 5 + \ldots + \left( 2k - 1 \right) + \left( 2k + 1 \right) & = \left( k + 1
+    \right)^2                                                                                                                               \\
+    \\
+    P \left( k + 1 \right): P \left( k \right) + \left( 2k + 1 \right)                                                                      \\
+    1 + 3 + 5 + \ldots + \left( 2k + 1 \right)                                                 & = k^2 + 2k + 1                             \\
+                                                                                               & = \left( k + 1 \right)\left( k + 1 \right) \\
+                                                                                               & = \left( k + 1 \right)^2                   \\
+  \end{align*}
+
+  \noindent$\therefore$ $P \left( k + 1 \right) $ is $T$ \\
+  Hence we can conclude that $P \left( n \right) $ is true for all positive integers $n$.
+}
+
+
+\qs{}{
+  Use mathematical induction to show that
+  \begin{align*}
+    1 +  2 + 2^2 + \ldots + 2^{n} = 2^{n + 1} - 1
+  \end{align*}
+  For all non-negative integers $n$
+}
+
+\sol{
+
+\noindent Let $P \left( n \right) $ be $1 + 2 + 2^2 + \ldots + 2^{n} = 2^{n + 1} - 1$\\
+
+\noindent \underline{Basis Step}: \\
+\\
+\begin{align*}
+  P \left( 0 \right): 2^{0} & = 2^{0 + 1} - 1 \\
+  1                         & = 2-1           \\
+  1                         & = 1             \\
+\end{align*}
+
+\noindent \underline{Induction Step} \\
+\\
+
+\noindent To complete this step I must prove $P \left( k \right) \to P \left( k +1 \right)  $ where $k$ is any non-negative
+integer. \\
+
+\noindent Assume $P \left( k \right) $ is true for some non-negative integer $k$, then
+\[
+P \left( k \right): 1 + 2 + 2^2+ \ldots + 2^{k} = 2^{k + 1} - 1
+    \]
+
+    \noindent Then $P \left( k + 1 \right) $ is
+
+    \[
+      P \left( k + 1 \right): 1 + 2 + 2^2 + \ldots + 2^{k} + 2^{k + 1} = 2^{k + 2} - 1
+    \]
+
+    \noindent $P \left( k + 1 \right) $ can also be expressed as $P \left( k + 1 \right)  = P \left( k \right) + 2^{k + 1}$
+
+    \begin{align*}
+      P \left( k + 1 \right): 1 + 2 + 2^2 + \ldots + 2^{k + 1} & = 2^{k + 1} - 1 + 2^{k + 1}                   \\
+                                                               & = 2^{k} \times 2^{1} + 2^{k} \times 2^{1} - 1 \\
+                                                               & = 2^{k} \left( 2^{1} + 2^{1} \right)  - 1     \\
+                                                               & = 2^{k} \left( 2^2 \right) - 1                \\
+                                                               & = 2^{k + 2} - 1                               \\
+    \end{align*}
+
+    \noindent$\therefore$ $P \left( k + 1 \right) $ is $T$ \\
+    Hence we can conclude that $P \left( n \right) $ is true for all non-negative integers $n$.
+
+
+  }
+
+
+\nparagraph{Sums of Geometric Progressions}
+\qs{}{
+  Use mathematical induction to prove this formula for the sum of a finite number of terms of a geometric progression with
+  initial term $a$ and a common ratio $r$
+  \[
+    \displaystyle\sum_{j = 0}^{n} ar^{j} = a + ar + ar^2 + \ldots + ar^{n} = \frac{ar^{n + 1} - a}{r - 1} \, \, \text{ where } r \neq 1
+  \]
+  where $n$ is a non-negative integer.
+}
+
+\sol{
+  Let $P \left( n \right) $ be "the sum of the first $n + 1$ terms of a geometric
+  progression in this formula is correct".
+
+  \noindent \underline{Basis Step} \\
+  \\
+  \begin{align*}
+    P \left( 0 \right): \displaystyle\sum_{j = 0}^{0} ar^{j} & = \frac{ar^{0 + 1} - a}{r - 1}          \\
+    a                                                        & = \frac{ar - a}{r - 1}                  \\
+    a                                                        & = \frac{a \left( r - 1 \right) }{r - 1} \\
+    a                                                        & = a                                     \\
+  \end{align*}
+
+  \noindent \underline{Induction  Step} \\
+  \\
+
+  \noindent To complete this step I must prove $P \left( k \right) - P \left( k + 1 \right)  $ where $k$ is any non-negative
+  integer. \\
+
+  \noindent Assume $P \left( k \right) $ for some non-negative integer $k$, then \\
+  \[
+    P \left( k \right): \displaystyle\sum_{j = 0}^{k} ar^{j} = a + ar + ar^2 + \ldots + ar^{k} = \frac{ar^{k + 1} - a}{r - 1}
+  \]
+
+  Then $P \left( k + 1 \right) $ is
+  \[
+    P \left( k + 1 \right): \displaystyle\sum_{j = 0}^{k + 1} ar^{j} = a + ar + ar^2 + \ldots + ar^{k + 1} =
+    \frac{ar^{k + 2} - a}{r - 1}
+  \]
+
+  And can be expressed as $P \left( k + 1 \right) = P \left( k \right) + ar^{k + 1}  $, therefore:
+  \begin{align*}
+    P \left( k + 1 \right): \displaystyle\sum_{j = 0}^{k + 1}ar^{j} = a + ar + ar^2 + \ldots + ar^{k} + ar^{k + 1} &
+    = \frac{ar^{k + 1} - a}{r - 1} + ar^{k + 1}                                                                                                                               \\
+                                                                                                                   & = \frac{ar^{k + 1} - a}{r - 1} + \frac{ar^{k + 1}}{1}    \\
+                                                                                                                   & =
+    \frac{ar^{k
+          + 1}
+      - a +
+      \left(
+      ar^{k + 1}
+      \right) \left(
+      r - 1\right)  }{r
+    - 1}                                                                                                                                                                      \\
+                                                                                                                   & = \frac{ar^{k + 1} + ar^{k + 2} - ar^{k + 1} - a}{r - 1} \\
+                                                                                                                   & = \frac{ar^{k
+          + 2} - a}{r
+    - 1}                                                                                                                                                                      \\
+  \end{align*}
+
+  \noindent $\therefore$ $P \left( k + 1 \right) $ is $T$ \\
+  Hence we can conclude that $P \left( n \right) $ is true for all non-negative integers $n$
+}
+
+
+\section{Exercises}
+
+\qs{}{
+  Prove that
+  \[
+    3 + 3 \times 5 + 3 \times 5^2 + \ldots + 3 \times 5^{n} = \frac{3 \left( 5^{n + 1} - 1 \right) }{4}
+  \]
+  whenever $n$ is non-negative integer
+}
+
+\sol{
+
+  \noindent Let $P \left( n \right) $ be $3 + 3 \times 5 + 3 \times 5^2 + \ldots + 3 \times 5^{n} = \frac{3 \left( 5^{n + 1} - 1
+      \right) }{4}$
+
+  \noindent \underline{Basis Step} \\
+  \\
+
+  \begin{align*}
+    P \left( 0 \right): 3 & = \frac{3 \left( 5^{1} - 1 \right) }{4} \\
+    3                     & = \frac{12}{4}                          \\
+    3                     & = 3                                     \\
+  \end{align*}
+
+
+  \noindent \underline{Induction  Step} \\
+  \\
+
+  To complete this step I must prove $P \left( k \right) \to P \left( k + 1 \right)  $ for any non-negative integer $k$
+
+  Assume $P \left( k \right) $ is $T$ for some non-negative integer $k$, then
+
+  \[
+    P \left( k \right): 3 + 3 \times 5 + 3 \times 5^2 + \ldots + 3 \times 5^{k} = \frac{3 \left( 5^{k + 1} - 1 \right) }{4}
+  \]
+
+  Then $P \left( k + 1 \right) $ is
+
+  \[
+    P \left( k + 1 \right): 3 + 3 \times 5 + 3 \times 5^2 + \ldots + 3 \times 5 ^{k + 1} = \frac{3 \left( 5^{k + 2} - 1 \right) }{4}
+  \]
+
+  And can be expressed as $P \left( k + 1 \right) = P \left( k \right) + 3 \times 5^{k + 1}  $, therefore:
+  \begin{align*}
+    P \left( k + 1 \right) : 3 + 3\times 5 + 3 \times 5^2 + \ldots + 3 \times 5^{k} + 3 \times 5^{k + 1} & = \frac{3
+    \left( 5^{k + 1} - 1 \right) }{4} + \left( 3 \times 5^{k + 1} \right)                                                                                                                     \\
+                                                                                                         & = \frac{3 \left( 5^{k + 1} - 1 \right) + 4 \left( 3 \times 5^{k + 1} \right)  }{4} \\
+                                                                                                         & = \frac{3 \times 5^{k + 1} - 3 + 12 \times 5^{k + 1} }{4}                          \\
+                                                                                                         & = \frac{3 \left( 5^{k + 1} + 4 \times 5^{k + 1} - 1 \right) }{4}                   \\
+    \text{Let } x =
+    5^{k + 1}                                                                                                                                                                                 \\
+                                                                                                         & = \frac{3 \left( x + 4x - 1 \right) }{4}                                           \\
+                                                                                                         & = \frac{3 \left( 5x - 1 \right)}{4}                                                \\
+                                                                                                         & = \frac{3 \left( 5^{1} \times 5^{k + 1} \right) - 1 }{4}                           \\
+                                                                                                         & = \frac{3 \left( 5^{k + 2} - 1 \right) }{4}                                        \\
+  \end{align*}
+
+  \noindent $\therefore$ $P \left( k +1 \right) $ is $T$ \\
+  Hence we can conclude that $P \left( n \right) $ is true for all non-negative integers $n$
+
+}
+
+\qs{}{
+  Prove that
+  \[
+    1 \times 1! + 2 \times 2! + \ldots + n \times n! = \left( n + 1 \right) ! - 1
+  \]
+
+  Whenever $n$ is a positive integer.
+}
+
+\sol{
+
+  \noindent Let $P \left( n \right) $ be $1 \times 1! + 2 \times 2! + \ldots + n \times n! = \left( n + 1 \right) ! - 1$ \\
+
+  \noindent \underline{Basis Step} \\
+  \\
+
+  \begin{align*}
+    P \left( 1 \right): 1 \times 1! & = \left( 1 + 1 \right) ! - 1
+    1                               & = 2 - 1                      \\
+    1                               & = 1                          \\
+  \end{align*}
+
+  \noindent \underline{Induction  Step} \\
+  \\
+
+  \noindent To conclude this step I need to prove $P \left( k \right) \to P \left( k + 1 \right)  $ for any positive integer $k$
+  \\
+
+  \noindent Assume $P \left( k \right) $ is $T$  for some positive integer $k$, then \\
+
+  \[
+    P \left( k \right): 1\times 1! + 2 \times 2! + \ldots + k \times k! = \left( k + 1 \right)! - 1
+  \]
+
+  \noindent Then $P \left( k + 1 \right) $ is:
+  \[
+    P \left( k + 1 \right): 1 \times 1! + 2 \times 2! + \ldots + \left( k + 1 \right) \times \left( k + 1 \right) ! =
+    \left( k + 2 \right)! - 1
+  \]
+
+  \noindent And can be expressed as $P \left( k + 1 \right): P \left( k \right) + \left( k + 1 \right) \times \left( k + 1
+    \right)!    $, therefore
+  \begin{align*}
+    P \left( k + 1 \right): 1 \times 1! + 2 \times 2! + \ldots + k \times k! + \left( k + 1 \right) \times \left( k +
+    1\right)! & = \left( \left( k + 1 \right)! - 1  \right) + \left( \left( k + 1 \right) \times \left( k + 1 \right)!   \right) \\
+              & = \left( k + 1 \right)! + \left( k + 1 \right) \times \left( k + 1 \right)! - 1                                  \\
+              & = \left( k + 1 \right)! \left( k + 2 \right)  -1                                                                 \\
+              & = \left( k + 2 \right)! - 1                                                                                      \\
+  \end{align*}
+
+
+}
+
+\qs{}{
+  \begin{enumerate}
+    \item
+          Find a formula for
+          \[
+            \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots + \frac{1}{2^{n}}
+          \]
+          by examining the values of this expression  for small values of $n$
+
+    \item Prove the formula you conjectured in part 1.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            S_{n} = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots + \frac{1}{2^{n}} \\
+            S_1 =  \frac{1}{2}                                                         \\
+            S_2 = \frac{3}{4}                                                          \\
+            S_3 = \frac{7}{8}                                                          \\
+            S_4 = \frac{15}{16}                                                        \\
+            S_n = \frac{2^{n} - 1}{2^{n}}                                              \\
+          \end{align*}
+    \item
+          \begin{myproof}
+
+            Let $P \left( n \right) $ be $\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots + \frac{1}{2^{n}} = \frac{2^{n} -
+                1}{2^{n}}$ \\
+
+
+            \noindent \underline{Basis Step} \\
+            \\
+
+            \begin{align*}
+              P \left( 1 \right): \frac{1}{2} & = \frac{2^{1} - 1}{2^{1}} \\
+                                              & \frac{1}{2}= \frac{1}{2}  \\
+            \end{align*}
+
+            \noindent \underline{Induction  Step} \\
+            \\
+
+            To complete this step I need to prove $P \left( k \right) \to  P \left( k + 1 \right)  $ for any positive
+            integer $k$. \\
+
+            Assume $P \left( k \right) $ is $T$  for some positive integer $k$. Then:
+            \[
+              P \left( k \right): \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots + \frac{1}{2^{k}} = \frac{2^{k} - 1}{2^{k}}
+            \]
+
+            Then $P \left( k + 1 \right) $ is:
+            \[
+              P \left( k + 1 \right): \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots + \frac{1}{2^{k + 1}} =
+              \frac{2^{k + 1} - 1}{2^{k + 1}}
+            \]
+
+            And can be expressed as $P \left( k + 1 \right): P \left( k \right) + \frac{1}{2^{k + 1}}  $, therefore
+            \begin{align*}
+              P \left( k + 1 \right): \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \ldots + \frac{1}{2^{k + 1}} & =
+              \frac{2^{k} - 1}{2^{k}} + \frac{1}{2^{k + 1}}                                                      \\
+                                                                                                             & =
+              \frac{\left( 2^{k} - 1 \right) \left( 2^{k + 1} \right) + 2^{k}  }{\left(
+                2^{k}\right)\left(
+              2^{k + 1}\right)  }                                                                                \\
+            \end{align*}
+
+          \end{myproof}
+  \end{enumerate}
+}
+
+\qs{}{
+  Show that 3 divides $n^3 + 2n$, whenever $n \in \mathbb{Z}^{+}$
+}
+
+\begin{myproof}
+
+  This has the same meaning as:
+
+  "$n^3 + 2n$ is divisible by 3"
+
+  "$n^3 + 2n$ is a multiple of 3"
+
+  Let $P \left( n \right) $ be $n^3 +2n$ is a multiple of 3 \\
+
+  \noindent \underline{Basis Step} \\
+  \\
+
+  \[
+    P \left( 1 \right) : 1^3 + 2 + 1 \text{ is a multiple of 3}
+  \]
+  True because 3 is a multiple of three. \\
+
+  \noindent \underline{Induction  Step} \\
+  \\
+  Assume $P \left( k \right) $ is $T$ then \\
+
+  "$k^3 + 2k$ is multiple of 3 " -  $\exists m \in \mathbb{Z} \, , k^3 + 2k = 3m $
+
+
+  \noindent And show $P \left( k + 1 \right) $ is \\
+
+  "$\left( k + 1 \right)^3 + 2 \left( k + 1 \right)  $ is a multiple of 3" \\
+
+
+  \noindent   We have \\
+  \begin{align*}
+    \left( k + 1 \right) ^3 + 2 \left( k + 1 \right) & = k^3 + 3k^2 + 3k + 1 + 2k + 2            \\
+                                                     & = \left( k^3 + 2k \right) + 3k^2 + 3k + 3 \\
+                                                     & = 3m + 3k^2 + 3k + 3                      \\
+                                                     & = 3 \left( m + k^2 + k + 1 \right)        \\
+    \text{Let } z = m + k^2 + k + 1                                                              \\
+                                                     & = 3z                                      \\
+  \end{align*}
+  Since $z$ is made up of positive integers $z$ is a positive integer\\
+  $\therefore$ $P \left( k + 1 \right) $\\
+  Hence we can conclude that $P \left( n \right) $ is true for all positive integers.
+
+
+\end{myproof}
+
+\end{document}
+

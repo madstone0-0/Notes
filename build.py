@@ -53,7 +53,17 @@ def readChecksumJSON():
 
 
 def cleanLatexArtifacts(startDir: Path):
-    artifacts = [".aux", ".fls", ".toc", ".synctex.gz", ".fdb_latexmk", ".log", ".gz"]
+    artifacts = [
+        ".aux",
+        ".fls",
+        ".toc",
+        ".synctex.gz",
+        ".fdb_latexmk",
+        ".log",
+        ".gz",
+        ".tfm",
+        ".600gf",
+    ]
     for file in (
         item
         for item in startDir.rglob("*")

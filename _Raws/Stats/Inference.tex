@@ -1,0 +1,174 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Inference}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Module 13: Inference}
+
+\dfn{Statistical Inference}{
+  Inferring something about a population from a sample.
+}
+
+\dfn{Point Estimation}{
+  Estimating an unknown parameter using a single number, calculated from the sample data.
+}
+
+\dfn{Interval Estimation}{
+  Estimating an unknown parameter using an Interval of values that is likely to contain the true value of the
+  parameter, and state how confident we are that the interval contains the true value.
+}
+
+\dfn{Hypothesis Testing}{
+  Making decisions about the population parameter based on the sample data.
+}
+
+\section{Inference for One Variable}
+
+Depending on the type of variable we are interested in the population parameter we infer about changes:
+\begin{itemize}
+  \item Categorical : Population Proportion $p$
+  \item Quantitative : Population Mean $\mu$
+\end{itemize}
+
+\chapter{Module 14: Estimation}
+
+\section{Point Estimation}
+
+\dfn{Point Estimator}{
+  A statistic that provides an estimate of a population parameter.
+}
+
+The point estimator also changes based on the type of variable examined:
+\begin{itemize}
+  \item Categorical: Sample Proportion / $\hat{p}$
+  \item Quantitative: Sample Mean /  $\bar{x}$
+\end{itemize}
+
+\nt{
+  The larger the sample size, the more accurate the point estimate.
+}
+
+\section{Interval Estimation}
+
+\dfn{Confidence Interval}{
+  An interval of values that is likely to contain the true value of the population parameter.
+}
+
+Interval estimation is based on the point estimate and the margin of error.
+
+\subsection{Confidence Intervals for the Population Mean}
+
+For a quantitative variable with a normally distributed sample mean distribution due to the Central Limit Theorem,
+construing a 95\% confidence interval consists of the following steps:
+\begin{itemize}
+  \item Identify mean $\overline{X}$, which for a sample mean distribution is approximately equal to $\mu $
+  \item Find the standard deviation $S$ of the sample mean distribution, $\frac{\sigma}{\sqrt{n}}$
+  \item Find $\overline{X} \pm 2 S $, which are your upper and lower bounds of the confidence interval
+\end{itemize}
+
+Therefore generally the confidence interval is:
+\[
+  \overline{x} \pm 2 \times \frac{\sigma}{\sqrt{n}}
+\]
+
+\subsubsection{Other Levels of Confidence}
+
+Constructing a 99\% confidence interval for $\mu $ can be done using:
+\[
+  \overline{x} \pm 2.576 \times \frac{\sigma}{\sqrt{n}}
+\]
+
+And a 90\% confidence interval for $\mu $ can be found using:
+\[
+  \overline{x} \pm 1.645 \times \frac{\sigma}{\sqrt{n}}
+\]
+
+\subsection{General Structure of Confidence Intervals}
+
+A confidence interval has the following form:
+\[
+  \overline{x} \pm z^{*} \times \frac{\sigma }{\sqrt{n}}
+\]
+
+Where $z^*$ is general notation for the multiplier that depends on the level of confidence. \\
+The confidence interval can then also be expressed in the form:
+\[
+  \overline{x} \pm m
+\]
+
+Where $m = z^* \times \frac{\sigma}{\sqrt{n}}$ and $\overline{x}$ is the point estimator for the unknown population mean $\mu $\\
+$m$ is called the margin of error, since it represents the maximum estimation error for a given level of confidence.
+
+\nt{
+  A larger sample size makes for a smaller margin of error.
+}
+
+\subsection{Sample Size Calculations}
+
+The sample size required to estimate the population mean $\mu $ with a margin of error $m$ at a level of confidence $C$ can be found using:
+\[
+  n = \left( \frac{z^*  \sigma }{m} \right)^2
+\]
+Which is rounded up to the nearest whole number.
+
+\subsection{When $\sigma $ is unknown}
+
+When the population standard deviation $\sigma $ is unknown, the sample standard deviation $s$ is used instead, but as a
+result we need to use a different set of confidence multipliers $t^*$, associated with the $t$ distribution. The
+interval is therefore:
+\[
+  \overline{x} \pm t^* \times \frac{s}{\sqrt{n}}
+\]
+
+These multipliers depend not only on the level of confidence, but also on the sample size $n$. \\
+For large values of $n$, the $t$ distribution approaches the standard normal distribution, and the $t^*$ multipliers,
+therefore the $z^*$ multipliers can be used, i.e. $t^* \approx z^*$ and the confidence interval becomes:
+\[
+  \overline{x} \pm z^* \times \frac{s}{\sqrt{n}}
+\]
+
+
+\section{Confidence Intervals for the Population Proportion}
+
+For a categorical variable, the population proportion $p$ can be estimated using the sample proportion $\hat{p}$, and the
+margin of error $m$, i.e. the confidence interval is:
+\[
+  \hat{p} \pm m
+\]
+
+Where $m$ is:
+
+\[
+  m = z^* \times \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+\]
+
+Therefore:
+\[
+  \hat{p} \pm z^* \times \sqrt{\frac{\hat{p}\left( 1 - \hat{p} \right) }{n}}
+\]
+
+\subsection{Sample Size Calculations}
+
+The sample size required to estimate the population proportion $p$ with a margin of error $m$ at a level of confidence
+$C$ can be found using:
+
+\[
+  n = \frac{4\hat{p} \left( 1 - \hat{p} \right) }{m^2}
+\]
+
+\end{document}

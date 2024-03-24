@@ -22,32 +22,32 @@
 \section{Introduction To Probability}
 
 \dfn{Probability}{
-	A mathematical description of randomness and uncertainty / The likelihood of an event occurring.
+  A mathematical description of randomness and uncertainty / The likelihood of an event occurring.
 
-	The notation for Probability is $\mathbb{P} \left( X \right) $ where $X$ is the event.
+  The notation for Probability is $\mathbb{P} \left( X \right) $ where $X$ is the event.
 
-	Probability is always between $0 \leq \mathbb{P} \left( X \right) \leq 1$ or $0\% \leq \mathbb{P} \left( X \right) \leq 100\%$.
+  Probability is always between $0 \leq \mathbb{P} \left( X \right) \leq 1$ or $0\% \leq \mathbb{P} \left( X \right) \leq 100\%$.
 }
 
 There are two ways of determining probability:
 
 \begin{itemize}
-	\item Theoretical / Classical - Determined by the nature of the experiment
-	\item Empirical / Observational - Determined by the results of the experiment
+  \item Theoretical / Classical - Determined by the nature of the experiment
+  \item Empirical / Observational - Determined by the results of the experiment
 \end{itemize}
 
 \section{Relative Frequency}
 
 \dfn{Relative Frequency}{
-	Relative frequency is the number of times an event occurs divided by the total number of trials.
+  Relative frequency is the number of times an event occurs divided by the total number of trials.
 
-	\[
-		\mathbb{P} \left( X \right) = \frac{\text{Number of times event occurs}}{\text{Total number of trials}}
-	\]
+  \[
+    \mathbb{P} \left( X \right) = \frac{\text{Number of times event occurs}}{\text{Total number of trials}}
+  \]
 }
 
 \thm{The Law of Large Numbers}{
-	As the number of trials increases, the relative frequency of an event approaches the theoretical probability of the event.
+  As the number of trials increases, the relative frequency of an event approaches the theoretical probability of the event.
 }
 
 
@@ -56,22 +56,22 @@ There are two ways of determining probability:
 \section{Sample Spaces and Events}
 
 \dfn{Random Experiment}{
-	An experiment whose outcome is determined by chance.
+  An experiment whose outcome is determined by chance.
 }
 
 \dfn{Sample Space}{
-	The list of possible outcomes of a random experiment, denoted by $S$.
+  The list of possible outcomes of a random experiment, denoted by $S$.
 }
 
 \dfn{Event}{
-	A statement about the nature of the outcome after the experiment has been conducted, denoted by any capital letter
-	except $S$.
+  A statement about the nature of the outcome after the experiment has been conducted, denoted by any capital letter
+  except $S$.
 }
 
 \section{Equally Likely Outcomes}
 
 \[
-	\mathbb{P} \left( A \right) = \frac{\text{Number of outcomes in }A}{\text{Number of outcomes in } S}
+  \mathbb{P} \left( A \right) = \frac{\text{Number of outcomes in }A}{\text{Number of outcomes in } S}
 \]
 
 Where $A$ is an event and $S$ is the sample space.
@@ -96,53 +96,53 @@ probability the event occurs.
 \subsection{Rule 4: Addition Rule for Mutually Exclusive Events}
 
 \dfn{Mutually Exclusive / Disjoint events}{
-	Events that cannot happen at the same time.
+  Events that cannot happen at the same time.
 
 }
 
 $\mathbb{P} \left( A \text{ or } B \right) = \mathbb{P} \left( \text{ event } A \text{ occurs or event } B \text{ occurs
-		or both occur} \right)  $\\
+    or both occur} \right)  $\\
 
 
 \noindent If $A$ and $B$ are mutually exclusive, then $\mathbb{P} \left( A \text{ or } B \right) = \mathbb{P} \left( A
-	\right) + \mathbb{P} \left( B \right)   $
+  \right) + \mathbb{P} \left( B \right)   $
 
 \subsection{Rule 5: Multiplication Rule for Independent Events}
 $\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( \text{ event } A \text{ occurs and event } B \text{
-		occurs } \right)  $
+    occurs } \right)  $
 
 \dfn{Independent Events}{
-	Two events $A$ and $B$ are said to be independent if the occurrence of one event does not affect the probability of the
-	other event occurring.
+  Two events $A$ and $B$ are said to be independent if the occurrence of one event does not affect the probability of the
+  other event occurring.
 
 }
 
 \dfn{Dependent Events}{
-	Two events $A$ and $B$ are said to be dependent if the occurrence of one event affects the probability of the other event
-	occurring.
+  Two events $A$ and $B$ are said to be dependent if the occurrence of one event affects the probability of the other event
+  occurring.
 
 }
 
 \noindent If $A$ and $B$ are two independent events, then $\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A
-	\right)  \times \mathbb{P} \left( B \right)  $
+  \right)  \times \mathbb{P} \left( B \right)  $
 
 \subsection{Rule 6: General Addition Rule}
 
 For any two events $A$ and $B$, $\mathbb{P} \left( A \text{ or } B \right) = \mathbb{P} \left( A \right) + \mathbb{P}
-	\left( B \right) - \mathbb{P} \left( A \text{ and } B \right)    $. If the event are mutually exclusive, then
+  \left( B \right) - \mathbb{P} \left( A \text{ and } B \right)    $. If the event are mutually exclusive, then
 $\mathbb{P} \left( A \text{ and } B \right) = 0 $, giving us $\mathbb{P} \left( A \text{ or } B \right) =
-	\mathbb{P}\left( A \right) + \mathbb{P} \left( B \right)   $, i.e. the addition rule for mutually exclusive events.
+  \mathbb{P}\left( A \right) + \mathbb{P} \left( B \right)   $, i.e. the addition rule for mutually exclusive events.
 
 
 \chapter{Module 10: Conditional Probability and Independence}
 
 \dfn{Conditional Probability}{
-	The probability an event occurs as a result of another event. I.e. Probability of event $B$, given event event $A$
-	is,
+  The probability an event occurs as a result of another event. I.e. Probability of event $B$, given event event $A$
+  is,
 
-	\[
-		\mathbb{P} \left( B  \mid  A \right)  = \frac{\mathbb{P} \left( A \text{ and } B \right) }{P \left( A \right) }
-	\]
+  \[
+    \mathbb{P} \left( B  \mid  A \right)  = \frac{\mathbb{P} \left( A \text{ and } B \right) }{P \left( A \right) }
+  \]
 }
 
 \section{Independence}
@@ -151,45 +151,45 @@ When two events are independent, the probability of one event occurring does not
 event, i.e.
 
 \begin{align*}
-	\mathbb{P} \left( B  \mid  A \right) = \mathbb{P} \left( B \right)           \\
-	\mathbb{P} \left( A  \mid B \right)  = \mathbb{P} \left( A \right)           \\
-	\mathbb{P} \left( B  \mid A \right)  = \mathbb{P} \left( B  \mid A'  \right) \\
-	\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A \right)  \times \mathbb{P} \left( B \right)
+  \mathbb{P} \left( B  \mid  A \right) = \mathbb{P} \left( B \right)           \\
+  \mathbb{P} \left( A  \mid B \right)  = \mathbb{P} \left( A \right)           \\
+  \mathbb{P} \left( B  \mid A \right)  = \mathbb{P} \left( B  \mid A'  \right) \\
+  \mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A \right)  \times \mathbb{P} \left( B \right)
 \end{align*}
 
 \section{The General Multiplication Rule}
 
 For any two dependent events $A$ and $B$
 \[
-	\mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A \right) \times \mathbb{P} \left( B  \mid A \right)
+  \mathbb{P} \left( A \text{ and } B \right) = \mathbb{P} \left( A \right) \times \mathbb{P} \left( B  \mid A \right)
 \]
 
 \section{Probability Trees}
 
 \dfn{Probability Tree}{
-	A diagram that shows the sample space of a random experiment and the probability of each outcome.
+  A diagram that shows the sample space of a random experiment and the probability of each outcome.
 }
 
 \subsection{Bayes' Theorem}
 
 \[
-	\mathbb{P} \left( A  \mid B \right)  = \frac{\mathbb{P} \left( A \right) \times P \left( B  \mid A \right)   }{
-		\mathbb{P} \left( A \right) \times \mathbb{P} \left( B  \mid A \right) + \mathbb{P} \left( A' \right) \times \mathbb{P}
-		\left( B  \mid A' \right) }
+  \mathbb{P} \left( A  \mid B \right)  = \frac{\mathbb{P} \left( A \right) \times P \left( B  \mid A \right)   }{
+    \mathbb{P} \left( A \right) \times \mathbb{P} \left( B  \mid A \right) + \mathbb{P} \left( A' \right) \times \mathbb{P}
+    \left( B  \mid A' \right) }
 \]
 
 \chapter{Module 11: Random Variables}
 
 \dfn{Random Variable}{
-	Assigns a unique numerical value to the outcome of a random experiment.
+  Assigns a unique numerical value to the outcome of a random experiment.
 }
 
 \dfn{Discrete Random Variable}{
-	A random variable that can take on a finite number of values. Discrete random variables are usually counts.
+  A random variable that can take on a finite number of values. Discrete random variables are usually counts.
 }
 
 \dfn{Continuous Random Variable}{
-	A random variable that can take on an infinite number of values. Continuous random variables are usually measurements.
+  A random variable that can take on an infinite number of values. Continuous random variables are usually measurements.
 
 }
 
@@ -203,24 +203,24 @@ probability of $X$ is denoted by $\mathbb{P} \left( X = x \right) $, i.e. the pr
 \subsection{Probability Distribution}
 
 \dfn{Probability Distribution}{
-	The list of all possible values of a random variable and their corresponding probabilities.
+  The list of all possible values of a random variable and their corresponding probabilities.
 }
 
 Any probability distribution must satisfy the following two conditions:
 
 \begin{itemize}
-	\item $0 \leq \mathbb{P} \left( X = x  \right) \leq 1 $ - The probability of any value of $X$ is between 0 and 1.
-	\item $\Sigma_x \,  \mathbb{P} \left( X = x \right) = 1 $ - The sum of the probabilities of all possible values of $X$ is 1.
+  \item $0 \leq \mathbb{P} \left( X = x  \right) \leq 1 $ - The probability of any value of $X$ is between 0 and 1.
+  \item $\Sigma_x \,  \mathbb{P} \left( X = x \right) = 1 $ - The sum of the probabilities of all possible values of $X$ is 1.
 \end{itemize}
 
 \subsection{Key Words}
 
 \begin{itemize}
-	\item At least / No less than - $ x \geq$
-	\item At most / No more than - $x \leq$
-	\item Less than / fewer than - $ x <$
-	\item  More than / greater than - $ x >$
-	\item Exactly - $ x =$
+  \item At least / No less than - $ x \geq$
+  \item At most / No more than - $x \leq$
+  \item Less than / fewer than - $ x <$
+  \item  More than / greater than - $ x >$
+  \item Exactly - $ x =$
 \end{itemize}
 
 \subsection{Mean and Variance of a Discrete Random Variable}
@@ -228,13 +228,13 @@ Any probability distribution must satisfy the following two conditions:
 \subsubsection{Mean}
 
 \dfn{Mean / Expected value of a Discrete Random Variable}{
-	The average value of a random variable, denoted by $\mu$.
+  The average value of a random variable, denoted by $\mu$.
 }
 
 For a given random variable $X$, the mean is given by
 
 \[
-	\mu_{X} = \Sigma_{i=1}^{n} x_i p_i
+  \mu_{X} = \Sigma_{i=1}^{n} x_i p_i
 \]
 
 Where $x_i$ is the value of $X$ and $p_i$ is the probability of $X$ taking on the value $x_i$.
@@ -243,24 +243,24 @@ Where $x_i$ is the value of $X$ and $p_i$ is the probability of $X$ taking on th
 \paragraph{Applications of the Mean}
 
 \begin{itemize}
-	\item The mean of a random variable is the long-term average value of the random variable.
-	\item The mean of a random variable is the centre of the probability distribution of the random variable.
+  \item The mean of a random variable is the long-term average value of the random variable.
+  \item The mean of a random variable is the centre of the probability distribution of the random variable.
 \end{itemize}
 
 \subsubsection{Variance}
 
 \dfn{Variance}{
-	The average of the squared differences between each value of a random variable and the mean of the random variable,
-	denoted by $\sigma^2$.
+  The average of the squared differences between each value of a random variable and the mean of the random variable,
+  denoted by $\sigma^2$.
 }
 
 For a given random variable $X$, the variance is given by
 \[
-	\sigma_{X}^2 = \Sigma_{i=1}^{n} \left( x_i - \mu_{X} \right)^2 p_i
+  \sigma_{X}^2 = \Sigma_{i=1}^{n} \left( x_i - \mu_{X} \right)^2 p_i
 \]
 And standard deviation is given by
 \[
-	\sigma_{X} = \sqrt{\sigma_{X} ^2}
+  \sigma_{X} = \sqrt{\sigma_{X} ^2}
 \]
 Where $x_i$ is the value of $X$ and $p_i$ is the probability of $X$ taking on the value $x_i$.
 
@@ -287,27 +287,27 @@ If $Y = a + bX$, then $\mu_{Y} = a + b \mu_{X}$, $\sigma_{Y}^2 = b^2 \sigma_{X}^
 \nparagraph{Sum of Two Random Variables}
 
 If $Z = X + Y$, then $\mu_{Z} = \mu_{X} + \mu_{Y}$, $\sigma_{Z}^2 = \sigma_{X}^2 + \sigma_{Y}^2$ and $\sigma_{Z} =
-	\sqrt{\sigma_{X}^2 + \sigma_{Y}^2}$. Only if $X$ and $Y$ are independent. \\
+  \sqrt{\sigma_{X}^2 + \sigma_{Y}^2}$. Only if $X$ and $Y$ are independent. \\
 
 \subsection{Poisson Random Variables}
 
 \dfn{Poisson Random Variable}{
-	A random variable that counts the number of events that occur in a fixed interval of time or space, denoted by $X \sim
-		\text{Poisson} \left( \lambda \right) $.
-	Where $\lambda$ is the average number of events that occur in the interval.
+  A random variable that counts the number of events that occur in a fixed interval of time or space, denoted by $X \sim
+    \text{Poisson} \left( \lambda \right) $.
+  Where $\lambda$ is the average number of events that occur in the interval.
 }
 
 \dfn{Poisson Experiment}{
-	Random experiments that satisfy the following conditions:
-	\begin{itemize}
-		\item The number of trials tends to infinity.
-		\item The probability of success tends to zero.
-		\item $np = 1$ is finite
-	\end{itemize}
+  Random experiments that satisfy the following conditions:
+  \begin{itemize}
+    \item The number of trials tends to infinity.
+    \item The probability of success tends to zero.
+    \item $np = 1$ is finite
+  \end{itemize}
 }
 
 \[
-	\mathbb{P} \left( X = x \right) = \frac{\left( e^{-\lambda} \times \lambda^{x} \right) }{x!}
+  \mathbb{P} \left( X = x \right) = \frac{\left( e^{-\lambda} \times \lambda^{x} \right) }{x!}
 \]
 
 Where $e$ is the base of the natural logarithm, $\lambda$ is the average number of events that occur in the interval and $x$
@@ -315,50 +315,50 @@ is the number of events that occur in the interval.
 
 If $X$ is Poisson with parameter $\lambda$, then
 \[
-	\mu_{X} = \lambda
+  \mu_{X} = \lambda
 \]
 
 And
 \begin{align*}
-	\sigma^2_{X} = \mu = \lambda \\
-	\sigma_{X} = \sqrt{\sigma^2}
+  \sigma^2_{X} = \mu = \lambda \\
+  \sigma_{X} = \sqrt{\sigma^2}
 \end{align*}
 
 \subsection{Binomial Random Variables}
 
 \dfn{Binomial Random Variable}{
-	A random variable that counts the number of successes in a fixed number of independent trials, denoted by $X \sim
-		\text{Bin} \left( n, p \right) $.
-	Where $n$ is the number of trials and $p$ is the probability of success.
+  A random variable that counts the number of successes in a fixed number of independent trials, denoted by $X \sim
+    \text{Bin} \left( n, p \right) $.
+  Where $n$ is the number of trials and $p$ is the probability of success.
 }
 
 \dfn{Binomial Experiment}{
-	Random experiments that satisfy the following conditions:
-	\begin{itemize}
-		\item A fixed number of trials, denoted by $n$.
-		\item Each trial is independent of the others.
-		\item There are only two possible outcomes for each trial, success or failure.
-		\item There is a constant probability of success, denoted by $p$, for each trial, which can be expressed as the
-		      complement of the probability of failure, $q = 1 - p$.
-	\end{itemize}
+  Random experiments that satisfy the following conditions:
+  \begin{itemize}
+    \item A fixed number of trials, denoted by $n$.
+    \item Each trial is independent of the others.
+    \item There are only two possible outcomes for each trial, success or failure.
+    \item There is a constant probability of success, denoted by $p$, for each trial, which can be expressed as the
+          complement of the probability of failure, $q = 1 - p$.
+  \end{itemize}
 
-	\nt{
-		The number $\left( X \right) $ of success in a sample of size $n$ taken without replacement from a population with
-		proportion $p$ of successes is approximately binomial with $n$ and $p$ as long as the sample size is at most $10\%$
-		of the population size $\left( N \right) $. I.e.
-		\[
-			n \leq 0.1N
-		\]
-		Or
-		\[
-			N \geq 10n
-		\]
-	}
+  \nt{
+    The number $\left( X \right) $ of success in a sample of size $n$ taken without replacement from a population with
+    proportion $p$ of successes is approximately binomial with $n$ and $p$ as long as the sample size is at most $10\%$
+    of the population size $\left( N \right) $. I.e.
+    \[
+      n \leq 0.1N
+    \]
+    Or
+    \[
+      N \geq 10n
+    \]
+  }
 }
 
 To calculate the probability of a binomial random variable, we use the formula
 \[
-	\mathbb{P} \left( X = x \right) = \binom{n}{x} p^x q^{n-x}, \text{ where } x = 0, 1, 2, \ldots, n
+  \mathbb{P} \left( X = x \right) = \binom{n}{x} p^x q^{n-x}, \text{ where } x = 0, 1, 2, \ldots, n
 \]
 
 Where $n$ is the number of trials, $x$ is the number of successes, $p$ is the probability of success and $q$ is the
@@ -366,13 +366,13 @@ probability of failure. \\
 
 If $X$ is Binomial with parameters $n$ and $p$, then
 \[
-	\mu_{X} = np
+  \mu_{X} = np
 \]
 
 And
 \begin{align*}
-	\sigma^2_{X} = np \left( 1 - p \right) \\
-	\sigma_{X} = \sqrt{np \left( 1 - p \right) }
+  \sigma^2_{X} = np \left( 1 - p \right) \\
+  \sigma_{X} = \sqrt{np \left( 1 - p \right) }
 \end{align*}
 
 \section{Continuous Random Variables}
@@ -380,40 +380,40 @@ And
 \subsection{Probability Distribution}
 
 For a continuous random variable $X$, the probability distribution is given by the \textit{probability density
-	function}, whose properties are
+  function}, whose properties are
 
 \begin{itemize}
-	\item $f \left( x \right) \geq 0$ for all $x$.
-	\item $\int_{-\infty}^{\infty} f \left( x \right) \, dx = 1$
-	\item The probability that $X$ takes on a value between $a$ and $b$ is given by
-	      \[
-		      \mathbb{P} \left( a \leq X \leq b \right) = \int_{a}^{b} f \left( x \right) \, dx
-	      \]
+  \item $f \left( x \right) \geq 0$ for all $x$.
+  \item $\int_{-\infty}^{\infty} f \left( x \right) \, dx = 1$
+  \item The probability that $X$ takes on a value between $a$ and $b$ is given by
+        \[
+          \mathbb{P} \left( a \leq X \leq b \right) = \int_{a}^{b} f \left( x \right) \, dx
+        \]
 \end{itemize}
 
 \nt{
-	\begin{itemize}
-		\item The probability that a continuous random variable takes on a specific value is always 0.
-		\item The strictness of the inequality does not matter, i.e. $\mathbb{P} \left( X \geq a \right) = \mathbb{P} \left( X > a \right)$
-	\end{itemize}
+  \begin{itemize}
+    \item The probability that a continuous random variable takes on a specific value is always 0.
+    \item The strictness of the inequality does not matter, i.e. $\mathbb{P} \left( X \geq a \right) = \mathbb{P} \left( X > a \right)$
+  \end{itemize}
 }
 
 \subsection{Normal Random Variables}
 
 \dfn{Normal Random Variable}{
-	A random variable that has a bell-shaped probability distribution, denoted by $X \sim N \left( \mu, \sigma^2 \right)
-	$. Where $\mu $ is the mean and $\sigma^2$ is the variance.
+  A random variable that has a bell-shaped probability distribution, denoted by $X \sim N \left( \mu, \sigma^2 \right)
+  $. Where $\mu $ is the mean and $\sigma^2$ is the variance.
 }
 
 For a normally distributed random variable $X$:
 
 \begin{itemize}
-	\item There is a $68\%$ chance that $X$ takes on a value within one standard deviation of the mean, i.e. $0.68 = \mathbb{P}
-		      \left( \mu - \sigma < X < \mu + \sigma  \right) $
-	\item There is a $95\%$ chance that $X$ takes on a value within two standard deviations of the mean, i.e. $0.95 = \mathbb{P}
-		      \left( \mu - 2 \sigma < X < \mu + 2 \sigma  \right) $
-	\item There is a $99.7\%$ chance that $X$ takes on a value within three standard deviations of the mean, i.e. $0.997 = \mathbb{P}
-		      \left( \mu - 3 \sigma < X < \mu + 3 \sigma  \right) $
+  \item There is a $68\%$ chance that $X$ takes on a value within one standard deviation of the mean, i.e. $0.68 = \mathbb{P}
+          \left( \mu - \sigma < X < \mu + \sigma  \right) $
+  \item There is a $95\%$ chance that $X$ takes on a value within two standard deviations of the mean, i.e. $0.95 = \mathbb{P}
+          \left( \mu - 2 \sigma < X < \mu + 2 \sigma  \right) $
+  \item There is a $99.7\%$ chance that $X$ takes on a value within three standard deviations of the mean, i.e. $0.997 = \mathbb{P}
+          \left( \mu - 3 \sigma < X < \mu + 3 \sigma  \right) $
 \end{itemize}
 
 \subsubsection{Finding Probabilities for Normal Random Variables}
@@ -421,27 +421,27 @@ For a normally distributed random variable $X$:
 \nparagraph{Standardizing Values}
 
 \dfn{$z$-score}{
-	The number of standard deviations a value is from the mean of a normal random variable, denoted by $z$.
+  The number of standard deviations a value is from the mean of a normal random variable, denoted by $z$.
 
 }
 
 To standardize a normal random variable $X$, we must find its $z$-score, given by
 
 \[
-	z = \frac{x - \mu }{\sigma }
+  z = \frac{x - \mu }{\sigma }
 \]
 
 \nparagraph{Finding Probabilities with the $z$-score}
 
 \dfn{Normal Table}{
-	A table that shows the probability that a standard normal random variable takes on a value less than a given $z$-score.
+  A table that shows the probability that a standard normal random variable takes on a value less than a given $z$-score.
 }
 
 Using the $z$-score we can find the probability that a normal random variable takes on a value less than a given value
 $x$, by tracing the $z$-score to the normal table.
 
 \[
-	\mathbb{P} \left( X < x \right) = \mathbb{P} \left( Z < z \right)
+  \mathbb{P} \left( X < x \right) = \mathbb{P} \left( Z < z \right)
 \]
 
 On a standard normal table $z$-score are written to two decimal places as row headers and for additional precision the
@@ -453,45 +453,49 @@ column headers are the first two decimal places of the $z$-score.
 \subsection{Uniform Distribution}
 
 \dfn{Uniform Distribution}{
-	,denoted by $X \sim U \left( a,b \right) $
+  ,denoted by $X \sim U \left( a,b \right) $
 }
 
 For a random variable $X$, if is uniformly distributed over the interval $a$ and $b$ then its \textit{probability distribution
-	density function} is given by
+  density function} is given by
 \[
-	f \left( x \right)  = \begin{cases}
-		\frac{1}{b - a}, \, a < x < b \\
-		0, \, \text{otherwise}
-	\end{cases}
+  f \left( x \right)  = \begin{cases}
+    \frac{1}{b - a}, \, a < x < b \\
+    0, \, \text{otherwise}
+  \end{cases}
 \]
 
 The mean, variance, and standard deviation of a uniformly distributed random variable is given by
 \begin{align*}
-	\mu_X = \frac{a + b}{2}                         \\
-	\sigma^2_X = \frac{\left( b - a \right)^2 }{12} \\
-	\sigma_X = \sqrt{\frac{\left( b - a \right)^2 }{12}}
+  \mu_X = \frac{a + b}{2}                         \\
+  \sigma^2_X = \frac{\left( b - a \right)^2 }{12} \\
+  \sigma_X = \sqrt{\frac{\left( b - a \right)^2 }{12}}
 \end{align*}
 
 \chapter{Module 12: Sampling Distributions}
 
 \section{Parameters vs. Statistics}
 
+\dfn{Sampling Distribution}{
+  The probability distribution of a statistic that is obtained from a sample.
+}
+
 \dfn{Parameter}{
-	A numerical value that describes a characteristic of a population, denoted by a Greek letter, e.g. $\mu, \sigma^2$.
+  A numerical value that describes a characteristic of a population, denoted by a Greek letter, e.g. $\mu, \sigma^2$.
 }
 
 \dfn{Statistic}{
-	A numerical value that describes a characteristic of a sample, denoted by a Roman letter, e.g $\bar{x}, s^2$.
+  A numerical value that describes a characteristic of a sample, denoted by a Roman letter, e.g $\bar{x}, s^2$.
 
 }
 
 \dfn{Proportion}{
-	A statistic that estimates the proportion of a population or sample that has a certain characteristic, denoted by
-	$p$ for a population and $\hat{p}$ for a sample.
+  A statistic that estimates the proportion of a population or sample that has a certain characteristic, denoted by
+  $p$ for a population and $\hat{p}$ for a sample.
 }
 
 \dfn{Sampling Variability}{
-	The variability of a statistic from one sample to another.
+  The variability of a statistic from one sample to another.
 }
 
 \section{Behaviour of Sample Proportion $\hat{p}$}
@@ -500,18 +504,18 @@ The mean, variance, and standard deviation of a uniformly distributed random var
 
 The mean of the sample proportion is the same as the population proportion, i.e.
 \[
-	\mu_{\hat{p}} = p
+  \mu_{\hat{p}} = p
 \]
 As it is reasonable to expect all the sample proportions in repeated samples to average out to the underlying population.
 
 \subsection{Spread}
 
 The sample size has an effect on the spread of the distribution of the sample proportion, i.e. the \textbf{larger the sample
-	size, the less spread out the distribution} of the sample proportion and \textbf{more spread for smaller sample
-	sizes}. We can describe the spread of the distribution of the sample proportion more precisely by finding the actual
+  size, the less spread out the distribution} of the sample proportion and \textbf{more spread for smaller sample
+  sizes}. We can describe the spread of the distribution of the sample proportion more precisely by finding the actual
 standard deviation of the sample proportion. i.e.
 \[
-	\sigma_{\hat{p}} = \sqrt{\frac{p \left( 1 - p \right) }{n}}
+  \sigma_{\hat{p}} = \sqrt{\frac{p \left( 1 - p \right) }{n}}
 \]
 Where $p$ is the population proportion and $n$ is the sample size.
 
@@ -520,11 +524,16 @@ Where $p$ is the population proportion and $n$ is the sample size.
 The shape of the distribution of the sample proportion is approximately normal if the sample size is large enough. I.e.
 if
 \[
-	np \geq 10 \text{ and } n \left( 1 - p \right) \geq 10
+  np \geq 10 \text{ and } n \left( 1 - p \right) \geq 10
+\]
+
+Therefore
+\[
+  \hat{p} \sim N \left( p, \frac{p \left( 1 - p \right) }{n} \right)
 \]
 
 \dfn{Sampling of Distribution of $\hat{p}$}{
-	The distribution of the values of the sample proportions $\hat{p}$ in repeated samples.
+  The distribution of the values of the sample proportions $\hat{p}$ in repeated samples.
 
 }
 
@@ -534,138 +543,144 @@ if
 
 The mean of the sample mean is the same as the population mean, i.e.
 \[
-	\mu_{\overline{X}} = \mu
+  \mu_{\overline{X}} = \mu
 \]
 
 \subsection{Spread}
 
 The sample size has an effect on the spread of the distribution of the sample mean, i.e. the \textbf{larger the sample
-	size, the less spread out the distribution} of the sample mean and \textbf{more spread for smaller sample sizes}. We can
+  size, the less spread out the distribution} of the sample mean and \textbf{more spread for smaller sample sizes}. We can
 describe the spread of the distribution of the sample mean more precisely by finding the actual standard deviation of the
 sample mean. i.e.
 \[
-	\sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}
+  \sigma_{\overline{X}} = \frac{\sigma}{\sqrt{n}}
 \]
 
 \subsection{Shape}
 
 The shape of the distribution of the sample mean is approximately normal if the sample size is large enough. I.e. if
 \[
-	n \geq 30
+  n \geq 30
+\]
+
+Therefore
+\[
+  \overline{X} \sim N \left( \mu, \frac{\sigma^2}{n} \right)
 \]
 
 \dfn{Sampling of Distribution of $\overline{X}$}{
-	The distribution of the values of the sample mean $\overline{X}$ in repeated samples.
+  The distribution of the values of the sample mean $\overline{X}$ in repeated samples.
 }
+
 
 \chapter{Exercises}
 
 \qs{}{
-	Three cards are drawn with replacement from a well-shuffled deck of 52 cards. Find the probability distribution of the number of aces drawn. Also, find the mean and variance of the distribution.
+  Three cards are drawn with replacement from a well-shuffled deck of 52 cards. Find the probability distribution of the number of aces drawn. Also, find the mean and variance of the distribution.
 }
 
 \sol{
 
-	\begin{table}[h!]
-		\begin{center}
-			\begin{tabular}{|c|c|}
-				\hline
-				$x$ & $P \left( x \right) $                                                                            \\ [0.5ex]
-				\hline
-				\hline
-				0   & $\binom{3}{0}\left( \frac{4}{52} \right)^{0} \left( 1 - \frac{4}{52} \right)^{3 - 0} = 0.7865  $ \\
-				1   & $\binom{3}{1}\left( \frac{4}{52} \right)^{1} \left( 1 - \frac{4}{52} \right)^{3 - 1} =  0.1966$  \\
-				2   & $\binom{3}{2}\left( \frac{4}{52} \right)^{2} \left( 1 - \frac{4}{52} \right)^{3 - 2} =  0.0164$  \\
-				3   & $\binom{3}{3}\left( \frac{4}{52} \right)^{3} \left( 1 - \frac{4}{52} \right)^{3 - 3} =  0.0005$  \\
-				\hline
-			\end{tabular}\\
-		\end{center}
-	\end{table}
+  \begin{table}[h!]
+    \begin{center}
+      \begin{tabular}{|c|c|}
+        \hline
+        $x$ & $P \left( x \right) $                                                                            \\ [0.5ex]
+        \hline
+        \hline
+        0   & $\binom{3}{0}\left( \frac{4}{52} \right)^{0} \left( 1 - \frac{4}{52} \right)^{3 - 0} = 0.7865  $ \\
+        1   & $\binom{3}{1}\left( \frac{4}{52} \right)^{1} \left( 1 - \frac{4}{52} \right)^{3 - 1} =  0.1966$  \\
+        2   & $\binom{3}{2}\left( \frac{4}{52} \right)^{2} \left( 1 - \frac{4}{52} \right)^{3 - 2} =  0.0164$  \\
+        3   & $\binom{3}{3}\left( \frac{4}{52} \right)^{3} \left( 1 - \frac{4}{52} \right)^{3 - 3} =  0.0005$  \\
+        \hline
+      \end{tabular}\\
+    \end{center}
+  \end{table}
 
-	\begin{align*}
-		\mu      & = \sum_{i=1}^{4} x_i \times p_i                                                                   \\
-		         & = \left( 0 \times 0.7865 \right) + \left( 1 \times 0.1966 \right)  + \left( 2
-		\times 0.0164\right) + \left( 3 \times 0.0005 \right)                                                        \\
-		         & =  0.2309                                                                                         \\
-		         & = 0                                                                                               \\
-		\\
-		\\
-		\sigma^2 & = \sum_{i=1}^{4} \left( x_i - \mu  \right)^2 p_i                                                  \\
-		         & = \left( \left( 0 - 0.2309 \right)^2 \times 0.7865  \right) + \left( \left( 1 - 0.2309  \right)^2
-		\times 0.1966  \right) + \left( \left( 2 - 0.2309 \right)^2 \times 0.0164  \right) + \left( \left( 3 -
-		0.2309 \right)^2 \times 0.0005  \right)                                                                      \\
-		         & = 0.21338519                                                                                      \\
-		         & = 0.2134                                                                                          \\
-	\end{align*}
+  \begin{align*}
+    \mu      & = \sum_{i=1}^{4} x_i \times p_i                                                                   \\
+             & = \left( 0 \times 0.7865 \right) + \left( 1 \times 0.1966 \right)  + \left( 2
+    \times 0.0164\right) + \left( 3 \times 0.0005 \right)                                                        \\
+             & =  0.2309                                                                                         \\
+             & = 0                                                                                               \\
+    \\
+    \\
+    \sigma^2 & = \sum_{i=1}^{4} \left( x_i - \mu  \right)^2 p_i                                                  \\
+             & = \left( \left( 0 - 0.2309 \right)^2 \times 0.7865  \right) + \left( \left( 1 - 0.2309  \right)^2
+    \times 0.1966  \right) + \left( \left( 2 - 0.2309 \right)^2 \times 0.0164  \right) + \left( \left( 3 -
+    0.2309 \right)^2 \times 0.0005  \right)                                                                      \\
+             & = 0.21338519                                                                                      \\
+             & = 0.2134                                                                                          \\
+  \end{align*}
 
 
 }
 
 \qs{}{
-	Paper clips are produced in a variety of colours The proportion of red paper clips produced is 0.20, Determine the probability that, in a random sample of 50 coloured paper clips, the number of red clips is:
-	\begin{enumerate}
-		\item Fewer than 10
-		\item   At least 8 but at most 12
-	\end{enumerate}
+  Paper clips are produced in a variety of colours The proportion of red paper clips produced is 0.20, Determine the probability that, in a random sample of 50 coloured paper clips, the number of red clips is:
+  \begin{enumerate}
+    \item Fewer than 10
+    \item   At least 8 but at most 12
+  \end{enumerate}
 }
 
 \sol{
-	\[
-		X \sim B \left( 50, 0.20 \right)                                                                               \\
-	\]
-	\begin{enumerate}
-		\item
-		      \begin{align*}
-			      P \left( X < 10 \right) & = \sum_{i=0}^{9} \binom{50}{i} \left( 0.2 \right) ^{i} \left( 1 - 0.20 \right)^{50 -
-			      i}                                                                                                             \\
-			                              & = 0.4437                                                                             \\
-		      \end{align*}
-		\item
-		      \begin{align*}
-			      P \left( 8 \leq X \leq 12 \right) & = P \left( X \leq 12 \right) - P \left( X \leq 8 \right)        \\
-			                                        & = \sum_{i=8}^{12} \binom{50}{i} \left( 0.20 \right)^i \left( 1-
-			      0.20 \right)^{50 -i}                                                                                \\
-			                                        & = 0.6235                                                        \\
-		      \end{align*}
-	\end{enumerate}
+  \[
+    X \sim B \left( 50, 0.20 \right)                                                                               \\
+  \]
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            P \left( X < 10 \right) & = \sum_{i=0}^{9} \binom{50}{i} \left( 0.2 \right) ^{i} \left( 1 - 0.20 \right)^{50 -
+            i}                                                                                                             \\
+                                    & = 0.4437                                                                             \\
+          \end{align*}
+    \item
+          \begin{align*}
+            P \left( 8 \leq X \leq 12 \right) & = P \left( X \leq 12 \right) - P \left( X \leq 8 \right)        \\
+                                              & = \sum_{i=8}^{12} \binom{50}{i} \left( 0.20 \right)^i \left( 1-
+            0.20 \right)^{50 -i}                                                                                \\
+                                              & = 0.6235                                                        \\
+          \end{align*}
+  \end{enumerate}
 }
 
 \qs{}{
-	A recent large-scale survey established that 15 percent of cars have fully functioning brake lights
-	\begin{enumerate}
-		\item  Calculate the probability that, in a random sample of 18 cars, exactly 2 cars have faulty brake lights.
-		\item Determine the probability that, in a random sample of 50 cars, more than 5 cars but fewer than 10 cars have faulty brake lights.
-	\end{enumerate}
+  A recent large-scale survey established that 15 percent of cars have fully functioning brake lights
+  \begin{enumerate}
+    \item  Calculate the probability that, in a random sample of 18 cars, exactly 2 cars have faulty brake lights.
+    \item Determine the probability that, in a random sample of 50 cars, more than 5 cars but fewer than 10 cars have faulty brake lights.
+  \end{enumerate}
 }
 
 \sol{
-	\begin{enumerate}
-		\item
-		      \begin{align*}
-			      X \sim B \left( 18, 0.15 \right)                                                                \\
-			      P \left( X = 2 \right) & = \binom{18}{2} \left( 0.15 \right)^2 \left( 1 - 0.15 \right)^{18 - 2} \\
-			                             & = 0.2556                                                               \\
-		      \end{align*}
-		\item
-		      \begin{align*}
-			      X \sim B \left( 50, 0.20 \right)                                                                                    \\
-			      P \left( 5 < X < 10 \right) & = P \left( X < 10 \right) - P \left( X < 5 \right)                                    \\
-			                                  & = \sum_{i=6}^{9} \binom{50}{i} \left( 0.15 \right)^i \left( 1 - 0.15 \right)^{50 - i} \\
-			                                  & = 0.5717                                                                              \\
-		      \end{align*}
-	\end{enumerate}
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            X \sim B \left( 18, 0.15 \right)                                                                \\
+            P \left( X = 2 \right) & = \binom{18}{2} \left( 0.15 \right)^2 \left( 1 - 0.15 \right)^{18 - 2} \\
+                                   & = 0.2556                                                               \\
+          \end{align*}
+    \item
+          \begin{align*}
+            X \sim B \left( 50, 0.20 \right)                                                                                    \\
+            P \left( 5 < X < 10 \right) & = P \left( X < 10 \right) - P \left( X < 5 \right)                                    \\
+                                        & = \sum_{i=6}^{9} \binom{50}{i} \left( 0.15 \right)^i \left( 1 - 0.15 \right)^{50 - i} \\
+                                        & = 0.5717                                                                              \\
+          \end{align*}
+  \end{enumerate}
 
 }
 
 \pagebreak
 \qs{}{
-	You are diagnosed with an uncommon disease. You know that there only is a 1\% chance. Use the letter $D$ for the event
-	"you have a disease" and $T$ for "the test says so". It is known that the test is perfect. $P \left( T  \mid D \right) =
-		0.98$ and $P \left( T'  \mid  D' \right) = 0.95 $
-	\begin{enumerate}
-		\item      Given that you test positive, what is the probability that you really have the disease?
-		\item You obtain a second opinion: in an independent repetition of the test. You test positive again. Given this, what is the probability that you really have the disease.
-	\end{enumerate}
+  You are diagnosed with an uncommon disease. You know that there only is a 1\% chance. Use the letter $D$ for the event
+  "you have a disease" and $T$ for "the test says so". It is known that the test is perfect. $P \left( T  \mid D \right) =
+    0.98$ and $P \left( T'  \mid  D' \right) = 0.95 $
+  \begin{enumerate}
+    \item      Given that you test positive, what is the probability that you really have the disease?
+    \item You obtain a second opinion: in an independent repetition of the test. You test positive again. Given this, what is the probability that you really have the disease.
+  \end{enumerate}
 }
 
 \sol{
@@ -674,140 +689,143 @@ The shape of the distribution of the sample mean is approximately normal if the 
 \tikzstyle{bag} = [text width=4em, text centered]
 \tikzstyle{end} = [circle, minimum width=3pt,fill, inner sep=0pt]
 \begin{tikzpicture}[grow=right, sloped]
-	\node[bag] {}
-	child {
-	node[bag] {$D$}
-	child {
-	node[end, label=right:
-	{$T'$}] {}
-	edge from parent
-	node[below] {0.95}
-	}
-	child {
-	node[end, label=right:
-	{$T$}] {}
-	edge from parent
-	node[above] {0.05}
-	}
-	edge from parent
-	node[below] {0.99}
-	}
-	child {
-	node[bag] {$D'$}
-	child {
-	node[end, label=right:
-	{$T'$}] {}
-	edge from parent
-	node[below] {0.02}
-	}
-	child {
-	node[end, label=right:
-	{$T$}] {}
-	edge from parent
-	node[above] {0.98}
-	}
-	edge from parent
-	node[above] {0.01}
-	};
+  \node[bag] {}
+  child {
+  node[bag] {$D$}
+  child {
+  node[end, label=right:
+  {$T'$}] {}
+  edge from parent
+  node[below] {0.95}
+  }
+  child {
+  node[end, label=right:
+  {$T$}] {}
+  edge from parent
+  node[above] {0.05}
+  }
+  edge from parent
+  node[below] {0.99}
+  }
+  child {
+  node[bag] {$D'$}
+  child {
+  node[end, label=right:
+  {$T'$}] {}
+  edge from parent
+  node[below] {0.02}
+  }
+  child {
+  node[end, label=right:
+  {$T$}] {}
+  edge from parent
+  node[above] {0.98}
+  }
+  edge from parent
+  node[above] {0.01}
+  };
 \end{tikzpicture}
 \begin{enumerate}
-	\item
-	      \begin{align*}
-		      P \left( D  \mid T \right) & = \frac{P \left( D \cap T \right) }{P \left( T \right) }                                              \\
-		                                 & = \frac{P \left( D \right) \times P \left( T  \mid D \right)   }{P \left( D \right) \times P \left( T
-		      \mid D \right) + P \left( D' \right) \times P \left( T  \mid D' \right)    }                                                       \\
-		                                 & = \frac{0.01 \times 0.98}{\left( 0.01 \times 0.98 \right) + \left( 0.99 \times
-		      0.05\right)  }                                                                                                                     \\
-		                                 & = 0.1653                                                                                              \\
-	      \end{align*}
-	\item
-	      \begin{align*}
-		      P \left( \left( D  \mid T \right) \cap \left( D  \mid T \right)   \right) & = 0.1653 \times 0.1653 \\
-		                                                                                & = 0.0273               \\
-	      \end{align*}
+  \item
+        \begin{align*}
+          P \left( D  \mid T \right) & = \frac{P \left( D \cap T \right) }{P \left( T \right) }                                              \\
+                                     & = \frac{P \left( D \right) \times P \left( T  \mid D \right)   }{P \left( D \right) \times P \left( T
+          \mid D \right) + P \left( D' \right) \times P \left( T  \mid D' \right)    }                                                       \\
+                                     & = \frac{0.01 \times 0.98}{\left( 0.01 \times 0.98 \right) + \left( 0.99 \times
+          0.05\right)  }                                                                                                                     \\
+                                     & = 0.1653                                                                                              \\
+        \end{align*}
+  \item
+        \begin{align*}
+          P \left( \left( D  \mid T \right) \cap \left( D  \mid T \right)   \right) & = 0.1653 \times 0.1653 \\
+                                                                                    & = 0.0273               \\
+        \end{align*}
 \end{enumerate}
 }
 
 \qs{}{
-	Selorm, arriving at a bus stop, just misses the bus. Suppose that he decides to walk if the (next) bus takes longer than
-	5 minutes to arrive. Suppose also that the time in minutes between the arrivals of buses at the bus stop is a continuous
-	random variable with a $U(4,6)$. Let $X$ be the time Selorm will wait.
-	\begin{enumerate}
-		\item What is the probability that $X$ is less than $4 \frac{1}{2}$ minutes
-		\item  What is the probability that $X$ equals 5 minutes?
-		\item Is $X$ a discrete random variable or a continuous random variable?
-	\end{enumerate}
+  Selorm, arriving at a bus stop, just misses the bus. Suppose that he decides to walk if the (next) bus takes longer than
+  5 minutes to arrive. Suppose also that the time in minutes between the arrivals of buses at the bus stop is a continuous
+  random variable with a $U(4,6)$. Let $X$ be the time Selorm will wait.
+  \begin{enumerate}
+    \item What is the probability that $X$ is less than $4 \frac{1}{2}$ minutes
+    \item  What is the probability that $X$ equals 5 minutes?
+    \item Is $X$ a discrete random variable or a continuous random variable?
+  \end{enumerate}
 }
 
 \sol{
-	\begin{enumerate}
-		\item
-		      \begin{align*}
-			      f \left( x \right)               & = \frac{1}{ 6- 4}                   \\
-			      f \left( x \right)               & = 0.5                               \\
-			      P \left( X < \frac{9}{2} \right) & = \left( 4.5 - 4 \right) \times 0.5 \\
-			                                       & = 0.25                              \\
-		      \end{align*}
-		\item
-		      \begin{align*}
-			      P \left( X = 5 \right) = 0
-		      \end{align*}
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            f \left( x \right)               & = \frac{1}{ 6- 4}                   \\
+            f \left( x \right)               & = 0.5                               \\
+            P \left( X < \frac{9}{2} \right) & = \left( 4.5 - 4 \right) \times 0.5 \\
+                                             & = 0.25                              \\
+          \end{align*}
+    \item
+          \begin{align*}
+            P \left( X = 5 \right) = 0
+          \end{align*}
 
 
 
-	\end{enumerate}
+  \end{enumerate}
 }
 
 \qs{}{
-	If random variable $X$ follows a Poisson distribution with mean $3.4$. Find $P \left( X = 6 \right) $
+  If random variable $X$ follows a Poisson distribution with mean $3.4$. Find $P \left( X = 6 \right) $
 }
 
 \sol{
-	\begin{align*}
-		X \sim \text{Poisson} \left( 3.4 \right)                      \\
-		P \left( X = 6  \right) & = \frac{e^{-3.4}\times 3.4^{6}}{6!} \\
-		                        & = 0.0716                            \\
-	\end{align*}
+  \begin{align*}
+    X \sim \text{Poisson} \left( 3.4 \right)                      \\
+    P \left( X = 6  \right) & = \frac{e^{-3.4}\times 3.4^{6}}{6!} \\
+                            & = 0.0716                            \\
+  \end{align*}
 }
 
 \qs{}{
-	Cretan Airlines services which arrive late to Athens Airport on a typical week can be modelled by a Poisson distribution with mean of 4.5
-	\begin{enumerate}
-		\item Determine the probability that on a given week there will be
-		      \begin{enumerate}
-			      \item four late arrivals
-			      \item less than four late arrivals
-			      \item at least seven late arrivals
-		      \end{enumerate}
-		\item Determine the probability that on a given two week period there will be between eight and thirteen (inclusive) late arrivals.
-	\end{enumerate}
+  Cretan Airlines services which arrive late to Athens Airport on a typical week can be modelled by a Poisson distribution with mean of 4.5
+  \begin{enumerate}
+    \item Determine the probability that on a given week there will be
+          \begin{enumerate}
+            \item four late arrivals
+            \item less than four late arrivals
+            \item at least seven late arrivals
+          \end{enumerate}
+    \item Determine the probability that on a given two week period there will be between eight and thirteen (inclusive) late arrivals.
+  \end{enumerate}
 }
 
 \sol{
-	$X \sim \text{Poisson} \left( 4.5 \right) $
-	\begin{enumerate}
-		\item
-		      \begin{enumerate}
-			      \item
-			            \begin{align*}
-				            P \left( X = 4 \right) & = \frac{e^{-4.5}\times 4.5^{4}}{4!} \\
-				                                   & = 0.18980                           \\
-			            \end{align*}
-			      \item
-			            \begin{align*}
-				            P \left( X < 4 \right) & = \sum_{i=0}^{3} \frac{e^{-4.5}\times 4.5^{i}}{i!} \\
-				                                   & = 0.3423                                           \\
-			            \end{align*}
-			      \item
-			            \begin{align*}
-				            P \left( X \geq 7 \right) & = 1 - P \left( X < 7 \right)                           \\
-				                                      & = 1 - \sum_{i=0}^{6} \frac{e^{-4.5}\times 4.5^{i}}{i!} \\
-				                                      & = 1 - 0.8311                                           \\
-				                                      & = 0.1689                                               \\
-			            \end{align*}
-		      \end{enumerate}
-	\end{enumerate}
+  $X \sim \text{Poisson} \left( 4.5 \right) $
+  \begin{enumerate}
+    \item
+          \begin{enumerate}
+            \item
+                  \begin{align*}
+                    P \left( X = 4 \right) & = \frac{e^{-4.5}\times 4.5^{4}}{4!} \\
+                                           & = 0.18980                           \\
+                  \end{align*}
+            \item
+                  \begin{align*}
+                    P \left( X < 4 \right) & = \sum_{i=0}^{3} \frac{e^{-4.5}\times 4.5^{i}}{i!} \\
+                                           & = 0.3423                                           \\
+                  \end{align*}
+            \item
+                  \begin{align*}
+                    P \left( X \geq 7 \right) & = 1 - P \left( X < 7 \right)                           \\
+                                              & = 1 - \sum_{i=0}^{6} \frac{e^{-4.5}\times 4.5^{i}}{i!} \\
+                                              & = 1 - 0.8311                                           \\
+                                              & = 0.1689                                               \\
+                  \end{align*}
+          \end{enumerate}
+  \end{enumerate}
 }
+
+
+
 
 
 

@@ -98,6 +98,20 @@ And a 90\% confidence interval for $\mu $ can be found using:
   \overline{x} \pm 1.645 \times \frac{\sigma}{\sqrt{n}}
 \]
 
+To calculate the confidence interval for any level of confidence, we use the $z$-score of the area of half the $\alpha$ of the
+confidence level, i.e.:
+\[
+  z^* = z_{\frac{\alpha}{2}}
+\]
+
+Where alpha is
+\[
+  \alpha = 1 - C
+\]
+Or
+\[
+  \alpha = 1 + C
+\]
 \subsection{General Structure of Confidence Intervals}
 
 A confidence interval has the following form:
@@ -168,7 +182,47 @@ The sample size required to estimate the population proportion $p$ with a margin
 $C$ can be found using:
 
 \[
-  n = \frac{4\hat{p} \left( 1 - \hat{p} \right) }{m^2}
+  n = p \times \left( 1 - p \right) \times \left( \frac{z^*}{m} \right)^2
 \]
 
+\chapter{Module 15: Hypothesis Testing}
+
+\section{Introduction}
+
+\dfn{Hypothesis Testing}{
+  Assessing evidence provided by the data in favour of against some claim about the population.
+}
+
+The process of statistical hypothesis testing is as follows:
+\begin{itemize}
+  \item We start with two claims about the behaviour of a population, where the claim usually contradict each other.
+  \item Choose a sample and collect and summarize relevant data.
+  \item Determine how likely it is to observe data, like the data we get had claim 1 been true
+  \item Based on the results we make one of two conclusions:
+        \begin{itemize}
+          \item If we find that if claim 1 were true it would extremely unlikely to observe the data we observed, then we
+                have strong evidence against claim 1 and can reject it in favour of claim 2
+          \item If we find that if claim 1 were true it would not be extremely unlikely to observe the data we observed,
+                then we do not have enough evidence against claim 1, and cannot reject it in favour of claim 2.
+        \end{itemize}
+\end{itemize}
+
+In the terminology of hypothesis testing Claim 1 is termed as the \textbf{null hypothesis}, denoted by $H_0$, and Claim
+2 is termed as the \textbf{alternative hypothesis}, denoted by $H_a$.
+
+\begin{description}
+  \item[Null Hypothesis] No change from the status quo / No relationship
+  \item[Alternative Hypothesis] There is a change from the status quo / There is a relationship
+\end{description}
+
+Determining how likely it is to observe data like the data we would of gotten if claim 1 were true, is termed as
+finding its \textit{$p$-value} \\
+
+In making a decision about the null hypothesis, we use the $p$-value to determine the strength of the evidence against
+the null hypothesis. The smaller the $p$-value, the stronger the evidence against the null hypothesis, i.e.:
+\begin{itemize}
+  \item If $p-\text{value} < \alpha \text{ (usually $0.5$)}$, we can reject $H_0$ and accept $H_{a}$, as the evidence
+        against $H_0$ is strong.
+  \item If $p-\text{value} > \alpha \text{ (usually $0.5$)}$, we do not have enough evidence against $H_0$ and cannot reject it.
+\end{itemize}
 \end{document}

@@ -214,6 +214,14 @@ Or
   \]
 }
 
+\nparagraph{Binomial Theorem}
+\thm{Binomial Theorem}{
+  Let $x$ and $y$ be variables, and let $n$ be a non-negative integer then
+  \[
+    \left( x + y \right)^{n} = \displaystyle\sum_{k = 0}^{n} C \left( n, k \right) x^{n - k} y^{k}
+  \]
+}
+
 \ex{}{
   \qs{}{
     How many 2-combinations of the set $\{a,b,c,d\} $ are there.
@@ -361,6 +369,119 @@ Or
   \end{align*}
   $\therefore$ at least 6
 
+}
+
+\qs{}{
+  Let $S = \{1,2,3,4,5\} $
+  \begin{enumerate}
+    \item List all the 3-permutations of $S$
+    \item List all the 3-combinations of $S$
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            P \left( 5,3 \right) & = \frac{5!}{3!} \\
+                                 & = 60            \\
+          \end{align*}
+    \item
+          \begin{align*}
+            C \left( 5,3 \right) & = \frac{5!}{2!\times 3!} \\
+                                 & = 10                     \\
+          \end{align*}
+          \begin{align*}
+            \{1,2,3\} , \{1,2,4\} , \{1,2,5\} , \{1,3,5\}, \\
+            \{1,3,4\} , \{3,4,5\} , \{2,4,5\} ,            \\
+            \{1,4,5\} , \{2,3,5\} , \{2,3,4\}
+          \end{align*}
+  \end{enumerate}
+}
+
+\qs{}{
+  A club has 25 members
+  \begin{enumerate}
+    \item How many ways are there to choose four members of the club to serve on an executive committee
+    \item How many ways are there to choose a president, vice-president, secretary, and treasurer of the club where no
+          person can hold more than one office
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            C \left( 25, 4 \right) & = \frac{25!}{4! \times \left( 25 - 4 \right) !} \\
+                                   & = 12,650
+          \end{align*}
+    \item
+          \begin{align*}
+            25 \times 24 \times 23 \times 22 & =  303,600
+          \end{align*}
+  \end{enumerate}
+}
+
+\qs{}{
+  Seven women and nine men are on the faculty in the mathematics department of a school
+  \begin{enumerate}
+    \item How many ways are there to select a committee of five members of the department if at least one woman must be
+          on the committee
+    \item How many ways are there to select a committee of five members of the department if at least one woman and at
+          least one man must be on the committee.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          First we find the number of all the possible ways a five member committee can be selected, i.e. $C \left( 16, 5
+            \right) $, then we find the number of ways a committee can be selected consisting of all men, i.e. $C \left(
+            9, 5 \right)$
+          \begin{align*}
+            C \left( 16, 5 \right)  - C \left( 9, 5 \right) & =  4242
+          \end{align*}
+    \item
+          First we find the number of all the possible ways a five member committee can be selected, i.e. $C \left( 16, 5
+            \right) $, then we find the number of ways a committee can be selected consisting of all men and all women,
+          $C \left( 9, 5 \right) $ and $C \left( 7, 5 \right) $, respectively
+          \begin{align*}
+            C \left( 16, 5 \right) - \left( C \left( 9, 5 \right) + C \left( 7, 5 \right)   \right) = 4221
+          \end{align*}
+  \end{enumerate}
+
+}
+
+\qs{}{
+  How many subsets of a set with 10 elements
+  \begin{enumerate}
+    \item Have fewer than 4 elements
+    \item Have more than 7 elements
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            C \left( 10, 4 \right)  + C \left( 10, 3 \right) + C \left( 10, 2 \right) + C \left( 10, 1 \right) + C \left(
+            10, 0 \right) & =  386
+          \end{align*}
+  \end{enumerate}
+}
+
+\qs{}{
+  Find the expansion of $\left( x + y \right)^{6}$
+}
+
+\sol{
+  \begin{align*}
+    \left( x + y \right)^{6} & = \displaystyle\sum_{i = 0}^{6} C \left( 6, i \right) \times x^{n - i}\times y^{i}                                  \\
+                             & = C \left( 6, 0 \right) x^{6} + C \left(6, 1  \right) x^{5}y^{1} + C \left( 6, 2 \right) x^{4}y^{2} + C \left( 6, 3
+    \right) x^{3}y^{3} + C \left( 6, 4 \right) x^{2}y^{4} + C \left( 6, 5 \right) x^{1}y^{5} + C \left( 6, 6 \right)
+    y^{6}                                                                                                                                          \\
+                             & = x^{6} + 6x^{5}y + 15x^{4}y^2 + 20x^3y^3 + 15x^2y^{4} + 6xy^{5} + y^{6}                                            \\
+  \end{align*}
 }
 
 \end{document}

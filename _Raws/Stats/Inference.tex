@@ -225,4 +225,388 @@ the null hypothesis. The smaller the $p$-value, the stronger the evidence agains
         against $H_0$ is strong.
   \item If $p-\text{value} > \alpha \text{ (usually $0.5$)}$, we do not have enough evidence against $H_0$ and cannot reject it.
 \end{itemize}
+
+\section{Hypothesis Testing for Population Proportion}
+
+\subsection{Step 1 - Stating the Hypothesis}
+
+In stating the null and alternative hypothesis for a population proportion, the null hypothesis always takes the form of
+equality, and the alternative hypothesis takes the form of inequality / difference that can either be one-sided or
+two-sided alternatives, where one-sided alternatives are used when we are interested in a specific direction of change,
+and two-sided alternatives are used when the direction of change is irrelevant.
+\begin{itemize}
+  \item Null Hypothesis: $H_0: p = p_0$
+  \item Alternative Hypothesis:
+        \begin{itemize}
+          \item $H_a: p \neq p_0$ (two-sided)
+          \item $H_a: p > p_0$ (one-sided)
+          \item $H_a: p < p_0$ (one-sided)
+        \end{itemize}
+\end{itemize}
+
+\subsection{Step 2 - Collecting and Summarizing Data}
+
+\section{Hypothesis Testing for Population Mean}
+
+In hypothesis testing for a population mean there are two cases:
+\begin{itemize}
+  \item $\sigma $ is known and we use the $z$-test for the population mean $\mu $
+  \item $\sigma $ is unknown and we use the $t$-test for the population mean $\mu $
+\end{itemize}
+
+\subsection{$z$-test for the Population Mean}
+
+\subsubsection{Step 1 - Stating the Hypothesis}
+The null and alternative hypothesis for the population mean $\mu $ takes the same form as the population mean,
+i.e.:
+\begin{itemize}
+  \item Null Hypothesis: $H_0: \mu = \mu_0$
+  \item Alternative Hypothesis:
+        \begin{itemize}
+          \item $H_a: \mu \neq \mu_0$ (two-sided)
+          \item $H_a: \mu < \mu_0$ (one-sided)
+          \item $H_a: \mu > \mu_0$ (one-sided)
+        \end{itemize}
+\end{itemize}
+Where $\mu_0$ is the null value
+
+\subsubsection{Step 2 - Collecting and Summarizing Data}
+
+In this step we calculate the sample mean $\overline{x}$, and relevant sample statistic and summarize the data with a
+test statistic. This test statistic is the $z$-score of the sample mean, assuming $H_0$ is true, i.e:
+\[
+  z = \frac{\overline{x} - \mu_0}{\frac{\sigma}{\sqrt{n}}}
+\]
+Where $\overline{x}$ is the sample mean, $\mu_0$ is the null value, $\sigma $ is the population standard deviation, And
+$n$ is the sample size, where $n > 30$
+
+The conditions needed to perform the $z$-test for the population mean are:
+\begin{itemize}
+  \item The sample is random
+  \item The variable varies normally in the population
+  \item The variable does not vary normally in the population, but the sample size is large enough
+\end{itemize}
+
+\subsubsection{Step 3 - Finding the $p$-value}
+
+The $p$-value is the probability of observing a sample mean as extreme as the one observed, assuming $H_0$ is true.
+The $p$-value is calculated using the $z$-score of the sample mean, i.e.:
+\begin{itemize}
+  \item $H_a: \mu \neq \mu_0 \implies p\text{-value} = 2 \mathbb{P}\left( Z \geq  \mid z \mid  \right) $
+  \item $H_a: \mu < \mu_0 \implies  p\text{-value } = \mathbb{P}\left( Z \leq z \right) $
+  \item $H_a: \mu > \mu_0 \implies p\text{-value} = \mathbb{P}\left( Z \geq z \right) $
+\end{itemize}
+
+\subsubsection{Step 4 - Drawing Conclusions}
+
+In drawing conclusions about the null hypothesis, we compare the $p$-value to the level of significance $\alpha $, and
+state our conclusion as follows:
+\begin{itemize}
+  \item $p\text{-value} > \alpha$ - We do not have enough evidence against $H_0$ and cannot reject it
+  \item $p\text{-value} < \alpha$ - We have enough evidence against $H_0$ and can reject it in favour of $H_a$
+\end{itemize}
+
+\subsection{$t$-test for Population mean}
+
+The first, second, and fourth steps in using the $t$-test for population mean are identical to that of the $z$-test, but the
+$t$-score being calculated as:
+\[
+  t = \frac{\overline{x} - \mu_0}{\frac{s}{\sqrt{n}}}
+\]
+Where the denominator $\frac{s}{\sqrt{n}}$ is the standard error of $\overline{X}$. \\
+This value is then compared to the $t$-distribution with $n-1$ degrees of freedom, and the $p$-value is calculated
+
+\subsubsection{Step 3 - Finding the $p$-value}
+
+The $p$-value is calculated using the $t$-score of the sample mean, i.e.:
+\begin{itemize}
+  \item $H_a: \mu \neq  \mu_0 \implies p\text{-value} = 2 \mathbb{P}\left( t \left( n - 1 \right) \geq  \mid t \mid   \right) $
+  \item $H_a: \mu < \mu_0 \implies p\text{-value} = \mathbb{P}\left( t \left( n - 1 \right) \leq t  \right) $
+  \item $H_a: \mu > \mu_0 \implies p\text{-value} = \mathbb{P}\left( t \left( n - 1 \right) \geq t  \right) $
+\end{itemize}
+
+\section{Type I and Type II Errors}
+
+\subsection{Type I Error}
+\dfn{Type I Error}{
+  Rejecting the null hypothesis when it is true
+}
+
+\subsubsection{The Probability of Type I Error}
+
+The probability of making a Type I error is denoted by $\alpha $, and is the level of significance of the test, i.e.:
+\[
+  \alpha = \mathbb{P}\left( \text{Type I Error} \right)
+\]
+
+\subsection{Type II Error}
+\dfn{Type II Error}{
+  Failing to reject the null hypothesis when it is false
+}
+
+\subsubsection{The Probability of a Type II Error}
+
+The probability of making a Type II error is inversely related to the probability of making a Type I error, and is denoted by $\beta $, i.e.:
+\[
+  \beta = \mathbb{P}\left( \text{Type II Error} \right)
+\]
+
+\chapter{Module 16 and 17: Inference for Relationships}
+
+\nt{
+  Large Enough - $n > 30$
+}
+
+\section{Case $C \to Q$}
+
+In this case, we are interested in the relationship between a categorical variable and a quantitative variable. To make
+inferences about the relationship between the two variables, we compare the means of the quantitative variable across the
+categories of the categorical variable. The method used depends on the number of categories of the categorical
+variable., i.e:
+\begin{itemize}
+  \item $k = 2$: We use the two-sample $t$-test
+  \item $k > 2$ We use the ANOVA test
+\end{itemize}
+Where $k$ is the number of categories of the categorical variable.
+
+Furthermore when $k = 2$, there are two cases to consider:
+\begin{itemize}
+  \item Independent groups /samples - Where the two categories are independent of each other.
+  \item Paired groups / Dependent samples - Where the two categories are dependent on each other in some way or matched pairs.
+\end{itemize}
+
+\subsection{Two sample $t$-test - Independent Groups}
+
+\subsubsection{Step 1 - Stating the Hypothesis}
+
+In this case the hypothesis represents the difference in the population means $\left( \mu_1 \text{ and } \mu_2  \right)
+$ of the two categories of the categorical variable.i.e.
+\begin{itemize}
+  \item Null Hypothesis: $H_0: \mu_1 = \mu_2$ / $H_0: \mu_1 - \mu_2 = 0$
+  \item Alternative Hypothesis:
+        \begin{itemize}
+          \item $H_a: \mu_1 - \mu_2 \neq 0$ (two-sided)
+          \item $H_a: \mu_1 - \mu_2 > 0$ (one-sided)
+          \item $H_a: \mu_1 - \mu_2 < 0$ (one-sided)
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Step 2 - Collecting and Summarizing Data}
+In this step we calculate the test statistic, which is in this case the $t$-score of the difference in the sample means,
+i.e.:
+\[
+  t = \frac{\left( \overline{y_1} - \overline{y_2} \right) - 0 }{\sqrt{\frac{s^2_1}{n_1} + \frac{s^2_2}{n_2}}}
+\]
+Where:
+
+$\overline{y_1}$ and $\overline{y_2}$ are the sample means of the samples from populations 1 and 2 respectively.
+
+$s_1$ and $s_2$ are the sample standard deviations of the samples from populations 1 and 2 respectively.
+
+$n_1$ and $n_2$ are the sample sizes of the two samples.
+\\
+
+
+The conditions needed to perform the two-sample $t$-test for independent groups are:
+\begin{itemize}
+  \item The two samples are independent
+  \item Either:
+        \begin{itemize}
+          \item Both populations are normal and both samples are random
+          \item Either population is not normal but the sample sizes are large enough
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Step 3 - Finding the $p$-value}
+
+The $p$-value is the probability of observing a difference in sample means as extreme as the one observed, assuming $H_0$
+is true.
+
+\subsubsection{Step 4 - Drawing Conclusions}
+
+In drawing conclusions about the null hypothesis, we compare the $p$-value to the level of significance $\alpha $, and
+state our conclusion as follows:
+\begin{itemize}
+  \item $p\text{-value} > \alpha$ - We do not have enough evidence against $H_0$ and cannot reject it.
+  \item $p\text{-value} < \alpha$ - We have enough evidence against $H_0$ and can reject it in favour of $H_a$.
+\end{itemize}
+
+\subsection{Two sample $t$-test - Matched Pairs}
+
+\subsubsection{Step 1 - Stating the Hypothesis}
+
+For matched pairs, the hypothesis represents the difference in the population means $\left( \mu_d \right) $ of the two
+quantitative variables, i.e.:
+\begin{itemize}
+  \item Null Hypothesis - $H_0: = \mu_{d}$
+  \item Alternative Hypothesis:
+        \begin{itemize}
+          \item $H_a: \mu_d \neq 0$ (two-sided)
+          \item $H_a: \mu_d > 0$ (one-sided)
+          \item $H_a: \mu_d < 0$ (one-sided)
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{Step 2 - Collecting and Summarizing Data}
+
+In this step we calculate the test statistic, which is in this case the $t$-score of the difference in the sample means,
+i.e.:
+\[
+  t = \frac{\overline{x_d} - 0}{\frac{s_d}{\sqrt{n}}}
+\]
+
+Where $\overline{x_d}$ is the sample mean of the differences, and $s_d$ is the sample standard deviation of the differences.
+
+\subsubsection{Step 3 - Finding the $p$-value}
+
+The $p$-value is the probability of observing a difference in sample means as extreme as the one observed, assuming
+$H_0$ is true, this is calculated using the $t$-score of the sample mean with the $t$-distribution with $n-1$ degrees of
+freedom.
+
+\subsubsection{Step 4 - Drawing Conclusions}
+
+In drawing conclusions about the null hypothesis, we compare the $p$-value to the level of significance $\alpha $, and
+state our conclusion as follows:
+\begin{itemize}
+  \item $p\text{-value} > \alpha$ - We do not have enough evidence against $H_0$ and cannot reject it.
+  \item $p\text{-value} < \alpha$ - We have enough evidence against $H_0$ and can reject it in favour of $H_a$.
+\end{itemize}
+
+\subsubsection{Confidence Interval for $\mu_d$}
+
+The point estimator used in this confidence interval is the sample mean of the differences $\overline{x_d}$
+
+If the null value $0$ falls outside the confidence interval, then we can reject $H_0$
+
+If the null value $0$ falls inside the confidence interval, then we cannot reject $H_0$
+
+\subsection{ANOVA (Analysis of Variance) Test}
+
+The ANOVA test is used to compare the means of three or more populations, and is used to determine if there is a
+difference in the means of the populations. The test statistic used in the ANOVA test is the $F$-score, which is the ratio
+of the variance between the sample means to the variance within the samples, i.e.:
+
+\subsubsection{Step 1 - Stating the Hypothesis}
+
+The null and alternative hypothesis for the ANOVA test are:
+\begin{itemize}
+  \item Null Hypothesis: $H_0: \mu_1 = \mu_2 = \mu_3 = \ldots = \mu_k$ / There is no relationship between the
+        categorical variable and the quantitative variable
+  \item Alternative Hypothesis: $H_a: \text{ not all the $\mu$'s are equal}$
+\end{itemize}
+
+\subsubsection{Step 2 - Checking conditions and finding the test statistic}
+
+For the ANOVA test the test statistic is the $F$-score, which is the ratio of the variance between the sample means
+to the variance within the samples, i.e.:
+\[
+  F = \frac{\text{Variation among sample means}}{\text{Variation within samples}}
+\]
+The larger the $F$-score, the stronger the evidence against the null hypothesis. If the variation within samples is
+large then the $F$-score will be small, and vice versa.
+
+The conditions needed to perform the ANOVA test are:
+\begin{itemize}
+  \item Random samples
+  \item The sample size is large enough or the variable varies normally in the population
+\end{itemize}
+
+\subsubsection{Step 3 - Find the $p$-value}
+
+The $p$-value is the probability of observing a difference in sample means as extreme as the one observed, assuming
+$H_0$ is true.
+
+\subsubsection{Step 4 - Drawing Conclusions}
+
+In drawing conclusions about the null hypothesis, we compare the $p$-value to the level of significance $\alpha $,
+and state our conclusion as follows:
+\begin{itemize}
+  \item $p\text{-value} > \alpha$ - We do not have enough evidence against $H_0$ and cannot reject it.
+  \item $p\text{-value} < \alpha$ - We have enough evidence against $H_0$ and can reject it in favour of $H_a$.
+\end{itemize}
+
+\section{Case $C \to C$}
+
+\subsection{Step 1 - Stating the Hypothesis}
+
+In stating the null and alternative hypothesis for a relationship between two categorical variables, the null hypothesis
+and alternative hypothesis take the following forms:
+\begin{itemize}
+  \item $H_0:$ There is no relationship between the two categorical variables / They are independent / $p_1 = p_2$
+  \item $H_a:$  There is a relationship between the two categorical variables / They are dependent / $p_1 \neq p_2$
+\end{itemize}
+
+\subsection{Step 2 - Checking Conditions and Finding the Test Statistic}
+
+The test statistic of the chi-square test for independence is the $\chi^2$-score, which is is a standardized measure of
+the difference between the observed and expected frequencies, i.e.:
+\[
+  \chi^2 = \displaystyle\sum_{\text{all cells}} \frac{\left( \text{Observed Count} - \text{Expected Count} \right)^2 }{\text{Expected Count}}
+\]
+
+The conditions for the chi-square test for independence are:
+\begin{itemize}
+  \item Random sample
+  \item The expected count in each cell is at least $5$
+\end{itemize}
+
+\subsection{Step 3 - Finding the $p$-value}
+
+The $p$-value is the probability of observing a difference in sample means as extreme as the one observed, assuming
+$H_0$ were true.
+
+\subsection{Step 4 - Drawing Conclusions}
+
+In drawing conclusions about the null hypothesis, we compare the $p$-value to the level of significance $\alpha $,
+and state our conclusion as follows:
+\begin{itemize}
+  \item $p\text{-value} > \alpha$ - We do not have enough evidence against $H_0$ and cannot reject it.
+  \item $p\text{-value} < \alpha$ - We have enough evidence against $H_0$ and can reject it in favour of $H_a$.
+\end{itemize}
+
+\section{Case $Q \to Q$}
+
+\subsection{Step 1 - Stating the Hypothesis}
+
+For a relationship between two quantitative variables, the null and alternative hypothesis take the form of, there is no
+linear relationship between the two variables, and there is a linear relationship between the two variables, respectively i.e.:
+\begin{itemize}
+  \item Null Hypothesis : No linear relationship exists between $X$ and $Y$
+  \item Alternative Hypothesis: A linear relationship exists between $X$ and $Y$
+\end{itemize}
+Where $\rho $ is the population correlation coefficient
+
+\subsection{Step 2 - Collecting and Summarizing Data}
+
+In this step we calculate the sample correlation coefficient $r$, and relevant sample statistics and summarize the data
+with a test statistic. This test statistic is the $t$-score of the sample correlation coefficient, assuming $H_0$ is
+true.
+
+\subsection{Step 3 - Finding the $p$-value}
+
+In finding the $p$-value for the population correlation coefficient, we use the $t$-score of the sample correlation
+coefficient.
+
+
+\subsubsection{Conditions for the $t$-test for the Population Correlation Coefficient}
+
+The conditions needed to perform the $t$-test for the population correlation coefficient are:
+\begin{itemize}
+  \item The observed data seems to have a linear relationship
+  \item The observations are independent
+  \item There are no extreme outliers in the data
+  \item The sample size is fairly large
+\end{itemize}
+
+\subsection{Step 4 - Drawing Conclusions}
+
+In drawing conclusions about the null hypothesis, we compare the $p$-value to the level of significance $\alpha $,
+and state our conclusion as follows:
+\begin{itemize}
+  \item $p\text{-value} > \alpha$ - We do not have enough evidence against $H_0$ and cannot reject it.
+  \item $p\text{-value} < \alpha$ - We have enough evidence against $H_0$ and can reject it in favour of $H_a$.
+\end{itemize}
+
+
+
 \end{document}

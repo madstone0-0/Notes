@@ -1131,4 +1131,113 @@ Two graphs cannot be isomorphic if they do not have the following properties:
 
 }
 
+\qs{}{
+  Find the number of vertices, the number of edges and the degree of edges of each vertex in the following graph
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance={3cm},thick,main/.style = {draw, circle}]
+      \node[main](1){a};
+      \node[main](2)[right of=1]{b};
+      \node[main](3)[right of=2]{c};
+      \node[main](4)[right of=3]{d};
+      \node[main](5)[below of=4]{e};
+      \node[main](7)[left of=5]{g};
+      \node[main](8)[left of=7]{h};
+      \node[main](9)[left of=8]{i};
+      \node[main](6)[left of=9]{f};
+
+      \path
+      (1) edge[bend left](3)
+      (1) edge (9)
+      (1) edge (5)
+      (2) edge (8)
+      (3) edge (5)
+      (2) edge (5)
+      (5) edge (7)
+      (5) edge[bend right] (7)
+      (5) edge[bend left] (7)
+      (7) edge (3)
+      (8) edge (9)
+      (9) edge (3)
+      ;
+    \end{tikzpicture}
+  \end{figure}
+}
+
+\sol{
+  This graph has 6 nodes and 12 edges. \\
+  deg(a) - 3 \\
+  deg(b) - 2 \\
+  deg(c) - 3 \\
+  deg(d) - 0 \\
+  deg(e) - 6 \\
+  deg(f) - 0 \\
+  deg(g) - 4 \\
+  deg(h) - 2 \\
+  deg(i) - 3 \\
+}
+
+\qs{}{
+  Can a simple graph exist with 15 nodes each of degree five ?
+}
+
+\sol{
+  According to the handshaking theorem, where $m$ is the number of edges:
+  \[
+    2m = \displaystyle\sum_{v \in V} \text{deg}\left( v \right)
+  \]
+  Using this we can see that if all the degrees of graph with 15 nodes where 5 we would not get the expected $m$, 15,
+  and the $m$ we do get indicates a half node which is not possible.
+  \begin{align*}
+    2m & = 15 \left( 5 \right) \\
+    2m & = 75                  \\
+    m  & = \frac{75}{2}        \\
+    m  & = 37.5                \\
+  \end{align*}
+}
+
+\qs{}{
+  In a round-robin tournament the Tigers beat the Blue Jays, the Tigers beat the Cardinals, the Tigers beat
+  the Orioles, the Blue Jays beat the Cardinals, the Blue Jays beat the Orioles, and the Cardinals beat the
+  Orioles.
+  \begin{enumerate}
+    \item Model this outcome with a directed graph.
+    \item What do the in-degree and the out-degree of a vertex in this graph represent?
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[node distance={3cm},thick,main/.style = {draw, circle}]
+              \node[main](1){Tigers};
+              \node[main](2)[right of=1]{Blue Jays};
+              \node[main](3)[below of=2]{Cardinals};
+              \node[main](4)[below of=1]{Orioles};
+
+              \path
+              (1) edge[->] (2)
+              (1) edge[->] (3)
+              (1) edge[->] (4)
+
+              (2) edge[->] (3)
+              (2) edge[->] (4)
+
+              (3) edge[->] (4)
+              ;
+
+            \end{tikzpicture}
+          \end{figure}
+    \item
+          The in-degree represents the number of losses a team had, and the out-degree represents the number of wins a
+          team had.
+
+  \end{enumerate}
+}
+
+
+
+
 \end{document}

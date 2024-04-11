@@ -619,5 +619,83 @@ A product of sums expansion is the dual of a sum of product expansion.
   \]
 }
 
+\chapter{Exercises}
+
+\qs{}{
+  \begin{enumerate}
+    \item Use a truth table to express the values of the Boolean function $F \left( x, y,z \right) = x + yz $
+    \item Using the result from (1) write $F \left( x, y, z \right) $ in conjunctive normal form
+    \item Using the result from (1) write $F \left( x, y, z \right) $ in disjunctive normal form
+    \item Using Boolean identities, write $F \left( x, y, z \right) $ in disjunctive normal form
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{table}[h!]
+            \begin{center}
+              \begin{tabular}{|c c c|c|c|c|}
+                \hline
+                $x$ & $y$ & $z$ & $yz$ & $x + yz$ & $F \left( x, y, z \right) $ \\ [0.5ex]
+                \hline
+                \hline
+                1   & 1   & 1   & 1    & 1        & 1                           \\
+                1   & 1   & 0   & 0    & 1        & 1                           \\
+                1   & 0   & 1   & 0    & 1        & 1                           \\
+                1   & 0   & 0   & 0    & 1        & 1                           \\
+                0   & 1   & 1   & 1    & 1        & 1                           \\
+                0   & 1   & 0   & 0    & 0        & 0                           \\
+                0   & 0   & 1   & 0    & 0        & 0                           \\
+                0   & 0   & 0   & 0    & 0        & 0                           \\
+                \hline
+              \end{tabular}
+            \end{center}
+          \end{table}
+    \item
+          \[
+            F \left( x, y, z \right) = \left( x + \overline{y} + z \right)  \cdot \left( x + y + \overline{z} \right)
+            \cdot \left( x + y + z \right)
+          \]
+    \item
+          \[
+            F \left( x, y , z \right)  = xyz + xy\overline{z} + x\overline{y}z + x\overline{y}\overline{z} +
+            \overline{x}yz
+          \]
+    \item
+          \begin{align*}
+            F \left( x, y, z \right) & = x + yz                                                                                             \\
+                                     & = x1 + y1z \tag*{Second Identity Law}                                                                \\
+                                     & = x\cdot \left( y + \overline{y} \right) + yz1 \tag*{Unit Property}                                  \\
+                                     & = x \cdot \left( y + \overline{y} \right) + yz \cdot \left( x+ 1 \right) \tag*{First Domination Law} \\
+                                     & = xy + x\overline{y} + yzx + yz1 \tag*{Second Distributive Law}                                      \\
+                                     & = xy + x\overline{y} + yzx + yz \cdot \left( x + \overline{x} \right) \tag*{Unit
+            Property}                                                                                                                       \\
+                                     & = xy +x\overline{y} + yzx + yzx + yz\overline{x} \tag*{Second Distributive Law}                      \\
+                                     & = xy1 + x\overline{y}1 + yzx + yzx + yz\overline{x} \tag*{Second Identity Law}                       \\
+                                     & = xy \cdot \left( z + \overline{z} \right) + x\overline{y} \cdot \left( z +
+            \overline{z} \right) + yzx + yzx + yz\overline{x} \tag*{Unit Property}                                                          \\
+                                     & = xyz + xy\overline{z} + x\overline{y}z + x\overline{y}\overline{z} + xyz + xyz + \overline{x}yz
+            \tag*{Second Distributive Law}                                                                                                  \\
+                                     & = xyz + xyz + xyz + xy\overline{z} + x\overline{y}z + x\overline{y}\overline{z} + \overline{x}yz
+            \tag*{First Commutative Law}                                                                                                    \\
+                                     & = xyz + xy\overline{z}+ x\overline{y}z + x\overline{y}\overline{z} + \overline{x}yz                  \\
+          \end{align*}
+          Hence $F \left( x, y, z \right) = xyz + xy\overline{z} + x\overline{y}z + x\overline{y}\overline{z} +
+            \overline{x}yz $
+  \end{enumerate}
+}
+
+\qs{}{
+  Construct circuits from inverters, AND gates, and OR gates to produce these outputs.
+  \begin{enumerate}
+    \item $\overline{x} + y$
+    \item $xyz + \overline{x}\overline{y}\overline{z}$
+  \end{enumerate}
+}
+
+\sol{
+
+}
 
 \end{document}

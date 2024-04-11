@@ -523,7 +523,7 @@ P \left( k \right): 1 + 2 + 2^2+ \ldots + 2^{k} = 2^{k + 1} - 1
   \\
 
   \[
-    P \left( 1 \right) : 1^3 + 2 + 1 \text{ is a multiple of 3}
+    P \left( 1 \right) : 1^3 + 2 \times  1 \text{ is a multiple of 3}
   \]
   True because 3 is a multiple of three. \\
 
@@ -552,6 +552,98 @@ P \left( k \right): 1 + 2 + 2^2+ \ldots + 2^{k} = 2^{k + 1} - 1
   $\therefore$ $P \left( k + 1 \right) $\\
   Hence we can conclude that $P \left( n \right) $ is true for all positive integers.
 
+
+\end{myproof}
+
+\chapter{Exercises}
+
+\qs{}{
+  Use mathematical induction to prove that 43 divides $6^{n + 1} + 7^{2n - 1}$ for every positive integer $n$
+}
+
+\begin{myproof}
+  The given statements can be written as "$6^{n + 1} + 7^{2n - 1}$ is a multiple of 43".\\
+  Let $P \left( n \right) $ be $6^{n+ 1} + 7^{2n - 1}$ is a multiple of 43. \\
+
+  \noindent \underline{Basis Step} \\
+  \\
+  \begin{align*}
+    P \left( 1 \right) & : 6^{1 + 1} + 7^{2 \times 1 - 1} \text{ is a multiple of } 43 \\
+                       & : 43 \text{ is a multiple of } 43                             \\
+  \end{align*}
+  $P \left( 1 \right) $ is true as 43 is a multiple of 43. \\
+
+  \noindent \underline{Induction  Step} \\
+  \\
+  Assume $P \left( k \right) $ is $T$, then: \\
+
+  "$6^{k + 1} + 7^{2k - 1}$" is a multiple of 43", means $\exists m \in \mathbb{Z}, 6^{k + 1} + 7^{2k - 1} = 43m$ \\
+
+  \noindent I must now show that $P \left( k + 1 \right) $:
+  "$6^{k + 2} + 7^{2 \left( k + 1 \right)  - 1}$" is a multiple of 43.\\
+
+  \begin{align*}
+    6^{k + 2} + 7^{2 \left( k + 1 \right) - 1 } & = 6^{k + 2} + 7^{2k + 1}                                         \\
+                                                & = 6^{k + 1 + 1} + 7^{2k + 2 - 1}                                 \\
+                                                & = 6^{k + 1}\times 6^{1} + 7^{2k - 1} \times 7^{2}                \\
+                                                & =  6^{k + 1}\times 6^{1} + 7^{2k - 1} \times 49                  \\
+                                                & = 6^{k+ 1}\times 6^1 + 7^{2k - 1}\times 6 + 7^{2k - 1} \times 43 \\
+                                                & = 6 \left( 6^{k + 1} + 7^{2k - 1} \right) + 7^{2k - 1} \times 43 \\
+                                                & = 6 \left( 43m \right) + 7^{2k - 1} \times 43                    \\
+                                                & =  43 \left( 6m + 7^{2k - 1} \right)                             \\
+    \text{Let } u = 6m + 7^{2k - 1}                                                                                \\
+                                                & = 43u                                                            \\
+  \end{align*}
+  Since $u$ is made up of integers $u$ is an integer \\
+  $\therefore \, P \left( k + 1 \right) $ is $T$. \\
+  Hence I can conclude $P \left( n \right) $ is true for all positive integers
+\end{myproof}
+
+\qs{}{
+  Prove by induction that $\sum_{j = 0}^{n} \left( -\frac{1}{2} \right)^j = \frac{2^{n + 1} + \left( -1 \right)^n }{3\times 2^n} $, whenever $n$ is a non-negative integer
+}
+
+\begin{myproof}
+  Let $P \left( n \right) $ be:
+  \[
+    1 + \left( -\frac{1}{2} \right)^1 + \left( -\frac{1}{2} \right)^2 + \ldots + \left( -\frac{1}{2} \right)^n = \frac{2^{n + 1} + \left( -1 \right)^n }{3\times 2^n}
+  \]
+
+  \noindent \underline{Basis Step} \\
+  \\
+  \begin{align*}
+    P \left( 0 \right): 1 & = \frac{2 + 1}{3 \times 1 } \\
+    1                     & = 1                         \\
+  \end{align*}
+  $\therefore$ $P \left( 0 \right) $ is $T$ \\
+
+  \noindent \underline{Induction  Step} \\
+  \\
+  To complete this step I must prove $P \left( k \right) \to P \left( k + 1 \right)  $ for every non non-negative integer
+  $k$ \\
+
+  \noindent Assume $P \left( k \right) $ is true for some post integer $k$, then:
+  \[
+    P \left( k \right): 1 + \left( -\frac{1}{2} \right)^1 + \left( -\frac{1}{2} \right)^2 + \ldots + \left( -\frac{1}{2}
+    \right)^k = \frac{2^{k + 1} + \left( -1 \right)^k }{3\times 2^k}
+  \]
+
+  Then $P \left( k + 1 \right) $ is:
+  \[
+    P \left( k + 1 \right): 1 + \left( -\frac{1}{2} \right)^1 + \left( -\frac{1}{2} \right)^2 + \ldots + \left(
+    -\frac{1}{2} \right)^{k + 1} = \frac{2^{k + 2} + \left( -1 \right)^{k + 1} }{3\times 2^{k+ 1}}
+  \]
+  And can be expressed as $P \left( k + 1 \right): P \left( k \right) + \left( -\frac{1}{2} \right)^{k + 1}  $, therefore:
+  \begin{align*}
+    P \left( k + 1 \right): 1 + \left( -\frac{1}{2} \right) + \left( -\frac{1}{2} \right)^2 + \ldots + \left(
+    -\frac{1}{2} \right)^{k} + \left( -\frac{1}{2} \right)^{k + 1} & = \frac{2^{k + 1}
+      + \left( -1 \right)^{k} }{3
+    \times 2^{k}} + \left( -\frac{1}{2} \right)^{k + 1}                                                                                                                         \\
+                                                                   & = \frac{2^{2k + 2} + \left( -1 \right)^{k} \times
+    2^{k + 1} - 3\times 2^k \times 1^{k + 1} }{3\times 2^{2k + 1}}                                                                                                              \\
+                                                                   & = \frac{2^{k} \left( 2^{k + 2} + \left( -1 \right)^k\times 2 - 3  \right) }{2^k \times 3 \times 2^{k + 1}} \\
+                                                                   & = \frac{2^{k + 2} + \left( -1 \right)^k \times 2 - 3 }{3 \times 2^{k + 1}}                                 \\
+  \end{align*}
 
 \end{myproof}
 

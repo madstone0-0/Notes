@@ -484,4 +484,101 @@ Or
   \end{align*}
 }
 
+\chapter{Exercises}
+
+\qs{}{
+  Suppose you have 30 books (15 novels, 10 history books, and 5 math books). Assume that all 30 books
+  are different.
+  \begin{enumerate}
+    \item  In how many ways can you put the 30 books in a row on a shelf?
+    \item In how many ways can you get a bunch of four books to give to a friend?
+    \item In how many ways can you get a bunch of three history books and seven novels to give to a friend?
+    \item In how many ways can you put the 30 books in a row on a shelf if the novels are on the left, the math books are in the middle, and the history books are on the right?
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          As each of the books are distinct the order matters, therefore using permutation:
+          \begin{align*}
+            P \left( 30, 30 \right) & = \frac{30!}{0!} \\
+                                    & = 30!            \\
+          \end{align*}
+    \item
+          As the order and type of book doesn't matter in this case, using combination:
+          \begin{align*}
+            C \left( 30, 4 \right) & = \frac{30!}{\left( 30 - 4 \right)! 4! } \\
+                                   & = 27405                                  \\
+          \end{align*}
+    \item As we want $3$ out of the $10$ history books and $7$ out of the $15$ novels where the order doesn't
+          matter using combinations and product rule:
+          \begin{align*}
+            C \left( 10, 3 \right)  \times  C \left( 15, 7  \right) & = \frac{10!}{\left( 10 - 3 \right)! 3! } \times
+            \frac{15!}{\left( 15 - 7  \right)! 7! }                                                                   \\
+                                                                    & = 120 \times 6435                               \\
+                                                                    & = 772200                                        \\
+          \end{align*}
+    \item
+          Breaking this task into 3 separate steps as this deals with the ordering of distinct items the order matters
+          in each step, with the first choosing novels, the second choosing math books, and the third choosing history
+          books, using permutation and the product rule:
+          \begin{align*}
+            P \left( 15, 15 \right) \times P \left( 10, 10 \right) \times P \left( 5, 5 \right) & = 15! \times 10!
+            \times 5!                                                                                                        \\
+                                                                                                & = 15! \times 10! \times 5! \\
+          \end{align*}
+  \end{enumerate}
+}
+
+\qs{}{
+  What is the minimum number of students, each of whom comes from one of the 50 states of the USA,
+  who must be enrolled in a university to guarantee that there are at least 100 who come from the same
+  state?
+}
+
+\sol{
+  Using the generalized Pigeon-hole principle we have our $k$ as the number of states, 50 and we must find $N$ such that
+  $\left\lceil \frac{N}{50} \right\rceil $:
+  \begin{align*}
+    \left\lceil \frac{N}{50} \right\rceil = 100 \\
+    99 < \frac{N}{50} \leq 100                  \\
+    \\
+    \frac{N}{50} > 99                           \\
+    N > 4950
+    \\
+    \frac{N}{50} \leq 100
+    N \leq 5000                                 \\
+    \therefore 4950 < N \leq 5000               \\
+  \end{align*}
+  Hence the minimum $N$ is 4951
+}
+
+\qs{}{
+  \begin{enumerate}
+    \item Find the expansion of $\left( x + y \right)^6 $
+    \item Find the coefficient of $x^6y^9$ in the expansion of $\left( 3x -2y \right)^{15} $
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \left( x + y \right)^6 & = C \left( 6, 0 \right) x^{6} + C \left( 6, 1 \right) x^{5}y^{1} + C \left( 6, 2 \right)
+            x^{4}y^{2} + C \left( 6, 3 \right)  x^{3}y^{3} + C \left( 6, 4 \right) x^{2}y^{4} + C \left( 6, 5 \right)
+            x^{1}y^{5} + C \left( 6, 6 \right) x^{0}y^{6}                                                                     \\
+                                   & = x^{6} + 6x^{5}y + 15x^{4}y^{2} + 20x^{3}y^{3} + 15x^{2}y^{4} + 6xy^{5} + y^{6}         \\
+          \end{align*}
+    \item
+          Let $a$ be the coefficient of $x^{6}y^{9}$
+          \begin{align*}
+            ax^{6}y^{9} & = C \left( 15, 9 \right) \left( 3x \right)^{6} \left(- 2y \right) ^{9} \\
+                        & = 5005 \times 729x^{6} \times -512y^{9}                                \\
+                        & = -5005\times 729 \times 512 x^{6}y^{9}                                \\
+            a           & = - 5005 \times 729 \times 512                                         \\
+          \end{align*}
+  \end{enumerate}
+}
+
 \end{document}

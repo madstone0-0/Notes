@@ -95,6 +95,29 @@ Or
 
 \subsection{Subtraction Rule}
 
+\dfn{Subtraction Rule}{
+  If a task can be done in either $n_1$ ways or $n_2$ ways, then the number of ways to do the task is $n_1 + n_2$ minus
+  the number of ways to do the task that are common to both $n_1$ and $n_2$.
+}
+
+\ex{}{
+  \qs{}{
+    How many bit strings of length 8 either start with a 1 bit or end with the two bits 00
+  }
+
+  \sol{
+    We can construct a bit string of length 8 that starts with 1 in $2^{7}$ ways, and we can construct a bit string of
+    length 8 that ends with the two bits 00 in $2^{6}$ ways. We can do both in $2^{5}$ ways \\
+    Using the subtraction rule the number of ways to construct a bit string of length 8 that either starts with a 1 or ends
+    with the two bits 00 is:
+    \begin{align*}
+      2^{7} + 2^{6} - 2^{5} & = 160 \\
+    \end{align*}
+
+  }
+
+}
+
 
 \section{Combining the sum and product rule}
 

@@ -1,0 +1,318 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Basic Notions}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+
+\chapter{Vector Spaces}
+\section{Axioms of a Vector Space}
+\dfn{Vector Spaces}{
+  A \textit{vector space} $V$ is a collection of objects, called \textit{vectors}, denoted by lower-case  bold letters
+  $\mathbf{v}$, with two operations, addition and scalar multiplication.
+}
+
+These two operations must satisfy the following properties:
+\begin{description}
+  \item[Commutativity] $\mathbf{v} + \mathbf{w} = \mathbf{w} + \mathbf{v} $, $\forall \mathbf{v} \in V$
+  \item[Associativity] $\left( \mathbf{u} + \mathbf{v} \right) + \mathbf{w} = \mathbf{u} + \left( \mathbf{v} +
+          \mathbf{w}  \right)  $ for all $\mathbf{u}\, , \, \mathbf{v}\, , \mathbf{w} \in V$
+  \item[Zero Vector] there exists a special vector, denoted by $\mathbf{0}$ such that $\forall \mathbf{v} \in V\, ,
+          \mathbf{v} + \mathbf{0} = \mathbf{v} $
+  \item[Additive Inverse] For every vector $\mathbf{v} \in V$ there exists a vector $\mathbf{w} \in V$ such that
+        $\mathbf{v} + \mathbf{w} = \mathbf{0}$. Such additive inverse is denoted by $-\mathbf{v}$
+  \item[Multiplicative Identity] $1\mathbf{v} = \mathbf{v}$, $\forall \mathbf{v} \in V$
+  \item[Multiplicative Associativity] $\left( \alpha \beta \right) \mathbf{v} = \alpha \left( \beta\mathbf{v} \right)$,
+        $\forall \mathbf{v} \in V$ and all scalars $\alpha$, $\beta$
+  \item[Distributive Propety 1] $\alpha \left( \mathbf{u} + \mathbf{v} \right) = \alpha \mathbf{u} + \alpha +
+          \mathbf{v}$, for all $\mathbf{u}\, , \, \mathbf{v} \in V$ and all scalars $\alpha$
+  \item[Distributive Propoerty 2] $\left( \alpha + \beta \right)\mathbf{v} = \alpha\mathbf{v} + \beta\mathbf{v} $
+        $\forall \mathbf{v} \in V$ and all scalars $\alpha$, $\beta$
+\end{description}
+
+If the scalars are real numbers, then the vector space $V$ is called a \textit{real vector space}, and if the scalars
+are complex numbers, $V$ is a \textit{complex vector space}.
+
+\nt{
+  Every complex vector space is also a real vector space, but not vice versa.
+}
+
+The space $\mathbb{R}^{n}$ consists of all columns of size $n$, whose, entries are real numbers.
+\[
+  \mathbf{v} = \begin{pmatrix} v_1 \\  v_2 \\  \vdots  \\  v_n  \end{pmatrix}
+\]
+Addition and scalar multiplication are defined as follows:
+\begin{align*}
+  \alpha \begin{pmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{pmatrix}                                                   & = \begin{pmatrix} \alpha v_1 \\ \alpha v_2 \\
+                                                                                                                           \vdots
+                                                                                                                           \\
+                                                                                                                           \alpha
+                                                                                                                           v_n\end{pmatrix}
+  \\
+  \\
+  \begin{pmatrix} v_1\\ v_2 \\  \vdots\\ v_n \end{pmatrix} + \begin{pmatrix} w_1\\ w_2\\  \vdots\\ w_n \end{pmatrix} & =
+  \begin{pmatrix} v_1 + w_1\\ v_2+w_2 \\  \vdots\\ v_n + w_3 \end{pmatrix}                                                                                        \\
+\end{align*}
+
+The space $\mathbb{C}^{n}$, consists of all columns of size $n$, whose entries are complex numbers. Addition and scalar
+multiplication are defined exactly as in $\mathbb{R}^{n}$, but the scalars can now also be complex numbers, as
+$\mathbb{C}^{n}$ is a complex vector space.
+
+\nt{
+  Where a result is true for both complex $\left( \mathbb{C}^{n} \right) $ and real $\left( \mathbb{R}^{n} \right) $
+  vector spaces, $\mathbb{F}^{n}$, will be used to denote the vector space.
+}
+
+In the space $M_{m\times n}$ / $M_{m,n}$ of $m \times n$ matrices, addition and scalar multiplication are also defined
+entrywise. If this vector space is over real entries, then it is a real vector space, and if it is over complex entries,
+then it is a complex vector space. These spaces are denoted by $M^{\mathbb{R}}_{m,n}$ and $M^{\mathbb{C}}_{m,n}$
+respectively.
+
+\nparagraph{Matrix Notation}
+\dfn{$m\times n$ Matrix}{
+  An $m \times n$ matrix is a regular array with $m$ rows and $n$ columns, in which elements of such an array are called
+  entries of the matrix.
+}
+
+It is common practice to denote matrix entries by indexed letters, with the first index denoting the number of the row
+and the second index denoted the number of the column where the entry is located. For example a $m\times n$ matrix is
+written as:
+\[
+  A = \left( a_{j,k} \right)^{m,\, n}_{j=1,\,  k=1} = \begin{pmatrix} a_{1,1}  & a_{1,2}  & \ldots & a_{1,n} \\
+                a_{2, 1} & a_{2, 2} & \ldots & a_{2,n} \\
+                \vdots   & \vdots   &        & \vdots  \\
+                a_{m, 1} & a_{m, 2} & \ldots & a{m,n}  \\
+  \end{pmatrix}
+\]
+
+\dfn{Transposition}{
+Given a matrix $A$, its \textit{transpose}, denoted by $A^T$, is defined by transforming  the rows of $A$ into columns.
+For example:
+\[
+  \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6  \end{pmatrix}^{T} = \begin{pmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{pmatrix}
+\]
+Therefore formally, the transpose of a matrix $A_{j,k}$ is defined as:
+\[
+  A^T_{j,k}  = A_{k,j}
+\]
+Transposition allows for column vectors to be written horizontally, i.e., $\mathbf{x} \in \mathbb{F},\, \mathbf{x} =
+  \left( x_1,x_2,\ldots,x_n \right)^{T} $
+
+}
+
+\section{Exercises}
+
+\qs{}{
+  Let $\mathbf{x} = \left( 1,2,3 \right)^{T} $, $\mathbf{y} = \left( y_1,y_2,y_3 \right)^{T} $, and $\mathbf{z} = \left(
+    4,2,1 \right)^{T} $. Compute:
+  \begin{enumerate}
+    \item $2\mathbf{x}$
+    \item $3\mathbf{y}$
+    \item $\mathbf{x} + 2\mathbf{y} - 3\mathbf{z}$
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            2\mathbf{x} & = 2 \begin{pmatrix} 1 \\  2 \\  3  \end{pmatrix} \\
+                        & = \begin{pmatrix} 2 \\ 4 \\ 6 \end{pmatrix}      \\
+          \end{align*}
+    \item
+          \begin{align*}
+            3\mathbf{y} & = 3 \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}  \\
+                        & = \begin{pmatrix} 3y_1 \\ 3y_2 \\ 3y_3 \end{pmatrix} \\
+          \end{align*}
+    \item
+          \begin{align*}
+            \mathbf{x} + 2\mathbf{y} - 3\mathbf{z} & = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix} + \begin{pmatrix} 2y_1
+                                                                                                     \\ 2y_2 \\ 2y_3\end{pmatrix} - \begin{pmatrix} 12 \\ 6 \\ 3 \end{pmatrix} \\
+                                                   & = \begin{pmatrix}
+                                                         1 + 2y_1 - 12 \\
+                                                         2 + 2y_2 - 6  \\
+                                                         3 + 2y_3 - 3
+                                                       \end{pmatrix}                                                                                                        \\
+                                                   & = \begin{pmatrix} - 11 + 2y_1 \\
+                                                         -3 + 2y_2   \\
+                                                         2y_3
+                                                       \end{pmatrix}                                                                                           \\
+          \end{align*}
+  \end{enumerate}
+}
+
+\qs{}{
+  Which of the following sets (with natural addition and multiplication by a scalar) are vector spaces. Justify your
+  answer.
+  \begin{enumerate}
+    \item The set of all continuous functions on the interval $\left[ 0,1 \right] $
+    \item  The set of all non-negative functions on the interval $\left[ 0,1 \right] $
+    \item The set of all polynomials of degree exactly $n$
+    \item The set of all symmetric $n \times n$ matrices, i.e. the set of matrices $A = \left\{ a_{j,k} \right\}^{n}_{j,k
+            = 1} $ such that $A^{T} = A$
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+  \end{enumerate}
+}
+
+
+
+\chapter{Linear Combinations and Bases}
+
+\section{Introduction}
+
+\dfn{Linear Combination}{
+  Let $V$ be a vector space, and let $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_p \in V$ be a collection of
+  vectors. A \textit{linear combination} of vectors $\mathbf{v}_1, \mathbf{v}_2, \ldots,\mathbf{v}_p$ is a sum of form:
+  \[
+    \alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 + \ldots + \alpha_p \mathbf{v}_p = \displaystyle\sum_{k=1}^{p}
+    \alpha_k \mathbf{v}_k
+  \]
+}
+
+\dfn{Basis}{
+  A system of vectors $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n \in V$, is called a \textit{basis}, for the
+  vector space $V$, if any vector $v \in V$ admits a \textit{unique} representation as a linear combination
+  \[
+    \mathbf{v} = \alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 + \ldots + \alpha_n \mathbf{v}_n = \displaystyle\sum_{k =
+      1}^{n} \alpha_k \mathbf{v}_k
+  \]
+  Where the coefficients $\alpha_1, \alpha_2, \ldots, \alpha_n$ are \textit{coordinates} of the vector $\mathbf{v}$,
+  with respect to the basis.\\
+
+  A \textit{basis} can also be described as the situation in which for the collection of vectors, $\mathbf{v}_1,
+    \mathbf{v}_2, \ldots, \mathbf{v}_n$, for any possible choice of the right side $\mathbf{v}$, the equation $x_1
+    \mathbf{v}_1 + x_2 \mathbf{v}_2 + \ldots + x_m \mathbf{v}_n = \mathbf{v}$, with unknowns $x_k$, has a unique solution
+
+  This means that the basis of a vector space $V$ can used to generate every possible vector found in a vector space $V$.
+}
+
+\ex{}{
+  In the space $V$, where $V$ is $\mathbb{F}^{n}$, we have the vectors:
+  \[
+    \mathbf{e}_1 = \begin{pmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix} ,\, \mathbf{e}_2 = \begin{pmatrix} 0 \\ 1 \\ 0 \\ \vdots \\ 0
+    \end{pmatrix},\, \mathbf{e}_3 = \begin{pmatrix} 0 \\ 0 \\ 1 \\ \vdots \\ 0 \end{pmatrix}, \,  \ldots, \, \mathbf{e}_n = \begin{pmatrix} 0 \\ 0 \\ 0 \\ \vdots \\ 1 \end{pmatrix}
+  \]
+  Where the vectors $e_k$ has all entries 0 except the entry number $k$, which is 1. \\
+
+  The system of vectors $\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3, \ldots, \mathbf{e}_n$ is a basis in $\mathbb{F}^{n}$
+  and can be represented as the linear combination:
+  \[
+    \mathbf{v} = \displaystyle\sum_{k=1}^{n} x_k \mathbf{e}_k
+  \]
+  We can represent any vector in the vector space $\mathbb{F}^{n}$ as this linear combination, making the system
+  $\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n \in \mathbb{F}^{n}$ the \textit{standard basis} in $\mathbb{F}^{n}$
+}
+
+\ex{}{
+  In the space $\mathbb{P}_n$ of the polynomials of degree at most $n$. The system of vectors (polynomials),
+  $\mathbf{e}_0, \mathbf{e}_{1}, \mathbf{e}_{2}, \ldots, \mathbf{e}_{n} \in \mathbb{P}_n$ defined by:
+  \[
+    \mathbf{e}_{0} := 1, \, \mathbf{e}_{1} := t, \, \mathbf{e}_{2} := t^2, \, \mathbf{e}_{3} := t^3, \, \ldots , \, \mathbf{e}_{n} := t^n
+  \]
+  Any polynomial $p$, $p \left( t \right) = a_0 + a_1 t + a_2 t^2 + \ldots + a_n t^n$ admits a unique representation
+  \[
+    p = a_0 e_0 + a_1 e_1 + \ldots + a_n e_n
+  \]
+  So the system $\mathbf{e}_{0}, \, \mathbf{e}_{1}, \, \ldots , \, \mathbf{e}_{n} \in \mathbb{P}_n $ is a basis in
+  $\mathbb{P}_n$, and is the standard basis in $\mathbb{P}_n$
+}
+
+\noindent If a vector space $V$ has a basis $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n$, then any vector $\mathbf{v} \in V$
+can be uniquely defined by its coefficients in the decomposition $\mathbf{v} = \sum_{k=1}^{n} \alpha_k \mathbf{v}_k$. We
+can then stack the coefficients $\alpha_k$ in a column, rendering it a column vector giving us the usual vector
+operations, i.e. if $\mathbf{v} = \sum_{k=1}^{n}\alpha_k \mathbf{v}_k$ and $\mathbf{w} = \sum_{k=1}^{n} \beta_k
+  \mathbf{v}_k$
+\[
+  \mathbf{v} + \mathbf{w} = \displaystyle\sum_{k=1}^{n} \alpha_k \mathbf{v}_k + \displaystyle\sum_{k=1}^{n} \beta_K
+  \mathbf{v}_k = \displaystyle\sum_{k = 1}^{n} \left( \alpha_k + \beta_k \right) \mathbf{v}_k
+\]
+This means to get the column od coordinates of the sum, we just need to add the column of coordinates of the vectors being
+summed, $\alpha_k + \beta_k$, and similarly to get the column of coordinates of a product, $\alpha \mathbf{v}$, we just
+need to multiply the column of coordinates of $\mathbf{v}$ by $\alpha$
+
+\section{Generating and Linearly Independent Systems}
+
+The definition of a basis posits that any vector can be uniquely expressed as a linear combination. Breaking this
+statement down we get two central ideas:
+\begin{itemize}
+  \item There exists a linear combination representation of any vector
+  \item The resultant linear combination is unique for that specific vector
+\end{itemize}
+
+\subsection{Existence / Generating System}
+Looking at the first idea of existence we get the notion of \textit{Generating systems}
+
+\dfn{Generating / Spanning / Complete System}{
+  A system of vectors $\mathbf{v}_1, \mathbf{v}_{2}, \ldots, \mathbf{v}_{p} \in V$ is termed as a \textit{generating system} in $V$ if any
+  vector $\mathbf{v} \in V$ can be represented as a linear combination
+  \[
+    \mathbf{v} = \displaystyle\sum_{k=1}^{p} \alpha_k \mathbf{v}_k
+  \]
+  This definition although similar to that of a basis differs in the fact that we do not assume that this representation
+  is unique to the vector $\mathbf{v}$.
+}
+
+\subsection{Uniqueness / Linearly Independent System}
+
+Now only looking at uniqueness, we consider the zero vector \textbf{0}, which is always representable as a linear
+combination.
+
+\dfn{Triviality}{
+  A linear combination $\alpha_1 \mathbf{v}_{1} + \alpha_2 \mathbf{v}_{2} + \ldots \alpha_p \mathbf{v}_{p}$ is termed as
+  \textit{trivial} if $\alpha_k = 0 \, \forall k$. \\
+  As a result any trivial linear combination is equal to \textbf{0}.
+}
+
+\dfn{Linearly Independent}{
+  A system of vectors $\mathbf{v}_{1}, \mathbf{v}_{2}, \ldots, \mathbf{v}_{p} \in V$ is termed as \textit{linearly
+    independent} if and only if the trivial linear Combination
+  \[
+    \displaystyle\sum_{k=1}^{p} \alpha_k \mathbf{v}_k \text{ with } \alpha_K = \mathbf{0} \, \forall k
+  \]
+  of vectors $\mathbf{v}_{1}, \mathbf{v}_{2}, \ldots, \mathbf{v}_{n}$ is equal to \textbf{0}.
+
+  In other words the system of equations $\mathbf{v}_{1}, \mathbf{v}_{2}, \ldots, \mathbf{v}_{n}$ is linearly
+  independent iff all the coordinates are equal to 0, i.e., $\alpha_1 = \alpha_2 = \ldots = \alpha_n = 0$
+}
+
+In the same vein if a a system is not linearly independent, it is termed as \textit{linearly dependent}.
+
+\dfn{Linearly Dependent}{
+  A system of vectors $\mathbf{v}_{1}, \mathbf{v}_{2}, \ldots, \mathbf{v}_{p}$ is \textit{linearly dependent} if
+  \textbf{0} can be represented as a non-trivial linear combination $\sum_{k=1}^{p} \alpha_k \mathbf{v}_k$, where
+  non-trivial means $\exists k, \, \alpha_k \neq 0$, and thus, $\sum_{k=1}^{p}  \mid \alpha_k  \mid \neq 0$. \\
+
+  Therefore a system of vectors is \textit{linearly dependent} iff there exists scalars $\alpha_1, \alpha_2, \ldots,
+    \alpha_p$, $\sum_{k=1}^{p}  \mid \alpha_k  \mid \neq 0$ such that
+  \[
+    \mathbf{0} = \displaystyle\sum_{k=i}^{p} \alpha_k \mathbf{v}_k
+  \]
+
+
+}
+
+
+
+
+
+
+\end{document}

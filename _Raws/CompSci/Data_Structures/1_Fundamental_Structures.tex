@@ -1,0 +1,142 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Fundamental Data Structures}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction to Data Structures}
+
+\section{Data Structures}
+
+
+\dfn{Data Type}{
+  Describes the set of values that a variable can gold and the types of operations that can be performed on it.
+}
+
+\dfn{Data Structure}{
+  A way of storing and organizing data in computer memory / The logical mathematical model of a particular organization of
+  data.
+}
+
+In choosing a data structure, we consider the following in the following order:
+\begin{enumerate}
+  \item The relationships of the data in the real world
+  \item The type and amount of data to be stored
+  \item Cost (time complexity) of operations
+  \item Memory occupations
+  \item Ease of implementation
+\end{enumerate}
+
+\subsection{Types of Data Structures}
+
+Data structures can be broadly classified into two types:
+\begin{itemize}
+  \item Primitive Data Structures
+  \item Non-Primitive / Composite Data Structures
+\end{itemize}
+
+With data structures under the primitive category being:
+\begin{itemize}
+  \item Variables
+        \begin{itemize}
+          \item Integer
+          \item Float
+          \item Character
+          \item Boolean
+          \item Enumerated
+          \item Reference / Pointer
+        \end{itemize}
+\end{itemize}
+
+And data structures under the non-primitive category being:
+\begin{itemize}
+  \item Arrays
+  \item Structure / Record
+  \item Union
+  \item Class
+  \item Abstract Data Type
+        \begin{itemize}
+          \item Linear
+                \begin{itemize}
+                  \item List
+                  \item Stack
+                  \item Queue
+                \end{itemize}
+          \item Non-Linear / Associative
+                \begin{itemize}
+                  \item Tree
+                  \item Graph
+                  \item Hash Table
+                \end{itemize}
+        \end{itemize}
+\end{itemize}
+
+Data structures can also more simply be classified in two ways:
+\begin{itemize}
+  \item Linear / Sequential Data Structures
+        \begin{itemize}
+          \item Linked List
+          \item Array
+          \item Stack
+          \item Queue
+          \item Set
+        \end{itemize}
+  \item Non-Linear / Associative  Data Structures
+        \begin{itemize}
+          \item Graph
+          \item Tree
+          \item Hash Table
+        \end{itemize}
+\end{itemize}
+
+In this way data structures are defined by an implementation of a particular abstract data type.
+
+
+\subsubsection{Primitive Data Structures}
+
+These are the basic data structures that are directly operated on by machine / CPU instructions. They are the atomic
+data type, i.e. they cannot be divided further
+
+\subsubsection{Non-Primitive Data Structures}
+
+These are data structures composed of or derived from primitive data structures.
+
+\subsubsection{Linear Data Structures}
+
+These data structures are characterized by the fact their elements can be accessed in a sequential / linear manner. This
+means every element, excluding the first and last elements which only have a successor and predecessor respectively, has
+both a predecessor and successor, allowing bi-directional traversal.
+
+\subsubsection{Non-Linear Data Structures}
+
+These data structures are characterized by the fact that their elements are accessed based on some relationship /
+association between elements, therefore non-linearly.
+
+\section{Non-Primitive Data Structures}
+
+\subsection{Arrays}
+
+\dfn{Array}{
+  An indexed collection of a fixed number of homogeneous data elements. Elements are stored in contiguous memory, i.e.
+  sequentially and can be accessed by their index.
+}
+
+\section{The Collections Framework}
+
+
+
+\end{document}

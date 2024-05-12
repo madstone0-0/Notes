@@ -1,0 +1,228 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Introduction to Databases}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+
+\section{Uses of Databases}
+
+\begin{description}
+  \item[Retail]  - Department stores, supermarkets, mail order companies, etc.
+  \item[Social Media] - Store information about users, their friends, and their activities.
+\end{description}
+
+\section{File Based Systems}
+
+\dfn{File-Based Approach}{
+  A collection of application programs that perform services for the end-users, where each program defines and manages
+  its own data
+}
+
+\subsection{Disadvantages of File-Based Systems}
+
+\begin{itemize}
+  \item Space intensive
+  \item Data redundancy / Duplication - Due to each program having and controlling its own data, if data is needed by multiple programs, it must be duplicated.
+  \item Separation and isolation of data - When data is scattered across different files, it becomes difficult to
+        access data that should be available.
+  \item Data Dependence / Program-Data Dependence - The inherent relationship between the application program and the data it uses. This leads
+        to:
+        \begin{itemize}
+          \item Difficulty in updating data
+        \end{itemize}
+  \item Incompatible file formats.
+  \item Fixed Queries / Proliferation of application programs - Due to the nature of file-based systems creating new
+        queries is difficult as a developer would have to write the new queries into the program.
+  \item Difficulty in accessing data
+  \item Inconsistent data
+\end{itemize}
+
+
+\section{Database Management Systems (DBMS)}
+\subsection{Database}
+\dfn{Database}{
+  A collection of related data
+}
+
+\dfn{Database}{
+  A \textit{shared} collection of \textit{logically} related data, and descriptions of this data, designed to meet the
+  information needs of an organization.
+}
+
+\dfn{System Catalogue / Data Dictionary}{
+  A description of the data in the database (metadata).
+}
+
+\dfn{Entity / Record}{
+  A distinct real world object that is to be represented in a database
+}
+
+\dfn{Attribute}{
+  A property that describes an entity
+}
+
+\dfn{Relationship}{
+  An association between entities
+}
+
+\subsection{Database Management System (DBMS)}
+\dfn{Database Management System (DBMS)}{
+  A software system that enables users to define, create, maintain, and control access to the database. A DBMS usually
+  provides the following functions:
+  \begin{description}
+    \item[Data Definition Language (DDL)] - Allows users to define a database by describing the data types, structures,
+          and constraints on the data to be stored in the database.
+    \item[Data Manipulation Language (DML)] - Allows users to insert, update, delete, and retrieve data from the
+          database. The DML, then provides a \textbf{query language}, which is used for inquiry and reporting.
+    \item[Controlled Access] -
+          \begin{itemize}
+            \item Ensures that only authorized users can access the database,
+            \item Ensures the consistence of the stored data is maintained
+            \item Manages concurrent access to the database
+            \item Provides a recovery system to ensure consistency of data in the presence of system failures.
+          \end{itemize}
+  \end{description}
+}
+
+\subsubsection{Properties of a DBMS}
+
+\begin{description}
+  \item[Massive] Be able to manage large amounts of data.
+  \item[Persistence]  Data should be available even after the application has been closed.
+  \item[Safe]  Hardware and software failures should not cause data loss.
+  \item[Multi-user / Concurrent] Multiple users should be able to access the database at the same time>
+  \item[Convenient] Be able to declaratively specify queries and operations.
+  \item[Efficient] Be able to perform operations and process queries quickly.
+  \item[Reliable] Be able to recover from failures.
+\end{description}
+
+\subsubsection{Difference between File-Based Systems and DBMS}
+
+\nparagraph{The Self-Describing Nature of a Database System}
+
+The database system contains the complete definition of the database structure and constraints. This definition is
+
+\nparagraph{Multiple Views of Data}
+
+Each user may see a different view of the database, and the DBMS must control the access of these users to the database.
+
+\nparagraph{The Concurrent Access to the Data}
+
+Each user must be able to access the data concurrently, and the DBMS must include concurrency control techniques to ensure that the user's operations are correctly synchronized.
+
+
+\dfn{Database System}{
+  A DBMS together with the database itself.
+}
+
+\section{(Database) Application Programs}
+
+\dfn{(Database) Application Programs}{
+  Programs that interact with the DBMS to access the database, using the DBMS's DML and query language.
+}
+
+\subsection{Views}
+
+\dfn{View / View Mechanism}{
+  A subset of the database, defined using queries. Views provide an abstracted view of the database, hiding irrelevant
+  information from the end-user.
+}
+
+Views not only serve as an abstraction layer but also provide:
+
+\begin{description}
+  \item[A Level of Security] - Views can be used to exclude sensitive data to unauthorized parties.
+  \item[Customization] - Views can be used to better present data for end-users
+  \item[Consistency] - Views can be used to preserve the state of the database even though the underlying data may have
+        changed.
+\end{description}
+
+\section{Comparison of File-Based Systems and DBMS}
+
+\subsection{Advantages of Using the DBMS Approach}
+
+\begin{itemize}
+  \item Control of data redundancy - Data is stored in a central location, and is not duplicated unnecessarily across multiple
+        programs. As some data will need to be duplicated for various reasons such as performance.
+  \item Data Consistency - If a data item is stored only once in the database, an update to it will reflect in all
+        places it is used, ensuring consistency.
+  \item Data Sharing - Data can be shared across departments, and applications without the need for duplication.
+  \item Improved Data Integrity - Database integrity refers to the validity and consistency of stored data. Integrity is
+        defined in terms of constraints, which are consistency rules that the database is not allowed to violate. With DBMS,
+        the Database Admin can define constraints that the DBMS will enforce.
+  \item Economy of Scale - The cost of developing and maintaining the database is spread over all the applications that
+        use the database.
+\end{itemize}
+
+\subsection{Disadvantages of Using the DBMS Approach}
+
+\begin{itemize}
+  \item Complexity - The DBMS is a complex piece of software, and as such, it requires a high level of expertise to
+        manage.
+  \item Size - The complexity and breadth of functionality usually makes the DBMS large and resource-intensive.
+  \item Cost of DBMS - The cost of acquiring a DBMS can be high.
+  \item Additional hardware costs - The disk storage requirements of a DBMS and the database may require the purchase of
+        additional storage space.
+  \item Higher impact of a failure - The centralization of resources increases the vulnerability of the system to
+        failure as a failure will affect all the applications that use the database which due to centralization, is a lot.
+  \item Performance - The DBMS may not be as efficient as a custom-built file-based system.
+\end{itemize}
+
+
+\chapter{Database System Environment}
+
+\subsection{Database Users / Roles}
+
+\begin{description}
+  \item[Database Administrators] Responsible for authorizing access to the database for coordinating and monitoring its
+        use. Acquiring software and hardware resources, controlling its use, and monitoring efficiency of operations.
+  \item[Data Administrators] Responsible for the management of the organization's data resources, including the
+        database planning, development, maintenance of standards, polices, and procedures.
+  \item [Database Designers] Responsible for defining the content structure, constraints, and functions or transactions of
+        the database. Database designers can be split into two categories:
+        \begin{itemize}
+          \item Logical Database Designers - Focus on the logical structure of the database, i.e. the constraints on
+                data to be stored in the database (business rules).
+          \item Physical Database Designers - Focuses on how the logical database is to be actually implemented. This
+                involves:
+                \begin{itemize}
+                  \item Mapping the logical structure to a set of tables and integrity constraints
+                  \item Selecting storage structures and access methods
+                  \item Designing security  measures required on the data.
+                \end{itemize}
+        \end{itemize}
+  \item[Application Developers] Responsible for developing the application programs that provide required
+        functionality for the end users, using the implemented database.
+  \item[End Users] Clients of the database, which has been designed and implemented to serve their information needs.
+        The can be classified according to the way the interact with the system.
+        \begin{itemize}
+          \item Naive Users - Unsophisticated users who interact with the system through application programs.
+          \item Casual - Users who access the database occasionally, and may not be familiar with the system.
+          \item Sophisticated - Users who interact with the system regularly and are familiar with the structure of the
+                database and the facilities provided by the DBMS.
+          \item Stand-alone - Users who maintain personal databases using ready-to-use packaged applications.
+        \end{itemize}
+\end{description}
+
+
+
+
+
+\end{document}

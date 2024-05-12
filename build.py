@@ -193,17 +193,27 @@ def compileMany(dirs: list[str], force: bool, mtime: bool):
 if __name__ == "__main__":
     args = argv[1:]
     dirs = [
+        # Y1
         # "Calc",
         # "Calc/Semester_1",
-        "CompSci/Personal/Intro_To_Machine_Learning",
-        "CompSci/Personal/Algorithms",
-        "CompSci/Discrete_Math",
-        "CompSci/OOP",
-        "Stats",
-        "Econs",
-        "Homework/Discrete",
-        "Homework/OOP",
         # "FDE",
+        # Y1
+        # Y2 S2
+        # "CompSci/Personal/Intro_To_Machine_Learning",
+        # "CompSci/Personal/Algorithms",
+        # "CompSci/Discrete_Math",
+        # "CompSci/OOP",
+        # "Stats",
+        # "Econs",
+        # "Homework/Discrete",
+        # "Homework/OOP",
+        # Y2 S2
+        # Y2 S3
+        "CompSci/Data_Structures",
+        "CompSci/DB",
+        "CompSci/Intro_AI",
+        "CompSci/Linear_Algebra",
+        # Y2 S3
     ]
 
     force = False

@@ -58,12 +58,8 @@
 \section{Database Management Systems (DBMS)}
 \subsection{Database}
 \dfn{Database}{
-  A collection of related data
-}
-
-\dfn{Database}{
   A \textit{shared} collection of \textit{logically} related data, and descriptions of this data, designed to meet the
-  information needs of an organization.
+  information needs of an organization. / A set of named relations.
 }
 
 \dfn{System Catalogue / Data Dictionary}{
@@ -71,15 +67,15 @@
 }
 
 \dfn{Entity / Record}{
-  A distinct real world object that is to be represented in a database
+  A distinct real world object that is to be represented in a database / Row.
 }
 
 \dfn{Attribute}{
-  A property that describes an entity
+  A property that describes an entity. / Column.
 }
 
 \dfn{Relationship}{
-  An association between entities
+  An association between entities. / Table
 }
 
 \subsection{Database Management System (DBMS)}
@@ -185,6 +181,15 @@ Views not only serve as an abstraction layer but also provide:
   \item Performance - The DBMS may not be as efficient as a custom-built file-based system.
 \end{itemize}
 
+\section{Components of a Database System}
+
+\begin{itemize}
+  \item Users - Application programs, DBA, End-users
+  \item Software - Controls the organization, storage, management and retrieval of data.
+  \item Hardware - The physical devices used to store and process the data.
+  \item Data - The data to be stored in the database.
+\end{itemize}
+
 
 \chapter{Database System Environment}
 
@@ -222,6 +227,190 @@ Views not only serve as an abstraction layer but also provide:
 \end{description}
 
 
+\section{ANSI-SPARC Three-Level Architecture}
+
+\dfn{ANSI-SPARC Three-Level Architecture}{
+  American National Standards Institute (ANSI) Standards Planning and Requirements Committee (SPARC). A database architecture that separates the user's view of the database from the way the data is physically stored.
+}
+
+This architecture is based on the idea that a database system should be divided into three levels of abstraction:
+\begin{itemize}
+  \item External Level
+  \item Conceptual Level
+  \item Internal Level
+\end{itemize}
+
+\subsection{External Level}
+
+\dfn{External Level}{
+  The user's view of the database. Describes the part of the database that is relevant to the user.
+}
+
+This level consists of a number of external views of the database. Each external view includes only the entities,
+attributes and relationships that are relevant to a particular user group.
+
+\subsection{Conceptual Level}
+
+\dfn{Conceptual Level}{
+  The community view of the database. Describes what data is stored in the database and the relationships between the data.
+}
+
+This level contains the logical structure of the database as seen by the Database Administrator, i.e., the complete view
+of the database without considering implementation details. The conceptual level represents:
+\begin{itemize}
+  \item All entities, attributes, and relationships
+  \item Data integrity constraints
+  \item Semantic information about the data
+  \item Security information.
+\end{itemize}
+"
+
+\subsection{Internal Level}
+
+\dfn{Internal Level}{
+  The physical representation of the database on the computer. Describes how the data is stored in the database.
+}
+
+\begin{itemize}
+  \item Storage space allocation of data and indexes
+  \item Record description for storage
+  \item Record placement (pointers)
+  \item Data compression and encryption techniques
+\end{itemize}
+
+\subsection{Data Independence}
+\subsubsection{Logical Data Independence}
+\dfn{Logical Data Independence}{
+  Possibility for addition/removal of new entities, attributes or relationships. Indicates that the conceptual schema
+  can be changed without affecting the existing external schemas.
+}
+
+This mainly affects the conceptual and external levels of the database, enabling a form of data abstraction from the
+external views and the conceptual structure of the database.
+
+\subsubsection{Physical Data Independence}
+\dfn{Physical Data Independence}{
+  Possibility for changes to storage structures. Indicates that the physical storage structures or devices could be
+  changed without affecting conceptual schema.
+}
+
+This mainly affects the conceptual and internal levels of the database, decoupling the conceptual description of the
+database from the actual physical implementation of the database.
+
+\section{Data Models}
+
+\dfn{Data Model}{
+  An integrated collection of concepts for describing and manipulation of data. The data model provides the
+  necessary means to achieve data abstraction, which is the process of hiding the low-level details of the database
+  and showing only the relevant data to the user.
+}
+
+
+\begin{itemize}
+  \item Object-Based
+  \item Record-Based
+  \item Physical Data Model
+\end{itemize}
+
+\section{Database Languages}
+
+\dfn{Database Languages}{
+  A language that enables the user to create and maintain the database and provide ways to access and manipulate the
+  data stored in the database.
+}
+
+\begin{itemize}
+  \item Data Definition Language (DDL)
+  \item Data Manipulation Language (DML)
+\end{itemize}
+
+
+\subsection{Data Definition Language (DDL)}
+
+\dfn{Data Definition Language}{
+  A language used to define and name, entities, their attributes, and relationships required for the application, along
+  with integrity constraints.
+}
+
+\subsection{Data Manipulation Language (DML)}
+\dfn{Data Manipulation Language}{
+
+}
+
+\section{The Relational Model}
+
+\subsection{Terminology}
+\subsubsection{Database}
+\dfn{Database}{
+  A set of named relations.
+}
+
+\subsubsection{Relation}
+\dfn{Relation / Table}{
+  A table in a relational database.
+}
+
+\subsubsection{Attribute}
+\dfn{Attribute}{
+  A column in a table. Each relation has a named set of attributes.
+}
+
+\subsubsection{Tuple}
+\dfn{Tuple}{
+  A row in a table. Each tuple has a value for each attribute.
+}
+
+\subsubsection{Type}
+\dfn{Type / Domain}{
+  A description of the types of operations and values an attribute can have.
+}
+
+\subsubsection{Schema}
+\dfn{Schema}{
+  A structural description of relations in a database / A structural description of the tables in a database. A database
+  differs from a database by the fact that a database is the implementation of the schema.
+}
+
+\subsubsection{Instance}
+\dfn{Instance}{
+  The actual data in a database at a particular point in time.
+}
+
+\subsubsection{Null values}
+\dfn{Null}{
+  Unknown / Undefined
+}
+
+\subsubsection{Key}
+\dfn{Key}{
+  An attribute unique to each tuple, used to differentiate entities / tuples.
+}
+
+\section{Software Architecture}
+
+\dfn{Presentation Layer}{
+  Medium of access.
+}
+
+\dfn{Application Layer}{
+  Software that is accessed by the presentation layer.
+}
+
+\dfn{Database Layer}{
+  The database
+}
+
+\nt{
+  Machine means server.
+}
+
+\begin{itemize}
+  \item One-Tier architecture -  Presentation layer , Application layer , Database layer on the same machine.
+  \item  Two-Tier architecture - Database tier (Application and Database layers) on one machine and client tier
+        (Presentation layer) on another.
+  \item Three-Tier architecture - Each layer on its own machine
+  \item N-Tier architecture - Multiple instances of tiers using replication procedures and load balancing.
+\end{itemize}
 
 
 

@@ -135,9 +135,6 @@ A system of linear equations can be represented in matrix form two ways:
   \]
 }
 
-\dfn{Upper triangular matrix / Echelon Form}{
-
-}
 
 
 One procedure used to solve linear systems is that of \textit{simplification}. This involves replacing one linear system
@@ -263,6 +260,18 @@ with a simpler equivalent system. This is done by applying the following operati
 
 \section{Identifying Existence and Uniqueness}
 
+\dfn{Free Variable}{
+  A variable that does not exist in a row of a matrix
+}
+
+\dfn{Parametric Equations}{
+  Any equation that expresses the variables in a system of linear equations in terms of a free variable.
+}
+
+\dfn{Basic Variable}{
+  A variable that exists in a row of a matrix
+}
+
 To determine the nature of a linear system we must answer two fundamental questions:
 \begin{itemize}
   \item Is the system consistent? / Does a solution exist?
@@ -353,6 +362,8 @@ To determine the nature of a linear system we must answer two fundamental questi
 
   }
 }
+
+
 
 \section{Exercises}
 
@@ -660,5 +671,63 @@ To determine the nature of a linear system we must answer two fundamental questi
   \end{enumerate}
 }
 
+\chapter{Row Reduction and Echelon Forms}
+\dfn{Leading Entry}{
+  The leftmost entry in a non-zero row
+}
+
+\dfn{Upper triangular matrix / Echelon Form}{
+  A rectangular matrix is in \textit{echelon form / row echelon form}  if it has the following proprieties:
+  \begin{itemize}
+    \item All non-zero rows are above any rows of all zeros
+    \item Each leading entry of a row is in a column to the right of the leading entry of the row above it
+    \item All entries in a column below a leading entry are zeros
+  \end{itemize}
+}
+
+\dfn{Reduced Row Echelon Form}{
+  A matrix is in \textit{reduced row echelon form} if it meets all the conditions of a matrix in echelon form and:
+  \begin{itemize}
+    \item The leading entry in each non-zero row is 1
+    \item Each leading 1 is the only non-zero entry in its column
+  \end{itemize}
+}
+
+\dfn{Echelon Matrix}{
+  A matrix that is in echelon form
+}
+
+\dfn{Reduced Echelon Matrix}{
+  A matrix that is in reduced row echelon form
+}
+
+
+\thm{Uniqueness of a Row Reduced Echelon Form}{
+  Each matrix is row equivalent to one and only one reduced row echelon form
+}
+
+Therefore if matrix $A$ is row equivalent to an echelon matrix $U$, $U$ is the \textbf{echelon form of} $A$, and if $A$ is row equivalent to a reduced echelon matrix $R$, $R$ is the \textbf{reduced echelon form of} $A$.
+
+\section{Pivot Positions}
+
+\dfn{Pivot Position}{
+  A \textit{pivot position} in matrix $A$ is a location in $A$ that corresponds to a leading 1 in the reduced echelon
+  form of $A$.
+}
+\dfn{Pivot Column}{
+  A column of a matrix $A$ that contains a pivot position.
+}
+
+A pivot cannot be 0 and a pivot column cannot contain any other non-zero entries. Therefore when identifying pivot
+positions we look for the first non-zero entry in each row, that is not in a column that already contains a pivot.
+
+\ex{}{
+  For the reduced echelon matrix:
+  \[
+    \begin{bmatrix} 1 & 4 & 5 & -9 & -7 \\ 0 & 2 & 4 & -6 & -6 \\ 0 & 0 & 0 & -5 & 0 \\  0 & 0 & 0 & 0 & 0 \end{bmatrix}
+  \]
+
+  The pivots positions are $\left( 1,1 \right), \left( 2,2 \right), \left( 3,4 \right)   $ and values are $\left( 1,2,-5 \right) $
+}
 
 \end{document}

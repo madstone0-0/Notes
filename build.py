@@ -63,6 +63,7 @@ def cleanLatexArtifacts(startDir: Path):
         ".gz",
         ".tfm",
         ".600gf",
+        ".xdv",
     ]
     for file in (
         item
@@ -90,9 +91,11 @@ def compileLatex(file: Path, exportDir: Path) -> str:
         proc = Popen(
             [
                 f"{latexPath}",
-                "-pdf",
+                "-xelatex",
+                # "-pdf",
                 "-synctex=1",
                 "-interaction=nonstopmode",
+                "-shell-escape",
                 f"-outdir={exportDir}",
                 f"{file}",
             ],

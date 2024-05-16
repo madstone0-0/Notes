@@ -260,18 +260,6 @@ with a simpler equivalent system. This is done by applying the following operati
 
 \section{Identifying Existence and Uniqueness}
 
-\dfn{Free Variable}{
-  A variable that does not exist in a row of a matrix
-}
-
-\dfn{Parametric Equations}{
-  Any equation that expresses the variables in a system of linear equations in terms of a free variable.
-}
-
-\dfn{Basic Variable}{
-  A variable that exists in a row of a matrix
-}
-
 To determine the nature of a linear system we must answer two fundamental questions:
 \begin{itemize}
   \item Is the system consistent? / Does a solution exist?
@@ -729,5 +717,606 @@ positions we look for the first non-zero entry in each row, that is not in a col
 
   The pivots positions are $\left( 1,1 \right), \left( 2,2 \right), \left( 3,4 \right)   $ and values are $\left( 1,2,-5 \right) $
 }
+
+\section{The Row Reduction Algorithm}
+
+The row Reduction Algorithm reduces a matrix to it's echelon form in four steps with the fifth reducing the echelon
+matrix to a reduced echelon matrix. These steps are:
+\begin{enumerate}
+  \item Start with the leftmost non-zero column, this is the first pivot column, with its pivot position at the top of
+        the column
+  \item Select a non-zero entry in the pivot column as a pivot, interchanging rows if necessary
+  \item Use row replacement operations to create all zeros below the pivot.
+  \item Cover the row containing the pivot and repeat the process for the submatrix that remains.
+  \item Beginning with the rightmost pivot and working upward to the left, create zeros above each pivot. If the pivot
+        is not 1 make it 1 via a scaling operation
+\end{enumerate}
+
+\ex{}{
+  Given the matrix:
+  \[
+    \begin{bmatrix}
+      0 & 3  & -6 & 6  & 4 & 5  \\
+      3 & -7 & 8  & -5 & 8 & 9  \\
+      3 & -9 & 12 & -9 & 6 & 15
+    \end{bmatrix}
+  \]
+
+  We interchange the first and second rows to have the first item in the leftmost column be non-zero:
+  \\
+  $R_1 \leftrightarrow R_2$
+  \[
+    \begin{bmatrix}
+      3 & -7 & 8  & -5 & 8 & 9  \\
+      0 & 3  & -6 & 6  & 4 & 5  \\
+      3 & -9 & 12 & -9 & 6 & 15
+    \end{bmatrix}
+  \]
+  We then select the non-zero entry in the first column, 3, as the pivot for the first column, and use it to render zeros
+  in the first column below the pivot
+  $R_1 - R_3 \to R_3$
+  \begin{align*}
+    \begin{split}
+      3x_1 - 7x_2 + 8x_3 - 5x_4 + 8x_5 = 9 \\
+      3x_1 - 9x_2 + 12x_3 -9x_4 +6x_5 = 15 \\
+      \hline
+      2x_2 - 4x_3 + 4x_4 + 2x_5 = -6       \\
+    \end{split}
+  \end{align*}
+
+  \[
+    \begin{bmatrix}
+      3 & -7 & 8  & -5 & 8 & 9  \\
+      0 & 3  & -6 & 6  & 4 & 5  \\
+      0 & 2  & -4 & 4  & 2 & -6
+    \end{bmatrix}
+  \]
+  And repeat the process for the remaining columns: \\
+  \[
+    \frac{2}{3}R_2 - R_3 \to R_3
+  \]
+  \begin{align*}
+    \begin{split}
+      0 + 2x_2 - 4x_3 + 4x_4 + \frac{8}{3}x_5 = \frac{10}{3} \\
+      0 + 2x_2 - 4x_3 + 4x_4 + 2x_5 = -6                     \\
+      \hline
+      0 + 0 + 0 + 0 + \frac{2}{3}x_5 = \frac{28}{3}
+    \end{split}
+  \end{align*}
+  \[
+    \begin{bmatrix}
+      3 & -7 & 8  & -5 & 8           & 9            \\
+      0 & 3  & -6 & 6  & 4           & 5            \\
+      0 & 0  & 0  & 0  & \frac{2}{3} & \frac{28}{3}
+    \end{bmatrix}
+  \]
+
+  \[
+    6R_3 - R_2 \to R_2
+  \]
+  \begin{align*}
+    \begin{split}
+      0 + 0 + 0 + 0 + 4x_5 = 56         \\
+      0 + 3x_2 - 6x_3 + 6x_4 + 4x_5 = 5 \\
+      \hline
+      -3x_2 + 6x_3 -6x_4 = 51
+    \end{split}
+  \end{align*}
+
+  \[
+    \begin{bmatrix}
+      3 & -7 & 8 & -5 & 8           & 9            \\
+      0 & -3 & 6 & -6 & 0           & 51           \\
+      0 & 0  & 0 & 0  & \frac{2}{3} & \frac{28}{3}
+    \end{bmatrix}
+  \]
+
+  \[
+    12R_3 - R_1 \to R_1
+  \]
+  \begin{align*}
+    \begin{split}
+      0 + 0 + 0 + 0 + 8x_5 = 612          \\
+      3x_1 -7x_2 + 8x_3 - 5x_4 + 8x_5 = 9 \\
+      \hline
+      -3x_1 + 7x_2 - 8x_3 + 5x_4  = 603
+    \end{split}
+  \end{align*}
+  \[
+    \begin{bmatrix}
+      -3 & 7  & -8 & 5  & 0           & 603          \\
+      0  & -3 & 6  & -6 & 0           & 51           \\
+      0  & 0  & 0  & 0  & \frac{2}{3} & \frac{28}{3}
+    \end{bmatrix}
+  \]
+
+  \[
+    -\frac{7}{3}R_2 - R_1 \to R_1
+  \]
+
+  \begin{align*}
+    \begin{split}
+      0 + 7x_2 -14x_3  + 14x_4 + 0 = -119  \\
+      -3x_1 + 7x_2 - 8x_3 + 5x_4 + 0 = 603 \\
+      \hline
+      3x_1 + 0 -6x_3 + 9x_4 = -722
+    \end{split}
+  \end{align*}
+  \[
+    \begin{bmatrix}
+      3 & 0  & -6 & 9  & 0           & -722         \\
+      0 & -3 & 6  & -6 & 0           & 51           \\
+      0 & 0  & 0  & 0  & \frac{2}{3} & \frac{28}{3}
+    \end{bmatrix}
+  \]
+  \[
+    \frac{3}{2}R_3 \to R_3
+  \]
+  \[
+    \begin{bmatrix}
+      3 & 0  & -6 & 9  & 0 & -722 \\
+      0 & -3 & 6  & -6 & 0 & 51   \\
+      0 & 0  & 0  & 0  & 1 & 14   \\
+    \end{bmatrix}
+  \]
+
+  \[
+    -\frac{1}{3}R_2 \to R_2
+  \]
+  \[
+    \begin{bmatrix}
+      3 & 0 & -6 & 9 & 0 & -722 \\
+      0 & 1 & -2 & 2 & 0 & -17  \\
+      0 & 0 & 0  & 0 & 1 & 14   \\
+    \end{bmatrix}
+  \]
+
+  \[
+    \frac{1}{3}R_1 \to R_1
+  \]
+  \[
+    \begin{bmatrix}
+      1 & 0 & -2 & 3 & 0 & -\frac{722}{3} \\
+      0 & 1 & -2 & 2 & 0 & -17            \\
+      0 & 0 & 0  & 0 & 1 & 14             \\
+    \end{bmatrix}
+  \]
+}
+
+\section{Solutions of Linear Systems}
+
+\dfn{Free Variable}{
+  A variable that does not exist in a row of a matrix
+}
+
+\dfn{Parametric Equations}{
+  Any equation that expresses the variables in a system of linear equations in terms of a free variable.
+}
+
+\dfn{Basic Variable}{
+  A variable that exists in a row of a matrix
+}
+
+In deriving a reduced echelon matrix we can determine the consistency of a system of linear equations, and thereby
+describe the solution set. For example in the case below we have the reduced echelon matrix:
+\begin{align*}
+  \begin{bmatrix}
+    1 & 0 & -5 & 1 \\
+    0 & 1 & 1  & 4 \\
+    0 & 0 & 0  & 0
+  \end{bmatrix}
+  \\
+  \\
+  x_1 - 5x_3 = 1 \\
+  x_2 + x_3 = 4  \\
+  0 = 0
+\end{align*}
+There are three variables $x_1, x_2, \text{ and } x_3$, as there are four columns in this augmented matrix. The
+variables $x_1$ and $x_2$ are referred to as basic variables as they have pivots in their columns, and $x_3$ is a free
+variable as it does not have a pivot in its column, thus this system is consistent has has infinitely many solutions.
+Describing the solution set of this equation we can say:
+\begin{align*}
+  \begin{cases}
+    x_1 = 1 + 5x_3 \\
+    x_2 = 4 - x_3  \\
+    x_3 \text{ is free}
+  \end{cases}
+\end{align*}
+The statement "$x_3$ is free" means that $x_3$ can take on any value, and by extension the values of $x_1$ and $x_2$
+are determined by the value $x_3$ takes on.
+
+\ex{}{
+  \qs{}{
+    Find the general solution of the linear system whose augmented matrix has been reduced to:
+    \[
+      \begin{bmatrix}
+        1 & 6 & 2 & -5 & -2 & -4 \\
+        0 & 0 & 2 & -8 & -1 & 3  \\
+        0 & 0 & 0 & 0  & 1  & 7
+      \end{bmatrix}
+    \]
+  }
+
+  \sol{
+    \[
+      \begin{bmatrix}
+        1 & 6 & 2 & -5 & -2 & -4 \\
+        0 & 0 & 2 & -8 & -1 & 3  \\
+        0 & 0 & 0 & 0  & 1  & 7
+      \end{bmatrix}
+    \]
+
+    \[
+      -1R_3 - R_2 \to R_2
+    \]
+    \begin{align*}
+      \begin{split}
+        0 + 0 + 0 + 0 - 1 = -7   \\
+        0 + 0 + 2 - 8 - 1 = -3   \\
+        \hline
+        0 + 0 + -2 + 8 + 0 = -10 \\
+      \end{split}
+    \end{align*}
+    \[
+      \begin{bmatrix}
+        1 & 6 & 2  & -5 & -2 & -4  \\
+        0 & 0 & -2 & 8  & 0  & -10 \\
+        0 & 0 & 0  & 0  & 1  & 7
+      \end{bmatrix}
+    \]
+
+    \[
+      -2R_3 - R_1 \to R_1
+    \]
+    \begin{align*}
+      \begin{split}
+        0 + 0 + 0 + 0 -2 = -14 \\
+        1 + 6 + 2 - 5 - 2 = -4 \\
+        \hline
+        -1 - 6 - 2 + 5 + 0 = -10
+      \end{split}
+    \end{align*}
+    \[
+      \begin{bmatrix}
+        -1 & -6 & -2 & 5 & 0 & -10 \\
+        0  & 0  & -2 & 8 & 0 & -10 \\
+        0  & 0  & 0  & 0 & 1 & 7
+      \end{bmatrix}
+    \]
+    \[
+      R_2 - R_1 \to R_1
+    \]
+
+    \begin{align*}
+      \begin{split}
+        0 + 0 -2 + 8 + 0 = -10 \\
+        -1 -6 -2 + 5 + 0 = -10 \\
+        \hline
+        1 + 6 + 0 + 3 + 0 = 0
+      \end{split}
+    \end{align*}
+    \[
+      \begin{bmatrix}
+        1 & 6 & 0  & 3 & 0 & 0   \\
+        0 & 0 & -2 & 8 & 0 & -10 \\
+        0 & 0 & 0  & 0 & 1 & 7
+      \end{bmatrix}
+    \]
+
+    \begin{align*}
+      -\frac{1}{2}R_2 \to R_2 \\
+      \begin{bmatrix}
+        1 & 6 & 0 & 3  & 0 & 0 \\
+        0 & 0 & 1 & -4 & 0 & 5 \\
+        0 & 0 & 0 & 0  & 1 & 7
+      \end{bmatrix}
+    \end{align*}
+
+    \begin{align*}
+      x_1 + 6x_2  +3x_4 = 0 \\
+      x_3 - 4x_4 -  = 5     \\
+      x_5 = 7               \\
+      \\
+      \\
+      x_1 = -6x_2 - 3x_4
+      x_3 =  5 + 4x_4       \\
+      x_5 = 7
+    \end{align*}
+    $\therefore$
+    \begin{align*}
+      \begin{cases}
+        x_1 = -6x_2 - 3x_4   \\
+        x_2 \text{ is free } \\
+        x_3 =  5 + 4x_4      \\
+        x_4 \text{ is free}  \\
+        x_5 = 7
+      \end{cases}
+    \end{align*}
+  }
+}
+
+\subsection{Parametric Description of Solution Sets}
+\dfn{Parametric Description}{
+  A description of the solution set of a system of linear equations in terms of a free variable.
+}
+
+The descriptions given so far are all parametric, i.e., the free variables act as parameters that determine the values
+of the basic variables.
+
+\subsection{Uniqueness and Existence of Solutions}
+
+\thm{Existence and Uniqueness Theorem}{
+  A linear system is consistent if and only if the rightmost column of the augmented matrix is not a pivot column, i.e.,
+  if and only if an echelon form of the augmented matrix has no row of the form:
+  \[
+    \begin{bmatrix} 0 & 0 & \cdots & 0 & b \end{bmatrix}
+  \]
+  where $b$ is a non-zero number.
+  \\
+  If a linear system is consistent then the solution set contains either:
+  \begin{itemize}
+    \item A unique solution, when there are no free variables.
+    \item Infinitely many solutions in the presence of at least one free variable.
+  \end{itemize}
+}
+
+\section{Exercises}
+
+
+\qs{}{
+  Find the general solutions of the systems whose augmented matrices are:
+  \begin{enumerate}
+    \item
+          \[
+            \begin{bmatrix}
+              1 & 3 & 4 & 7 \\
+              3 & 9 & 7 & 6
+            \end{bmatrix}
+          \]
+    \item
+          \[
+            \begin{bmatrix}
+              1  & -7 & 0  & 6  & 5  \\
+              0  & 0  & 1  & -2 & -3 \\
+              -1 & 7  & -4 & 2  & 7
+            \end{bmatrix}
+          \]
+    \item
+          \[
+            \begin{bmatrix}
+              1 & -3 & 0 & -1 & 0  & -2 \\
+              0 & 1  & 0 & 0  & -4 & 1  \\
+              0 & 0  & 0 & 1  & 9  & 4  \\
+              0 & 0  & 0 & 0  & 0  & 0
+            \end{bmatrix}
+          \]
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \begin{bmatrix}
+              1 & 3 & 4 & 7 \\
+              3 & 9 & 7 & 6
+            \end{bmatrix}
+            \\
+            \\
+            3R_1 - R_2 \to R_2           \\
+            \begin{split}
+              3 + 9 + 12 = 21 \\
+              3 + 9 + 7 = 6   \\
+              \hline
+              0 + 0 + 5 = 15  \\
+            \end{split}              \\
+            \begin{bmatrix}
+              1 & 3 & 4 & 7  \\
+              0 & 0 & 5 & 15
+            \end{bmatrix}               \\
+            \\
+            \frac{4}{5}R_2 - R_1 \to R_1 \\
+            \begin{split}
+              0 + 0 + 4  = 12 \\
+              1 + 3 + 4  = 7  \\
+              \hline
+              -1 -3 + 0 = 5
+            \end{split}              \\
+            \begin{bmatrix}
+              -1 & -3 & 0 & 5  \\
+              0  & 0  & 5 & 15
+            \end{bmatrix}             \\
+            \\
+            \frac{1}{5}R_2               \\
+            \begin{bmatrix}
+              -1 & -3 & 0 & 5 \\
+              0  & 0  & 1 & 3
+            \end{bmatrix}              \\
+            \\
+            -R_1                         \\
+            \begin{bmatrix}
+              1 & 3 & 0 & -5 \\
+              0 & 0 & 1 & 3
+            \end{bmatrix}               \\
+            \\
+            x_1 + 3x_2 = -5              \\
+            x_3 = 3                      \\
+            \\
+            \begin{cases}
+              x_1 = -5 -3x_2      \\
+              x_2 \text{ is free} \\
+              x_3 = 3             \\
+            \end{cases}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{bmatrix}
+              1  & -7 & 0  & 6  & 5  \\
+              0  & 0  & 1  & -2 & -3 \\
+              -1 & 7  & -4 & 2  & 7
+            \end{bmatrix}       \\
+            \\
+            R_2 \leftrightarrow R_3      \\
+            \begin{bmatrix}
+              1  & -7 & 0  & 6  & 5  \\
+              -1 & 7  & -4 & 2  & 7  \\
+              0  & 0  & 1  & -2 & -3 \\
+            \end{bmatrix}       \\
+            \\
+            R_1 + R_2 \to R_2            \\
+            \begin{split}
+              1 - 7 + 0 + 6 = 5  \\
+              -1 + 7 - 4 + 2 = 7 \\
+              \hline
+              0 + 0 - 4+ 8 = 12  \\
+            \end{split}           \\
+            \begin{bmatrix}
+              1 & -7 & 0  & 6  & 5  \\
+              0 & 0  & -4 & 8  & 12 \\
+              0 & 0  & 1  & -2 & -3 \\
+            \end{bmatrix}        \\
+            \\
+            \frac{1}{4}R_2 + R_3 \to R_3 \\
+            \begin{split}
+              0 + 0 -1 + 2 = 3   \\
+              0 + 0 + 1 - 2 = -3 \\
+              \hline
+              0 + 0 + 0 + 0 = 0  \\
+            \end{split}           \\
+            \begin{bmatrix}
+              1 & -7 & 0  & 6 & 5  \\
+              0 & 0  & -4 & 8 & 12 \\
+              0 & 0  & 0  & 0 & 0  \\
+            \end{bmatrix}         \\
+            \\
+            -\frac{1}{4}R_2 \to R_2      \\
+            \begin{bmatrix}
+              1 & -7 & 0 & 6  & 5  \\
+              0 & 0  & 1 & -2 & -3 \\
+              0 & 0  & 0 & 0  & 0  \\
+            \end{bmatrix}         \\
+            \\
+            x_1 - 7x_2 + 6x_4 = 5        \\
+            x_3 - 2x_4 = -3              \\
+            0 = 0                        \\
+            \\
+            x_1 = 5 - 7x_2 + 6x_4        \\
+            x_3 = -3 + 2x_4              \\
+            \\
+            \begin{cases}
+              x_1 = 5 - 7x_2 + 6x_4 \\
+              x_2 \text{ is free }  \\
+              x_3 = -3 + 2x_4       \\
+              x_4 \text{ is free }
+            \end{cases}
+          \end{align*}
+  \end{enumerate}
+}
+
+\qs{}{
+  Find $h$ and $k$ such that the system has:
+  \begin{enumerate}
+    \item No solutions
+    \item A unique solution
+    \item Many solutions
+  \end{enumerate}
+
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            x_1 + hx_2 = 2 \\
+            4x_1 + 8x_2 = k
+          \end{align*}
+    \item
+          \begin{align*}
+            x_1 + 3x_2 = 2 \\
+            3x_1 + hx_2 = k
+          \end{align*}
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            x_1 + hx_2 = 2 \\
+            4x_1 + 8x_2 = k
+          \end{align*}
+          \begin{enumerate}
+            \item
+                  \begin{align*}
+                    \begin{bmatrix}
+                      1 & h & 2 \\
+                      4 & 8 & k
+                    \end{bmatrix}                                    \\
+                    \\
+                    -4R_1 + R_2 \to R_2                               \\
+                    \begin{split}
+                      -4 - 4h = 8 \\
+                      4 + 8 = k   \\
+                      0 + \left( -4h + 8 \right) = \left( -8 + k \right)
+                    \end{split} \\
+                    \begin{bmatrix}
+                      1 & h                      & 2                    \\
+                      0 & \left( -4h + 8 \right) & \left( -8 +k \right)
+                    \end{bmatrix} \\
+                    \\
+                    -4h + 8 = 0                                       \\
+                    h = 2                                             \\
+                    \\
+                    -8 + k \neq 0                                     \\
+                    k \neq 8
+                  \end{align*}
+                  $\therefore$ $h = 2$ and $k \neq  8$
+            \item
+                  \begin{align*}
+                    \begin{bmatrix}
+                      1 & h & 2 \\
+                      4 & 8 & k
+                    \end{bmatrix}                                    \\
+                    -4R_1 + R_2 \to R_2                               \\
+                    \begin{split}
+                      -4 - 4h = 8 \\
+                      4 + 8 = k   \\
+                      0 + \left( -4h + 8 \right) = \left( -8 + k \right)
+                    \end{split} \\
+                    \begin{bmatrix}
+                      1 & h                      & 2                    \\
+                      0 & \left( -4h + 8 \right) & \left( -8 +k \right)
+                    \end{bmatrix} \\
+                    \\
+                    h \neq 2
+                  \end{align*}
+                  $\therefore$ $h \neq 2$
+            \item
+                  \begin{align*}
+                    \begin{bmatrix}
+                      1 & h & 2 \\
+                      4 & 8 & k
+                    \end{bmatrix}                                    \\
+                    -4R_1 + R_2 \to R_2                               \\
+                    \begin{split}
+                      -4 - 4h = 8 \\
+                      4 + 8 = k   \\
+                      0 + \left( -4h + 8 \right) = \left( -8 + k \right)
+                    \end{split} \\
+                    \begin{bmatrix}
+                      1 & h                      & 2                    \\
+                      0 & \left( -4h + 8 \right) & \left( -8 +k \right)
+                    \end{bmatrix} \\
+                    -4h + 8 = 0                                       \\
+                    h = 2                                             \\
+                    \\
+                    -8 + k = 0                                        \\
+                    k = 8
+                  \end{align*}
+                  $\therefore$ $h = 2$ and $k = 8$
+
+          \end{enumerate}
+  \end{enumerate}
+}
+
+
+
 
 \end{document}

@@ -42,6 +42,9 @@
   Extension = .otf,
   Path = /usr/share/fonts/libertinus/,
   UprightFont = *-Regular,
+  ItalicFont = *-Italic,
+  BoldFont = *-Bold,
+  BoldItalicFont = *-BoldItalic,
 ]
 
 \setmonofont{CaskaydiaCoveNerdFontMono}[
@@ -108,7 +111,8 @@ literate         =
 {…}{{\ldots}}1 {≥}{{>=}}1 {≤}{{<=}}1 {„}{{\glqq}}1 {“}{{\grqq}}1
 {”}{{''}}1
 }
-\lstset{style=eisvogel_listing_style}
+\lstset{style=eisvogel_listing_style,
+  numbers=left}
 
 %
 % Java (Java SE 12, 2019-06-22)

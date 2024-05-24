@@ -1311,12 +1311,384 @@ of the basic variables.
                     k = 8
                   \end{align*}
                   $\therefore$ $h = 2$ and $k = 8$
-
           \end{enumerate}
   \end{enumerate}
 }
 
+\chapter{Vector Equations}
 
+Instead of matrix notation, we can represent a system of linear equations as a vector equation. For example, the system:
+\begin{align*}
+  2x_1 + 4x_2 = 3 \\
+  3x_1 + 2x_2 = 7
+\end{align*}
+Can be represented as:
+\[
+  x_1 \begin{bmatrix} 2 \\ 3 \end{bmatrix}  + x_2 \begin{bmatrix} 4 \\ 2 \end{bmatrix}  = \begin{bmatrix} 3 \\ 7  \end{bmatrix}
+\]
+
+\subsection{Vectors in $\mathbb{R}^2$}
+
+\dfn{Vector}{
+  A matrix with a single column
+}
+
+$\mathbb{R}^{2}$ refers to the set of all vectors with two real number entries this is also called the vector space. For example:
+\[
+  \mathbf{w} = \begin{bmatrix} w_1 \\ w_2 \end{bmatrix}
+\]
+
+\subsubsection{Axioms of a Vector Space}
+
+\begin{description}
+  \item[Commutativity] $\mathbf{v} + \mathbf{w} = \mathbf{w} + \mathbf{v} $, $\forall \mathbf{v} \in V$
+  \item[Associativity] $\left( \mathbf{u} + \mathbf{v} \right) + \mathbf{w} = \mathbf{u} + \left( \mathbf{v} +
+          \mathbf{w}  \right)  $ for all $\mathbf{u}\, , \, \mathbf{v}\, , \mathbf{w} \in V$
+  \item[Zero Vector] there exists a special vector, denoted by $\mathbf{0}$ such that $\forall \mathbf{v} \in V\, ,
+          \mathbf{v} + \mathbf{0} = \mathbf{v} $
+  \item[Additive Inverse] For every vector $\mathbf{v} \in V$ there exists a vector $\mathbf{w} \in V$ such that
+        $\mathbf{v} + \mathbf{w} = \mathbf{0}$. Such additive inverse is denoted by $-\mathbf{v}$
+  \item[Multiplicative Identity] $1\mathbf{v} = \mathbf{v}$, $\forall \mathbf{v} \in V$
+  \item[Multiplicative Associativity] $\left( \alpha \beta \right) \mathbf{v} = \alpha \left( \beta\mathbf{v} \right)$,
+        $\forall \mathbf{v} \in V$ and all scalars $\alpha$, $\beta$
+  \item[Distributive Propety 1] $\alpha \left( \mathbf{u} + \mathbf{v} \right) = \alpha \mathbf{u} + \alpha +
+          \mathbf{v}$, for all $\mathbf{u}\, , \, \mathbf{v} \in V$ and all scalars $\alpha$
+  \item[Distributive Propoerty 2] $\left( \alpha + \beta \right)\mathbf{v} = \alpha\mathbf{v} + \beta\mathbf{v} $
+        $\forall \mathbf{v} \in V$ and all scalars $\alpha$, $\beta$
+\end{description}
+
+\ex{}{
+  \qs{}{
+    Given the $\mathbf{u} = \begin{bmatrix} 1 \\  -2 \end{bmatrix} $ and $\mathbf{v} = \begin{bmatrix} 2 \\ -5
+      \end{bmatrix}  $, find $4\mathbf{u}$, $\left( -3 \right)\mathbf{v} $ and $4\mathbf{u} + \left( -3 \right)\mathbf{v}$
+  }
+
+  \sol{
+    \begin{enumerate}
+      \item
+            \begin{align*}
+              4\mathbf{u} = \begin{bmatrix} 4 \\ -8 \end{bmatrix}
+            \end{align*}
+      \item
+            \[
+              -3\mathbf{v} = \begin{bmatrix} -6 \\ 15 \end{bmatrix}
+            \]
+      \item
+            \begin{align*}
+              4\mathbf{u} + \left( -3 \right) \mathbf{v} & = \begin{bmatrix} 4 \\ -8 \end{bmatrix}  + \begin{bmatrix} -6 \\
+                                                                                                        15\end{bmatrix} \\
+                                                         & = \begin{bmatrix} -2 \\ 7 \end{bmatrix}                       \\
+            \end{align*}
+    \end{enumerate}
+  }
+}
+
+\section{Linear Combinations}
+
+\dfn{Linear Combination}{
+  Given vectors $\mathbf{v_1}, \mathbf{v_2}, \ldots, \mathbf{v_p}$ in $\mathbb{R}^{n}$, and given scalars $c_1, c_2,
+    \ldots, c_p$, then the vector $\mathbf{y}$ defined by
+  \[
+    y = c_1\mathbf{v}_1 + c_2 \mathbf{v}_2, \ldots, c_p \mathbf{v}_p
+  \]
+  Is a linear combination of $\mathbf{v}_1, \ldots, \mathbf{v}_p$, with weights $c_1, \ldots, c_p$
+}
+
+\dfn{Mapping Function}{
+  A function in the form
+  \[
+    f: \mathbb{R}^{n} \to R
+  \]
+  That takes in a vector as input, $\mathbb{R}^{n}$ and returns a scalar, $R$.
+}
+
+\ex{}{
+  \qs{}{
+    Let $\mathbf{a}_1 = \begin{bmatrix} 1 \\ -2 \\ -5 \end{bmatrix} $, $\mathbf{a}_2 = \begin{bmatrix} 2 \\ 5\\ 6
+      \end{bmatrix} $, and $\mathbf{b} = \begin{bmatrix} 7 \\ 4\\ -3 \end{bmatrix} $, Determine whether $\mathbf{b}$ can
+    be generated as a linear combination of $\mathbf{a}_1$ and $\mathbf{a}_2$. That is determine whether weights $x_1$
+    and $x_2$ exist such that
+    \[
+      x_1\mathbf{a}_1 + x_2 \mathbf{a}_2 = \mathbf{b}
+    \]
+    If such an equation has a solution find it.
+  }
+
+  \sol{
+    \begin{align*}
+      x_1 \begin{bmatrix} 1 \\ -2 \\ -5 \end{bmatrix} + x_2 \begin{bmatrix} 2 \\ 5\\ 6
+                                                            \end{bmatrix}          & = \begin{bmatrix} 7 \\ 4\\ -3 \end{bmatrix}             \\
+      \begin{bmatrix} x_1 \\ -2x_1 \\ -5x_1 \end{bmatrix} + \begin{bmatrix} 2x_2 \\ 5x_2\\ 6x_2
+                                                            \end{bmatrix} & = \begin{bmatrix} 7 \\ 4\\ -3 \end{bmatrix}                      \\
+      \begin{bmatrix}
+        x_1 +2x_2    \\
+        -2x_1 + 5x_2 \\
+        -5x_1 + 6x_2
+      \end{bmatrix}                                                                           & = \begin{bmatrix} 7 \\ 4 \\ -3 \end{bmatrix} \\
+      \\
+      x_1 +2x_2 = 7                                                                                                                          \\
+      -2x_1 + 5x_2 = 4                                                                                                                       \\
+      -5x_1 + 6x_2 = -3                                                                                                                      \\
+      \\
+      \begin{bmatrix}
+        1  & 2 & 7  \\
+        -2 & 5 & 4  \\
+        -5 & 6 & -3
+      \end{bmatrix}
+    \end{align*}
+  }
+}
+
+\chapter{Solution Sets of Linear systems}
+
+\section{Homogeneous Linear Systems}
+
+\dfn{Homogeneous Linear System}{
+  A system that can be expressed in the form
+  \[
+    A\mathbf{x} = \mathbf{0}
+  \]
+  Where $A$ is an $m\times n$ matrix and $\mathbf{0}$ is the zero vector $\mathbb{R}^{m}$.
+}
+
+\noindent Such a system $A\mathbf{x} =
+  \mathbf{0}$ always has at least one solution, namely $\mathbf{x} = \mathbf{0}$. This zero solution is also called the
+\textit{trivial solution}. The question is then is whether there exists a \textit{non-trivial solution} that satisfies
+$A\mathbf{x} = \mathbf{0}$.
+
+\dfn{Trivial solution}{
+  A solution of zero
+}
+
+\dfn{Non-Trivial solution}{
+  A solution that is not zero
+}
+
+\thm{}{
+  The homogeneous equation $A\mathbf{x} = \mathbf{0}$ has a non-trivial solution if and only if the equation has at least one
+  free variable.
+}
+
+\ex{}{
+  \qs{}{
+    Determine if the following homogeneous system has a non-trivial solution. Then describe the solution set.
+
+    \begin{align*}
+      3x_1 + 5x_2 - 4x_3 = 0  \\
+      -3x_1 - 2x_2 + 4x_3 = 0 \\
+      6x_1 + x_2 - 8x_3 = 0
+    \end{align*}
+  }
+
+  \sol{
+    \begin{align*}
+      \begin{bmatrix}
+        3  & 5  & -4 & 0 \\
+        -3 & -2 & 4  & 0 \\
+        6  & 1  & -8 & 0
+      \end{bmatrix} \sim
+      \begin{bmatrix}
+        3 & 5  & -4 & 0 \\
+        0 & -3 & 0  & 0 \\
+        6 & 1  & -8 & 0
+      \end{bmatrix} \sim
+      \begin{bmatrix}
+        3 & 5  & -4 & 0 \\
+        0 & -3 & 0  & 0 \\
+        0 & 9  & 0  & 0 \\
+      \end{bmatrix}
+      \\
+      \begin{bmatrix}
+        1 & 0 & -\frac{4}{3} & 0 \\
+        0 & 1 & 0            & 0 \\
+        0 & 0 & 0            & 0
+      \end{bmatrix}
+      \\
+      x_1 -\frac{4}{3}x_3 = 0                                                                                  \\
+      x_2 = 0                                                                                                  \\
+      0 = 0                                                                                                    \\
+      \text{This gives us $x_3$ as free. Due to the representation of a vector $x_3=x_3$}                      \\
+      \\
+      \text{In vector notation we describe the solution}                                                       \\
+      \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} \frac{4}{3}x_3 \\ 0 \\ x_3
+                                                                     \end{bmatrix} = x_3 \mathbf{v} \\
+      \text{Where } \mathbf{v} = \begin{bmatrix} \frac{4}{3} \\ 0 \\ 1 \end{bmatrix}
+    \end{align*}
+  }
+}
+
+\ex{}{
+  \qs{}{
+    A single linear equation can be treated as a very simple system of equations. Describe all solutions of the
+    homogeneous system
+    \[
+      10x_1 -3x_2 -2x_3 = 0
+    \]
+  }
+
+  \sol{
+    \begin{align*}
+      \begin{bmatrix}
+        10 & -3 & -2 & 0 \\
+        0  & 0  & 0  & 0 \\
+        0  & 0  & 0  & 0
+      \end{bmatrix}
+      \\
+      x_1 = \frac{3}{10}x_2 + \frac{1}{5}x_3 \\
+      x_2 = x_2                              \\
+      x_3 = x_3                              \\
+      \\
+      \mathbf{x} = \begin{bmatrix} x_1 \\  x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} \frac{3}{10}x_2 + \frac{1}{5}x_2
+                                                                        \\ x_2 \\ x_3\end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0  \end{bmatrix} + x_2 \begin{bmatrix} \frac{3}{10} \\ 1
+                                                                                                                                                      \\ 0\end{bmatrix} + x_3 \begin{bmatrix} \frac{1}{5} \\ 0 \\ 1 \end{bmatrix}
+    \end{align*}
+  }
+}
+
+\section{Parametric Vector Form}
+
+\dfn{Parametric Vector Form}{
+  A description of the solution set of a system of linear equations in terms of a free variable. In the form:
+  \[
+    \mathbf{x} = s\mathbf{u} + t \mathbf{v}, \text{ where} s, t \in \mathbb{R}
+  \]
+}
+
+
+\section{Non-Homogeneous Linear Systems}
+
+\dfn{Non-Homogeneous Linear System}{
+  A system that can be expressed in the form
+  \[
+    A\mathbf{x} = b
+  \]
+  Where $A$ is a coefficient matrix, $\mathbf{x}$ is a vector in $\mathbb{R}^{n}$, and $\mathbf{b}$ is a vector in $\mathbb{R}^{m}$.
+}
+
+When a non-homogeneous system has many solutions, the general solution can be written in parametric vector form as one
+vector plus an arbitrary linear combination of other vectors that satisfy the system.
+
+\ex{}{
+  \qs{}{
+    Describe all solutions of $A\mathbf{x} = b$, where
+    \[
+      A = \begin{bmatrix}
+        3  & 5  & -4 \\
+        -3 & -2 & 4  \\
+        6  & 1  & -8
+      \end{bmatrix} \text{ and } \mathbf{b}= \begin{bmatrix}
+        7 \\ -1 \\ -4
+      \end{bmatrix}
+    \]
+  }
+
+  \sol{
+
+  }
+}
+
+\thm{}{
+  Suppose the equation $A\mathbf{x} = \mathbf{b}$ is consistent for some given $\mathbf{b}$, and let $\mathbf{p}$ be a
+  solution. Then the solution set of $A\mathbf{x}= \mathbf{b}$ is the set of all vectors the form $\mathbf{w} =
+    \mathbf{p} + \mathbf{v}_h$, where $\mathbf{v}_h$ is any solution of the homogeneous equation $A\mathbf{x} = \mathbf{0}$.
+}
+
+\chapter{Linear Independence}
+
+\dfn{Linear Independence}{
+  An indexed set of vectors $\{\mathbf{v}_1, \ldots, \mathbf{v}_p\} $  in $\mathbb{R}^n$ is said to be \textit{linearly
+    independent} if the vector equation
+  \[
+    x_1\mathbf{v}_1 + x_2\mathbf{v}_2 + x_3\mathbf{v}_3 +  \ldots + x_p \mathbf{v}_p = \mathbf{0}
+  \]
+  has only the trivial solution.
+}
+
+\dfn{Linear Dependence}{
+  The set $\{\mathbf{v}_1, \ldots, \mathbf{v}_p\} $ is said to be \textit{linearly dependent} if there exist weights
+  $c_1, \ldots, c_p$, not all zero, such that
+  \[
+    c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + c_3\mathbf{v}_3 +  \ldots + c_p \mathbf{v}_p = \mathbf{0}
+  \]
+}
+
+\ex{}{
+  \qs{}{
+    Let $\mathbf{v}_1 = \begin{bmatrix} 1 \\  2\\  3 \end{bmatrix} $, $\mathbf{v}_2 = \begin{bmatrix} 4 \\  5\\  6
+      \end{bmatrix} $, $\mathbf{v}_3 = \begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} $
+    \begin{enumerate}
+      \item Determine if the set $\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\} $ is linearly independent
+      \item If possible find a linear dependence relationship between the vectors
+    \end{enumerate}
+  }
+
+  \sol{
+    \begin{enumerate}
+      \item
+            \begin{align*}
+              \mathbf{v}_1 + \mathbf{v}_2 +  \mathbf{v}_3 = x_1\begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} + x_2\begin{bmatrix}
+                                                                                                                4 \\ 5 \\ 6 \end{bmatrix} + x_3\begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} \\
+            \end{align*}
+    \end{enumerate}
+  }
+}
+
+\subsection{Linear Independence of Matrix Columns}
+
+\dfn{Linear Independence of Matrix Columns}{
+  A matrix $A$ is said to have linearly independent columns if the equation $A\mathbf{x} = \mathbf{0}$ has only the
+  trivial solution.}{
+}
+
+\ex{}{
+  \qs{}{
+    Determine if the columns of the matrix are linearly independent
+    \[
+      A = \begin{bmatrix}
+        0 & 1 & 4  \\
+        1 & 2 & -1 \\
+        5 & 8 & 0
+      \end{bmatrix}
+    \]
+  }
+
+  \sol{
+    \begin{align*}
+      \begin{bmatrix} 7 \\ 8 \\ 9 \end{bmatrix} \neq \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+    \end{align*}
+  }
+}
+
+
+\chapter{Exercises}
+
+\qs{}{
+  \begin{enumerate}
+    \item   Suppose a $3\times 5$ coefficient matrix for a system has three pivot columns. Is the system consistent ? Why or why
+          not?
+
+    \item Suppose the coefficient matrix of a linear system of three equations in three variables has a pivot in each column.
+          Explain why the system has a unique solution.
+
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item The system is consistent as if there are three pivot columns then there is a pivot in each row which means no
+          row is of the form:
+          \[
+            \begin{bmatrix} 0 & 0 & 0 & 0 & 0 \end{bmatrix}
+          \]
+          Making the value of $b$ irrelevant to the consistency of the system. Thus the system is consistent.
+    \item If the coefficient matrix has a pivot in each column then there is a pivot in each row, and no row is of the
+          form:
+          \[
+            \begin{bmatrix} 0 & 0 & 0 & 0 \end{bmatrix}
+          \]
+          As such the system is consistent and has a unique solution.
+  \end{enumerate}
+}
 
 
 \end{document}

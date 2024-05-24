@@ -159,6 +159,91 @@ with generics, the class can be defined to store any data type.
   compatible with the data type of the object.
 }
 
+\pagebreak
+\subsection{Wildcards}
+
+\dfn{Wildcard Character}{
+  The wildcard character, \lstinline{<?>} , is used to denote that a generic type can be of any type, with the usual restrictions of
+  parametrized types still applying.
+}
+
+A parametrized wildcard type on its own is called an unbounded wildcard type and essentially means the same as the
+upper bounded wildcard type \lstinline{<? extends Object>}. When unbounded wildcard types in methods act similar to
+an equivalent generic method, for example:
+
+\begin{lstlisting}[language=Java]
+public void print(ArrayList<?> list) {
+  for (Object obj : list) System.out.println(obj);
+}
+
+public <T> void print(ArrayList<T> list) {
+  for (T t: list) System.out.println(t);
+}
+\end{lstlisting}
+
+These two methods perform exactly the same and work with any parametrized type.
+
+\begin{lstlisting}[language=Java]
+public void printZip(ArrayList<?> first, ArrayList<?> second) {
+    for (int i = 0; i < first.size(); i++) {
+        System.out.println(first.get(i) + " " + second.get(i));
+    }
+}
+
+public <T> void printZip(ArrayList<T> first, ArrayList<T> second) {
+    for (int i = 0; i < first.size(); i++) {
+        System.out.println(first.get(i) + " " + second.get(i));
+    }
+}
+\end{lstlisting}
+
+This listing shows the main difference in the use of normal parametrized types and wildcard types. The wildcard
+implementation can accept two difference types for each of the ArrayLists but the same type \lstinline{T} is used for
+both lists in the generic method implementation.
+
+\subsubsection{Upper Bounded Wildcards}
+
+\dfn{Upper Bounded Wildcard }{
+  A wildcard parametrized type that only accepts types of the bounded type or any subclass of the bounded type, denoted
+  by:
+  \begin{center}
+    \lstinline{<? extends T>}
+  \end{center}
+}
+
+\begin{lstlisting}[language=Java]
+public double sum(ArrayList<? extends Number> numbers) {
+    double sum = 0;
+    for (Number number : numbers) sum += number.doubleValue();
+    return sum;
+}
+\end{lstlisting}
+
+In this listing the method \lstinline{sum} only accepts an ArrayList of any subclass of the \lstinline{Number} class, i.e.
+\lstinline{Integer}, \lstinline{Double}, \lstinline{Float}, etc.
+
+\subsubsection{Lower Bounded Wildcards}
+
+\dfn{Lower Bounded Wildcard}{
+  A wildcard parametrized type that only accepts types of the bounded type or any superclass of the bounded type,
+  denoted by:
+  \begin{center}
+    \lstinline{<? super T>}
+  \end{center}
+}
+
+\begin{lstlisting}[language=Java]
+public int sum(ArrayList<? super Integer> numbers) {
+    int sum = 0;
+    for (int i = 0; i < 10; i++) {
+        sum += numbers.get(i);
+    }
+    return sum;
+}
+\end{lstlisting}
+
+In this listing the method \lstinline{sum} on accepts an ArrayList of type \lstinline{Integer}, or superclasses,
+\lstinline{Number} and \lstinline{Object}.
 
 
 \end{document}

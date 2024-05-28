@@ -216,6 +216,7 @@ if __name__ == "__main__":
         "CompSci/DB",
         "CompSci/Intro_AI",
         "CompSci/Linear_Algebra",
+        "Homework/Linear_Algebra",
         # Y2 S3
     ]
 

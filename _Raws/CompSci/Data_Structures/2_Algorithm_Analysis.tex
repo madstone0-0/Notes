@@ -1,0 +1,170 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Algorithm Analysis}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Analysing Algorithms}
+
+Analysing an algorithm involves prediction the resources that the algorithm will require. The resources that are of interest are:
+\begin{itemize}
+  \item Memory
+  \item Computation Time
+  \item Bandwidth
+  \item Energy Consumption
+\end{itemize}
+
+In analysing an algorithm represented in pseudocode we can determine how long the algorithm takes to run by examining
+how many times each line of the code is executed  and how long each line takes to execute. To do this we first derive a
+precise formula for the running time, then simplify the formula using a convenient notation that allows us to compare
+running times of different algorithms. For this example we will use the insertion-sort algorithm with the pseudocode
+defined below:
+
+\begin{algorithm}[H]
+  \caption{Insertion-Sort $\left( A,n \right) $}
+  \begin{algorithmic}[1]
+    \For{index $= 2$ to $n$}
+    \State prevIndex := index $- 1$
+    \State nextElement := $A$[index]
+    \Comment{Insert $A$[index] into the sorted array $A[1:\text{index}-1]$}
+    \While{$A$[prevIndex] $>$ nextElement and prevIndex $\geq 0$}
+    \State $A$[prevIndex $+ 1$] := $A$[prevIndex]
+    \EndWhile
+    \State     $A$[prevIndex $ + 1$] = nextElement
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
+
+We first must acknowledge that the running time of an algorithm depends on the input which we will call $A$. Also we
+must acknowledge that the insertion-sort algorithm can take a different amount of time sorting two arrays of the same
+size depending on how already sorted the arrays are. We then describe the running time of an algorithm as a function of
+the size of the input $n$. To do so we must clearly define the terms "running time", "size of input", and be clear about
+what scenario we are considering, whether it be best-case, worst-case, or average-case.
+
+The best description of the \textit{size of input} depends on the problem being solved. In this case for a sorting algorithm the
+best notion of the size of input is the number of elements in the array to be sorted. The \textit{running time} of an
+algorithm is the number of instructions and data accesses made by the algorithm, how this is accounted for differs from
+computer to computer but using the \textbf{RAM model} in which each simple operation takes a constant amount of time, we
+can generalize the running time of an algorithm as the number of comparisons and data movements made by the algorithm.
+Therefore in this framework each execution of the $k$th line of pseudocode takes $c_k$ time units where $c_k$ is a
+constant.
+
+First for each $i = 2,3,\ldots,n$, let $t_i$ denote the number of times the \lstinline{WHILE} loop test in line 5 is executed for
+that value of $i$. Below is a table of lines, the number of times each line is executed and cost of each line.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}[c]{|l|l|l|}
+      \hline
+      \multicolumn{1}{|c|}{\textbf{Line}} &
+      \multicolumn{1}{c|}{\textbf{Cost}}  &
+      \multicolumn{1}{c|}{\textbf{Times}}                                                    \\
+      \hline
+      1                                   & $c_1$ & $n$                                      \\
+
+      2                                   & $c_2$ & $n-1$                                    \\
+
+      3                                   & $c_3$ & $n-1$                                    \\
+
+      4                                   & $c_4$ & $\sum_{i=2}^{n} t_i$                     \\
+
+      5                                   & $c_5$ & $\sum_{i=1}^{n} \left( t_i - 1 \right) $ \\
+
+      6                                   & $c_6$ & $\sum_{i=1}^{n} \left( t_i - 1 \right) $ \\
+
+      7                                   & $c_7$ & $\sum_{i=1}^{n} \left( t_i - 1 \right) $ \\
+
+      8                                   & $c_8$ & $n-1$                                    \\
+
+
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\chapter{Exercises}
+
+\qs{}{
+  Describe an algorithm that takes as input a list of $n$ integers and finds the number of negative integers in the list
+}
+
+\sol{
+  \begin{algorithm}[H]
+    \caption{Count-Negative $\left( A,n \right) $}
+    \begin{algorithmic}[1]
+      \State count := 0
+      \For{i := 1 to $n$}
+      \If{$A$[i] < $0$}
+      \State count = count + 1
+      \EndIf
+      \EndFor
+      \State \Return count
+    \end{algorithmic}
+  \end{algorithm}
+}
+
+\qs{}{
+  Describe an algorithm that takes as in put a list of $n$ integers and produces as outputs the largest difference
+  obtained by subtracting an integer in the list from the one following it.
+}
+
+\sol{
+  \begin{algorithm}[H]
+    \caption{Largest-Difference $\left( A, n \right) $}
+    \begin{algorithmic}[1]
+      \State largest := $A_{2} - A_{1}$
+      \For{i := 2 to $n - 1$}
+      \State diff := $A_{i+1} - A_{i}$
+      \If{ diff $>$ largest}
+      \State largest = diff
+      \EndIf
+      \EndFor
+      \State \Return largest
+    \end{algorithmic}
+  \end{algorithm}
+}
+
+\qs{}{
+
+}
+
+\sol{
+  \begin{algorithm}[H]
+    \caption{Repeated-Ints $\left( A, n \right) $}
+    \begin{algorithmic}[1]
+      \State j := 0
+      \State i := 2
+      \While{$ i \leq n$}
+      \If{$A_i = A_{i-1}$}
+      \State j := $j + 1$
+      \State $B_j$ := $A_i$
+      \Comment{$B$ is the list of repeated values}
+      \While{$i \leq n$ and $A_i = C_i$}
+      \State i := $i + 1$
+      \EndWhile
+      \EndIf
+      \State i := $i + 1$
+      \EndWhile
+      \State \Return $B$
+    \end{algorithmic}
+  \end{algorithm}
+}
+
+
+
+\end{document}

@@ -278,6 +278,7 @@ of the database without considering implementation details. The conceptual level
   \item Data compression and encryption techniques
 \end{itemize}
 
+
 \subsection{Data Independence}
 \subsubsection{Logical Data Independence}
 \dfn{Logical Data Independence}{
@@ -297,20 +298,6 @@ external views and the conceptual structure of the database.
 This mainly affects the conceptual and internal levels of the database, decoupling the conceptual description of the
 database from the actual physical implementation of the database.
 
-\section{Data Models}
-
-\dfn{Data Model}{
-  An integrated collection of concepts for describing and manipulation of data. The data model provides the
-  necessary means to achieve data abstraction, which is the process of hiding the low-level details of the database
-  and showing only the relevant data to the user.
-}
-
-
-\begin{itemize}
-  \item Object-Based
-  \item Record-Based
-  \item Physical Data Model
-\end{itemize}
 
 \section{Database Languages}
 
@@ -332,10 +319,111 @@ database from the actual physical implementation of the database.
   with integrity constraints.
 }
 
+Database schema is specified by a set of definitions defined in a Data Definition Language. The result of statements
+made in a DDL is a set of tables stored in the system catalogue. The system catalogue couples the definition of these
+objects to metadata which makes it easier to access and manage the objects. This metadata includes definitions of
+records, data items, and other objects of interest.
+
 \subsection{Data Manipulation Language (DML)}
 \dfn{Data Manipulation Language}{
-
+  A language that provides a set of operations to support the basic data manipulation operations on data in the
+  database.
 }
+These operations include:
+\begin{itemize}
+  \item Insertion
+  \item Retrieval
+  \item Modification
+  \item Deletion
+\end{itemize}
+
+The part of the DML that handles retrieval is called a query language. A query language differs from the whole DML by
+their underlying retrieval constructs.
+
+\dfn{Query Language}{
+  High level special-purpose language used to satisfy diverse requests for the retrieval of data held in a database.
+}
+
+There are two types of DML:
+\begin{itemize}
+  \item Procedural
+  \item Non-procedural
+\end{itemize}
+With the main difference being that Procedural languages specify how the output of a DML statement is to be obtained but
+Non-procedural DMLs describe only what data is to be obtained.
+
+\subsubsection{Procedural DMLs}
+\dfn{Procedural DMLs}{
+  A language that allows the user to tell the system what data is needed and exactly how to obtain the data
+}
+
+This means the user must express all the data access operations that are to be used by calling the corresponding
+procedures obtaining the required output. Typically Procedural DMLs process each record individually basing the next
+record it processes on the result of processing the previous record. This chain of retrievals continues until the data
+requested has been gathered.
+
+\subsubsection{Non-Procedural DMLs}
+
+\dfn{Non-Procedural DMLs}{
+  A language that allows the user to state what data is needed rather than how it is to be retrieved.
+}
+
+The DBMS translates the DML statement into procedures that manipulate the required sets of data.
+
+\section{Data Models}
+
+\dfn{Data Model}{
+  An integrated collection of concepts for describing and manipulation of data. The data model provides the
+  necessary means to achieve data abstraction, which is the process of hiding the low-level details of the database
+  and showing only the relevant data to the user.
+}
+A data model comprises of three components:
+\begin{description}
+  \item[A Structural Part] - Consisting of a set of rules according to which databases can be constructed.
+  \item[A Manipulative Part] - Defining the types of operations that are allowed on the data.
+  \item[A Set of Integerity Constraints] - Ensures that the data is accurate.
+\end{description}
+
+Following the ANSI-SPARC architecture, we can identify three related data models:
+\begin{itemize}
+  \item An external data model / Universe of Discourse - To represent each user's view of the organization.
+  \item A conceptual data model - To represent the logical view that is DBMS-independent.
+  \item An internal data model - To represent the conceptual schema in a way that can be understood by the DBMS.
+
+\end{itemize}
+
+There are three main categories of data models:
+\begin{itemize}
+  \item Object-Based
+  \item Record-Based
+  \item Physical Data Model
+\end{itemize}
+
+\subsection{Object-Based Data Model}
+
+These categories of model use concepts such as entities, attributes, and relationships to represent data. In this model an
+\textit{entity} is a representation of a distinct real world object we want to include in the database, an
+\textit{attribute} is a property that describes some aspect of an entity, a \textit{relationship} is an association
+between entities. Some of the most common object-based data models include:
+\begin{itemize}
+  \item Entity-Relationship
+  \item Semantic
+  \item Functional
+  \item Object-Oriented
+\end{itemize}
+
+\subsection{Record-Based Data Model}
+
+These models are based on the concept of a record, which is a collection of fields, each of which contains one data
+item. There are three principal types of record-based logical data model:
+\begin{itemize}
+  \item Relational Data Model
+  \item Network Data Model
+  \item Hierarchical Data Model.
+\end{itemize}
+
+\subsection{Physical Data Model}
+
 
 \section{The Relational Model}
 
@@ -411,6 +499,84 @@ database from the actual physical implementation of the database.
   \item Three-Tier architecture - Each layer on its own machine
   \item N-Tier architecture - Multiple instances of tiers using replication procedures and load balancing.
 \end{itemize}
+
+
+\chapter{Relational Algebra and Relational Calculus}
+
+\section{The Relational Algebra}
+
+\nt{
+  A relation is a table!
+}
+
+\dfn{Relational Algebra }{
+  A theoretical language with operations that work on one or more relations to define another relation without changing
+  the original relation. Thus both the input and output of the relational algebra are relations. This allows operation
+  nesting and chaining. This property is known as \textbf{Closure}.
+}
+
+\subsection{Unary Operations}
+
+\dfn{Unary Operations}{
+  Operations that work on a single relation.
+}
+
+There are two types of unary operations:
+\begin{itemize}
+  \item  Selection / Restriction
+  \item Projection
+\end{itemize}
+
+\subsubsection{Selection}
+
+\dfn{Selection}{
+  Works on a single relation $R$, and defines a relation that contains only those tuples of $R$ that satisfy the
+  specified condition called a predicate. The selection operation is denoted by:
+  \[
+    \sigma_{\text{predicate}}\left( R \right)
+  \]
+  Where $R$ is the relation and
+  the predicate is the condition that must be satisfied.
+}
+
+\qs{}{
+  List all staff that earn more than 1000.
+}
+
+\sol{
+  Therefore the selection operation is:
+  \[
+    \sigma_{\text{salary} > 1000} \left( \text{Staff} \right)
+  \]
+  And in SQL this would be:
+  \begin{lstlisting}[language=SQL]
+    SELECT * FROM Staff WHERE salary > 1000;
+    \end{lstlisting}
+}
+
+\subsubsection{Projection}
+
+\dfn{Projection}{
+
+}
+
+
+
+\section{Defining Schemas}
+
+\subsection{Create Table}
+In the SQL DDL, the \lstinline{CREATE TABLE} statement is used to create a new table. Relations created through this command are
+base relations
+
+\dfn{Base Table / Base Relation}{
+  A table not derived from any other table.
+}
+
+To create a view using SQL the \lstinline{CREATE VIEW} statement is used.
+
+\dfn{Virtual Table / Virtual Relation / View }{
+  A table derived from other tables.
+}
 
 
 

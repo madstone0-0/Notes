@@ -18,7 +18,26 @@
 \tableofcontents
 \pagebreak
 
-\chapter{Analysing Algorithms}
+\chapter{Foundations}
+
+\section{Assumptions of the RAM Model}
+
+\begin{itemize}
+  \item Each simple operation (+, -, *, /, =, ==, \textless, \textgreater, \textless=, \textgreater=) takes a constant amount of time.
+  \item Each memory access takes a constant amount of time.
+  \item Each instruction takes a constant amount of time.
+  \item The input size is the number of bits needed to represent the input.
+\end{itemize}
+
+\section{Analysing Algorithms}
+
+\dfn{Time Complexity}{
+  How an algorithm's execution time or running time as a function of the input size grows as the input size grows.
+}
+
+\dfn{Space Complexity}{
+  The amount of memory an algorithm needs to solve a problem as a function of the input size.
+}
 
 Analysing an algorithm involves prediction the resources that the algorithm will require. The resources that are of interest are:
 \begin{itemize}
@@ -43,6 +62,7 @@ defined below:
     \Comment{Insert $A$[index] into the sorted array $A[1:\text{index}-1]$}
     \While{$A$[prevIndex] $>$ nextElement and prevIndex $\geq 0$}
     \State $A$[prevIndex $+ 1$] := $A$[prevIndex]
+    \State prevIndex := prevIndex $- 1$
     \EndWhile
     \State     $A$[prevIndex $ + 1$] = nextElement
     \EndFor
@@ -83,19 +103,202 @@ that value of $i$. Below is a table of lines, the number of times each line is e
 
       4                                   & $c_4$ & $\sum_{i=2}^{n} t_i$                     \\
 
-      5                                   & $c_5$ & $\sum_{i=1}^{n} \left( t_i - 1 \right) $ \\
+      5                                   & $c_5$ & $\sum_{i=2}^{n} \left( t_i - 1 \right) $ \\
 
-      6                                   & $c_6$ & $\sum_{i=1}^{n} \left( t_i - 1 \right) $ \\
+      6                                   & $c_6$ & $\sum_{i=2}^{n} \left( t_i - 1 \right) $ \\
 
-      7                                   & $c_7$ & $\sum_{i=1}^{n} \left( t_i - 1 \right) $ \\
+      7                                   & $0$   & $n-1$                                    \\
 
       8                                   & $c_8$ & $n-1$                                    \\
-
-
+      9                                   & $0$   & $1$                                      \\
       \hline
     \end{tabular}
   \end{center}
 \end{table}
+
+Therefore:
+\[
+  T \left( n \right)  = c_1 n + c_2  \left( n - 1 \right) + c_3 \left( n-1 \right) + c_4 \displaystyle\sum_{i=2}^{n} t_i +
+  c_5 \displaystyle\sum_{i=2}^{n} \left( t_i -1 \right) + c_6 \displaystyle\sum_{i=2}^{n} \left( t_i -1 \right) + c_8 \left( n-1 \right)
+\]
+
+However even for inputs of the same size the running time of an algorithm can vary depending on the input. For example
+the insertion-sort algorithm can take a different amount of time sorting two arrays of the same size depending on
+how already sorted the input arrays are. Therefore we must consider the \textit{best-case}, in which the input is
+already completely sorted, the \textit{worst-case}, in which the input is sorted in reverse order, and the \textit{average-case},
+in which the input is a random permutation of the integers $1,2,\ldots,n$.
+
+In the best-case the \lstinline{WHILE} loop on line 4 exits every time the condition is evaluated as the next element is
+always greater than the previous element. Therefore the lines inside the loop are not executed and only the loop header
+is executed making the time of line 4 $\left( n-1 \right) $ and lines 5 and 6 $0$, hence $T \left( n \right) $ is:
+\begin{align*}
+  T \left( n \right) & = c_1 n + c_2 \left( n-1 \right) + c_3 \left( n - 1 \right) + c_4 \left( n - 1 \right) + c_8 \left(
+  n-1\right)                                                                                                               \\
+                     & = c_1n + c_2n - c_2 + c_3n - c_3 + c_4n -c_4 + c_8n - c_8                                           \\
+                     & = n \left( c_1+c_2+c_3+c_4+c_8 \right) - \left( c_2 + c_3 + c_4 + c_8 \right)                       \\
+\end{align*}
+
+This can be expressed as
+\[
+  T \left( n \right)  = an + b
+\]
+Where $a$ and $b$ are constants. This results in the best-case running time being a linear function of $n$, the size of
+the input.
+
+In the worst-case, where the entries are sorted in reverse order, the function must compare each element $A \left[ i \right] $ to each
+element in the sorted sub array $A \left[ 1: i-1 \right] $ (the elements already gone through), therefore the \lstinline{WHILE} loop runs $i-1$ for $i =
+  2,3,\ldots,n$. Noting that:
+\begin{align*}
+  \displaystyle\sum_{i=2}^{n} i & = \left( \displaystyle\sum_{i=1}^{n} i \right) - 1 \\
+                                & = \frac{n \left( n + 1 \right) }{2} -1             \\
+\end{align*}
+And
+\begin{align*}
+  \displaystyle\sum_{i=2}^{n} \left( i - 1 \right) & = \displaystyle\sum_{i=1}^{n-1}    \\
+                                                   & = \frac{n \left( n -1 \right) }{2} \\
+\end{align*}
+
+$T \left( n \right) $ is :
+\begin{align*}
+  T \left( n \right) & = c_1 n + c_2  \left( n - 1 \right) + c_3 \left( n-1 \right) + c_4 \left( \frac{n \left( n + 1
+      \right) }{2} -1 \right)  +
+  c_5 \left( \frac{n \left( n - 1 \right) }{2} \right)  + c_6 \left( \frac{n \left( n - 1 \right) }{2} \right) + c_8
+  \left( n-1 \right)                                                                                                  \\
+                     & = c_1n + c_2n -c_2 + c_3n - c_3 + \frac{c_4n^{2} + c_4n}{2} -c_4 + \frac{c_5 n^2 - c_5n}{2} +
+  \frac{c_6 n^2 - c_6n}{2} + c_8n - c_8                                                                               \\
+                     & =  c_1n + c_2n -c_2 + c_3n - c_3 + \frac{c_4 n^2}{2} + \frac{c_4n}{2} + \frac{c_5n^2}{2} -
+  \frac{c_5n}{2} + \frac{c_6n^2}{2} - \frac{c_6n}{2} + c_8n - c_8                                                     \\
+                     & = n^2 \left( \frac{c_4}{2} + \frac{c_5}{2}+ \frac{c_6}{2} \right) + n \left( \frac{c_4}{2}
+  -\frac{c_5}{2}
+  -\frac{c_6}{2} + c_1 + c_2 + c_3 + c_8 \right) - \left( c_2 + c_3 + c_8 \right)                                     \\
+\end{align*}
+
+This can be expressed as
+\[
+  T \left( n \right)  = an^2 + bn + c
+\]
+Where $a$, $b$, and $c$ are constants. This results in the worst-case running time being a quadratic function of $n$.
+
+Usually when analysing the running times of algorithms we are mainly interested in the worst-case running time due to
+three reasons:
+\begin{itemize}
+  \item The worst-case running time gives an upper bound on the running time for any input.
+  \item From some algorithms the worst-case occurs fairly often.
+  \item The average-case is often roughly as bad as the worst-case
+\end{itemize}
+
+\section{Order of Growth}
+
+These derived equations are complex and give us more detail than we need. What we really care about when analysing
+algorithms is the rate / order of growth. We therefore consider only the leading term of a formula, $an^2$, since the
+lower-order terms are insignificant for large values of $n$. We then ignore the leading term's coefficient, since
+constant factors are less significant than the growth rate in determining the efficiency of large inputs.
+
+So for the insertion-sort's worst case $T \left( n \right) = an^2 + b + c $, we take the leading term $an^2$, then
+isolate the factor $n^2$. The factor $n^2$ then becomes the order of growth of the worst-case running time of the
+insertion-sort.
+
+The order of growth of running time is denoted by $\Theta$, making the worst-case running time of the insertion-sort
+$\Theta \left( n^2 \right) $, and the best-case running time is $\Theta \left( n \right) $
+
+\section{Designing Algorithms}
+
+\section{$O$-notation, $\Omega$-notation and $\Theta$-notation}
+
+We determined the worst-case running time of the insertion-sort algorithm to be $\Theta \left( n^2 \right) $. This
+notation is not the only notation used to describe the running time of an algorithm.
+
+\subsection{$O$-notation}
+
+\dfn{$O$-notation}{
+  Characterizes an upper-bound on the growth rate of a function. I.e. it describes that the function grows no faster
+  than a certain rate, based on the highest order term in the function.
+}
+
+For example the function
+\[
+  7n^3 + 100n^2 -20n + 6
+\]
+Its highest order term $7n^3$ and so the function's growth rate is $n^3$. Because this function grows no faster than
+$n^3$, we can say that the function is $O \left( n^3 \right) $, $O \left( n^4 \right) $, and therefore $O \left( n^c \right)
+  \text{ where } c\geq 3 $. This is because the function grows no faster than $n^3$ and therefore grows no faster than
+$n^c$ where $c \geq 3$
+
+\subsection{$\Omega$-notation}
+
+\dfn{$\Omega$-notation}{
+  Characterizes a lower-bound on the growth rate of a function. I.e. it describes that the function grows no slower than
+  a certain rate, based on the highest order term in the function.
+}
+
+This means for the same function
+\[
+  7n^3 + 100n^2 -20n + 6
+\]
+Its growth rate is $n^3$, and because the function grows no slower than $n^3$, we can say that the function is $\Omega
+  \left( n^3 \right) $, and therefore $\Omega \left( n^c \right) $, where $c \leq 3$
+
+\subsection{$\Theta$-notation}
+
+\dfn{$\Theta$-notation}{
+  Characterizes the tight bound on the growth rate of a function. I.e. it describes the precise rate at which the function
+  grows based on the highest order term in the function.
+}
+
+This notation characterizes the growth rate of a function to within a constant factor from above and below. Therefore if
+you can show that a function is both $O \left( n^c \right) $ and $\Omega \left( n^c \right) $, then you have shown that
+the function is $\Theta \left( n^c \right) $. I.e for the same function
+\[
+  7n^3 + 100n^2 -20n + 6
+\]
+We found that the function is both $O \left( n^3 \right) $ and $\Omega \left( n^3 \right) $, it is also $\Theta \left(
+  n^3 \right) $
+
+\section{Exercises}
+
+\qs{}{
+  Express the function
+  \[
+    \frac{n^3}{1000} + 100n^2 - 100n + 3
+  \]
+  in terms of $\Theta$-notation
+}
+
+\sol{
+  $\Theta \left( n^3 \right) $
+}
+
+\qs{}{
+  Consider sorting $n$ numbers stored in array $A \left[ 1:n \right] $ by finding the smallest element of $A \left[ 1:n
+      \right] $ and exchanging it with the element in $A \left[ 1 \right] $.  Then find the second smallest element of
+  $A \left[ 2:n \right] $ and exchange it with $A \left[ 2 \right] $. Continue in this manner for the first $n-1$
+  elements of $A$. Write pseudocode for this algorithm, which is known as selection-sort. What loop invariant does this
+  algorithm maintain? Why does it need to run for only the first $n-1$ elements, rather than for all $n$ elements? Give
+  the best-case and worst-case running times of selection-sort in $\Theta$-notation. Is the best-case running time any
+  better?
+}
+
+\sol{
+  \begin{algorithm}[H]
+    \caption{Selection-Sort $\left( A, n \right) $}
+    \begin{algorithmic}[1]
+      \For{i := 1 to $n -1$}
+      \State min := $A_i$
+      \State mI := i
+      \State j := i
+      \While{j $< n - 1$}
+      \If{$A_j < \text{ min}$}
+      \State min = $A_j$
+      \State mI = j
+      \EndIf
+      \State j = j $+ 1$
+      \EndWhile
+      \State Swap $A_i$ and $A_{\text{mI}}$
+      \EndFor
+    \end{algorithmic}
+  \end{algorithm}
+}
+
 
 \chapter{Exercises}
 

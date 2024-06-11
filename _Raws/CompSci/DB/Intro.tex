@@ -428,51 +428,208 @@ item. There are three principal types of record-based logical data model:
 \section{The Relational Model}
 
 \subsection{Terminology}
-\subsubsection{Database}
+
+\subsubsection{Relational Data Structure}
+\nparagraph{Database}
 \dfn{Database}{
   A set of named relations.
 }
 
-\subsubsection{Relation}
+\nparagraph{Relation}
 \dfn{Relation / Table}{
   A table in a relational database.
 }
 
-\subsubsection{Attribute}
+\nparagraph{Attribute}
 \dfn{Attribute}{
   A column in a table. Each relation has a named set of attributes.
 }
 
-\subsubsection{Tuple}
+\nparagraph{Tuple}
 \dfn{Tuple}{
   A row in a table. Each tuple has a value for each attribute.
 }
 
-\subsubsection{Type}
+\nparagraph{Type}
 \dfn{Type / Domain}{
   A description of the types of operations and values an attribute can have.
 }
 
-\subsubsection{Schema}
+\nparagraph{Schema}
 \dfn{Schema}{
   A structural description of relations in a database / A structural description of the tables in a database. A database
   differs from a database by the fact that a database is the implementation of the schema.
 }
 
-\subsubsection{Instance}
+\nparagraph{Instance}
 \dfn{Instance}{
   The actual data in a database at a particular point in time.
 }
 
-\subsubsection{Null values}
+\nparagraph{Null values}
 \dfn{Null}{
   Unknown / Undefined
 }
 
-\subsubsection{Key}
+\nparagraph{Key}
 \dfn{Key}{
   An attribute unique to each tuple, used to differentiate entities / tuples.
 }
+
+\nparagraph{Domain}
+
+\dfn{Domain}{
+  A domain $D$ is a set of atomic values, that can be assigned to a specific attribute.
+}
+
+\nparagraph{Atomic}
+\dfn{Atomic}{
+  An atomic value is indivisible, i.e. at its most basic level.
+}
+
+\nparagraph{Degree}
+\dfn{Degree}{
+  The number of attributes in a relation.
+}
+
+\nparagraph{Cardinality}
+\dfn{Cardinality}{
+  The number of tuples in a relation.
+}
+
+\nparagraph{Relational Database}
+\dfn{Relational Database}{
+  A collection of normalized relations with distinct relation names.
+}
+
+\subsubsection{Mathematical Relations}
+
+\dfn{Mathematical Relation}{
+  A subset of the Cartesian product of a list of domains.
+}
+Domains specify all the possible values that an attribute can take.
+Suppose we have domains represented as sets $D_1$, and $D_2$, where $D_1 = \{2, 4\} $ and $D_2 = \{1, 3, 5\} $. The
+\textit{Cartesian product} of these sets is:
+\[
+  D_1 \times D_2 = \{ \left( 2,1 \right), \left( 2, 3 \right), \left( 2, 5
+  \right), \left( 4, 1 \right), \left( 4, 3 \right), \left( 4, 5 \right)       \}
+\]
+Any subset of this product is a relation. For example, the subset $\{ \left( 2,1 \right), \left( 4,1 \right)   \} $ can
+be expressed as the relation $R$:
+\[
+  R = \left\{ \left( 2,1 \right), \left( 4,1 \right) \right\}
+\]
+Therefore generally for domains $D_1$ and $D_2$, a relation $R$ is:
+\[
+  R = \{ \left( x, y \right)  \mid x \in D_1 \wedge y \in D_2  \}
+\]
+And due to the properties of $n$-tuples, a relation $S$ can be defined using the same sets of domains as:
+\[
+  S = \{ \left( y, x \right)  \mid x \in D_1 \wedge y \in D_2  \}
+\]
+Therefore for $n$ domains, $D_1, D_2, \ldots, D_n$, any subset of the Cartesian product of these domains is a relation:
+\begin{align*}
+  D_1 \times D_2 \times \ldots \times D_n & = \{ \left( d_1, d_2, \ldots, d_n \right)  \mid d_1 \in D_1 \wedge d_2 \in D_2
+  \wedge \ldots \wedge d_n \in D_n \}                                                                                      \\
+  \text{Which is represented as}          &
+  \\
+                                          & \prod_{j=1}^{n}  D_j
+\end{align*}
+
+\subsubsection{Database Relations}
+
+\nparagraph{Relation Schema}
+\dfn{Relation Schema}{
+  A named relation defined  by a set of attribute and domain name pairs.
+}
+
+Let $A_1, A_2,\ldots, A_n$ be attributes with domains $D_1, D_2, \ldots, D_n$. Then set
+\[
+  S = \{A_1:D_1, A_2:D_2, \ldots, A_n:D_n\}
+\]
+Is a relation schema.
+
+A relation $R$ defined by a relation schema $S$ is a set of mappings from the attribute names to their corresponding
+domains, thus , $R$ is a set of $n$-tuples:
+\[
+  R = \{ \left( A_1:d_1, A_2:d_2, \ldots, A_n:d_n \right)  \mid d_1 \in D_1 \wedge d_2 \in D_2 \wedge \ldots \wedge d_n
+  \in D_n  \}
+\]
+
+\nparagraph{Relational Database Schema}
+\dfn{Relational Database Schema}{
+  A set of relation schemas, each with a distinct name
+}
+
+Therefore for relation schemas $R_1, R_2, \ldots, R_n$, a relation database schema $S$ is:
+\[
+  S = \{R_1, R_2, \ldots, R_n\}
+\]
+
+\subsubsection{Properties of Relations}
+
+\subsection{Relational Keys}
+\subsubsection{Superkey}
+\dfn{Superkey}{
+  An attribute, or set of attributes, that uniquely identifies a tuple within a relation.
+}
+A superkey may include extraneous attributes not necessary for identification.
+
+\subsubsection{Candidate Key}
+\dfn{Candidate Key}{
+  A superkey such that such that no proper subset is a superkey within the relation. An attribute or set of attributes
+  that can be used to uniquely identify a tuple within a relation without any extraneous attributes.
+}
+
+A candidate key $K$ for a relation $R$ has two properties:
+\begin{description}
+  \item[Uniqueness] In each tuple of $R$, the value of $K$ uniquely identifies the tuple.
+  \item[Irreducibility] No proper subset of $K$ has the uniqueness property.
+\end{description}
+
+\dfn{Composite Key}{
+  A candidate key that consists of more than one attribute.
+}
+
+\subsubsection{Primary Key}
+\dfn{Primary Key}{
+  The candidate key that is chosen to uniquely identify tuples within a relation.
+}
+
+\subsubsection{Foreign Key}
+\dfn{Foreign Key}{
+  An attribute, or set of attributes, within one relation that matches the candidate key of some (possibly the same)
+  relation.
+}
+
+\subsection{Integrity Constraints}
+
+\subsubsection{Domain Constraints}
+\dfn{Domain Constraints}{
+  The set of allowable values for an attribute.
+}
+
+\subsubsection{Null}
+\dfn{Null}{
+  Represents a value for an attribute that is currently unknown or not applicable for the tuple.
+}
+
+\subsubsection{Entity Integrity}
+
+\dfn{Entity Integrity}{
+  In a base relation, no attribute of a primary key can be null.
+}
+
+By definition a primary key is a unique identify used to differentiate tuples from one another, this means no subset of
+the primary key is enough to uniquely identify a tuple. If any part of the primary key were null the implication is that
+not all the attributes of a tuple are needed to distinguish from other tuples contradicting the definition of primary
+key.
+
+\subsubsection{Referential Integrity}
+
+\subsubsection{Key Integrity}
+
+\subsubsection{Operations and Integrity Violations}
 
 \section{Software Architecture}
 
@@ -557,26 +714,33 @@ There are two types of unary operations:
 \subsubsection{Projection}
 
 \dfn{Projection}{
-
+  Also works on a single relation $R$ and defines a relation that contains a vertical subset of $R$, extracting the values
+  of specified attributes and eliminating duplicates. The projection operation is denoted by:
+  \[
+    \Pi_{a_1, \ldots, a_n} \left( R \right)
+  \]
 }
 
-
-
-\section{Defining Schemas}
-
-\subsection{Create Table}
-In the SQL DDL, the \lstinline{CREATE TABLE} statement is used to create a new table. Relations created through this command are
-base relations
-
-\dfn{Base Table / Base Relation}{
-  A table not derived from any other table.
+\qs{}{
+  Produce a list of salaries for all staff, showing only the staffNo, fName, IName, and salary details.
 }
 
-To create a view using SQL the \lstinline{CREATE VIEW} statement is used.
+\sol{
 
-\dfn{Virtual Table / Virtual Relation / View }{
-  A table derived from other tables.
+  The projection operation is:
+  \[
+    \Pi_{\text{staffNo, fName, lName, salary}} \left( \text{Staff} \right)
+  \]
+  And in SQL this would be:
+  \begin{lstlisting}[language=SQL]
+  SELECT staffNo, fName, lName, salary FROM Staff
+  \end{lstlisting}
 }
+
+\section{Set / Binary Operations}
+
+\subsection{Union}
+
 
 
 

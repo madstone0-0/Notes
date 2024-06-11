@@ -1,0 +1,292 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Matrix Algebra}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Matrix Operations}
+
+
+If $A$ is a $n \times m$ matrix then the scalar entry in the $i$th row and the $j$th column of $A$ is denoted by
+$a_{ij}$, and is called the $ \left( i, j \right) $-entry. Each column of $A$ is a list of $m$ real numbers in the
+$\mathbb{R}^{m}$ vector space. Therefore the columns of $A$ can be represented as vectors in $\mathbb{R}^{m}$:
+\[
+  A = \begin{bmatrix} \mbold{a}_1 & \mbold{a}_2 & \ldots \mbold{a}_n \end{bmatrix}
+\]
+
+\dfn{Diagonals}{
+  The diagonal entries of a matrix $A$ of dimension $n \times m$, are the entries $a_{ij}$, where $i = j$. This is
+  called the \textbf{main diagonal} of the matrix $A$. A \textbf{diagonal matrix} is a square matrix $n\times n$ whose
+  non-diagonal entries are all zero.
+}
+
+\section{Sums and Scalar Multiples}
+
+\dfn{Equality of Matrices}{
+  Two matrices $A$ and $B$, are equal if:
+  \begin{itemize}
+    \item The are of the same size i.e, $m\times x$
+    \item The corresponding entries are equal i.e, $A_{ij} = B_{ij}$
+  \end{itemize}
+}
+
+\thm{Axioms of Matrix Addition}{
+  Let $A, B$ and $C$ be matrices of the same size, and let $r$ and $s$ be scalars. Then the following axioms hold:
+  \begin{description}
+    \item[Communtativity] $A + B = B + A$
+    \item[Associativity] $ \left( A + B \right) + C = A + \left( B + C\right)  $
+    \item[Additive Identity] $A + 0 = A$
+    \item[Distruibutivity 1] $r\left( A + B \right) = rA + rB$
+    \item[Distruibutivity 2] $ \left( r + s \right) A = rA + sA $
+    \item[Compatibility with Scalar Multiplication] $r\left( sA \right) = \left( rs \right)A$
+  \end{description}
+}
+
+\section{Matrix Multiplication}
+
+When a matrix $B$ multiples a vector $\mbold{x}$, it transforms $\mbold{x}$ into the vector $B\mbold{x}$. If this vector
+is then multiples by another matrix $A$, the result is the vector $A \left( B \mbold{x}\right) $. Thus $A \left( B
+  \mbold{x}\right) $ is produced by a composition of mappings / linear transformations. This can be also expressed as:
+\[
+  A \left( B \mbold{x}\right) = \left( AB \right) \mbold{x}
+\]
+
+Because, if $A$ is $m\times n$, $B$ is $n\times p$ and $\mbold{x}$ is in $\mathbb{R}^{p}$, can denote the columns of
+$B$, by $\mbold{b}_1, \ldots, \mbold{b}_p$ and the entries of $\mbold{x}$ by, $x_1, \ldots, x_p$. Then
+\[
+  B \mbold{x} = x_1 \mbold{b}_1 + \ldots + x_p \mbold{b}_p
+\]
+By the linearity of matrix multiplication, we have:
+\begin{align*}
+  A \left( B \mbold{x} \right) & = A \left( x_1 \mbold{b}_1 \right) + \ldots + A \left( x_p \mbold{b}_p \right) \\
+                               & = x_1 \left( A\mbold{b}_1 \right) + \ldots + x_p \left( A \mbold{b}_p \right)  \\
+\end{align*}
+The vector $A \left( B\mbold{x} \right) $ is then a linear combination of the vectors $A\mbold{b}_1, \ldots,
+  A\mbold{b}_p$, using the entries of $\mbold{x}$ as weights. This can be expressed in matrix notation as:
+\[
+  A \left( B \mbold{x} \right)  = \begin{bmatrix} A \mbold{b}_1 & A \mbold{b}_2 & \ldots & A \mbold{b}_p \end{bmatrix}
+  \mbold{x}
+\]
+\thm{}{
+  If $A$ is an $m \times n$ matrix, and if $B$ is an $n \times p$ matrix with columns $\mbold{b}_1, \ldots, \mbold{b}_p$,
+  then the product $AB$ is the $m \times p$ matrix whose columns are $A\mbold{b}_1, \ldots, A\mbold{b}_p$.That is:
+  \[
+    A \left( B \mbold{x} \right)  = \begin{bmatrix} A \mbold{b}_1 & A \mbold{b}_2 & \ldots & A \mbold{b}_p \end{bmatrix}
+    \mbold{x}
+  \]
+}
+
+\ex{}{
+  \qs{}{
+    Compute $AB$ where $A = \begin{bmatrix} 2 & 3 \\ 1 & -5 \end{bmatrix} $, and $B = \begin{bmatrix} 4  & 3 & 6 \\ 1 &
+                -2 & 3\end{bmatrix} $
+  }
+
+  \sol{
+    \begin{align*}
+      A \mbold{b}_1 & = \begin{bmatrix} 2 & 3 \\ 1 & -5 \end{bmatrix} \begin{bmatrix} 4 \\ 1 \end{bmatrix}  \\
+                    & = \begin{bmatrix}
+                          8 + 3 \\
+                          4 + -5
+                        \end{bmatrix}                                                                      \\
+                    & = \begin{bmatrix}
+                          11 \\
+                          -1
+                        \end{bmatrix}                                                                      \\
+      \\
+      A \mbold{b}_2 & = \begin{bmatrix} 2 & 3 \\ 1 & -5 \end{bmatrix} \begin{bmatrix} 3 \\ -2 \end{bmatrix} \\
+                    & = \begin{bmatrix}
+                          6 - 6 \\
+                          3 + 10
+                        \end{bmatrix}                                                                      \\
+                    & = \begin{bmatrix}
+                          0 \\
+                          13
+                        \end{bmatrix}                                                                      \\
+      \\
+      A \mbold{b}_3 & = \begin{bmatrix} 2 & 3 \\ 1 & -5 \end{bmatrix} \begin{bmatrix} 6 \\ 3 \end{bmatrix}  \\
+                    & = \begin{bmatrix}
+                          21 \\
+                          -9
+                        \end{bmatrix}                                                                      \\
+      \\
+      AB            & =  \begin{bmatrix}
+                           11 & 0  & 12 \\
+                           -1 & 13 & -9
+                         \end{bmatrix}                                                                     \\
+    \end{align*}
+  }
+}
+
+\thm{Row-Column Rule}{
+If the product $AB$ is defined, them the entry in row $i$ and column $j$ of $AB$ is the sum of the products of
+corresponding entries of the row $i$ of $A$ and column $j$ of $B$. If $ \left( A B \right)_{ij} $ denotes the $ \left(
+  i, j \right) $-entry in $A B$, and if $A$ is an $m \times n$, then
+\[
+  \left( A B \right)_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + \ldots + a_{in}b_{nj}
+\]
+}
+
+\ex{}{
+  Use the row–column rule to compute two of the entries in $A B$ for the
+  matrices:
+  \[
+    A = \begin{bmatrix}
+      2 & 3  \\
+      1 & -5
+    \end{bmatrix}, \,
+    B = \begin{bmatrix}
+      4 & 3  & 6 \\
+      1 & -2 & 3
+    \end{bmatrix}
+  \]
+  An inspection of the numbers involved will make it clear how
+  the two methods for calculating $A B$ produce the same matrix. \\
+
+
+  The dimensions of the resultant matrix is $2 \times 3$, therefore the entries of $A B$ are:
+  \begin{align*}
+    A B & = \begin{bmatrix}
+              2 \left( 4 \right)+ 3 \left( 1 \right)  & 2 \left( 3 \right)  + 3 \left( -2 \right) & 2 \left( 6 \right) + 3
+              \left( 3 \right)                                                                                             \\
+              1 \left( 4 \right)  -5 \left( 1 \right) & 1 \left( 3 \right) - 5 \left( -2 \right)  & 1 \left( 6 \right) - 5
+              \left( 3 \right)
+            \end{bmatrix} \\
+        & = \begin{bmatrix}
+              11 & 0  & 21 \\
+              -1 & 13 & 9  \\
+            \end{bmatrix}                                                                                               \\
+  \end{align*}
+}
+
+\ex{}{
+  \qs{}{
+    Find the entries in the second row of $AB$ where,
+    \[
+      A = \begin{bmatrix}
+        2  & -5 & 0  \\
+        -1 & 3  & -4 \\
+        6  & -8 & -7 \\
+        -3 & 0  & 9
+      \end{bmatrix}, \,
+      B = \begin{bmatrix}
+        4 & -6 \\
+        7 & 1  \\
+        3 & 2
+      \end{bmatrix}
+    \]
+  }
+
+  \sol{
+    \begin{align*}
+      \begin{bmatrix} -1 & 3 & -4 \end{bmatrix} \begin{bmatrix} 4 & -6 \\ 7 & 1 \\ 3 & 2 \end{bmatrix} \\
+      \begin{bmatrix}
+        -4 + 21 - 12 & 6 + 3 - 8
+      \end{bmatrix}                                                                         \\
+      \begin{bmatrix} 5 & 1 \end{bmatrix}
+    \end{align*}
+  }
+}
+
+\thm{Axioms of Matrix Multiplication}{
+  Let $A$ be an $m \times n$ matrix and let $B$ and $C$ have sizes for which  the indicated sums and products are
+  defined:
+  \begin{description}
+    \item[Associativity]  $A \left( B C \right) = \left( A B \right)  C$
+    \item[Left Distruibutivity] $A \left( B + C \right) = A B + A C $
+    \item[Right Distruibutivity] $ \left( B + C \right) A = B A + C A $
+    \item[Scalar Associativity] $ r \left( A B \right) = \left( r A \right) B = A \left( r B \right), \, \forall r, \, r
+            \in \mathbb{F}$
+    \item[Mutliplicative Identitiy] $I_{m}A = A = A I_{n} $
+  \end{description}
+}
+
+\ex{}{
+  \qs{}{
+    Let $A = \begin{bmatrix} 5 & 1 \\ 3 & -2 \end{bmatrix} $ and $B = \begin{bmatrix} 2 & 0 \\ 4 & 3 \end{bmatrix} $. Show
+    that these matrices do not commute, I.e, verify $A B \neq  B A$
+  }
+
+  \sol{
+    \begin{align*}
+      A B            & = \begin{bmatrix} 5 & 1 \\ 3 & -2 \end{bmatrix} \begin{bmatrix} 2 & 0 \\ 4 & 3 \end{bmatrix} \\
+                     & = \begin{bmatrix}
+                           14 & 3  \\
+                           -2 & -6
+                         \end{bmatrix}                                                                             \\
+      \\
+      B A            & = \begin{bmatrix} 2 & 0 \\ 4 & 3 \end{bmatrix} \begin{bmatrix} 5 & 1 \\ 3 & -2 \end{bmatrix} \\
+                     & = \begin{bmatrix}
+                           10 & 2  \\
+                           29 & -2
+                         \end{bmatrix}                                                                             \\
+      \\
+      \therefore A B & \neq BA
+    \end{align*}
+  }
+}
+
+\subsection{Powers of a Matrix}
+
+\dfn{Powers of a Matrix}{
+  If $A$ is an $n \times n$ matrix and if $k$ is a positive integer, then $A^k$ denotes the product of $k$ copies of
+  $A$:
+  \[
+    A^{k} = A_1 \ldots A_k
+  \]
+  Where $A_1 = A_2 \wedge A_2 = A_3 \wedge \ldots \wedge A_{k-1} = A_k$
+}
+
+If $A$ is non-zero and if $\mbold{x}$ is in $\mathbb{R}^{n}$, then $A^{k} \mbold{x}$ is the result of left-multiplying
+$\mbold{x}$ by $A$ repeatedly $k$ times.
+
+If $k = 0$, then $A^{0} \mbold{x}$ is $\mbold{x}$. Thus $A^{0}$ is interpreted as the Identity matrix.
+
+\section{The Transpose of a Matrix}
+
+\dfn{The Transpose of a Matrix}{
+Given a matrix $A$, its \textit{transpose}, denoted by $A^T$, is defined by transforming  the rows of $A$ into columns.
+For example:
+\[
+  \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6  \end{bmatrix}^{T} = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix}
+\]
+Therefore formally, the transpose of a matrix $A_{m,n}$ is defined as:
+\[
+  A^T_{m,n}  = A_{n,m}
+\]
+}
+
+Therefore, let $A$ and $B$ denote matrices whose sizes are appropriate for the following sums and products:
+\begin{enumerate}
+  \item $ \left( A^{T} \right)^{T} = A$
+  \item $ \left( A + B \right)^{T} = A^{T} + B^{T} $
+  \item $\forall r \in \mathbb{F}, \, \left( r A \right)^{T} = r A^{T}  $
+  \item $ \left( A B \right)^{T} = B ^{T} A^{T} $ \label{thm:asctrans}
+\end{enumerate}
+
+Usually $ \left( A B \right)^{T} $ is not equal $A ^{T} B^{T}$, even when $A$ and $B$ have dimensions such that $A ^{T}
+  B^{T}$ is defined. The generalization of axiom \ref{thm:asctrans} to products more than two factors is as follows:
+
+\thm{}{
+  The transpose of a product of matrices equals the product of their transpose in the reverse order.
+}
+
+\chapter{The Inverse Of A Matrix}
+
+\section{Invertibility}
+
+\end{document}

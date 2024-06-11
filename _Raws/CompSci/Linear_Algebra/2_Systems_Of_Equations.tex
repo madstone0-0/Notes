@@ -1852,7 +1852,73 @@ vector plus an arbitrary linear combination of other vectors that satisfy the sy
       \item
             \begin{align*}
               \mathbf{v}_1 + \mathbf{v}_2 +  \mathbf{v}_3 = x_1\begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} + x_2\begin{bmatrix}
-                                                                                                                4 \\ 5 \\ 6 \end{bmatrix} + x_3\begin{bmatrix} 2 \\ 1 \\ 0 \end{bmatrix} \\
+                                                                                                                4 \\ 5
+                                                                                                                \\ 6
+                                                                                                              \end{bmatrix}
+              +
+              x_3\begin{bmatrix}
+                   2 \\ 1
+                   \\ 0
+                 \end{bmatrix}
+              =
+              \begin{bmatrix}
+                0 \\0 \\ 0 \end{bmatrix}    \\
+              \\
+              x_1 + 4x_2 + 2x_3 = 0       \\
+              2x_1 + 5x_2 + x_3 = 0       \\
+              3x_1 + 6x_2 = 0             \\
+              \\
+              \begin{bmatrix}
+                1 & 4 & 2 & 0 \\
+                2 & 5 & 1 & 0 \\
+                3 & 6 & 0 & 0
+              \end{bmatrix}              \\
+              2R_1 - R_2  \rightarrow R_2 \\
+              \begin{bmatrix}
+                1 & 4 & 2 & 0 \\
+                0 & 3 & 3 & 0 \\
+                3 & 6 & 0 & 0 \\
+              \end{bmatrix}
+              \\
+              3R_1 - R_3  \rightarrow R_3 \\
+              \begin{bmatrix}
+                1 & 4 & 2 & 0 \\
+                0 & 3 & 3 & 0 \\
+                0 & 6 & 6 & 0 \\
+              \end{bmatrix}
+              \\
+              2R_2 - R_3  \rightarrow R_3 \\
+              \begin{bmatrix}
+                1 & 4 & 2 & 0 \\
+                0 & 3 & 3 & 0 \\
+                0 & 0 & 0 & 0 \\
+              \end{bmatrix}
+              \\
+            \end{align*}
+            $\therefore$ The set of vectors $\{\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3\} $ is linearly dependent
+      \item
+            \begin{align*}
+              \frac{4}{3}R_2 - R_1  \rightarrow R_1 \\
+              \begin{bmatrix}
+                -1 & 0 & 2 & 0 \\
+                0  & 3 & 3 & 0 \\
+                0  & 0 & 0 & 0 \\
+              \end{bmatrix}
+              \\
+              \\
+              -x_1 + 2x_3 = 0                       \\
+              3x_2 + 3x_3 = 0                       \\
+              x_3 = x_3                             \\
+              \\
+              x_1 = 2x_3                            \\
+              x_2 = -x_3                            \\
+              x_3 = x_3                             \\
+              \\
+              \begin{cases}
+                x_1 = 2x_3 \\
+                x_2 = -x_3 \\
+                x_3 \text{ is free}
+              \end{cases}
             \end{align*}
     \end{enumerate}
   }
@@ -1883,8 +1949,30 @@ vector plus an arbitrary linear combination of other vectors that satisfy the sy
         0 & 1 & 4  & 0 \\
         1 & 2 & -1 & 0 \\
         5 & 8 & 0  & 0
+      \end{bmatrix}              \\
+      R_1 \leftrightarrow R_2     \\
+      \begin{bmatrix}
+        1 & 2 & -1 & 0 \\
+        0 & 1 & 4  & 0 \\
+        5 & 8 & 0  & 0 \\
+      \end{bmatrix}
+      \\
+      5R_1 - R_3  \rightarrow R_3 \\
+      \begin{bmatrix}
+        1 & 2 & -1 & 0 \\
+        0 & 1 & 4  & 0 \\
+        0 & 2 & -5 & 0 \\
+      \end{bmatrix}
+      \\
+      2R_2 - R_3  \rightarrow R_3 \\
+      \begin{bmatrix}
+        1 & 2 & -1 & 0 \\
+        0 & 1 & 4  & 0 \\
+        0 & 0 & 13 & 0 \\
       \end{bmatrix}
     \end{align*}
+    $\therefore$ The columns of the matrix $A$ are linearly dependent as the equation $A\mathbf{x} = \mathbf{0}$ has
+    a non-trivial solution.
   }
 }
 
@@ -1958,13 +2046,263 @@ when $A$ has $m$ rows.
             \end{align*}
       \item
             \begin{align*}
-              T \left( \mathbf{x} \right) & = A \mathbf{x} =  \mathbf{b}                                                                                                                      \\
-                                          & =                            \begin{bmatrix} x_1 - 3x_2 \\ 3x_1 + 5x_2 \\ -x_1 + 7x_2 \end{bmatrix} = \begin{bmatrix} 3 \\  2 \\ -5 \end{bmatrix}
+              T \left( \mathbf{x} \right)  = A \mathbf{x} =  \mathbf{b}                                           \\
+              =                            \begin{bmatrix} x_1 - 3x_2 \\ 3x_1 + 5x_2 \\
+                                             -x_1 + 7x_2\end{bmatrix} = \begin{bmatrix} 3 \\  2 \\ -5 \end{bmatrix} \\
+              \begin{bmatrix}
+                1  & -3 & 3  \\
+                3  & 5  & 2  \\
+                -1 & 7  & -5 \\
+              \end{bmatrix}
+              \\
+              3R_1 - R_2  \rightarrow R_2                                                                         \\
+              \begin{bmatrix}
+                1  & -3  & 3  \\
+                0  & -14 & 7  \\
+                -1 & 7   & -5 \\
+              \end{bmatrix}
+              \\
+              R_2 \leftrightarrow R_3                                                                             \\
+              \begin{bmatrix}
+                1  & -3  & 3  \\
+                0  & -14 & 7  \\
+                -1 & 7   & -5 \\
+              \end{bmatrix}
+              \\
+              -2R_2 - R_3  \rightarrow R_3                                                                        \\
+              \begin{bmatrix}
+                1  & -3 & 3  \\
+                -1 & 7  & -5 \\
+                2  & 0  & 3  \\
+              \end{bmatrix}
+              \\
+              -1R_1 - R_2  \rightarrow R_2                                                                        \\
+              \begin{bmatrix}
+                1 & -3 & 3 \\
+                0 & -4 & 2 \\
+                2 & 0  & 3 \\
+              \end{bmatrix}
+              \\
+              2R_1 - R_3  \rightarrow R_3                                                                         \\
+              \begin{bmatrix}
+                1 & -3 & 3 \\
+                0 & -4 & 2 \\
+                0 & -6 & 3 \\
+              \end{bmatrix}
+              \\
+              \frac{3}{2}R_2 - R_3  \rightarrow R_3                                                               \\
+              \begin{bmatrix}
+                1 & -3 & 3 \\
+                0 & -4 & 2 \\
+                0 & 0  & 0 \\
+              \end{bmatrix}
+              \\
+              \frac{3}{4}R_2 - R_1  \rightarrow R_1                                                               \\
+              \begin{bmatrix}
+                -1 & 0  & \frac{-3}{2} \\
+                0  & -4 & 2            \\
+                0  & 0  & 0            \\
+              \end{bmatrix}
+              \\
+              x_1 = \frac{3}{2}                                                                                   \\
+              x_2 = -\frac{1}{2}                                                                                  \\
             \end{align*}
+            $\therefore$ $\mathbf{x} = \begin{bmatrix}
+                \frac{3}{2} \\
+                -\frac{1}{2}
+              \end{bmatrix} $
 
+      \item
+            \begin{align*}
+              T \left( \mathbf{x} \right) = \mathbf{b} \\
+              \begin{bmatrix}
+                x_1 - 3x_2  \\
+                3x_1 + 5x_2 \\
+                -x_1 + 7x_2
+              \end{bmatrix} = \begin{bmatrix}
+                                3 \\  2\\  -5
+                              \end{bmatrix}           \\
+              \begin{bmatrix}
+                1  & -3 & 3  \\
+                3  & 5  & 2  \\
+                -1 & 7  & -5 \\
+              \end{bmatrix} \sim               \begin{bmatrix}
+                                                 -1 & 0  & \frac{-3}{2} \\
+                                                 0  & -4 & 2            \\
+                                                 0  & 0  & 0            \\
+                                               \end{bmatrix}
+            \end{align*}
+            As the equation $A \mbold{x} = \mbold{b}$ has a unique solution, there is exactly one $\mbold{x}$ whose
+            image is $\mbold{b}$
+      \item
+            For $\mbold{c}$ to be in the range of the transformation $T$, a $\mbold{x}$ transformed by $T$ must map to
+            $\mbold{c}$, therefore:
+            \begin{align*}
+              \begin{bmatrix}
+                1  & -3 & 3 \\
+                3  & 5  & 2 \\
+                -1 & 7  & 5 \\
+              \end{bmatrix}                        \\
+              3R_1 - R_2  \rightarrow R_2           \\
+              \begin{bmatrix}
+                1  & -3  & 3 \\
+                -1 & 7   & 5 \\
+                0  & -14 & 7 \\
+              \end{bmatrix}
+              \\
+              R_2 \leftrightarrow R_3               \\
+              \begin{bmatrix}
+                1  & -3  & 3 \\
+                -1 & 7   & 5 \\
+                0  & -14 & 7 \\
+              \end{bmatrix}
+              \\
+              -2R_2 - R_3  \rightarrow R_3          \\
+              \begin{bmatrix}
+                1  & -3 & 3   \\
+                -1 & 7  & 5   \\
+                2  & 0  & -17 \\
+              \end{bmatrix}
+              \\
+              -R_1 - R_2  \rightarrow R_2           \\
+              \begin{bmatrix}
+                1 & -3 & 3   \\
+                0 & -4 & -8  \\
+                2 & 0  & -17 \\
+              \end{bmatrix}
+              \\
+              2R_1 - R_3  \rightarrow R_3           \\
+              \begin{bmatrix}
+                1 & -3 & 3  \\
+                0 & -4 & -8 \\
+                0 & -6 & 23 \\
+              \end{bmatrix}
+              \\
+              \frac{3}{2}R_2 - R_3  \rightarrow R_3 \\
+              \begin{bmatrix}
+                1 & -3 & 3   \\
+                0 & -4 & -8  \\
+                0 & 0  & -35 \\
+              \end{bmatrix}
+            \end{align*}
+            The system is inconsistent, meaning $\mbold{c}$ is not in the range of $T$
     \end{enumerate}
   }
 }
+
+\section{Linear Transformations}
+
+\dfn{Linear Transform}{
+  A transformation / mapping $T$ is linear if:
+  \begin{itemize}
+    \item $T \left( \mathbf{u} + \mathbf{v} \right) = T \left( \mathbf{u} \right) + T \left( \mathbf{v} \right),
+            \,\forall \mathbf{u}, \mathbf{v} \text{ in the domain of } T   $
+    \item $T \left( c\mathbf{u} \right) = c T \left( \mathbf{u} \right) \text{ for all scalars $c$ and all $\mathbf{u}$
+              in the domain of } T  $
+  \end{itemize}
+}
+
+Linear Transformations preserve the operations of vector addition and scalar multiplication.
+\thm{}{
+  If $T$ is a linear transformation, then
+  \[
+    T \left( \mathbf{0} \right) = \mathbf{0}
+  \]
+  and
+  \[
+    T \left( c\mathbf{u} + d \mathbf{v} \right)  = c T \left( \mathbf{u} \right)  + d T \left( \mathbf{v} \right)
+  \]
+  for all vectors $\mathbf{u}$, $\mathbf{v}$ in the domain of $T$ and all scalars $c$, $d$.
+}
+
+\dfn{Contraction}{
+  Given a scalar $r$, and a transformation $T: \mathbb{R}^2 \to \mathbb{R}^2$ defined by $T \left( \mathbf{x} \right) =
+    r \mathbf{x}$. $T$ is a contraction when $0 \leq r \leq 1$.
+}
+
+\dfn{Dilation}{
+  Given a scalar $r$, and a transformation $T:\mathbb{R}^2 \to \mathbb{R}^2$ defined by $T \left( \mathbf{x} \right) = r
+    \mathbf{x}$. $T$ is a dilation when $r > 1$
+}
+
+\ex{}{
+  \qs{}{
+    Let $r = 3$, and show that $T$ is a linear transformation.
+  }
+
+  \sol{
+    Let $\mathbf{u}$, and  $\mathbf{v}$ be vectors in $\mathbb{R}^2$, and $c$, and $d$ be scalars.
+    \begin{align*}
+      T \left( c\mathbf{u} + d \mathbf{v} \right) & = 3 \left( c \mathbf{u} + d \mathbf{v} \right)                  \\
+                                                  & = 3c\mathbf{u} + 3d\mathbf{v}                                   \\
+                                                  & = c \left( 3\mathbf{u} \right) + d \left( 3 \mathbf{v} \right)  \\
+                                                  & = c T \left( \mathbf{u} \right) + d T \left( \mathbf{v} \right) \\
+    \end{align*}
+    Thus $T$ is a linear transformation because its satisfies the properties of linearity.
+  }
+}
+
+\section{The Matrix of a Linear Transformation}
+
+\dfn{Matrix of a Linear Transformation}{
+  Let $T$ be a linear transformation from $\mathbb{R}^n$ to $\mathbb{R}^m$. Then there exists a unique matrix $A$ such
+  that
+  \[
+    T \left( \mathbf{x} \right) = A \mathbf{x}
+  \]
+  for all $\mathbf{x}$ in $\mathbb{R}^n$. The matrix $A$ is called the \textit{standard matrix} for the linear
+  transformation $T$.
+}
+
+The key to finding the matrix $A$ of a linear transformation $T$ is determine the images of the standard unit vectors
+found in the columns of $n\times n$ identity matrix $I_n$
+
+\ex{}{
+  \qs{}{
+    The columns of $I_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} $ are $\mathbf{e}_1 = \begin{bmatrix} 1 \\ 0
+      \end{bmatrix} $, and $\mathbf{e}_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix} $. Suppose $T$ is a linear transformation from
+    $\mathbb{R}^2$ into $\mathbb{R}^3$ such that
+    \[
+      T \left( \mathbf{e}_1 \right) = \begin{bmatrix} 5 \\ -7 \\ 2 \end{bmatrix} \text{ and } T \left( \mathbf{e}_2 \right) =
+      \begin{bmatrix} -3 \\ 8 \\ 0 \end{bmatrix}
+    \]
+    With no additional information, find a formula for the image of an arbitrary $\mathbf{x}$ in $\mathbb{R}^2$
+  }
+
+  \sol{
+    \[
+      \mathbf{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}  = x_1 \begin{bmatrix} 1 \\ 0 \end{bmatrix} + x_2
+      \begin{bmatrix} 0 \\ 1 \end{bmatrix} = x_1 \mbold{e}_1 + x_1 \mbold{e}_2
+    \]
+    $\therefore$
+    \begin{align*}
+      T \left( \mbold{x} \right) & = x_1 T \left( \mbold{e}_1 \right)  + x_2 T \left( \mbold{e}_2 \right)                             \\
+                                 & = x_1  \begin{bmatrix} 5 \\ -7 \\ 2 \end{bmatrix} + x_2 \begin{bmatrix} -3 \\ 8 \\ 0 \end{bmatrix} \\
+                                 & = \begin{bmatrix}
+                                       5x_1 -3 x_2  \\
+                                       -7x_1 + 8x_2 \\
+                                       2x_1
+                                     \end{bmatrix}                                                                                   \\
+      \therefore                                                                                                                      \\
+      T \left( \mbold{x} \right) & = \begin{bmatrix} T \left( \mbold{e}_1 \right) & T \left( \mbold{e}_2 \right)
+                                     \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}                      \\
+    \end{align*}
+  }
+}
+
+\thm{}{
+  Let $T: \mathbb{R}^{n} \to \mathbb{R}^{m}$ be a linear transformation. Them there exists a unique matrix $A$ such that
+  \[
+    T \left( \mbold{x} \right) = A \mbold{x}, \, \forall \mbold{x} \in \mathbb{R}^{n}
+  \]
+  In fact , $A$ is the $m \times n$ matrix whose $j$th column is the vector $T \left( \mbold{e}_j \right) $,where
+  $\mbold{e}_j$ is the $j$th column of the identity matrix in $\mathbb{R}^{n}$:
+  \[
+    A = \begin{bmatrix} T \left( \mbold{e}_1 \right) \ldots T \left( \mbold{e}_n \right)   \end{bmatrix}
+  \]
+}
+
+\section{Geometric Linear Transformations of $\mathbb{R}^2$}
 
 \chapter{Exercises}
 

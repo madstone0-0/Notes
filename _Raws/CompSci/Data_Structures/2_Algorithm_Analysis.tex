@@ -7,6 +7,8 @@
 \author{\huge{Madiba Hudson-Quansah}}
 \date{}
 \usepackage{parskip}
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest}
 
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
@@ -224,6 +226,46 @@ $n^3$, we can say that the function is $O \left( n^3 \right) $, $O \left( n^4 \r
   \text{ where } c\geq 3 $. This is because the function grows no faster than $n^3$ and therefore grows no faster than
 $n^c$ where $c \geq 3$
 
+\subsubsection{Formal Definition}
+\dfn{$O$-notation}{
+  For a given function $g \left( n \right) $, we denote by $O \left( g \left( n \right)  \right) $ the set of functions:
+  \[
+    O \left( g \left( n \right)  \right)  = \{f \left( n \right) : \text{ there exist positive constants $c$ and $n_0$
+      such that } 0 \leq f \left( n \right) \leq c g \left( n \right),\, \forall n,\, n \geq n_0   \}
+  \]
+}
+
+A function $f \left( n \right) $ belongs to the set $O \left( g \left( n \right)  \right) $ if there exists a positive
+constant $c$ such that $f \left( n \right) \leq c g \left( n \right)  $ for sufficiently large $n$. This means that the
+value of function $f \left( n \right) $ will never exceed the value of $c g \left( n \right) $ for sufficiently large
+$n$, where $g \left( n \right) $ is the growth rate of the function.
+
+For example for the function $f \left( n \right) = 7n^3 + 100n^2 - 20n + 6 $, and the order of growth $g \left( n
+  \right) = n^3 $. We can say that $f \left( n \right) $ is $O \left( n^3 \right) $ because when $n \geq 12$ and $c =
+  20$, $f \left( n \right) < 20n^3 $
+
+\begin{tikzpicture}
+  \begin{axis}[
+      xlabel=$n$,
+      ylabel=$y$,
+      xmin = 0, xmax = 30,
+      xtick distance = 2,
+      grid = both,
+      minor tick num = 1,
+      width = \textwidth,
+      height = 0.5\textwidth,
+      legend cell align = {left},
+      legend pos = north west
+    ]
+    \addplot[domain=0:30,color=red]{7*x^3 + 100*x^2 - 20*x + 6};
+    \addplot[domain=0:30,color=blue]{20*x^3};
+    \legend{
+      $f \left( n \right) = 7n^3 + 100n^2 - 20n + 6$,
+      $c g \left( n \right) = 20n^3$
+    }
+  \end{axis}
+\end{tikzpicture}
+
 \subsection{$\Omega$-notation}
 
 \dfn{$\Omega$-notation}{
@@ -237,6 +279,45 @@ This means for the same function
 \]
 Its growth rate is $n^3$, and because the function grows no slower than $n^3$, we can say that the function is $\Omega
   \left( n^3 \right) $, and therefore $\Omega \left( n^c \right) $, where $c \leq 3$
+
+\subsubsection{Formal Definition}
+\dfn{$\Omega$-notation}{
+  For a given function $g \left( n \right) $, we denote by $\Omega \left( g \left( n \right)  \right) $ the set of functions:
+  \[
+    \Omega \left( g \left( n \right)  \right)  = \{f \left( n \right) : \text{ there exist positive constants $c$ and $n_0$
+      such that } 0 \leq c g \left( n \right) \leq f \left( n \right),\, \forall n,\, n \geq n_0   \}
+  \]
+}
+
+A function $f \left( n \right) $ belongs to the set $\Omega \left( g \left( n \right)  \right) $ if there exists a positive
+constant $c$ such that $c g \left( n \right) \leq f \left( n \right)  $ for sufficiently large $n$. This means that the
+value of function $f \left( n \right) $ will never be less than the value of $c g \left( n \right) $ for sufficiently large
+$n$, where $g \left( n \right) $ is the growth rate of the function.
+
+For example for the function $f \left( n \right) = 7n^3 + 100n^2 - 20n + 6 $, and the order of growth $g \left( n
+  \right) = n^3 $. We can say that $f \left( n \right) $ is $\Omega \left( n^3 \right) $ because when $n \geq 6$ and $c =
+  1$, $n^3 \leq f \left( n \right) $
+
+\begin{tikzpicture}
+  \begin{axis}[
+      xlabel=$n$,
+      ylabel=$y$,
+      xmin = 0, xmax = 30,
+      xtick distance = 1,
+      grid = both,
+      width = \textwidth,
+      height = 0.5\textwidth,
+      legend cell align = {left},
+      legend pos = north west
+    ]
+    \addplot[domain=0:30,color=red]{7*x^3 + 100*x^2 - 20*x + 6};
+    \addplot[domain=0:30,color=green]{x^3};
+    \legend{
+      $f \left( n \right) = 7n^3 + 100n^2 - 20n + 6$,
+      $c g \left( n \right) = n^3$
+    }
+  \end{axis}
+\end{tikzpicture}
 
 \subsection{$\Theta$-notation}
 
@@ -253,6 +334,70 @@ the function is $\Theta \left( n^c \right) $. I.e for the same function
 \]
 We found that the function is both $O \left( n^3 \right) $ and $\Omega \left( n^3 \right) $, it is also $\Theta \left(
   n^3 \right) $
+
+\subsubsection{Formal Definition}
+
+\dfn{$\Theta$-notation}{
+  For a given function $g \left( n \right) $, we denote by $\Theta \left( g \left( n \right)  \right) $ the set of functions:
+  \[
+    \Theta \left( g \left( n \right)  \right)  = \{f \left( n \right) : \text{ there exist positive constants $c_1$, $c_2$ and $n_0$
+      such that } 0 \leq c_1 g \left( n \right) \leq f \left( n \right) \leq c_2 g \left( n \right),\, \forall n,\, n \geq n_0   \}
+  \]
+}
+
+A function $f \left( n \right) $ belongs to the set $\Theta \left( g \left( n \right)  \right) $ if there exists positive
+constants $c_1$ and $c_2$ such that $c_1 g \left( n \right) \leq f \left( n \right) \leq c_2 g \left( n \right)  $ for
+sufficiently large $n$. This means that the value of function $f \left( n \right) $ will always be within a constant factor
+of the value of $g \left( n \right) $ for sufficiently large $n$, where $g \left( n \right) $ is the growth rate of the function.
+
+For example the function $f \left( n \right) = 7n^3 + 100n^2 - 20n + 6 $, and the order of growth $g \left( n \right) = n^3 $.
+We can say that $f \left( n \right) $ is $\Theta \left( n^3 \right) $ because when $n \geq 12$ and $c_1 = 1$ and $c_2 = 20$,
+
+\begin{tikzpicture}
+  \begin{axis}[
+      xlabel=$n$,
+      ylabel=$y$,
+      xmin = 6, xmax = 30,
+      xtick distance = 1,
+      grid = both,
+      % minor tick num = 1,
+      width = \textwidth,
+      height = 0.5\textwidth,
+      legend cell align = {left},
+      legend pos = north west
+    ]
+    \addplot[domain=6:30, color=red]{7*x^3 + 100*x^2 - 20*x + 6};
+    \addplot[domain=6:30, color=blue]{20*x^3};
+    \addplot[domain=6:30, color=green]{x^3};
+
+    \legend{
+      $f \left( n \right) = 7n^3 + 100n^2 - 20n + 6$,
+      $c_2 g \left( n \right) = 20n^3$,
+      $c_1 g \left( n \right) = n^3$
+    }
+  \end{axis}
+\end{tikzpicture}
+
+\subsection{Determining The Running Time of an Algorithm}
+
+Going back to the insertion-sort algorithm we can better characterize its running time using asymptotic notation. Given
+that the procedure has nested loops, an outer for loop that always runs $n-1$ times and an inner while loop whose number
+of iterations depends on the data being sorted. The while loop variable $j$ starts at $i - 1$ and decreases by 1 each
+iteration until it reaches 0 or $A_j \leq \text{key}$. This means the while loop could run $0$ to $i-1$ times. This
+means that generally we can deduce an $O \left( n^2 \right) $ running time for the insertion-sort algorithm.
+
+In determining the worst case running time of the insertion sort we need to reiterate that the worst case occurs when
+the input is sorted in reverse order. For a value in a reverse sorted array to be inserted into the correct position in
+the sub array, it must have been moved in line 4 of the algorithm, and moved $k$ positions. For an element to be moved
+$k$ times line 4 needs to have been executed $k$ times. In the worst case where elements need to be moved $i-1$ times
+where $i$ is the current index of the element under consideration meaning at least the while loop must be executed $n-1$
+times. This means that the worst case running time of the insertion sort is $\Omega \left( n^2 \right) $, because for
+every input size $n$ above a certain size $n_0$, there is at least one input of size $n$ that takes at least $cn^2$ time
+where $c$ is a positive constant.
+
+Because we have shown that the insertion sort algorithm runs in $O \left( n^2 \right) $ time in all cases, and that
+there is an input that takes $\Omega \left( n^2 \right) $ time, we can conclude that the worst-case running time of the
+insertion-sort is $\Theta \left( n^2 \right) $
 
 \section{Exercises}
 

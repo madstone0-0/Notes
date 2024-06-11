@@ -245,5 +245,32 @@ public int sum(ArrayList<? super Integer> numbers) {
 In this listing the method \lstinline{sum} on accepts an ArrayList of type \lstinline{Integer}, or superclasses,
 \lstinline{Number} and \lstinline{Object}.
 
+\chapter{Abstract Data Types}
+
+\dfn{Abstract Data Type}{
+  Defined by the operations that can be performed on it, its representation and the values that can be stored in it.
+}
+
+\ex{}{
+  An Integer ADT is defined below:
+  \begin{itemize}
+    \item Operations: Addition, Subtraction, Multiplication, Division
+    \item Representation: Binary, Decimal, Hexadecimal
+    \item Values: -$\infty$ to $\infty$
+  \end{itemize}
+}
+
+\begin{algorithm}[H]
+  \caption{Is-Empty $ \left( A, n \right) $}
+  \begin{algorithmic}[1]
+    \For{i:= 1 to $n$}
+    \If{ $A_i \neq  \text{NULL}$}
+    \State \Return false
+    \EndIf
+    \State \Return true
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
 
 \end{document}

@@ -1,0 +1,356 @@
+\documentclass[12pt letter openany]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+\pagenumbering{gobble}
+
+\usepackage{parskip}
+\let\cleardoublepage=\clearpage
+\title{\Huge{Homework 2}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+  Suppose an economy has four sectors, Agriculture (A), Energy (E), Manufacturing (M), and Transportation (T). Sector
+  A sells 10 \% of it's output to E and 25 \% to M and retains the rest. Sector E sells 30 \% of its output to A, 35
+  \% to M and 25 \% to T and retains the rest. Sector M sells 30 \% of its output to A, 15 \% to E, and 40 \% to T and
+  retains the rest. Sector T sells 20 \% of its output to A, 10 \% to E, and 30 \% to M and retains the rest.
+  \begin{enumerate}
+    \item Construct the exchange table for this economy.
+    \item Find the set of equilibrium prices for the economy.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{table}[h!]
+            \begin{center}
+              \begin{tabular}{|c|c|c|c|c|}
+                \hline
+                Agriculture & Energy & Manufacturing & Transportation & Sold By        \\ [0.5ex]
+                \hline
+                \hline
+                0.65        & 0.1    & 0.25          & 0              & Agriculture    \\
+                0.3         & 0.1    & 0.35          & 0.25           & Energy         \\
+                0.3         & 0.15   & 0.15          & 0.4            & Manufacturing  \\
+                0.2         & 0.1    & 0.3           & 0.4            & Transportation \\
+                \hline
+              \end{tabular}
+            \end{center}
+          \end{table}
+  \end{enumerate}
+}
+
+\qs{}{
+  Ashesi University owns two farms. When it is operated for a month, Farm \#1 produces 50 kg of kale, 56 kg of onions and
+  34 kg of tomatoes. A month's operation at Farm \#2 on the other hand yields 35 kg of kale, 14 kg of onions and 123 kg of
+  tomatoes. The vectors $\mbold{v}_1 = \begin{bmatrix} 50 \\ 56 \\ 34 \end{bmatrix} $ and $\mbold{v}_2 = \begin{bmatrix}
+      35 \\ 14 \\ 123 \end{bmatrix} $, then represent the output per month of Famr \#1 and Farm \#2 respectively.
+  \begin{enumerate}
+    \item What physical interpretation can be given to the vector $3 \mbold{v}_2$
+    \item Suppose the university operates Farm \#1 for $x_1$ months and Farm \#2 for $x_2$ months. Write a vector equation
+          whose solution gives the number of months each farm should operate in order to produce in total 830 kg of kale,
+          728 kg of onions, 1358 kg of tomatoes. Explain. Do not solve the equation
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item This represents the output of Farm \#2 if it were to be operated for 3 months.
+    \item
+          \begin{align*}
+            x_1 \begin{bmatrix} 50 \\ 56 \\ 34 \end{bmatrix} + x_2 \begin{bmatrix}
+                                                                     35 \\ 14 \\ 123 \end{bmatrix} & = \begin{bmatrix} 830
+                                                                                                       \\ 728 \\ 1358\end{bmatrix} \\
+            x_1 \mbold{v}_1 + x_2 \mbold{v}_2                                      & = \begin{bmatrix} 830
+                                                                                         \\ 728 \\ 1358\end{bmatrix}
+          \end{align*}
+          This equation represents the total output of the two farms if they were to be operated for $x_1$ and $x_2$ months
+          respectively. This is a linear combination of the output of the two farms, weighted by the number of months each farm is
+          operated.
+  \end{enumerate}
+}
+
+\qs{}{
+  Intersections in England are often constructed as one-way "roundabouts" such as the one shown
+  in the figure. Assume that traffic must travel in the directions shown.
+  \begin{enumerate}
+    \item Find the general solution of the network flow.
+    \item Find the smallest possible value for $x_6$.
+  \end{enumerate}
+}
+\begin{align*}
+  A: & x_1  = 100 + x_2              \\
+  B: & 50 + x_2 = x_3                \\
+  C: & x_3 = x_4 + 120               \\
+  D: & x_4 + 150 = x_5               \\
+  E: & x_5 = x_6 + 80                \\
+  F: & x_6 + 100 = x_1               \\
+  \\
+  x_1 - x_2 = 100                    \\
+  x_2 - x_3 = -50                    \\
+  x_3 - x_4 = 120                    \\
+  x_4 - x_5 = -150                   \\
+  x_5 - x_6 = 80                     \\
+  x_6 - x_1 = -100                   \\
+  \\
+  \begin{bmatrix}
+    1  & -1 & 0  & 0  & 0  & 0  & 100  \\
+    0  & 1  & -1 & 0  & 0  & 0  & -50  \\
+    0  & 0  & 1  & -1 & 0  & 0  & 120  \\
+    0  & 0  & 0  & 1  & -1 & 0  & -150 \\
+    0  & 0  & 0  & 0  & 1  & -1 & 80   \\
+    -1 & 0  & 0  & 0  & 0  & 1  & -100 \\
+  \end{bmatrix} \\
+  R_4 \leftrightarrow R_6            \\
+  \begin{bmatrix}
+    1  & -1 & 0  & 0  & 0  & 0  & 100  \\
+    0  & 1  & -1 & 0  & 0  & 0  & -50  \\
+    0  & 0  & 1  & -1 & 0  & 0  & 120  \\
+    -1 & 0  & 0  & 0  & 0  & 1  & -100 \\
+    0  & 0  & 0  & 0  & 1  & -1 & 80   \\
+    0  & 0  & 0  & 1  & -1 & 0  & -150 \\
+  \end{bmatrix}
+  \\
+  -R_1 - R_4  \rightarrow R_4        \\
+  \begin{bmatrix}
+    1 & -1 & 0  & 0  & 0  & 0  & 100  \\
+    0 & 1  & -1 & 0  & 0  & 0  & -50  \\
+    0 & 0  & 1  & -1 & 0  & 0  & 120  \\
+    0 & 1  & 0  & 0  & 0  & -1 & 0    \\
+    0 & 0  & 0  & 0  & 1  & -1 & 80   \\
+    0 & 0  & 0  & 1  & -1 & 0  & -150 \\
+  \end{bmatrix}
+  \\
+  R_2 - R_4  \rightarrow R_4         \\
+  \begin{bmatrix}
+    1 & -1 & 0  & 0  & 0  & 0  & 100  \\
+    0 & 1  & -1 & 0  & 0  & 0  & -50  \\
+    0 & 0  & 1  & -1 & 0  & 0  & 120  \\
+    0 & 0  & -1 & 0  & 0  & 1  & -50  \\
+    0 & 0  & 0  & 0  & 1  & -1 & 80   \\
+    0 & 0  & 0  & 1  & -1 & 0  & -150 \\
+  \end{bmatrix}
+  \\
+  -R_3 - R_4  \rightarrow R_4        \\
+  \begin{bmatrix}
+    1 & -1 & 0  & 0  & 0  & 0  & 100  \\
+    0 & 1  & -1 & 0  & 0  & 0  & -50  \\
+    0 & 0  & 1  & -1 & 0  & 0  & 120  \\
+    0 & 0  & 0  & 1  & 0  & -1 & -70  \\
+    0 & 0  & 0  & 0  & 1  & -1 & 80   \\
+    0 & 0  & 0  & 1  & -1 & 0  & -150 \\
+  \end{bmatrix}
+  \\
+  \\
+\end{align*}
+\begin{align*}
+  R_4 - R_6  \rightarrow R_6      \\
+  \begin{bmatrix}
+    1 & -1 & 0  & 0  & 0 & 0  & 100 \\
+    0 & 1  & -1 & 0  & 0 & 0  & -50 \\
+    0 & 0  & 1  & -1 & 0 & 0  & 120 \\
+    0 & 0  & 0  & 1  & 0 & -1 & -70 \\
+    0 & 0  & 0  & 0  & 1 & -1 & 80  \\
+    0 & 0  & 0  & 0  & 1 & -1 & 80  \\
+  \end{bmatrix}
+  \\
+  R_5 - R_6  \rightarrow R_6      \\
+  \begin{bmatrix}
+    1 & -1 & 0  & 0  & 0 & 0  & 100 \\
+    0 & 1  & -1 & 0  & 0 & 0  & -50 \\
+    0 & 0  & 1  & -1 & 0 & 0  & 120 \\
+    0 & 0  & 0  & 1  & 0 & -1 & -70 \\
+    0 & 0  & 0  & 0  & 1 & -1 & 80  \\
+    0 & 0  & 0  & 0  & 0 & 0  & 0   \\
+  \end{bmatrix}
+  \\
+  -R_2 - R_1  \rightarrow R_1     \\
+  \begin{bmatrix}
+    -1 & 0 & 1  & 0  & 0 & 0  & -50 \\
+    0  & 1 & -1 & 0  & 0 & 0  & -50 \\
+    0  & 0 & 1  & -1 & 0 & 0  & 120 \\
+    0  & 0 & 0  & 1  & 0 & -1 & -70 \\
+    0  & 0 & 0  & 0  & 1 & -1 & 80  \\
+    0  & 0 & 0  & 0  & 0 & 0  & 0   \\
+  \end{bmatrix}
+  \\
+  -R_3 - R_2  \rightarrow R_2     \\
+  \begin{bmatrix}
+    -1 & 0  & 1 & 0  & 0 & 0  & -50 \\
+    0  & -1 & 0 & 1  & 0 & 0  & -70 \\
+    0  & 0  & 1 & -1 & 0 & 0  & 120 \\
+    0  & 0  & 0 & 1  & 0 & -1 & -70 \\
+    0  & 0  & 0 & 0  & 1 & -1 & 80  \\
+    0  & 0  & 0 & 0  & 0 & 0  & 0   \\
+  \end{bmatrix} \\
+  R_3 - R_1  \rightarrow R_1      \\
+  \begin{bmatrix}
+    1 & 0  & 0 & -1 & 0 & 0  & 170 \\
+    0 & -1 & 0 & 1  & 0 & 0  & -70 \\
+    0 & 0  & 1 & -1 & 0 & 0  & 120 \\
+    0 & 0  & 0 & 1  & 0 & -1 & -70 \\
+    0 & 0  & 0 & 0  & 1 & -1 & 80  \\
+    0 & 0  & 0 & 0  & 0 & 0  & 0   \\
+  \end{bmatrix}
+  \\
+\end{align*}
+\begin{align*}
+  -R_4 - R_3  \rightarrow R_3     \\
+  \begin{bmatrix}
+    1 & 0  & 0  & -1 & 0 & 0  & 170 \\
+    0 & -1 & 0  & 1  & 0 & 0  & -70 \\
+    0 & 0  & -1 & 0  & 0 & 1  & -50 \\
+    0 & 0  & 0  & 1  & 0 & -1 & -70 \\
+    0 & 0  & 0  & 0  & 1 & -1 & 80  \\
+    0 & 0  & 0  & 0  & 0 & 0  & 0   \\
+  \end{bmatrix}
+  \\
+  R_4 - R_2  \rightarrow R_2      \\
+  \begin{bmatrix}
+    1 & 0 & 0  & -1 & 0 & 0  & 170 \\
+    0 & 1 & 0  & 0  & 0 & -1 & 0   \\
+    0 & 0 & -1 & 0  & 0 & 1  & -50 \\
+    0 & 0 & 0  & 1  & 0 & -1 & -70 \\
+    0 & 0 & 0  & 0  & 1 & -1 & 80  \\
+    0 & 0 & 0  & 0  & 0 & 0  & 0   \\
+  \end{bmatrix}
+  \\
+  -R_4 - R_1  \rightarrow R_1     \\
+  \begin{bmatrix}
+    -1 & 0 & 0  & 0 & 0 & 1  & -100 \\
+    0  & 1 & 0  & 0 & 0 & -1 & 0    \\
+    0  & 0 & -1 & 0 & 0 & 1  & -50  \\
+    0  & 0 & 0  & 1 & 0 & -1 & -70  \\
+    0  & 0 & 0  & 0 & 1 & -1 & 80   \\
+    0  & 0 & 0  & 0 & 0 & 0  & 0    \\
+  \end{bmatrix} \\
+  -R_1 \to R_1                    \\
+  -R_2 \to R_2                    \\
+  \begin{bmatrix}
+    1 & 0 & 0 & 0 & 0 & -1 & 100 \\
+    0 & 1 & 0 & 0 & 0 & -1 & 0   \\
+    0 & 0 & 1 & 0 & 0 & -1 & 50  \\
+    0 & 0 & 0 & 1 & 0 & -1 & -70 \\
+    0 & 0 & 0 & 0 & 1 & -1 & 80  \\
+    0 & 0 & 0 & 0 & 0 & 0  & 0   \\
+  \end{bmatrix}
+  \\
+  x_1 - x_6 = 100                 \\
+  x_2 - x_6 = 0                   \\
+  x_3 - x_6 = 50                  \\
+  x_4 - x_6 = -70                 \\
+  x_5 - x_6 = 80                  \\
+  x_6 = x_6                       \\
+  \\
+  \begin{cases}
+    x_1 = x_6 + 100 \\
+    x_2 = x_6       \\
+    x_3 = x_6 + 50  \\
+    x_4 = x_6 - 70  \\
+    x_5 = x_6 + 80  \\
+    x_6 \text{ is free}
+  \end{cases}
+\end{align*}
+
+The smallest value of $x_6$ is 0 as $x_6$ is the same as the outflow of $x_2$  which cannot be negative.
+
+\qs{}{
+  Let $T:\mathbb{R}^2 \to \mathbb{R}^3$ be a linear transformation with $T \left( x_1, x_2 \right) = \left( 2x_1 - x_2,
+    -3x_1 + x_2, 2x_1-3x_2 \right)  $
+  \begin{enumerate}
+    \item Find the standard matrix of $T$
+    \item Find $\mbold{x}$ such that $T \left( \mbold{x} \right) = \left( 0,-1,4 \right)  $
+    \item Is $T$ onto? Is it one-to-one? Explain.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            T \left( \mbold{x} \right)                                                            & = A \mbold{x}                                                                     \\
+            I_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \quad \mbold{e}_1                  & = \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+            \quad \mbold{e}_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}                                                                                                                  \\
+            \mbold{x}                                                                             & = x_1 \mbold{e}_1 + x_2 \mbold{e}_2                                               \\
+            T \left( \mbold{x} \right)                                                            & = x_1 T \left( \mbold{e}_1 \right) + x_2 T \left( \mbold{e}_2 \right)             \\
+            \therefore T \left( \mbold{e}_1 \right)  = \begin{bmatrix} 2 \\ -3 \\ 2 \end{bmatrix} & \quad T \left( \mbold{e}_2 \right)  = \begin{bmatrix} -1 \\ 1 \\ -3 \end{bmatrix} \\
+            T \left( \mbold{x} \right)                                                            & = \begin{bmatrix} T \left( \mbold{e}_1 \right) & T \left( \mbold{e}_2 \right)
+                                                                                                      \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = A \mbold{x}     \\
+            \text{Hence } A                                                                       & = \begin{bmatrix}
+                                                                                                        2  & -1 \\
+                                                                                                        -3 & 1  \\
+                                                                                                        2  & -3
+                                                                                                      \end{bmatrix}                                                                  \\
+          \end{align*}
+    \item
+          \begin{align*}
+            T \left( \mbold{x} \right)                             & = \begin{bmatrix} 0 \\ -1 \\ 4 \end{bmatrix} \\
+            \begin{bmatrix}
+              2  & -1 \\
+              -3 & 1  \\
+              2  & -3
+            \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} & = \begin{bmatrix} 0 \\ -1 \\ 4 \end{bmatrix} \\
+            \\
+          \end{align*}
+          \begin{align*}
+            \begin{bmatrix}
+              2  & -1 & 0  \\
+              -3 & 1  & -1 \\
+              2  & -3 & 4
+            \end{bmatrix}                         \\
+            \frac{-3}{2}R_1 - R_2  \rightarrow R_2 \\
+            \begin{bmatrix}
+              2 & -1          & 0 \\
+              0 & \frac{1}{2} & 1 \\
+              2 & -3          & 4 \\
+            \end{bmatrix}
+            \\
+            R_1 - R_3  \rightarrow R_3             \\
+            \begin{bmatrix}
+              2 & -1          & 0  \\
+              0 & \frac{1}{2} & 1  \\
+              0 & 2           & -4 \\
+            \end{bmatrix}
+            \\
+            4R_2 - R_3  \rightarrow R_3            \\
+            \begin{bmatrix}
+              2 & -1          & 0 \\
+              0 & \frac{1}{2} & 1 \\
+              0 & 0           & 8 \\
+            \end{bmatrix}
+            \\
+            -2R_2 - R_1  \rightarrow R_1           \\
+            \begin{bmatrix}
+              -2 & 0           & -2 \\
+              0  & \frac{1}{2} & 1  \\
+              0  & 0           & 8  \\
+            \end{bmatrix}
+            \\
+            -\frac{1}{2}R_1 \to R_1                \\
+            2R_2 \to R_2                           \\
+            \begin{bmatrix}
+              1 & 0 & 1 \\
+              0 & 1 & 2 \\
+              0 & 0 & 8
+            \end{bmatrix}                         \\
+            x_1 = 1                                \\
+            x_2 = 2                                \\
+            \\
+            \mbold{x} = \begin{bmatrix} 1 \\ 2 \end{bmatrix}
+          \end{align*}
+    \item
+          $T$ is onto for $ \left( 0, -1,4 \right) $ as $ \left( 0, -1,4 \right) $ produces an image in the
+          $\mathbb{R}^3$  vector space, and $T$ is also one-to-one as it produces only one, a unique, image.
+  \end{enumerate}
+}
+
+
+
+\end{document}

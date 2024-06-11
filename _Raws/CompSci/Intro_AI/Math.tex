@@ -38,40 +38,40 @@ The main structure of the machine learning part of AI is as follows:
 \dfn{Vector}{
   A vector is a mathematical object that has both magnitude and direction. It is represented by an arrow with a
   starting point and an end point. The length of the arrow represents the magnitude of the vector, and the direction
-  of the arrow represents the direction of the vector. Denoted by $\vec{v}$ or $\mathbf{v}$ which in vector space
+  of the arrow represents the direction of the vector. Denoted by $\vec{v}$ or $\mbold{v}$ which in vector space
   $\mathbb{R}^n$ represents:
   \[
-    \mathbf{v} = \begin{pmatrix} v_1\\ \vdots\\ v_n \end{pmatrix}
+    \mbold{v} = \begin{pmatrix} v_1\\ \vdots\\ v_n \end{pmatrix}
   \]
 }
 
-The transpose of a column vector $\mathbf{v}$ is denoted by $\mathbf{v}^t$ and is a row vector:
+The transpose of a column vector $\mbold{v}$ is denoted by $\mbold{v}^t$ and is a row vector:
 \[
-  \mathbf{v}^t = \begin{pmatrix} v_1 & \ldots & v_n \end{pmatrix}
+  \mbold{v}^t = \begin{pmatrix} v_1 & \ldots & v_n \end{pmatrix}
 \]
 
 \dfn{Dot Product}{
-  The dot product of two vectors $\mathbf{v}$ and $\mathbf{w}$ is a scalar value denoted by $\mathbf{v} \cdot \mathbf{w}$ and is defined as:
+  The dot product of two vectors $\mbold{v}$ and $\mbold{w}$ is a scalar value denoted by $\mbold{v} \cdot \mbold{w}$ and is defined as:
   \[
-    \mathbf{v} \cdot \mathbf{w} = \displaystyle\sum_{i=1}^{n} v_i w_i
+    \mbold{v} \cdot \mbold{w} = \displaystyle\sum_{i=1}^{n} v_i w_i
   \]
   The dot product is the same as the product of a row vector / transposed column vector and a column vector, for example
-  for vectors $\mathbf{a} = \begin{pmatrix} a_1\\ a_2 \\ a_3 \\ a_4 \\ a_5 \end{pmatrix}$ and $\mathbf{b} =
+  for vectors $\mbold{a} = \begin{pmatrix} a_1\\ a_2 \\ a_3 \\ a_4 \\ a_5 \end{pmatrix}$ and $\mbold{b} =
     \begin{pmatrix} b_1\\ b_2 \\ b_3\\ b_4 \\ b_5 \end{pmatrix}$, the dot product is:
   \begin{align*}
-    \mathbf{a} \cdot \mathbf{b} & = \begin{pmatrix} a_1 \\  a_2 \\  a_3 \\  a_4 \\  a_5 \end{pmatrix} \begin{pmatrix}
-                                                                                                        b_1\\ b_2 \\ b_3\\ b_4 \\ b_5 \end{pmatrix} \\
-                                & = a_1 b_1 + a_2 b_2 + a_3 b_3 + a_4 b_4 + a_5 b_5                                                               \\
-    \text{Or}                                                                                                                                     \\
-    \mathbf{a}^{t} \mathbf{b}   & = \begin{pmatrix} a_1 & a_2 & a_3& a_4 & a_5 \end{pmatrix} \begin{pmatrix} b_1 \\ b_2 \\ b_3
-                                                                                               \\ b_4 \\ b_5\end{pmatrix}                     \\
-                                & = a_1 b_1 + a_2 b_2 + a_3 b_3 + a_4 b_4 + a_5 b_5                                                               \\
+    \mbold{a} \cdot \mbold{b} & = \begin{pmatrix} a_1 \\  a_2 \\  a_3 \\  a_4 \\  a_5 \end{pmatrix} \begin{pmatrix}
+                                                                                                      b_1\\ b_2 \\ b_3\\ b_4 \\ b_5 \end{pmatrix} \\
+                              & = a_1 b_1 + a_2 b_2 + a_3 b_3 + a_4 b_4 + a_5 b_5                                                               \\
+    \text{Or}                                                                                                                                   \\
+    \mbold{a}^{t} \mbold{b}   & = \begin{pmatrix} a_1 & a_2 & a_3& a_4 & a_5 \end{pmatrix} \begin{pmatrix} b_1 \\ b_2 \\ b_3
+                                                                                             \\ b_4 \\ b_5\end{pmatrix}                     \\
+                              & = a_1 b_1 + a_2 b_2 + a_3 b_3 + a_4 b_4 + a_5 b_5                                                               \\
   \end{align*}
 }
 
 Moreover:
 \[
-  \mid  \mid \mathbf{a}  \mid \mid  ^2_{l^2} = \mathbf{a}^t \mathbf{a} = a^2_1 + a^2_2 + a^2_3 + a^2_4 + a^2_5
+  \mid  \mid \mbold{a}  \mid \mid  ^2_{l^2} = \mbold{a}^t \mbold{a} = a^2_1 + a^2_2 + a^2_3 + a^2_4 + a^2_5
 \]
 
 \section{Numerical vs Analytical Solutions}
@@ -84,9 +84,78 @@ Moreover:
   Has to do with analysis. Are exact solutions to problems. Not all problems have analytical solutions.
 }
 
-\section{Gradient Descent}
+\section{Multivariable Calculus}
+
+In multivariable calculus, the gradient of a function is a vector that points in the direction of the greatest rate of
+increase of the function at a given point. The gradient is denoted by $\nabla$ and is defined as:
+\[
+  \nabla F = \begin{pmatrix} \frac{\partial F}{\partial x_1} \\ \frac{\partial F}{\partial x_2} \\ \vdots \\ \frac{\partial F}{\partial x_n} \end{pmatrix}
+\]
+
+\subsection{Common derivatives of linear algebra} \label{subsec:derivatives}
+
+\begin{itemize}
+  \item When $a$ and $\omega$ and $a$ is a constant, the derivate of $f \left( \omega \right) = a \omega $ is
+        \[
+          f^{\prime} \left( \omega \right) = a
+        \]
+        Therefore when $\mbold{a}$ and $\mbold{\omega}$ and the entries of $\mbold{a}$ are constant, then the derivate /
+        gradient of $f \left( \mbold{\omega} \right) = \mbold{a}^t \mbold{\omega} $ is:
+        \[
+          \nabla f \left( \mbold{\omega} \right)  = \mbold{a}
+        \]
+        And similarly the derivate of  $f \left( \mbold{\omega}\right) = \mbold{\omega}^{t} \mbold{a}  $ is
+        \[
+          \nabla f \left( \mbold{\omega} \right) = \mbold{a}
+        \]
+  \item When $s$ is constant and $\omega$ is scalars, then the derivate of the quadratic function $f \left( \omega \right) =
+          s\omega^2$ is :
+        \[
+          f ^{\prime} \left( \omega \right)  = 2s \omega
+        \]
+        Therefore when $S$ is  a symmetric matrix with constant entries, then the derivative of the function $f \left( \mbold{\omega}
+          \right) = \mbold{\omega}^{t}S \mbold{\omega}$ is:
+        \[
+          \nabla f \left( \mbold{\omega} \right) = 2S \mbold{\omega}
+        \]
+        Because $\mbold{\omega}^{t} \mbold{\omega}$, if $\mbold{\omega} = \begin{bmatrix} \omega_0 \\ \omega_1 \\
+            \omega_2\end{bmatrix} $, then $\mbold{\omega}^{t} = \begin{bmatrix} \omega_0 & \omega_1 & \omega_2 \end{bmatrix} $ is defined as:
+        \[
+          \mbold{\omega}^{t} \mbold{\omega} = \begin{bmatrix} \omega_0 & \omega_1 & \omega_2 \end{bmatrix}  \begin{bmatrix}
+            \omega_0 \\ \omega_1 \\
+            \omega_2
+          \end{bmatrix}
+        \]
+\end{itemize}
+
+\section{Gradient Descent}\label{sec:grad}
+\dfn{Gradient}{
+  The gradient of a function is a vector that points in the direction of the greatest rate of increase of the function at a given point.
+}
+
 \dfn{Gradient Descent}{
   An optimization algorithm used to minimize some function by iteratively moving in the direction of steepest descent as defined by the negative of the gradient.
+}
+
+This algorithm is used in the optimization of training functions using a loss function. Gradient descent is carried out
+as follows:
+\begin{enumerate}
+  \item Choose a random starting point within the search space
+  \item Calculate the gradient of the function at that point
+  \item Move in the direction of the negative of the gradient by subtracting the gradient from the current point
+  \item Repeat steps 2 and 3 until the gradient is close to zero
+\end{enumerate}
+As denoted by the following formula:
+\[
+  \mbold{\omega}_{n+1} = \mbold{\omega}_n - \alpha \nabla F \left( \mbold{\omega_n} \right)
+\]
+
+Where $\mbold{\omega_{n+1}}$ is the new point,  $\mbold{\omega_n}$ is the current point, $\alpha$ is the learning
+rate, and $\nabla F \left( \mbold{\omega_n} \right)$ is the gradient of the function at the current point.
+
+\dfn{Learning Rate}{
+  A hyperparameter that controls how much the weights are updated during training. A large learning rate means the weights
+  are updated by a large amount, while a small learning rate means the weights are updated by a small amount.
 }
 
 \section{Regression}
@@ -114,9 +183,89 @@ feature / independent variable.
 
 \subsubsection{Training Function}
 
+When using linear models the assumption of linear dependence is made. This means that the predicted value found using a
+line of best fit derived from the data, giving the training function as:
+\[
+  y = \beta_0 + \beta_1 x
+\]
+Where $\beta_0$ is the $y$-intercept, $\beta_1$ is the slope of the line, $y$ is the predicted value and $x$ is the feature
+under consideration.
+
 \subsubsection{Loss Function}
 
+For linear regression models the most common loss function is the mean squared error function. Defined as:
+\[
+  \text{Mean Squared Error} = \frac{1}{m} \displaystyle\sum_{i=1}^{m}  \mid  y_{\text{predict}} - y_{\text{true}}
+  \mid ^2
+\]
+Where $m$ is the number of rows in the sample data, $y_{\text{predict}}$ is the predicted value, and $y_{\text{true}}$ is
+the actual value. The mean squared error function can also be expressed as:
+\[
+  \text{Mean Squared Error} = \frac{1}{m} \left( \mbold{y}_{\text{predicted}} - \mbold{y}_{\text{true}}  \right)^{t}
+  \left( \mbold{y}_{\text{predict}} - \mbold{y}_{\text{true}} \right)
+\]
+Because the predicted and true values for all the rows in the sample data can be represented as vectors. And using
+$\mbold{y}_{\text{predict}} = \mbold{x}\mbold{\beta}$, (where $\mbold{\beta} = \begin{bmatrix} \beta_0 \\ \beta_1
+  \end{bmatrix} $ and $\mbold{x} = \begin{bmatrix} 1 & x_1 \\ \vdots & \vdots \\ 1 & x_m \end{bmatrix} $ )  can then
+be expressed as:
+\[
+  \text{Mean Squared Error} = \frac{1}{m} \left( \mbold{x} \mbold{\beta} - \mbold{y}_{\text{true}} \right)^{t} \left( \mbold{x} \mbold{\beta} - \mbold{y}_{\text{true}} \right)
+\]
+
+
 \subsubsection{Optimization}
+
+In minimizing the mean squared error function the weights of the model, $\alpha$ and $\beta$, can be found using the
+minimizing the derivative of loss function with respect to the weights and equating it to zero. Therefore for the
+loss function:
+\[
+  \text{Mean Squared Error} = \frac{1}{m} \left( \mbold{x} \mbold{\beta} - \mbold{y}_{\text{true}} \right)^{t} \left( \mbold{x} \mbold{\beta} - \mbold{y}_{\text{true}} \right)
+\]
+
+Let $L \left( \mbold{\beta} \right) $ be:
+\[
+  L \left( \mbold{\beta} \right) = \frac{1}{m} \left( \mbold{x} \mbold{\beta} - \mbold{y}_{\text{true}} \right)^{t} \left( \mbold{x} \mbold{\beta} - \mbold{y}_{\text{true}} \right)
+\]
+Simplified:
+\begin{align*}
+  L \left( \mbold{\beta} \right) & = \frac{1}{m} \left( \mbold{x} \mbold{\beta} - \mbold{y}_{\text{true}} \right)^{t}
+  \left( \mbold{x} \mbold{\beta} - \mbold{y}_{\text{true}} \right)                                                    \\
+                                 & = \frac{1}{m} \left( \left( \mbold{x}\mbold{\beta} \right)^{t} -
+  \mbold{y}_{\text{true}}^{t}  \right) \left( \mbold{x}\mbold{\beta} -
+  \mbold{y}_{\text{true}} \right)                                                                                     \\
+                                 & = \frac{1}{m} \left( \mbold{x}^{t}\mbold{\beta}^{t} - \mbold{y}_{\text{true}}^{t}
+  \right) \left( \mbold{x}\mbold{\beta} - \mbold{y}_{\text{true}} \right)                                             \\
+                                 & = \frac{1}{m} \left( \mbold{x}^{t}\mbold{x} \mbold{\beta}^{t}\mbold{\beta} -
+  \mbold{y}_{\text{true}}^{t}\mbold{x}\mbold{\beta} -
+  \mbold{y}_{\text{true}}\mbold{x}^{t}\mbold{\beta}^{t} + \mbold{y}_{\text{true}}^{t}
+  \mbold{y}_{\text{true}} \right)                                                                                     \\
+\end{align*}
+
+Notice that $ \left( \mbold{y}^{t}_{\text{true}} \mbold{x} \mbold{\beta} \right)^{t} = \mbold{y}_{\text{true}}
+  \mbold{x}^{t} \mbold{\beta}^{t} $, and since this is a $1\times 1$ matrix, a scalar, $ \mbold{y}^{t}_{\text{true}}
+  \mbold{x} \mbold{\beta} = \mbold{y}_{\text{true}} \mbold{x}^{t} \mbold{\beta}^{t} $ making the last expression:
+\[
+  = \frac{1}{m} \left( \mbold{x}^{t}\mbold{x} \mbold{\beta}^{t}\mbold{\beta} -2
+  \mbold{y}_{\text{true}}\mbold{x}^{t}\mbold{\beta}^{t} + \mbold{y}_{\text{true}}^{t}
+  \mbold{y}_{\text{true}} \right)
+\]
+
+Then we take the derivate of the last expression with respect to $\mbold{\beta}$ using the common derivatives
+\ref{subsec:derivatives}.
+\begin{align*}
+  L \left( \mbold{\beta} \right)        & = \frac{1}{m} \left( \mbold{x}^{t}\mbold{x} \mbold{\beta}^{t}\mbold{\beta} -2
+  \mbold{y}_{\text{true}}\mbold{x}^{t}\mbold{\beta}^{t} + \mbold{y}_{\text{true}}^{t}
+  \mbold{y}_{\text{true}} \right)                                                                                                                    \\
+  \text{Let } S = \mbold{x}^{t}\mbold{x} \text{ and let } \mbold{a} = \mbold{x}^{t} \mbold{y}_{\text{true}}                                          \\
+  L \left( \mbold{\beta} \right)        & =  \frac{1}{m} \left( S \mbold{\beta}^{t}\mbold{\beta} - 2
+  \mbold{a}\mbold{\beta}^{t} + \mbold{y}^{t}_{\text{true}}\mbold{y}_{\text{true}}   \right)                                                          \\
+  \nabla L \left( \mbold{\beta} \right) & = \frac{1}{m} \left( 2S \mbold{\beta} - 2 \mbold{a} + 0 \right)                                            \\
+  \nabla L \left( \mbold{\beta} \right) & = \frac{2}{m} \left( S \mbold{\beta} - \mbold{a} \right)                                                   \\
+  \nabla L \left( \mbold{\beta} \right) & = \frac{2}{m} \left( \mbold{x}^{t}\mbold{x} \mbold{\beta} - \mbold{x}^{t} \mbold{y}_{\text{true}}  \right)
+\end{align*}
+
+At this point we have the derivate of the loss function $L \left( \mbold{\beta} \right) $ and can either equate it to
+zero or use gradient descent \ref{sec:grad} to find the optimal weights $\mbold{\beta}$.
 
 \subsection{Multi-Linear Regression}
 In the case of multi-linear regression, there are multiple independent variables. This relationship can be expressed as:
@@ -168,6 +317,13 @@ affect the predicted value. This means for each row in the total amount of rows 
                                                                                          \omega_n
                                                                                        \end{pmatrix}                                                                          \\
 \end{align*}
+
+This can be then expressed as
+\[
+  \mbold{y}_{\text{predict}} = X \mbold{\omega}
+\]
+Where $\mbold{y}_{predict}$ is the vector of predictions $X$ is the training subset, and $\mbold{\omega}$ is the
+vector of unknown weights.
 
 \nparagraph{Parametric Models vs Non-Parametric Models}
 
@@ -254,12 +410,158 @@ And in linear algebra notation:
   \vec{y}_{\text{predict}} - \vec{y}_{\text{true}} \right) = \frac{1}{m}  \mid  \mid \vec{y}_{\text{predict}} -
   \vec{y}_{\text{true}}  \mid  \mid ^2_{l^2}
 \]
-Where $l^2$ denotes the $l^2$ norm of the vector which by definition is the $\sqrt{\text{sum of squares of its components}}$
+Where $l^2$ denotes the $l^2$ norm of the vector which by definition is the $\sqrt{\text{sum of squares of its
+      components}}$.
+
+And using $\mbold{y}_{\text{predict}} = X \mbold{\omega}$
+\[
+  \text{Mean Squared Error} = \frac{1}{m}  \left( X \mbold{\omega} - \mbold{y}_{\text{true}} \right)^{t} \left( X
+  \mbold{\omega} - \mbold{y}_{\text{true}} \right) = \frac{1}{m}  \mid  \mid X \mbold{\omega} -
+  \mbold{y}_{\text{true}}  \mid  \mid_{l^2}^2
+\]
 }
 
 \subsubsection{Optimization}
 
-\subsection{Polynomial Regression}
+\dfn{Optimization}{
+  Finding the best / optimal / maximal / minimal / extreme solution.
+}
+
+Given our linear training function:
+\[
+  y = \omega_0 + \omega_1 x_1 + \omega_2 x_2 + \ldots + \omega_n x_n
+\]
+The goal of the optimization step is to find the values of $\omega_0, \omega_1, \omega_2, \ldots, \omega_n$, that make
+our training function best fit the training data, where an optimal fit is charactered by the loss function. Therefore we
+need the weights that minimize the value of our loss function, denoted by:
+\[
+  \text{min}_{\mbold{\omega}} \text{ loss function}
+\]
+For our loss function, the mean squared error is:
+\[
+  \text{min}_{\mbold{\omega}} \frac{1}{m}  \mid  \mid X \mbold{\omega} - \mbold{y}_{\text{true}}  \mid  \mid_{l^2}^2
+\]
+
+\nparagraph{Convex Landscapes vs Non convex Landscapes}
+
+\dfn{Convex Function}{
+  Let $f$ be a function that is differentiable over an interval $I$. The function $f$ is convex if the first derivative
+  of the function $f^{\prime}$ is increasing over $I$, which means the second derivate of the function, $f^{\prime
+        \prime}$ is greater than zero over the interval $I$, $f^{\prime\prime} > 0$
+}
+
+\dfn{Non Convex / Concave Function}{
+  Let $f$ be a function that is differentiable over an interval $I$. The function $f$ is concave if $f^{\prime}$ is
+  decreasing over $I$, which means $f^{\prime \prime}$ is less than zero over the interval $I$, $f^{\prime\prime} < 0$
+}
+
+Most functions and equations we will deal with are non-linear, but can be linearised at certain points of interest. This
+is done by drawing a tangent line to the point in 2D space or a tangent hyperplane in greater dimensions. To do this the
+derivative of the function must be found with respect to all of its variables to determine the slope of the
+approximating flat space.
+
+One important type of function is a function that is the maximum of two or more convex functions, which are always
+convex. Linear functions are flat so they are both convex and concave. This is important because some functions are
+defined as the maxima of linear functions, which are not guaranteed to be linear, but are guaranteed to be convex. That
+is even if we lose linearity when taking the maximum of linear functions we still have convexity.
+
+The Rectified Linear Unit function (ReLU), is an example of a non-linear function defined as the maximum of two linear
+functions:
+\[
+  \text{\textit{ReLU}} \left( x \right)  = \text{\textit{max}} \left( 0,x \right)
+\]
+
+There is one more relationship between linearity and convexity. If we have a non-linear convex function, the maximum of
+all the linear functions that stay below the function is exactly equal to it.
+
+Overall the landscape of a convex function is good for minimization problems as there is no chance at getting stuck at a
+local minima as any local minimum is also a global minimum for a convex function. However a non convex function could
+have peaks, valleys and saddle points, which runs the risk of getting stuck at a local minima, and never finding the
+global minima.
+
+\nparagraph{Locating Function Minimizers}
+
+There are generally two approaches to locating minimizers/maximizers of functions with the trade-off usually being
+between:
+\begin{itemize}
+  \item Calculating only one derivative and converging to the minimum slowly. These are called \textit{gradient} methods, where
+        the gradient is one derivate of a function of several variables as is our case with $\omega_0, \ldots, \omega_n$.
+  \item Calculating two derivatives and converging to the minimum faster. These are called \textit{Newton's} methods, and the
+        \textit{Hessian} or an approximation of the Hessian is used in these methods
+\end{itemize}
+
+\dfn{Hessian Matrix}{
+  A square matrix consisting of second derivates of a function
+}
+
+One key idea from calculus remains fundamental: minimizers / maximizers occur at critical points. So to locate these
+minimizers / maximizers we must search through both the boundary points (points where the function is undefined) and
+interior critical points (where the first derivative of the function is equal to 0). This can be done using one of two approaches
+
+\subparagraph{Approach 1}
+
+\begin{enumerate}
+  \item Find the derivate of the function
+  \item Equate the derivative to 0
+  \item Solve for the $\omega$'s that make the derivative 0.
+\end{enumerate}
+
+This approach works when the derivate is linear and the $\omega$s can easily be found but is not ideal when the derivate
+is non linear.
+
+\subparagraph{Approach 2}
+
+Follow the gradient direction to descend towards the minimum or ascend towards the maximum, using gradient
+descent~\ref{sec:grad}.
+
+\nparagraph{Minimizing the mean squared error function}
+
+Let $L \left( \mbold{\omega} \right) $ be
+\[
+  \frac{1}{m} \left( X \mbold{\omega} - \mbold{y}_{\text{true}} \right)^{t} \left( X \mbold{\omega} -
+  \mbold{y}_{\text{true}} \right)
+\]
+Simplified:
+\begin{align*}
+  L \left( \mbold{\omega} \right) & =   \frac{1}{m} \left( X \mbold{\omega} - \mbold{y}_{\text{true}} \right)^{t} \left( X \mbold{\omega} -
+  \mbold{y}_{\text{true}} \right)                                                                                                                          \\
+                                  & = \frac{1}{m} \left( \left( X \mbold{\omega} \right)^{t}  - \mbold{y}_{\text{true}} \right)  \left( X \mbold{\omega} -
+  \mbold{y}_{\text{true}} \right)                                                                                                                          \\
+                                  & = \frac{1}{m} \left( \mbold{\omega}^{t} \mbold{X}^{t}   -
+  \mbold{y}_{\text{true}} \right) \left( X\mbold{\omega} - \mbold{y}_{\text{true}} \right)                                                                 \\
+                                  & = \frac{1}{m} \left( \mbold{\omega}^{t} X^t X \mbold{\omega} - \mbold{\omega}^t X^t
+  \mbold{y}^t_{\text{true}} - \mbold{y}^t X \mbold{\omega} + \mbold{y}^t_{\text{true}}
+  \mbold{y}_{\text{true}} \right)                                                                                                                          \\
+                                  & = \frac{1}{m} \left( \mbold{\omega}^t S \mbold{\omega}- \mbold{\omega}^t \mbold{a} -
+  \mbold{a}^t \mbold{\omega}
+  + \mbold{y}^t_{\text{true}} \mbold{y}_{\text{true}} \right)                                                                                              \\
+\end{align*}
+
+Next we take the gradient of the last expression with respect to $\mbold{\omega}$ and equate it to zero.
+\begin{align*}
+  \nabla L \left( \mbold{\omega} \right)                                   & = \frac{1}{m} \left( 2S \mbold{\omega} -
+  \mbold{a} - \mbold{a} + 0 \right)                                                                                   \\
+  \nabla L \left( \mbold{\omega} \right)                                   & = 0                                      \\
+  \\
+  \frac{1}{m} \left( 2S \mbold{\omega} - \mbold{a} - \mbold{a} + 0 \right) & = 0                                      \\
+  2 S \mbold{\omega} -2 \mbold{a}                                          & = 0                                      \\
+  2 S \mbold{\omega}                                                       & = 2 \mbold{a}                            \\
+  \mbold{\omega} = \frac{\mbold{a}}{S}                                                                                \\
+  \mbold{\omega} = S^{-1}\mbold{a}
+  \mbold{\omega} = \left( X^t X ) \right)^{-1} X^t \mbold{y}_{\text{true}}
+\end{align*}
+
+At this $\mbold{\omega}$ the loss function is at it's lowest points and are the most optimal weights for predicting the
+original dataset. This is undesired though and regularization methods are used to help the data better work on new
+datasets.
+
+
+\chapter{Polynomial Models}
+
+\section{Polynomial Regression}
+\subsection{Training Function}
+\subsection{Loss Function}
+\subsection{Optimization}
 
 \chapter{Decision Trees}
 \section{Decision Tree Regressors}

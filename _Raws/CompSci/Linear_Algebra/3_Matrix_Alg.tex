@@ -125,7 +125,7 @@ The vector $A \left( B\mbold{x} \right) $ is then a linear combination of the ve
                         \end{bmatrix}                                                                      \\
       \\
       AB            & =  \begin{bmatrix}
-                           11 & 0  & 12 \\
+                           11 & 0  & 21 \\
                            -1 & 13 & -9
                          \end{bmatrix}                                                                     \\
     \end{align*}
@@ -288,5 +288,428 @@ Usually $ \left( A B \right)^{T} $ is not equal $A ^{T} B^{T}$, even when $A$ an
 \chapter{The Inverse Of A Matrix}
 
 \section{Invertibility}
+
+\dfn{Invertibility}{
+  Let $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix} $. If $ad - bc \neq  0$, then $A$ is invertible and
+  \[
+    A^{-1} = \frac{1}{ad - bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}
+  \]
+  If $ad - bc = 0$, then $A$ is not invertible. Where $ad-bc$ is known as the \textit{determinant} and denoted by
+  \[
+    \text{det} A  = ad - bc
+  \]
+}
+
+\thm{}{
+  If $A$ is an invertible $n \times n$ matrix, then for each $\mbold{b}$ in $\mathbb{R}^{n}$, the equation $A \mbold{x}
+    = \mbold{b}$ has the unique solution:
+  \[
+    \mbold{x} = A^{-1} \mbold{b}
+  \]
+}
+
+\thm{}{
+  \begin{enumerate}
+    \item If $A$ is an invertible matrix, then $A^{-1}$ is invertible and
+          \[
+            \left( A^{-1} \right)^{-1} = A
+          \]
+    \item If $A$ and $B$ are $n \times n$ invertible matrices, then so $AB$, and the inverse of $A B$ is the product of
+          the inverses of $A$ and $B$ in the reverse order:
+          \[
+            \left( A B \right) ^{-1} = B^{-1} A^{-1}
+          \]
+    \item If $A$ is an invertible matrix, then so is $A^{T}$ and the inverse of $A^T$ is the transpose of $A^{-1}$:
+          \[
+            \left( A^T \right)^{-1} = \left( A^{-1} \right) ^T
+          \]
+
+  \end{enumerate}
+}
+
+\section{Elementary Matrices}
+
+\dfn{Elementary Matrix}{
+  A matrix obtained by performing a single elementary row operation on an identity matrix.
+}
+
+\ex{}{
+  \qs{}{
+    Let
+    \[
+      E_1 = \begin{bmatrix} 1 & 0 &0 \\0 & 1 & 0 \\ -4 & 0 & 1  \end{bmatrix}, \, E_2 = \begin{bmatrix} 0 & 1 & 0 \\ 1 & 0
+                  & 0     \\ 0 & 0 & 1\end{bmatrix}, \, E_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 5
+      \end{bmatrix}, \, A \begin{bmatrix} a & b & c \\ d & e & f \\ g &h&i \end{bmatrix}
+    \]
+  }
+  Compute $E_1A$, $E_2A$, $E_3A$, and describe how these products can be obtained by elementary row operations on $A$.
+
+  \sol{
+    \begin{align*}
+      E_1 A & =\begin{bmatrix} 1 & 0 &0 \\0 & 1 & 0 \\ -4 & 0 & 1  \end{bmatrix} \begin{bmatrix} a & b & c \\ d & e & f \\
+                g & h & i\end{bmatrix} \\
+            & = \begin{bmatrix}
+                  a      & b       & c       \\
+                  d      & e       & f       \\
+                  -4a+ g & -4b + h & -4c + 1
+                \end{bmatrix}                                                                              \\
+      \\
+      E_2 A & = \begin{bmatrix} 0 & 1 & 0 \\ 1 & 0
+                  & 0     \\ 0 & 0 & 1\end{bmatrix} \begin{bmatrix} a & b & c \\ d & e & f \\ g &h&i \end{bmatrix}      \\
+            & = \begin{bmatrix}
+                  d & e & f \\
+                  a & b & c \\
+                  g & h & i
+                \end{bmatrix}                                                                                          \\
+      \\
+      E_3 A & = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 5
+                \end{bmatrix} \begin{bmatrix} a & b & c \\ d & e & f \\ g &h&i \end{bmatrix}                            \\
+            & = \begin{bmatrix}
+                  a  & b  & c  \\
+                  d  & e  & f  \\
+                  5g & 5h & 5i
+                \end{bmatrix}                                                                                          \\
+    \end{align*}
+    \begin{itemize}
+      \item     $E_1A$ could be obtained by the elementary row operation $-4R_1 + R_3 \to R_3$
+      \item $E_2A$ could be obtained by the elementary row operation $R_1 \leftrightarrow R_2$
+      \item $E_3A$ could be obtained by the elementary row operation $5R_3 \to R_3$
+    \end{itemize}
+  }
+}
+
+
+\cor{}{
+  If an elementary row operation is performed on an $m \times n$ matrix $A$, the resulting matrix can be expressed as
+  $E A$, where $E$ is the $m \times m$ matrix created by performing the same row operation on $I_m$
+}
+
+Since row operations are reversible, all elementary matrices are invertible. Therefore there exists an elementary matrix
+$F$ such that
+\[
+  F E = I
+\]
+And since $E$ and $F$ correspond to reverse operations $EF = I$, also.
+
+\ex{}{
+  \qs{}{
+    Find the inverse of $E_1 = \begin{bmatrix}
+        1  & 0 & 0 \\
+        0  & 1 & 0 \\
+        -4 & 0 & 1
+      \end{bmatrix} $
+  }
+
+  \sol{
+    To transform this matrix into $I_3$ we must get rid of the $-4$ entry in the third row. This can be done by the row
+    operation $4R_1 + R_3 \to R_3$, which corresponds to the elementary matrix:
+    \[
+      E^{-1}_1 = \begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        4 & 0 & 1
+      \end{bmatrix}
+    \]
+    Checking our answer:
+    \begin{align*}
+      E_1 E^{-1}_1 & = \begin{bmatrix}
+                         1  & 0 & 0 \\
+                         0  & 1 & 0 \\
+                         -4 & 0 & 1
+                       \end{bmatrix} \begin{bmatrix}
+                                       1 & 0 & 0 \\
+                                       0 & 1 & 0 \\
+                                       4 & 0 & 1
+                                     \end{bmatrix} \\
+                   & = \begin{bmatrix}
+                         1 & 0 & 0 \\
+                         0 & 1 & 0 \\
+                         0 & 0 & 1
+                       \end{bmatrix}               \\
+    \end{align*}
+    This is indeed the identity matrix $I_m$
+
+  }
+}
+\thm{}{
+  An $n\times n$ matrix $A$ is invertible if and only if $A$ is row equivalent to $I_n$, and in this case, any sequence
+  of elementary row operations that reduces $A$ to $I_n$ also transforms $I_n$ into $A^{-1}$
+}
+
+\subsection{Finding $A^{-1}$}
+
+To find the inverse of a matrix $A$, we can augment $A$ with the $n \times n$ identity matrix $I_n$ and then row reduce.
+If $A$ is row equivalent to $I_{n}$ then $\begin{bmatrix} A & I \end{bmatrix} $ is row equivalent to $\begin{bmatrix} I
+     & A^{-1}\end{bmatrix} $. Otherwise, $A$ does not have an inverse.
+
+\ex{}{
+  \qs{}{
+    Find the inverse of the matrix $A = \begin{bmatrix}
+        0 & 1  & 2 \\
+        1 & 0  & 3 \\
+        4 & -3 & 8
+      \end{bmatrix} $
+  }
+
+  \sol{
+    \begin{align*}
+      \begin{bmatrix} A &I \end{bmatrix}  = \begin{bmatrix}
+                                              0 & 1  & 2 & 1 & 0 & 0 \\
+                                              1 & 0  & 3 & 0 & 1 & 0 \\
+                                              4 & -3 & 8 & 0 & 0 & 1
+                                            \end{bmatrix} \\
+      R_1 \leftrightarrow R_3                                      \\
+      \begin{bmatrix}
+        4 & -3 & 8 & 0 & 0 & 1 \\
+        1 & 0  & 3 & 0 & 1 & 0 \\
+        0 & 1  & 2 & 1 & 0 & 0 \\
+      \end{bmatrix}
+      \\
+      \frac{1}{4}R_1 - R_2  \rightarrow R_2                        \\
+      \begin{bmatrix}
+        4 & -3           & 8  & 0 & 0  & 1           \\
+        0 & \frac{-3}{4} & -1 & 0 & -1 & \frac{1}{4} \\
+        0 & 1            & 2  & 1 & 0  & 0           \\
+      \end{bmatrix}
+      \\
+      \frac{-4}{3}R_2 - R_3  \rightarrow R_3                       \\
+      \begin{bmatrix}
+        4 & -3           & 8            & 0  & 0           & 1            \\
+        0 & \frac{-3}{4} & -1           & 0  & -1          & \frac{1}{4}  \\
+        0 & 0            & \frac{-2}{3} & -1 & \frac{4}{3} & \frac{-1}{3} \\
+      \end{bmatrix}
+      \\
+      4R_2 - R_1  \rightarrow R_1                                  \\
+      \begin{bmatrix}
+        -4 & 0            & -12          & 0  & -4          & 0            \\
+        0  & \frac{-3}{4} & -1           & 0  & -1          & \frac{1}{4}  \\
+        0  & 0            & \frac{-2}{3} & -1 & \frac{4}{3} & \frac{-1}{3} \\
+      \end{bmatrix}
+      \\
+      \frac{3}{2}R_3 - R_2  \rightarrow R_2                        \\
+      \begin{bmatrix}
+        -4 & 0           & -12          & 0            & -4          & 0            \\
+        0  & \frac{3}{4} & 0            & \frac{-3}{2} & 3           & \frac{-3}{4} \\
+        0  & 0           & \frac{-2}{3} & -1           & \frac{4}{3} & \frac{-1}{3} \\
+      \end{bmatrix}
+      \\
+      18R_3 - R_1  \rightarrow R_1                                 \\
+      \begin{bmatrix}
+        4 & 0           & 0            & -18          & 28          & \frac{-6}{1} \\
+        0 & \frac{3}{4} & 0            & \frac{-3}{2} & 3           & \frac{-3}{4} \\
+        0 & 0           & \frac{-2}{3} & -1           & \frac{4}{3} & \frac{-1}{3} \\
+      \end{bmatrix}
+      \\
+      - R_1  \rightarrow R_1                                       \\
+      \begin{bmatrix}
+        -4 & 0           & 0            & 18           & -28         & \frac{6}{1}  \\
+        0  & \frac{3}{4} & 0            & \frac{-3}{2} & 3           & \frac{-3}{4} \\
+        0  & 0           & \frac{-2}{3} & -1           & \frac{4}{3} & \frac{-1}{3} \\
+      \end{bmatrix}
+      \\
+      \frac{-1}{4}R_1 \to R_1                                      \\
+      \frac{4}{3}R_2 \to R_2                                       \\
+      \frac{-3}{2}R_3 \to R_3                                      \\
+      \begin{bmatrix}
+        1 & 0 & 0 & \frac{-9}{2} & 7  & \frac{-3}{2} \\
+        0 & 1 & 0 & -2           & 4  & -1           \\
+        0 & 0 & 1 & \frac{3}{2}  & -2 & \frac{1}{2}  \\
+      \end{bmatrix}
+      \\
+    \end{align*}
+    Since $A \sim I$, $A$ is invertible and
+    \[
+      A^{-1}= \begin{bmatrix}
+        \frac{-9}{2} & 7  & \frac{-3}{2} \\
+        -2           & 4  & -1           \\
+        \frac{3}{2}  & -2 & \frac{1}{2}  \\
+      \end{bmatrix}
+    \]
+    Checking our answer:
+    \begin{align*}
+      A A^{-1} & = \begin{bmatrix}
+                     0 & 1  & 2 \\
+                     1 & 0  & 3 \\
+                     4 & -3 & 8
+                   \end{bmatrix} \begin{bmatrix}
+                                   \frac{-9}{2} & 7  & \frac{-3}{2} \\
+                                   -2           & 4  & -1           \\
+                                   \frac{3}{2}  & -2 & \frac{1}{2}  \\
+                                 \end{bmatrix} \\
+               & = \begin{bmatrix}
+                     1 & 0 & 0 \\
+                     0 & 1 & 0 \\
+                     0 & 0 & 1
+                   \end{bmatrix}                                \\
+    \end{align*}
+  }
+
+}
+
+\chapter{Determinants}
+
+
+
+
+\chapter{Exercises}
+
+\qs{}{
+  Compute the product $A B$ using:
+  \begin{itemize}
+    \item The definition where $A b_1, A b_2$ are computed separately.
+    \item The row-column rule.
+  \end{itemize}
+  \[
+    A = \begin{bmatrix} -1 & 2 \\ 5 & 4 \\ 2 & -3 \end{bmatrix}, \, B \begin{bmatrix} 3 & -2 \\ -2 & 1 \end{bmatrix}
+  \]
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            A b_1 & = \begin{bmatrix} -1 & 2 \\ 5 & 4 \\ 2 & -3 \end{bmatrix} \begin{bmatrix} 3 \\ -2 \end{bmatrix} \\
+                  & = \begin{bmatrix} -3 - 4 \\ 15 - 8 \\ 6 + 6 \end{bmatrix}                                       \\
+                  & = \begin{bmatrix} -7 \\ 7 \\ 12 \end{bmatrix}                                                   \\
+            A b_2 & = \begin{bmatrix} -1 & 2 \\ 5 & 4 \\ 2 & -3 \end{bmatrix} \begin{bmatrix} -2 \\ 1 \end{bmatrix} \\
+                  & = \begin{bmatrix} 4 \\ -6 \\ -7 \end{bmatrix}                                                   \\
+            \\
+            A B   & = \begin{bmatrix} -7 & 4 \\ 7 & -6 \\ 12 & -7 \end{bmatrix}
+          \end{align*}
+    \item
+          \begin{align*}
+            A B & = \begin{bmatrix}
+                      -1 \times 3 + 2 \times -2 & -1 \times -2 + 2 \times 1 \\
+                      5 \times 3 + 4 \times -2  & 5 \times -2 + 4 \times 1  \\
+                      2 \times 3 + -3 \times -2 & -2 \times 2 + -3 \times 1
+                    \end{bmatrix} \\
+                & = \begin{bmatrix}
+                      -7 & 4   \\
+                      7  & - 6 \\
+                      12 & -7
+                    \end{bmatrix}                                        \\
+          \end{align*}
+  \end{enumerate}
+}
+\qs{}{
+  Suppose the last column of $A B$ is entirely zero but $B$ itself has no column of zeros. What can you say
+  about the columns of $A$?
+}
+
+\sol{
+  If the last column of $A B$ is entirely zero, then the last column of $A$ must be a linear combination of the
+  columns of $B$. Therefore the columns of $A$ are linearly dependent.
+}
+
+\qs{}{
+  Find the inverses of the following matrices:
+  \begin{enumerate}
+    \item \label{itm:inv1}
+          \[
+            \begin{bmatrix} 8 & 6 \\ 5 & 4  \end{bmatrix}
+          \]
+    \item
+          \[
+            \begin{bmatrix} 3 & -4 \\ 7 & -8 \end{bmatrix}
+          \]
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \text{det} \left( A \right) & = 32 - 30                                                    \\
+                                        & = 2                                                          \\
+            \\
+            A^{-1}                      & = \frac{1}{2} \begin{bmatrix} 4 & -6 \\ -5 & 8 \end{bmatrix} \\
+                                        & = \begin{bmatrix}
+                                              2    & -3 \\
+                                              -5/2 & 4
+                                            \end{bmatrix}                                             \\
+          \end{align*}
+    \item
+          \begin{align*}
+            \text{det} \left( A \right) & = -24 + 28                                                   \\
+                                        & = 4                                                          \\
+            A^{-1}                      & = \frac{1}{4} \begin{bmatrix} -8 & 4 \\ -7 & 3 \end{bmatrix} \\
+                                        & = \begin{bmatrix}
+                                              -4           & 1           \\
+                                              -\frac{7}{4} & \frac{3}{4}
+                                            \end{bmatrix}                                 \\
+          \end{align*}
+  \end{enumerate}
+}
+
+\qs{}{
+  Use the inverse found in 6 \ref{itm:inv1} to solve the system:
+  \begin{align*}
+    8x_1 + 6x_2 & = 2  \\
+    5x_1 + 4x_2 & = -1
+  \end{align*}
+}
+
+\sol{
+  \begin{align*}
+    \mbold{b} = \begin{bmatrix} 2 \\  -1 \end{bmatrix}                \\
+    \mbold{x} = A^{-1} \mbold{b}                                      \\
+    \\
+    \mbold{x} & = \begin{bmatrix}
+                    2    & -3 \\
+                    -5/2 & 4
+                  \end{bmatrix} \begin{bmatrix} 2 \\ -1 \end{bmatrix} \\
+              & = \begin{bmatrix}
+                    7 \\
+                    -9
+                  \end{bmatrix}                                      \\
+  \end{align*}
+}
+
+\qs{}{
+  Find the inverse of the following matrix if it exists:
+  \[
+    \begin{bmatrix}
+      1  & -2 & 1  \\
+      4  & -7 & 3  \\
+      -2 & 6  & -4
+    \end{bmatrix}
+  \]
+}
+
+\sol{
+  \begin{align*}
+    \begin{bmatrix}
+      1  & -2 & 1  \\
+      4  & -7 & 3  \\
+      -2 & 6  & -4
+    \end{bmatrix}
+    \\
+    4R_1 - R_2  \rightarrow R_2                          \\
+    \begin{bmatrix}
+      1  & -2 & 1  \\
+      0  & -1 & 1  \\
+      -2 & 6  & -4 \\
+    \end{bmatrix}
+    \\
+    -2R_1 - R_3  \rightarrow R_3                         \\
+    \begin{bmatrix}
+      1 & -2 & 1 \\
+      0 & -1 & 1 \\
+      0 & -2 & 2 \\
+    \end{bmatrix}
+    \\
+    2R_2 - R_3  \rightarrow R_3                          \\
+    \begin{bmatrix}
+      1 & -2 & 1 \\
+      0 & -1 & 1 \\
+      0 & 0  & 0 \\
+    \end{bmatrix}
+    \\
+    \text{det} \left( A \right) & = 1 \times -1 \times 0 \\
+                                & = 0                    \\
+    \therefore \text{ the matrix does not have an inverse}
+  \end{align*}
+}
+
 
 \end{document}

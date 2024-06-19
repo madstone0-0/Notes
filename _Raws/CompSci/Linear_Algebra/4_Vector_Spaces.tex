@@ -1,0 +1,110 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Vector Spaces}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Vector Spaces and Subspaces}
+
+\section{Introduction}
+
+\dfn{Vector Space}{
+  A \textit{vector space} is a non empty set $V$ of objects, called vectors, on which are defined two operations,
+  addition and multiplication by scalars, e.g. real numbers, subject to the following axioms which must hold for all
+  vectors $\mbold{u}, \mbold{v}$ and $\mbold{w}$ in $V$ and for all scalars $c$ and $d$.
+  \begin{enumerate}
+    \item The sum of $\mbold{u}$ and $\mbold{v}$, denoted by $\mbold{u} + \mbold{v}$, is in $V$.
+    \item $\mbold{u} + \mbold{v} = \mbold{v} + \mbold{u}$
+    \item $ \left( \mbold{u} + \mbold{v} \right) + \mbold{w} = \mbold{u} + \left( \mbold{v} + \mbold{w} \right)  $
+    \item There is a zero vector $\mbold{0}$ in $V$ such that $\mbold{u} + \mbold{0} = \mbold{u}$
+    \item For each $\mbold{u}$ in $V$, there is a vector $-\mbold{u}$ in $V$ such that $\mbold{u} + \left( -
+            \mbold{u} \right) = \mbold{0} $
+    \item The scalar multiple of $\mbold{u}$ by $c$, denoted by $c\mbold{u}$, is in $V$.
+    \item $c\left( \mbold{u} + \mbold{v} \right) = c\mbold{u} + c\mbold{v}$
+    \item $\left( c + d \right)\mbold{u} = c\mbold{u} + d\mbold{u}$
+    \item $c\left( d\mbold{u} \right) = \left( cd \right)\mbold{u}$
+    \item $1\mbold{u} = \mbold{u}$
+  \end{enumerate}
+}
+
+\section{Subspaces}
+
+\dfn{Subspace}{
+  A subset $H$ of the vector space $V$, where:
+  \begin{enumerate}
+    \item The zero vector of $V$ is in $H$.
+    \item $H$ is closed under vector addition. That is for each $\mbold{u}$ and $\mbold{v}$ in $H$, the sum of
+          $\mbold{u} + \mbold{v}$ is in $H$.
+    \item $H$ is closed under scalar multiplication. That is for each $\mbold{u}$ in $H$ and each scalar $c$, the
+          scalar multiple $c\mbold{u}$ is in $H$.
+  \end{enumerate}
+}
+
+\subsection{Subspace Spanned by a Set}
+
+\thm{}{
+  If $\mbold{v}_1, \ldots, \mbold{v}_p$ are in vector space $V$, then $\text{Span}\{\mbold{v}_1, \ldots, \mbold{v}_p\}
+  $ is a subspace of $V$.
+}
+
+\chapter{Null Space, Column Space, and Linear Transformations}
+
+\section{The Null Space of a Matrix}
+
+\dfn{Null Space}{
+  The \textit{null space} of an $m \times n$ matrix $A$, denoted by $\text{Nul } A$, is the set of all solutions of
+  the homogeneous equation $A \mbold{x} = \mbold{0}$. In set notation:
+  \[
+    \text{Nul }A = \{\mbold{x} : \mbold{x} \text{ is in $\mathbb{R}^{n}$ and } A\mbold{x} = \mbold{0}\}
+  \]
+}
+
+\ex{}{
+  \qs{}{
+    Let $A$ be the matrix $\begin{bmatrix}
+        1  & -3 & -2 \\
+        -5 & 9  & 1
+      \end{bmatrix} $, and let $\mbold{u} = \begin{bmatrix} 5 \\ 3 \\ -2 \end{bmatrix} $. Determine if $\mbold{u}$ belongs
+    to the null space of $A$.
+  }
+
+  \sol{
+    This is basically asking us to verify if $\mbold{u}$ satisfies the equation $A \mbold{u} = \mbold{0}$
+
+    \begin{align*}
+      \begin{bmatrix}
+        1  & -3 & -2 \\
+        -5 & 9  & 1
+      \end{bmatrix}       \begin{bmatrix} 5 \\ 3\\ -2 \end{bmatrix} & = \begin{bmatrix} 0 \\  0  \end{bmatrix} \\
+      \begin{bmatrix}
+        5  -9 + 4    \\
+        -25 + 27  -2 \\
+      \end{bmatrix}                                               & = \begin{bmatrix} 0 \\ 0 \end{bmatrix}     \\
+    \end{align*}
+    $\therefore$ $\mbold{u}$ is in the null space of $A$.
+  }
+}
+
+\thm{}{
+  The null space of an $m\times n$ matrix $A$ is a subspace of $\mathbb{R}^{n}$, equivalently, the set of all
+  solutions to a system $A\mbold{x} = \mbold{0} $ of $m$ homogeneous linear equations in $n$ unknowns is a subspace
+  of $\mathbb{R}^{n}$.
+}
+
+\subsection{An Explicit Description of the Null Space of a Matrix}
+
+\end{document}

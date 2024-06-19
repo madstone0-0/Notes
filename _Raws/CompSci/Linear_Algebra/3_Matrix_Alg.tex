@@ -294,9 +294,9 @@ Usually $ \left( A B \right)^{T} $ is not equal $A ^{T} B^{T}$, even when $A$ an
   \[
     A^{-1} = \frac{1}{ad - bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}
   \]
-  If $ad - bc = 0$, then $A$ is not invertible. Where $ad-bc$ is known as the \textit{determinant} and denoted by
+  If $ad - bc = 0$, then $A$ is not invertible. Where $ad-bc$ is known as the \textit{determinant} \label{thg:det} and denoted by
   \[
-    \text{det} A  = ad - bc
+    \det A  = ad - bc
   \]
 }
 
@@ -540,13 +540,236 @@ If $A$ is row equivalent to $I_{n}$ then $\begin{bmatrix} A & I \end{bmatrix} $ 
                      1 & 0 & 0 \\
                      0 & 1 & 0 \\
                      0 & 0 & 1
-                   \end{bmatrix}                                \\
+                   \end{bmatrix}                                 \\
     \end{align*}
   }
 
 }
 
 \chapter{Determinants}
+
+\section{Introduction}
+
+To extend the concept of the determinant to  $n \times n$ matrices we must use this recursive definition:
+
+\dfn{The Determinant of a $n\times n$ matrix}{
+  For $n \geq 2$, the determinant of an $n \times n$ matrix $A = \left[ a_{ij} \right] $ is the sum of terms of the form
+  $\pm a_{1j}$ det$A_{1j}$, with plus and minus signs alternating, where the entries  of $a_{11}, a_{12}, \ldots,
+    a_{1n}$ are form the first row of $A$, i.e.:
+  \begin{align*}
+    \det A & = a_{11} \text{det} A_{11} - a_{12} \text{det} A_{12} + \ldots + (-1)^{1+n} a_{1n} \text{det} A_{1n}
+    \\
+           & = \displaystyle\sum_{j=1}^{n} \left( -1 \right)^{1 + j} a_{1j} \det A_{1j}                           \\
+  \end{align*}
+}
+
+Where $A_{1j}$ refers to the matrix obtained by crossing out the first row and the $j$th column of $A$, which if $A$ is
+a $3\times 3$ matrix would result in a $2\times 2$ one allowing us to find the determinant of $A_{1j}$ using \ref{thg:det}
+
+\ex{}{
+  \qs{}{
+    Compute the determinant of
+    \[
+      A = \begin{bmatrix}
+        1 & 5  & 0  \\
+        2 & 4  & -1 \\
+        0 & -2 & 0
+      \end{bmatrix}
+    \]
+  }
+
+  \sol{
+    \begin{align*}
+      \text{det } A & = \displaystyle\sum_{j=1}^{n} \left( -1 \right) ^{1+j} a_{1j} \det A_{1j} \\
+                    & = a_{11} \det A_{11} - a_{12} \det A_{12} + a_{13} \det A_{13}            \\
+                    & =  1 \begin{vmatrix} 4 & 1 \\ 2 & 0 \end{vmatrix} - 5 \begin{vmatrix} 2
+                                                                               & -1 \\  0 &
+                                                                              0\end{vmatrix} +
+      0
+      \begin{vmatrix}
+        2 & 4 \\ 0 & -2\end{vmatrix}                                                              \\
+                    & = 1 \left( 0 - 2 \right) - 5 \left( 0 \right) + 0 \left( -4 \right)       \\
+                    & = -2                                                                      \\
+    \end{align*}
+  }
+}
+
+The definition of $\det A$ can also be written in the form of a \textit{cofactor expansion}, Given $A = \left[ a_{ij}
+    \right] $, the $ \left( i, j \right)\text{-cofactor} $ of $A$ is the number $C_{ij}$ defined by:
+\[
+  C_{ij} = \left( -1 \right)^{i+j} \det A_{ij}
+\]
+Allowing us to express $\det A$ as:
+\begin{align*}
+  \det A & = \displaystyle\sum_{j=1}^{n} a_{1j} C_{1j} \\
+         & = a_{11} C_{11} + \ldots + a_{1n} C_{1n}    \\
+\end{align*}
+This is termed as the \textit{cofactor expansion of the determinant along the first row} of $A$.
+
+\thm{Cofactor Expansion}{
+  The determinant of any $n\times n$ matrix $A$ can be computed by a cofactor expansion across any row or down any column.
+  The expansion across the $i$th row is:
+  \begin{align*}
+    \det A & = \displaystyle\sum_{j=1}^{n} a_{ij} C_{ij}              \\
+           & = a_{i1} C_{i1} + a_{i2} C_{i2} + \ldots + a_{in} C_{in} \\
+  \end{align*}
+  And the expansion down the $j$th column is:
+  \begin{align*}
+    \det A & = \displaystyle\sum_{i=1}^{n} a_{ij} C_{ij}              \\
+           & = a_{1j} C_{1j} + a_{2j} C_{2j} + \ldots + a_{nj} C_{nj} \\
+  \end{align*}
+}
+
+\ex{}{
+  \qs{}{
+    Use a cofactor expansion across the third row to compute the determinant of $A$, where
+    \[
+      A = \begin{bmatrix} 1 & 5 & 0 \\ 2 & 4 & -1 \\ 0 & -2 & 0 \end{bmatrix}
+    \]
+  }
+
+  \sol{
+    \begin{align*}
+      \det A & = \displaystyle\sum_{j=1}^{n} a_{3j} C_{3j}                                                              \\
+             & = 0  \begin{vmatrix} 5 & 0 \\ 4 & -1 \end{vmatrix} + 2 \begin{vmatrix} 1 & 0 \\ 2 & -1 \end{vmatrix} + 0
+      \begin{vmatrix} 1 & 5 \\ 2 & 4 \end{vmatrix}                                                                      \\
+             & = 0 + 2 \left( -1 \right) + 0                                                                            \\
+             & = -2                                                                                                     \\
+    \end{align*}
+  }
+}
+
+In the case where we are computing the determinant of a matrix with great dimension, we take the cofactor across the row
+or column with the most zeros.
+
+\ex{}{
+  \qs{}{
+    Compute $\det A$, where
+    \[
+      A = \begin{bmatrix}
+        3 & - 7 & 8  & 9  & -6 \\
+        0 & 2   & -5 & 7  & 3  \\
+        0 & 0   & 1  & 5  & 0  \\
+        0 & 0   & 2  & 4  & -1 \\
+        0 & 0   & 0  & -2 & 0
+      \end{bmatrix}
+    \]
+  }
+
+  \sol{
+    We take the cofactor expansion down the first column of $A$.
+
+    \begin{align*}
+      \det A & = \displaystyle\sum_{i=1}^{n} a_{i1} C_{i3}                                                                \\
+             & = a_{11} C_{11} + a_{21} C_{21} + a_{31} C_{31} + a_{41} C_{41} + a_{51} C_{51}                            \\
+             & = 3 \begin{vmatrix} 2 & -5 & 7 & 3 \\ 0 & 1 & 5 & 0 \\ 0 & 2 & 4 & -1 \\ 0 & 0 & -2 & 0 \end{vmatrix} + 0
+      C_{21} + 0 C_{31} + 0 C_{41} + 0 C_{51}                                                                             \\
+             & \text{We disregard the zero terms}                                                                         \\
+             & = 3 \begin{vmatrix} 2 & -5 & 7 & 3 \\ 0 & 1 & 5 & 0 \\ 0 & 2 & 4 & -1 \\ 0 & 0 & -2 & 0 \end{vmatrix}      \\
+             & \text{Next we perform a cofactor expansion down the 1st column of our determinant}                         \\
+             & = 3 \left(
+      \displaystyle\sum_{i=1}^{n} a_{i1} C_{i1}
+      \right)                                                                                                             \\
+             & = 3 \left(
+      a_{11} C_{11} + a_{21} C_{21} + a_{31} C_{31} + a_{41} C_{41}
+      \right)                                                                                                             \\
+             & = 3 \left( 2 \begin{vmatrix} 1 & 5 & 0 \\ 2 & 4 & -1 \\ 0 & -2 & 0 \end{vmatrix} - 0 C_{21} + 0 C_{31} - 0
+      C_{41}\right)                                                                                                       \\
+             & = 3 \times 2 \begin{vmatrix} 1 & 5 & 0 \\ 2 & 4 & -1 \\ 0 & -2 & 0 \end{vmatrix}                           \\
+             & = 3 \times 2 \left(
+      \displaystyle\sum_{j=1}^{n} a_{3j} C_{3j}
+      \right)                                                                                                             \\
+             & = 3 \times 2 \left( a_{31} C_{31} + a_{32} C_{32} + a_{33} C_{33} \right)                                  \\
+             & = 3 \times 2 \left( 0 C_{31} + 2 \begin{vmatrix} 1 & 0 \\ 2 & -1 \end{vmatrix} + 0 C_{33}  \right)         \\
+             & = 3 \times 2 \times 2 \left( -1 \right)                                                                    \\
+             & = -12                                                                                                      \\
+    \end{align*}
+  }
+}
+
+\thm{}{
+  If $A$ is a triangular matrix, then $\det A$ is the product of the entries on the main diagonal of $A$.
+}
+
+\subsection{Exercises}
+
+\qs{}{
+  Compute
+  \[
+    \begin{vmatrix}
+      5  & -7 & 2 & 2  \\
+      0  & 3  & 0 & -4 \\
+      -5 & -8 & 0 & 3  \\
+      0  & 5  & 0 & -6
+    \end{vmatrix}
+  \]
+}
+
+\sol{
+  \begin{align*}
+    \det A & = \displaystyle\sum_{j=1}^{n} a_{4j} C_{4j}                                                                                                           \\
+           & = a_{41} C_{41} + a_{42} C_{42} + a_{43} C_{43} + a_{44} C_{44}                                                                                       \\
+           & = 0 C_{41} - 5 \begin{vmatrix} 5 & 2 & 2\\ 0 & 0 & -4 \\ -5 & 0 & 3  \end{vmatrix} + 0 C_{43} + 6
+    \begin{vmatrix} 5 & -7 & 2 \\ 0& 3 & 0 \\ -5 & -8 & 0 \end{vmatrix}                                                                                            \\
+           & = 5 \left( \displaystyle\sum_{j=1}^{n} a_{2j} C_{2j} \right) + 6 \left( \displaystyle\sum_{j=1}^{n} a_{2j} C_{2j} \right)                             \\
+           & = 5 \left( 0 C_{21} - 0 C_{22} -4 \begin{vmatrix} 5 & 2 \\ -5 & 0 \end{vmatrix}  \right) + 6 \left( \displaystyle\sum_{j=1}^{n} a_{2j} C_{2j} \right) \\
+           & = 5 \left( 0 + 40 \right)  + 6 \left( 0 C_{21} - 3 \begin{vmatrix} 5 & 2 \\ -5 & 0 \end{vmatrix} + 0 C_{23}  \right)                                  \\
+           & = 200 + 6 \left( -3 \times 10 \right)                                                                                                                 \\
+           & = 200 - 180                                                                                                                                           \\
+           & = 20                                                                                                                                                  \\
+  \end{align*}
+}
+
+\section{Properties of Determinants}
+
+\thm{Row Operations}{
+  Let $A$ be a square matrix, Then:
+  \begin{enumerate}
+    \item If a multiple of one row $A$ is added to another row to produce a matrix $B$, then $\det B = \det A$
+    \item If two rows of $A$ are interchanged to produce $B$, then $\det B = - \det A$
+    \item If one row of $A$ is multiple by $k$ to produce $B$, then $\det B = k\cdot \det A$
+  \end{enumerate}
+}
+
+\ex{}{
+  \qs{}{
+    Compute $\det A$, where $A = \begin{bmatrix}
+        1  & - 4 & 2  \\
+        -2 & 8   & -9 \\
+        -1 & 7   & 0  \\
+      \end{bmatrix} $
+  }
+
+  \sol{
+    We can reduce the matrix $A$ to reduced row echelon form then use the fact that the determinant of a triangular matrix
+    is the product of main diagonal entries.
+
+    \begin{align*}
+      \det A & = \begin{vmatrix}
+                   1  & - 4 & 2  \\
+                   -2 & 8   & -9 \\
+                   -1 & 7   & 0  \\
+                 \end{vmatrix}      \\
+             & = \begin{vmatrix}
+                   1  & -4 & 2  \\
+                   0  & 0  & -5 \\
+                   -1 & 7  & 0
+                 \end{vmatrix}      \\
+             & = \begin{vmatrix}
+                   1 & -4 & 2  \\
+                   0 & 0  & -5 \\
+                   0 & 3  & 2
+                 \end{vmatrix}      \\
+             & = \begin{vmatrix}
+                   1 & -4 & 2  \\
+                   0 & 3  & 2  \\
+                   0 & 0  & -5
+                 \end{vmatrix}      \\
+             & = 1 \times 3 \times -5 \\
+             & = -15                  \\
+    \end{align*}
+  }
+}
 
 
 
@@ -619,24 +842,24 @@ If $A$ is row equivalent to $I_{n}$ then $\begin{bmatrix} A & I \end{bmatrix} $ 
   \begin{enumerate}
     \item
           \begin{align*}
-            \text{det} \left( A \right) & = 32 - 30                                                    \\
-                                        & = 2                                                          \\
+            \det \left( A \right) & = 32 - 30                                                    \\
+                                  & = 2                                                          \\
             \\
-            A^{-1}                      & = \frac{1}{2} \begin{bmatrix} 4 & -6 \\ -5 & 8 \end{bmatrix} \\
-                                        & = \begin{bmatrix}
-                                              2    & -3 \\
-                                              -5/2 & 4
-                                            \end{bmatrix}                                             \\
+            A^{-1}                & = \frac{1}{2} \begin{bmatrix} 4 & -6 \\ -5 & 8 \end{bmatrix} \\
+                                  & = \begin{bmatrix}
+                                        2    & -3 \\
+                                        -5/2 & 4
+                                      \end{bmatrix}                                             \\
           \end{align*}
     \item
           \begin{align*}
-            \text{det} \left( A \right) & = -24 + 28                                                   \\
-                                        & = 4                                                          \\
-            A^{-1}                      & = \frac{1}{4} \begin{bmatrix} -8 & 4 \\ -7 & 3 \end{bmatrix} \\
-                                        & = \begin{bmatrix}
-                                              -4           & 1           \\
-                                              -\frac{7}{4} & \frac{3}{4}
-                                            \end{bmatrix}                                 \\
+            \det \left( A \right) & = -24 + 28                                                   \\
+                                  & = 4                                                          \\
+            A^{-1}                & = \frac{1}{4} \begin{bmatrix} -8 & 4 \\ -7 & 3 \end{bmatrix} \\
+                                  & = \begin{bmatrix}
+                                        -4           & 1           \\
+                                        -\frac{7}{4} & \frac{3}{4}
+                                      \end{bmatrix}                                 \\
           \end{align*}
   \end{enumerate}
 }
@@ -684,30 +907,204 @@ If $A$ is row equivalent to $I_{n}$ then $\begin{bmatrix} A & I \end{bmatrix} $ 
       -2 & 6  & -4
     \end{bmatrix}
     \\
-    4R_1 - R_2  \rightarrow R_2                          \\
+    4R_1 - R_2  \rightarrow R_2                    \\
     \begin{bmatrix}
       1  & -2 & 1  \\
       0  & -1 & 1  \\
       -2 & 6  & -4 \\
     \end{bmatrix}
     \\
-    -2R_1 - R_3  \rightarrow R_3                         \\
+    -2R_1 - R_3  \rightarrow R_3                   \\
     \begin{bmatrix}
       1 & -2 & 1 \\
       0 & -1 & 1 \\
       0 & -2 & 2 \\
     \end{bmatrix}
     \\
-    2R_2 - R_3  \rightarrow R_3                          \\
+    2R_2 - R_3  \rightarrow R_3                    \\
     \begin{bmatrix}
       1 & -2 & 1 \\
       0 & -1 & 1 \\
       0 & 0  & 0 \\
     \end{bmatrix}
     \\
-    \text{det} \left( A \right) & = 1 \times -1 \times 0 \\
-                                & = 0                    \\
+    \det \left( A \right) & = 1 \times -1 \times 0 \\
+                          & = 0                    \\
     \therefore \text{ the matrix does not have an inverse}
+  \end{align*}
+}
+
+\qs{}{
+  Suppose the system below is consistent for all possible values of $f$ and $g$. What can you say about the coefficients
+  $c$ and $d$? Justify your answer.
+  \begin{align*}
+    x_1 + 3x_2  & = f \\
+    cx_1 + dx_2 & = g \\
+  \end{align*}
+}
+
+\sol{
+  \begin{align*}
+    \begin{bmatrix}
+      1 & 3 & f \\
+      c & d & g
+    \end{bmatrix}     \\
+    cR_1 - R_2 \to R_2 \\
+    \begin{bmatrix}
+      1 & 3      & f      \\
+      0 & 3c - d & cf - g
+    \end{bmatrix}
+  \end{align*}
+}
+
+\qs{}{
+  Let $\mbold{u} = \begin{bmatrix} 2 \\ -1 \end{bmatrix} $ and $\mbold{v} = \begin{bmatrix} 2 \\ 1 \end{bmatrix} $. Show
+  that $\begin{bmatrix} h \\ k \end{bmatrix} $ is in $\text{Span}  \{u, v\} $ for all $h$ and $k$.
+}
+
+\sol{
+  \begin{align*}
+    x_1\mbold{u} + x_2 \mbold{v}                 & = \begin{bmatrix} h \\ k \end{bmatrix} \\
+    \begin{bmatrix} 2 & 2 \\ -1 & 1\end{bmatrix} & = \begin{bmatrix} h \\ k \end{bmatrix}
+  \end{align*}
+  Therefore
+  \begin{align*}
+    \begin{bmatrix}
+      2  & 2 & h \\
+      -1 & 1 & k
+    \end{bmatrix}                \\
+    -\frac{1}{2}R_1 - R_2 \to R_2 \\
+  \end{align*}
+}
+
+\qs{}{
+  A steam plant burns two types of coal: anthracite (A) and bituminous (B). For each ton of A burned,
+  the plant produces 27.6 million Btu of heat, 3100 grams (g) of sulfur dioxide, and 250 g of
+  particulate matter (solid-particle pollutants). For each ton of B burned, the plant produces 30.2
+  million Btu, 6400 g of sulfur dioxide, and 360 g of particulate matter.
+  \begin{enumerate}
+    \item How much heat does the steam plant produce when it burns $x_1$ tons of A and $x_2$ tons of B?
+    \item Suppose the output of the steam plant is described by a vector that lists the amounts of
+          heat, sulfur dioxide, and particulate matter. Express this output as a linear combination of
+          two vectors, assuming that the plant burns $x_1$ tons of A and $x_2$ tons of B.
+    \item Over a certain time period, the steam plant produced 162 million Btu of heat, 23,610 g
+          of sulfur dioxide, and 1623 g of particulate matter. Determine how many tons of each type
+          of coal the steam plant must have burned. Include a vector equation as part of your solution.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{align*}
+    27.6x_1 + 30.2x_2 & = \text{Heat}               \\
+    3100x_1 + 6400x_2 & = \text{Sulfur Dioxide}     \\
+    250x_1 + 360x_2   & = \text{Particulate Matter}
+  \end{align*}
+  \begin{enumerate}
+    \item
+          \[
+            27.6x_1 + 30.2x_2
+          \]
+    \item
+          \begin{align*}
+            27.6x_1 + 30.2x_2             & = H                                            \\
+            3100x_1 + 6400x_2             & = SO_2                                         \\
+            250x_1 + 360x_2               & = P                                            \\
+            \\
+            \mbold{u} x_1 + \mbold{v} x_2 & = \begin{bmatrix} H \\ SO_2 \\ P \end{bmatrix} \\
+            \text{Where } \mbold{u} = \begin{bmatrix} 27.6 \\ 3100 \\ 250 \end{bmatrix} \text{ and } \mbold{v} = \begin{bmatrix} 30.2 \\ 6400 \\ 360 \end{bmatrix}
+          \end{align*}
+    \item
+          \begin{align*}
+            27.6x_1 + 30.2x_2 & = 162                  \\
+            3100x_1 + 6400x_2 & = 23610                \\
+            250x_1 + 360x_2   & = 1623                 \\
+            \\
+            \begin{bmatrix}
+              27.6 & 30.2 & 162   \\
+              3100 & 6400 & 23610 \\
+              250  & 360  & 1623  \\
+            \end{bmatrix}                        \\
+            \frac{7750}{69}R_1 - R_2  \rightarrow R_2  \\
+            \begin{bmatrix}
+              \frac{138}{5} & \frac{151}{5}      & 162                \\
+              0             & \frac{-207550}{69} & \frac{-124530}{23} \\
+              250           & 360                & 1623               \\
+            \end{bmatrix}
+            \\
+            \frac{625}{69}R_1 - R_3  \rightarrow R_3   \\
+            \begin{bmatrix}
+              \frac{138}{5} & \frac{151}{5}      & 162                \\
+              0             & \frac{-207550}{69} & \frac{-124530}{23} \\
+              0             & \frac{-5965}{69}   & \frac{-3579}{23}   \\
+            \end{bmatrix}
+            \\
+            \frac{112}{3897}R_2 - R_3  \rightarrow R_3 \\
+            \begin{bmatrix}
+              \frac{138}{5} & \frac{151}{5}      & 162                \\
+              0             & \frac{-207550}{69} & \frac{-124530}{23} \\
+              0             & 0                  & \frac{0}{1}        \\
+            \end{bmatrix}
+            \\
+            0R_1 - R_3  \rightarrow R_3                \\
+            \begin{bmatrix}
+              \frac{138}{5} & \frac{151}{5}      & 162                \\
+              0             & \frac{-207550}{69} & \frac{-124530}{23} \\
+              0             & 0                  & \frac{0}{1}        \\
+            \end{bmatrix}
+            \\
+            0R_2 - R_3  \rightarrow R_3                \\
+            \begin{bmatrix}
+              \frac{138}{5} & \frac{151}{5}      & 162                \\
+              0             & \frac{-207550}{69} & \frac{-124530}{23} \\
+              0             & 0                  & \frac{0}{1}        \\
+            \end{bmatrix}
+            \\
+            \frac{-98}{9761}R_2 - R_1  \rightarrow R_1 \\
+            \begin{bmatrix}
+              \frac{-138}{5} & 0                  & \frac{-2691}{25}   \\
+              0              & \frac{-207550}{69} & \frac{-124530}{23} \\
+              0              & 0                  & \frac{0}{1}        \\
+            \end{bmatrix}
+            \\
+            0R_2 - R_1  \rightarrow R_1                \\
+            \begin{bmatrix}
+              \frac{138}{5} & 0                  & \frac{2691}{25}    \\
+              0             & \frac{-207550}{69} & \frac{-124530}{23} \\
+              0             & 0                  & \frac{0}{1}        \\
+            \end{bmatrix}
+            \\
+            0R_2 - R_1  \rightarrow R_1                \\
+            \frac{5}{138}R_1 \to R_1                   \\
+            \frac{-1}{3008}R_2 \to R_2                 \\
+            \begin{bmatrix}
+              1 & 0 & \frac{39}{10} \\
+              0 & 1 & \frac{9}{5}   \\
+              0 & 0 & \frac{0}{1}   \\
+            \end{bmatrix}
+            \\
+            \mbold{x} = \begin{bmatrix} \frac{39}{10} \\ \frac{9}{5} \end{bmatrix}
+          \end{align*}
+
+  \end{enumerate}
+}
+
+\qs{}{
+  Describe and compare the solution sets of $x_1-3x_2+5x_3 = 0$ and $x_1-3x_2+5x_3 = 4$.
+}
+
+\sol{
+  \begin{align*}
+    \begin{bmatrix}
+      1 & -3 & 5 & 0 \\
+      0 & 0  & 0 & 0 \\
+      0 & 0  & 0 & 0 \\
+    \end{bmatrix}       \\
+    x_1 -3x_2 + 5x_3 = 0 \\
+    x_2 = x_2            \\
+    x_3 = x_3            \\
+    x_1 = 3x_2 - 5x_3    \\
+    \\
+    \mbold{x} = \begin{bmatrix} 3 \\ 1 \\ 0 \end{bmatrix} x_2 + \begin{bmatrix} -5 \\ 0 \\ 1 \end{bmatrix} x_3
   \end{align*}
 }
 

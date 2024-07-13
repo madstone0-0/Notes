@@ -1,5 +1,6 @@
 /*
 !.gitignore
+!README.md
 
 !/_Raws
 /_Raws/*
@@ -10,6 +11,8 @@
 !/_Raws/Stats
 !/_Raws/Econs
 !/_Raws/Homework
+*_files/
+notebooks
 
 !/_Exported/
 # /_Exported/Calc/*

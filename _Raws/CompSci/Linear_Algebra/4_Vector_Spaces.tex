@@ -27,21 +27,37 @@
   addition and multiplication by scalars, e.g. real numbers, subject to the following axioms which must hold for all
   vectors $\mbold{u}, \mbold{v}$ and $\mbold{w}$ in $V$ and for all scalars $c$ and $d$.
   \begin{enumerate}
-    \item The sum of $\mbold{u}$ and $\mbold{v}$, denoted by $\mbold{u} + \mbold{v}$, is in $V$.
-    \item $\mbold{u} + \mbold{v} = \mbold{v} + \mbold{u}$
+    \item The sum of $\mbold{u}$ and $\mbold{v}$, denoted by $\mbold{u} + \mbold{v}$, is in $V$. \label{ax:1}
+    \item $\mbold{u} + \mbold{v} = \mbold{v} + \mbold{u}$ \label{ax:2}
     \item $ \left( \mbold{u} + \mbold{v} \right) + \mbold{w} = \mbold{u} + \left( \mbold{v} + \mbold{w} \right)  $
-    \item There is a zero vector $\mbold{0}$ in $V$ such that $\mbold{u} + \mbold{0} = \mbold{u}$
+          \label{ax:3}
+    \item There is a zero vector $\mbold{0}$ in $V$ such that $\mbold{u} + \mbold{0} = \mbold{u}$ \label{ax:4}
     \item For each $\mbold{u}$ in $V$, there is a vector $-\mbold{u}$ in $V$ such that $\mbold{u} + \left( -
-            \mbold{u} \right) = \mbold{0} $
-    \item The scalar multiple of $\mbold{u}$ by $c$, denoted by $c\mbold{u}$, is in $V$.
-    \item $c\left( \mbold{u} + \mbold{v} \right) = c\mbold{u} + c\mbold{v}$
-    \item $\left( c + d \right)\mbold{u} = c\mbold{u} + d\mbold{u}$
-    \item $c\left( d\mbold{u} \right) = \left( cd \right)\mbold{u}$
-    \item $1\mbold{u} = \mbold{u}$
+            \mbold{u} \right) = \mbold{0} $ \label{ax:5}
+    \item The scalar multiple of $\mbold{u}$ by $c$, denoted by $c\mbold{u}$, is in $V$. \label{ax:6}
+    \item $c\left( \mbold{u} + \mbold{v} \right) = c\mbold{u} + c\mbold{v}$ \label{ax:7}
+    \item $\left( c + d \right)\mbold{u} = c\mbold{u} + d\mbold{u}$ \label{ax:8}
+    \item $c\left( d\mbold{u} \right) = \left( cd \right)\mbold{u}$ \label{ax:9}
+    \item $1\mbold{u} = \mbold{u}$ \label{ax:10}
   \end{enumerate}
 }
 
+Using these axioms one can show that the zero vector in axiom \ref{ax:4} is unique, and the vector $-\mbold{u}$, called
+the \textbf{negative} of $\mbold{u}$ in axiom \ref{ax:5} is unique for each $\mbold{u}$ in $V$, outlined in:
+
+\thm{}{
+  \begin{align}
+    0\mbold{u}  & = \mbold{0}                    \\
+    c \mbold{0} & = \mbold{0}                    \\
+    -\mbold{u}  & = \left( -1 \right)  \mbold{u}
+  \end{align}
+}
+
 \section{Subspaces}
+
+In many problems, a vector space consists of an appropriate set of vectors from a larger vector space. In this case
+only, three of the ten axioms need to be checked to determine if the subset is a vector space, the rest are satisfied
+automatically.
 
 \dfn{Subspace}{
   A subset $H$ of the vector space $V$, where:
@@ -54,11 +70,289 @@
   \end{enumerate}
 }
 
+These properties guarantee that a subspace $H$ of $V$ is also a vector space, under the defined vector space operations.
+This means that every subspace is a vector space and conversely every vector space is a subspace (of itself and possibly
+of a larger vector space).
+
+\ex{}{
+  \qs{}{
+    The vector space $\mathbb{R}^{2}$ is not a vector space of $\mathbb{R}^{3}$ because $\mathbb{R}^{2}$ is not even a
+    subset of $\mathbb{R}^{3}$. The set
+    \[
+      H = \left\{\begin{bmatrix} s \\ t \\ 0 \end{bmatrix} : s \text{ and $t$ are real} \right\}
+    \]
+    is a subset of $\mathbb{R}^{3}$ that "looks" and "acts" like $\mathbb{R}^{2}$ even though it is logically distinct
+    from $\mathbb{R}^{2}$. Show that $H$ is subset of $\mathbb{R}^{3}$
+  }
+
+  \sol{
+    \begin{itemize}
+      \item The zero vector is in $H$
+      \item $H$ is closed under vector addition and scalar multiplication as these operations on vectors in $H$ always
+            produce vectors whose third entry is zero and thus belong to $H$.
+    \end{itemize}
+    Thus $H$ is as subspace of $\mathbb{R}^3$
+  }
+}
+
 \subsection{Subspace Spanned by a Set}
 
-\thm{}{
+One way of describing a subspace is as a linear combination of vectors that span the subspace.
+
+\ex{}{
+  \qs{}{
+    Given $\mbold{v}_1$ and $\mbold{v}_2$ in a vector space $V$, let $H = \text{Span}\{\mbold{v}_1, \mbold{v}_2\} $. Show
+    that $H$ is a subspace of $V$
+  }
+
+  \sol{
+    \begin{itemize}
+      \item The zero vector is in $H$ as:
+            \[
+              \mbold{0} = 0\mbold{v}_1 + 0\mbold{v}_2
+            \]
+      \item To show that $H$ is closed under vector addition and scalar multiplication, take two arbitrary vectors in
+            $H$, say
+            \[
+              \mbold{u} = s_1 \mbold{v}_1 + s_2 \mbold{v}_2 \text{ and } \mbold{w} = t_1 \mbold{v}_1 + t_2 \mbold{v}_2
+            \]
+            By axioms \ref{ax:2}, \ref{ax:3}, and \ref{ax:8} for the vector space $V$:
+            \begin{align*}
+              \mbold{u} + \mbold{w} & = \left( s_1 \mbold{v}_1 + s_2 \mbold{v}_2 \right) + \left( t_1 \mbold{v}_1 + t_2 \mbold{v}_2 \right) \\
+                                    & = \left( s_1 + t_1 \right)\mbold{v}_1 + \left( s_2 + t_2 \right) \mbold{v}_2                          \\
+            \end{align*}
+            The result is still in $H$ as it can still be spanned from $\text{Span}\{\mbold{v}_1, \mbold{v}_2\} $, with
+            weights $ \left( s_1 + t_1 \right) $ and $ \left( s_2 + t_2 \right) $
+
+            Furthermore:
+            \begin{align*}
+              c \mbold{u} & = c \left( s_1 \mbold{v}_1 + s_2 \mbold{v}_2  \right)                 \\
+                          & = \left( c s_1 \right) \mbold{v}_1 + \left( c s_2 \right) \mbold{v}_2 \\
+            \end{align*}
+            therefore $H$ is also closed under scalar multiplication.
+
+    \end{itemize}
+  }
+}
+
+\thm{}{ \label{thm:1}
   If $\mbold{v}_1, \ldots, \mbold{v}_p$ are in vector space $V$, then $\text{Span}\{\mbold{v}_1, \ldots, \mbold{v}_p\}
   $ is a subspace of $V$.
+}
+
+We can call $\text{Span}\{\mbold{v}_1, \ldots, \mbold{v}_p\} $ \textbf{the subspace spanned} by $\{\mbold{v}_1, \ldots,
+  \mbold{v}_p\} $. Therefore given any subspace $H$ of $V$, a \textbf{spanning set} for $H$ is a set $\{\mbold{v}_1,
+  \ldots, \mbold{v}_p\} $ in $H$ such that $H = \text{Span}\{\mbold{v}_1, \ldots, \mbold{v}_p\} $.
+
+\ex{}{
+  \qs{}{
+    Let $H$ be the set of all vectors of the form $ \left( a - 3b, b - a, a, b \right) $, where $a$ and $b$ are
+    arbitrary scalars. That is let $H = \{ \left( a - 3b, b-a, a, b \right) : a \text{ and $b$ in } \mathbb{R} \} $.
+    Show that $H$ is a subspace of $\mathbb{R}^{4}$
+  }
+
+  \sol{
+    \begin{align*}
+      H & = \begin{bmatrix}
+              a - 3b \\
+              b - a  \\
+              a      \\
+              b
+            \end{bmatrix}                    \\
+        & = a\begin{bmatrix}
+               1  \\
+               -1 \\
+               1  \\
+               0
+             \end{bmatrix} + b \begin{bmatrix}
+                                 -3 \\
+                                 1  \\
+                                 0  \\
+                                 1
+                               \end{bmatrix} \\
+        & = a \mbold{v}_1 + b \mbold{v}_2     \\
+    \end{align*}
+    Thus $H$ is a subspace of $\mathbb{R}^4$ by theorem \ref{thm:1}
+  }
+}
+
+\ex{}{
+  \qs{}{
+    For what value(s) of $h$ will $\mbold{y}$ be in the subspace of $\mathbb{R}^3$ spanned by $\mbold{v}_1, \mbold{v}_2,
+      \mbold{v}_3$, if
+    \[
+      \mbold{v}_1 = \begin{bmatrix} 1 \\ -1\\ 2 \end{bmatrix},\, \mbold{v}_2 = \begin{bmatrix} 5 \\ -4 \\ -7
+      \end{bmatrix},\, \mbold{v}_3 = \begin{bmatrix} -3 \\ 1 \\ 0 \end{bmatrix},\,  \text{ and } \mbold{y} = \begin{bmatrix} -4\\ 3 \\ h \end{bmatrix}
+    \]
+  }
+
+  \sol{
+    The subspace of $\mathbb{R}^3$ Span$\{\mbold{v}_1, \mbold{v}_2, \mbold{v}_3\} $. $\mbold{y}$ will be in the subspace
+    if the span of $\mbold{v}_1, \mbold{v}_2, \mbold{v}_3$ contains $\mbold{y}$, that is if $\mbold{y}$ can be written
+    \[
+      x_1 \mbold{v}_1 + x_2 \mbold{v}_2 + x_3 \mbold{v}_3 = \mbold{y}
+    \]
+    And thus the matrix equation:
+    \[
+      A \mbold{x} = \mbold{y}
+    \]
+    Where $A = \begin{bmatrix}
+        1  & 5  & -3 \\
+        -1 & -4 & 1  \\
+        -2 & -7 & 0
+      \end{bmatrix} $ and $\mbold{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} $
+
+    \begin{align*}
+      \begin{bmatrix}
+        1  & 5  & -3 & -4 \\
+        -1 & -4 & 1  & 3  \\
+        -2 & -7 & 0  & h
+      \end{bmatrix}    \\
+      -R_1 - R_2 \to R_2   \\
+      \begin{bmatrix}
+        1  & 5  & -3 & -4 \\
+        0  & 1  & -2 & -1 \\
+        -2 & -7 & 0  & h
+      \end{bmatrix}    \\
+      -2 R_2 + R_3 \to R_3 \\
+      \begin{bmatrix}
+        1 & 5  & -3 & -4    \\
+        0 & 1  & -2 & -1    \\
+        0 & -3 & 6  & 8 - h \\
+      \end{bmatrix}  \\
+      -3R_2 - R_3 \to R_3  \\
+      \begin{bmatrix}
+        1 & 5 & -3 & -4     \\
+        0 & 1 & -2 & -1     \\
+        0 & 0 & 0  & -5 + h
+      \end{bmatrix}
+    \end{align*}
+    $\therefore$ The system $A \mbold{x} = \mbold{y}$ is only consistent if $h = 5$, and thus $\mbold{y}$ is in the
+    subspace spanned by Span$\{\mbold{v}_1, \mbold{v}_2, \mbold{v}_3\} $ if and only if $h = 5$
+  }
+}
+
+\section{Exercises}
+
+\qs{}{
+  Show that the set $H$ of all points in $\mathbb{R}^2$ of the form $ \left( 3s, 2 + 5s \right) $ is not a vector space,
+  by showing that it is not closed under scalar multiplication. (Find a specific vector $\mbold{u}$ in $H$ and a scalar
+  $c$ such that $c \mbold{u}$ is not in $H$)
+}
+
+\sol{
+  Let $\mbold{u} = \begin{bmatrix} 3 \\ 7 \end{bmatrix} $ and $c = 2$. Then:
+  \begin{align*}
+    2 \mbold{u} & = 2 \left( \begin{bmatrix} 3 \\ 7 \end{bmatrix}  \right) \\
+                & = \begin{bmatrix} 6 \\ 14 \end{bmatrix}                  \\
+  \end{align*}
+  This implies there is some $s$ such that $\begin{bmatrix} 3s \\ 2 + 5s \end{bmatrix} = \begin{bmatrix} 6 \\ 14
+    \end{bmatrix}  $, but for this to be true $s$ would need to be equal to $2$ and $2.4$ which is impossible. Therefore $H$
+  is not closed under scalar multiplication and thus is not a vector space.
+}
+
+\qs{}{
+  Let $W = \text{Span} \{\mbold{v}_1,\ldots, \mbold{v}_p\} $, where $\mbold{v}_1,\ldots, \mbold{v}_p$ are in a vector
+  space $V$. Show that $\mbold{v}_k$ is in $W$ for $1 \leq k \leq p$.
+}
+
+\sol{
+  If $W = \text{Span} \{\mbold{v}_1,\ldots, \mbold{v}_p\} $, then the contents of $W$ for example $\mbold{v}_1$ can be
+  written as linear combination of the spanned vectors, that is:
+  \begin{align*}
+    \mbold{v}_1 = 1 \mbold{v}_1 + 0 \mbold{v}_2 + \ldots + 0 \mbold{v}_p
+  \end{align*}
+  Therefore if $1 \leq k \leq p$, then $\mbold{v}_k$ is in $W$ because:
+  \[
+    \mbold{v}_k = 0 \mbold{v}_1 + \ldots + 0\mbold{v}_{k-1} + 1\mbold{v}_k + 0\mbold{v}_{k+1} + \ldots + 0 \mbold{v}_p
+  \]
+}
+
+\qs{}{
+  An $n\times n$ matrix $A$ is said to be \textit{symmetric} if $A = A^{T}$. Let $S$ be the set of all $3\times 3$
+  symmetric matrices. Show that $S$ is a subspace of $M_{3\times 3}$, the vector space of all $3\times 3$ matrices.
+}
+
+\sol{
+  To prove that $S$ is a subspace of $M_{3\times 3}$, I must show:
+  \begin{description}
+    \item[The Zero vector Is in $S$] Since the zero vector is symmetric $S$ contains the zero vector as:
+          \[
+            \mbold{0} = \mbold{0}^{T}
+          \]
+    \item[$S$ is closed under vector addition] Let $A$ and $B$ be in $S$, hence $A = A^{T}$ and $B = B^{T}$
+          \begin{align*}
+            \left( A + B \right)^{T} & = A^{T} + B^{T} \\
+                                     & = A + B         \\
+          \end{align*}
+          Thus $A + B$ is symmetric and is in $S$
+    \item[$S$ is closed under scalar multiplication] Let $A$ be in $S$ and $c$ be a scalar
+          \begin{align*}
+            \left( cA \right)^{T} & = c \left( A \right)^{T} \\
+                                  & = cA                     \\
+          \end{align*}
+          Thus $cA$ is symmetric and is in $S$
+  \end{description}
+  $\therefore$ $S$ is a subspace of $M_{3\times 3}$
+}
+
+\qs{}{
+  Let $V$ be the first quadrant in the $xy$-plane; that is, let
+  \[
+    V = \left\{ \begin{bmatrix} x \\ y \end{bmatrix} : x \geq 0 \text{ and } y \geq 0 \right\}
+  \]
+  \begin{enumerate}
+    \item If $\mbold{u}$ and $\mbold{v}$ are in $V$, is $\mbold{u} + \mbold{v}$ in $V$? Why?
+    \item Find a specific vector $\mbold{u}$ in $V$ and specific scalar $c$ such that $c\mbold{u}$ is not in $V$.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item If $\mbold{u}$ and $\mbold{v}$ are $V$, then indeed $\mbold{u} + \mbold{v}$ are in $V$, because the sum of
+          these two vectors will always have positive $x$ and $y$ components and will therefore always be in the first
+          quadrant of the $xy$-plane.
+    \item For $\mbold{u} = \begin{bmatrix} 3 \\ 4 \end{bmatrix} $ and $c = -2$
+          \begin{align*}
+            -2 \mbold{u} & = -2 \left( \begin{bmatrix} 3\\ 4  \end{bmatrix}  \right) \\
+                         & = \begin{bmatrix} -6 \\ -8 \end{bmatrix}                  \\
+          \end{align*}
+  \end{enumerate}
+}
+
+\qs{}{
+  Determine if the given sets are subspaces of $\mathbb{P}_n$ for an appropriate value of $n$. Justify your answers.
+  \begin{enumerate}
+    \item All polynomials in the form $\mbold{p} \left( t \right) = at^2 $, where $a \in \mathbb{R}$.
+    \item All polynomials in the form $\mbold{p} \left( t \right) = a + t^2 $, where $a \in \mathbb{R}$
+    \item All polynomials of degree at most $3$, with integers as coefficients.
+    \item All polynomials in $\mathbb{P}_n$ such that $\mbold{p} \left( 0 \right) = 0 $
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item Yes this is a subspace of $\mathbb{P}_n$ as:
+          \begin{description}
+            \item[Contains the zero vector] When $a = 0$, $\mbold{p} \left( t \right) = 0t^2 = 0$.
+            \item[Closed under vector additon] Let $\mbold{w}$ and $\mbold{q}$ be polynomials in the appropriate form
+                  \begin{align*}
+                    \mbold{w} + \mbold{q} & = \left( wt^2 \right) + \left( qt^2 \right) \\
+                                          & = \left( w + q \right)t^2                   \\
+                    \text{Let } w + q     & = a \text{, then}                           \\
+                                          & = a t^2                                     \\
+                  \end{align*}
+            \item[Closed under scalar multiplication] Let $\mbold{w}$ be a polynomial in the appropriate form and
+                  $c$ be a scalar.
+                  \begin{align*}
+                    c \mbold{w}     & =  c \left( w t^2 \right) \\
+                                    & = \left( c w \right) t^2  \\
+                    \text{Let } c w & = a \text{, then}         \\
+                                    & = a t^2                   \\
+                  \end{align*}
+
+          \end{description}
+  \end{enumerate}
 }
 
 \chapter{Null Space, Column Space, and Linear Transformations}

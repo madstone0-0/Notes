@@ -1,0 +1,760 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Eigenvalues and Eigenvectors}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\dfn{Eigenvector}{
+  An eigenvector of a of a $n\times n$ matrix $A$ is a non-zero vector $\mbold{x}$ such that $A\mbold{x} = \lambda \mbold{x}$ for
+  some scalar $\lambda$. A scalar $\lambda $ is called an eigenvalue of $A$ if there is a non-trivial solution
+  $\mbold{x}$ of $A\mbold{x} = \lambda \mbold{x}$; such an $\mbold{x}$ is called an \textit{eigenvector corresponding to
+    $\lambda $}.
+}
+
+\ex{}{
+  \qs{}{
+    Let $A = \begin{bmatrix} 1 & 6 \\ 5 & 2 \end{bmatrix} $, $\mbold{u} = \begin{bmatrix} 6 \\ -5 \end{bmatrix} $, and
+    $\mbold{v} = \begin{bmatrix} 3 \\ -2 \end{bmatrix} $. Are $\mbold{u}$ and $\mbold{v}$ eigenvectors of $A$?
+  }
+
+  \sol{
+    \begin{align*}
+      A \mbold{u} & = \begin{bmatrix} 1 & 6 \\ 5 & 2 \end{bmatrix} \begin{bmatrix} 6 \\ -5 \end{bmatrix} =
+      \begin{bmatrix} -24 \\ 20 \end{bmatrix} = -4 \begin{bmatrix} 6 \\ -5 \end{bmatrix} = -4 \mbold{u}    \\
+      A \mbold{v} & = \begin{bmatrix} 1 & 6 \\ 5 & 2 \end{bmatrix} \begin{bmatrix} 3 \\ -2 \end{bmatrix} =
+      \begin{bmatrix} -9 \\ 11 \end{bmatrix} \neq \lambda \begin{bmatrix} 3 \\ -2 \end{bmatrix}            \\
+    \end{align*}
+  }
+  \qs{}{
+    Show that 7 is an eigenvalue of $A$ and find the corresponding eigenvector.
+  }
+
+  \sol{
+    To show this we need to prove that $A \mbold{x} = \lambda \mbold{x}$ where $\lambda = 7$ has non-trivial solutions.
+    \begin{align*}
+      A \mbold{x}                                                                                                          & = \lambda \mbold{x} \\
+      A \mbold{x}                                                                                                          & = 7 \mbold{x}       \\
+      A\mbold{x} - 7\mbold{x}                                                                                              & = \mbold{0}         \\
+      \left( A - 7 I \right) \mbold{x}                                                                                     & = \mbold{0}         \\
+      \left( \begin{bmatrix} 1 & 6 \\ 5 & 2 \end{bmatrix} - 7\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+      \right)\mbold{x}                                                                                                     & = \mbold{0}         \\
+      \left( \begin{bmatrix} 1 & 6 \\ 5 & 2 \end{bmatrix} - \begin{bmatrix} 7 & 0 \\ 0 & 7 \end{bmatrix} \right) \mbold{x} & =
+      \mbold{0}                                                                                                                                  \\
+      \begin{bmatrix} -6 & 6 \\ 5 & -5  \end{bmatrix} \mbold{x}                                                            & = \mbold{0}         \\
+      \begin{bmatrix} -6 & 6 & 0 \\ 5 & -5 & 0  \end{bmatrix}                                                                                    \\
+      \frac{-5}{6}R_1 - R_2  \rightarrow R_2                                                                                                     \\
+      \begin{bmatrix}
+        -6 & 6 & 0 \\
+        0  & 0 & 0 \\
+      \end{bmatrix}
+      \\
+      \frac{-1}{6}R_1 \to R_1                                                                                                                    \\
+      \begin{bmatrix}
+        1 & -1 & 0 \\
+        0 & 0  & 0 \\
+      \end{bmatrix}
+      \\
+      x_1 -x_2 = 0                                                                                                                               \\
+      x_1 = x_2                                                                                                                                  \\
+      x_2 =x_2                                                                                                                                   \\
+      \mbold{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = x_2\begin{bmatrix} 1 \\ 1  \end{bmatrix}
+    \end{align*}
+    This system has non-trivial solutions as the columns are multiples of themselves and such linearly dependent.
+    Therefore 7 is a eigenvalue of $A$, with the corresponding eigenvectors in the form $x_2 \begin{bmatrix} 1 \\ 1
+      \end{bmatrix} $ where $x_2 \neq 0$
+  }
+}
+
+This brings us to the next conclusion:
+
+A scalar $\lambda $ is an eigenvalue of a matrix $A$ if and only if
+\begin{equation}
+  \left( A - \lambda I \right) \mbold{x} = \mbold{0}
+  \label{eq:1}
+\end{equation}
+Has a non-trivial solution, where the corresponding eigenvectors is in the form of the parametric vector equation of the
+solution set of this non-homogeneous system.
+
+The set of all solutions of \ref{eq:1} is just the null space of the matrix $A - \lambda I$. This solution set is a
+subspace of $\mathbb{R}^{n}$ and is called the \textit{eigenspace} of $A$ corresponding to $\lambda$
+
+\dfn{Eigenspace}{
+  The eigenspace of a matrix $A$ corresponding to an eigenvalue $\lambda$ is the set of all eigenvectors of $A$ corresponding
+  to $\lambda$, together with the zero vector.
+}
+
+\ex{}{
+  \qs{}{
+    Let $A = \begin{bmatrix}
+        4 & -1 & 6 \\
+        2 & 1  & 6 \\
+        2 & -1 & 8
+      \end{bmatrix} $. An eigenvalue of $A$ is 2. Find a basis of for the eigenspace of $A$ corresponding to $\lambda = 2$.
+  }
+
+  \sol{
+    \begin{align*}
+      \left( A - 2I \right)                                                                             \\
+      \left( \begin{bmatrix}
+               4 & -1 & 6 \\
+               2 & 1  & 6 \\
+               2 & -1 & 8
+             \end{bmatrix} - \begin{bmatrix} 2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 \end{bmatrix}  \right) \\
+      \begin{bmatrix}
+      \end{bmatrix}
+    \end{align*}
+  }
+}
+
+
+\subsection{Exercises}
+
+\qs{}{
+  Is $\lambda = 2$ an eigenvalue of $\begin{bmatrix} 3 &2 \\ 3 & 8 \end{bmatrix} $? Why or why not?
+}
+
+\sol{
+  \begin{align*}
+    \left( \begin{bmatrix} 3 &2 \\ 3 & 8 \end{bmatrix} - \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix}    \right) \\
+    \begin{bmatrix} 1 & 2 \\ 3 & 6 \end{bmatrix}                                                                 \\
+    \begin{bmatrix} 1 & 2 & 0 \\ 3 & 6 & 0 \end{bmatrix}                                                         \\
+    3R_1 - R_2  \rightarrow R_2                                                                                  \\
+    \begin{bmatrix}
+      1 & 2 & 0 \\
+      0 & 0 & 0 \\
+    \end{bmatrix}
+    \\
+    x_1 = -2x_2                                                                                                  \\
+    x_2 = x_2                                                                                                    \\
+    \mbold{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} -2x_2 \\ x_2 \end{bmatrix} = x_2
+    \begin{bmatrix} -2 \\ 1 \end{bmatrix}
+  \end{align*}
+  This columns of the matrix are linearly dependent therefore $2$ is an eigenvalue of the matrix. And the eigenspace is
+  the set of all vectors in the form $x_2 \begin{bmatrix} -2 \\ 1 \end{bmatrix} $ where $x_2 \neq 0$, i.e:
+  \[
+    \left\{ x_2 \begin{bmatrix} -2 \\ 1 \end{bmatrix}: x_2 \in \mathbb{R} \wedge x_2 \neq 0  \right\}
+  \]
+}
+
+\qs{}{
+  Is $\begin{bmatrix} 4 \\ -3 \\ 1 \end{bmatrix} $ and eigenvector of in $\begin{bmatrix} 3 & 7 & 9 \\ -4 & -5 & 1 \\ 2
+                  & 4 & 4\end{bmatrix} $? If so find the corresponding eigenvalue.
+}
+
+\sol{
+  \begin{align*}
+    \begin{bmatrix} 3 & 7 & 9 \\ -4 & -5 & 1 \\ 2 & 4 & 4\end{bmatrix} \begin{bmatrix} 4 \\ -3 \\ 1 \end{bmatrix} & =
+    \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}                                                                                                                   \\
+    0 \begin{bmatrix} -4 \\ -5 \\ 1 \end{bmatrix}                                                                 & = \begin{bmatrix} 0 \\  0\\ 0 \end{bmatrix} \\
+    \therefore \lambda                                                                                            & = 0                                         \\
+  \end{align*}
+  $\therefore$ $\begin{bmatrix} 4 \\ -3 \\ 1 \end{bmatrix} $ is an eigenvector of the matrix, with 0 as its eigenvalue.
+}
+
+\qs{}{
+  Is $\lambda  = 4$ an eigenvalue of $\begin{bmatrix} 3 & 0 &-1\\ 2 &3 & 1 \\ -3 & 4 & 5 \end{bmatrix} $? If so, find
+  one corresponding eigenvector.
+}
+
+\sol{
+  \begin{align*}
+    \left( A - 4 I  \right)  = \mbold{0}                                                                                \\
+    \begin{bmatrix} 3 & 0 &-1\\ 2 &3 & 1 \\ -3 & 4 & 5 \end{bmatrix} - \begin{bmatrix} 4 & 0 & 0 \\ 0 & 4 & 0 \\ 0 & 0 &
+                4\end{bmatrix} \\
+    \begin{bmatrix}
+      -1 & 0  & -1 \\
+      2  & -1 & 1  \\
+      -3 & 4  & 1
+    \end{bmatrix}                                                                                                      \\
+    \begin{bmatrix}
+      -1 & 0  & -1 & 0 \\
+      2  & -1 & 1  & 0 \\
+      -3 & 4  & 1  & 0
+    \end{bmatrix}                                                                                                    \\
+    -2R_1 - R_2  \rightarrow R_2                                                                                        \\
+    \begin{bmatrix}
+      -1 & 0 & -1 & 0 \\
+      0  & 1 & 1  & 0 \\
+      -3 & 4 & 1  & 0 \\
+    \end{bmatrix}
+    \\
+    3R_1 - R_3  \rightarrow R_3                                                                                         \\
+    \begin{bmatrix}
+      -1 & 0  & -1 & 0 \\
+      0  & 1  & 1  & 0 \\
+      0  & -4 & -4 & 0 \\
+    \end{bmatrix}
+    \\
+    -4R_2 - R_3  \rightarrow R_3                                                                                        \\
+    \begin{bmatrix}
+      -1 & 0 & -1 & 0 \\
+      0  & 1 & 1  & 0 \\
+      0  & 0 & 0  & 0 \\
+    \end{bmatrix}
+    \\
+    -1R_1 \to R_1                                                                                                       \\
+    \begin{bmatrix}
+      1 & 0 & 1 & 0 \\
+      0 & 1 & 1 & 0 \\
+      0 & 0 & 0 & 0 \\
+    \end{bmatrix}
+    \\
+    x_1 + x_3 = 0                                                                                                       \\
+    x_2 + x_3 = 0                                                                                                       \\
+    x_3 = 0                                                                                                             \\
+    \\
+    x_1 = -x_3                                                                                                          \\
+    x_2 = -x_3                                                                                                          \\
+    x_3 = x_3                                                                                                           \\
+    \\
+    \mbold{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}  = \begin{bmatrix} x_3 \\ x_3 \\ x_3 \end{bmatrix} = x_3
+    \begin{bmatrix} -1 \\ -1 \\ 1 \end{bmatrix}
+  \end{align*}
+  $\therefore$ Since the columns of $ \left( A - 4I \right) $ are linearly dependent, 4 is an eigenvalue of the matrix $A$
+
+  \noindent One eigenvector is found when $x_3=1$, $\begin{bmatrix} -1 \\ -1 \\ 1 \end{bmatrix} $
+}
+
+\qs{}{
+  Find a basis for the eigenspace of $A = \begin{bmatrix} 5 & 0 \\ 2 & 1 \end{bmatrix} $ with eigenvalues $\lambda =1,5$
+}
+
+\sol{
+  \begin{align*}
+    \left( A - 1 I \right)                                                                      \\
+    \begin{bmatrix} 5 & 0 \\ 2 & 1 \end{bmatrix} - \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \\
+    \begin{bmatrix} 4 & 0 \\ 2 & 0 \end{bmatrix}                                                \\
+    \begin{bmatrix} 4 & 0 & 0 \\ 2 & 0 & 0 \end{bmatrix}                                        \\
+    \frac{1}{2}R_1 - R_2  \rightarrow R_2                                                       \\
+    \begin{bmatrix}
+      4 & 0 & 0 \\
+      0 & 0 & 0 \\
+    \end{bmatrix}
+    \\
+    \frac{1}{4}R_1 \to R_1                                                                      \\
+    \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 0 & 0 \\
+    \end{bmatrix}
+    \\
+    x_1 = 0                                                                                     \\
+    x_2 = x_2                                                                                   \\
+    \\
+    \mbold{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ x_2 \end{bmatrix}  =
+    x_2
+    \begin{bmatrix} 0
+      \\ 1
+    \end{bmatrix}                                                                            \\
+    \therefore \text{ the basis of the eigenspace of $A$ with $\lambda = 1$ is } \left\{ \begin{bmatrix} 0 \\ 1 \end{bmatrix}  \right\}
+  \end{align*}
+
+  \begin{align*}
+    \left( A - 5 I \right)                                                                      \\
+    \begin{bmatrix} 5 & 0 \\ 2 & 1 \end{bmatrix} - \begin{bmatrix} 5 & 0 \\ 0 & 5 \end{bmatrix} \\
+    \begin{bmatrix}
+      0 & 0  \\
+      2 & -4
+    \end{bmatrix}                                                                              \\
+    \begin{bmatrix}
+      0 & 0  & 0 \\
+      2 & -4 & 0
+    \end{bmatrix}                                                                              \\
+    R_1 \leftrightarrow R_2                                                                     \\
+    \begin{bmatrix}
+      2 & -4 & 0 \\
+      0 & 0  & 0 \\
+    \end{bmatrix}
+    \\
+    \frac{1}{2}R_1 \to R_1                                                                      \\
+    \begin{bmatrix}
+      1 & -2 & 0 \\
+      0 & 0  & 0 \\
+    \end{bmatrix}
+    \\
+    x_1 -2x_2 = 0                                                                               \\
+    x_2  = x_2                                                                                  \\
+    \\
+    x_1 = 2x_2                                                                                  \\
+    x_2 = x_2                                                                                   \\
+    \mbold{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 2x_2 \\ x_2 \end{bmatrix}  = x_2
+    \begin{bmatrix} 2 \\ 1 \end{bmatrix}                                                        \\
+    \therefore \text{ the basis of the eigenspace of $A$ with $\lambda = 5$ is } \left\{ \begin{bmatrix} 2 \\ 1 \end{bmatrix}  \right\}
+  \end{align*}
+}
+
+\chapter{The Characteristic Equation}
+
+\thm{}{
+  Let $A$ be an $n\times n$ matrix. Then $A$ is only invertible if and only if:
+  \begin{itemize}
+    \item The number 0 is not an eigenvalue of $A$
+    \item The determinant of $A$ is not zero
+  \end{itemize}
+}
+
+Therefore the updated properties of determinants are:
+\thm{}A{
+\begin{enumerate}
+  \item $A$ is invertible if and only if $\det A \neq 0$
+  \item $\det AB = \left( \det A \right) \left( \det B \right)  $
+  \item $\det A^{T} = \det A$
+  \item If $A$ is triangular, then $\det A$ is the product of the entries on the main diagonal of $A$
+  \item A row replacement operation on $A$ does not change the determinant of $A$. A row interchange changes the
+        sign of the determinant. A row scaling also scales the determinant by the same factor.
+\end{enumerate}
+}
+
+
+Useful information about the eigenvalues of a square matrix $A$ is found in a special scalar equation called the
+characteristic equation of $A$.
+
+\qs{}{
+  Find the eigenvalues of $A = \begin{bmatrix} 2 & 3 \\ 3 & -6 \end{bmatrix} $
+}
+
+\sol{
+  We must find all scalars $\lambda $ such that the matrix equation
+  \[
+    \left( A - \lambda I \right)\mbold{x}  = \mbold{0}
+  \]
+  Has the non-trivial solution. By the invertible matrix theorem, this is the same as finding all the scalars $\lambda $
+  where the matrix $A - \lambda I$ is non-invertible, i.e. $\det \left( A - \lambda I \right) = 0 $. Therefore
+  \begin{align*}
+    A - \lambda I & = \begin{bmatrix} 2 & 3 \\ 3 & 6 \end{bmatrix} - \begin{bmatrix} \lambda & 0 \\ 0 & \lambda  \end{bmatrix} \\
+                  & = \begin{bmatrix}
+                        2 - \lambda & 3            \\
+                        3           & -6 - \lambda
+                      \end{bmatrix}                                                                               \\
+    \\
+    \det \left( A - \lambda I \right)  = 0 \therefore                                                                          \\
+    \det \left( \begin{bmatrix}
+                  2 - \lambda & 3            \\
+                  3           & -6 - \lambda\end{bmatrix} \right) = 0                                                            \\
+    \left( 2- \lambda  \right) \left( -6 - \lambda  \right) - 9   = 0                                                          \\
+    \lambda^2 + 4 \lambda  - 21 = 0                                                                                            \\
+    \left( \lambda - 7 \right)  \left( \lambda - 3 \right)  =  0                                                               \\
+    \lambda  = 7                                                                                                               \\
+    \lambda  = 3
+  \end{align*}
+}
+
+\dfn{Characteristic Equation}{
+  A scalar $\lambda $ is an eigenvalue of an $n \times n$ matrix $A$ if and only if $\lambda $ satisfies the
+  characteristic equation
+  \[
+    \det \left( A - \lambda I \right)  = 0
+  \]
+}
+
+\section{Characteristic Polynomial}
+
+The characteristic polynomial of a matrix $A$ is a polynomial of degree $n$ in the variable $\lambda $, where $n$ is the
+the size of the matrix $A$. The characteristic polynomial of $A$ is defined as:
+\[
+  \lambda^{n} - \left( \text{trace} A \right) \lambda^{n-1} + \left( \text{trace} A \right) \lambda^{n-2} + \ldots + \left( -1 \right)^{n} \det A
+\]
+
+\section{Similarity}
+
+\dfn{Similarity}{
+
+  If $A$ and $B$ are $n\times n$ matrices, then $A$ is similar to $B$ if there is an invertible matrix $P$ such that
+  $P^{-1}AP = B $. If $A$ is similar to $B$, then $B$ is also similar to $A$, therefore $A$ and $B$ are similar.
+}
+
+\thm{}{
+  If $n\times n$ matrices of $A$ and $B$ are similar, then they have the same characteristic polynomial and hence have
+  the same eigenvalues, with the same multiplicities. Therefore
+  \[
+    \det \left( A - \lambda I \right) = \det \left( B - \lambda I \right)
+  \]
+
+}
+
+\begin{myproof}
+  If $B = P^{-1}AP$, Then
+  \begin{align*}
+    B - \lambda I                     & = P^{-1}AP  - \lambda I                                      \\
+    B - \lambda I                     & = P^{-1}AP - \lambda P^{-1}P                                 \\
+                                      & = P^{-1} \left( AP - \lambda P \right)                       \\
+                                      & = P^{-1} \left( AP - \lambda PI \right)                      \\
+                                      & = P^{-1} \left( A - \lambda I \right)P                       \\
+    \text{The determinants of the two matrices are equal, then:}                                     \\
+    \det \left( B - \lambda I \right) & = \det \left( P^{-1} \left( A - \lambda I \right) P  \right) \\
+                                      & = \det P^{-1} \det \left( A - \lambda I \right) \det P       \\
+                                      & = \det P^{-1} \det P \det \left( A - \lambda I \right)       \\
+                                      & = 1 \det \left( A - \lambda I \right)                        \\
+    \det \left( B - \lambda I \right) & = \det \left( A - \lambda I \right)                          \\
+  \end{align*}
+\end{myproof}
+
+
+\section{Exercises}
+
+\qs{}{
+  Find the characteristic polynomial and the eigenvalues of the
+  matrices
+  \begin{enumerate}
+    \item
+          \[
+            \begin{bmatrix} 2 & 7 \\ 7 & 2 \end{bmatrix}
+          \]
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \det \left( A - \lambda I \right)  = 0                     \\
+            \det \begin{bmatrix}
+                   2 - \lambda & 7           \\
+                   7           & 2 - \lambda
+                 \end{bmatrix} = 0                             \\
+            \left( 2 - \lambda  \right)^2 -49 = 0                      \\
+            \lambda^2 -4 \lambda + 4 - 49 = 0                          \\
+            \left( \lambda - 9 \right) \left( \lambda + 5 \right)  = 0 \\
+            \lambda = 9                                                \\
+            \lambda = -4
+          \end{align*}
+  \end{enumerate}
+}
+
+
+\chapter{Diagonalization}
+
+In many cases the eigenvalue-eigenvector information contained in a matrix $A$ can be displayed in the factorization $A
+  = PDP^{-1}$, where $D$ is a diagonal matrix. This makes it easy compute $A^{k}$ for large values of $k$.
+
+\ex{}{
+  If $D = \begin{bmatrix} 5 & 0 \\ 0 & 3 \end{bmatrix} $, then:
+  \begin{align*}
+    D^2   & ^= \begin{bmatrix} 5 & 0 \\ 0 & 3 \end{bmatrix} \times \begin{bmatrix} 5 & 0 \\ 0 & 3 \end{bmatrix} \\
+          & = \begin{bmatrix}
+                5^2 & 0   \\
+                0   & 3^2
+              \end{bmatrix}                                                                                    \\
+    D^3   & = \begin{bmatrix}
+                5^2 & 0   \\
+                0   & 3^2
+              \end{bmatrix} \begin{bmatrix} 5 & 0 \\ 0 & 3 \end{bmatrix}                                        \\
+          & = \begin{bmatrix}
+                5^3 & 0   \\
+                0   & 3^3
+              \end{bmatrix}                                                                                    \\
+    \text{Therefore generally}                                                                                  \\
+    D^{k} & = \begin{bmatrix}
+                5^{k} & 0     \\
+                0     & 3^{k}
+              \end{bmatrix}
+  \end{align*}
+}
+
+\thm{Diagonalization Theorem}{
+  An $n\times n$ matrix $A$ is diagonalizable if and only if $A$ has $n$ linearly independent eigenvectors.
+
+  $A = PDP^{-1}$, with the diagonal matrix $D$, if an only if the columns of $P$ are $n$ linearly independent
+  eigenvectors of $A$. In this case the diagonal entries of $D$ are the eigenvalues of $A$ that correspond, respectively
+  to the eigenvectors in $P$
+}
+
+\ex{}{
+  \qs{}{
+    Diagonalize the following matrix if possible:
+    \[
+      A = \begin{bmatrix}
+        1  & 3  & 3  \\
+        -3 & -5 & -3 \\
+        3  & 3  & 1
+      \end{bmatrix}
+    \]
+  }
+
+  \sol{
+    To do this we must complete the following steps:
+    \begin{enumerate}
+      \item Find the eigenvalues of $A$
+      \item Find three linearly independent eigenvectors of $A$
+      \item Construct $P$ from the vectors found in step 2
+      \item Construct $D$ from the eigenvalues found in step 1
+    \end{enumerate}
+
+    Therefore\\
+    \begin{enumerate}
+      \item
+            \begin{align*}
+              \det \left( A - \lambda I \right)  = 0 \\
+            \end{align*}
+            Eigenvalues: $1, -2, -2$
+      \item
+            $\lambda  = -2$
+            \begin{align*}
+              A + 2 I  =  \begin{bmatrix}
+                            3  & 3  & 3  \\
+                            -3 & -3 & -3 \\
+                            3  & 3  & 3
+                          \end{bmatrix}   \\
+              -1R_1 - R_2  \rightarrow R_2 \\
+              \begin{bmatrix}
+                3 & 3 & 3 & 0 \\
+                0 & 0 & 0 & 0 \\
+                3 & 3 & 3 & 0 \\
+              \end{bmatrix}
+              \\
+              R_1 - R_3  \rightarrow R_3   \\
+              \begin{bmatrix}
+                3 & 3 & 3 & 0 \\
+                0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 \\
+              \end{bmatrix}
+              \\
+              \frac{1}{3}R_1 \to R_1       \\
+              \begin{bmatrix}
+                1 & 1 & 1 & 0 \\
+                0 & 0 & 0 & 0 \\
+                0 & 0 & 0 & 0 \\
+              \end{bmatrix}
+              \\
+              x_1 = -x_2 - x_3             \\
+              x_2 = x_2                    \\
+              x_3 = x_2                    \\
+              \\
+              \mbold{x} = \begin{bmatrix} -x_2 - x_3 \\ x_2 \\ x_3 \end{bmatrix} = x_2 \begin{bmatrix} -1 \\ 1 \\ 0
+                                                                                       \end{bmatrix} + x_3 \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix}
+            \end{align*}
+            $\lambda = 1$
+            \begin{align*}
+              A - I = \begin{bmatrix}
+                        0  & 3  & 3  \\
+                        -3 & -6 & -3 \\
+                        3  & 3  & 0
+                      \end{bmatrix}       \\
+              R_1 \leftrightarrow R_2      \\
+              \begin{bmatrix}
+                -3 & -6 & -3 & 0 \\
+                0  & 3  & 3  & 0 \\
+                3  & 3  & 0  & 0 \\
+              \end{bmatrix}
+              \\
+              R_2 \leftrightarrow R_3      \\
+              \begin{bmatrix}
+                -3 & -6 & -3 & 0 \\
+                3  & 3  & 0  & 0 \\
+                0  & 3  & 3  & 0 \\
+              \end{bmatrix}
+              \\
+              -1R_1 - R_2  \rightarrow R_2 \\
+              \begin{bmatrix}
+                -3 & -6 & -3 & 0 \\
+                0  & 3  & 3  & 0 \\
+                0  & 3  & 3  & 0 \\
+              \end{bmatrix}
+              \\
+              R_2 - R_3  \rightarrow R_3   \\
+              \begin{bmatrix}
+                -3 & -6 & -3 & 0 \\
+                0  & 3  & 3  & 0 \\
+                0  & 0  & 0  & 0 \\
+              \end{bmatrix}
+              \\
+              -2R_2 - R_1  \rightarrow R_1 \\
+              \begin{bmatrix}
+                3 & 0 & -3 & 0 \\
+                0 & 3 & 3  & 0 \\
+                0 & 0 & 0  & 0 \\
+              \end{bmatrix}
+              \\
+              \frac{1}{3}R_1 \to R_1       \\
+              \begin{bmatrix}
+                1 & 0 & -1 & 0 \\
+                0 & 3 & 3  & 0 \\
+                0 & 0 & 0  & 0 \\
+              \end{bmatrix}
+              \\
+              \frac{1}{3}R_2 \to R_2       \\
+              \begin{bmatrix}
+                1 & 0 & -1 & 0 \\
+                0 & 1 & 1  & 0 \\
+                0 & 0 & 0  & 0 \\
+              \end{bmatrix}
+              \\
+              x_1 = x_3                    \\
+              x_2 = -x_3                   \\
+              x_3 = x_3                    \\
+              \\
+              \mbold{x} = \begin{bmatrix} x_3 \\ -x_3 \\ x_3 \end{bmatrix} = x_3 \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix}
+            \end{align*}
+            Our linearly dependent eigenvectors are therefore
+            \[
+              \{ \begin{bmatrix} -1 \\ 1 \\ 0  \end{bmatrix}, \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1
+                \\ 1\end{bmatrix}     \}
+            \]
+      \item
+            Therefore our $P$:
+            \[
+              P = \begin{bmatrix}
+                -1 & 1 & 1  \\
+                1  & 0 & -1 \\
+                0  & 1 & 1  \\
+              \end{bmatrix}
+            \]
+      \item
+            We start the matrix with the columns from the eigenspace from the repeated eigenvalue $-2$, therefore we must list the entries in
+            $D$ in the same order.
+            \[
+              D = \begin{bmatrix}
+                -2 & 0  & 0 \\
+                0  & -2 & 0 \\
+                0  & 0  & 1
+              \end{bmatrix}
+            \]
+            In checking our answers we check if the sides of the equation below are equal
+            \[
+              AP = PD
+            \]
+    \end{enumerate}
+  }
+}
+
+
+\thm{}{
+  An $n\times n$ matrix with $n$ distinct eigenvalues is diagonalizable
+}
+\ex{}{
+  \qs{}{
+    Determine if the following matrix is diagonalizable
+    \[
+      A = \begin{bmatrix}
+        5 & -8 & 1  \\
+        0 & 0  & 7  \\
+        0 & 0  & -2
+      \end{bmatrix}
+    \]
+  }
+
+  \sol{
+
+  }
+}
+
+\section{Exercises}
+
+\qs{}{
+  Let $A = PDP^{-1}$ and compute $A^{4}$
+  \[
+    P = \begin{bmatrix} 5 & 7 \\ 2 & 3 \end{bmatrix} , D = \begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix}
+  \]
+}
+
+\sol{
+  \begin{align*}
+    A   & = PDP^{-1}                     \\
+    A^2 & = PDP^{-1} \times PDP^{-1}     \\
+    P \times P^{-1} = I                  \\
+    A^2 & = PD^2IP^{-1}                  \\
+    A^4 & = PD^2P^{-1} \times PD^2P^{-1} \\
+        & = PD^{4}P^{-1}                 \\
+  \end{align*}
+}
+
+\qs{}{
+  The matrix $A$ is factored in the form $PDP^{-1}$, Use the Diagonalization Theorem to find the eigenvalues and the basis
+  of each eigenspace
+  \[
+    A = \begin{bmatrix} 2 & 2& 1 \\ 1 & 3 & 1 \\ 1 & 2& 2 \end{bmatrix} = \begin{bmatrix} 1  & 1 & 2 \\ 1 & 0 & -1 \\ 1 &
+                -1 & 0\end{bmatrix} \begin{bmatrix} 5 & 0 & 0 \\ 0 & 1& 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} \frac{1}{4} &
+                \frac{1}{2} & \frac{1}{4} \\ \frac{1}{4} & \frac{1}{2} & -\frac{3}{4} \\ \frac{1}{4} & -\frac{1}{2} & \frac{1}{4}\end{bmatrix}
+  \]
+}
+
+\sol{
+
+}
+
+\qs{}{
+  Diagonalize the matrices below
+  \begin{enumerate}
+    \item
+          \[
+            \begin{bmatrix} 1 & 0 \\ 6 & -1 \end{bmatrix}
+          \]
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \begin{bmatrix} 1 & 0 \\ 6 & -1 \end{bmatrix}                             \\
+            \text{The eigenvalues are on the diagonal as this is a triangular matrix} \\
+            \lambda = 1                                                               \\
+            A - I                                                                     \\
+            \begin{bmatrix} 0 & 0 \\ 6 & -2 \end{bmatrix}                             \\
+            R_1 \leftrightarrow R_2                                                   \\
+            \begin{bmatrix}
+              6 & -2 & 0 \\
+              0 & 0  & 0 \\
+            \end{bmatrix}
+            \\
+            \frac{1}{6}R_1 \to R_1                                                    \\
+            \begin{bmatrix}
+              1 & \frac{-1}{3} & 0 \\
+              0 & 0            & 0 \\
+            \end{bmatrix}
+            \\
+            x_1 = \frac{1}{3}x_2                                                      \\
+            x_2 = x_2                                                                 \\
+            \mbold{x} = \begin{bmatrix} \frac{1}{3}x_2 \\ x_2 \end{bmatrix} = x_2 \begin{bmatrix} \frac{1}{3} \\ 1 \end{bmatrix}
+            \\
+            \\
+            \lambda = -1                                                              \\
+            A + I                                                                     \\
+            \begin{bmatrix}
+              2 & 0 \\
+              6 & 0 \\
+            \end{bmatrix}                                                            \\
+            3R_1 - R_2  \rightarrow R_2                                               \\
+            \begin{bmatrix}
+              2 & 0 & 0 \\
+              0 & 0 & 0 \\
+            \end{bmatrix}
+            \\
+            \frac{1}{2}R_1 \to R_1                                                    \\
+            \begin{bmatrix}
+              1 & 0 & 0 \\
+              0 & 0 & 0 \\
+            \end{bmatrix}
+            \\
+            x_1 = 0                                                                   \\
+            x_2 = x_2                                                                 \\
+            \mbold{x} = x_2\begin{bmatrix} 0  \\ 1 \end{bmatrix}
+            \\
+            P = \begin{bmatrix}
+                  \frac{1}{3} & 0 \\
+                  1           & 1
+                \end{bmatrix}                                                       \\
+            D = \begin{bmatrix}
+                  1 & 0  \\
+                  0 & -1
+                \end{bmatrix}
+          \end{align*}
+  \end{enumerate}
+}
+
+\end{document}

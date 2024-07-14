@@ -1,0 +1,99 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Searching and Sorting Algorithms}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Searching Algorithms}
+
+\section{Linear / Sequential Search}
+
+The linear search algorithm is a simple search algorithm  that uses a brute force approach to locate a single target
+value $t$ in a collection $A$.
+
+\subsection{Input / Output (IO)}
+
+\begin{description}
+  \item[Input] A non-empty collection $A$ of $n > 0$ elements and a target value $t$.
+  \item[Output] The index of the target value $t$ in the collection $A$ if it exists, otherwise $-1$
+\end{description}
+
+\subsection{Algorithm}
+
+\begin{algorithm}[H]
+  \caption{LinearSearch($A$, $n$, $t$)}
+  \begin{algorithmic}[1]
+    \For{$i = 1$ to $n$}
+    \If{ $A_i = t$}
+    \State \Return $i$
+    \EndIf
+    \State \Return $-1$
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
+\subsection{Time Complexity}
+
+\begin{description}
+  \item[Best Case] The best case for this algorithm is when the target value is at the first index of the collection
+        $A$, for which the time complexity is $O(1)$ or more specifically $\Theta \left( 1 \right) $ as the algorithm will
+        always use a constant amount of time to locate the target value.
+  \item[Worst Case] The worst case for this algorithm is when the target value is not found or the target value is
+        at the last index of the collection $A$, for which the time complexity is $O(n)$.
+\end{description}
+
+
+
+\section{Binary Search}
+
+The binary search algorithm is a more efficient search algorithm that uses a divide and conquer approach to locate a
+single target value $t$ in a sorted collection $A$.
+
+\subsection{Input / Output (IO)}
+
+\begin{description}
+  \item[Input] A sorted non-empty collection $A$ of $n > 0$ elements and a target value $t$.
+  \item[Output] The index of the target value $t$ in the collection $A$ if it exists, otherwise $-1$
+\end{description}
+
+\subsection{Algorithm}
+
+\begin{algorithm}[H]
+  \caption{BinarySearch($A$, $n$, $t$)}
+  \begin{algorithmic}[1]
+    \State low := 0
+    \State high := n
+    \While{low $\leq$ high}
+    \State mid := $\left\lfloor \frac{ \left( \text{high} + \text{low} \right) }{2} \right\rfloor$
+
+    \If{ $t = A_{\text{mid}}$}
+    \State \Return mid
+    \EndIf
+
+    \If{ $t < A_{\text{mid}}$}
+    \State high = mid - 1
+    \ElsIf{ $t > A_{\text{mid}}$}
+    \State low = mid + 1
+    \EndIf
+    \EndWhile
+    \State \Return -1
+  \end{algorithmic}
+\end{algorithm}
+
+\chapter{Sorting Algorithms}
+
+\end{document}

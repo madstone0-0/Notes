@@ -37,6 +37,10 @@ def writeChecksumJSON(filepaths: list[Path]):
             for item in file.rglob("*.md"):
                 if item.is_file():
                     checksums[str(item)] = genChecksum(item)
+            if Path(file / "notebooks").exists():
+                for item in file.rglob("*.ipynb"):
+                    if item.is_file():
+                        checksums[str(item)] = genChecksum(item)
 
     with open(checksumPath, "w") as f:
         f.write(json.dumps(checksums, indent=4))
@@ -64,6 +68,7 @@ def cleanLatexArtifacts(startDir: Path):
         ".tfm",
         ".600gf",
         ".xdv",
+        ".out",
     ]
     for file in (
         item
@@ -140,6 +145,37 @@ def compileMarkdown(file, exportDir) -> str:
     return out
 
 
+def convertNotebook(file, exportDir) -> str:
+    out: str = ""
+    filename = Path(file).name.split(".")[0]
+    out += f"[IPYNB] Compiling {file}: {filename}.ipynb - {exportDir}\n"
+    juptyerPath = shutil.which("jupyter")
+    cmd = [
+        f"{juptyerPath}",
+        "nbconvert",
+        # "--execute",
+        "--to",
+        "latex",
+        "--TemplateExporter.extra_template_basedirs=/home/mads/.local/share/jupyter",
+        "--template",
+        "temp",
+        f"--output-dir='{exportDir}'",
+        f"{file}",
+    ]
+
+    out += " ".join(cmd) + "\n"
+    if juptyerPath:
+        proc = Popen(
+            cmd,
+            stderr=PIPE,
+            stdout=PIPE,
+        )
+        stdout, stderr = proc.communicate()
+        out += "[STDOUT]:\n" + f"""{stdout.decode()}""" + "\n"
+        out += "[STDERR]:\n" + f"""{stderr.decode()}""" + "\n"
+    return out
+
+
 def compileOne(dir: str, force: bool, mtime: bool) -> list[str]:
     checksums = readChecksumJSON()
     out: list[str] = []
@@ -162,6 +198,22 @@ def compileOne(dir: str, force: bool, mtime: bool) -> list[str]:
                 or (mtime and (modTime > nowLower and modTime < nowUpper))
             ):
                 out.append(f(file, exportPath / dir))
+
+    nbPath = Path(workingDir / "notebooks")
+    if nbPath.exists():
+        for nb in nbPath.rglob("*.ipynb"):
+            modTime = nb.stat().st_mtime
+            nowUpper = now + datetime.timedelta(minutes=5)
+            nowUpper = nowUpper.timestamp()
+            nowLower = now - datetime.timedelta(minutes=5)
+            nowLower = nowLower.timestamp()
+
+            # if (
+            #     genChecksum(nb) != checksums[str(nb)]
+            #     or force
+            #     or (mtime and (modTime > nowLower and modTime < nowUpper))
+            # ):
+            out.append(convertNotebook(nb, workingDir))
 
     walkDir(".tex", compileLatex)
     walkDir(".md", compileMarkdown)

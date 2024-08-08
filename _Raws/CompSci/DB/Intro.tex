@@ -627,7 +627,20 @@ key.
 
 \subsubsection{Referential Integrity}
 
+\dfn{Referential Integrity}{
+  In a base relation, a tuple that refers to another relation must refer to an existing tuple in that relation.
+}
+
+This constraint is defined between two related relations to maintain the consistency of the data between the relations.
+
 \subsubsection{Key Integrity}
+\dfn{Key Integrity}{
+  No two distinct tuples in a relation can have the same values for all their attributes.
+}
+
+By definition, a relation is a set of tuples, and a set by definition cannot contain duplicates. Therefore no two tuples
+in a relation can have the same values for all their attributes, as this would imply that the relation is not a set, as
+a set cannot contain duplicates.
 
 \subsubsection{Operations and Integrity Violations}
 
@@ -739,9 +752,90 @@ There are two types of unary operations:
 
 \section{Set / Binary Operations}
 
-\subsection{Union}
+\subsection{Cartesian Product}
 
+\dfn{Cartesian Product}{
+  A binary operation that defines a relation that is the concatenation of every tuple of relation $R$ with every tuple
+  of relation $S$. The Cartesian product is denoted by:
+  \[
+    R \times S
+  \]
+}
 
+\noindent The Cartesian product operation multiples two relations resulting in another relation consisting of all the possible
+pairs of the tuples from the two relations, therefore one relation has $I$ tuple and $N$ attributes and another
+has $J$ tuples and $M$ attributes, the resulting relation will have $I \times J$ tuples and $N + M$ attributes
+
+\qs{}{
+  List the names and comments of all clients who have viewed a property  for rent
+}
+
+\sol{
+  The names of clients are stored in the Client relation and the details of viewings are stored in the Viewing relation.
+  To obtain the list of clients and the comments on properties they have viewed we need to combine these two relations:
+  \[
+    \left( \Pi_{\text{clientNo, fName, lName}} \left( \text{Client} \right)  \right)  \times \left( \Pi_{\text{clientNo,
+        propertyNo, comment}} \left( \text{Viewing} \right)  \right)
+  \]
+  or
+  \[
+    \Pi_{\text{Client.clientNo, Viewing.clientNo, fName, lName, propertyNo, comment}} \left( \text{Client}\times
+    \text{Viewing} \right)
+  \]
+  In SQL:
+
+  \noindent \lstinline[language=SQL]{SELECT Client.clientNo, Viewing.clientNo, fName, lName, propertyNo, comment FROM Client, Viewing}
+
+  But this operation contains more information than required, therefore to obtain the required list we need to perform
+  as selection operation to extract only the tuples where the clientNo of the Client relation is equal to the clientNo
+  of the Viewing relation:
+  \[
+    \sigma_{\text{Client.clientNo} = \text{Viewing.clientNo}} \left(     \left( \Pi_{\text{clientNo, fName, lName}} \left( \text{Client} \right)  \right)  \times \left( \Pi_{\text{clientNo,
+        propertyNo, comment}} \left( \text{Viewing} \right)  \right)
+    \right)
+  \]
+  or
+  \[
+    \Pi_{\text{Client.clientNo, Viewing.clientNo, fName, lName, propertyNo, comment}} \left(
+    \sigma_{\text{Client.clientNo} = \text{Viewing.clientNo}} \left( \text{Client}\times \text{Viewing} \right)  \right)
+  \]
+  In SQL:
+
+  \noindent \lstinline[language=SQL]{SELECT Client.clientNo, Viewing.clientNo, fName, lName, propertyNo, comment FROM Client, Viewing WHERE Client.clientNo = Viewing.clientNo}
+}
+
+\section{Join Operations}
+
+\subsection{Natural Join}
+
+\dfn{Equi-Join}{
+  A join operation that combines tuples from two relations based on a related attribute. Can also be described in terms
+  of Theta-Join, where $\theta$ is specifically $=$. Denoted by:
+  \[
+    R \bowtie_{R.a = S.b} S = \sigma_{R.a = S.b} \left( R \times S \right)
+  \]
+  Where $R$ and $S$ are relations and $a$ is an attribute of $R$ and $b$ is an attribute of $S$.
+}
+
+\dfn{Natural Join}{
+  An equi-join, of the two relations $R$ and $S$ over all common attributes $x$. One occurrence of each common attribute
+  is retained in the result, i.e. removing duplicate attributes. Denoted by:
+  \[
+    R \bowtie S
+  \]
+}
+
+\noindent The degree of a natural join is the sum of the degrees of the relations $R$ and $S$ minus the number of common
+attributes $x$.
+
+\noindent This means the example operation performed with the Cartesian product can be simplified to:
+\[
+  \Pi_{\text{clientNo, fName, lName, propertyNo, comment}} \left( \text{Client} \bowtie \text{Viewing} \right)
+\]
+
+And in SQL:
+
+\noindent \lstinline[language=SQL]{SELECT clientNo, fName, lName, propertyNo, comment FROM Client NATURAL JOIN Viewing}
 
 
 \end{document}

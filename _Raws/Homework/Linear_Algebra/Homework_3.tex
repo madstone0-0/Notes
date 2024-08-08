@@ -1,0 +1,187 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\title{\Huge{Homework 3}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+  Is $\lambda = -2$ an eigenvalue of \[
+    \begin{bmatrix}
+      1 & 0   & -1 \\
+      1 & -3  & 0  \\
+      4 & -13 & 1
+    \end{bmatrix}
+  \]
+  If so, find one corresponding eigenvector.
+}
+
+\sol{
+
+  If $\lambda = -2$, then $A\mbold{x} = -2\mbold{x}$
+  \begin{align*}
+    A + 2I & =                \\
+           & =\begin{bmatrix}
+                1 & 0   & -1 \\
+                1 & -3  & 0  \\
+                4 & -13 & 1
+              \end{bmatrix} +
+    \begin{bmatrix}
+      2 & 0 & 0 \\
+      0 & 2 & 0 \\
+      0 & 0 & 2
+    \end{bmatrix}            \\
+           & = \begin{bmatrix}
+                 3 & 0   & -1 \\
+                 1 & -1  & 0  \\
+                 4 & -13 & 3
+               \end{bmatrix} \\
+  \end{align*}
+  \begin{align*}
+    \begin{bmatrix}
+      3 & 0   & -1 \\
+      1 & -1  & 0  \\
+      4 & -13 & 3
+    \end{bmatrix}                        \\
+    \frac{1}{3}R_1 - R_2  \rightarrow R_2 \\
+    \begin{bmatrix}
+      3 & 0   & -1           \\
+      0 & 1   & \frac{-1}{3} \\
+      4 & -13 & 3            \\
+    \end{bmatrix}
+    \\
+    \frac{4}{3}R_1 - R_3  \rightarrow R_3 \\
+    \begin{bmatrix}
+      3 & 0  & -1            \\
+      0 & 1  & \frac{-1}{3}  \\
+      0 & 13 & \frac{-13}{3} \\
+    \end{bmatrix}
+    \\
+    13R_2 - R_3  \rightarrow R_3          \\
+    \begin{bmatrix}
+      3 & 0 & -1           \\
+      0 & 1 & \frac{-1}{3} \\
+      0 & 0 & 0            \\
+    \end{bmatrix}
+    \\
+    \frac{1}{3}R_1 \to R_1                \\
+    \begin{bmatrix}
+      1 & 0 & \frac{-1}{3} \\
+      0 & 1 & \frac{-1}{3} \\
+      0 & 0 & 0            \\
+    \end{bmatrix}
+    \\
+    x_1 -\frac{1}{3}x_3 = 0               \\
+    x_2 - \frac{1}{3}x_3 = 0              \\
+    x_3 = x_3                             \\
+    \\
+    x_1 = \frac{1}{3}x_3                  \\
+    x_2 = \frac{1}{3}x_3                  \\
+    x_3 = x_3                             \\
+    \\
+    \mbold{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} \frac{1}{3}x_3 \\ \frac{1}{3}x_3 \\ x_3
+                                                                  \end{bmatrix}  = x_3 \begin{bmatrix} \frac{1}{3} \\ \frac{1}{3} \\ 1 \end{bmatrix}
+  \end{align*}
+  Therefore $\lambda = -2$ is an eigenvector of the matrix and an eigenvector is $\begin{bmatrix} \frac{1}{3} \\
+      \frac{1}{3} \\ 1\end{bmatrix} $ when $x_3= 1$
+}
+
+\qs{}{
+  Diagonalize the following matrix if possible:
+  \[
+    \begin{bmatrix}
+      -2 & 12 \\
+      -1 & 5
+    \end{bmatrix}
+  \]
+}
+
+\sol{
+  The matrix is diagonalizable if and only if the matrix has $2$ linearly independent eigenvectors. To prove this I must
+  first find the eigenvalues of the matrix
+  \begin{align*}
+    \det \left( A - \lambda I \right)                                             & = 0                                                                   \\
+    A - \lambda I                                                                 & = \begin{bmatrix} -2- \lambda & 12 \\ -1 & 5 - \lambda  \end{bmatrix} \\
+    \left( -2 - \lambda  \right) \left( 5 - \lambda  \right) - \left( -12 \right) & = 0                                                                   \\
+    -10 + 2 \lambda -5 \lambda + \lambda^2 + 12 = 0                                                                                                       \\
+    \lambda^2 - 3 \lambda + 2                                                     & = 0                                                                   \\
+    \left( \lambda - 2 \right) \left( \lambda - 1 \right)                         & = 0                                                                   \\
+    \lambda                                                                       & = 2                                                                   \\
+    \lambda                                                                       & = 1                                                                   \\
+  \end{align*}
+  Next I find the corresponding eigenvectors of the eigenvalues $\lambda = 2, 1$
+  \begin{align*}
+    \lambda = 2                                                                                    \\
+    A - 2 I  = \begin{bmatrix}
+                 -4 & 12 \\
+                 -1 & 3
+               \end{bmatrix}                                                                      \\
+    \frac{1}{4}R_1 - R_2  \rightarrow R_2                                                          \\
+    \begin{bmatrix}
+      -4 & 12 \\
+      0  & 0  \\
+    \end{bmatrix}
+    \\
+    \frac{-1}{4}R_1 \to R_1                                                                        \\
+    \begin{bmatrix}
+      1 & -3 \\
+      0 & 0  \\
+    \end{bmatrix}
+    \\
+    x_1 = 3x_2                                                                                     \\
+    x_2 = x_2
+    \\
+    \mbold{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 3x_2 \\ x_2 \end{bmatrix} = x_2\begin{bmatrix} 3
+                                                                                                            \\ 1\end{bmatrix}
+    \\
+    \\
+    \lambda = 1                                                                                    \\
+    A - I  = \begin{bmatrix}
+               -3 & 12 \\
+               -1 & 4
+             \end{bmatrix}                                                                        \\
+    \frac{1}{3}R_1 - R_2  \rightarrow R_2                                                          \\
+    \begin{bmatrix}
+      -3 & 12 \\
+      0  & 0  \\
+    \end{bmatrix}
+    \\
+    \frac{-1}{3}R_1 \to R_1                                                                        \\
+    \begin{bmatrix}
+      1 & -4 \\
+      0 & 0  \\
+    \end{bmatrix}
+    \\
+    x_1 = 4x_2                                                                                     \\
+    x_2 = x_2                                                                                      \\
+    \mbold{x} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = x_2\begin{bmatrix} 4 \\ 1 \end{bmatrix} \\
+  \end{align*}
+  Therefore:
+  \[
+    P = \begin{bmatrix} 3 & 4 \\ 1 & 1 \end{bmatrix}
+  \]
+  And
+  \[
+    D = \begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix}
+  \]
+  \begin{align*}
+    AP                                                         & = PD                                          \\
+    \begin{bmatrix}
+      -2 & 12 \\
+      -1 & 5
+    \end{bmatrix} \begin{bmatrix} 3 & 4 \\ 1 & 1 \end{bmatrix} & =
+    \begin{bmatrix} 3 & 4 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 2 & 0 \\ 0 & 1 \end{bmatrix}                  \\
+    \begin{bmatrix} 6 & 4 \\ 2 & 1 \end{bmatrix}               & =\begin{bmatrix} 6 & 4 \\ 2 & 1 \end{bmatrix}
+  \end{align*}
+}
+
+
+\end{document}

@@ -1,0 +1,534 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Orthogonality and Least Squares}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Inner Product, Length and Orthogonality}
+
+\section{Inner Product}
+
+\dfn{Inner / Dot Product}{
+  If $\mbold{u}$ and $\mbold{v}$ are vectors in $\mathbb{R}^{n}$, then we regard $\mbold{u}$ and $\mbold{v}$ as
+  $n\times 1$ matrices. The transpose of $\mbold{u}^{T}$ is a $1 \times n$ matrix, and the matrix product
+  $\mbold{u}^{T}\mbold{v}$ is a $1\times 1$ matrix, a scalar. This scalar is called the \textit{inner / dot product} of
+  $\mbold{u}$ and $\mbold{v}$
+  which can also be referred to as:
+  \[
+    \mbold{u} \cdot \mbold{v}
+  \]
+  Which breaks down into:
+  \[
+    \mbold{u}^{T} \times \mbold{v}
+  \]
+  When $\mbold{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix} $ and $\mbold{v} = \begin{bmatrix} v_1 \\
+      v_2 \\ \vdots \\ v_n\end{bmatrix} $, is then defined as:
+  \begin{align*}
+    \begin{bmatrix} u_1 & u_2 & \ldots u_n \end{bmatrix} \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix} =
+    u_1v_1 + u_2v_2 + \ldots + u_n v_n
+  \end{align*}
+}
+
+\ex{}{
+  \qs{}{
+    Compute $\mbold{u} \cdot \mbold{v}$ and $\mbold{v} \cdot \mbold{u}$ for $\mbold{u}=\begin{bmatrix} 2 \\ -5 \\ -1
+      \end{bmatrix} $ and $\mbold{v} = \begin{bmatrix} 3 \\ 2 \\ -3 \end{bmatrix} $
+  }
+
+  \sol{
+    \begin{align*}
+      \mbold{u} \cdot \mbold{v} = \mbold{u}^{T}\times \mbold{v} & = \begin{bmatrix} 2 & -5 & -1 \end{bmatrix}  \begin{bmatrix} 3 \\ 2 \\ -3 \end{bmatrix}         \\
+                                                                & = 3 \left( 2 \right) + \left( -5 \right) \left( 2 \right) + \left( -1 \right) \left( -3 \right) \\
+                                                                & = -1                                                                                            \\
+    \end{align*}
+
+    \begin{align*}
+      \mbold{v} \cdot \mbold{u} = \mbold{v}^{T} \times \mbold{u} & = \begin{bmatrix} 3 & 2 & -3 \end{bmatrix} \begin{bmatrix} 2 \\ -5 \\ -1
+                                                                                                              \end{bmatrix} \\
+                                                                 & = 2\left(
+      3\right) +
+      2 \left(
+      -5 \right)
+      + \left(
+      -3 \right)
+      \left( -1 \right)                                                                                                                    \\
+                                                                 & = -1                                                                    \\
+    \end{align*}
+  }
+}
+
+\thm{Axioms of Inner / Dot products}{
+  Let $\mbold{u}$ and $\mbold{v}$, and $\mbold{w}$ be vectors in $\mathbb{R}^{n}$, and let $c$ be a scalar. Then
+  \begin{enumerate}
+    \item $\mbold{u} \cdot \mbold{v} = \mbold{v} \cdot  \mbold{u}$
+    \item $ \left( \mbold{u} + \mbold{v} \right) \cdot \mbold{w} = \mbold{u} \cdot \mbold{w} + \mbold{v} \cdot \mbold{w} $
+    \item $ \left( c \mbold{u} \right) \cdot \mbold{v} = \mbold{u} \cdot \left( c \mbold{v} \right)  $
+    \item $\mbold{u} \cdot \mbold{u} \geq 0$, and $\mbold{u}\cdot \mbold{u} = 0$ if and only if $\mbold{u} = \mbold{0}$
+  \end{enumerate}
+}
+
+\section{Length of a Vector}
+
+\dfn{Length of a Vector}{
+  If $\mbold{v}$ is in $\mathbb{R}^{n}$, with entries $v_1, \ldots, v_n$, then the square root of $\mbold{v}\cdot
+    \mbold{v}$ is defined because $\mbold{v} \cdot \mbold{v}$ is non-negative. Therefore the \textit{length / norm}  of
+  $\mbold{v}$ is the non-negative scalar $ \norm{ \mbold{v}  } $, defined:
+  \[
+    \norm{ \mbold{v} }  = \sqrt{\mbold{v} \cdot \mbold{v}} = \sqrt{v^2_1 + v^2_2 + \ldots + v^2_n} \text{
+      and }  \norm{ \mbold{v}  } ^2 = \mbold{v}\cdot \mbold{v}
+  \]
+
+}
+
+And similarly for any scalar $c$, the length of $c\mbold{v}$ is $ \abs{c} $ times the length of $\mbold{v}$, i.e:
+\[
+  \norm{ c\mbold{v}} =  \abs{c } \times \|\mbold{v}\|
+\]
+
+\dfn{Unit Vector}{
+  A vector whose length is 1. If we divide a non zero vector by it's length, i.e. multiply by $\frac{1}{\|\mbold{v}\|}$, we obtain a unit vector $\mbold{u}$. This process of creating a unit vector $\mbold{u}$ from
+  $\mbold{v}$ can be called \textit{normalizing} $\mbold{v}$, and the resulting $\mbold{u}$ is in the same direction
+  as $\mbold{v}$
+}
+
+\section{Distance in $\mathbb{R}^{n}$}
+
+\dfn{Distance between two vectors}{
+  For $\mbold{u}$ and $\mbold{v}$ in $\mathbb{R}^{n}$, the \textit{distance between} $\mbold{u}$ and $\mbold{v}$,
+  expressed as $\text{dist} \left( \mbold{u}, \mbold{v} \right) $, is the length of the vector $\mbold{u}-\mbold{v}$:
+  \[
+    \text{dist} \left( \mbold{u}, \mbold{v} \right)  =  \norm{ \mbold{u} - \mbold{v}  }
+  \]
+  Then defined:
+  \begin{align*}
+    \text{dist} \left( \mbold{u}, \mbold{v} \right) = \|\mbold{u} - \mbold{v}\| & = \sqrt{ \left( \mbold{u} - \mbold{v}
+    \right) \cdot  \left( \mbold{u} - \mbold{v} \right)  }                                                                                                     \\
+                                                                                & = \sqrt{ \left( u_1 - v_1 \right)^2 + \ldots + \left( u_n - v_n \right)^2  } \\
+  \end{align*}
+
+}
+In $\mathbb{R}^{2}$ and $\mathbb{R}^{3}$, this is basically the same as the Euclidean distance between two points.
+
+\ex{}{
+  \qs{}{
+    Compute the distance between the vectors $\mbold{u}= \left( 7, 1 \right) $ and $\mbold{v} = \left( 3, 2 \right) $
+  }
+
+  \sol{
+    \begin{align*}
+      \text{dist} \left( \mbold{u}, \mbold{v} \right) & =  \|\mbold{u} - \mbold{v}\|                                                                \\
+                                                      & = \sqrt{ \left( \mbold{u} - \mbold{v} \right) \cdot \left( \mbold{u} - \mbold{v} \right)  } \\
+                                                      & = \sqrt{\begin{bmatrix} 4 \\ -1 \end{bmatrix}\cdot
+      \begin{bmatrix} 4 \\ -1 \end{bmatrix}  }                                                                                                      \\
+                                                      & = \sqrt{4^2 + \left( -1 \right)^2 }                                                         \\
+                                                      & = \sqrt{17}                                                                                 \\
+    \end{align*}
+  }
+}
+
+\section{Orthogonal Vectors}
+
+Consider $\mathbb{R}^{2}$ and $\mathbb{R}^{3}$ and two lines through the origin determined by vectors $\mbold{u}$ and
+$\mbold{v}$. These lines are geometrically perpendicular if and only if the distance from $\mbold{u}$ to $\mbold{v}$ is
+the same as the distance from $\mbold{u}$ to $-\mbold{v}$. This is equivalent to saying the squares of the distances are
+the same. Therefore:
+\begin{align*}
+  \left[ \text{dist} \left( \mbold{u}, -\mbold{v} \right)  \right] ^2 & = \|\mbold{u} - \left( -\mbold{v} \right) \|^2 =
+  \|\mbold{u} + \mbold{v}\|^2                                                                                                                                                         \\
+                                                                      & = \left( \mbold{u} + \mbold{v} \right) \cdot \left( \mbold{u} + \mbold{v} \right)                             \\
+                                                                      & = \mbold{u} \cdot \left( \mbold{u} + \mbold{v} \right) + \mbold{v} \cdot \left( \mbold{u} + \mbold{v} \right) \\
+                                                                      & = \mbold{u}\cdot \mbold{u} + \mbold{u} \cdot \mbold{v} + \mbold{v}\cdot \mbold{u} + \mbold{v}\cdot \mbold{v}  \\
+                                                                      & = \|\mbold{u}^2\| + \|\mbold{v}\|^2 +
+  2\mbold{u}\cdot \mbold{v}                                                                                                                                                           \\
+\end{align*}
+And then $\text{dist} \left( \mbold{u}, \mbold{v} \right) $:
+\begin{align*}
+  \left[ \text{dist} \left( \mbold{u}, \mbold{v} \right)  \right] & = \|\mbold{u}\|^2 + \|\mbold{v}\|^2 - 2\mbold{u}\cdot \mbold{v} \\
+\end{align*}
+This shows that the two squared distances are only equal if and only if $2\mbold{u}\cdot \mbold{v} = -2\mbold{u}\cdot
+  \mbold{v}$, which happens if and only if $\mbold{u} \cdot \mbold{v} = 0$
+
+\dfn{Orthogonality}{
+  Two vectors $\mbold{u}$ and $\mbold{v}$ in $\mathbb{R}^{n}$ are orthogonal, to each other, if $\mbold{u} \cdot
+    \mbold{v} = 0$
+}
+
+This then confirms that the zero vector $\mbold{0}$ is orthogonal to every vector in $\mathbb{R}^{n}$, since
+$\mbold{0}^{T} \mbold{v} = 0$ for every $\mbold{v}$.
+
+\thm{The Pythagorean Theorem}{
+  If $\mbold{u}$ and $\mbold{v}$ are orthogonal vectors in $\mathbb{R}^{n}$, then:
+  \[
+    \|\mbold{u} + \mbold{v}\|^2 = \|\mbold{u}\|^2 + \|\mbold{v}\|^2
+  \]
+}
+
+\section{Exercises}
+
+\qs{}{
+  Let $\mbold{a} = \begin{bmatrix} -2 \\ 1 \end{bmatrix} $ and $\mbold{b} = \begin{bmatrix} -3 \\ 1 \end{bmatrix} $.
+  Compute $\frac{\displaystyle \mbold{a} \cdot \mbold{b}}{\displaystyle \mbold{a}\cdot \mbold{a}}$ and $ \left( \displaystyle \frac{\mbold{a} \cdot
+      \mbold{b}}{\mbold{a}\cdot \mbold{a}} \right) \mbold{a} $
+}
+
+\sol{
+  \begin{align*}
+    \mbold{a} \cdot \mbold{b}                                                                                       & = \left( -2 \right) \left( -3 \right) + 1           \\
+                                                                                                                    & = 7                                                 \\
+    \mbold{a}\cdot \mbold{a}                                                                                        & = \left( -2 \right)^2 + 1                           \\
+                                                                                                                    & = 5                                                 \\
+    \frac{\displaystyle \mbold{a} \cdot \mbold{b}}{\displaystyle \mbold{a}\cdot \mbold{a}}                          & =
+    \frac{7}{5}                                                                                                                                                           \\
+    \\
+    \left( \frac{\displaystyle \mbold{a} \cdot \mbold{b}}{\displaystyle \mbold{a}\cdot \mbold{a}} \right) \mbold{a} & =
+    \frac{7}{5} \begin{bmatrix} -2 \\ 1 \end{bmatrix}                                                                                                                     \\
+                                                                                                                    & = \begin{bmatrix} -2.8 \\ \frac{7}{5} \end{bmatrix} \\
+  \end{align*}
+}
+
+\qs{}{
+  Let $\mbold{c} = \begin{bmatrix} \frac{4}{3} \\ -1 \\ \frac{2}{3} \end{bmatrix}$ and $\mbold{d} = \begin{bmatrix} 5 \\
+      6 \\ -1\end{bmatrix} $.
+  \begin{enumerate}
+    \item Find a unit vector $\mbold{u}$ in the direction of $\mbold{c}$
+    \item Show that $\mbold{d}$ is orthogonal to $\mbold{c}$.
+    \item Use the results of parts (1) and (2) to explain why $d$ must be orthogonal to the unit vector $\mbold{u}$
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \|\mbold{c}\| & = \sqrt{\mbold{c} \cdot \mbold{c}}                                                                                                                                                           \\
+                          & = \sqrt{ \left( \frac{4}{3} \right)^2 + \left( -1 \right)^2 + \left( \frac{2}{3} \right)^2   }                                                                                               \\
+                          & = \frac{\sqrt{ 29}}{3}                                                                                                                                                                       \\
+            \mbold{u}     & = \frac{1}{\frac{\sqrt{ 29}}{3}} \begin{bmatrix} \frac{4}{3} \\ -1 \\ \frac{2}{3} \end{bmatrix}                                                                                              \\
+                          & = \frac{3\sqrt{29} }{29} \begin{bmatrix} \frac{4}{3} \\ -1 \\ \frac{2}{3} \end{bmatrix}                                                                                                      \\
+                          & =  \begin{bmatrix} \displaystyle \frac{4\sqrt{29} }{29} \\ \displaystyle \frac{3\sqrt{29} }{29} \\ \displaystyle \frac{2\sqrt{29} }{29} \end{bmatrix} \\
+            \\
+            \|\mbold{u}\| & = \sqrt{\mbold{u}\cdot \mbold{u}}                                                                                                                                                            \\
+                          & = \sqrt{ \left( \frac{4\sqrt{29} }{29} \right) ^2 + \left( \frac{3\sqrt{29} }{29} \right) ^2
+            + \left( \frac{2\sqrt{29} }{29} \right) ^2}                                                                                                                                                                  \\
+                          & = 1                                                                                                                                                                                          \\
+          \end{align*}
+    \item
+          If $\mbold{d}$ is orthogonal to $\mbold{c}$ then $\mbold{d} \cdot \mbold{c} = 0$
+          \begin{align*}
+            \mbold{d} \cdot \mbold{c} & = \mbold{d}^{T} \times \mbold{c}                                                                          \\
+                                      & = \begin{bmatrix} 5 & 6 & -1 \end{bmatrix} \begin{bmatrix} \frac{4}{3} \\ -1 \\ \frac{2}{3} \end{bmatrix} \\
+                                      & = 5 \left( \frac{4}{3} \right) + 6 \left( -1 \right)  -1 \left( \frac{2}{3} \right)                       \\
+                                      & = \frac{20}{3} - 6 - \frac{2}{3}                                                                          \\
+                                      & = 0                                                                                                       \\
+          \end{align*}
+          $\therefore$ $\mbold{c}$ and $\mbold{d}$ are orthogonal to each other.
+    \item $\mbold{d}$ is orthogonal to the unit vector $\mbold{u}$ because $\mbold{d}$ is orthogonal to $\mbold{c}$
+          of which $\mbold{u}$ is a scalar multiple of. I.e $\mbold{u}$ is in the form $k \mbold{c}$ for some $k$ and:
+          \[
+            \mbold{d}\cdot \mbold{u} = \mbold{d} \cdot \left( k \mbold{c} \right) =  k \left( \mbold{d}\cdot c \right) = k
+            \left( 0 \right) = 0
+          \]
+  \end{enumerate}
+}
+
+\chapter{Orthogonal Sets}
+
+\dfn{Orthogonal Set}{
+  If $S = \{\mbold{u}_1,\ldots,\mbold{u}_p\} $ is an orthogonal set of non-zero vectors in $\mathbb{R}^{n}$, then $S$
+  is linearly independent and hence is a basis for the subspace spanned by $S$.
+}
+
+\chapter{Orthogonal Projections}
+
+\dfn{Orthogonal Projection}{
+  Let $W$ be a subspace of $\mathbb{R}^{n}$, and let $\mbold{y}$ be in $\mathbb{R}^{n}$. The \textit{orthogonal
+    projection} of $\mbold{y}$ onto $W$, denoted $\text{proj}_W \mbold{y}$, is the closest point in $W$ to $\mbold{y}$.
+  This point is obtained by adding the orthogonal projection of $\mbold{y}$ onto the orthogonal complement of $W$ to the
+  orthogonal projection of $\mbold{y}$ onto $W$.
+
+}
+
+\ex{}{
+  \qs{}{
+    Let $\{\mbold{u}_1, \ldots, \mbold{u}_5\} $ be an orthogonal basis for a subspace $W$ of $\mathbb{R}^{5}$, and let
+    \[
+      \mbold{y} = c_1 \mbold{u}_1 + \ldots + c_5 \mbold{u}_5
+    \]
+    Consider the subspace $W = \text{Span}\{\mbold{u}_1,\mbold{u}_2\} $, and write $\mbold{y}$ as the sum of a vector
+    $\mbold{z}_1$ in $W$ and a vector $\mbold{z}_2$ in $W^{\perp}$
+  }
+
+  \sol{
+
+  }
+}
+
+\thm{The Orthogonal Decomposition Theorem}{
+  \label{orthog_decomp}
+  Let $W$ be a subspace of $\mathbb{R}^{n}$. Then each $\mbold{y}$ in $\mathbb{R}^{n}$ can be written uniquely in the
+  form:
+  \[
+    \mbold{y} = \hat{\mbold{y}} + \mbold{z}
+  \]
+  where $\hat{\mbold{y}}$ is in $W$ and $\mbold{z}$ is in $W^{\perp}$. In fact, if $\{\mbold{u}_1, \ldots, \mbold{u}_p\}
+  $, is any orthogonal basis of $W$, then:
+  \[
+    \hat{\mbold{y}} = \frac{\mbold{y}\cdot \mbold{u}_1}{\mbold{u}_1 \cdot \mbold{u}_1} \mbold{u}_1 + \ldots + \frac{\mbold{y}\cdot \mbold{u}_p}{\mbold{u}_p \cdot \mbold{u}_p} \mbold{u}_p
+  \]
+  and $\mbold{z} = \mbold{y} - \hat{\mbold{y}}$
+}
+
+\ex{}{
+  \qs{}{
+    Let $\mbold{u}_1 = \begin{bmatrix} 2 \\ 5 \\ -1 \end{bmatrix} $, $\mbold{u}_2 = \begin{bmatrix} -2 \\ 1\\ 1
+      \end{bmatrix} $, and $\mbold{y} = \begin{bmatrix} 1 \\ 2\\ 3 \end{bmatrix} $. Observe that $ \{\mbold{u}_1,
+      \mbold{u}_2\} $ is an orthogonal basis for $W = \text{Span} \{\mbold{u}_1, \mbold{u}_2\} $. Write $\mbold{y}$ as
+    the sum of a vector in $W$ and a vector orthogonal to $W$
+  }
+
+  \sol{
+    The orthogonal projection of $\mbold{y}$ onto $W$ is:
+    \begin{align*}
+      \hat{\mbold{y}} & = \frac{\mbold{y} \cdot \mbold{u}_1 }{\mbold{u}_1 \cdot \mbold{u}_1} \mbold{u}_1 + \frac{\mbold{y} \cdot
+      \mbold{u}_2}{\mbold{u}_2 \cdot \mbold{u}_2} \mbold{u}_2                                                                    \\
+                      & = \frac{9}{30}\begin{bmatrix} 2 \\ 5 \\ -1 \end{bmatrix} + \frac{3}{6} \begin{bmatrix} -2 \\ 1\\ 1
+                                                                                               \end{bmatrix}        \\
+                      & = \begin{bmatrix}
+                            \frac{3}{5} \\ \frac{3}{2} \\ -\frac{3}{10}  \end{bmatrix} + \begin{bmatrix}
+                                                                                         -1 \\ \frac{3}{6} \\ \frac{3}{6}
+                                                                                       \end{bmatrix}           \\
+                      & = \begin{bmatrix}
+                            -\frac{2}{5} \\
+                            2            \\
+                            \frac{1}{5}
+                          \end{bmatrix}                                                                                         \\
+    \end{align*}
+    So:
+    \begin{align*}
+      \mbold{z} & =   \mbold{y}- \hat{\mbold{y}}                              \\
+                & = \begin{bmatrix} 1 \\ 2\\ 3 \end{bmatrix} - \begin{bmatrix}
+                                                                 -\frac{2}{5} \\
+                                                                 2            \\
+                                                                 \frac{1}{5}
+                                                               \end{bmatrix} \\
+                & = \begin{bmatrix}
+                      \frac{7}{5} \\
+                      0           \\
+                      \frac{14}{5}
+                    \end{bmatrix}                                            \\
+    \end{align*}
+    $\mbold{z}$ is orthogonal to $W$ due to \ref{orthog_decomp}, so $\mbold{y}$ can be expressed as:
+    \[
+      \mbold{y} = \begin{bmatrix}
+        \displaystyle -\frac{2}{5} \\
+        \displaystyle 2            \\
+        \displaystyle \frac{1}{5}
+      \end{bmatrix}  +  \begin{bmatrix}
+        \displaystyle \frac{7}{5} \\
+        \displaystyle 0           \\
+        \displaystyle \frac{14}{5}
+      \end{bmatrix}
+    \]
+  }
+}
+
+\section{Properties of Orthogonal Projections}
+
+If $\{\mbold{u}_1, \ldots, \mbold{u}_p\} $ is an orthogonal basis for $W$ and if $\mbold{y}$ happens to be in $W$, then
+the formula for $\text{proj}_W \mbold{y}$ is exactly the same as the representation of $\mbold{y}$ in terms of the
+basis. In this case, $\text{proj}_W \mbold{y} = \mbold{y}$.
+
+\thm{}{
+  If $\mbold{y}$ is in $W = \text{Span}\{\mbold{u}_1, \ldots, \mbold{u}_p\} $, then $\text{proj}_W \mbold{y} = \mbold{y}$
+}
+
+
+\subsection{Exercises}
+
+\qs{}{
+  The distance from a point $\mbold{y}$ in $\mathbb{R}^{n}$ to a subspace $W$ is defined as the distance from
+  $\mbold{y}$ to the nearest point in $W$. Find the distance from $\mbold{y}$ to $W = \text{Span}\{\mbold{u}_1,
+    \mbold{u}_2\} $, where
+  \[
+    \mbold{y} = \begin{bmatrix} -1 \\ -5 \\ 10 \end{bmatrix} , \mbold{u}_1 = \begin{bmatrix} 5 \\ -2 \\ 1 \end{bmatrix},
+    \mbold{u}_2 = \begin{bmatrix} 1 \\ 2\\ -1 \end{bmatrix}
+  \]
+}
+
+\sol{
+  \begin{align*}
+    \hat{\mbold{y}} & = \frac{\mbold{y} \cdot \mbold{u}_1}{\mbold{u}_1 \cdot \mbold{u}_1} \mbold{u}_1 + \frac{\mbold{y} \cdot
+    \mbold{u}_2}{\mbold{u}_2 \cdot \mbold{u}_2}                                                                                               \\
+                    & = \frac{15}{30} \begin{bmatrix} 5 \\ -2 \\ 1 \end{bmatrix}   + -\frac{21}{6} \begin{bmatrix} 1 \\ 2 \\ -1 \end{bmatrix} \\
+                    & = \begin{bmatrix} \frac{5}{2} \\ -1 \\ \frac{15}{30} \end{bmatrix} + \begin{bmatrix} -\frac{21}{6}
+                                                                                             \\ -7 \\  \frac{21}{6}\end{bmatrix}                \\
+                    & = \begin{bmatrix}
+                          -1 \\
+                          -8 \\
+                          4
+                        \end{bmatrix}                                                                                                        \\
+    \mbold{z}       & = \mbold{y} - \hat{\mbold{y}}                                                                                           \\
+                    & = \begin{bmatrix} -1 \\ -5 \\ 10 \end{bmatrix} - \begin{bmatrix}
+                                                                         -1 \\
+                                                                         -8 \\
+                                                                         4
+                                                                       \end{bmatrix}                                                         \\
+                    & = \begin{bmatrix}
+                          0 \\
+                          3 \\
+                          6
+                        \end{bmatrix}                                                                                                        \\
+    \|\mbold{z}\|   & = \sqrt{3^2 + 6^2}                                                                                                      \\
+                    & = \sqrt{45}                                                                                                             \\
+  \end{align*}
+}
+
+\chapter{Exercises}
+
+\qs{}{
+  Show that $\{\mbold{u}_1, \mbold{u}_2, \mbold{u}_3\} $ is an orthogonal basis for $\mathbb{R}^{3}$. Then express
+  $\mbold{x}$ as a linear combination of the $\mbold{u}s$
+  \[
+    \mbold{u}_1 = \begin{bmatrix} 3 \\ -3 \\ 0 \end{bmatrix} , \mbold{u} = \begin{bmatrix} 2 \\ 2 \\ -1 \end{bmatrix} ,
+    \mbold{u}_3 = \begin{bmatrix} 1 \\ 1 \\ 4 \end{bmatrix}, \text{ and } \mbold{x} = \begin{bmatrix} 5 \\ -3 \\ 1 \end{bmatrix}
+  \]
+}
+
+\sol{
+  For the basis be orthogonal $\mbold{u}_1 \cdot \mbold{u}_2 = 0$, $\mbold{u}_2 \cdot \mbold{u}_3 = 0$, and $\mbold{u}_1
+    \cdot \mbold{u}_3 = 0$.
+  \begin{align*}
+    \mbold{u}_1 \cdot \mbold{u}_2 & = \begin{bmatrix} 3 \\ -3 \\ 0 \end{bmatrix} \cdot \begin{bmatrix} 2 \\ 2 \\ -1 \end{bmatrix} \\
+                                  & = 3(2) + (-3)(2) + 0(-1)                                                                      \\
+                                  & = 6 - 6                                                                                       \\
+                                  & = 0                                                                                           \\
+    \\
+    \mbold{u}_2 \cdot \mbold{u}_3 & = \begin{bmatrix} 2 \\ 2 \\ -1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 1 \\ 4 \end{bmatrix}  \\
+                                  & = 2(1) + 2(1) + (-1)(4)                                                                       \\
+                                  & = 2 + 2 - 4                                                                                   \\
+                                  & = 0                                                                                           \\
+    \mbold{u}_3 \cdot \mbold{u}_1 & =  \begin{bmatrix} 1 \\ 1 \\ 4 \end{bmatrix} \cdot \begin{bmatrix} 3 \\ -3 \\ 0 \end{bmatrix} \\
+                                  & = 1(3) + 1(-3) + 4(0)                                                                         \\
+                                  & = 3 - 3                                                                                       \\
+                                  & = 0                                                                                           \\
+  \end{align*}
+  Therefore $\{\mbold{u}_1, \mbold{u}_2, \mbold{u}_3\} $ is an orthogonal basis for $\mathbb{R}^{3}$. To express
+  $\mbold{x}$ as a linear combination of the $\mbold{u}s$:
+  \begin{align*}
+    \mbold{x} = c_1 \mbold{u}_1 + c_2 \mbold{u}_2 + c_3 \mbold{u}_3 \\
+    \begin{bmatrix}
+      3  & 2  & 1 & 5  \\
+      -3 & 2  & 1 & -3 \\
+      0  & -1 & 4 & 1
+    \end{bmatrix}                                                \\
+    -1R_1 - R_2  \rightarrow R_2                                    \\
+    \begin{bmatrix}
+      3 & 2  & 1  & 5  \\
+      0 & -4 & -2 & -2 \\
+      0 & -1 & 4  & 1  \\
+    \end{bmatrix}
+    \\
+    \frac{1}{4}R_2 - R_3  \rightarrow R_3                           \\
+    \begin{bmatrix}
+      3 & 2  & 1            & 5            \\
+      0 & -4 & -2           & -2           \\
+      0 & 0  & \frac{-9}{2} & \frac{-3}{2} \\
+    \end{bmatrix}
+    \\
+    \frac{-1}{2}R_2 - R_1  \rightarrow R_1                          \\
+    \begin{bmatrix}
+      -3 & 0  & 0            & -4           \\
+      0  & -4 & -2           & -2           \\
+      0  & 0  & \frac{-9}{2} & \frac{-3}{2} \\
+    \end{bmatrix}
+    \\
+    \frac{4}{9}R_3 - R_2  \rightarrow R_2                           \\
+    \begin{bmatrix}
+      -3 & 0 & 0            & -4           \\
+      0  & 4 & 0            & \frac{4}{3}  \\
+      0  & 0 & \frac{-9}{2} & \frac{-3}{2} \\
+    \end{bmatrix}
+    \\
+    \frac{-1}{3}R_1 \to R_1                                         \\
+    \begin{bmatrix}
+      1 & 0 & 0            & \frac{4}{3}  \\
+      0 & 4 & 0            & \frac{4}{3}  \\
+      0 & 0 & \frac{-9}{2} & \frac{-3}{2} \\
+    \end{bmatrix}
+    \\
+    \frac{1}{4}R_2 \to R_2                                          \\
+    \begin{bmatrix}
+      1 & 0 & 0            & \frac{4}{3}  \\
+      0 & 1 & 0            & \frac{1}{3}  \\
+      0 & 0 & \frac{-9}{2} & \frac{-3}{2} \\
+    \end{bmatrix}
+    \\
+    \frac{-2}{9}R_3 \to R_3                                         \\
+    \begin{bmatrix}
+      1 & 0 & 0 & \frac{4}{3} \\
+      0 & 1 & 0 & \frac{1}{3} \\
+      0 & 0 & 1 & \frac{1}{3} \\
+    \end{bmatrix}                                         \\
+    c_1 = \frac{4}{3}                                               \\
+    c_2 = \frac{1}{3}                                               \\
+    c_3 = \frac{1}{3}                                               \\
+    \\
+    \mbold{x} = \frac{4}{3} \begin{bmatrix} 3 \\ -3 \\ 0 \end{bmatrix} + \frac{1}{3} \begin{bmatrix} 2 \\ 2\\ -1
+                                                                                     \end{bmatrix}  + \frac{1}{3} \begin{bmatrix} 1 \\ 1\\ 4 \end{bmatrix}
+  \end{align*}
+}
+
+\qs{}{
+  Let $W$ be the subspace spanned by the $\mbold{u}s$, and write $\mbold{y}$ as the sum of a vector in $W$ and a vector
+  orthogonal to $W$.
+  \[
+    \mbold{y} = \begin{bmatrix} 1 \\ 3 \\ 5 \end{bmatrix}, \mbold{u}_1 = \begin{bmatrix} 1 \\ 3\\ -2 \end{bmatrix} ,
+    \mbold{u}_2 = \begin{bmatrix} 5 \\ 1 \\ 4 \end{bmatrix}
+  \]
+}
+
+\sol{
+  We can express $\mbold{y}$ as the sum of a vector in $W$ and a vector orthogonal to $W$ using the orthogonal
+  decomposition theorem, finding  the orthogonal projection of $\mbold{y}$ onto $W$, and subtracting that from
+  $\mbold{y}$ to find the vector orthogonal to $W$.
+  \begin{align*}
+    \hat{\mbold{y}} & = \frac{0}{14} \begin{bmatrix} 1 \\ 3\\ -2 \end{bmatrix} + \frac{28}{42} \begin{bmatrix} 5 \\ 1 \\
+                                                                                                 4\end{bmatrix} \\
+                    & = \begin{bmatrix}
+                          \displaystyle \frac{10}{3} \\
+                          \displaystyle \frac{2}{3}  \\
+                          \displaystyle \frac{8}{3}
+                        \end{bmatrix}                                                                    \\
+    \mbold{z}       & = \mbold{y} - \hat{\mbold{y}}                                                                   \\
+                    & = \begin{bmatrix} 1 \\ 3 \\ 5 \end{bmatrix} - \begin{bmatrix}
+                                                                      \frac{10}{3} \\
+                                                                      \frac{2}{3}  \\
+                                                                      \frac{8}{3}
+                                                                    \end{bmatrix}                                    \\
+    \mbold{z}       & = \begin{bmatrix} -\frac{7}{3} \\
+                          \frac{7}{3}  \\ \frac{7}{3}\end{bmatrix}                                                      \\
+    \mbold{y}       & = \mbold{z} + \hat{\mbold{y}}                                                                   \\
+                    & = \begin{bmatrix} -\frac{7}{3} \\
+                          \frac{7}{3}  \\ \frac{7}{3}\end{bmatrix}+   \begin{bmatrix}
+                                                                      \frac{10}{3} \\
+                                                                      \frac{2}{3}  \\
+                                                                      \frac{8}{3}
+                                                                    \end{bmatrix}                                    \\
+  \end{align*}
+}
+
+\end{document}

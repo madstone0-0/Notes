@@ -112,12 +112,42 @@ subspace of $\mathbb{R}^{n}$ and is called the \textit{eigenspace} of $A$ corres
     \begin{align*}
       \left( A - 2I \right)                                                                             \\
       \left( \begin{bmatrix}
-               4 & -1 & 6 \\
-               2 & 1  & 6 \\
-               2 & -1 & 8
-             \end{bmatrix} - \begin{bmatrix} 2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 \end{bmatrix}  \right) \\
+                 4 & -1 & 6 \\
+                 2 & 1  & 6 \\
+                 2 & -1 & 8
+               \end{bmatrix} - \begin{bmatrix} 2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 \end{bmatrix}  \right) \\
       \begin{bmatrix}
+        2 & -1 & 6 \\
+        2 & -1 & 6 \\
+        2 & -1 & 6 \\
+      \end{bmatrix}                                                                                    \\
+      R_1 - R_2  \rightarrow R_2                                                                        \\
+      \begin{bmatrix}
+        2 & -1 & 6 \\
+        0 & 0  & 0 \\
+        2 & -1 & 6 \\
       \end{bmatrix}
+      \\
+      R_1 - R_3  \rightarrow R_3                                                                        \\
+      \begin{bmatrix}
+        2 & -1 & 6 \\
+        0 & 0  & 0 \\
+        0 & 0  & 0 \\
+      \end{bmatrix}
+      \\
+      \frac{1}{2}R_1 \to R_1                                                                            \\
+      \begin{bmatrix}
+        1 & \frac{-1}{2} & 3 \\
+        0 & 0            & 0 \\
+        0 & 0            & 0 \\
+      \end{bmatrix}
+      \\
+      x_1 = \frac{1}{2}x_2 - 3x_3
+      x_2 = x_2                                                                                         \\
+      x_3 = x_3
+      \\
+      \mbold{x} = \begin{bmatrix} \frac{1}{2}x_2 - 3x_3 \\ x_2 \\ x_3 \end{bmatrix} = x_2\begin{bmatrix} \frac{1}{2} \\
+                                                                                           1           \\ 0\end{bmatrix} + x_3 \begin{bmatrix} -3 \\ 0 \\ 1 \end{bmatrix}
     \end{align*}
   }
 }
@@ -755,6 +785,264 @@ In many cases the eigenvalue-eigenvector information contained in a matrix $A$ c
                 \end{bmatrix}
           \end{align*}
   \end{enumerate}
+}
+
+\chapter{Eigenvectors and Linear Transformations}
+
+\section{The Matrix of a Linear Transformation}
+
+Let $V$ be an $n$-dimensional matrix, and $W$ be an $m$-dimensional vector space, and let $T$ be any linear
+transformation from $V$ to $W$. To associate a matrix with $T$, choose ordered bases $\mathcal{B}$ and $\mathcal{C}$ for $V$ and
+$W$, respectively.
+
+\noindent Given any $\mbold{x}$ in $V$ the coordinates vector $ \left[ \mbold{x} \right]_{\mathcal{B}} $ is in $\mathbb{R}^{n}$
+and the coordinate vector of its image, $ \left[ T \left( \mbold{x} \right)  \right]_{\mathcal{C}} $, is in
+$\mathbb{R}^{m}$. The connection between the coordinate vectors $ \left[ \mbold{x} \right]_{\mathcal{B}} $ and $ \left[ T \left( \mbold{x}
+    \right)  \right]_{\mathcal{C}} $ can be found. Let $\{\mbold{b}_1, \ldots, \mbold{b}_n\} $ be the basis $\mathcal{B}$
+for $V$. If $\mbold{x} = r_1\mbold{b}_1 + \ldots + r_n \mbold{b}_n$, then:
+\[
+  \left[ \mbold{x} \right]_{\mathcal{B}}  = \begin{bmatrix} r_1 \\ \vdots \\ r_n \end{bmatrix}
+\]
+And therefore:
+\[
+  T \left( \mbold{x} \right) = T \left( r_1\mbold{b}_1 + \ldots + r_n \mbold{b}_n \right)  = r_1T \left( \mbold{b}_1
+  \right) + \ldots + r_n T \left( \mbold{b}_n \right)
+\]
+
+\chapter{Discrete Dynamical Systems}
+\section{Introduction}
+Eigenvalues and vectors can be used to understand the long term behaviour / evolution of a dynamical system, described
+by the difference equation:
+\[
+  \mbold{x}_{k+1} = A \mbold{x}_k
+\]
+This equation can be used to model population movement, Markov chains, and other systems. The matrix $A$ is called the
+stage matrix of the system.
+
+Assuming $A$ is diagonalizable, with $n$ linearly independent eigenvectors, $\mbold{v}_1, \ldots, \mbold{v}_n$, and
+corresponding eigenvalues, $\lambda_1, \ldots, \lambda_n$, we assume that the eigenvalues are arranged so that $ \mid
+  \lambda _1 \mid \geq  \mid \lambda _2  \mid \geq \ldots \geq \lambda_n$. Since as $\{\mbold{v}_1, \ldots,
+  \mbold{v}_n\} $ is set of linearly independent vectors in $\mathbb{R}^{n}$, it is a basis for $\mathbb{R}^{n}$ as any
+vector in $\mathbb{R}^{n}$ can be written as a linear combination of the vectors in $\{\mbold{v}_1, \ldots,
+  \mbold{v}_n\} $. Therefore since $\mbold{x}_0$ is in $\mathbb{R}^{n}$:
+\[
+  \mbold{x}_0 = c_1 \mbold{v}_1 + \ldots + c_n \mbold{v}_n
+\]
+This is called the \textit{eigenvector decomposition} of $\mbold{x}_0$ and determines what happens to the sequence
+$\{\mbold{x}_k\} $. The sequence is:
+\begin{align*}
+  \mbold{x}_1 = A \mbold{x}_0 & = c_1 A\mbold{v}_1 + c_2 A \mbold{v}_2 + \ldots + c_n A \mbold{v}_n                           \\
+                              & = c_1 \lambda_1 \mbold{v}_1 + c_1 \lambda_2 \mbold{v}_2 + \ldots + c_n \lambda _n \mbold{v}_n \\
+\end{align*}
+And generally:
+\[
+  \mbold{x}_k = c_1 \lambda^{k}_1 \mbold{v}_1 + \ldots + c_n \lambda ^{k}_n \mbold{v}_n, \quad \left( k= 0,1,2, \ldots \right)
+\]
+
+\section{Exercises}
+
+\qs{}{
+  In a certain tow, 30 percent of the married women get divorced each year  and 20 percent of the single women get married
+  each year. There are currently 8000 married women and 200 single women.
+
+  \noindent Assuming the total  population of women remains constant, how many married women and how many single women
+  will there be after on year? Two years? Can you predict what would happen in the long run, say in a hundred years?
+}
+
+
+\sol{
+  First we express the first year as an equation:
+  \begin{align*}
+    m_k & = 0.7 m_k + 0.2 s_k       \\
+    s_k & = 0.3 m_k + 0.8 s_k       \\
+    \\
+    \mbold{x}_k = A \mbold{x}_{k-1} \\
+    \begin{bmatrix} m_k \\ s_k \end{bmatrix} = \begin{bmatrix} 0.7 & 0.2 \\ 0.3 & 0.8 \end{bmatrix}
+  \end{align*}
+  $x_0 = \begin{bmatrix} 8000 \\ 2000 \end{bmatrix} $. We then need to see if $A$ is diagonalizable, and if so, find the eigenvalues and eigenvectors.
+  \begin{align*}
+    \det \left( A - \lambda I \right) = 0                                                                            \\
+    \begin{bmatrix} 0.7 & 0.2 \\ 0.3 & 0.8 \end{bmatrix} - \begin{bmatrix} \lambda & 0 \\ 0 & \lambda  \end{bmatrix} \\
+    \begin{bmatrix}
+      0.7 - \lambda & 0.2           \\
+      0.3           & 0.8 - \lambda
+    \end{bmatrix}                                                                                    \\
+    \left( 0.7 - \lambda  \right) \left( 0.8 - \lambda  \right) - \left( 0.2 \times 0.3 \right) = 0                  \\
+    \lambda ^2 - 1.5 \lambda + 0.5 = 0                                                                               \\
+    \left( \lambda -1 \right)  \left( 2 \lambda - 1 \right)                                                          \\
+    \lambda = 1, 0.5                                                                                                 \\
+    \\
+    \lambda = 1                                                                                                      \\
+    \begin{bmatrix} 0.7 & 0.2 \\ 0.3 & 0.8 \end{bmatrix} - \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}              \\
+    \begin{bmatrix}
+      -0.3 & 0.2  \\
+      0.3  & -0.2
+    \end{bmatrix}                                                                                                   \\
+    -1R_1 - R_2  \rightarrow R_2                                                                                     \\
+    \begin{bmatrix}
+      \frac{-3}{10} & \frac{1}{5} \\
+      0             & 0           \\
+    \end{bmatrix}
+    \\
+    \frac{-10}{3}R_1 \to R_1                                                                                         \\
+    \begin{bmatrix}
+      1 & \frac{-2}{3} \\
+      0 & 0            \\
+    \end{bmatrix}
+    x_1 = \frac{2}{3}x_2                                                                                             \\
+    x_2 = x_2                                                                                                        \\
+    \mbold{x} = x_2\begin{bmatrix} \frac{2}{3} \\ 1 \end{bmatrix}                                                    \\
+    \left\{ \begin{bmatrix} \frac{2}{3} \\ 1 \end{bmatrix} \right\}
+  \end{align*}
+
+  \begin{align*}
+    \lambda = 0.5                                                                                            \\
+    \begin{bmatrix} 0.7 & 0.2 \\ 0.3 & 0.8 \end{bmatrix} - \begin{bmatrix} 0.5 & 0 \\ 0 & 0.5  \end{bmatrix} \\
+    \begin{bmatrix}
+      0.2 & 0.2 \\
+      0.3 & 0.3
+    \end{bmatrix}                                                                                           \\
+    \frac{3}{2}R_1 - R_2  \rightarrow R_2                                                                    \\
+    \begin{bmatrix}
+      \frac{1}{5} & \frac{1}{5} \\
+      0           & 0           \\
+    \end{bmatrix}
+    \\
+    5R_1 \to R_1                                                                                             \\
+    \begin{bmatrix}
+      1 & 1 \\
+      0 & 0 \\
+    \end{bmatrix}
+    \\
+    x_1 = -x_2                                                                                               \\
+    x_2 = x_2                                                                                                \\
+    \mbold{x} = x_2 \begin{bmatrix} -1 \\ 1 \end{bmatrix}                                                    \\
+    \left\{ \begin{bmatrix} -1 \\ 1 \end{bmatrix} \right\}                                                   \\
+    P = \begin{bmatrix} \frac{2}{3} & -1 \\ 1 & 1 \end{bmatrix}                                              \\
+    D = \begin{bmatrix} 1 & 0 \\ 0 & 0.5 \end{bmatrix}
+  \end{align*}
+
+  Since the columns of $P$ are linearly independent and in $\mathbb{R}^2$, they form a basis for $\mathbb{R}^2$. As
+  $\mbold{x}_0$ exists in $\mathbb{R}^2$, therefore:
+  \[
+    \mbold{x}_0 = c_1 \mbold{v}_1 + c_2 \mbold{v}_2
+  \]
+  Where $\mbold{v}_1 = \begin{bmatrix} \frac{2}{3} \\ 1 \end{bmatrix} $, and $\mbold{v}_2 = \begin{bmatrix} -1 \\  1 \end{bmatrix} $
+
+
+
+}
+
+\qs{}{
+  Construct a stage matrix model for an animal speices that has two life stages, juvenile and adule. Suppsoe
+}
+
+\sol{
+  \begin{enumerate}
+    \item   \begin{align*}
+            j_k = 1.6 a_k           \\
+            a_k = 0.3 j_k + 0.8 a_k \\
+            \\
+            A = \begin{bmatrix}
+                  0   & 1.6 \\
+                  0.3 & 0.8
+                \end{bmatrix}
+          \end{align*}
+
+    \item
+          \begin{align*}
+            \det \left( A - \lambda I \right)  = 0                                   \\
+            \begin{bmatrix}
+              0   & 1.6 \\
+              0.3 & 0.8
+            \end{bmatrix} - \begin{bmatrix} \lambda & 0 \\ 0 & \lambda \end{bmatrix} \\
+            \begin{bmatrix}
+              - \lambda & 1.6           \\
+              0.3       & 0.8 - \lambda
+            \end{bmatrix}                                                \\
+            \left( - \lambda  \right) \left( 0.8 - \lambda  \right)  - 0.48 = 0      \\
+            \lambda^2 - 0.8 \lambda - 0.48 = 0                                       \\
+            \lambda = 1.2, -0.4                                                      \\
+            \\
+            \lambda = 1.2                                                            \\
+            \begin{bmatrix}
+              -1.2 & 1.6  \\
+              0.3  & -0.4
+            \end{bmatrix}                                                           \\
+            \frac{-1}{4}R_1 - R_2  \rightarrow R_2                                   \\
+            \begin{bmatrix}
+              \frac{-6}{5} & \frac{8}{5} \\
+              0            & 0           \\
+            \end{bmatrix}
+            \\
+            \frac{-5}{6}R_1 \to R_1                                                  \\
+            \begin{bmatrix}
+              1 & \frac{-4}{3} \\
+              0 & 0            \\
+            \end{bmatrix}
+            \\
+            \\
+            x = x_2\begin{bmatrix} \frac{4}{3} \\ 1 \end{bmatrix}                    \\
+            \left\{ \begin{bmatrix} \frac{4}{3} \\ 1 \end{bmatrix} \right\}
+            \\
+            \lambda = -0.4                                                           \\
+            \begin{bmatrix}
+              0   & 1.6 \\
+              0.3 & 0.8
+            \end{bmatrix} - \begin{bmatrix} -0.4 & 0 \\ 0 & -0.4 \end{bmatrix}       \\
+            \begin{bmatrix}
+              0.4 & 1.6 \\
+              0.3 & 1.2
+            \end{bmatrix}                                                           \\
+            \frac{3}{4}R_1 - R_2  \rightarrow R_2                                    \\
+            \begin{bmatrix}
+              \frac{2}{5} & \frac{8}{5} \\
+              0           & 0           \\
+            \end{bmatrix}
+            \\
+            \frac{5}{2}R_1 \to R_1                                                   \\
+            \begin{bmatrix}
+              1 & 4 \\
+              0 & 0 \\
+            \end{bmatrix}
+            \\
+            \mbold{x} = x_2 \begin{bmatrix} - 4\\ 1 \end{bmatrix}                    \\
+            \left\{ \begin{bmatrix} - 4\\ 1 \end{bmatrix} \right\}
+          \end{align*}
+
+          \begin{align*}
+            P = \begin{bmatrix} \frac{4}{3} &-4 \\ 1 & 1 \end{bmatrix} \\
+            D = \begin{bmatrix} 1.2 & 0 \\ 0 & -0.4 \end{bmatrix}
+          \end{align*}
+          Therefore:
+          \[
+            \mbold{x}_0 = c_1 \mbold{v}_1 + c_2 \mbold{v}_2
+          \]
+          Where $\mbold{v}_1 = \begin{bmatrix} \frac{4}{3} \\ 1 \end{bmatrix} $, and $\mbold{v}_2 = \begin{bmatrix} -4
+              \\ 1\end{bmatrix} $
+
+          \noindent And in the long run:
+          \[
+            \mbold{x}_k = c_1 \lambda_1^{k} \mbold{v}_1 + c_2 \lambda_2^{k}\mbold{v}_2
+          \]
+          Therefore:
+          \[
+            \mbold{x}_k = c_1 \left( 1.2 \right)^{k}\mbold{v}_1 + c_2 \left( -0.4 \right) ^{k} \mbold{v}_2
+          \]
+          For large values of $k$:
+          \[
+            \mbold{x}_k \sim c_1 \left( 1.2 \right)^{k} \mbold{v}_1
+          \]
+          Therefore $\mbold{x}_{k+1}$:
+          \[
+            \mbold{x}_{k+1} \sim 1.2 \mbold{x}_k
+          \]
+          Therefore the number of juveniles will increase by 20 percent each year, and the number of adults will increase by 20 percent each year.
+
+
+  \end{enumerate}
+
+
 }
 
 \end{document}

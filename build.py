@@ -176,7 +176,7 @@ def convertNotebook(file, exportDir) -> str:
     return out
 
 
-def compileOne(dir: str, force: bool, mtime: bool) -> list[str]:
+def compileOne(dir: str, force: bool, mtime: bool, notebooks: bool = True) -> list[str]:
     checksums = readChecksumJSON()
     out: list[str] = []
     newPath = exportPath / dir
@@ -199,28 +199,29 @@ def compileOne(dir: str, force: bool, mtime: bool) -> list[str]:
             ):
                 out.append(f(file, exportPath / dir))
 
-    nbPath = Path(workingDir / "notebooks")
-    if nbPath.exists():
-        for nb in nbPath.rglob("*.ipynb"):
-            modTime = nb.stat().st_mtime
-            nowUpper = now + datetime.timedelta(minutes=5)
-            nowUpper = nowUpper.timestamp()
-            nowLower = now - datetime.timedelta(minutes=5)
-            nowLower = nowLower.timestamp()
+    if notebooks:
+        nbPath = Path(workingDir / "notebooks")
+        if nbPath.exists():
+            for nb in nbPath.rglob("*.ipynb"):
+                modTime = nb.stat().st_mtime
+                nowUpper = now + datetime.timedelta(minutes=5)
+                nowUpper = nowUpper.timestamp()
+                nowLower = now - datetime.timedelta(minutes=5)
+                nowLower = nowLower.timestamp()
 
-            # if (
-            #     genChecksum(nb) != checksums[str(nb)]
-            #     or force
-            #     or (mtime and (modTime > nowLower and modTime < nowUpper))
-            # ):
-            out.append(convertNotebook(nb, workingDir))
+                # if (
+                #     genChecksum(nb) != checksums[str(nb)]
+                #     or force
+                #     or (mtime and (modTime > nowLower and modTime < nowUpper))
+                # ):
+                out.append(convertNotebook(nb, workingDir))
 
     walkDir(".tex", compileLatex)
     walkDir(".md", compileMarkdown)
     return out
 
 
-def compileMany(dirs: list[str], force: bool, mtime: bool):
+def compileMany(dirs: list[str], force: bool, mtime: bool, notebooks: bool):
     FolderQueue: SimpleQueue[str] = SimpleQueue()
     todo_list_map = {}
     with ThreadPoolExecutor(10) as exc:
@@ -230,7 +231,7 @@ def compileMany(dirs: list[str], force: bool, mtime: bool):
         if not FolderQueue.empty():
             while True:
                 folder = FolderQueue.get()
-                job: Future = exc.submit(compileOne, folder, force, mtime)
+                job: Future = exc.submit(compileOne, folder, force, mtime, notebooks)
                 todo_list_map[job] = folder
                 if FolderQueue.empty():
                     break
@@ -275,6 +276,7 @@ if __name__ == "__main__":
     force = False
     clean = False
     mtime = False
+    notebooks = True
     if len(args) > 0:
         if args[0] == "force":
             force = True
@@ -282,13 +284,15 @@ if __name__ == "__main__":
             clean = True
         elif args[0] == "mtime":
             mtime = True
+        if "no-nb" in args:
+            notebooks = False
 
     if clean:
         cleanLatexArtifacts(rawPath)
         cleanLatexArtifacts(exportPath)
         exit(0)
 
-    compileMany(dirs, force, mtime)
+    compileMany(dirs, force, mtime, notebooks)
     cleanLatexArtifacts(rawPath)
     cleanLatexArtifacts(exportPath)
     writeChecksumJSON([rawPath / Path(dir) for dir in dirs])

@@ -273,4 +273,189 @@ In this listing the method \lstinline{sum} on accepts an ArrayList of type \lsti
 \end{algorithm}
 
 
+\chapter{Lists}
+
+\section{Introduction}
+
+A list is a linearly ordered data structure that stores elements sequentially. The locations of elements in this data
+structure can be described by their index, which is an integer value that starts at 0. By this definition the first
+element in an list is at the 0th index and the last element is at the $n-1$ index, where $n$ is the number of elements
+in the list.
+
+\section{Abstract Data Type}
+
+\subsection{Operations}
+The List ADT is defined by the following operations:
+
+\begin{description}
+  \item[Size] - Returns the number of elements in the list
+  \item[IsEmpty] - Returns true if the list is empty, false otherwise
+  \item[Get] - Returns the element at the specified index
+  \item[Set] - Replaces the element at the specified index with the specified element
+  \item[Add] - Adds the specified element to the end of the list or at a specified index
+  \item[Remove] - Removes the element at the specified index, moving all subsequent elements one index to the left to
+        fill the gap left by the removed element.
+\end{description}
+
+\subsection{Representation}
+
+A list can be represented in two ways:
+\begin{itemize}
+  \item Array Based
+  \item Linked List Based
+\end{itemize}
+
+With linked lists discussed in chapter \ref{linked-lists}.
+
+\section{Array List}
+
+In representing a list using an array a common notion is to use an array $A$, where $A \left[ i \right] $, stores a
+reference to the element with index $i$ in the list. This representation assumes that the array is fixed in size, i.e.
+the array has a fixed capacity. This means that the array has a maximum number of elements that it can store, and if
+the number of elements in the list exceeds this capacity, a new array is created with a larger capacity and the elements
+are copied over to the new array. This process is known as resizing the array, and would be a $O \left( n \right) $ time
+and space complexity operation as all the elements in the list would have to be copied over to the new array.
+
+\noindent This means that the elements in the list are stored in contiguous
+memory making the \textit{Set} and \textit{Get} operations operate in $O \left( 1 \right) $ time complexity due to the
+random access nature of arrays.
+
+\noindent This also means that the \textit{Add} and \textit{Remove} operations operate in $O \left( n \right) $ time
+complexity worst case. In the worst case for the \textit{Add} operation a new element is added at index 0. This requires
+that all the elements currently in the array would have to be shifted one index to the right to make space for the new
+element, i.e. taking $n$ operations. Although in the best case, adding to the end of the list, the \textit{Add}
+operation operates in $O \left( 1 \right) $ as the new element is added to the end of the list and no shifting is
+required. Similarly the \textit{Remove} operation operates in $O \left( n \right) $ time complexity in the worst case
+where the first element is removed, requiring all the elements to be shifted one index to the left to fill the gap left by
+the removed element, and also $O \left( 1 \right) $ time complexity in the best case where the last element is removed.
+
+\noindent The algorithms for the operations of the array list are shown below:
+\begin{algorithm}[H]
+  \caption{Get $ \left( A, n, i \right) $}
+  \begin{algorithmic}[1]
+    \If{ $i \leq 0$ or $i > n$} \Comment{Check if index is out of bounds}
+    \State \Return "Index out of bounds"
+    \EndIf
+    \State \Return $A_i$
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{Set $ \left( A, n, nE, i \right) $}
+  \begin{algorithmic}[1]
+    \If{ $i \leq 0$ or $i > n$} \Comment{Check if index is out of bounds}
+    \State \Return "Index out of bounds"
+    \EndIf
+
+    \State result $ = A_i$
+    \State $A_i = nE$
+    \State \Return result
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{Add $ \left( A, n, e, i \right) $}
+  \begin{algorithmic}[1]
+    \For{k $= n$ down to $i$} \Comment{Shift elements to the right of index $i$ to the right}
+
+    $A_{k+1} = A_{k}$ \Comment{Shift elements to the right}
+    \EndFor
+    \State $A_{i} = e$ \Comment{Add element $e$ at index $i$}
+    \State $n = n + 1$
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{Remove $ \left( A, n, i\right) $}
+  \begin{algorithmic}[1]
+    \If{ $i \leq 0$ or $i > n$} \Comment{Check if index is out of bounds}
+    \State \Return "Index out of bounds"
+    \EndIf
+    \State result $ = A_i$
+    \For{ $k = i$ to $n$}
+
+    $A_k = A_{k+1}$
+    \EndFor
+
+    $A_{n} = \text{null}$ \\
+    $n= n - 1$
+    \State \Return result
+  \end{algorithmic}
+\end{algorithm}
+
+
+
+\chapter{Linked Lists} \label{linked-lists}
+
+\chapter{Stacks}
+
+\chapter{Queues}
+
+\chapter{Trees}
+
+\chapter{Graphs}
+
+\section{Introduction}
+
+\dfn{Graph}{
+  A non-linear data stricture that consists of a finite set of vertices and a set of edges that connect the vertices. A
+  graph $G$ is an ordered pair of a set of vertices $V$ and a set of edges or arcs $E$.
+
+  \noindent Each edge can be an ordered / directed or unordered / undirected pair of vertices. An ordered pair is
+  indicated as $ \left( u, v \right) $, and an unordered pair is indicated as $ \{u, v\}$, where $u$ and $v$ are
+  vertices.
+}
+
+Graph theory is further discussed in the Discrete Math topic in the same computer science topic.
+
+\subsection{Applications of Graphs}
+
+A graph can be used to model any collection with pairwise relationships.
+\begin{itemize}
+  \item Social Networks
+  \item Links between web pages
+  \item Road Connections
+\end{itemize}
+
+\subsection{Terminology}
+
+\dfn{Path}{
+  A sequence of vertices, where each adjacent pair is connected by an edge. In a directed graph the direction must be
+  aligned.
+
+  \noindent A simple path is a path in which no vertices and thus edges are repeated. The term walk is usually used to
+  denote paths in general while path is used to indicate simple paths. Thus a walk in which no vertices are repeated is
+  called a path and one where vertices are repeated is called a \textbf{Trail}
+}
+
+\dfn{Strength}{
+  A directed graph is \textit{strongly connected} if there is a path from any vertex to any other vertex.
+
+  \noindent If a graph is undirected we simply call it a \textit{connected} graph.
+
+  \noindent If a directed graph is not strongly connected but can be turned into a connected graph by treating all edges
+  as undirected it is termed a \textit{weakly connected} graph
+}
+
+
+\section{Abstract Data Type}
+\begin{description}
+  \item[Number of Vertices] Returns the number of vertices in a graph
+  \item[Vertices] Returns an iteration of all the vertices in a graph
+  \item[Number of Edges] Returns the number of edges in a graph
+  \item[Edges] Returns an iteration of all the edges in a graph
+  \item[Get Edge] Returns the edge from a vertex $u$ to a vertex $v$.
+  \item[End Vertices] Returns an iteration containing the two endpoint vertices of an edge $e$.
+  \item[Opposite] For an edge $e$ incident to a vertex $v$, returns the other vertex of the edge
+  \item[Out Degree] Returns the number of outgoing edges from a vertex $v$
+  \item[In Degree] Returns the number of incoming edges from a vertex $v$
+  \item[Out Going Edges] Returns an iteration containing all the outgoing edges from a vertex $v$
+  \item[Incoming Edges] Returns an iteration containing all the incoming edges from a vertex $v$
+  \item[Insert Vertex] Inserts a vertex $v$ into the Graph
+  \item[Insert Edge] Inserts an edge $e$ between two vertices $u$ and $v$
+\end{description}
+
+\section{Representation}
+
+
 \end{document}

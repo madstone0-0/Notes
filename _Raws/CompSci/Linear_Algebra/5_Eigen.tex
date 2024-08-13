@@ -339,15 +339,16 @@ subspace of $\mathbb{R}^{n}$ and is called the \textit{eigenspace} of $A$ corres
 }
 
 Therefore the updated properties of determinants are:
-\thm{}A{
-\begin{enumerate}
-  \item $A$ is invertible if and only if $\det A \neq 0$
-  \item $\det AB = \left( \det A \right) \left( \det B \right)  $
-  \item $\det A^{T} = \det A$
-  \item If $A$ is triangular, then $\det A$ is the product of the entries on the main diagonal of $A$
-  \item A row replacement operation on $A$ does not change the determinant of $A$. A row interchange changes the
-        sign of the determinant. A row scaling also scales the determinant by the same factor.
-\end{enumerate}
+\thm{}{
+  Let $A$ and $B$ be $n\times n$ matrices
+  \begin{enumerate}
+    \item $A$ is invertible if and only if $\det A \neq 0$
+    \item $\det AB = \left( \det A \right) \left( \det B \right)  $
+    \item $\det A^{T} = \det A$
+    \item If $A$ is triangular, then $\det A$ is the product of the entries on the main diagonal of $A$
+    \item A row replacement operation on $A$ does not change the determinant of $A$. A row interchange changes the
+          sign of the determinant. A row scaling also scales the determinant by the same factor.
+  \end{enumerate}
 }
 
 
@@ -666,6 +667,7 @@ In many cases the eigenvalue-eigenvector information contained in a matrix $A$ c
 \thm{}{
   An $n\times n$ matrix with $n$ distinct eigenvalues is diagonalizable
 }
+
 \ex{}{
   \qs{}{
     Determine if the following matrix is diagonalizable
@@ -679,7 +681,27 @@ In many cases the eigenvalue-eigenvector information contained in a matrix $A$ c
   }
 
   \sol{
-
+    \begin{align*}
+      \det \left( A - \lambda I \right) = 0                                                                                                         \\
+      \begin{bmatrix}
+        5 & -8 & 1  \\
+        0 & 0  & 7  \\
+        0 & 0  & -2
+      \end{bmatrix} - \begin{bmatrix} \lambda & 0 & 0 \\ 0 & \lambda & 0 \\ 0 & 0 & \lambda  \end{bmatrix}                                          \\
+      \begin{bmatrix}
+        5 - \lambda & -8       & 1            \\
+        0           & -\lambda & 7            \\
+        0           & 0        & -2 - \lambda
+      \end{bmatrix}                                                                                                         \\
+      \det \left( A - \lambda I \right) & = \displaystyle\sum_{j=1}^{n} a_{ij}C_{ij}                                                                \\
+                                        & = 0 + 0 + \left( -1 \right)^{3+3} \left( -2 - \lambda \begin{vmatrix} 5 -
+                                                                                                    \lambda & -8 \\ 0 & - \lambda\end{vmatrix}  \right) \\
+                                        & = \lambda ^3 -3
+      \lambda ^2 - 10 \lambda
+      \\
+      \lambda                           & = 5                                                                                                       \\
+      \lambda                           & = -3                                                                                                      \\
+    \end{align*}
   }
 }
 
@@ -714,7 +736,17 @@ In many cases the eigenvalue-eigenvector information contained in a matrix $A$ c
 }
 
 \sol{
-
+  By the Diagonalization theory, the eigenvalues of $A$ are the diagonal entries of $D$, and the corresponding basis of
+  the eigenspace of each eigenvalue is the respective column of $P$. Therefore the eigenvalues are $5, 1, 1$ and the
+  basis for the eigenspace $\lambda = 5$:
+  \[
+    \left\{     \begin{bmatrix} 1 \\ 1\\ 1 \end{bmatrix}
+    \right\}   \]
+  And the basis for the eigenspace $\lambda = 1$:
+  \[
+    \left\{     \begin{bmatrix} 1 \\ 0\\ -1 \end{bmatrix}, \begin{bmatrix} 2 \\ -1\\ 0 \end{bmatrix}
+    \right\}
+  \]
 }
 
 \qs{}{
@@ -842,7 +874,7 @@ And generally:
 \section{Exercises}
 
 \qs{}{
-  In a certain tow, 30 percent of the married women get divorced each year  and 20 percent of the single women get married
+  In a certain town, 30 percent of the married women get divorced each year  and 20 percent of the single women get married
   each year. There are currently 8000 married women and 200 single women.
 
   \noindent Assuming the total  population of women remains constant, how many married women and how many single women
@@ -927,7 +959,185 @@ And generally:
   \[
     \mbold{x}_0 = c_1 \mbold{v}_1 + c_2 \mbold{v}_2
   \]
-  Where $\mbold{v}_1 = \begin{bmatrix} \frac{2}{3} \\ 1 \end{bmatrix} $, and $\mbold{v}_2 = \begin{bmatrix} -1 \\  1 \end{bmatrix} $
+  Where $\mbold{v}_1 = \begin{bmatrix} \frac{2}{3} \\ 1 \end{bmatrix} $, and $\mbold{v}_2 = \begin{bmatrix} -1 \\  1
+    \end{bmatrix} $ \\
+
+  \noindent  Next we solve for $c_1$ and $c_2$ in the linear combination:
+  \begin{align*}
+    \mbold{x}_0 & = c_1 \lambda^{0}_1 \mbold{v}_1 + c_2 \lambda^{0}_2 \mbold{v}_2                                  \\
+                & = c_1 \begin{bmatrix} \frac{2}{3} \\ 1 \end{bmatrix} + c_2 \begin{bmatrix} -1 \\ 1 \end{bmatrix} \\
+  \end{align*}
+  Giving us the equation
+  \[
+    \begin{bmatrix}
+      \frac{2}{3} & -1 \\
+      1           & 1
+    \end{bmatrix} = \begin{bmatrix} 8000 \\ 200 \end{bmatrix}
+  \]
+  \begin{align*}
+    \frac{3}{2}R_1 - R_2  \rightarrow R_2 \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2            \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+  \end{align*}
+
+  \begin{align*}
+    \\
+    R_1 - R_2  \rightarrow R_2                                                             \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2                                                             \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2                                                             \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2                                                             \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1          & 8000             \\
+      0           & \frac{5}{2} & \frac{-11800}{1} \\
+    \end{bmatrix}
+    \\
+    R_1 - R_2  \rightarrow R_2                                                             \\
+    \begin{bmatrix}
+      \frac{2}{3} & -1           & 8000            \\
+      0           & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    \frac{2}{5}R_2 - R_1  \rightarrow R_1                                                  \\
+    \begin{bmatrix}
+      \frac{-2}{3} & 0            & \frac{-3280}{1} \\
+      0            & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    \frac{-3}{2}R_1 \to R_1                                                                \\
+    \begin{bmatrix}
+      1 & 0            & \frac{4920}{1}  \\
+      0 & \frac{-5}{2} & \frac{11800}{1} \\
+    \end{bmatrix}
+    \\
+    \frac{-2}{5}R_2 \to R_2                                                                \\
+    \begin{bmatrix}
+      1 & 0 & \frac{4920}{1}  \\
+      0 & 1 & \frac{-4720}{1} \\
+    \end{bmatrix}
+    \\
+    R_2 - R_1  \rightarrow R_1                                                             \\
+    \begin{bmatrix}
+      -1 & 0 & \frac{-4920}{1} \\
+      0  & 1 & \frac{-4720}{1} \\
+    \end{bmatrix}
+    \\
+    x_2   -1R_1 \to R_1                                                                    \\
+    \begin{bmatrix}
+      1 & 0 & \frac{4920}{1}  \\
+      0 & 1 & \frac{-4720}{1} \\
+    \end{bmatrix}                                                                \\
+    c_1 = 4920                                                                             \\
+    c_2 = -4720                                                                            \\
+    \\
+    x_k & = 4920 \left( 1 \right)^{k}\mbold{v}_1 + -4720 \left( 0.5 \right)^{k}\mbold{v}_2 \\
+  \end{align*}
 
 
 

@@ -546,6 +546,37 @@ If $A$ is row equivalent to $I_{n}$ then $\begin{bmatrix} A & I \end{bmatrix} $ 
 
 }
 
+\section{Characteristics of Invertible Matrices}
+
+\thm{The Invertible Matrix Theorem}{\label{thm:inv}
+  Let $A$ be a square $n\times n$ matrix. Then the following statements are equivalent. That is, for a given $A$, the
+  statements are either all true or all false.
+  \begin{enumerate}
+    \item \label{inv:1} $A$ is an invertible matrix.
+    \item \label{inv:2} $A$ is row equivalent to the $n\times n$ identity matrix.
+    \item \label{inv:3} $A$ has $n$ pivot positions.
+    \item \label{inv:4} The equation $A\mbold{x} = \mbold{0}$ has only the trivial solution.
+    \item \label{inv:5} The columns of $A$ form a linearly independent set.
+    \item \label{inv:6} The linear transformation $\mbold{x} \to A \mbold{x}$ is one-to-one.
+    \item \label{inv:7} The equation $A\mbold{x} = \mbold{b}$  has at least one solution for each $\mbold{b}$ in $\mathbb{R}^{n}$.
+    \item \label{inv:8} The columns of $A$ span $\mathbb{R}^{n}$.
+    \item \label{inv:9} The linear transformation $\mbold{x} \to A\mbold{x}$ maps $\mathbb{R}^{n}$ onto $\mathbb{R}^{n}$.
+    \item \label{inv:10} There is an $n\times n$ matrix $C$ such that $CA = I$
+    \item \label{inv:11}  There is an $n\times n$ matrix $D$ such that $AD = I$.
+    \item \label{inv:12} $A^{T}$ is an invertible matrix.
+  \end{enumerate}
+}
+
+Due to the definition of solutions statement \ref{inv:7} could also be written as "The equation $A \mbold{x} =
+  \mbold{b}$ has a unique solution for each $\mbold{b}$ in $\mathbb{R}^{n}$". This further implies the statement
+\ref{inv:2} and hence implies all other statements. This next fact follows directly from the invertible matrix theorem:
+\thm{}{
+  Let $A$ and $B$ be square matrices. If $AB = I$, then $A$ and $B$ are both invertible, with $B = A^{-1}$ and $A = B^{-1}$
+}
+The Invertible Matrix theorem divides the set of $n\times n$ matrices into two disjoint subsets: the invertible
+(nonsingular) matrices, and the noninvertible (singular) matrices, with each statement in the theorem characterizing a
+property of invertible matrices and the negation of each statement characterizing a property of noninvertible matrices.
+
 \chapter{Determinants}
 
 \section{Introduction}
@@ -722,7 +753,7 @@ or column with the most zeros.
 
 \section{Properties of Determinants}
 
-\thm{Row Operations}{
+\thm{Row Operations}{\label{thm:row}
   Let $A$ be a square matrix, Then:
   \begin{enumerate}
     \item If a multiple of one row $A$ is added to another row to produce a matrix $B$, then $\det B = \det A$
@@ -749,22 +780,22 @@ or column with the most zeros.
                    1  & - 4 & 2  \\
                    -2 & 8   & -9 \\
                    -1 & 7   & 0  \\
-                 \end{vmatrix}      \\
+                 \end{vmatrix}       \\
              & = \begin{vmatrix}
                    1  & -4 & 2  \\
                    0  & 0  & -5 \\
                    -1 & 7  & 0
-                 \end{vmatrix}      \\
+                 \end{vmatrix}       \\
              & = \begin{vmatrix}
                    1 & -4 & 2  \\
                    0 & 0  & -5 \\
                    0 & 3  & 2
-                 \end{vmatrix}      \\
+                 \end{vmatrix}       \\
              & = \begin{vmatrix}
                    1 & -4 & 2  \\
                    0 & 3  & 2  \\
                    0 & 0  & -5
-                 \end{vmatrix}      \\
+                 \end{vmatrix}       \\
              & = 1 \times 3 \times -5 \\
              & = -15                  \\
     \end{align*}
@@ -772,7 +803,267 @@ or column with the most zeros.
 }
 
 
+\thm{Invertible Matrix Theorem}{
+  A square matrix $A$ is invertible if and only if $\det A \neq 0$
+}
 
+This theorem adds the statement "$\det A \neq 0$" to the Invertible Matrix theorem \ref{thm:inv}. This then implies a
+matrix $A$ with $\det A = 0$ has its columns as linearly dependent, also implying the rows of $A$ are also linearly
+dependent.
+\ex{}{
+  \qs{}{
+    Compute $\det A$, where $A = \begin{bmatrix}
+        3  & -1 & 2  & -5 \\
+        0  & 5  & -3 & -6 \\
+        -6 & 7  & -7 & 4  \\
+        -5 & -8 & 0  & 9
+      \end{bmatrix} $
+  }
+
+  \sol{
+    \begin{align*}
+      \begin{bmatrix}
+        3  & -1 & 2  & -5 \\
+        0  & 5  & -3 & -6 \\
+        -6 & 7  & -7 & 4  \\
+        -5 & -8 & 0  & 9
+      \end{bmatrix}   \\
+      -2R_1 + R_3 \to R_3 \\
+      \begin{bmatrix}
+        3  & -1 & 2  & -5 \\
+        0  & 5  & -3 & -6 \\
+        0  & 5  & -3 & -6 \\
+        -5 & -8 & 0  & 9
+      \end{bmatrix}   \\
+    \end{align*}
+    $\det A = 0$ because rows 2 and 3 are the same making the system linearly dependent
+  }
+}
+
+\subsection{Column Operations}
+
+Similar to row operations, we can also perform column operations on matrices. The following theorem shows that column
+operations have the same effect on the determinant as row operations.
+
+\thm{}{\label{thm:col}
+  If $A$ is an $n\times n$ matrix, then $\det A^{T} = \det A$
+}
+
+Because of this theorem, each statement in \ref{thm:row} is true when the word row is replaced with column.
+
+\subsection{Determinants and Matrix Products}
+
+\thm{Multiplicative Property}{
+  If $A$ and $B$ are $n\times n$ matrices then $\det AB = \left( \det A \right) \left( \det B \right)  $
+}
+
+\ex{}{
+  For $A = \begin{bmatrix}
+      6 & 1 \\
+      3 & 2
+    \end{bmatrix} $ and $B = \begin{bmatrix}
+      4 & 3 \\
+      1 & 2
+    \end{bmatrix} $,
+  \begin{align*}
+    AB                                          & = \begin{bmatrix}
+                                                      6 & 1 \\
+                                                      3 & 2
+                                                    \end{bmatrix}\begin{bmatrix}
+                                                                   4 & 3 \\
+                                                                   1 & 2
+                                                                 \end{bmatrix} = \begin{bmatrix}
+                                                                                   25 & 20 \\
+                                                                                   14 & 13
+                                                                                 \end{bmatrix} \\
+    \det AB                                     & = 25 \times 13 - 20 \times 14                 \\
+                                                & = 45                                          \\
+    \det A                                      & = 6 \times 2 - 1 \times 3                     \\
+                                                & = 9                                           \\
+    \det B                                      & = 4 \times 2 - 3 \times 1                     \\
+                                                & = 5                                           \\
+    \left( \det A \right) \left( \det B \right) & = 9 \times 5                                  \\
+                                                & = 45                                          \\
+  \end{align*}
+
+
+}
+
+\chapter{Cramer's Rule, Volume, and Linear Transformations}
+
+\section{Cramer's Rule}
+
+
+Cramer's rule is often used in many theoretical calculations, for example in studying how the solution of $A\mbold{x} =
+  \mbold{b}$ is affected by changes in the entries of $\mbold{b}$. However, Cramer's rule is not practical for solving
+systems of equations larger than $3\times 3$.
+
+For any $n\times n$ matrix $A$ and any $\mbold{b}$ in $\mathbb{R}^{n}$, let $A_i \left( b \right)$ be the matrix
+obtained from $A$ by replacing column $i$ by the vector $\mbold{b}$.
+\[
+  A_i \left( \mbold{b} \right)  = \begin{bmatrix}  a_1& \ldots& a_{i-1}&  \mbold{b}& \ldots& a_n  \end{bmatrix}
+\]
+
+\dfn{Cramer's Rule}{
+  Let $A$ be an invertible $n\times n$ matrix. For any $\mbold{b}$ in $\mathbb{R}^{n}$, the unique solution $\mbold{x}$
+  of $A\mbold{x} = b$ has entries given by
+  \[
+    x_i = \frac{\det A_i \left( \mbold{b} \right) }{\det A}, \quad i = 1, 2, \ldots, n
+  \]
+}
+
+\ex{}{
+  \qs{}{
+    Use Cramer's rule to solve the system
+    \begin{align*}
+      3x_1 - 2x_2 = 6 \\
+      -5x_1 + 4x_2 = 8
+    \end{align*}
+  }
+
+  \sol{
+    \[
+      A = \begin{bmatrix}
+        3  & -2 \\
+        -5 & 4
+      \end{bmatrix},\, \mbold{b} = \begin{bmatrix} 6 \\ 8 \end{bmatrix}
+    \]
+    \begin{align*}
+      \det A    & = \left( 3\times 4 \right) - \left( -2 \times -5 \right)   \\
+                & = 2                                                        \\
+      x_1       & = \frac{\begin{vmatrix} 6 & -2 \\ 8 & 4 \end{vmatrix} }{2} \\
+                & = \frac{40}{2}                                             \\
+                & = 20                                                       \\
+      \\
+      x_2       & = \frac{\begin{vmatrix} 3 & 6 \\ -5 & 8 \end{vmatrix} }{2} \\
+                & = \frac{54}{2}                                             \\
+                & = 27                                                       \\
+      \\
+      \mbold{x} & = \begin{bmatrix} 20 \\ 27 \end{bmatrix}
+    \end{align*}
+  }
+}
+
+\subsection{Determinants as Area or Volume}
+
+\thm{}{
+  If $A$ is a $2\times 2$ matrix, the area of the parallelogram determined by the columns of $A$ is $\left| \det A \right|$.
+
+  \noindent If $A$ is a $3\times 3$ matrix, the volume of the parallelogram determined by the columns of $A$ is
+  $\left|\det A\right|$
+}
+
+\thm{}{
+  Let $\mbold{a}_1$ and $\mbold{a}_2$ be non-zero vectors. Then for any scalar $c$, the area of the parallelogram
+  determined by $\mbold{a}_1$ and $\mbold{a}_2$ equals the area of the parallelogram determined by $\mbold{a}_1$ and
+  $\mbold{a}_2 + c\mbold{a}_1$
+}
+
+\ex{}{
+  \qs{}{
+    Calculate the area of the parallelogram determined by the points $ \left( -2,-2 \right), \left( 0,3 \right), \left(
+      4,-1 \right), \text{ and } \left( 6,4 \right)$
+  }
+
+  \sol{
+
+    First we must translate the parallelogram to one having the origin as a vertex. We can do this by subtracting any
+    one of the points from all the other points. We choose to subtract $\left( -2,-2 \right)$ from all the other points.
+    This gives us the points $ \left( 0,0 \right), \left( 2, 5 \right), \left( 6, 1  \right), \left( 8, 6 \right)    $,
+    this parallelogram still has the same area as the original one.
+
+    Then we can form the matrix $A$ with the columns as the vectors formed by the points. We can choose any two of the
+    vectors to form the parallelogram, we choose $\left( 2, 5 \right)$ and $\left( 6, 1 \right)$:
+    \begin{align*}
+      \text{Area} & = \left| \begin{vmatrix} 2 & 6 \\ 5 & 1 \end{vmatrix}  \right| \\
+                  & = \left| \left( 2 - 30 \right)  \right|                        \\
+                  & = \left| -28 \right|                                           \\
+                  & = 28                                                           \\
+    \end{align*}
+  }
+}
+
+\section{Exercises}
+
+\qs{}{
+  Use Cramer's rule to compute the solutions of the system
+  \begin{align*}
+    x_1 + 3x_2 + x_3 = 4 \\
+    -x_1 + 2x_3 = 2      \\
+    3x_1 + x_2 = 2       \\
+  \end{align*}
+}
+
+\sol{
+  \[
+    A = \begin{bmatrix}
+      1  & 3 & 1 \\
+      -1 & 0 & 2 \\
+      3  & 1 & 0
+    \end{bmatrix},\, \mbold{b} = \begin{bmatrix} 4 \\ 2\\ 2 \end{bmatrix}
+  \]
+  \begin{align*}
+    \det A & = \displaystyle\sum^{n}_{j=1} a_{2j} C_{2j}                                                               \\
+           & = \left( -1 \right)^{1 + 2} \left( -1 \right)   \begin{vmatrix} 3 & 1 \\ 1 & 0  \end{vmatrix} + \left( -1
+    \right)^{3+2} \left( 2 \right) \begin{vmatrix} 1 & 3 \\ 3 & 1 \end{vmatrix}                                        \\
+           & = 1 \left( -1 \right) + -2 \left( 1 - 9 \right)                                                           \\
+           & = -1 + -2 \left( -8 \right)                                                                               \\
+           & = 15                                                                                                      \\
+    \\
+    x_1    & = \frac{\begin{vmatrix} 4 & 3 & 1 \\ 2 & 0 & 2 \\ 2 & 1 & 0 \end{vmatrix} }{15}                           \\
+    x_1    & = \frac{6}{15}                                                                                            \\
+    x_1    & = \frac{2}{5}                                                                                             \\
+    \\
+    x_2    & = \frac{\begin{vmatrix} 1 & 4 & 1 \\ -1 & 2 & 2\\ 3 & 2& 0 \end{vmatrix} }{15}                            \\
+    x_2    & = \frac{12}{15}                                                                                           \\
+    x_2    & = \frac{4}{5}                                                                                             \\
+    \\
+    x_3    & = \frac{\begin{vmatrix} 1 & 3 & 4 \\ -1 & 0 & 2 \\ 3 & 1 & 2 \end{vmatrix} }{15}                          \\
+    x_3    & = \frac{18}{15}                                                                                           \\
+    x_3    & = \frac{6}{5}                                                                                             \\
+    \\
+    \mbold{x} = \begin{bmatrix} \frac{2}{5} \\ \frac{4}{5} \\ \frac{6}{5} \end{bmatrix}
+  \end{align*}
+
+}
+
+\qs{}{
+  Find the area of the parallelogram whose vertices are listed:
+  \[
+    \left( 0,-2 \right), \left( 5, -2 \right), \left( -3, 1 \right), \text{ and } \left( 2, 1 \right)
+  \]
+}
+
+\sol{
+  Minus $ \left( 0,-2 \right) $, giving $ \left( 0,0 \right), \left( 5, 0 \right), \left( -3, 3 \right), \left( 2, 3 \right)    $
+  \begin{align*}
+    A           & = \begin{bmatrix} 5 & -3 \\ 0 & 3 \end{bmatrix} \\
+    \text{Area} & = \left| \det A \right|                         \\
+                & = \left| 15 \right|                             \\
+                & = 15                                            \\
+  \end{align*}
+}
+
+\qs{}{
+  Find the volume of the parallelepiped with one vertex at the origin and adjacent vertices at $ \left( 1,0,3 \right),
+    \left( 1,2,4 \right), \left( 5,1,0 \right)   $
+}
+
+\sol{
+  \begin{align*}
+    A      & = \begin{bmatrix}
+                 1 & 1 & 5 \\
+                 0 & 2 & 1 \\
+                 5 & 4 & 0
+               \end{bmatrix}                                                                                             \\
+    \det A & = \left| \displaystyle\sum_{j=1}^{n} a_{ij}C_{ij} \right|                                                    \\
+           & = \left| \left( -1 \right)^{3 + 1} \left( 5 \right) \begin{vmatrix} 1 & 5 \\ 2 & 1 \end{vmatrix} + \left( -1
+    \right)^{2+3} \left( 4 \right) \begin{vmatrix} 1 & 5 \\ 0 & 1 \end{vmatrix} \right|                                   \\
+           & = \left| 5 \left( 1 - 10 \right) + -4 \left( 1 \right) \right|                                               \\
+           & = \left| -45 - 4 \right|                                                                                     \\
+           & = 49                                                                                                         \\
+  \end{align*}
+}
 
 \chapter{Exercises}
 

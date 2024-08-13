@@ -252,6 +252,45 @@ $\mbold{0}^{T} \mbold{v} = 0$ for every $\mbold{v}$.
   is linearly independent and hence is a basis for the subspace spanned by $S$.
 }
 
+\dfn{Orthogonal Basis}{
+  An orthogonal basis for a subspace $W$ of $\mathbb{R}^{n}$ is a basis for $W$ that is also an orthogonal set.
+}
+
+\thm{}{
+  Let $\{\mbold{u}_1,\ldots,\mbold{u}_p\} $ be an orthogonal basis for a subspace $W$ of $\mathbb{R}^{n}$. For each
+  $\mbold{y}$ in $W$, the weights in the linear combination
+  \[
+    \mbold{y} = c_1 \mbold{u}_1 + \ldots + c_p \mbold{u}_p
+  \]
+  are given by
+  \[
+    c_j = \frac{\mbold{y}\cdot \mbold{u}_j}{\mbold{u}_j\cdot \mbold{u}_j } \quad \left( j = 1, \ldots, p \right)
+  \]
+}
+
+\ex{}{
+  \qs{}{
+    The set $S = \{\mbold{u}_1, \mbold{u}_2, \mbold{u}_3\} $, where
+    \[
+      \mbold{u}_1 = \begin{bmatrix} 3 \\ 1\\ 1 \end{bmatrix} , \mbold{u}_2 = \begin{bmatrix} -1 \\ 2 \\ 1 \end{bmatrix} ,
+      \mbold{u}_3 = \begin{bmatrix} -\frac{1}{2} \\ -2 \\ \frac{7}{2} \end{bmatrix}
+    \]
+    is an orthogonal basis for $\mathbb{R}^{3}$. Express the vector $\mbold{y} = \begin{bmatrix} 6 \\ 1\\ -8 \end{bmatrix}
+    $ as a linear combination of the vectors in $S$
+  }
+
+  \sol{
+    \begin{align*}
+      \mbold{y} & = \frac{\mbold{y}\cdot \mbold{u}_1}{\mbold{u}_1 \cdot \mbold{u}_1} \mbold{u}_1
+      + \frac{\mbold{y}\cdot \mbold{u}_2}{\mbold{u}_2 \cdot \mbold{u}_2} \mbold{u}_2
+      + \frac{\mbold{y}\cdot \mbold{u}_3}{\mbold{u}_3 \cdot \mbold{u}_3} \mbold{u}_3
+      \\
+                & = \frac{11}{11}\mbold{u}_1 + -\frac{12}{6}\mbold{u}_2 + -\frac{33}{\frac{33}{2}}\mbold{u}_3 \\
+                & = \mbold{u}_1 - 2\mbold{u}_2 - 2\mbold{u}_3                                                 \\
+    \end{align*}
+  }
+}
+
 \chapter{Orthogonal Projections}
 
 \dfn{Orthogonal Projection}{
@@ -273,7 +312,15 @@ $\mbold{0}^{T} \mbold{v} = 0$ for every $\mbold{v}$.
   }
 
   \sol{
-
+    \begin{align*}
+      \mbold{z}_1                           & = \mbold{y} - \mbold{z}_2                                                              \\
+      \mbold{y}                             & = \mbold{z}_2 + \mbold{z}_1                                                            \\
+      \\
+      \mbold{z}_1                           & = c_1\mbold{u}_1 + c_2\mbold{u}_2                                                      \\
+      \mbold{z}_2                           & = c_3\mbold{u}_3 + c_4 \mbold{u}_4 + c_5 \mbold{u}_5                                   \\
+      \\
+      \mbold{y} = \mbold{z}_1 + \mbold{z}_2 & = c_1\mbold{u}_1 + c_2\mbold{u}_2 + c_3\mbold{u}_3 + c_4 \mbold{u}_4 + c_5 \mbold{u}_5
+    \end{align*}
   }
 }
 
@@ -356,6 +403,33 @@ basis. In this case, $\text{proj}_W \mbold{y} = \mbold{y}$.
   If $\mbold{y}$ is in $W = \text{Span}\{\mbold{u}_1, \ldots, \mbold{u}_p\} $, then $\text{proj}_W \mbold{y} = \mbold{y}$
 }
 
+This leads to the next theorem:
+\thm{The Best Approximation Theorem}{
+  Let $W$ be a subspace of $\mathbb{R}^{n}$, let $\mbold{y}$ be any vector in $\mathbb{R}^{n}$, and let $\hat{\mbold{y}}$
+  be an orthogonal projection of $\mbold{y}$  onto $W$. Then $\hat{\mbold{y}}$ is the closest point in $W$ to $\mbold{y}$,
+  in the sense that
+  \[
+    \|\mbold{y}-\hat{\mbold{y}}\| < \|\mbold{y}-\mbold{v}\|
+  \]
+  For all $\mbold{v}$ in $W$ distinct from $\hat{\mbold{y}}$
+}
+
+\dfn{Orthonormality}{
+  A set of vectors is orthonormal if each of them are orthogonal to each other and have a length of 1.
+}
+
+\thm{Orthonormal Basis}{
+  If $\{\mbold{u}_1, \ldots, \mbold{u}_p\} $ is an Orthonormal basis for a subspace $W$ of $\mathbb{R}^{n}$, then
+  \[
+    \text{proj}_W \mbold{y} = \left( \mbold{y} \cdot \mbold{u}_1 \right) \mbold{u}_1 + \left( \mbold{y}\cdot \mbold{u}_2
+    \right) \mbold{u}_2 + \ldots + \left( \mbold{y}\cdot \mbold{u}_p \right) \mbold{u}_p
+  \]
+  If  $U = \begin{bmatrix} \mbold{u}_1 & \mbold{u}_2 & \ldots & \mbold{u}_p \end{bmatrix} $, then
+  \[
+    \text{proj}_W \mbold{y} = U U ^{T}\mbold{y} \forall \mbold{y} \in \mathbb{R}^{n}
+  \]
+}
+
 
 \subsection{Exercises}
 
@@ -395,6 +469,283 @@ basis. In this case, $\text{proj}_W \mbold{y} = \mbold{y}$.
     \|\mbold{z}\|   & = \sqrt{3^2 + 6^2}                                                                                                      \\
                     & = \sqrt{45}                                                                                                             \\
   \end{align*}
+}
+
+\chapter{The Gram-Schmidt Process}
+
+The Gram-Schmidt process is a simple algorithm for producing an orthogonal or orthonormal basis for any non-zero
+subspace of $\mathbb{R}^{n}$.
+
+\ex{}{
+  \qs{}{
+    Let  $\mbold{x}_1 = \begin{bmatrix} 1 \\ 1\\ 1\\ 1\\  \end{bmatrix} $ and $\mbold{x}_2= \begin{bmatrix} 0 \\ 1\\ 1\\
+        1\end{bmatrix} $, and $\mbold{x}_3 = \begin{bmatrix} 0 \\ 0\\ 1\\ 1\\  \end{bmatrix} $. Then $\{\mbold{x}_1,
+      \mbold{x}_2, \mbold{x}_3\} $ is clearly linearly independent and thus a basis for a subspace $W$ of
+    $\mathbb{R}^{4}$. Construct and orthogonal basis for $W$.
+  }
+
+  \sol{
+    \begin{description}
+      \item[Step 1] Let $\mbold{v}_1 = \mbold{x}_1$ and $W_1 = \text{Span } \{\mbold{x}_1\} = \text{Span } \{\mbold{v}_1\} $
+      \item[Step 2] Let $\mbold{v}_2$ be the vector produced by subtracting from $\mbold{x}_2$ is projection onto the subspace
+            $W_1$. That is, let
+            \begin{align*}
+              \mbold{v}_2 & = \mbold{x}_2 - \text{proj}_{W_1} \mbold{x}_2                                                                                                                        \\
+                          & = \mbold{x}_2 - \frac{\mbold{x}\cdot \mbold{v}_1}{\mbold{v}_1\cdot \mbold{v}_1} \mbold{v}_1                                                                          \\
+              \text{Since } \mbold{v}_1 = \mbold{x}_1                                                                                                                                            \\
+                          & = \begin{bmatrix} 0 \\ 1\\ 1\\ 1 \end{bmatrix} - \frac{3}{4} \begin{bmatrix} 1 \\ 1 \\ 1\\ 1
+                                                                                         \end{bmatrix} = \begin{bmatrix} -\frac{3}{4} \\ \frac{1}{4} \\ \frac{1}{4} \\ \frac{1}{4} \end{bmatrix} \\
+            \end{align*}
+            $\mbold{v}_2$ is the component of $\mbold{x}_2$ orthogonal to $\mbold{x}_1$, and $\{\mbold{v}_1,
+              \mbold{v}_2\} $ is an orthogonal basis for the subspace $W_2$ spanned by $\mbold{x}_1$ and $\mbold{x}_2$
+      \item[Step 2' (Optional)] If possible scale $\mbold{v}_2$ to simplify future calculations. Since $\mbold{v}_2$ has
+            fractional entries, it is convenient to scale it by a factor of 4 and replace $\{\mbold{v}_1,
+              \mbold{v}_2\} $ by the orthogonal basis
+            \[
+              \mbold{v}_1 = \begin{bmatrix} 1 \\ 1\\ 1\\ 1 \end{bmatrix},\, \mbold{v}^{\prime}_2 = \begin{bmatrix}
+                -3 \\ 1\\ 1\\ 1 \end{bmatrix}
+            \]
+      \item [Step 3] Let $\mbold{v}_3$ be the vector produced by subtracting from $\mbold{x}_3$  its projection
+            onto the subspace $W_2$, using the orthogonal basis $\{\mbold{v}_1, \mbold{v}^{\prime}_2\} $ to compute this
+            projection to $W_2$:
+            \begin{align*}
+              \text{proj}_{W_2} \mbold{x}_3                    & = \frac{\mbold{x}_3 \cdot \mbold{v}_1}{\mbold{v}_1\cdot
+                \mbold{v}_1}\mbold{v}_1 +
+              \frac{\mbold{x}_3 \cdot \mbold{v}^{\prime}_2}{\mbold{v}^{\prime}_2 \cdot
+              \mbold{v}^{\prime}_2}\mbold{v}^{\prime}_2                                                                            \\
+              \mbold{x}_3 \cdot \mbold{v}_1                    & = 0 + 0 + 1 + 1                                                   \\
+                                                               & = 2                                                               \\
+              \mbold{v}_1 \cdot \mbold{v}_1                    & = 1 + 1+ 1+1                                                      \\
+                                                               & = 4                                                               \\
+              \mbold{x}_3 \cdot \mbold{v}^{\prime}_2           & = 0 + 0 + 1 + 1                                                   \\
+                                                               & = 2                                                               \\
+              \mbold{v}^{\prime}_2\cdot   \mbold{v}^{\prime}_2 & =9 + 1 + 1 + 1                                                    \\
+                                                               & = 12                                                              \\
+                                                               & = \frac{2}{4} \begin{bmatrix} 1 \\ 1\\ 1\\ 1
+                                                                               \end{bmatrix} + \frac{2}{12} \begin{bmatrix} -3 \\ 1\\
+                                                                                                              1  \\ 1\end{bmatrix} \\
+                                                               & = \begin{bmatrix}
+                                                                     \frac{2}{4} \\
+                                                                     \frac{2}{4} \\
+                                                                     \frac{2}{4} \\
+                                                                     \frac{2}{4} \\
+                                                                   \end{bmatrix} +
+              \begin{bmatrix}
+                -\frac{1}{2} \\
+                \frac{1}{6}  \\
+                \frac{1}{6}  \\
+                \frac{1}{6}  \\
+              \end{bmatrix}
+              \\
+                                                               & = \begin{bmatrix}
+                                                                     0           \\
+                                                                     \frac{2}{3} \\
+                                                                     \frac{2}{3} \\
+                                                                     \frac{2}{3} \\
+                                                                   \end{bmatrix}                                                  \\
+              \\
+              \mbold{v}_3                                      & = \mbold{x}_3 - \text{proj}_{W_2}\mbold{x}_3                      \\
+                                                               & = \begin{bmatrix} 0 \\ 0 \\ 1\\ 1 \end{bmatrix} - \begin{bmatrix}
+                                                                                                                     0           \\
+                                                                                                                     \frac{2}{3} \\
+                                                                                                                     \frac{2}{3} \\
+                                                                                                                     \frac{2}{3} \\
+                                                                                                                   \end{bmatrix}  \\
+                                                               & = \begin{bmatrix}
+                                                                     0            \\
+                                                                     -\frac{2}{3} \\
+                                                                     \frac{1}{3}  \\
+                                                                     \frac{1}{3}
+                                                                   \end{bmatrix}                                                  \\
+            \end{align*}
+            Therefore the orthogonal basis for $W$ is $\{\mbold{v}_1, \mbold{v}^{\prime}_2,\mbold{v}_3 \} $, where
+            \[
+              \mbold{v}_1 = \begin{bmatrix} 1 \\ 1\\ 1\\ 1 \end{bmatrix},\, \mbold{v}^{\prime}_2 = \begin{bmatrix}
+                -3 \\ 1\\ 1\\ 1 \end{bmatrix}
+              \mbold{v}_3 = \begin{bmatrix} 0 \\ -\frac{2}{3} \\ \frac{1}{3}  \\ \frac{1}{3} \end{bmatrix}
+            \]
+    \end{description}
+  }
+}
+
+\pagebreak
+\thm{The Gram-Schmidt Process}{
+  Given a basis $\{\mbold{x}_1, \ldots, \mbold{x}_p\} $ for a non-zero subspace $W$ of $\mathbb{R}^{n}$, define
+  \begin{align*}
+    \mbold{v}_1 & = \mbold{x}_1                                                                                   \\
+    \mbold{v}2  & = \mbold{x}_2 - \frac{\mbold{x}_2\cdot \mbold{v}_1}{\mbold{v}_1\cdot \mbold{v}_1} \mbold{v}_1   \\
+    \mbold{v}_3 & =  \mbold{x}_3 - \frac{\mbold{x}_3\cdot \mbold{v}_1}{\mbold{v}_1\cdot \mbold{v}_1} \mbold{v}_1
+    - \frac{\mbold{x}_3\cdot \mbold{v}_2}{\mbold{v}_2\cdot \mbold{v}_2} \mbold{v}_2                               \\
+    \vdots                                                                                                        \\
+    \mbold{v}_p & = \mbold{x}_p - \frac{\mbold{x}_p\cdot \mbold{v}_1}{\mbold{v}_1\cdot \mbold{v}_1} \mbold{v}_1 -
+    \frac{\mbold{x}_p \cdot  \mbold{v}_2}{\mbold{v}_2\cdot \mbold{v}_2} \mbold{v}_2 - \ldots - \frac{\mbold{x}_p \cdot
+      \mbold{v}_{p-1} }{\mbold{v}_{p-1} \cdot \mbold{v}_{p-1}} \mbold{v}_{p-1}
+  \end{align*}
+  Then $\{\mbold{v}_1,\ldots, \mbold{v}_p\} $ is an orthogonal basis for $W$. In addition
+  \[
+    \text{Span }\{\mbold{v}_1, \ldots, \mbold{v}_k\} = \text{Span }\{\mbold{x}_1, \ldots, \mbold{x}_k\} \quad \text{ for }
+    1 \leq k \leq p
+  \]
+}
+
+\section{Orthonormal Bases}
+
+An orthonormal basis is constructed easily from an orthogonal basis $\{\mbold{v}_1, \ldots, \mbold{v}_p\} $, by
+normalizing all the $\mbold{v}_k$.
+
+\ex{}{
+  Given the constructed basis
+  \[
+    \mbold{v}_1 = \begin{bmatrix} 3 \\ 6 \\ 0 \end{bmatrix} , \mbold{v}_2 = \begin{bmatrix} 0 \\ 0 \\ 2 \end{bmatrix}
+  \]
+  An orthonormal basis is
+  \begin{align*}
+    \mbold{u}_1 & = \frac{1}{\|\mbold{v}_1\|} = \frac{1}{\sqrt{45}} \begin{bmatrix} 3 \\ 6\\ 0 \end{bmatrix} =
+    \begin{bmatrix} \frac{1}{\sqrt{5}} \\ \frac{2}{\sqrt{5}} \\ 0 \end{bmatrix}  \\
+    \mbold{u}_2 & = \frac{1}{\|\mbold{v}_2\|}\mbold{v}_2 = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}           \\
+  \end{align*}
+}
+
+\subsection{Exercises}
+
+\qs{}{
+  Let $A = \begin{bmatrix}
+      1 & -1 & 4  \\
+      1 & 4  & -2 \\
+      1 & 4  & 2  \\
+      1 & -1 & 0
+    \end{bmatrix} $. Find an orthonormal basis for the column space of $A$.
+}
+
+\sol{
+  \begin{align*}
+    \begin{bmatrix}
+      1 & -1 & 4  \\
+      1 & 4  & -2 \\
+      1 & 4  & 2  \\
+      1 & -1 & 0
+    \end{bmatrix}             \\
+    R_1 - R_2  \rightarrow R_2 \\
+    \begin{bmatrix}
+      1 & -1 & 4 & 0 \\
+      0 & -5 & 6 & 0 \\
+      1 & 4  & 2 & 0 \\
+      1 & -1 & 0 & 0 \\
+    \end{bmatrix}
+    \\
+    R_1 - R_3  \rightarrow R_3 \\
+    \begin{bmatrix}
+      1 & -1 & 4 & 0 \\
+      0 & -5 & 6 & 0 \\
+      0 & -5 & 2 & 0 \\
+      1 & -1 & 0 & 0 \\
+    \end{bmatrix}
+    \\
+    R_1 - R_4  \rightarrow R_4 \\
+    \begin{bmatrix}
+      1 & -1 & 4 & 0 \\
+      0 & -5 & 6 & 0 \\
+      0 & -5 & 2 & 0 \\
+      0 & 0  & 4 & 0 \\
+    \end{bmatrix}
+    \\
+    R_2 - R_3  \rightarrow R_3 \\
+    \begin{bmatrix}
+      1 & -1 & 4 & 0 \\
+      0 & -5 & 6 & 0 \\
+      0 & 0  & 4 & 0 \\
+      0 & 0  & 4 & 0 \\
+    \end{bmatrix}
+  \end{align*}
+  \begin{align*}
+    R_3 - R_4  \rightarrow R_4              \\
+    \begin{bmatrix}
+      1 & -1 & 4 & 0 \\
+      0 & -5 & 6 & 0 \\
+      0 & 0  & 4 & 0 \\
+      0 & 0  & 0 & 0 \\
+    \end{bmatrix}
+    \\
+    \frac{1}{5}R_2 - R_1  \rightarrow R_1   \\
+    \begin{bmatrix}
+      -1 & 0  & \frac{-14}{5} & 0 \\
+      0  & -5 & 6             & 0 \\
+      0  & 0  & 4             & 0 \\
+      0  & 0  & 0             & 0 \\
+    \end{bmatrix}
+    \\
+    \frac{3}{2}R_3 - R_2  \rightarrow R_2   \\
+    \begin{bmatrix}
+      -1 & 0 & \frac{-14}{5} & 0 \\
+      0  & 5 & 0             & 0 \\
+      0  & 0 & 4             & 0 \\
+      0  & 0 & 0             & 0 \\
+    \end{bmatrix}
+    \\
+    \frac{-7}{10}R_3 - R_1  \rightarrow R_1 \\
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 5 & 0 & 0 \\
+      0 & 0 & 4 & 0 \\
+      0 & 0 & 0 & 0 \\
+    \end{bmatrix}
+    \\
+    \frac{1}{5}R_2 \to R_2                  \\
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 4 & 0 \\
+      0 & 0 & 0 & 0 \\
+    \end{bmatrix}
+    \\
+    \frac{1}{4}R_3 \to R_3                  \\
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 0 \\
+    \end{bmatrix}
+    \\
+  \end{align*}
+  Therefore $\text{Col }A = \left\{ \begin{bmatrix} 1 \\ 1\\ 1\\ 1 \end{bmatrix}, \begin{bmatrix} -1 \\ 4\\ 4\\ -1
+    \end{bmatrix}, \begin{bmatrix} 4 \\ -2\\ 2\\ 0 \end{bmatrix}    \right\} $ \\
+
+  \noindent Let $\mbold{v}_1 = \mbold{x}_1$ and $W_1 = \text{Span } \{\mbold{v}1\} $
+  \begin{align*}
+    \mbold{v}_2          & = \mbold{x}_2 - \text{proj}_{W_1}\mbold{x}_2                                                                        \\
+                         & = \mbold{x}_2 - \frac{\mbold{x}_2 \cdot \mbold{v}_1}{\mbold{v}_1 \cdot \mbold{v}_1}\mbold{v}_1                      \\
+                         & = \begin{bmatrix} -1 \\ 4 \\ 4 \\ -1 \end{bmatrix} - \frac{6}{4} \begin{bmatrix} 1 \\ 1\\ 1\\ 1 \end{bmatrix}       \\
+                         & = \begin{bmatrix}
+                               -\frac{5}{2} \\
+                               \frac{5}{2}  \\
+                               \frac{5}{2}  \\
+                               -\frac{5}{2} \\
+                             \end{bmatrix}                                                                                                    \\
+    \mbold{v}^{\prime}_2 & = \begin{bmatrix} -5 \\ 5\\ 5\\ -5 \end{bmatrix}                                                                    \\
+    \\
+    \text{Now let } W_2  & = \text{Span } \{\mbold{v}_1, \mbold{v}^{\prime}_2\}                                                                \\
+    \mbold{v}_3          & = \mbold{x}_3 - \text{proj}_{W_2} \mbold{x}_3                                                                       \\
+                         & = \mbold{x}_3
+    - \frac{\mbold{x}_3 \cdot \mbold{v}_1}{\mbold{v}_1 \cdot \mbold{v}_1} \mbold{v}_1
+    - \frac{\mbold{x}_3 \cdot \mbold{v}^{\prime}_2}{\mbold{v}^{\prime}_2 \cdot \mbold{v}^{\prime}_2} \mbold{v}^{\prime}_2
+    \\
+                         & = \begin{bmatrix} 4 \\ -2\\ 2\\ 0 \end{bmatrix} = \frac{4}{4} \begin{bmatrix} 1 \\ 1\\ 1\\ 1 \end{bmatrix} - \left(
+    -\frac{20}{100}\right) \begin{bmatrix} -5 \\ 5\\ 5\\ -5 \end{bmatrix}                                                                      \\
+                         & = \begin{bmatrix} 2 \\ -2\\ 2\\ -2 \end{bmatrix}
+  \end{align*}
+  Therefore the orthogonal basis for the column space of $a$ is $\left\{ \begin{bmatrix} 1 \\ 1\\ 1\\ 1 \end{bmatrix},
+    \begin{bmatrix} -5 \\ 5\\ 5\\ -5 \end{bmatrix}, \begin{bmatrix} 2 \\ -2\\ 2\\ -2 \end{bmatrix} \right\} $. The orthonormal basis is
+  \begin{align*}
+    \mbold{u}_1 & = \frac{1}{\|\mbold{v}_1\|} = \frac{1}{\sqrt{4}} \begin{bmatrix} 1 \\ 1\\ 1\\ 1 \end{bmatrix} =
+    \begin{bmatrix} \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \end{bmatrix}                            \\
+    \mbold{u}_2 & = \frac{1}{\|\mbold{v}_2\|} = \frac{1}{\sqrt{100}} \begin{bmatrix} -5 \\ 5\\ 5\\ -5 \end{bmatrix} =
+    \begin{bmatrix} -\frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ -\frac{1}{2} \end{bmatrix}                          \\
+    \mbold{u}_3 & = \frac{1}{\|\mbold{v}_3\|} = \frac{1}{\sqrt{16}} \begin{bmatrix} 2 \\ -2\\ 2\\ -2 \end{bmatrix} =
+    \begin{bmatrix} \frac{1}{2} \\ -\frac{1}{2} \\ \frac{1}{2} \\ -\frac{1}{2} \end{bmatrix}                          \\
+  \end{align*}
+  Therefore the orthonormal basis for the column space of $A$ is $\left\{ \begin{bmatrix} \frac{1}{2} \\ \frac{1}{2}\\
+      \frac{1}{2} \\ \frac{1}{2}\end{bmatrix}, \begin{bmatrix} -\frac{1}{2} \\ \frac{1}{2}\\ \frac{1}{2}\\ -\frac{1}{2}
+    \end{bmatrix}, \begin{bmatrix} \frac{1}{2} \\ -\frac{1}{2}\\ \frac{1}{2}\\ -\frac{1}{2} \end{bmatrix} \right\} $
 }
 
 \chapter{Exercises}

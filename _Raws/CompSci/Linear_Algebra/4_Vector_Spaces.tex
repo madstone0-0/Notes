@@ -178,8 +178,7 @@ We can call $\text{Span}\{\mbold{v}_1, \ldots, \mbold{v}_p\} $ \textbf{the subsp
 
 \ex{}{
   \qs{}{
-    For what value(s) of $h$ will $\mbold{y}$ be in the subspace of $\mathbb{R}^3$ spanned by $\mbold{v}_1, \mbold{v}_2,
-      \mbold{v}_3$, if
+    For what value(s) of $h$ will $\mbold{y}$ be in the subspace of $\mathbb{R}^3$ spanned by $\mbold{v}_1, \mbold{v}_2, pmbold{v}_3$, if
     \[
       \mbold{v}_1 = \begin{bmatrix} 1 \\ -1\\ 2 \end{bmatrix},\, \mbold{v}_2 = \begin{bmatrix} 5 \\ -4 \\ -7
       \end{bmatrix},\, \mbold{v}_3 = \begin{bmatrix} -3 \\ 1 \\ 0 \end{bmatrix},\,  \text{ and } \mbold{y} = \begin{bmatrix} -4\\ 3 \\ h \end{bmatrix}
@@ -416,10 +415,96 @@ defined implicitly, as it is defined by a condition that must be checked. Howeve
   \sol{
     The first step is to find the general solution of $A \mbold{x} = \mbold{0}$ in terms of free variables. Therefore:
     \begin{align*}
-
-      A = \begin{bmatrix} -3 & 6 & -1 & 1 & -7 \\ 1 & -2 & 2 & 3 & -1 \\ 2 & -4 & 5 & 8 & -4 \end{bmatrix} \\
+      A = \begin{bmatrix} -3 & 6 & -1 & 1 & -7 \\ 1 & -2 & 2 & 3 & -1 \\ 2 & -4 & 5 & 8 & -4 \end{bmatrix} \sim \begin{bmatrix}
+                                                                                                                  1 & -2 & 0 & -1 & 3  & 0 \\
+                                                                                                                  0 & 0  & 1 & 2  & -2 & 0 \\
+                                                                                                                  0 & 0  & 0 & 0  & 0  & 0
+                                                                                                                \end{bmatrix}
+      \\
+      x_1 -2x_2 -x_4 + 3x_5  =0                               \\
+      x_3 + 2x_4 -2x_5       = 0                              \\
+      x_2                    = x_2                            \\
+      x_4                    = x_4                            \\
+      x_5                    = x_5                            \\
+      \\
+      x_1                    = 2x_2 + x_4 -3x_5               \\
+      x_2                    = x_2                            \\
+      x_3                    = -2x_4 + 2x_5                   \\
+      x_4                    = x_4                            \\
+      x_5                    = x_5                            \\
+      \\
+      \mbold{x} = \begin{bmatrix} 2x_2 + x_4 - 3x_5 \\ x_2 \\ -2x_4 + 2x_5 \\ x_4 \\ x_5 \end{bmatrix} = x_2
+      \begin{bmatrix} 2 \\ 1 \\ 0 \\ 0 \\ 0 \end{bmatrix} + x_4 \begin{bmatrix} 1 \\ 0 \\ 2 \\ 1 \\ 0 \end{bmatrix} +
+      x_5 \begin{bmatrix} -3 \\ 0 \\ 2\\ 0 \\ 1 \end{bmatrix} \\
+       & = x_2 \mbold{u} + x_4 \mbold{v} + x_5 \mbold{w}      \\
     \end{align*}
+    Every linear combination of $\mbold{u}, \mbold{v}, \text{ and } \mbold{w}$ is an element of $\text{Nul } A$ and vice
+    versa. Thus $\{\mbold{u}, \mbold{v}, \mbold{w}\} $ is a spanning set for $\text{Nul } A$.
   }
+}
+
+Two points are made apparent by the previous example:
+\begin{enumerate}
+  \item The spanning set produced by the general solution of $A\mbold{x} = \mbold{0}$ is automatically linearly
+        independent because the free variables are weights on the spanning vectors.
+  \item When $\text{Nul }A$ contains non-zero vectors, the number of vectors in the spanning set for $\text{Nul } A$
+        equals the number of free variables in the equation $A\mbold{x} = \mbold{0}$
+\end{enumerate}
+
+\section{The Column Space of a Matrix}
+
+\dfn{The Column Space of a Matrix}{
+  The column space of an $m\times n$ matrix $A$, denoted by $\text{Col } A$, is the set of all linear combinations of
+  the columns of $A$. If $A = \begin{bmatrix} \mbold{a}_1 & \ldots & \mbold{a}_n \end{bmatrix} $, then
+  \[
+    \text{Col }A = \text{Span}\{\mbold{a}_1, \ldots, \mbold{a}_n\}
+  \]
+}
+
+Since $\text{Span } \{\mbold{a}_1, \ldots, \mbold{a}_n\} $ is a subspace, by theorem \ref{thm:1}, the next theorem
+follows from the definition of $\text{Col }A$ and the fact that the columns of $A$ are in $\mathbb{R}^{m}$.
+
+\thm{}{
+  The column space of an $m\times n$ matrix $A$ is a subspace of $\mathbb{R}^{m}$.
+}
+
+\ex{}{
+  \qs{}{
+    Find a matrix $A$ such that $W = \text{Col }A$.
+    \[
+      W = \left\{ \begin{bmatrix} 6a - b \\ a + b \\ -7a \end{bmatrix} : a, b \in \mathbb{R}  \right\}
+    \]
+  }
+
+  \sol{
+
+    We first write $W$ as a set of linear combinations:
+    \[
+      W = \left\{ a \begin{bmatrix} 6 \\ 1 \\ -7 \end{bmatrix} + b \begin{bmatrix} -1 \\ 1\\  0 \end{bmatrix} : a, b \in
+      \mathbb{R}\right\} = \text{Span } \left\{ \begin{bmatrix}
+        6 \\
+        1 \\
+        -7
+      \end{bmatrix}, \begin{bmatrix}
+        -1 \\
+        1  \\
+        0  \\
+      \end{bmatrix}   \right\}
+    \]
+    Then we create a matrix $A$ with these columns:
+    \[
+      \begin{bmatrix}
+        6  & -1 \\
+        1  & 1  \\
+        -7 & 0
+      \end{bmatrix}
+    \]
+  }
+}
+
+\thm{}{
+  The column space of an $m\times n$ matrix $A$ is all of $\mathbb{R}^{m}$ if and only if the equation $A\mbold{x} =
+    \mbold{b}$ has a solution for each $\mbold{b}$ in $\mathbb{R}^{m}$
 }
 
 

@@ -265,11 +265,16 @@ if __name__ == "__main__":
         # "Homework/OOP",
         # Y2 S2
         # Y2 S3
-        "CompSci/Data_Structures",
-        "CompSci/DB",
-        "CompSci/Intro_AI",
-        "CompSci/Linear_Algebra",
-        "Homework/Linear_Algebra",
+        # "CompSci/Data_Structures",
+        # "CompSci/DB",
+        # "CompSci/Intro_AI",
+        # "CompSci/Linear_Algebra",
+        # "Homework/Linear_Algebra",
+        "CompSci/Algo_Design",
+        "CompSci/Web",
+        "CompSci/Hardware",
+        "CompSci/ICP",
+        "CompSci/Machine_Learning",
         # Y2 S3
     ]
 

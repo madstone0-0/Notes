@@ -1,0 +1,60 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Introduction}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\section{Machine Learning}
+
+\begin{itemize}
+  \item Performing a Task
+  \item With Experience
+  \item Improving Performance
+\end{itemize}
+
+\section{Artificial Intelligence (AI)}
+
+
+\dfn{Artificial Intelligence}{
+  The science and engineering of making intelligent machines, especially intelligent computer programs.
+}
+
+\section{Deep Learning vs Machine Learning}
+
+\subsection{Machine Learning}
+\begin{itemize}
+  \item Subfield of AI focused on algorithms that learn from data.
+  \item Works well with structured data.
+  \item Simpler models.
+  \item Requires manual feature extraction and selection.
+  \item Involves predictive modelling, clustering, and classification.
+  \item Feature extraction and application are done separately.
+\end{itemize}
+
+\subsection{Deep Learning}
+\begin{itemize}
+  \item Subfield of ML using neural networks with many layers.
+  \item  Works well with large amounts of unstructured data.
+  \item  Complex models with multiple layers.
+  \item Automatically extracts features from raw data.
+  \item Involves image and speech recognition, natural language processing, and recommendation systems.
+  \item Feature extraction and application are done together by the neural network.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,98 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Introduction}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Networks}
+
+\section{Introduction}
+\dfn{Local Area Network (LAN)}{
+  A network that is confined to a relatively small area. It is generally limited to a geographic area such as a writing lab, school, or building.
+}
+
+\dfn{IP (Internet Protocol) Address}{
+  A unique string of numbers separated by periods that identifies each computer using the Internet Protocol to communicate over a network.
+}
+
+\dfn{Wide Area Network (WAN)}{
+  A network that covers a broad area (i.e., any telecommunications network that links across metropolitan, regional, or national boundaries).
+}
+
+\dfn{Intranet}{
+  A private network that is contained within an enterprise. It may consist of many interlinked local area networks and also use leased lines in the wide area network.
+}
+
+\dfn{Router}{
+  A device that forwards data packets between computer networks. Routers perform the traffic directing functions on the Internet.
+}
+
+\dfn{Switch}{
+  A device that connects devices together on a computer network by using packet switching to receive, process, and forward data to the destination device.
+}
+
+\dfn{Internet}{
+  A global network of networks that consists of millions of private, public, academic, business, and government networks of local to global scope that are linked by a broad array of electronic, wireless, and optical networking technologies.
+}
+
+\dfn{Client}{
+  A computer that accesses a server for resources.
+}
+
+\dfn{Server}{
+  A computer that provides data to clients.
+}
+
+\subsection{Switch vs Router}
+
+A switch is used to connect various devices within a network. It is used to create a network. A router is used to connect various networks. It is used to route data packets between different networks.
+
+\section{OSI (Open Systems Interconnection) Model}
+
+\dfn{OSI Model}{
+  A conceptual framework that standardizes the functions of a telecommunication or computing system into seven
+  abstraction layers.
+}
+
+This model is composed of seven layers, each specifying particular protocols and functions that are performed at each
+layer, with each subsequent layer building on the one below it. The layers are from top to bottom:
+\begin{itemize}
+  \item Application Layer / Layer 7
+  \item Presentation Layer / Layer 6
+  \item Session Layer / Layer 5
+  \item Transport Layer / Layer 4
+  \item Network Layer / Layer 3
+  \item Data Link Layer / Layer 2
+  \item Physical Layer / Layer 1
+\end{itemize}
+
+\subsection{Application Layer}
+
+\dfn{Application Layer}{
+  Protocols designed for process-to-process communication and provide services directly to the application. This layer
+  interacts with software applications that implement a communicating component. Examples of protocols include HTTP, SMTP, and FTP.
+}
+
+\subsection{Presentation Layer}
+
+\dfn{Presentation Layer}{
+  The presentation layer ensures that the information that the application layer of one system sends out is readable by
+  the application layer of another system. It translates data between the application layer and the network format. This
+  is where encoding and encryption is done.
+}
+
+\end{document}

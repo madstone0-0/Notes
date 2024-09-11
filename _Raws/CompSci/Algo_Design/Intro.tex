@@ -1,0 +1,359 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Introduction}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\section{What is an Algorithm}
+
+\dfn{Algorithm}{
+  A sequence of unambiguous instructions for solving a problem i.e. for obtaining a required output for any legitimate
+  input in a finite amount of time.
+}
+
+Using the task of finding the greatest common divisor (GCD) of two numbers we can explicitly illustrate the general
+notions of an algorithm. Namely:
+\begin{itemize}
+  \item The requirement of non-ambiguity in describing each step of an algorithm.
+  \item  The specified range of inputs for which an algorithm works.
+  \item  The different ways the same algorithm can be expressed / implemented.
+  \item The non uniqueness of algorithms for a particular problem
+  \item Different algorithms for the same problem may be based on different ideas and have different time and space complexities.
+\end{itemize}
+
+
+The GCD of two non-negative, non-zero integers $m$ and $n$, denoted $\text{gcd} \left( m, n \right) $ is defined as the
+largest integer that divides both $m$ and $n$ evenly, i.e., with a remainder of zero. Euclid of Alexandria, a Greek
+mathematician, outlined an algorithm for solving this problem in his book \textit{Elements}. Defined as follows:
+\[
+  \text{gcd} \left( m, n \right)  = \begin{cases}
+    m                                      & \text{if } n = 0 \\
+    \text{gcd} \left( n,  m \mod n \right) & \text{otherwise}
+  \end{cases}
+\]
+
+Where $m \mod n$ is the remainder of the division of $m$ by $n$, and when n is zero the GCD is $m$ as it is the only and
+largest number that divides $m$ evenly between  $m$ and $0$. In pseudocode:
+
+\begin{algorithm}[H]
+  \caption{gcd $ \left( m, n \right) $}
+  \Comment{}\\
+  \Comment{Computes the greatest common divisor of two numbers} \\
+  \Comment{Input: Two non-negative integers $m$ and $n$} \\
+  \Comment{Output: The greatest common divisor of $m$ and $n$}\\
+  \begin{algorithmic}[1]
+    \While{ $n \neq 0$}
+
+    $r \gets m \mod n$
+
+    $m \gets n$
+
+    $n \gets r$
+    \EndWhile
+    \State \Return $r$
+  \end{algorithmic}
+\end{algorithm}
+
+This algorithm eventually terminates as the value of $n$ decreases with each iteration as its value is set to $m \mod n$
+every iteration, and the value of $m$ is always greater than $n$.
+
+Another algorithm for solving this problem is based on the definition of the GCD as the greatest common divisor of $m$ and
+$n$ as the largest integer that divides both number evenly. This leads us to the conclusion that such a common divisor
+cannot be greater than the smallest of the two numbers, denoted $t = \min \left\{ m, n \right\} $. We can then check if
+$t$ divides both numbers $m$ and $n$ evenly, if it does then $t$ is the GCD of $m$ and $n$. If it does not, we decrease
+$t$ by 1 and then check if $t - 1$ divides both $m$ and $n$ evenly. This process is repeated until we find a number that
+divide both $m$ and $n$ evenly or until $t = 1$ in which case the GCD is 1 as 1 divides all numbers evenly. In pseudocode:
+\begin{algorithm}[H]
+  \caption{Consecutive Integer Checking $ \left( m, n \right) $}
+  \begin{algorithmic}[1] \\
+    $t \gets \min \left\{ m, n \right\} $
+
+    \While{ $t > 1$}
+
+    \If{ $m  \mod t == 0$ and $n \mod t == 0$}
+    \State \Return $t$
+    \EndIf
+    \State $t \gets t - 1$
+    \EndWhile
+    \State \Return $t$
+  \end{algorithmic}
+\end{algorithm}
+
+The final algorithm considers the prime factorization of the two numbers $m$ and $n$. The GCD of two numbers is the
+product of the common prime factors of the two numbers. As there is no unambiguous way to find the prime factorization
+of a number we simply layout the steps for the algorithm for now.
+\begin{enumerate}
+  \item Find the prime factorization of $m$
+  \item Find the prime factorization of $n$
+  \item Identify the common prime factors of $m$ and $n$
+  \item Multiply the common prime factors and return it as the GCD
+\end{enumerate}
+
+A simple way of generating consecutive prime numbers not exceeding a given integer $n > 1$ is the Sieve of Eratosthenes.
+This algorithm starts by initializing a list of prime candidates with consecutive integers from $2 \text{ to } n$. Then
+each iteration of the algorithm selects the next number in the list as a prime number and removes all multiples of that
+prime number in the list. This continues until no more numbers can be selected as prime numbers i.e. no number can be
+removed from the list. The remaining numbers in the list are the prime numbers not exceeding $n$. In pseudocode:
+
+\begin{algorithm}[H]
+  \caption{SieveNaïve $ \left( n \right) $}
+  \Comment{}\\
+  \Comment{Generates a list of prime numbers not exceeding $n >1$} \\
+  \Comment{Input: A positive number to not exceed $n$} \\
+  \Comment{Output: A list of prime numbers not exceeding $n$} \\
+  \begin{algorithmic}[1]
+    \Function{ZeroMultiples}{$L, p, n$}
+    \For{ $i \gets 1$ to $n$}
+    \If{ $L_i \neq 0$ and $p \neq L_i$ and $L_i \mod p  == 0$}
+    \State $L_i \gets 0$
+    \EndIf
+    \EndFor
+    \State \Return $L$
+    \EndFunction\\
+
+    \State $P[n]$ \Comment{ $P$ is an array of size $n$}
+
+    \For{ $i \gets 2$ to $n$}
+    \State $P_i \gets i $
+    \EndFor
+
+    \For{ $i \gets 1$ to $n$}
+    \If{ $P_i \neq  0$}
+    \State prime $ \gets P_i$
+    \State $P \gets$ ZeroMultiples $ \left( P, \text{prime}, n \right) $
+    \EndIf
+    \EndFor \\
+
+    \State $T \left[ n \right] $ \Comment{Temporary array to store prime numbers}
+    \State $i \gets 0$
+    \For{ $j \gets 1$ to $n$}
+    \If{ $P_j \neq 0$}
+    \State $T_i \gets P_j$
+    \State $i \gets i + 1$
+    \EndIf
+    \EndFor
+    \State \Comment{Remove trailing zeros}
+
+    \State \Return $T$
+  \end{algorithmic}
+\end{algorithm}
+
+But through observation, we can deduce that the largest number $p$ whose multiples can still remain to warrant further
+iterations of the algorithm. We must first note that if $p$ is a number whose multiples are being eliminated on the
+current pass, then the first multiple of $p$ we must consider is $p \times p$ because all of its smaller multiples $2p,
+  \ldots, \left( p -1 \right) $ have been eliminated on earlier passes. This prevents us from eliminating the same number
+more than once. As $p \times p$ should not be greater than $n$, $p$ cannot exceed $\sqrt{n}$ floored i.e. $\left\lfloor
+  \sqrt{n}\right\rfloor$. We assume in the following pseudocode that there is function available for computing
+$\left\lfloor \sqrt{n} \right\rfloor$.
+
+\begin{algorithm}[H]
+  \caption{Sieve of Eratosthenes $ \left( n \right) $}
+  \Comment{}\\
+  \Comment{Generates a list of prime numbers not exceeding $n > 1$} \\
+  \Comment{Input: A positive number to not exceed $n$} \\
+  \Comment{Output: A list of prime numbers not exceeding $n$} \\
+  \begin{algorithmic}[1]
+    \For{ $p \gets 2$ to $n$}
+    \State $A \left[ p \right] \gets p $
+    \EndFor\\
+
+    \For{ $p \gets 2$ to $\left\lfloor \sqrt{n} \right\rfloor$}
+    \If{ $A_p \neq  0$} \Comment{ $p$ hasn't been eliminated on previous passes}
+    \State  $j \gets p \times p$
+    \While{ $j \leq n$}
+    \State $A_j \gets 0$
+    \State $j \gets j + p$
+    \EndWhile
+    \EndIf
+    \EndFor \\
+
+    \Comment{Copy remaining elements of $A$ to array $L$ of the primes}
+    \State $ i \gets 0$
+    \For{ $p \gets 2$ to $n$}
+
+    \If{ $A_p \neq 0$}
+
+    \State $L_i \gets A_p$
+    \State $i \gets i + 1$
+    \EndIf
+    \EndFor
+
+    \State \Return $L$
+
+  \end{algorithmic}
+\end{algorithm}
+
+\subsection{Exercises}
+
+\qs{}{
+  Design an algorithm for computing $\left\lfloor \sqrt{n} \right\rfloor$ for any positive integer $n$. Besides assignment
+  and comparison, your algorithm may only use the four basic
+  arithmetical operations.
+}
+
+\sol{
+  \begin{algorithm}[H]
+    \caption{FloorSqrt $\left( n \right)$ }
+    \Comment{}\\
+    \Comment{Computes $\left\lfloor \sqrt{n} \right\rfloor$ for any positive integer $n$} \\
+    \Comment{Input: Integer $n$} \\
+    \Comment{Output: The floored square root of $n$} \\
+    \begin{algorithmic}[1]
+      \Function{abs}{ $x$}
+      \If{ $x < 0$}
+      \State \Return $-1 \times x$
+      \Else
+      \State \Return x
+      \EndIf
+      \EndFunction \\
+
+      \Comment{Newtons Method for calculating square root}
+      \State $x \gets 10$
+      \While{ $\text{ABS} \left( x \times x - n \right) > 0.001 $}
+
+      \State $x \gets \left( x + \frac{n}{x} \right) / 2 $
+      \EndWhile \\
+
+
+      \State $r \gets x$ \Comment{Approximate definition of the floor function}
+      \While{ $r \geq 1$}
+
+      \State $r \gets r - 1$
+      \EndWhile
+
+      \State \Return $x - r$
+
+    \end{algorithmic}
+  \end{algorithm}
+
+  \begin{algorithm}[H]
+    \caption{FloorSqrtBinarySearch $ \left( n \right) $}
+    \Comment{}\\
+    \Comment{Finds the floored square root of a positive integer $n$ using binary search} \\
+    \Comment{Input: A positive integer $n$ } \\
+    \Comment{Output: The floored square root of the integer $n$} \\
+    \begin{algorithmic}[1] \\
+      \State low $ \gets 0$
+      \State high $ \gets n$
+      \While{high $>$ low}
+      \State $\text{mid} \gets \left( \text{high } + \text{ low} \right) $ / 2
+
+      \If{mid $\times$ mid $ \leq n$ and $ \left( \text{mid } + 1 \right) \times \left( \text{mid } + 1 \right) > n  $}
+      \State \Return mid
+      \EndIf
+      \If{mid $\times $ mid $< n$}
+      \State low $ \gets \text{ mid } + 1$
+      \Else
+      \State high $ \gets \text{ mid } - 1$
+      \EndIf
+      \EndWhile
+    \end{algorithmic}
+  \end{algorithm}
+}
+
+
+\chapter{Algorithm Design}
+
+For a time function $T \left( n \right) $ if the assumptions of the RAM model cannot be confirmed, then the actual time
+function of an algorithm is:
+\[
+  a \times  T \left( n \right)  \leq T \left( n \right)  \leq b \times T \left( n \right)
+\]
+
+\noindent Where $a$ is the least time taken by any primitive operation and $b$ is the most time taken by any primitive operation.
+
+\section{Primitive Operations}
+
+\dfn{Primitive Operation}{
+  Any operation that takes a constant amount of time to execute. Usually primitive operations are implemented as machine
+  instructions.
+}
+
+\noindent Examples of primitive operations include:
+\begin{itemize}
+  \item Evaluating an expression
+  \item Variable Assignment
+  \item Array indexing
+  \item Comparisons
+  \item Arithmetic operations
+  \item Function calls
+  \item Returning from a function
+\end{itemize}
+
+\section{Growth Rate of Running Time}
+
+The growth rate of a function can also described informally as:
+\[
+  \lim_{n \to \infty} T \left( n \right) \approx O \left( n \right)
+\]
+
+\noindent For the formal definitions see \lstinline{2_Algorithm_Analysis.pdf} in the \lstinline{CompSci/Data_Structures} folder.
+
+\ex{}{
+  \qs{}{
+    Show that $T \left( n \right) = 5n + 3 $ is $O \left( n \right) $ using the big-$O$ notation
+  }
+
+  \sol{
+    Let $f \left( n \right) = 5n + 3 $ and $g \left( n \right) = n $. $O$ is defined as for a given function $ g\left( n
+      \right) $:
+    \[
+      O \left( g \left( n \right)  \right) = \left\{ f \left( n \right) : \exists c > 0, n_0 \in \mathbb{N} \text{ such
+        that } 0 \leq f \left( n \right) \leq c \cdot g \left( n \right) \, \forall n \geq n_0 \right\}
+    \]
+    $\therefore$
+    \[
+      5n + 3 \leq cn \, \forall n \geq n_0
+    \]
+    \begin{align*}
+      5n \leq cn                                                \\
+      c = 5, 6, 7, \ldots                                       \\
+      \text{ Since } 5n + 3 \leq 5n = F \text{ we chose } c = 6 \\
+      5 n + 3 \leq 6n                                           \\
+      3 \leq 6n - 5n                                            \\
+      3 \leq n                                                  \\
+      \therefore c = 6 \, n_0 = 3                               \\
+    \end{align*}
+    $\therefore$ $T \left( n \right) = 5n + 3 $ is $O \left( n \right) $.
+  }
+}
+
+\ex{}{
+  \qs{}{
+    Show that $T \left( n \right) = 5n^2 + 3n - 7 $ is not $O \left( n \right) $
+  }
+
+  \sol{
+    Let $f \left( n \right) = T \left( n \right)  $ and $g \left( n \right) = n $. From the definition of $O \left( n
+      \right) $:
+    \[
+      O \left( g \left( n \right)  \right) = f \left( n \right) \leq c g \left( n \right) \, \forall n \geq n_0
+    \]
+    \begin{align*}
+      5n^2 + 3n - 7 & \leq cn \\
+      5n^2 + 3n     & \leq cn \\
+      5n + 3        & \leq c  \\
+    \end{align*}
+    As $c$ is a constant but is dependent on $n$ there is no $c$ that satisfies the inequality \\
+    $\therefore$ $T \left( n \right) $ is not $O \left( n \right) $
+
+  }
+}
+
+\end{document}

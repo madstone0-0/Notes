@@ -40,7 +40,7 @@ notions of an algorithm. Namely:
 
 The GCD of two non-negative, non-zero integers $m$ and $n$, denoted $\text{gcd} \left( m, n \right) $ is defined as the
 largest integer that divides both $m$ and $n$ evenly, i.e., with a remainder of zero. Euclid of Alexandria, a Greek
-mathematician, outlined an algorithm for solving this problem in his book \textit{Elements}. Defined as follows:
+athematician, outlined an algorithm for solving this problem in his book \textit{Elements}. Defined as follows:
 \[
   \text{gcd} \left( m, n \right)  = \begin{cases}
     m                                      & \text{if } n = 0 \\
@@ -261,6 +261,41 @@ $\left\lfloor \sqrt{n} \right\rfloor$.
       \State low $ \gets \text{ mid } + 1$
       \Else
       \State high $ \gets \text{ mid } - 1$
+      \EndIf
+      \EndWhile
+    \end{algorithmic}
+  \end{algorithm}
+}
+
+\qs{}{
+  Design an algorithm to find all the common elements in two sorted lists of
+  numbers. For example, for the lists 2, 5, 5, 5 and 2, 2, 3, 5, 5, 7, the output
+  should be 2, 5, 5. What is the maximum number of comparisons your algorithm
+  makes if the lengths of the two given lists are $m$ and $n$, respectively?
+}
+
+\sol{
+  \begin{algorithm}[H]
+    \caption{Common $ \left( A, m, B, n \right) $}
+    \Comment{}\\
+    \Comment{Finds the common elements in two lists $A$ and $B$ keeping their multiplicities} \\
+    \Comment{Input: } \\
+    \Comment{Output: } \\
+    \begin{algorithmic}[1]
+      \State $i \gets 1$
+      \State $j \gets 1$
+      \State $k \gets 1$
+      \While{ $i \leq m \text{ and } j \leq n$}
+
+      \If{ $A_i == B_j$}
+      \State $L_k \gets A_i$ \Comment{ $L$ is the list of common elements}
+      \State $i \gets i + 1$
+      \State $j \gets j + 1$
+      \State $k \gets k + 1$
+      \ElsIf{ $A_j > B_i$}
+      \State $j \gets j + 1$
+      \Else
+      \State $i \gets i + 1$
       \EndIf
       \EndWhile
     \end{algorithmic}

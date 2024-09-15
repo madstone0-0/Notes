@@ -6,6 +6,7 @@ import shutil
 from sys import exit, argv
 from os import chdir
 from hashlib import md5
+from typing import Dict
 import datetime
 import json
 
@@ -248,34 +249,48 @@ def compileMany(dirs: list[str], force: bool, mtime: bool, notebooks: bool):
 
 if __name__ == "__main__":
     args = argv[1:]
+    yearDict: Dict[str, Dict[str, list[str]] | list[str]] = {
+        "Y1": {
+            "S2": [
+                "Calc/Y1/Semester_1",
+                "Calc/Y1/Semester_2",
+                "CompSci/Y1/Information_Systems",
+            ]
+        },
+        "Y2": {
+            "S1": [
+                "CompSci/Y2/S1/Discrete_Math",
+                "Stats",
+                "Liberal/Econs",
+                "Homework/Discrete",
+                "Homework/OOP",
+            ],
+            "S2": [
+                "CompSci/Y2/S2/Data_Structures",
+                "CompSci/Y2/S2/DB",
+                "CompSci/Y2/S2/Intro_AI",
+                "CompSci/Y2/S2/Linear_Algebra",
+                "Homework/Y2/S2/Linear_Algebra",
+            ],
+        },
+        "Y3": {
+            "S1": [
+                "CompSci/Algo_Design",
+                "CompSci/Web",
+                "CompSci/Hardware",
+                "CompSci/ICP",
+                "CompSci/Machine_Learning",
+            ]
+        },
+        "Personal": [
+            "CompSci/Personal/Intro_To_Machine_Learning",
+            "CompSci/Personal/Algorithms",
+        ],
+    }
+
     dirs = [
-        # Y1
-        # "Calc",
-        # "Calc/Semester_1",
-        # "FDE",
-        # Y1
-        # Y2 S2
-        # "CompSci/Personal/Intro_To_Machine_Learning",
-        # "CompSci/Personal/Algorithms",
-        # "CompSci/Discrete_Math",
-        # "CompSci/OOP",
-        # "Stats",
-        # "Econs",
-        # "Homework/Discrete",
-        # "Homework/OOP",
-        # Y2 S2
-        # Y2 S3
-        # "CompSci/Data_Structures",
-        # "CompSci/DB",
-        # "CompSci/Intro_AI",
-        # "CompSci/Linear_Algebra",
-        # "Homework/Linear_Algebra",
-        "CompSci/Algo_Design",
-        "CompSci/Web",
-        "CompSci/Hardware",
-        "CompSci/ICP",
-        "CompSci/Machine_Learning",
-        # Y2 S3
+        *yearDict["Y3"]["S1"],
+        *yearDict["Y2"]["S2"],
     ]
 
     force = False

@@ -57,4 +57,65 @@
   \item Feature extraction and application are done together by the neural network.
 \end{itemize}
 
+\section{Supervised Learning}
+
+\dfn{Supervised Learning}{
+  A subfield of Machine Learning where labelled datasets are used to train algorithms that classify data or predict
+  outcomes.
+}
+
+\subsection{Terminology}
+
+\dfn{Feature / Input Feature / Independent Variable / $X$}{
+  A feature is an individual measurable property or characteristic of a phenomenon being observed.
+}
+
+\dfn{Label / Dependent Variable / $Y$}{
+  The output / target variable that we are trying to predict.
+}
+
+\dfn{Classification}{
+  Involves predicting a categorical label.
+}
+
+\dfn{Regression}{
+  Involves predicting a quantitative continuous label.
+}
+
+\subsection{Supervised Learning Pipeline}
+
+\begin{enumerate}
+  \item Determine the type of training dataset.
+  \item Gather the labelled training data.
+  \item Split the training dataset into training dataset, test dataset.
+  \item Determine the most suitable algorithm for the model.
+  \item Execute the algorithm on the training dataset.
+  \item Evaluate the accuracy of the model by providing the test set.
+\end{enumerate}
+
+\dfn{Independent Identical Distribution  (IID)}{
+
+}
+
+\subsection{Math}
+For a model:
+\[
+  h \left( x \right)  = \theta_0 + \theta_1 x
+\]
+Where $h \left( x\right) $ is he hypothesis, The $\theta$ are our parameters, and $x$ is an input feature.
+\[
+  h \left( x \right) = \mbold{\theta} \cdot \mbold{x}
+\]
+Where $x_0 = 1$, where the number of elements in $\mbold{\theta}$ and $\mbold{x}$ is $n+1$ or
+\[
+  h \left( x \right) = \displaystyle\sum_{i = 0}^{n} \theta_i x_i
+\]
+Where $x_0 = 1$, For multiple input features.
+
+For the training set $ \left( X^i, Y^i\right) $, represents the $i$-th input and the  $i$-th label
+
+
+
+
+
 \end{document}

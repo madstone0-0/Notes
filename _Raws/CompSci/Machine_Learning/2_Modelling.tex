@@ -1,0 +1,393 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Linear Regression}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Linear Regression}
+
+\section{Introduction}
+
+\dfn{Linear Regression}{
+  A model that assumes a linear relationship between the input variables ( $\mbold{X}$) and the single output variable
+  ($\mbold{Y}$). This model  makes predictions by computing a weighted sum of the input variables, plus a constant
+  bias / intercept term ($\mbold{b}$). Represented as:
+  \[
+    \mbold{y} = b + w_1x_1 + w_2x_2 + \ldots + w_nx_n
+  \]
+  Or
+  \[
+    \mbold{y} = \theta_0 + \theta_1x_1 + \theta_2x_2 + \ldots + \theta_n x_n
+  \]
+  Where:
+  \begin{itemize}
+    \item $\mbold{y}$ is the predicted value.
+    \item $n$ is the number of features.
+    \item $x_i$ is the $i$-th feature value.
+    \item $\theta_j$ is the $j$-th model parameter including the bias term $\theta_0$ and feature weights
+          $\theta_1, \theta_2, \ldots, \theta_n$
+  \end{itemize}
+}
+
+In vectorized form, the linear regression model can be represented as:
+\[
+  \mbold{y} = h_{\theta} \left( \mbold{x} \right)  = \mbold{\theta} \cdot \mbold{x}
+\]
+
+Where:
+\begin{itemize}
+  \item $h_{\mbold{\theta}} \left( \mbold{x} \right) $ i the hypothesis function for some parameters $\mbold{\theta}$.
+  \item $\mbold{\theta}$ is the model's parameter vector, containing the bias term $\theta_0$ and the feature weights
+        $\theta_1, \theta_2, \ldots, \theta_n$.
+  \item $\mbold{x}$ is the input feature vector, containing $x_0$ to $x_n$, with $x_0$ always equal to 1.
+  \item $\mbold{\theta} \cdot \mbold{x}$ is the dot product of the vectors $\mbold{\theta}$ and $\mbold{x}$, which is of course equal to
+        $\theta_0 + \theta_1x_1 + \theta_2x_2 + \ldots + \theta_nx_n$.
+\end{itemize}
+\nt{
+  In machine learning vectors are often represented as column vectors, which is why $\mbold{x}$ is a column vector, and
+  the dot product $\mbold{\theta} \cdot \mbold{x}$, simplifies to $\mbold{\theta}^T \mbold{x}$, where $\mbold{\theta}^T$ is
+  the transpose of $\mbold{\theta}$.
+}
+
+\section{Loss / Cost Function}
+
+In training a linear regression model, we need to find the value of $\mbold{\theta}$ such that the model makes the best
+predictions on the training data. To do this, we need a way to measure how well (or poorly) the model is performing on
+the training data. We can do this by defining a \textbf{loss function} that measures the difference between the
+predicted value and the actual value. The goal is to minimize this difference.
+
+For linear regression, the most common loss function is the \textbf{Mean Squared Error (MSE)}:
+\[
+  \text{MSE} \left( \mbold{X}, h_{\mbold{\theta}} \right)  = \frac{1}{m} \displaystyle\sum_{i=1}^{m} \left(
+  \mbold{\theta}^T \mbold{x}^{i} - \mbold{y}^{i}  \right)^2
+\]
+Where $m$ is the number of instances in the dataset.
+
+\subsection{The Normal Equation}
+
+One way to find the value of $\mbold{\theta}$ that minimizes the cost function is to use the \textbf{Normal Equation}.
+This is a closed-form solution that gives the result directly as is derived from the derivation of the cost function.
+Given by:
+\[
+  \hat{\mbold{\theta}} = \left( \mbold{X}^T \mbold{X} \right)^{-1} \mbold{X}^T \mbold{y}
+\]
+Where:
+\begin{itemize}
+  \item $\hat{\mbold{\theta}}$ is the value of $\mbold{\theta}$ that minimizes the cost function.
+  \item $\mbold{y}$ is the vector of target values containing $\mbold{y}^{(1)}$ to $\mbold{y}^{(m)}$.
+\end{itemize}
+
+This method is computationally expensive when the number of features is large, as the complexity of inverting the matrix
+is $O(n^3)$. However, it is linear with regard to the number of instances in the training set, so it handles large training
+sets efficiently. Another less computationally expensive method is the \textbf{Gradient Descent} algorithm.
+
+\subsection{Derivation of the Normal Equation}
+
+The loss function:
+\[
+  \text{MSE} \left( X, h_{\mbold{\theta}} \right) = \frac{1}{m} \displaystyle\sum_{i=1}^{m} \left( \mbold{x}^{i}
+  \mbold{\theta} -
+  y^{i} \right)^2
+\]
+Where
+\begin{itemize}
+  \item $\mbold{x}^{i}$ is a vector of the $i$-th instance's feature values from the input matrix $X$, where each
+        instance is represented as row of the matrix. I.e. $\mbold{x}^{i}$ is of the form:
+        \[
+          \mbold{x}^{i} = \begin{bmatrix}
+            1       \\
+            x_1^{i} \\
+            x_2^{i} \\
+            \vdots  \\
+            x_n^{i}
+          \end{bmatrix}
+        \]
+        Where $n$ is the number of features.
+  \item $\mbold{\theta}$ is a vector of the model's parameters / weights for each input feature including the bias / intercept
+        $\theta_0$. I.e. $\mbold{\theta}$ is of the form:
+        \[
+          \mbold{\theta} = \begin{bmatrix}
+            \theta_0 \\
+            \theta_1 \\
+            \vdots   \\
+            \theta_n
+          \end{bmatrix}
+        \]
+        Where $n$ is the number of features. This results in the multiplication $\mbold{x}^{i} \theta$ being equivalent to
+        the dot product $\mbold{x}^{i} \cdot \theta$ and therefore a scalar value.
+  \item $y^{i}$ is the actual target value of the $i$-th instance and is a scalar value.
+  \item $m$ is the number of instances in the dataset.
+\end{itemize}
+Can be expressed in matrix-vector form as:
+\[
+  \text{MSE} \left( X, h_{\mbold{\theta}} \right) = \frac{1}{m} \left( X \mbold{\theta} - \mbold{y} \right)^{T} \left( X \mbold{\theta} - \mbold{y} \right)
+\]
+Where:
+\begin{itemize}
+  \item $X$ is a input matrix containing all the input features of all instances in the dataset. $X$ is of the form:
+        \[
+          X = \begin{bmatrix}
+            \left( \mbold{x}^{1} \right)^{T} \\
+            \left( \mbold{x}^{2} \right)^{T} \\
+            \vdots                           \\
+            \left( \mbold{x}^{m} \right)^{T} \\
+          \end{bmatrix}
+        \]
+        With each vector $\mbold{x}^{i}$ being an instance's input features previously defined as column vectors, hence
+        the transposition.
+  \item $\mbold{y}$ is a vector of the target values of all instances in the dataset. $\mbold{y}$ is of the form:
+        \[
+          \mbold{y} = \begin{bmatrix}
+            y^{1}  \\
+            y^{2}  \\
+            \vdots \\
+            y^{m}
+          \end{bmatrix}
+        \]
+  \item $\mbold{\theta}$ is still the model's parameter vector as previously defined.
+  \item $m$ is still the number of instances in the dataset.
+\end{itemize}
+
+This leads us to finding the partial derivative of this expression with respect to $\mbold{\theta}$ and minimizing it,
+equating it to zero, given below where $L \left( \mbold{\theta} \right) $ is the loss function:
+\begin{align*}
+  L \left( \mbold{\theta} \right) & = \frac{1}{m}\left( X \mbold{\theta} - \mbold{y} \right)^{T} \left( X \mbold{\theta} - \mbold{y}
+  \right)                                                                                                                                                                  \\
+  L \left( \mbold{\theta} \right) & =\frac{1}{m} \left( \left( X \mbold{\theta} \right)^{T}- \mbold{y}^T  \right) \left( X
+  \mbold{\theta} - \mbold{y} \right)                                                                                                                                       \\
+                                  & = \frac{1}{m} \left( \mbold{\theta}^{T} X^{T} - \mbold{y}^T  \right) \left( X
+  \mbold{\theta} - \mbold{y} \right)                                                                                                                                       \\
+                                  & = \frac{1}{m} \left( \mbold{\theta}^{T} X^{T} X \mbold{\theta} - \mbold{\theta}^{T} X^{T} \mbold{y} - \mbold{y}^{T} X \mbold{\theta} +
+  \mbold{y}^{T} \mbold{y} \right)                                                                                                                                          \\
+                                  & \text{Let } \mbold{a} = X^{T} \mbold{y} \text{ and } S = X^{T} X \text{ then}                                                          \\
+                                  & = \frac{1}{m} \left( \mbold{\theta}^{T} S \mbold{\theta} - \mbold{\theta}^{T} \mbold{a} - \mbold{a}
+  \mbold{\theta} + \mbold{y}^{T} \mbold{y}  \right)                                                                                                                        \\
+\end{align*}
+We then take the partial derivative of the resulting expression with respect to $\mbold{\theta}$:
+\begin{align*}
+  \nabla_{\mbold{\theta}} L \left( \mbold{\theta} \right) & =  \nabla_{\mbold{\theta}} \left( \frac{1}{m}\mbold{\theta}^{T} S \mbold{\theta} - \mbold{\theta}^{T} \mbold{a} - \mbold{a}
+  \mbold{\theta} + \mbold{y}^{T} \mbold{y}
+  \right)                                                                                                                                                                               \\
+                                                          & = \frac{1}{m} \left( 2S \mbold{\theta} - \mbold{a} - \mbold{a} + 0 \right)                                                  \\
+                                                          & = \frac{1}{m} \left( 2S \mbold{\theta} - 2 \mbold{a}  \right)                                                               \\
+\end{align*}
+Then equate the partial derivative to zero:
+\begin{align*}
+  \nabla_{\theta} L \left( \mbold{\theta} \right) & = \frac{1}{m} \left( 2S \mbold{\theta} - 2 \mbold{a}  \right) \\
+  0                                               & = 2S \mbold{\theta} - 2\mbold{a}                              \\
+  0                                               & = S \mbold{\theta} - \mbold{a}                                \\
+  S \mbold{\theta}                                & = \mbold{a}                                                   \\
+  \hat{\mbold{\theta}}                            & = S^{-1}\mbold{a}                                             \\
+  \hat{\mbold{\theta}}                            & = \left( X^{T} X \right)^{-1} X^{T} \mbold{y}                 \\
+\end{align*}
+
+
+\section{Gradient Descent}
+\dfn{Gradient Descent}{
+  A generic optimization algorithm capable of finding optimal solutions to a wide range of problems. The general idea of Gradient Descent is to tweak parameters iteratively in order to minimize a cost function.
+}
+
+\subsection{Batch Gradient Descent}
+
+To implement Gradient Descent, we need to compute the gradient of the cost function with regard to each model parameter
+$\theta_j$ or parameter vector $\mbold{\theta}$. In other words, we need to calculate how much the cost function will
+change if we change $\theta_j$ just a little bit. This is called a \textbf{partial derivative}. This is given by:
+\[
+  \mbold{\theta} \leftarrow \mbold{\theta} - \alpha \nabla_{\mbold{\theta}} L \left( \mbold{\theta} \right)
+\]
+Where:
+\begin{itemize}
+  \item $\alpha$ is the learning rate.
+  \item $\nabla_{\mbold{\theta}} L \left( \mbold{\theta} \right) $ is the gradient of the cost function with respect to the current
+        $\mbold{\theta}$ and is equivalent to the partial derivative of the cost function with respect to $\theta_j$.
+\end{itemize}
+The partial derivative of the cost function with respect to $\theta_j$ is found the same way as the normal equation but
+we do not equate it to zero. Given by:
+\[
+  \nabla_{\mbold{\theta}} L \left( \mbold{\theta} \right)  = \frac{2}{m} \left( X^{T} X \mbold{\theta} - X^{T} \mbold{y} \right)
+\]
+
+
+\subsection{Stochastic Gradient Descent}
+
+\dfn{Stochastic}{
+  Randomly determined; having a random probability distribution or pattern that may be analyzed statistically but may not be predicted precisely.
+}
+
+Batch gradient descent requires the whole training set to compute the gradients at each step, which makes it slow when
+the dataset is large. The Stochastic Gradient Descent algorithm is a variation of the gradient descent algorithm that
+updates the weights based on a randomly chosen training instance. So instead of the equation above, we have:
+\[
+  \mbold{\theta} \gets  \theta_i - \alpha \nabla_{\theta_i} L \left( \theta_i \right)
+\]
+
+This makes the algorithm much faster because it has little data to manipulate at each step. However, due to its
+stochastic nature, it is less stable than batch gradient descent often converging to a value close to the minimum but
+not the minimum itself.
+
+\chapter{Locally Weighted Regression (LOWESS)}
+
+\section{Introduction}
+
+\dfn{Locally Weighted Regression}{
+  A non-parametric regression algorithm that makes predictions by fitting several local linear models to a dataset. It
+  generally follows the same representation as linear regression, but the weight of each instance is determined by a
+  kernel / weight function that gives more weight to instances closer to the instance being predicted, usually using the
+  Gaussian kernel, given by:
+  \[
+    w = \exp \left( - \frac{\left( x^{(i)} - x \right)^2}{2\tau^2} \right)
+  \]
+}
+
+Instead of fitting a single model to the entire dataset, LOWESS fits a model to a subset of the data, where the size of
+the subset is determined by the bandwidth parameter $\tau$. The weight function $w$ gives more weight to instances
+closer to a specific point of interest usually the point being predicted, with the weight decreasing as the distance
+from the point of interest increases.
+
+The bandwidth parameters $\tau$, determines how many points are considered in the local model, with smaller values
+making the model more sensitive to local fluctuations in the data, while larger values make the model produce a smoother
+fit.
+
+\section{Kernel Functions}
+
+\dfn{Kernel Function}{
+  Determines how weights are assigned to the neighbouring points.
+}
+
+\subsection{Gaussian Kernel}
+
+Provides weights based on the normal distribution, giving more weight to points closer to the point of interest. Given by:
+\[
+  w = \exp \left( - \frac{\left( x^{(i)} - x \right)^2}{2\tau^2} \right)
+\]
+Where:
+\begin{itemize}
+  \item $w$ is the weight assigned to the $i$-th instance.
+  \item $x^{i}$ is the $i$-th instance's feature value.
+  \item  $x$ is the feature value of the point of interest.
+  \item $\tau$ is the bandwidth parameter which determines the size of the subset of the data that the model fits to.
+\end{itemize}
+
+\subsection{Tri-cube Kernel}
+
+Provides weights based on the tri-cube function, giving more weight to points closer to the point of interest. Given by:
+\[
+  w = \left( 1 - \left( \frac{\left| x^{(i)} - x \right|}{\tau} \right)^3 \right)^3
+\]
+Where:
+\begin{itemize}
+  \item $w$ is the weight assigned to the $i$-th instance.
+  \item $x^{i}$ is the $i$-th instance's feature value.
+  \item $x$ is the feature value of the point of interest.
+  \item  $\tau$ is the bandwidth parameter which determines the size of the subset of the data that the model fits to.
+\end{itemize}
+
+\section{Parametric vs Non-parametric Models}
+
+\dfn{Parametric Model}{
+  This model assumes a specific form for the underlying data distribution and have a fixed number of parameters, with
+  these parameters being learned from the training data.
+}
+
+\dfn{Non-parametric Model}{
+  This model does not assume a specific form for the underlying data distribution and can adapt their shape based on the
+  data, with the number of parameters increasing with the size of the training data.
+}
+
+\chapter{Logistic Regression}
+
+\section{Introduction}
+
+\dfn{Logistic Regression}{
+  A classification algorithm based on regression that estimates the probability that an instance belongs to a particular
+  class. Given by:
+  \[
+    \hat{p} = h_{\mbold{\theta}} \left( \mbold{\theta} \cdot \mbold{x} \right) = \sigma \left( \mbold{\theta}^{T} \times \mbold{x}  \right)
+  \]
+  Where $\sigma $ is the \textbf{sigmoid function} defined by:
+  \[
+    \sigma \left( z \right)  = \frac{1}{ 1 + \exp^{-z}}
+  \]
+  This function outputs a value between 0 and 1, which can be interpreted as a probability.
+}
+
+Once a Logistic regression model has estimated the probability $\hat{p}$ that an instance belongs to the positive class,
+it can make its prediction $\hat{y}$, based on a specified threshold value, usually 0.5. Given by:
+\[
+  \hat{y} = \begin{cases}
+    0 & \text{if } \hat{p} < 0.5    \\
+    1 & \text{if } \hat{p} \geq 0.5
+  \end{cases}
+\]
+
+\section{Training and Loss Function}
+
+In training a Logistic regression model, we need to find a parameter vector $\mbold{\theta}$ such that the model
+estimates high probabilities for positive instances $y = 1$ and low probabilities for negative instances $y = 0$. The
+loss function for a single instance can then be given by:
+\[
+  L \left( \mbold{\theta} \right)  = \begin{cases}
+    - \log \left( \hat{p} \right)     & \text{if } y = 1 \\
+    - \log \left( 1 - \hat{p} \right) & \text{if } y = 0
+  \end{cases}
+\]
+This loss function works as the value of $-\log t$ grows large when $t$ approaches 0, i.e. the model will be penalized
+if it estimates a probability close to 0 for a positive instance, and similarly for a probability close to 1 for a
+negative instance. On the other hand $- \log t$ is close to 0 when $t$ is close to 1, so the loss will be small if the
+model estimates a probability close to 0 for a negative instance or close to 1 for a positive instance. \\
+
+Applying this loss function over the entire training set, we want the average loss over all the training instances so we
+must find the sum of all the losses and divide by the number of instances. Given by:
+\[
+  L \left( \mbold{\theta} \right)  = -\frac{1}{m} \displaystyle\sum_{i=1}^{m} \left[ y^{i} \log \left( \hat{p}^{i}
+    \right) + \left( 1 - y^{i} \right) \log \left( 1 - \hat{p}^{i} \right)    \right]
+\]
+
+This in turn was derived from the log likelihood function, which is the product of the probabilities of the instances in the
+training set being classified correctly, the use of product due to the AND operation of the probabilities. Given by:
+\[
+  \log L \left( \mbold{\theta} \right) = \log \prod_{n=1}^{m}  \left( \frac{1}{\sqrt{2 \pi \mbold{\theta}}} \right)  \exp \left( - \frac{ \left( y^{i} -
+    x^{i}\mbold{\theta} \right)^2 }{2 \theta^2} \right)
+\]
+This was simplified to a summation due to $\log \left( a\times b \right) = \log a + \log b $ giving us:
+\[
+  \log L \left( \mbold{\theta} \right) = \displaystyle\sum_{i=1}^{m} \left( \log \frac{1}{\sqrt{2 \pi \mbold{\theta}}} +
+  \log \exp \left( \frac{ \left( y^{i} + x^{i} \mbold{\theta} \right) }{2 \mbold{\theta}^2} \right)  \right)
+\]
+This was further simplified using the properties of the logarithm function to give us:
+\[
+  \log L \left( \mbold{\theta} \right) = \displaystyle\sum_{i=1}^{m} \left( - \frac{1}{2} \log 2 \pi \mbold{\theta} - \frac{ \left( y^{i} + x^{i} \mbold{\theta} \right)^2 }{2 \mbold{\theta}^2}  \right)
+\]
+Using Bernoulli's distribution and applying the sigmoid function to the linear regression model, we can posit that the
+hypothesis function's output is the probability that the instance belongs to the positive class and now exists in the
+range $[0, 1]$. Given this we can simplify the likelihood of a positive instance and the inverse probability of a
+negative instance using the output of the hypothesis function, giving us:
+\[
+  \log L \left( \mbold{\theta} \right) = \displaystyle\sum_{i=1}^{m} \left( y^{i} \log \left( \hat{p}^{i} \right) + \left( 1 - y^{i} \right) \log \left( 1 - \hat{p}^{i} \right)  \right)
+\]
+By using the log loss we are implicitly making the assumption that the instances follow a Gaussian distribution around
+the mean of their respective classes. This is a common assumption in logistic regression and is the reason why the
+log loss is used as the loss function. \\
+
+There exists no closed-form equation to compute the value of $\mbold{\theta}$ that minimizes the cost function, but due
+to the convex nature of the cost function, we are guaranteed to find the global minimum using the Gradient Descent or
+any other optimization algorithm. The partial derivative of the cost function with respect to $\theta_j$ is given by:
+\[
+  \nabla_{\theta_j} L \left( \mbold{\theta} \right) = \frac{1}{m} \displaystyle\sum_{i=1}^{m} \left( \sigma \left( \mbold{\theta}^{T} \mbold{x}^{(i)} \right) - y^{(i)} \right) x_j^{(i)}
+\]
+
+\end{document}

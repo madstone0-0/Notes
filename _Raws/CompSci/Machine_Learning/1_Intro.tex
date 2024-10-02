@@ -1,0 +1,186 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Introduction}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\section{Machine Learning}
+
+\begin{itemize}
+  \item Performing a Task
+  \item With Experience
+  \item Improving Performance
+\end{itemize}
+
+\section{Artificial Intelligence (AI)}
+
+
+\dfn{Artificial Intelligence}{
+  The science and engineering of making intelligent machines, especially intelligent computer programs.
+}
+
+\section{Deep Learning vs Machine Learning}
+
+\subsection{Machine Learning}
+\begin{itemize}
+  \item Subfield of AI focused on algorithms that learn from data.
+  \item Works well with structured data.
+  \item Simpler models.
+  \item Requires manual feature extraction and selection.
+  \item Involves predictive modelling, clustering, and classification.
+  \item Feature extraction and application are done separately.
+\end{itemize}
+
+\subsection{Deep Learning}
+\begin{itemize}
+  \item Subfield of ML using neural networks with many layers.
+  \item  Works well with large amounts of unstructured data.
+  \item  Complex models with multiple layers.
+  \item Automatically extracts features from raw data.
+  \item Involves image and speech recognition, natural language processing, and recommendation systems.
+  \item Feature extraction and application are done together by the neural network.
+\end{itemize}
+
+\section{Supervised Learning}
+
+\dfn{Supervised Learning}{
+  A subfield of Machine Learning where labelled datasets are used to train algorithms that classify data or predict
+  outcomes.
+}
+
+\subsection{Terminology}
+
+\dfn{Feature / Input Feature / Independent Variable / $X$}{
+  A feature is an individual measurable property or characteristic of a phenomenon being observed.
+}
+
+\dfn{Label / Dependent Variable / $Y$}{
+  The output / target variable that we are trying to predict.
+}
+
+\dfn{Classification}{
+  Involves predicting a categorical label.
+}
+
+\dfn{Regression}{
+  Involves predicting a quantitative continuous label.
+}
+
+\subsection{Supervised Learning Pipeline}
+
+\begin{enumerate}
+  \item Determine the type of training dataset.
+  \item Gather the labelled training data.
+  \item Split the training dataset into training dataset, test dataset.
+  \item Determine the most suitable algorithm for the model.
+  \item Execute the algorithm on the training dataset.
+  \item Evaluate the accuracy of the model by providing the test set.
+\end{enumerate}
+
+\dfn{Independent Identical Distribution  (IID)}{
+  A set of random variables is independent and identically distributed if each random variable has the same probability distribution as the others and all are mutually independent.
+}
+
+\subsection{Math}
+For a model:
+\[
+  h \left( x \right)  = \theta_0 + \theta_1 x
+\]
+Where $h \left( x\right) $ is he hypothesis, The $\theta$ are our parameters, and $x$ is an input feature.
+\[
+  h \left( x \right) = \mbold{\theta} \cdot \mbold{x}
+\]
+Where $x_0 = 1$, where the number of elements in the parameter vector $\mbold{\theta}$ and input feature vector $\mbold{x}$ is $n+1$ or
+\[
+  h \left( x \right) = \displaystyle\sum_{i = 0}^{n} \theta_i x_i
+\]
+Where $x_0 = 1$, For multiple input features.
+
+For the training set $ \left( X^i, Y^i\right) $, represents the $i$-th input and the  $i$-th label.
+
+\dfn{Gradient Descent}{
+  A first-order iterative optimization algorithm for finding the minimum of a function.
+}
+
+\nparagraph{Batch Gradient Descent}
+
+$\theta$ is chosen such that $h \left( x \right) \approx y $ for a training example $ \left( x, y\right) $. This means
+minimizing some cost/loss function $L \left( \theta \right) $. I.e
+
+\begin{align*}
+  h \left( x \right)                      & = \displaystyle\sum_{i = 0}^{n} \theta_i x_i                                                          \\
+  h_{\theta} \left( x \right)             & = h \left( x \right)                                                                                  \\
+  \text{Let } L \left( \theta \right)     & = \frac{1}{m} \displaystyle\sum_{i = 1}^{m} \left( h_{\theta} \left( x^i \right)
+  - y^i \right)^2                                                                                                                                 \\
+  L \left( \theta \right)                 & = \frac{1}{m} \left( h_{\theta} \left( x \right) - \mbold{y}  \right)^{T} \left( h_{\theta} \left(
+  x\right) - \mbold{y}  \right)                                                                                                                   \\
+  \text{Let } h_{\theta} \left( x \right) & = \mbold{x} \mbold{\theta}                                                                            \\
+  L \left( \theta \right)                 & = \frac{1}{m} \left( \mbold{x} \mbold{\theta} - \mbold{y} \right)^{T} \left( \mbold{x} \mbold{\theta}
+  - \mbold{y}\right)                                                                                                                              \\
+  \text{Then }
+  \nabla L \left( \theta \right)  = 0
+\end{align*}
+
+Or iteratively:
+
+\begin{align*}
+  h_{\theta} \left( x \right)  = \displaystyle\sum_{i=0}^{m} \theta_i x_i                               \\
+  \theta_i = \theta_i - \alpha \frac{\partial L \left( \mbold{\theta} \right)}{\partial \mbold{\theta}} \\
+  \text{Until } \frac{\partial L \left( \mbold{\theta} \right)}{\partial \mbold{\theta}} = 0
+\end{align*}
+Where $\alpha$ is the learning rate / step size.
+
+The partial derivative $\frac{\partial L \left( \theta \right) }{\partial \theta}$ is  found;
+\begin{align*}
+  \frac{\partial L \left( \mbold{\theta} \right) }{\partial \mbold{\theta}} & = \frac{\partial}{\partial \mbold{\theta}} \left(   \frac{1}{2m}
+  \displaystyle\sum_{i=0}^{m} \left( h_{\theta} \left( x^i \right) - y^i   \right)^2 \right)                                                                                                                  \\
+                                                                            & = \frac{\partial}{\partial \mbold{\theta}} \left(   \frac{1}{2m} \left( h_{\theta} \left( x^i \right) - y^i   \right)^2 \right) \\ \\
+                                                                            & = 2 \times \frac{1}{2m} \times  \frac{\partial}{\partial
+  \theta}\left( h_{\theta} \left( x \right) - y  \right) \left( h_{\theta} \left( x \right) - y  \right)                                                                                                      \\
+                                                                            & = \frac{1}{m} \times \frac{\partial}{\partial \theta}
+  \left( \mbold{\theta} \mbold{x} - \mbold{y} \right) \left( \mbold{\theta} \mbold{x} - \mbold{y} \right)                                                                                                     \\
+                                                                            & \text{As $\mbold{\theta}$ is a vector of constants its
+  partial derivative in each case is 1}                                                                                                                                                                       \\
+                                                                            & = \frac{1}{m} \left( \mbold{x} \right)  \left(
+  \mbold{\theta} \mbold{x} - \mbold{y} \right)                                                                                                                                                                \\
+                                                                            & = \frac{1}{m} \left( \mbold{\theta} \mbold{x} - \mbold{y}
+  \right) \mbold{x}                                                                                                                                                                                           \\
+  \frac{\partial L \left( \theta \right) }{\partial \theta}                 & = \frac{1}{m} \left( \mbold{\theta} \mbold{x} - \mbold{y}
+  \right) \mbold{x}                                                                                                                                                                                           \\ \\
+\end{align*}
+
+This method is called the batch gradient descent algorithm.
+
+
+\nparagraph{Stochastic Gradient Descent}
+
+\dfn{Stochastic}{
+  Randomly determined; having a random probability distribution or pattern that may be analyzed statistically but may not be predicted precisely.
+}
+
+The Stochastic Gradient Descent algorithm is a variation of the gradient descent algorithm that updates the weights
+after each training example. So instead of the equation above, we have:
+\[
+  \theta_i = \theta_i - \alpha \left( h_{\theta} \left( x^i \right) - y^i \right) x^i
+\]
+Where $i$ is the $i$-th training example. In this method we calculate the gradient of the loss function at that
+specific parameter-training set and update the parameter accordingly.
+
+
+\end{document}

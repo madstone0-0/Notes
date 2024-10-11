@@ -1,0 +1,221 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Brute Force and Exhaustive Search}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\section{Brute Force}
+
+\dfn{Brute Force}{
+  A straightforward problem-solving approach, directly based on the problem statement and definitions  of the concepts
+  involved. This technique involves enumerating all possible candidates for the solution and identifying the one that
+  completely solves the problem statement.
+}
+
+An example of a brute force problem the exponentiation problem: Compute $a^n$ for a nonzero integer $a$ and a
+nonnegative integer $n$. By the definition of exponentiation:
+\[
+  a^n = a \times \ldots \times a \quad \text{($n$ times)}
+\]
+This suggests computing $a^n$ by multiplying $a$ by itself $n$ times. This is a brute force solution to the problem.
+The brute force approach is useful as it applies to a large class of problems and can be used as a starting point for
+more sophisticated algorithms. Also the expense of designing a more efficient algorithm may not be justified if the
+problem instances are small or infrequent and a brute force solution can solve the problem in a reasonable amount of time.
+
+\chapter{Selection Sort and Bubble Sort}
+
+\section{Selection Sort}
+
+\dfn{Selection Sort}{
+  Start by scanning the entire list to identify the smallest element and exchange it with the first, putting the
+  smallest element in its correct position in the sorted list. Then scan the remaining $n-1$ elements to identify the
+  next smallest element and exchange it with the second element, putting the second smallest element in its correct
+  position. Repeat until the entire list is sorted. Generally on the $i$th pass through the list, numbered from $0$ to
+  $n- 2$, the algorithm searches for the smallest item among the last $n-i$ items and swaps it with $A_i$, i.e.:
+  \[
+    A_0 \leq A_1 \leq \ldots \leq A_{i-1}  \mid A_i, \ldots, A_{\text{min}}, \ldots A_{n-1}
+  \]
+  Which results in the list being sorted after $n-1$ passes.
+
+  The brute force approach in this is the continuous scanning and swapping of elements until the list is sorted.
+}
+
+\begin{algorithm}[H]
+  \caption{SelectionSort $ \left( A, n \right) $}
+  \Comment{}\\
+  \Comment{Sorts a given array by selection sort} \\
+  \Comment{Input: An array $A \left[ 0\ldots n-1 \right] $ of orderable elements  } \\
+  \Comment{Output: An array $A \left[ 0\ldots n-1 \right] $ sorted in nondecreasing order } \\
+  \begin{algorithmic}[1] \\
+    \For{ $i \gets 0$ to $n - 2$}
+    \State min $<- i$
+    \For{ $j \gets i + 1$ to $n - 1$}
+    \If{ $A_j < A_{\text{min}}$}
+    \State min $ \gets j$
+    \EndIf
+    \EndFor
+    \State swap $A_i$ and $A_{\text{min}}$
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
+Analysed in terms of the size of the input list $n$, we have:
+\begin{align*}
+  C \left( n \right) & = \displaystyle\sum_{i=0}^{n-2} \displaystyle\sum_{i+1}^{n - 1} 2               \\
+                     & = \displaystyle\sum_{i=0}^{n-2} 2 \left( n-1 \right) - \left( i + 1 \right) + 1 \\
+                     & = \displaystyle\sum_{i=0}^{n-2} 2 \left( n - i - 1  \right)                     \\
+                     & = 2\displaystyle\sum_{i=0}^{n-2} \left( n - 1 - i \right)                       \\
+                     & = 2  \frac{ \left( n - 1 \right) \left( n - 2 \right)  }{2}                     \\
+                     & = n^2 -2n -n + 2                                                                \\
+                     & = n^2 - 3n + 2                                                                  \\
+\end{align*}
+$\therefore \, O \left( n^2 \right) $ and $ \Theta \left( n^2 \right) $
+
+\chapter{Depth-First Search and Breadth-First Search}
+
+\section{Depth-First Search}
+
+\dfn{Depth-First Search}{
+  Starts at a given vertex, marking it as visited then explores each adjacent vertex in turn. If a tie is encountered, it
+  can be broken arbitrarily. This process continues until a dead end - a vertex with no adjacent unvisited vertices - is
+  reached. \\
+  At this point the search backtracks to the most recently visited vertex with unexplored neighbours and
+  continues until it backtracks to the starting vertex. At this point it has visited all the vertices in the same
+  connected component as the starting vertex and if any unvisited vertices remain, the search is restarted at one of them.
+}
+
+A depth-first search can be implemented using a stack to trace the operation of the search. We push a node onto the
+stack when it is reached for the first time and pop off a node when it becomes a dead end. \\
+A depth-first search is often accompanied by a \textbf{depth-first search forest}. The starting node of the traversal
+serves as the root of the first tree in such a forest. Whenever a new unvisited node is reached for the first time it is
+attached as a child to the node from which it was reached .Such an edge is called a \textbf{tree edge}, because the set
+of all such edges forms a forest.\\
+DFS is implemented recursilvely as follows:
+\begin{algorithm}[H]
+  \caption{Depth-First Search $ \left( G \right) $}
+  \Comment{}\\
+  \Comment{Implements a depth-first traversal of a given graph} \\
+  \Comment{Input: $G = \left<V, E \right>$} \\
+  \Comment{Output: Graph $G$ with its nodes marked with consecuitve integers in the order they are first encountered by
+    the DFS traversal} \\
+  \begin{algorithmic}[1]
+    \State count $ \gets 0$
+    \For{ each vertex $v$ in $V$}
+    \If{ $v$ is marked with $0$}
+    \State \Call{dfs}{ $v$}
+    \EndIf
+    \EndFor\\
+
+    \Function{dfs}{ $v$}
+    \For{ each adjacent vertex $w$ to $v$}
+    \State count $ \gets \text{count} + 1$
+    \State mark $v$ with count
+    \If{ $w$ is marked with $0$}
+    \State \Call{dfs}{ $w$}
+    \EndIf
+    \EndFor
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+
+And using a stack:
+\begin{algorithm}[H]
+  \caption{Depth-First Search $ \left( G \right) $}
+  \Comment{}\\
+  \Comment{Implements a depth-first traversal of a given graph} \\
+  \Comment{Input: $G = \left<V, E \right>$} \\
+  \Comment{Output: Graph $G$ with its nodes marked with consecuitve integers in the order they are first encountered by
+    the DFS traversal} \\
+  \begin{algorithmic}[1]
+    \State mark each vertex in $V$ with $0$ as a mark of being "unvisited"
+    \State count $ \gets 0$
+    \State  $S \gets $ empty stack
+    \For{ each vertex $v$ in $V$}
+    \If{ $v$ is marked with $0$}
+    \State $S \gets $ push $v$
+    \While{ $S$ is not empty }
+    \State $w \gets $ pop from $S$
+    \If{ $w$ is marked with $0$}
+    \State count $ \gets \text{count} + 1$
+    \State mark $w$ with count
+    \For{ each adjacent vertex $u$ to $w$}
+    \State $S \gets $ push $u$
+    \EndFor
+    \EndIf
+    \EndWhile
+    \EndIf
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
+The time complexity of DFS depends on the way the graph is represented. If the graph is represented as an adjacency
+matrix, the time complexity is $O \left( \left| V \right|^2 \right) $, where $V$ is the set of vertices in the graph, as
+the algorithm must visit each possible edge in the graph to determine whether it is adjacent to the current vertex
+. If
+the graph is represented as an adjacency list, the time complexity is $O \left(  \mid V  \mid +  \mid E  \mid   \right)
+$, as the algorithm must visit each vertex and each edge in the graph.
+
+\section{Breadth-First Search}
+
+\dfn{Breadth-First Search}{
+  Starts at a given vertex, marking it as visited then explores each vertex adjacent to it, then all unvisited vertices
+  two edges apart from the starting vertex, then three edges apart and so on, until all the vertices in in the same
+  connected component as the starting vertex have been visited. \\
+  If there remains unvisited vertices, the search is restarted at one of them.
+}
+
+A Breadth-First search is usually implemented using a queue to trace the operation of the search. The queue is
+intialised with traversal's staring node and on each iteration the algorithm identifies all the adjacent nodes to the
+node at the front of the queue, marks them as visited and enqueues them. \\
+At this point the node at the front of the queue is dequeued and the process is repeated until the queue is empty. \\
+Similar to the depth-first search, a breadth-first search is often accompanied by a \textbf{breadth-first search tree}.
+The traversal's stating node becomes the root of the first tree in the forest and whenever a new unvisited node is
+reached for the first time, the node is attached as a child to the node it is being reached from, with an edge called
+the \textbf{tree edge}. If an edge leading to a previously visited node is encountered, the edge is called a \textbf{cross
+  edge}. \\
+Implemented:
+\begin{algorithm}[H]
+  \caption{Breadth-First Search $ \left( G \right) $}
+  \Comment{}\\
+  \Comment{Implements a breadth-first search traversal of a given graph} \\
+  \Comment{Input: Graph $G \left<V, E \right>$} \\
+  \Comment{Output: Graph $G$ with it's vertices marked with consecutive integers in the order they are visited by the
+    BFS traversal} \\
+  \begin{algorithmic}[1]
+    \State mark each vertex in $V$ with $0$ as a mark of being "unvisited"
+    \State count $ \gets 0$
+    \For{ each $v$ in $V$}
+    \If{ $v$ is marked with $0$}
+    \State  $Q \gets $ enqueue $v$ \Comment{Where $Q$ is a queue}
+    \While{ $Q$ is not empty}
+    \State count $ \gets \text{count} + 1$
+    \State $w \gets $ dequeue node from the front of $Q$
+    \State mark $w$ with count
+    \For{ each vertex $u$ in $V$ adjacent to $w$}
+    \If{ $u$ is marked with 0}
+    \State $Q \gets $ enqueue $u$
+    \EndIf
+    \EndFor
+    \EndWhile
+    \EndIf
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
+\end{document}

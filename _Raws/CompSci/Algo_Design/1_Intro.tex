@@ -302,6 +302,125 @@ $\left\lfloor \sqrt{n} \right\rfloor$.
   \end{algorithm}
 }
 
+\section{Fundamentals of Algorithmic Problem Solving}
+
+An algorithm is not a solution to a problem itself, instead it is a step by step procedure for arriving at a solution to
+a problem. In designing an algorithm for a problem one usually goes through the following steps:
+
+\subsection{Understanding The Problem}
+
+\begin{itemize}
+  \item What is the problem?
+  \item What are the inputs to the problem?
+  \item  What does an answer to the problem look like?
+  \item What are special cases to consider?
+  \item What are some examples of the problem with their solutions?
+  \item What are the constraints on the problem?
+  \item What are the requirements of the problem?
+\end{itemize}
+
+
+An input to a problem specifies an instance of the problem an algorithm solves, therefore it is important to define
+exactly the set of instances an algorithm is expected to solve. Failing to this can lead to an algorithm failing on
+valid inputs. This requires specifically defining the input space of the problem. For example in the problem of finding
+the greatest common divisor of two numbers, the input space is the set of all pairs of non-negative integers.
+
+\subsection{Ascertain the Capabilities of the Computational Device}
+
+The computational capabilities of an algorithm's target device determines the computational means available to the
+algorithm, i.e. exact or approximate solving. Most algorithms designed today are intended to operate on a computer
+using a variant of the von Neumann architecture, i.e. the Random Access Machine (RAM) model. This model assumes that
+the computer has a memory that can store data and instructions, a processor that can execute instructions, and a control
+unit that can interpret and execute instructions.
+
+A central assumption of algorithm design is that instructions are executed one after another, one operation after
+another, sequentially, in what is known as \textbf{sequential algorithm design}. However, with the proliferation of parallel
+processing, computers can now execute instructions concurrently. .This has lead to algorithm design taking advantage of
+this leading to the development of \textbf{parallel algorithms}.
+
+\subsection{Choosing between Exact and Approximate Problem Solving}
+
+\dfn{Exact Algorithm}{
+  An algorithm that solves a problem exactly, i.e. it returns the exact solution to the problem.
+}
+
+\dfn{Approximation Algorithm}{
+  An algorithm that solves a problem approximately, i.e. it returns an approximate solution to the problem.
+}
+
+The next thing to consider is whether the problem can be feasibly solved exactly or if an approximate solution is more
+feasible. The question of feasibility is apparent when considering the time and space complexity of the problem, for
+example in computing square roots, solving non-linear equation, and evaluating definite integrals.
+
+\subsection{Algorithm Design Techniques}
+
+\dfn{Algorithm Design Technique}{
+  A general approach to solving problems algorithmically that is applicable to a variety of problems from different
+  areas of computing.
+}
+
+Some common algorithm design techniques include:
+\begin{itemize}
+  \item Brute Force
+  \item Exhaustive Search
+  \item Decrease and Conquer
+  \item Divide and Conquer
+  \item Transform and Conquer
+\end{itemize}
+
+\subsection{Designing an Algorithm and Data Structures}
+
+When designing an algorithm it is important to consider the data structures that will be used to store the data that the algorithm
+will operate on. The choice of data structure can have a significant impact on the time and space complexity of the
+algorithm as the data structure determines how the data is stored and accessed.
+
+\subsection{Methods of Specifying an Algorithm}
+
+\begin{itemize}
+  \item Natural Language
+  \item Pseudocode
+  \item Flowcharts
+  \item Programming Languages
+\end{itemize}
+
+\subsection{Proving an Algorithm's Correctness}
+\dfn{Correctness}{
+  Proving an algorithm always produces the correct output for any legitimate input in a finite amount of time.
+}
+
+In order to prove an algorithm's correctness, one must prove that the algorithm terminates and that it produces the
+correct output for any legitimate input. This can be done using a variety of techniques, including:
+\begin{itemize}
+  \item Mathematical Induction - As an algorithm's iterations provide a sequence of steps needed for such proofs.
+  \item Loop Invariants - A condition that is true before and after each iteration of a loop.
+  \item Precondition and Postcondition - Conditions that must be true before and after the algorithm is executed.
+  \item Invariants - Conditions that are true at all times during the execution of the algorithm.
+  \item Assertions - Statements that are true at specific points in the algorithm's execution.
+\end{itemize}
+
+The notion of correctness for approximate algorithms is less straightforward. Instead for an approximate algorithm, one
+must show the error of the algorithm does not exceed a predefined limit.
+
+\subsection{Exercises}
+
+\qs{}{
+  A peasant finds himself on a riverbank with a wolf, a goat,
+  and a head of cabbage. He needs to transport all three to the other side of the
+  river in his boat. However, the boat has room for only the peasant himself
+  and one other item (either the wolf, the goat, or the cabbage). In his absence,
+  the wolf would eat the goat, and the goat would eat the cabbage. Solve this
+  problem for the peasant or prove it has no solution. (Note: The peasant is a
+  vegetarian but does not like cabbage and hence can eat neither the goat nor
+  the cabbage to help him solve the problem. And it goes without saying that
+  the wolf is a protected species.)
+}
+
+\sol{
+  The peasant can first bring the goat to the other side of the bank. Then return for the wolf and head to the other
+  side of the bank. As the wolf and goat cannot be together alone the peasant can then leave the wolf and take the goat
+  back with him to the other side. Then the peasant drops off the goat but picks up the cabbage and moves it over to the
+  wolf. Then he finally comes back for the goat.
+}
 
 \chapter{Algorithm Design}
 
@@ -331,8 +450,9 @@ function of an algorithm is:
   \item Returning from a function
 \end{itemize}
 
-\section{Growth Rate of Running Time}
+\section{Growth Rate of Running Time  / Asymptotic Order of Growth}
 
+\subsection{ Big-$O$}
 The growth rate of a function can also described informally as:
 \[
   \lim_{n \to \infty} T \left( n \right) \approx O \left( n \right)
@@ -391,4 +511,85 @@ The growth rate of a function can also described informally as:
   }
 }
 
+
+\subsection{ Big-$\Omega$}
+
+\ex{}{
+  \qs{}{
+    Show that $f \left( n \right) = 3n^2 + 2n + 1 $ is $\Omega \left( n^2 \right) $
+  }
+
+  \sol{
+    Let $g \left( n \right) = n^2 $. From the definition of $\Omega \left( n^2 \right) $:
+    \[
+      \Omega \left( g \left( n \right)  \right) = c g \left( n \right)  \leq f \left( n \right)\, , \forall n \geq n_0
+      \wedge n > 0
+    \]
+    \begin{align*}
+      c g \left( n \right) & \leq f \left( n \right)              \\
+      c n^2                & \leq 3n^2 + 2n + 1                   \\
+      cn                   & \leq 3n + 2 + \frac{1}{n}            \\
+      c                    & \leq 3 + \frac{2}{n} + \frac{1}{n^2} \\
+      \text{Let } n = 1                                           \\
+      c                    & \leq 6                               \\
+    \end{align*}
+    Or
+    \begin{align*}
+      c g \left( n \right) & \leq f \left( n \right)                                          \\
+      c n^2                & \leq 3n^2 + 2n + 1                                               \\
+                           & \text{Make everything on the right side have a variable of } n^2 \\
+      c n^2                & \leq 3n^2 + 2n^2 + n^2                                           \\
+      c n^2                & \leq 6n^2                                                        \\
+      c                    & \leq 6                                                           \\
+    \end{align*}
+  }
+}
+
+\subsection{Big-$\Theta$}
+
+\ex{}{
+  \qs{}{
+    Shot that $4n^2 + 3n + 2$ is $\Theta \left( n^2 \right) $
+  }
+
+  \sol{
+    Let $f \left( n \right) = 4n^2 + 3n + 2 $ and $g \left( n \right) = n^2 $. From the definition of $\Theta$:
+    \[
+      \Theta \left( n \right)  = c_1 g \left( n \right)  \leq f \left( n \right)  \leq c_2 g \left( n \right)
+    \]
+    \begin{align*}
+      c_1 n^2 & \leq 4n^2 + 3n + 7 \leq c_2 n^2 \\
+      c_1 n^2 & \leq 4n^2 + 3n + 7              \\
+      c_2 n^2 & \geq 4 n^2 + 3n + 7             \\
+      \\
+      c_1 n^2 & \leq 4n^2 + 3n^2 + 7n^2         \\
+      c_1 \leq 14                               \\
+      \\
+      c_2 n^2 & \geq 4n^2 + 3n^2 + 7n^2         \\
+      c_2     & \geq 14                         \\
+      c_1     & = 14\, , c_2 = 14               \\
+      \text{For }n_0 = 1                        \\
+    \end{align*}
+  }
+}
+
+\subsection{Establishing order of growth using limits}
+
+Using the limit:
+\[
+  \lim_{n \to \infty}  \frac{T \left( n \right) }{g \left( n \right) }
+\]
+If the function approaches:
+\begin{itemize}
+  \item 0 - Order of growth of $T \left( n \right) < $ order of growth $ g \left( n \right) $ - $O$
+  \item  $k > 0$ - Order of growth of $T \left(n  \right) =$ Order of growth of $g \left( n \right) $ - $\Theta$
+  \item $\infty$ - Order of growth of $T \left( n \right) $ > $g \left( n \right) $ - $\Omega$
+\end{itemize}
+
+
+\nt{
+  Trial and error also works
+}
+
 \end{document}
+

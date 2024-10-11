@@ -1,0 +1,215 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Decrease-and-Conquer}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+The decrease and conquer technique, exploits the relationship between a solution to a given instance of a problem and a
+solution to its smaller instance. Once such a relationship is established, it can be exploited either top down or bottom
+up. The top down approach naturally leads to a recursive implementation, also known as divide and conquer. The bottom up
+variation is usually implemented iteratively, starting with the smallest solvable instance of a problem and building up
+to the whole problem. This is also known as the \textbf{incremental approach}. There are three major variants of
+decrease and conquer:
+\begin{itemize}
+  \item Decrease by a constant.
+  \item Decrease by a constant factor.
+  \item Variable size decrease.
+\end{itemize}
+
+\section{Decrease by a constant}
+
+The size of the problem instance is reduced by the same constant on each iteration of the algorithm, usually by one.
+Taking the example of the exponentiation problem, $a^{n}$ where $a \neq 0$ and $n \in \mathbb{N}$, the relationship
+between a solution to a reduced problem instance, $n - 1$ and $n$ is obtained easily:
+\[
+  a^{n} = a \times a^{n-1}
+\]
+This allows the function $f \left( n \right) = a^{n} $ to be computed top down, recursively, by:
+\[
+  f \left( n \right) = \begin{cases}
+    1                               & \text{if } n = 0 \\
+    f \left( n -1  \right) \times a & \text{if } n > 0
+  \end{cases}
+\]
+Or bottom up, iteratively, by:
+\[
+  f \left( n \right) = \prod_{i = 1}^{n} a
+\]
+
+\section{Decrease by a constant factor}
+
+The size of a problem instance is reduced  by the same constant factor on each iteration of the algorithm, usually by a
+factor of two. Using the exponentiation problem again we can observe that the relationship between a solution to the
+reduced problem instance, $n/2$ and $n$ is:
+\[
+  a^{n} = \left( a ^{\frac{n}{2}} \right)^{2}
+\]
+But considering only integer values of $n$, this does not hold for odd values of $n$. If $n$ is odd, we have to compute
+for $n-1$ instead, i.e.
+\[
+  a^{n} = \left( a^{\frac{n-1}{2}} \right)\times a
+\]
+This allows the function $f \left( n \right) = a^{n} $ to be computed top down, recursively, by:
+\[
+  a^{n} = \begin{cases}
+    \left( a^{\frac{n}{2}} \right) ^2         & \text{if $n$ is even and positive} \\
+    \left( a^{\frac{n-1}{2}} \right) \times a & \text{if $n$ is odd}               \\
+    1                                         & \text{if $n = 0$}
+  \end{cases}
+\]
+Or bottom up, iteratively, by:
+\[
+  a^{n} = \begin{cases}
+    \prod_{i = 1}^{n/2} a \times a     & \text{if $n$ is even and positive} \\
+    \prod_{i = 1}^{(n-1)/2} a \times a & \text{if $n$ is odd}               \\
+    1                                  & \text{if $n = 0$}
+  \end{cases}
+\]
+In both cases the number of operations done each step reduces by a factor of two, making the algorithm run in $\Theta
+  \left( \log n \right) $ time.
+
+\section{Variable size decrease}
+
+The size of the problem instance is reduced by a variable amount on each iteration of the algorithm. An example of this
+is Euclid's algorithm for finding the greatest common divisor of two numbers:
+\[
+  \gcd \left( m, n \right)  = \gcd \left( n, m\mod n \right)
+\]
+In this algorithm the reduction in the size of the problem instance depends on the size of the numbers $m$ and $n$
+
+\chapter{Insertion Sort}
+
+\dfn{Insertion Sort}{
+  For an array of $n$ elements $A \left[ 0\ldots n-1 \right] $, we assume that the smaller problem instance of $A \left[
+      0\ldots n-2\right] $ has already been solved, giving us a sorted array of size $n - 1$, $A_0 \leq \ldots \leq
+    A_{n-2}$. Taking advantage of this, we just have $A_{n-1}$ left unsorted. We then scan the sorted subarray from the
+  right to find the correct position for $A_{n-1}$ and insert it there. This is repeated for each increasing subarray
+  until the entire array is sorted, i.e.:
+  \[
+    A_0 \leq \ldots \leq A_{n-i} \mid A_i,\, A_{n-1}
+  \]
+  Where $i$ is the number of passes through the array so far.
+  Although presented as a top down approach, it is more efficiently implemented as a bottom up approach, i.e.
+  iteratively, starting with $A_1$, and building up to $A_{n-1}$.
+}
+
+\begin{algorithm}[H]
+  \caption{InsertionSort $ \left( A, n\right) $}
+  \Comment{}\\
+  \Comment{Sorts a given array by insertion sort} \\
+  \Comment{Input: An array $A$ of $n$ orderable elements} \\
+  \Comment{Output: Array $A$ sorted in nondecreasing order} \\
+  \begin{algorithmic}[1]
+    \For{ $i \gets 1$ to $n - 1$}
+    \State $v \gets A_i$
+    \State $j \gets i - 1$
+    \While{ $j \geq 0$ and $A_j > v$}
+    \State $A_{j+1} \gets A_j$
+    \State $j \gets j - 1$
+    \EndWhile
+    \State $A_{j + 1} \gets v$
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+
+The basic operation of this algorithm is the comparison $A_j > v$, and the number of comparisons done depends on the
+nature of the input, i.e. if the array is already sorted the number of comparisons is $n-1$ as the while loop will never
+iterate but the outer for loop will always run the whole length of the array. In the worst case, where the array is
+sorted in descending order, the number of comparisons done is the largest amount possible, i.e. for every element
+encountered the while loop will iterate $j$ times, where $j$ is the index of the element in the array. Calculating this:
+\begin{align*}
+  C \left( n \right) & = \displaystyle\sum_{i=1}^{n-1} \displaystyle\sum_{j=0}^{i-1} 6 \\
+                     & = 6\displaystyle\sum_{i=1}^{n-1} \left( i - 1 \right) + 1       \\
+                     & = 6 \displaystyle\sum_{i=1}^{n-1} i                             \\
+                     & =  6 \left( \frac{n \left( n - 1 \right)}{2} \right) + 1        \\
+                     & =  3n^{2} - 3n + 1
+\end{align*}
+Therefore the worst case time complexity of the insertion sort algorithm is $\Theta \left( n^{2} \right) $.
+
+\chapter{Topological Sorting}
+
+\chapter{Generating Combinatorial Objects}
+
+\section{Generating Permutations}
+In generating permutations we assume that the underlying set whose elements we want to permute is the set of integers
+from $1$ to $n$, i.e., they can be represented as the indices of elements in an $n$-element set $\{a_1,\ldots,a_n\} $.\\
+In breaking the task of generating all $n!$ permutation of the set $\{1, \ldots, n\} $, we can consider all $ \left( n -
+  1\right)! $ permutations have been generated. Assuming this we can relate the task of generating all $n!$ permutations
+to augmenting this set of $ \left( n - 1 \right)! $ permutations with the $n$th element in all possible positions, i.e.:
+\[
+  n! = \left( n - 1 \right)! \times n
+\]
+We can insert $n$ in the previously generated permutations either left to right or right to left. It is more efficient
+to start with inserting $n$ into $1,2,\ldots \left( n-1 \right) $ by moving right to left, i.e. inserting $n$ at the end of
+each permutation and switching direction every time a new permutation of $\{1, \ldots, n - 1\} $ needs to be
+processed, i.e. for $n = 3$:
+
+\begin{align*}
+  \begin{array}{c c c c}
+    \text{start}                  & 1   &     &     \\
+    \text{insert 2 right to left} & 12  & 21  &     \\
+    \text{insert 3 right to left} & 312 & 132 & 213 \\
+    \text{insert 3 left to right} & 321 & 231 & 213
+  \end{array}
+\end{align*}
+
+It is also possible to get the same ordering of permutations of $n$ without explicitly generating all permutations of
+for smaller values of $n$. This is done by associating a direction with each element $k$ in a permutation. This element
+$k$ is said to be \textbf{mobile}, if its direction points to a smaller element adjacent to it. This defines the
+\textbf{Johnson-Trotter} algorithm for generating permutations:
+\begin{algorithm}[H]
+  \caption{JohnsonTrotter $ \left( n \right) $}
+  \Comment{}\\
+  \Comment{Implements Johnson-Trotter algorithm for generating permutations} \\
+  \Comment{Input: A positive integer $n$} \\
+  \Comment{Output: A list of all permutations of $\{1,\ldots,n\} $} \\
+  \begin{algorithmic}[1]
+    \State Initialize the first permutation with $1, 2, \ldots, n$ with all directions pointing left
+    \While{the last permutation has a mobile element}
+    \State find its largest mobile element $k$
+    \State swap $k$ with the adjacent element it is pointing to
+    \State reverse the direction of all the elements greater than $k$
+    \State add the new permutation to the list of permutations
+    \EndWhile
+  \end{algorithmic}
+\end{algorithm}
+
+\chapter{Decrease-by-a-Constant-Factor}
+
+\chapter{Variable-Size-Decrease}
+\section{Computing a Median and the Selection Problem}
+
+\dfn{Selection problem}{
+  The problem of finding the $k$th smallest element in an array of $n$ elements. This number is also known as the  $k$th
+  order statistic.
+}
+
+The median is a special case of the selection problem where $\left\lceil n / 2 \right\rceil $, which asks to find an
+element divides the array into two equal halves. This can be done by sorting the array and selecting the middle element,
+but this is not efficient as it takes $\Theta \left( n \log n \right) $ time.\\
+We can instead use the idea of partitioning a given list around some value $p$, for example the first element. Then we
+can identify all the elements less than $p$ and greater than $p$ to determine it's position in the sorted list. Using
+the notion of \textbf{Lomuto partitioning}, we think of the subarray, $A \left[ l \ldots r \right] $, as being divided into three parts:
+\[
+  p \mid \text{less than $p$} \mid \text{greater than $p$} \mid \text{unprocessed}
+\]
+I.e. a segment with elements known to be less than $p$, a segment with elements known to be greater than $p$, and a
+segment of elements yet to be compared to $p$.
+
+\end{document}

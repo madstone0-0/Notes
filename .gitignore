@@ -2,6 +2,7 @@
 !.gitignore
 !README.md
 
+/_Raws/_Exported
 !/_Raws
 /_Raws/*
 !/_Raws/Calc

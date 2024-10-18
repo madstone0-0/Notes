@@ -144,6 +144,17 @@ Therefore the worst case time complexity of the insertion sort algorithm is $\Th
 
 \chapter{Topological Sorting}
 
+\dfn{Topological Sort}{
+  Given a directed acyclic graph $G = \left( V, E \right) $, a topological sort is a linear ordering of the vertices
+  such that for every directed edge $ \left( u, v \right) $ from vertex $u$ to vertex $v$, $u$ comes before $v$ in the
+  ordering. This is useful in scheduling tasks that have dependencies on each other.
+}
+
+Topological sorting can be done in a decrease and conquer manner by the source removal algorithm. This algorithm works by
+identifying in a remaining digraph a \textbf{source} vertex, i.e. a vertex with an in-degree of 0 and delete it with the
+edges originating from it. This is repeated until all vertices have been removed. The order these vertices are removed
+in is the topological sort of a digraph.
+
 \chapter{Generating Combinatorial Objects}
 
 \section{Generating Permutations}
@@ -190,7 +201,104 @@ $k$ is said to be \textbf{mobile}, if its direction points to a smaller element 
   \end{algorithmic}
 \end{algorithm}
 
+\section{Generating Subsets}
+
+The task of generating all subsets of a set $A = \{a_1, \ldots, a_n\} $, can be done in a decrease and conquer manner by
+dividing all the subsets of $A$ into two groups:: those that do not contain $a_n$ and those that do. The former group is
+all the subsets of $\{a_1, \ldots, a_{n-1}\} $, while each and every element of the latter can be obtained by adding
+$a_n$ to a subset of $\{a_1, \ldots, a_n\} $.
+
 \chapter{Decrease-by-a-Constant-Factor}
+
+\section{Binary Search}
+\dfn{Binary  Search }{
+  In a sorted array $A$ of $n$ elements we first compare the search key $K$ with the middle element of the array $A_m$.
+  If they match, the algorithm stops, otherwise, the same operation is repeated recursively for the first half of the
+  array if $K < A_m$, and for the second half if $K > A_m$:
+  \[
+    A_0 \ldots A_{m - 1}\, A_m \, A_{m + 1} \ldots A_{n - 1}
+  \]
+}
+
+\begin{algorithm}[H]
+  \caption{BinarySearch $ \left( A, n, K \right) $}
+  \Comment{}\\
+  \Comment{Implements nonrecursive binary search} \\
+  \Comment{Input: An array $A$ of $n$ elements sorted in ascending order and a search key $K$} \\
+  \Comment{Output: An index of the array's element that is equal to $K$ or $-1$ if there is no such element } \\
+  \begin{algorithmic}[1]
+    \State $l \gets 0$
+    \State $h \gets n - 1$
+    \While{ $l \le  h$}
+    \State $m \gets \left\lfloor \left( h + l \right) \right\rfloor  / 2$
+    \If{ $A_m = K$}
+    \State \Return $m$
+    \ElsIf{ $A_m > K$}
+    \State $l \gets m + 1$
+    \Else
+    \State $r \gets m - 1$
+    \EndIf
+    \EndWhile
+    \State \Return -1
+  \end{algorithmic}
+\end{algorithm}
+
+The analysis of binary search  is focused on the number of times its basic operation, the comparison of the value and
+the search key, is done.  This number varies depending on the nature of the input. In the worst case $C_{\text{worst}}
+  \left( n \right) $, the input array does not contain the search key, or the search key is the last element of the array.
+Since after one comparison the algorithm is left with an array of half size we get the following recurrence relation:
+\[
+  C_{\text{worst}} \left( n \right) = C_{\text{worst}} \left( \left\lfloor n / 2 \right\rfloor \right) + 1 \text{ for } n
+  > 1, \, C_{\text{worst}} \left( 1 \right)  = 1
+\]
+We can solve this using the master theorem:
+\[
+  O \left( \log n \right)
+\]
+
+\section{Fake-Coin Problem}
+
+\dfn{Fake-Coin Problem}{
+  Among $n$ identical-looking coins, one is fake. With a balance scale, we can compare any two sets of coins, i.e. by
+  tipping to the left to the right, or stating even, the balance scale will tell whether the sets weigh the same or
+  which of the sets is heavier than the other but not by how much.
+}
+
+We can solve this problem in a Decrease-by-a-Constant-Factor manner by:
+\begin{itemize}
+  \item Dividing $n$ coinst into two piles of $\left\lfloor n / 2 \right\rfloor$ coins each , leaving one extra coin
+        aside if $n$ is odd.
+  \item Put the two pile on the scale. If the piles weigh the same, the coin put aside must be fake, otherwise, we can
+        proceed in the same manner with the lighter pile which must contain the fake coin.
+\end{itemize}
+This gives us the following recurrence relation:
+\[
+  W \left( n \right)  = W \left( \left\lfloor n / 2 \right\rfloor \right)  + 1 \text{ for } n > 1, \, W \left( 1 \right)
+  = 0
+\]
+
+This is identical to the binary search cost relation since both algorithms are based on the same
+Decrease-by-a-Constant-Factor technique of decreasing by a factor of 2. This leads to the close form of this recurrence
+also being:
+\[
+  W \left( n \right)  = \left\lfloor \log n \right\rfloor
+\]
+
+\section{Russian Peasant Multiplication}
+
+\dfn{Russian Peasant Multiplication}{
+  Let $n$ and $m$ be positive integers whose product we want to compute, and let us measure the instance size by the
+  value of $n$. If $n$ is even, and instance of half the problem size has to deal with $n / 2$. This gives us this
+  formula relating the smaller $n / 2$ multiplication to the larger problem instance
+  \[
+    n \cdot m = \frac{n}{2} \cdot 2 m
+  \]
+  If $n$ is odd, we need to account for that , i.e.:
+  \[
+    n \cdot m = \frac{n - 1}{2} \cdot 2 m + m
+  \]
+  Thus our base case becomes $n = 1$, i.e. $1 \cdot m = m$
+}
 
 \chapter{Variable-Size-Decrease}
 \section{Computing a Median and the Selection Problem}

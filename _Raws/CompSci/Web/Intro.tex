@@ -92,7 +92,275 @@ layer, with each subsequent layer building on the one below it. The layers are f
 \dfn{Presentation Layer}{
   The presentation layer ensures that the information that the application layer of one system sends out is readable by
   the application layer of another system. It translates data between the application layer and the network format. This
-  is where encoding and encryption is done.
+  is where encoding and encryption is done. Examples of protocols include SSL and TLS.
 }
+
+\subsection{Session Layer}
+
+\dfn{Session Layer}{
+  Establishes, manages, and terminates connections between applications. It provides services such as dialogue control and
+  synchronization. It also provides for full-duplex, half-duplex, or simplex operation, and establishes checkpointing,
+  adjournment, termination, and restart procedures. Examples of protocols include NetBIOS and PPTP.
+}
+
+\subsection{Transport Layer}
+
+\dfn{Transport Layer}{
+  Provides transparent transfer of data between end systems, or hosts, and is responsible for end-to-end error recovery
+  and flow control. It ensures complete data transfer. Examples of protocols include TCP and UDP.
+}
+
+\subsection{Network Layer}
+
+\dfn{Network Layer}{
+  Provides switching and routing technologies, creating logical paths, known as virtual circuits, for transmitting data
+  from node to node. It is responsible for packet forwarding including routing through intermediate routers. Examples of
+  protocols include IP and ICMP.
+}
+
+\subsection{Data Link Layer}
+
+\dfn{Data Link Layer}{
+  Provides node-to-node data transfer, and is responsible for error detection and correction. It ensures data is
+  transmitted reliably. Examples of protocols include Ethernet and PPP.
+}
+
+\subsection{Physical Layer}
+
+\dfn{Pyhsical Layer}{
+  Transmits raw data bits over a physical medium. It is responsible for the actual physical connection between devices.
+  Examples of protocols include Ethernet and DSL.
+
+}
+
+\chapter{Random Stuff}
+
+\section{Network and Domain Addresses}
+
+\subsection{Internet Protocol}
+\dfn{IP Address}{
+  A unique string of numbers separated by periods that identifies each computer using the Internet Protocol to communicate over a network.
+}
+
+\dfn{IPv4}{
+  The fourth version of the Internet Protocol. It is the most widely used version of the Internet Protocol. $32$-bit
+  addresses i.e. $2^{32}$ / 4 billion possible addresses. Structured as four octets (8 bits) separated by periods:
+  \[
+    X_1.X_2.X_3.X_4
+  \]
+  Where $X_i$ is a number between $0$ and $255$.
+  There are $3$ classes of IPv4 addresses:
+  \begin{itemize}
+    \item Class A where $X_1$ is $10$
+    \item Class B where $X_1$ is $172$. Most public IP addresses are Class B.
+    \item Class C where $X_1$ is $192$. Most private IP addresses are Class C.
+  \end{itemize}
+}
+
+\dfn{IPv6}{
+  The most recent version of the Internet Protocol. It is designed to succeed IPv4. $128$-bit addresses i.e. $2^{128}$.
+}
+
+\dfn{Localhost / Loopback Address}{
+  The address of the computer you are working on. It is always $127.0.0.1$.
+}
+
+\section{Domains}
+
+\dfn{Domain}{
+  A human-readable address for a computer on the Internet. It is a string of characters that is easier to remember than
+  an IP address. For an example of a domain, consider \texttt{https://www.google.com}, where:
+  \begin{description}
+    \item[\texttt{https}] is the protocol, i.e. SSL, encrypted HTTP.
+    \item[\texttt{www}] is the subdomain or third level domain, i.e. the specific server.
+    \item[\texttt{google}] is the second level domain.
+    \item[\texttt{com}] is the top level domain.
+  \end{description}
+}
+
+\dfn{Domain Name Server (DNS)}{
+  A server that translates domain names to IP addresses. It is like a phone book for the Internet.
+}
+
+\chapter{HyperText Transfer Protocol (HTTP)}
+
+\subsection{Introduction}
+
+\dfn{HTTP}{
+  The protocol used to transfer hypertext such as HTML. It is the foundation of data communication for the World Wide
+  Web. HTTP requests are built upon the TCP/IP protocol, with HTTP requests and responses being sent over TCP connections.
+}
+
+A HTTP request is made up of the following components:
+\begin{description}
+  \item[Request Line] - Contains the request method / \textbf{verb}, the URL, and the HTTP version.
+  \item[Headers] - Contains additional information about the request, such as the user agent, the host, and the content type.
+  \item[Body] - Contains the data being sent in the request.
+\end{description}
+
+HTTP is a stateless protocol, meaning that each request is independent of others and no data is retained between
+requests, by the http server. To maintain state between requests, there are several methods:
+\begin{itemize}
+  \item Cookies
+  \item Sessions
+  \item URL Parameters
+  \item Hidden Form Fields
+  \item  Local Storage
+\end{itemize}
+
+\subsection{HTTP Methods / Verbs}
+
+\dfn{Verb}{
+  Indicates the action / operation to be performed on the resource identified by the URL.
+}
+
+The most common HTTP verbs are:
+\begin{description}
+  \item[GET] - Requests data from a specified resource.
+  \item[POST] - Submits data to be processed to a specified resource.
+  \item[PUT] - Updates a specified resource.
+  \item[DELETE] - Deletes a specified resource.
+\end{description}
+Some other HTTP verbs include:
+\begin{description}
+  \item[PATCH] - Updates a specified resource, with it differing from PUT in that it only updates the fields that are
+        provided, whereas PUT updates the entire resource.
+  \item[HEAD] - Requests the headers of a specified resource, i.e. the same as GET but without the body.
+  \item[CONNECT] - Establishes a tunnel to the server identified by the target resource.
+  \item[OPTIONS] - Requests information about the communication options available for the target resource, i.e. what methods
+        are allowed.
+  \item [TRACE] - Performs a message loop-back test along the path to the target resource.
+\end{description}
+
+\subsection{HTTP Status Codes}
+
+\dfn{Status Code}{
+  A three-digit number that indicates the status of the HTTP response.
+}
+
+Status codes are grouped into five categories:
+\begin{description}
+  \item[1xx] - Informational, i.e. the request has been received and the process is continuing.
+  \item[2xx] - Success, i.e. the request was successfully received, understood, and accepted.
+  \item[3xx] - Redirection, i.e. further action must be taken to complete the request.
+  \item[4xx] - Client Error, i.e. the request contains bad syntax or cannot be fulfilled.
+  \item[5xx] - Server Error, i.e. the server failed to fulfil an apparently valid request.
+\end{description}
+
+\chapter{HyperText Markup Language (HTML)}
+
+\section{Introduction}
+
+\dfn{HTML}{
+  A markup language (i.e. a language that defines the structure of content) for describing web documents.
+}
+
+Invented in 1991 by Tim Berners-Lee for use in the World Wide Web project for CERN, HTML was originally designed for
+static documents with links to other documents. It has since evolved to include multimedia content and dynamic content
+and is maintained by the World Wide Web Consortium (W3C). The structure of an HTML document is as follows:
+\begin{description}
+  \item[Document Type Declaration]  - The document type declaration is an instruction to the web browser about what version of HTML the page is written in. It is not case sensitive.
+  \item[HTML Element] - The root element of an HTML page. It is the container for all other HTML elements.
+  \item[Head Element] - Contains meta-information about the document, such as its title, links to stylesheets, and scripts.
+  \item[Body Element] - Contains the content of the document, such as text, images, and links.
+\end{description}
+
+
+\section{Cascading Style Sheets (CSS)}
+
+\dfn{CSS}{
+  A style sheet language used for describing the presentation of a document written in HTML.
+}
+
+Before CSS was introduced in 1996, the style of web pages was defined within the HTML markup. This came with the
+following drawbacks:
+\begin{itemize}
+  \item Each element needed to be styled individually, leading to redundancy and repetition.
+  \item The style of a document was mixed with its content, making it difficult to read, maintain and update.
+\end{itemize}
+
+Invented alongside HTML by Håkon Wium Lie, CSS was designed to address these issues. It allows for the separation of
+content from presentation, making it easier to maintain and update the style of a document. The core concepts of CSS are:
+\begin{description}
+  \item[Specificity] - The process of determining which style rule applies to an element when multiple rules conflict.
+        Where the precedence of rules is described as:
+        \begin{description}
+          \item[Tag Selector] - Lowest precedence.
+          \item[Class Selector] - Middle precedence.
+          \item[ID Selector] - Highest precedence.
+        \end{description}
+  \item[Cascading] - The process of combining multiple style sheets and resolving conflicts between them. This leads to
+        the order of rules being important, with most recently defined rules taking precedence if two rules conflict.
+  \item[Inheritance] - The process of an element inheriting the style of its parent element. This allows for the
+        creation of a consistent style across a document. Properties like font size, colour, and line height are inherited by default.
+\end{description}
+
+\subsection{Length Units}
+There are several units of length in CSS:
+\begin{description}
+  \item[Pixels (px)] - A pixel is a single dot on a screen. It is a fixed-size unit that is the same size regardless of
+        the resolution of the screen, i.e. uses the monitor's pixel as a reference.
+  \item[Percentage (\%)] - A percentage is a relative unit that is a percentage of the parent element's size.
+  \item[Ems (em)] - An em is a relative unit that is the size of the font of the element. It is useful for setting the
+        size of text relative to the size of the parent element.
+  \item[Rems (rem)] - A rem is a relative unit that is the size of the font of the root / \lstinline{<html>} element. It is useful for setting
+        the size of text relative to the size of the root element.
+  \item[Viewport Width (vw)] - A viewport width is a relative unit that is a percentage of the viewport's width. It is
+        useful for setting the size of an element relative to the width of the viewport. Where the viewport is the visible
+        area of a web page.
+  \item[Viewport Height (vh)] - A viewport height is a relative unit that is a percentage of the viewport's height. It is
+        useful for setting the size of an element relative to the height of the viewport.
+\end{description}
+
+
+\chapter{JavaScript}
+
+\section{Introduction}
+
+\dfn{JavaScript}{
+  A high-level, interpreted programming language that conforms to the ECMAScript specification. It is a language that is primarily used for client-side scripting in web development.
+}
+
+Invented by Brendan Eich in 1995 for use in the Netscape Navigator web browser, JavaScript was originally designed to
+add interactivity to web pages. It has since evolved to include support for server-side scripting and is now used in a
+wide variety of applications, including web development, game development, and mobile app development. With the
+development of Google's V8 engine, JavaScript has escaped the browser and now runs on servers, desktops, and even IoT.
+
+\section{Representational State Transfer (REST) Architecture}
+
+\dfn{REST}{
+  A software architectural style that defines a set of constraints to be used for creating web services.
+  Representational state transfer means that a server will with the representation of a resource, data in HTML, XML or
+  JSON format, and that that the response will contain hypermedia links that can be followed to make the state of the
+  system change.
+}
+
+The REST architecture is based on the following principles:
+\begin{description}
+  \item[Client-Server]  - Client concerns should be separate from server concerns, i.e. the client should not be
+        concerned with data storage and the server should not be concerned with the user interface. This avoids tying
+        server logic to a specific client type.
+  \item[Stateless]  - Each client request should be independent and contain all the information needed to fulfil the
+        request. This allows the server to handle each request without needing to store information about the client between requests.
+  \item[Cacheable] - Servers can label responses as cacheable, enabling clients to reuse responses for equivalent
+        requests, improving performance.
+  \item[Uniform Interface] - The server must offer a consistent interface for all components, following constraints,
+        such as resource identification, manipulation through representations, self-descriptive messages, and hypermedia as the engine of application state.
+  \item[Layered System] - Server components should only interact with their immediate layers, limiting system
+        complexity and promoting component isolation.
+  \item[Code on Demand (Optional)] - Servers can provide code for clients to execute as needed reducing the initial
+        payload and allowing clientns to load only what they need.
+\end{description}
+
+REST uses standard HTTP methods to perform operations on resources:
+\begin{description}
+  \item[GET] - Retrieves a representation of the resource.
+  \item[POST] - Creates a new resource.
+  \item[PUT] - Updates an existing resource.
+  \item[DELETE] - Deletes a resource.
+\end{description}
+
+\section{Asynchronous JavaScript and XML (AJAX)}
+
 
 \end{document}

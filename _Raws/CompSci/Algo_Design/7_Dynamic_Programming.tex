@@ -1,0 +1,69 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Dynamic Programming}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\dfn{Dynamic Programming}{
+  A programming technique that involves breaking down a problem into smaller subproblems and solving each subproblem
+  only once. The solutions to the subproblems are stored in a table, so that the solutions to the subproblems are not
+  recomputed. This technique is used to solve optimization problems /A general algorithm design technique for solving
+  problems defined by recurrences with overlapping subproblems, i.e.:
+  \[
+    T \left( n \right)  = T \left( n - 1 \right)  + T \left( n - 2 \right)
+  \]
+  Where the problem $T \left( n \right) $ is made up of the subproblems $T \left( n - 1 \right) $ and $T \left( n - 2
+    \right) $ and $T \left( n - 1 \right) $ is made up of the subproblems $T \left( n - 2 \right) $ and $T \left( n - 3
+    \right) $ and so on.
+}
+
+A Dynamic Programming problem is made up of two main components:
+\begin{itemize}
+  \item Overlapping Subproblems - Where the problem can be broken down into smaller subproblems that are solved
+        multiple time during the process.
+  \item Optimal Substructure - Where an optimal solution of the original problem can be constructed from the
+        optimal solutions of its subproblems.
+\end{itemize}
+
+There are two main approaches to solving a Dynamic Programming problem:
+\begin{itemize}
+  \item Memoization - Top Down Approach
+  \item Tabulation - Bottom Up Approach
+\end{itemize}
+
+\qs{}{
+  Given a row of coins of the following values: $7, 5, 2, 10, 6, 3, 4, 8, 1$, pick up coins with a maximum value subject
+  to no adjacent coins can be picked. Produce the optimal solutions in terms of $F$ array with a linear algorithm.
+}
+
+\sol{
+  Given that there are two choices to make when picking coins, skipping the last coin and picking all the others or
+  picking the last coin and skipping the second last coin. The max value of the problem becomes:
+  \[
+    F \left( n \right) = \text{max} \left(  C_1 + F \left( n-2 \right)\, , F \left( n-1 \right)  \right)\, , n > 1
+  \]
+  Where $C$ is the array of coins.
+}
+
+\[
+F \left( i, j \right)  = 
+\] 
+
+
+\end{document}

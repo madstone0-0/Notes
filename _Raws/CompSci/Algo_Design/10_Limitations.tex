@@ -1,0 +1,108 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Limitations of Algorithm Power}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\chapter{ $P$, $NP$ and $N P$-Complete Problems}
+
+\dfn{Decision Problem}{
+  A problem that requires a yes or no answer.
+}
+
+\section{ $P$ and $N P$ Problems}
+\dfn{Polynomial Time}{
+  A problem is said to be in $P$ if there exists an algorithm that can solve the problem in polynomial time in the worst
+  case, i.e the
+  time complexity of the algorithm is of the form $O \left( n^k \right) $ for some constant $k$. This class of problems
+  is also called \textbf{tractable} problems.
+}
+
+\dfn{ $P$ Problems}{
+  A class of problems that can be solved in polynomial time by deterministic (non-random) algorithms. Also called
+  \textbf{Polynomial Time} problems.
+}
+
+\subsection{Non-deterministic Algorithms}
+\dfn{ Non-deterministic Algorithm}{
+  An algorithm that takes in as input an instance $I$ of a decision problem and does the following
+  \begin{description}
+    \item[Guess] Generates an arbitrary string $S$ that can be thought of as a candidate solution to the given
+          instance $I$.
+    \item[Verification] Using a deterministic algorithm that takes in the candidate solution $S$ and the problem
+          instance $I$ as input and outputs a boolean value indicating whether $S$ actually represents a solution to
+          the problem instance $I$.
+  \end{description}
+}
+A Non-deterministic algorithm is said to solve a decision problem if and only if for every instance $I$ and candidate
+solution $S$ it returns the correct answer, and never returns the wrong answer or a false positive, i.e. for a no
+instance it returns a no answer and for a yes instance it returns a yes answer.
+
+\subsection{ $NP$ Problems}
+\dfn{ $NP$ Problems}{
+  A class of decision problems that can be solved by a non-deterministic algorithm in polynomial time. The $NP$ stands
+  for Non-deterministic Polynomial time.
+}
+
+Most decision problems are in $NP$:
+\[
+  P \subseteq NP
+\]
+This is true because if a problem is in $P$, we can use the deterministic polynomial time algorithm that solves it in
+the verification step of the non-deterministic algorithm bypassing the guessing step and as this algorithm used in the
+verification step is in polynomial time and is the only step in the non-deterministic algorithm, the entire
+non-deterministic algorithm for the problem instance $I$ is in polynomial time. \\
+
+$N P$ also contains problems that are not in $P$:
+\begin{itemize}
+  \item Hamiltonian Circuit Problem
+  \item Knapsack Problem
+  \item Travelling Salesman Problem
+\end{itemize}
+
+This leads to the question:
+\[
+  P \stackrel{?}{=} NP
+\]
+I.e. are all problems in $N P$ also in $P$ or is $P$ a proper subset of $NP$?
+
+\section{ $N P$-Complete Problems}
+
+\dfn{Polynomially Reducible}{
+  A decision problem $D_1$ is said to be polynomially reducible to a decision problem $D_2$, if there exists a
+  function $t$ that transforms instances of $D_1$ to instances of $D_2$ such that:
+  \begin{enumerate}
+    \item $t$ maps all yes instances of $D_1$ to yes instances of $D_2$, and all no instances of $D_1$ to no
+          instances of $D_2$.
+    \item $t$ is computable in polynomial time.
+  \end{enumerate}
+}
+
+\dfn{ $NP$ Complete}{
+  A decision problem $D$ is $N P$-Complete if:
+  \begin{enumerate}
+    \item It belongs to the class $NP$
+    \item Every problem in $N P$ is polynomially reducible to $D$.
+  \end{enumerate}
+}
+
+
+
+
+\end{document}

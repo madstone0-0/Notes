@@ -1,0 +1,46 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Coping with the Limitations of Algorithm Power}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\chapter{Backtracking}
+
+The main idea behind backtracking stems from the foundation of the brute-force exhaustive search. Instead of enumerating
+every possible solution to a problem regardless of its validity backtracking constructs a solution incrementally, one
+component at a time and evaluate its validity at each step. If the partial solution is found to be invalid, the
+algorithm backtracks to replace the last component of the partially constructed solution with the next option. If the
+solution is found to be valid, the algorithm continues to build on the partial solution until a complete solution is found.
+
+\section{ $N$-Queens Problem}
+
+\dfn{ $N$-Queens Problem}{
+  The $N$-Queens problem is to place $n$ queens on an $n\times n$ chessboard such that no two queens attack each other
+  by either being on the same row, column or diagonal.
+}
+
+For $n \leq 3$, the solution is trivial, so we will only consider $n > 3$. We start with an empty board of size $4 \times 4$ and place the first queen in the first possible position of its row, $(1, 1)$. Then, we place queen 2 in the first available position of the second row that does not threaten queen 1. If queen 2 cannot be placed in any available column of the second row, we backtrack to queen 1 and move it to the next valid position.
+
+Next, we place queen 3 in the first available position of the third row that does not threaten either queen 1 or queen 2. Similarly, if queen 3 cannot be placed in a valid position, we backtrack again, moving queen 2 to the next position. Finally, we place queen 4 in the first valid position of the fourth row. If all queens are placed successfully, we have found a solution.
+
+If at any point, it is impossible to place a queen in any valid position due to conflicts, we backtrack to the previous queen and attempt a different position. This process continues until all queens are placed on the board without conflict or until we exhaust all possibilities, at which point we conclude there is no solution.
+
+The solution process follows the backtracking approach, where we attempt to place each queen in the first available position, and if a conflict arises, we backtrack to a previous step and try the next possible configuration.
+
+\end{document}

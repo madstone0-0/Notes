@@ -1,0 +1,351 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Divide and Conquer}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+Divide and Conquer is characterized by three steps:
+\begin{enumerate}
+  \item Divide the problem into several sub problems of the same type, ideally of equal size
+  \item Solve the sub problems, typically recursively.
+  \item If necessary, combine the solutions of all the sub problems to get the solution to the original
+        problem.
+\end{enumerate}
+
+This set of operations often result in running time that is in the form of the recurrence relation:
+\[
+  T \left( n \right)  = a T \left( n / b \right)  + f \left( n \right)
+\]
+
+Where:
+\begin{description}
+  \item[ $a$]  is the number of sub problems.
+  \item[ $ b$] is the number of instances the problem is divided into
+  \item [ $ f \left( n \right) $] is the time spent on dividing an instance of size $n$ into instances of size $n / b$
+        and combining their solutions.
+\end{description}
+This is called the \textbf{general divide and conquer recurrence}, and its asymptotic time can be found using the
+\textbf{Master Theorem}, where if $f \left( n \right) \in \Theta \left( n ^{d} \right)  $ where $d \geq 0$:
+\[
+  T \left( n \right) \in \begin{cases}
+    \Theta \left( n^{d} \right)         & \text{if } a < b^{d}  \\
+    \Theta \left( n ^{d} \log n \right) & \text{if } a = b^{d}  \\
+    \Theta \left( n ^{\log_b a} \right) & \text{if } a > b ^{d}
+  \end{cases}
+\]
+
+\chapter{Merge Sort}
+
+\dfn{Merge Sort}{
+  Divide a given array $A \left[ 0\ldots n - 1  \right] $ into two halves, $A \left[0\ldots \left\lfloor n / 2
+      \right\rfloor - 1 \right] $ and $A \left[ \left\lfloor n / 2 \right\rfloor \ldots n - 1\right] $, sorting each of them
+  recursively, and then merging the two smaller sorted arrays into a single sorted array.
+}
+
+\begin{algorithm}[H]
+  \caption{MergeSort $ \left( A \left[ 0 \ldots n - 1 \right]  \right) $}
+  \Comment{}\\
+  \Comment{Sorts array $A \left[ 0 \ldots n - 1 \right] $ by recursive merge sort} \\
+  \Comment{Input: An array $A \left[ 0 \ldots n - 1 \right] $ of orderable elements} \\
+  \Comment{Output: Array $A \left[ 0\ldots n - 1 \right] $ sorted in nondecreasing order} \\
+  \begin{algorithmic}[1]
+    \If{ $n > 1$}
+
+    \State copy $A \left[ 0\ldots \left\lfloor n / 2 \right\rfloor - 1 \right] $ to $B \left[ 0\ldots \left\lfloor n / 2 \right\rfloor - 1 \right] $
+    \State copy $A \left[ \left\lfloor n / 2 \right\rfloor\ldots n - 1 \right] $ to $C \left[ 0\ldots \left\lfloor n / 2 \right\rfloor - 1 \right] $
+    \State \Call{MergeSort}{$B$}
+    \State \Call{MergeSort}{$C$}
+    \State \Call{Merge}{$B, C, A$}
+    \EndIf
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{Merge  $ \left(B \left[ 0\ldots p - 1 \right], C \left[ 0 \ldots q - 1 \right], A \left[ 0 \ldots p + q - 1 \right]\right) $}
+  \Comment{}\\
+  \Comment{Merges two sorted arrays $B$ and $C$ into $A$} \\
+  \Comment{Input: Arrays $B$ and $C$ both sorted} \\
+  \Comment{Output: Sorted array $A$ of the elements of $B$ and $C$}
+  \begin{algorithmic}[1]
+    \State $i \gets 0$; $j \gets 0$; $k \gets 0$
+    \While{ $ i < p$ and $j < q$}
+    \If{ $B_i \leq C_j$}
+    \State $A_k \gets B_i$
+    \State $ i \gets i + 1$
+    \Else
+    \State $A_k \gets C_j$
+    \State $j \gets j + 1$
+    \EndIf
+    \State $k \gets k + 1$
+    \EndWhile
+    \If{ $i = p$}
+    \State copy $C \left[ j \ldots q - 1 \right] $ to $A \left[ k \ldots p + q - 1 \right] $
+    \Else
+    \State  copy $B \left[ i\ldots p - 1 \right] $ to $A \left[ k \ldots p + q  - 1 \right] $
+    \EndIf
+  \end{algorithmic}
+\end{algorithm}
+
+The cost of the merge sort algorithm can is also in the form of the general divide and conquer recurrence:
+\[
+  T \left( n \right) = 2 T \left( n / 2 \right)  + T_{\text{merge}} \left( n \right) \text{ for } n > 1, \, T \left( 1
+  \right)  = 0
+\]
+Using master theorem the worst case time complexity is:
+\begin{align*}
+  O \left(n ^{1} \log n  \right) \\
+  O \left( n \log n \right)
+\end{align*}
+
+And the space complexity due to the recursive calls and copying the items of the array is $O \left( \log n \right) $.
+
+\chapter{Quick Sort}
+
+\dfn{Quick Sort}{
+  Like merge sort, quick sort divides the array into two sub arrays but unlike merge sort quicksort divides the elements
+  according to their value based on a pivot element (Partitioning). This means that quick sort does not require additional space and
+  also sorts the array as it divides it.
+}
+
+\begin{algorithm}[H]
+  \caption{QuickSort $ \left( A \left[ l\ldots r \right]  \right) $}
+  \Comment{}\\
+  \Comment{Sorts a subarray by quicksort} \\
+  \Comment{Input: Subarray of array $A \left[ 0 \ldots n - 1 \right] $, defined by its left and right indices $l$ and
+    $r$} \\
+  \Comment{Output: Subarray $A [l \ldots r]$ sorted in nondecreasing order} \\
+  \begin{algorithmic}[1]
+    \If{ $ l < r$}
+    \State  $s \gets $ \Call{Partition}{ $A [l \ldots r]$} \Comment{ $s$ is a split position}
+    \State \Call{QuickSort}{ $A [l \ldots s - 1]$}
+    \State  \Call{QuickSort}{ $A [s  + 1\ldots r]$}
+    \EndIf
+  \end{algorithmic}
+\end{algorithm}
+
+The partitioning algorithm can be Lomuto's partitioning discussed in 3\_Decrease\_Conquer or Hoare's partitioning
+algorithm.\\
+
+In the best case where the pivot is the median of the array, i.e. perfectly splits the array into two equal halves, the
+recurrence relation is:
+\[
+  T \left( n \right) = 2 T \left( n / 2 \right) + O \left( n \right)
+\]
+Where $O \left( n \right) $ is the time spent finding the position of the pivot. Using the master theorem, the best case
+time complexity is:
+\[
+  O \left( n \log n \right)
+\]
+
+In the worst case where the pivot is the smallest or largest element in the array, the recurrence relation becomes:
+\[
+  T \left( n \right)  = 2 T \left( n - 1 \right) + O \left( n \right)
+\]
+Solving this recurrence relation using the iterative method, where $T \left( 1 \right) = 0$:
+\begin{align*}
+  T \left( n \right)     & = 2 T \left( n - 1 \right) + n                                          \\
+  T \left( n - 1 \right) & = 2 T\left( n - 2 \right) + n                                           \\
+  T \left( n - 2 \right) & = 2 T \left( n - 3 \right) + n                                          \\
+  \\
+  T \left( n \right)     & = 2 \left( 2 T \left( n - 2 \right) + n  \right) + n                    \\
+                         & = 4 T \left( n - 2 \right) + 3n                                         \\
+                         & = 4 \left( 2 T \left( n - 3 \right) + n  \right) + n                    \\
+                         & = 8 T \left( n - 3 \right) + 5n                                         \\
+  T \left( n \right)     & = 2^{k} T \left( n - k \right) + \left( 2k - 1 \right)n                 \\
+  \\
+  n - k                  & = 1                                                                     \\
+  n                      & = k + 1                                                                 \\
+  k                      & = n - 1                                                                 \\
+  T \left( k + 1 \right) & = 2^{k} T \left( 1 \right) + \left( 2k - 1 \right) \left( k + 1 \right) \\
+                         & = 2k^2 + 2k - k + 1                                                     \\
+                         & = 2k^2 + k + 1                                                          \\
+                         & = 2 \left( n - 1 \right)^2 + n - 1 + 1                                  \\
+                         & = 2 \left( n-1 \right) \left( n - 1 \right) + n                         \\
+                         & = 2n^2 -n -n + 1 + n                                                    \\
+                         & = 2n^2 -n + 1                                                           \\
+                         & \therefore O \left( n^2 \right)
+\end{align*}
+
+\chapter{Binary Tree Traversals}
+
+The divide and conquer strategy can be used in relation to binary trees in many ways.
+
+\section{Height}
+\dfn{Height of a Binary Tree}{
+  The height of a binary tree is the length of the longest path from the root to a leaf. It is also convenient to define
+  the height of an empty tree as -1.
+}
+
+\begin{algorithm}[H]
+  \caption{Height $ \left( T \right) $}
+  \Comment{}\\
+  \Comment{Finds the height of a binary tree $T$ recursively} \\
+  \Comment{Input: A binary tree $T$} \\
+  \Comment{Output: The height of $T$} \\
+  \begin{algorithmic}[1]
+    \If{ $T$ is empty}
+    \State \Return -1
+    \EndIf
+    \State \Return  $\text{max} \left\{ \Call{Height}{T_{\text{left}}}, \Call{Height}{T_{\text{right}}} \right\} + 1$
+  \end{algorithmic}
+\end{algorithm}
+
+The size of the problem instance is the number of nodes in the tree, $n$. Where the number of comparisons made to
+compute the maximum of two numbers and the number of additions $A \left( n \right) $ made by the algorithm are the same,
+giving us the recurrence relation:
+\begin{align*}
+  A \left( n \right) & = A \left( n_{\text{left}} \right) + A \left( n_{\text{right}} \right) + 1 \, \text{ for } n >
+  0                                                                                                                   \\
+  A \left( 0 \right) & = 0
+\end{align*}
+Solving this recurrence where:
+
+\chapter{ Multiplication of Large Integers and Strassen's Matrix Multiplication }
+
+\section{Multiplication of Large Integers}
+The multiplication of large integers can be done using the divide and conquer strategy which reduces the number of total
+digit multiplications from $n^2$. To demonstrate given the numbers $23$ and $14$. These numbers can be represented as:
+\[
+  23 = 2 \cdot 10^{1} + 3 \cdot 10^{0} \text{ and } 14 = 1 \cdot 10^{1} + 4 \cdot 10^{0}
+\]
+Multiplying them in the usual way:
+\begin{align*}
+  23 \times 14 & = \left( 2 \cdot 10^{1} + 3 \cdot 10^{0} \right) \times \left( 1 \cdot 10^{1} + 4 \cdot 10^{0} \right)               \\
+               & = \left( 2 \times 1 \right)10^{2} + \left( 2 \times 4 + 3 \times 1 \right) 10^{1} + \left( 3 \times 4 \right) 10^{0} \\
+\end{align*}
+Continuing with the last formula would use the same 4 multiplications as the usual method. However, we can compute the
+middle term with just one digit multiplication by taking advantage of the fact that the products $2 \times 1$ and $3
+  \times 4$ need to be computed anyway. We then express the middle term in a form that has both these products:
+\[
+  2 \times 4 + 3 \times 1 = \left( 2 + 3 \right) \times  \left( 1 + 4 \right) - 2 \times 1 - 3 \times 4
+\]
+This can be generalized for any pair of two-digit numbers $a = a_1a_0$ and $b = b_1b_0$, where $c$ is their product.
+\begin{align*}
+  c & = a \times b                    \\
+    & = c_2 10^{2} + c_1 10^{1} + c_0 \\
+\end{align*}
+Where:
+\begin{description}
+  \item[$c_2 = a_1 \times b_1 $] is the product of their first digits
+  \item[ $c0 = a_0 \times b_0$] is the product of their second digits
+  \item [ $c_1 = \left( a_1 + a_0 \right) \times  \left( b_1 + b_0 \right) - \left( c_2 + c_0 \right)   $] is the
+        product of the sum of the $a$'s digits and the sum of the $b$'s digits minus the sum of $c_2$ and $c_0$
+\end{description}
+
+Further generalizing this trick to $n$-digit numbers $a$ and $b$, where $n$ is a positive even number, we first divide
+both numbers into two halves of $n / 2$ digits each, denoting the first half of $a$'s digits as $a_1$ and the second
+half as $a_0$, and similarly for $b$. This then implies that:
+\begin{align*}
+  a & = a_1a_0 = a_1 10^{n / 2} + a_0 \\
+  b & = b_1b_0 = b_1 10^{n / 2} + b_0 \\
+\end{align*}
+This then implies that:
+\begin{align*}
+  c & = a \times b = \left( a_1 10^{ n / 2} + a_0 \right) \times \left( b_1 10^{n / 2} + b_0 \right)                       \\
+    & = \left( a_1\times b_1 \right)10^{n} + \left( a_1 \times b_0 + a_0 \times  b_1 \right)10^{n / 2} + \left( a_0 \times
+  b_0\right)                                                                                                               \\
+    & = c_2 10^{n} + c_1 10^{n / 2} + c_0                                                                                  \\
+\end{align*}
+Where:
+\begin{description}
+  \item[ $c_2 = a_1 \times b_1$] is the product of the first halves of the numbers
+  \item[ $c_0 = a_0 \times b_0$] is the product of the second halves of the numbers
+  \item [ $c_1 = \left( a_1 + a_0 \right) \times  \left( b_1 + b_0 \right) - \left( c_2 + c_0 \right)   $] is the
+        product of the sum of the $a$'s halves and the sum of the $b$'s halves minus the sum of $c_2$ and $c_0$
+\end{description}
+
+If $n / 2$ is even the same method for computing the values of $c_2$, $c_1$ and $c_0$ can be used. Thus is $n$ is a
+power of 2 this algorithm can be run recursively until the base case of $n = 1$ is reached or when $n$ is deemed small
+enough to be computed using the usual method. This them results in the number of multiplication taking the form the
+recurrence relation:
+\[
+  M \left( n \right)  = 3 M \left( n / 2 \right)  \, \text{ for } n > 1, \, M \left( 1 \right) = 1
+\]
+Which using the master theorem gives the time complexity of:
+\begin{align*}
+  O \left( n^{\log_2 3} \right) \approx O \left( n^{1.585} \right)
+\end{align*}
+
+
+\section{Strassen's Matrix Multiplication}
+
+Strassen's matrix multiplication is a divide and conquer algorithm that reduces the number of multiplications needed to multiply two matrices. Given two matrices $A$ and $B$ of size $n \times n$, the product $C = A \times B$ can be computed as:
+\begin{align*}
+  \begin{bmatrix} c_{00} & c_{01} \\
+                c_{10} & c_{11}
+  \end{bmatrix} & = \begin{bmatrix} a_{00} & a_{01} \\ a_{10} & a_{11} \end{bmatrix} \times
+  \begin{bmatrix} b_{00} & b_{01} \\ b_{10} & b_{11} \end{bmatrix}                          \\
+                                     & = \begin{bmatrix}
+                                           m_1 + m_4 - m_5 + + m_7 & m_3 + m_5             \\
+                                           m_2 + m_4               & m_1 + m_3 - m_2 + m_6
+                                         \end{bmatrix}    \\
+\end{align*}
+Where:
+\begin{align*}
+  m_1 & = \left( a_{00} + a_{11} \right) \times \left( b_{00} + b_{11} \right)  \\
+  m_2 & = \left( a_{10} + a_{11} \right)\times b_{00}                           \\
+  m_3 & = a_{00} \times  \left( b_{01} - b_{11} \right)                         \\
+  m_4 & = a_{11} \times \left( b_{10} - b_{00} \right)                          \\
+  m_5 & = \left( a_{00} + a_{01} \right) \times b_{11}                          \\
+  m_6 & = \left( a_{10} - a_{00} \right) \times  \left( b_{00} + b_{01} \right) \\
+  m_7 & = \left( a_{01} - a_{11} \right) \times \left( b_{10} + b_{11} \right)  \\
+\end{align*}
+This can then be generalized for any $n \times n$ matrix where $n$ is a power of 2, i.e.:
+\begin{align*}
+  \left[
+    \begin{array}{ c | c }
+      C_{00} & C_{01} \\
+      \hline
+      C_{10} & C_{11} \\
+    \end{array}
+  \right] & =
+  \left[
+    \begin{array}{ c | c }
+      A_{00} & A_{01} \\
+      \hline
+      A_{10} & A_{11} \\
+    \end{array}
+    \right]
+  \times
+  \left[
+    \begin{array}{ c | c }
+      B_{00} & B_{01} \\
+      \hline
+      B_{10} & B_{11} \\
+    \end{array}
+    \right]
+  \\
+          & =\begin{bmatrix}
+               M_1 + M_4 - M_5 + + M_7 & M_3 + M_5             \\
+               M_2 + M_4               & M_1 + M_3 - M_2 + M_6
+             \end{bmatrix} \\
+\end{align*}
+Where the formulae are the same but in terms of the sub-matrices of $A$ and $B$. This results in the following
+recurrence relation, where $M$ is the number of multiplications:
+\[
+  M \left( n \right) = 7 M \left( n / 2 \right) \text{ for } n > 1, \, M \left( 1 \right) = 1
+\]
+Using the master theorem the time complexity of Strassen's matrix multiplication is:
+\begin{align*}
+  O \left( n^{\log_2 7} \right) \approx O \left( n^{2.807} \right)
+\end{align*}
+
+\chapter{The Closest-Pair and Convex-Hull Problems}
+
+\end{document}

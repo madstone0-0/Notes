@@ -1,0 +1,121 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Space and Time Trade-Offs}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+Space and time trade-offs are a common occurrence in computer science. The trade-off is a situation where one must
+sacrifice one aspect of a system to gain another. In computer science, the trade-off is usually between space and time.
+Space refers to the amount of memory used by a program, while time refers to the amount of time it takes to run the
+program. In general, the more space a program uses, the faster it will run, and vice versa. The main idea in computing
+is to pre-process the problem's input at least somewhat and store additional information obtained to speed up solving
+the problem afterwards. This is called \textbf{input enhancement}. \\
+Another technique that exploits space-for-time trade-offs uses extra space to facilitate faster and more flexible access
+to the data. This is called \textbf{prestructuring }. \\
+
+\chapter{Input Enhancement}
+
+\section{Sorting By Counting}
+\dfn{Comparison Counting Sort}{
+  For each element $x$ in the input array $A$, count the number of elements less than $x$ and store this count in
+  an auxiliary array $C$. Then, use the counts in $C$ to place each element in its correct position in the output
+  array $B$.
+}
+\begin{algorithm}[H]
+  \caption{ComparisonCountingSort $ \left( A \left[ 0 \ldots n - 1 \right]  \right) $}
+  \Comment{}\\
+  \Comment{Sorts an array by comparison counting }\\
+  \Comment{Input: An array $A \left[ 0 \ldots n - 1 \right] $ of orderable elements} \\
+  \Comment{Output: Array $S \left[ 0 \ldots n - 1 \right] $ of $A$'s elements sorted in nondecreasing order} \\
+  \begin{algorithmic}[1]
+    \For{ $i \gets 0$ to $n-1$}
+    \State  $\text{Count}_i \gets 0 $
+    \EndFor
+    \For{ $i \gets 0$ to $n - 2$}
+    \For{ $j \gets i + 1$ to $n - 1$}
+    \If{ $A_i > A_j$}
+    \State $\text{Count}_i \gets \text{Count}_i + 1$
+    \Else
+    \State $ \text{Count}_j \gets \text{Count}_j + 1$
+    \EndIf
+    \EndFor
+    \EndFor
+    \For{ $i \gets 0 $ to $n - 1$}
+    \State $S_{\text{Count}_i} \gets A_i $
+    \EndFor
+    \State \Return $S$
+  \end{algorithmic}
+\end{algorithm}
+The time complexity of this algorithm is $O \left( n^2 \right) $, where $n$ is the number of elements in the input array
+
+\subsection{Distribution Counting Sort}
+The idea of the comparison counting sort performs better when the elements to be sorted belong to a small set of
+variables and the number of elements to be sorted is large. Given the array:
+
+\begin{table}[H]
+
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    $13$ & $11$ & $12$ & $13$ & $12$ & $12$ \\
+    \hline
+  \end{tabular}
+\end{table}
+Whose elements are known to belong to the set $\{11, 12, 13\} $, and should not be overwritten in the process of
+sorting. The frequency and distribution arrays are:
+\begin{table}[H]
+  \centering
+  \begin{tabular}{c c c c}
+    \hline
+    Array Values        & $11$ & $12$ & $13$ \\
+    \hline
+    Frequencies         & $1$  & $3$  & $2$  \\
+    Distribution values & $1$  & $4$  & $6$  \\
+    \hline
+  \end{tabular}
+\end{table}
+Now the distribution values indicate the final position of the last element of the corresponding value in the sorted
+array.
+
+\begin{algorithm}[H]
+  \caption{DistributionCountingSort $ \left( A \left[ 0 \ldots n - 1 \right], l, u \right) $}
+  \Comment{}\\
+  \Comment{Sorts an array of integers from a limited range by distribution counting} \\
+  \Comment{Input: An array $A \left[ 0 \ldots n - 1 \right] $ of integers between $l$ and $u$ ($l \leq u$)} \\
+  \Comment{Output: Array $S \left[ 0 \ldots n - 1 \right] $ of $A$'s elements sorted in nondecreasing order} \\
+  \begin{algorithmic}[1]
+    \For{ $j \gets 0$ to $u - l$}
+    \State $D_j \gets 0$ \Comment{Initialize frequencies}
+    \EndFor
+    \For{ $i \gets 0$ to $n - 1$}
+    \State  $D_{A_i - l} \gets D_{A_i - l} + 1$ \Comment{Compute frequencies}
+    \EndFor
+    \For{ $j \gets 1$ to $u - l$}
+    \State  $D_j \gets D_{j- 1} + D_j$
+    \EndFor
+    \For{ $i \gets n - 1$ down to $0$}
+    \State $j \gets A_i - l$
+    \State $S_{D_j - 1} \gets A_i$
+    \State $D_j \gets D_j - 1$
+    \EndFor
+    \State \Return $S$
+  \end{algorithmic}
+\end{algorithm}
+
+\end{document}

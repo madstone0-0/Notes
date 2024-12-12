@@ -1,0 +1,243 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Transform And Conquer}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+Transform and conquer is a general algorithm design strategy that is based on the following steps:
+\begin{description}
+  \item[Transform] The problem instance is modified to make it more amenable to solution.
+  \item[Conquer] The transformed problem is solved.
+\end{description}
+
+There are three major forms of this strategy:
+\begin{enumerate}
+  \item Transformation to a simpler / more convenient problem / Instance Simplification
+  \item Transformation to a different representation of the same problem instance / Representation Change
+  \item Transformation to an instance of a different problem for which a solution is known / Problem Reduction
+\end{enumerate}
+
+\chapter{Instance Simplification}
+
+\section{Presorting}
+
+Presorting stems from the observation that many problems are easier to solve if the input is sorted. The general
+approach is to sort the input and then solve the problem on the sorted input. For example the problem of determining
+element uniqueness in an array can be solved by sorting the array and then checking for duplicates:
+
+\begin{algorithm}[H]
+  \caption{CheckUniqueness $ \left( A \right) $}
+  \Comment{}\\
+  \Comment{Determines if all the elements in the array $A$ only appear once} \\
+  \Comment{Input: An array $A$ of size $n$ of orderable elements} \\
+  \Comment{Output: Returns true if $A$ has no duplicates and false otherwise} \\
+  \begin{algorithmic}[1]
+    \State Sort $A$
+    \For{ $i \gets 0$ to $n - 2$}
+    \If{$A_i = A_{ i + 1 }$}
+    \State \Return false
+    \EndIf
+    \EndFor
+    \State \Return true
+  \end{algorithmic}
+\end{algorithm}
+The running time of this algorithm is the sum of the time spent to sort the array and the time spent to check for duplicates.
+
+\section{Balanced Search Trees}
+
+\chapter{Representation Change}
+
+\section{Heaps and Heap sort}
+\dfn{Heap}{
+  A heap is a complete binary tree that satisfies the heap property, which is the value of each root node is more
+  extreme or equal to the values of its child nodes, according to some total order. Technically these are conditions
+  that should be met:
+  \begin{itemize}
+    \item The Shape property - A heap is a complete binary tree.
+    \item The parental dominance / Heap property - The value of each node is more extreme than or equal to the value of its children.
+  \end{itemize}
+}
+
+The properties of a heap are:
+\begin{itemize}
+  \item There exists exactly one essentially complete binary tree with $n$ nodes, whose height is equal to $\left\lfloor
+          \log_2 n\right\rfloor$
+  \item The root of a heap always contains the most extreme element
+  \item A node of heap considered with all its descendants is also a heap
+  \item A heap can be implemented as an array, where:
+        \begin{itemize}
+          \item The parent nodes will be in the first $\left\lfloor n / 2 \right\rfloor$ positions of the array while the
+                leaf nodes will be in the last $\left\lceil n / 2 \right\rceil$ positions of the array.
+          \item The children of a node at position $i$, ( $0 \leq i \leq \left\lfloor n / 2 \right\rfloor - 1$) are in
+                positions $2i + 1$ and $2i + 2$, and the parent of a node at position $i$ will be in the position
+                $\left\lfloor (i - 1) / 2 \right\rfloor$
+        \end{itemize}
+\end{itemize}
+
+In constructing a heap from a list of given keys there are two main methods:
+\begin{itemize}
+  \item Bottom-up construction - This method starts with a heap of size 1 and then adds elements one by one to the heap
+        until all the elements are added. This method is $O(n)$
+  \item Top down construction - This method starts with an empty heap and then adds elements one by one to the heap until
+        all the elements are added. This method is $O(n \log n)$
+\end{itemize}
+
+\subsection{Bottom-Up}
+\begin{algorithm}[H]
+  \caption{HeapBottomUp $ \left( H \left[ 0\ldots n-1 \right]  \right) $}
+  \Comment{}\\
+  \Comment{Constructs a heap from a given array of elements} \\
+  \Comment{Input: An array $H \left[ 0 \ldots n \right] $ of orderable items} \\
+  \Comment{Output: A heap $H \left[ 0 \ldots n \right] $} \\
+  \begin{algorithmic}[1]
+    \For{ $i \gets \left\lfloor (n-1 ) / 2 \right\rfloor$ down to $0$}
+    \State $k \gets i$; $v \gets H_k$
+    \State heap $ \gets $ false
+    \While{ not heap and $2k + 1 \leq n-1$}
+    \State $j \gets 2k + 1$
+    \If{ $j + 1 < n$}
+    \If{ $H_j < H_{j + 1}$} $j \gets j + 1$
+    \EndIf
+    \EndIf
+    \If{ $v \geq H_j$}
+    \State heap $ \gets $ true
+    \Else
+    \State $H_k \gets H_j$; $k \gets j$
+    \EndIf
+    \EndWhile
+    \State $H_k \gets v$
+    \EndFor
+  \end{algorithmic}
+\end{algorithm}
+Examining the time complexity of the algorithm, assuming $n = 2^{k} - 1$ the largest possible number of nodes occurs on
+each level. The height of the tree is $\left\lfloor \log n \right\rfloor$ and more specifically in this case:
+\begin{align*}
+  h & = \left\lfloor \log n \right\rfloor                       \\
+    & = \log \left( 2^{k} - 1 \right)                           \\
+    & = \left\lceil \log \left( n + 1 \right)  \right\rceil - 1
+    & = k - 1                                                   \\
+\end{align*}
+Each key on level $i$ is compared with the key on level $i + 1$, and in the worst case will travel to the leaf level
+$h$. As moving keys down requires two comparisons, one to find the larger child then another to compare with the parent,
+the total number of comparisons involving a key on level $i$ is $2 \left( h - i \right) $, i.e. the total number of key
+comparisons is:
+\begin{align*}
+  T \left( n \right) & = \displaystyle\sum_{i = 0}^{h - 1} \displaystyle\sum_{ \text{level $i$ keys}} 2 \left( h - i \right) \\
+                     & = \displaystyle\sum_{i = 0}^{h - 1} 2 \left( h - i \right) \times 2^{i}                               \\
+                     & = 2 \left( n - \log \left( n + 1 \right)  \right)                                                     \\
+                     & = 2n - 2\log \left( n + 1 \right)                                                                     \\
+\end{align*}
+Therefore the time complexity of the algorithm is $O(n)$
+
+\subsection{Top-Down}
+\begin{algorithm}[H]
+  \caption{HeapTopDown $ \left( H \left[ 0 \ldots n-1 \right]\right) $}
+  \Comment{}\\
+  \Comment{Constructs a heap from a given array of elements} \\
+  \Comment{Input: An array $H \left[ 0 \ldots n \right] $ of orderable items} \\
+  \Comment{Output: A heap $H \left[ 0 \ldots n \right] $} \\
+  \begin{algorithmic}[1]
+    \State $L \gets \left[ \right]$ \Comment{The heap to be constructed}
+    \For{ each element $e$ in $H$}
+    \State $L_{k} \gets e$ \Comment{Where $k$ is the current size of the heap}
+    \State $i \gets k$
+    \While{ $i > 0$}
+    \State $ j \gets \left\lfloor (i - 1) / 2 \right\rfloor$
+    \If{ $L_j \geq L_i$}
+    \State break
+    \Else
+    \State swap $L_i$ and $L_j$
+    \State $i \gets j$
+    \EndIf
+    \EndWhile
+    \EndFor
+    \State \Return $L$
+
+  \end{algorithmic}
+\end{algorithm}
+The top down approach involves successive insertions of each element in the array into an already constructed heap. This
+is less efficient then the bottom up approach as the each insertion is done $ \log n$ time and each element of the $n$
+elements in the array need to be inserted. Therefore the time complexity of the top down approach is $O(n \log n)$
+
+\subsection{Extreme Key Deletion}
+Due to the characteristics of a heap, the most extreme key is always the root of the heap. Therefore to delete the most
+extreme elements we go through the following steps:
+\begin{enumerate}
+  \item Exchange the root with the last element $K$ of the heap
+  \item Decrease the heap size by one
+  \item Heapify the  new tree by sifting $K$ down the tree until the heap property is restored
+\end{enumerate}
+Since this operation is done down the height of the tree, the time complexity of this operation is $O(\log n)$
+
+\subsection{Heap Sort}
+The heap sort algorithm uses the properties of a heap to sort an array of elements. The algorithm is in two parts:
+\begin{description}
+  \item[Heap Construction]: Construct a heap from the array of elements
+  \item[Extreme Deletions]: Delete the most extreme element from the heap for $n - 1$ times
+\end{description}
+This results in the elements of the array being deleted in a sorted order. The time complexity of the algorithm is also
+comprised of these two parts, constructing the heap using the most efficient method takes $n$ and removing all the keys
+from the constructed heap takes $n \log n$ resulting in a time complexity of $O(n \log n)$
+
+\section{Horner's Rule and Binary Exponentiation}
+
+
+\chapter{Problem Reduction}
+
+\section{Introduction}
+The main idea behind problem reduction is reducing an problem with an unknown solution to another problem with a known
+solution.
+
+\section{Computing the Least Common Multiple}
+
+The least common multiple of two numbers $a$ and $b$ is defined as the smallest integer that is divisible by $a$ and
+$b$. This problem can be reduced by finding the GCD of the numbers $a$ and $b$ which would obviously be a divisor of
+both number, then multiplying the two numbers to find the largest common multiple of the two numbers. By dividing the
+GCD of the two numbers from the product of the two numbers we get the least common multiple of the two numbers.
+\[
+  \text{lcm} \left( a, b \right) = \frac{a \times b}{ \text{gcd} \left( a, b \right) }
+\]
+Where the GCD can be found in $O(\log \min \left( a, b \right) )$ time using the Euclidean algorithm.
+
+\section{Counting Paths in a Graph}
+The problem of counting the number of paths between two nodes in a graph can be solved with problem reduction by
+recognizing that the number of paths between the node $i$ and the node $j$ is equals the $ \left( i, j \right) $th
+element of $A^{k}$, where $A$ is the adjacency matrix of the graph and $k$ is the number of edges between the two nodes.
+This reduces the problem to matrix multiplication which can be solved in $O(n^2.81)$  time.
+\\
+For example given the adjacency matrix of a graph:
+\[
+  A = \begin{bmatrix}
+    0 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 0 \\
+    1 & 0 & 0 & 1 \\
+    1 & 0 & 1 & 0 \\
+  \end{bmatrix}
+\]
+To get all the counts of the number of paths between the nodes of length $3$ we can calculate $A^{3}$:
+\[
+  A^{3} = \begin{bmatrix}
+    2 & 3 & 4 & 4 \\
+    3 & 0 & 1 & 1 \\
+    4 & 1 & 2 & 3 \\
+    4 & 1 & 3 & 2 \\
+  \end{bmatrix}
+\]
+
+\end{document}

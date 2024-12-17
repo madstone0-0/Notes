@@ -1,0 +1,1109 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Boolean Algebra For Circuits}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+\usepackage{karnaugh-map}
+\usepackage{booktabs}
+\usepackage{circuitikz}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{ {assets/} }
+\usetikzlibrary{arrows, positioning, shapes.gates.logic.US, circuits.logic.US, shapes.misc, automata}
+
+\tikzset{
+->, % makes the edges directed
+% >=stealth’, % makes the arrow heads bold
+node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+initial text=$ $, % sets the text that appears on the start arrow
+}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+
+% D-Latch shape
+\pgfdeclareshape{dlatch}{
+  % Define size using minimum width and height
+  \savedanchor\northeast{%
+    \pgfmathsetlength\pgf@x{\pgfshapeminwidth}%
+    \pgfmathsetlength\pgf@y{\pgfshapeminheight}%
+    \pgf@x=0.5\pgf@x
+    \pgf@y=0.5\pgf@y
+  }
+  \savedanchor\southwest{%
+    \pgfmathsetlength\pgf@x{\pgfshapeminwidth}%
+    \pgfmathsetlength\pgf@y{\pgfshapeminheight}%
+    \pgf@x=-0.5\pgf@x
+    \pgf@y=-0.5\pgf@y
+  }
+  
+  % Define anchors similar to a rectangle
+  \anchor{center}{\pgfpointorigin}
+  \anchor{north}{\northeast \pgf@x=0pt}
+  \anchor{east}{\northeast \pgf@y=0pt}
+  \anchor{south}{\southwest \pgf@x=0pt}
+  \anchor{west}{\southwest \pgf@y=0pt}
+  \anchor{north east}{\northeast}
+  \anchor{north west}{\northeast \pgf@x=-\pgf@x}
+  \anchor{south west}{\southwest}
+  \anchor{south east}{\southwest \pgf@x=-\pgf@x}
+  
+  % Define ports for D latch
+  \anchor{D}{
+    \pgf@process{\northeast}%
+    \pgf@x=-1\pgf@x%
+    \pgf@y=0.5\pgf@y%
+  }
+  \anchor{EN}{
+    \pgf@process{\northeast}%
+    \pgf@x=-1\pgf@x%
+    \pgf@y=-0.5\pgf@y%
+  }
+  \anchor{Q}{
+    \pgf@process{\northeast}%
+    \pgf@y=0.5\pgf@y%
+  }
+  \anchor{Qn}{
+    \pgf@process{\northeast}%
+    \pgf@y=-0.5\pgf@y%
+  }
+
+  % Draw the latch body and port labels
+  \backgroundpath{
+    % Rectangle representing the latch body
+    \pgfpathrectanglecorners{\southwest}{\northeast}
+    
+    % Draw port labels
+    \begingroup
+    \tikzset{latch/port labels}
+    \tikz@textfont
+
+    \pgf@anchor@dlatch@D
+    \pgftext[left,base,at={\pgfpoint{\pgf@x}{\pgf@y}},x=\pgfshapeinnerxsep]{\raisebox{-0.75ex}{D}}
+
+    \pgf@anchor@dlatch@EN
+    \pgftext[left,base,at={\pgfpoint{\pgf@x}{\pgf@y}},x=\pgfshapeinnerxsep]{\raisebox{-0.75ex}{EN}}
+
+    \pgf@anchor@dlatch@Q
+    \pgftext[right,base,at={\pgfpoint{\pgf@x}{\pgf@y}},x=-\pgfshapeinnerxsep]{\raisebox{-0.75ex}{Q}}
+
+    \pgf@anchor@dlatch@Qn
+    \pgftext[right,base,at={\pgfpoint{\pgf@x}{\pgf@y}},x=-\pgfshapeinnerxsep]{\raisebox{-0.75ex}{$\overline{\mbox{Q}}$}}
+
+    \endgroup
+  }
+}
+
+% Data Flip Flip (DFF) shape
+\pgfdeclareshape{dff}{
+  % The 'minimum width' and 'minimum height' keys, not the content, determine
+  % the size
+  \savedanchor\northeast{%
+    \pgfmathsetlength\pgf@x{\pgfshapeminwidth}%
+    \pgfmathsetlength\pgf@y{\pgfshapeminheight}%
+    \pgf@x=0.5\pgf@x
+    \pgf@y=0.5\pgf@y
+  }
+  % This is redundant, but makes some things easier:
+  \savedanchor\southwest{%
+    \pgfmathsetlength\pgf@x{\pgfshapeminwidth}%
+    \pgfmathsetlength\pgf@y{\pgfshapeminheight}%
+    \pgf@x=-0.5\pgf@x
+    \pgf@y=-0.5\pgf@y
+  }
+  % Inherit from rectangle
+  \inheritanchorborder[from=rectangle]
+
+  % Define same anchor a normal rectangle has
+  \anchor{center}{\pgfpointorigin}
+  \anchor{north}{\northeast \pgf@x=0pt}
+  \anchor{east}{\northeast \pgf@y=0pt}
+  \anchor{south}{\southwest \pgf@x=0pt}
+  \anchor{west}{\southwest \pgf@y=0pt}
+  \anchor{north east}{\northeast}
+  \anchor{north west}{\northeast \pgf@x=-\pgf@x}
+  \anchor{south west}{\southwest}
+  \anchor{south east}{\southwest \pgf@x=-\pgf@x}
+  \anchor{text}{
+    \pgfpointorigin
+    \advance\pgf@x by -.5\wd\pgfnodeparttextbox%
+    \advance\pgf@y by -.5\ht\pgfnodeparttextbox%
+    \advance\pgf@y by +.5\dp\pgfnodeparttextbox%
+  }
+
+  % Define anchors for signal ports
+  \anchor{D}{
+    \pgf@process{\northeast}%
+    \pgf@x=-1\pgf@x%
+    \pgf@y=.5\pgf@y%
+  }
+  \anchor{CLK}{
+    \pgf@process{\northeast}%
+    \pgf@x=-1\pgf@x%
+    \pgf@y=-.66666\pgf@y%
+  }
+  \anchor{CE}{
+    \pgf@process{\northeast}%
+    \pgf@x=-1\pgf@x%
+    \pgf@y=-0.33333\pgf@y%
+  }
+  \anchor{Q}{
+    \pgf@process{\northeast}%
+    \pgf@y=.5\pgf@y%
+  }
+  \anchor{Qn}{
+    \pgf@process{\northeast}%
+    \pgf@y=-.5\pgf@y%
+  }
+  \anchor{R}{
+    \pgf@process{\northeast}%
+    \pgf@x=0pt%
+  }
+  \anchor{S}{
+    \pgf@process{\northeast}%
+    \pgf@x=0pt%
+    \pgf@y=-\pgf@y%
+  }
+  % Draw the rectangle box and the port labels
+  \backgroundpath{
+    % Rectangle box
+    \pgfpathrectanglecorners{\southwest}{\northeast}
+    % Angle (>) for clock input
+    \pgf@anchor@dff@CLK
+    \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+    \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+    \pgf@xc=\pgf@x \pgf@yc=\pgf@y
+    \pgfmathsetlength\pgf@x{1.6ex} % size depends on font size
+    \advance\pgf@ya by \pgf@x
+    \advance\pgf@xb by \pgf@x
+    \advance\pgf@yc by -\pgf@x
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@yb}}
+    \pgfpathlineto{\pgfpoint{\pgf@xc}{\pgf@yc}}
+    \pgfclosepath
+
+    % Draw port labels
+    \begingroup
+    \tikzset{flip flop/port labels} % Use font from this style
+    \tikz@textfont
+
+    \pgf@anchor@dff@D
+    \pgftext[left,base,at={\pgfpoint{\pgf@x}{\pgf@y}},x=\pgfshapeinnerxsep]{\raisebox{-0.75ex}{D}}
+
+    \pgf@anchor@dff@CE
+    \pgftext[left,base,at={\pgfpoint{\pgf@x}{\pgf@y}},x=\pgfshapeinnerxsep]{\raisebox{-0.75ex}{CE}}
+
+    \pgf@anchor@dff@Q
+    \pgftext[right,base,at={\pgfpoint{\pgf@x}{\pgf@y}},x=-\pgfshapeinnerxsep]{\raisebox{-.75ex}{Q}}
+
+    \pgf@anchor@dff@Qn
+    \pgftext[right,base,at={\pgfpoint{\pgf@x}{\pgf@y}},x=-\pgfshapeinnerxsep]{\raisebox{-.75ex}{$\overline{\mbox{Q}}$}}
+
+    \pgf@anchor@dff@R
+    \pgftext[top,at={\pgfpoint{\pgf@x}{\pgf@y}},y=-\pgfshapeinnerysep]{R}
+
+    \pgf@anchor@dff@S
+    \pgftext[bottom,at={\pgfpoint{\pgf@x}{\pgf@y}},y=\pgfshapeinnerysep]{S}
+    \endgroup
+  }
+}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Logic Gates}
+
+\section{AND Gate}
+
+\begin{table}[h!]
+  \caption{And Gate Truth table}\label{tab:and}
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $x$ & $y$ & $x \cdot y$ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & 0           \\
+      0   & 1   & 0           \\
+      1   & 0   & 0           \\
+      1   & 1   & 1           \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{description}
+  \item[Sum of Products]  - $x \cdot y$
+  \item[Product of Sums] - $ \left( x + y \right) \left( x + \overline{y} \right) \left( \overline{x} + y \right)   $
+        or $ \left( \overline{x} + \overline{y} \right) $
+\end{description}
+
+\section{OR Gate}
+
+\begin{table}[h!]
+  \caption{Or Gate Truth Table}\label{tab:or}
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $x$ & $y$ & $x + y$ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & 0       \\
+      0   & 1   & 1       \\
+      1   & 0   & 1       \\
+      1   & 1   & 1       \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{description}
+  \item[Sum of Products]  - $\overline{x}y + x\overline{y} + xy $ or $\overline{x}\overline{y}$
+  \item[Product of Sums] - $x + y$
+\end{description}
+
+\section{NOT Gate}
+
+\begin{table}[h!]
+  \caption{Not Gate Truth table}\label{tab:not}
+  \begin{center}
+    \begin{tabular}{|c|c|}
+      \hline
+      $x$ & $\overline{x}$ \\ [0.5ex]
+      \hline
+      \hline
+      1   & 0              \\
+      0   & 1              \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+\begin{description}
+  \item[Sum of Products]  - $\overline{x}$
+  \item[Product of Sums] - $x$
+\end{description}
+
+\section{NAND Gate}
+
+\begin{table}[h!]
+  \caption{NAND Gate Truth table}\label{tab:nand}
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $x$ & $y$ & $\overline{x \cdot y}$ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & 1                      \\
+      0   & 1   & 1                      \\
+      1   & 0   & 1                      \\
+      1   & 1   & 0                      \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{description}
+  \item[Sum of Products]  - $\overline{x}\overline{y} + \overline{x}y + x\overline{y}$ or $xy$
+  \item[Product of Sums] - $\overline{x} + \overline{y}$
+\end{description}
+
+\section{NOR Gate}
+
+\begin{table}[h!]
+  \caption{NOR Gates Truth table}\label{tab:nor}
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $x$ & $y$ & $\overline{x + y}$ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & 1                  \\
+      0   & 1   & 0                  \\
+      1   & 0   & 0                  \\
+      1   & 1   & 0                  \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{description}
+  \item[Sum of Products]  - $\overline{x}\overline{y}$
+  \item[Product of Sums] - $ \left( x + \overline{y} \right) \left( \overline{x} + y \right) + \left( \overline{x} +
+          \overline{y} \right)   $ or $ x + y$
+\end{description}
+
+\section{XOR Gate}
+
+\begin{table}[h!]
+  \caption{XOR Gate Truth table}\label{tab:xor}
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $x$ & $y$ & $x \oplus y$ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & 0            \\
+      0   & 1   & 1            \\
+      1   & 0   & 1            \\
+      1   & 1   & 0            \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{description}
+  \item[Sum of Products]  - $\overline{x}y + x\overline{y}$
+  \item[Product of Sums] - $ \left( x + y \right) \left( \overline{x} + \overline{y} \right)  $
+\end{description}
+
+\section{XNOR Gate}
+
+\begin{table}[h!]
+  \caption{XNOR Gate Truth table}\label{tab:xnor}
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $x$ & $y$ & $\overline{x \oplus y}$ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & 1                       \\
+      0   & 1   & 0                       \\
+      1   & 0   & 0                       \\
+      1   & 1   & 1                       \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{description}
+  \item[Sum of Products]  - $\overline{x}\overline{y} + xy$
+  \item[Product of Sums] - $ \left( x + \overline{y} \right) \left( \overline{x} + y \right)  $
+\end{description}
+
+\chapter{Karnaugh Maps}
+
+\dfn{Karnaugh Map}{
+  A method of simplifying Boolean algebra expressions using a visual representation of the truth table.
+}
+
+A Karnaugh map represents the truth table of a Boolean expression in a grid. The grid is divided into cells, each of which represents a possible combination of inputs. The cells are arranged so that adjacent cells differ by only one input. The cells are then grouped together to form a simplified expression.
+For a two variable expression the resulting truth table is as follows:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $x_1$ & $x_2$ & $F$   \\ [0.5ex]
+      \hline
+      \hline
+      0     & 0     & $m_1$ \\
+      0     & 1     & $m_2$ \\
+      1     & 0     & $m_3$ \\
+      1     & 1     & $m_4$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+And the resulting Karnaugh map is as follows:
+:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $A$ & $B$ & $F$ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & 1   \\
+      0   & 1   & 1   \\
+      1   & 0   & 0   \\
+      1   & 1   & 1   \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+\begin{figure}[H]
+\centering
+\begin{karnaugh-map}[2][2][1][$A$][$B$]
+\minterms{0,1,3}
+\autoterms[0]
+\end{karnaugh-map}
+\end{figure}
+We can the group the cells as $00, 01$ and $01, 11$.
+
+For a three variable expression the resulting truth table is as follows:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c c c|c|}
+      \hline
+      $A$ & $B$ & $C$ & $F$ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & 0   & 0   \\
+      0   & 0   & 1   & 1   \\
+      0   & 1   & 0   & 0   \\
+      0   & 1   & 1   & 0   \\
+      1   & 0   & 0   & 1   \\
+      1   & 0   & 1   & 1   \\
+      1   & 1   & 0   & 1   \\
+      1   & 1   & 1   & 0   \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\begin{karnaugh-map}[4][2][1][ $BC$][ $A$]
+\minterms{1, 4, 5, 6}
+\maxterms{0, 2, 3, 7}
+\implicant{1}{5}
+\implicant{4}{5}
+\implicantedge{4}{4}{6}{6}
+\end{karnaugh-map}
+\end{figure}
+
+Simplified:
+\begin{align*}
+  A\cdot \overline{B} + \overline{B}\cdot C + A \cdot B & = A\overline{B} + A B + \overline{B} C \\
+                                                        & = A + \overline{B}C                    \\
+\end{align*}
+
+\chapter{Sequential Logic Circuits}
+
+\section{Combinational Logic Circuits vs Sequential Logic Circuits}
+\subsection{Combinational Logic Circut}
+\dfn{Combinational Logic Circuits}{
+  A combinational logic circuit is a circuit that has no memory. The output of the circuit is determined by the current input only.
+}
+
+At any time the output of a combinational logic circuit depends only on the inputs, with no regard to the previous state
+of the circuit. Time is not a factor in the output of the circuit.
+
+\subsection{Sequential Logic Circuits}
+\dfn{Sequential Logic Circuits}{
+  A sequential logic circuit is a circuit that has memory. The output of the circuit is determined by the current input and the previous state of the circuit.
+}
+
+A combinational circuit with feedback through stored memory defined as state. Outputs depend on inputs and the state of
+the circuit, i.e. the previous outputs, with the next state being a function of the current state and the current
+inputs.
+
+\subsection{Full Adder}
+
+\nparagraph{Combinational Adder}
+
+A combinational 4 bit adder requires 4 full adders connected in series, also known as the ripple carry adder, where each
+carry out propagates to the next full adder and one adder is active at a time.
+
+% Combinational 4-bit full adder
+% \begin{figure}[h]
+%   \begin{circuitikz}
+%     \draw
+%
+%     ;
+%
+%   \end{circuitikz}
+% \end{figure}
+
+\nparagraph{Sequential Adder}
+
+A sequential 4 bit adder uses just one full adder and a single bit memory element to store the carry out from the
+previous addition. The carry out is fed back into the carry in of the full adder. A clock signal is used to control the
+addition process and 4 clock cycles are required to add two 4 bit numbers with each bit being added each cycle.
+
+\section{Types of Sequential Logic Circuits}
+
+There are two types of sequential logic circuits:
+\begin{itemize}
+  \item Synchronous - Where the behaviour of the circuit depends on the input signal at discrete instances of time and
+        the output changes only at these instances, i.e. a single clock signal with one clock.
+  \item Asynchronous - Where the behaviour of the circuit depends on the input signal at any instance of time and
+        the order the inputs change, i.e. multiple clock signals with multiple clocks.
+\end{itemize}
+
+\subsection{Synchronous Sequential Circuits}
+
+\dfn{Synchronous Sequential Circuits}{
+  Employs a synchronizing signal called a clock signal to control the operation of the circuit. The clock signal is a
+  periodic train of pulses that oscillates between high (1) and low (0) states. The clock signal determines when computation
+  occurs and when the output is updated, while other signals determine what changes will occur.
+}
+
+The storage elements (memory) used in clocked sequential circuits are called flip-flops. Each flip-flop can store one
+bit of information 0, 1 and a circuit may use many flip-flops to define the circuit's state. Each flip-flop state
+updates only with pulses of the clock signal.
+
+\nparagraph{Storage Elements}
+
+A storage element can maintain a binary state indefinitely, until directed by an input signal to switch state, with the
+main difference between storage element types being the number of inputs they have and how the inputs affect the binary
+state.\\
+The two main types of storage elements are:
+\begin{itemize}
+  \item Latches - Level-sensitive, used in asynchronous sequential circuits.
+  \item Flip-Flops - Edge-sensitive, built with latches.
+\end{itemize}
+
+
+\section{Latches}
+
+\dfn{Latch}{
+  A latch is a sequential logic circuit that has two stable states and can be used to store one bit of information.
+  Changes state during the level of the clock signal, making them level-sensitive and unstable, i.e. not suitable for
+  high speed applications.
+}
+
+A latch is the most basic memory element and can store either a 0  or 1 and can be built using two NOR or NAND gates.
+
+\subsection{SR Latch}
+\dfn{SR Latch}{
+  A simple latch that has two inputs, Set (S) and Reset (R), and two outputs, Q and $\overline{Q}$. The latch is
+  level-sensitive and can be used to store one bit of information.
+}
+
+\begin{figure}[h]
+  \centering
+  \begin{circuitikz}
+    \draw
+    (0,2) node[nor port] (NOR1) {}
+    (1,2) node[anchor=east] {Q}
+    (1,0) node[anchor=east] {$\overline{Q}$}
+    (0,0) node[nor port] (NOR2) {}
+    (NOR1.in 1) node[anchor=east] { $R$ (Reset)}
+    (NOR2.in 2) node[anchor=east] { $S$ (Set)}
+    (NOR1.out) -- ++(0,-0.5) -- ($(NOR2.in 1) +(0,0.5)$) -- (NOR2.in 1)
+    (NOR2.out) -- ++(0,+0.5) -- ($(NOR1.in 2) +(0,-0.5)$)--(NOR1.in 2)
+    ;
+  \end{circuitikz}
+\end{figure}
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c c|c|c|}
+      \hline
+      $S$ & $R$ & $Q$ & $\overline{Q}$ \\ [0.5ex]
+      \hline
+      \hline
+      1   & 0   & 1   & 0              \\
+      0   & 0   & 1   & 0              \\
+      \hline
+      0   & 1   & 0   & 1              \\
+      0   & 0   & 0   & 1              \\
+      \hline
+      1   & 1   & 0   & 0              \\
+      \hline
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption{Function table}
+\end{table}
+
+When $S = R = 0$, $Q$ stays the same and $S = R = 1$ is undefined. And implemented with NAND gates the SR latch becomes
+the $\overline{S} \overline{R}$ latch:
+
+\begin{figure}[h!]
+  \centering
+  \begin{circuitikz}
+    \draw
+    (0,2) node[nand port] (NAND1) {}
+    (1,2) node[anchor=east] {Q}
+    (1,0) node[anchor=east] {$\overline{Q}$}
+    (0,0) node[nand port] (NAND2) {}
+    (NAND1.in 1) node[anchor=east] { $R$ (Reset)}
+    (NAND2.in 2) node[anchor=east] { $S$ (Set)}
+    (NAND1.out) -- ++(0,-0.5) -- ($(NAND2.in 1) +(0,0.5)$) -- (NAND2.in 1)
+    (NAND2.out) -- ++(0,+0.5) -- ($(NAND1.in 2) +(0,-0.5)$)--(NAND1.in 2)
+    ;
+  \end{circuitikz}
+\end{figure}
+
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c c|c|c|}
+      \hline
+      $S$ & $R$ & $Q$ & $\overline{Q}$ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 1   & 1   & 0              \\
+      1   & 1   & 1   & 0              \\
+      \hline
+      1   & 0   & 0   & 1              \\
+      1   & 1   & 0   & 1              \\
+      \hline
+      0   & 0   & 1   & 1              \\
+      \hline
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption{Function table}
+\end{table}
+
+\subsection{SR Latch with Clock}
+
+\begin{figure}[h!]
+  \centering
+  \begin{circuitikz}
+    \draw
+    (0,0) node[nand port] (NANDI1) {}
+    (0,2) node[nand port] (NANDI2) {}
+    (-2, 1) node[anchor=east](C) {C (Clock)}
+    (NANDI1.in 2) node[anchor=east] { $R$ (Reset)}
+    (NANDI2.in 1) node[anchor=east] { $S$ (Set)}
+
+
+    (2,0) node[nand port] (NAND2) {}
+    (2,2) node[nand port] (NAND1) {}
+    (3,2) node[anchor=east] {Q}
+    (3,0) node[anchor=east] {$\overline{Q}$}
+
+    (NANDI2.out) -- (NAND1.in 1)
+    (NANDI1.out) -- (NAND2.in 2)
+    (C) -| (NANDI1.in 1)
+    (C) -| (NANDI2.in 2)
+
+    (NAND1.out) -- ++(0,-0.5) -- ($(NAND2.in 1) +(0,0.5)$) -- (NAND2.in 1)
+    (NAND2.out) -- ++(0,+0.5) -- ($(NAND1.in 2) +(0,-0.5)$)--(NAND1.in 2)
+    ;
+  \end{circuitikz}
+\end{figure}
+
+A SR latch can be modified to control when it changes, using a clock signal. The clock signal is used to enable the
+latch, and the latch only changes state when the clock signal is high. Given by the function table below:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c c c|c|}
+      \hline
+      $C$ & $S$ & $R$ & Next state of $Q$    \\ [0.5ex]
+      \hline
+      \hline
+      0   & X   & X   & No change            \\
+      1   & 0   & 0   & No change            \\
+      1   & 0   & 1   & $Q = 0$; Reset state \\
+      1   & 1   & 0   & $Q = 1$; Set state   \\
+      1   & 1   & 1   & Undefined            \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Where $C$ is the clock signal. When $C = 0$ the values of $S$ and $R$ have no effect on the latch and only when $C = 1$,
+does the latch change state. \\
+
+We can eliminate the undefined state by ensuring $S$ and $R$ are never high at the same time. This can be done by using
+a single input $D$ for both $S$ and $R$ and inverting the signal going to $R$ ensuring both signals are always inverse.
+This gives us the D (Data) Latch:
+\begin{figure}[h!]
+  \centering
+  \begin{circuitikz}
+    \draw
+    (2,0) node[nand port] (NANDI1) {}
+    (2,2) node[nand port] (NANDI2) {}
+    (-1,-0.5) node[not port] (NOT) {}
+    (-3, 1) node[anchor=east](C) {C (Clock)}
+    (-4,2) node[anchor=east](D) { $D$}
+    (NANDI1.in 2) node[anchor=east] { $R$ }
+    (NANDI2.in 1) node[anchor=east] { $S$ }
+
+    (D) -| (NANDI2.in 1)
+    (D) -| (NOT.in)
+    (NOT.out) -- (NANDI1.in 2)
+
+    (4,0) node[nand port] (NAND2) {}
+    (4,2) node[nand port] (NAND1) {}
+    (5,2) node[anchor=east] {Q}
+    (5,0) node[anchor=east] {$\overline{Q}$}
+
+    (NANDI2.out) -- (NAND1.in 1)
+    (NANDI1.out) -- (NAND2.in 2)
+    (C) -| (NANDI1.in 1)
+    (C) -| (NANDI2.in 2)
+
+    (NAND1.out) -- ++(0,-0.5) -- ($(NAND2.in 1) +(0,0.5)$) -- (NAND2.in 1)
+    (NAND2.out) -- ++(0,+0.5) -- ($(NAND1.in 2) +(0,-0.5)$)--(NAND1.in 2)
+    ;
+  \end{circuitikz}
+\end{figure}
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $C$ & $D$ & Next State of $Q$    \\ [0.5ex]
+      \hline
+      \hline
+      0   & X   & No change            \\
+      1   & 0   & $Q = 0$; Reset state \\
+      1   & 1   & $Q = 1$; Set state   \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+
+\subsection{Problems with Latches}
+
+\begin{itemize}
+  \item Latches are transparent, i.e. the state keeps changing as long as the clock signal is high, due to this
+        uncertain they are not reliable for storage.
+  \item Latches are level-sensitive, i.e. the output changes when the input changes, making them unsuitable for high
+        speed applications.
+\end{itemize}
+
+\section{Flip-Flops}
+
+\dfn{Flip-Flop}{
+  A flip-flop is a sequential logic circuit that has two stable states and can be used to store one bit of information.
+  Changes state during the edge of the clock signal, making them edge-sensitive and stable, i.e. suitable for high speed applications.
+  All flip-flops are made from latches.
+}
+
+Flip-flops only change state when the clock signal changes state in either way, i.e. from 0 to 1 (\textbf{Rising Edge})
+or 1 to 0 (\textbf{Falling Edge}) and do not change state when the clock signal is stable. Flip -flops can be made from
+latches using a slave-master configuration. Where the master latch receives external inputs and the slave latch receives
+input from the master latch, where depending on the clock signal only one latch is active at a time. If $C = 1$ i.e. the
+clock signal is high, the master latch is enabled and the inputs are stored in the master latch. If $C = 0$ i.e. the
+clock signal low, the slave latch is enabled and the inputs are generated using the slave latch. \\
+
+The delay of logic gates inside the flip-flop is crucial to the operation of the flip-flop, as the output of the
+flip-flop depends on the inputs and the previous state of the flip-flop. The delay of the flip-flop is the time taken
+for the output to change after the clock signal changes state. There are two timings to consider when designing a flip-flop:
+\begin{description}
+  \item[Setup Time $T_s$]  - The minimum time during which $D$ input must be maintained before the clock transition
+        occurs.
+  \item [Hold Time $T_h$] - The minimum time during which $D$ input must be maintained after the clock transition occurs.
+\end{description}
+
+\subsection{SR Flip-Flop}
+
+\dfn{SR Flip-Flop}{
+  Built using two latches (Master $C = 1$ and Slave $C = 0$), $Q$ is sampled at the falling edge of the clock signal.
+  Data is entered during the rising edge of the clock pulse, but the output is not reflected until the falling edge when
+  $Q$ is sampled.
+}
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{*{8}{wc{7mm}}} \toprule
+      \multicolumn{4}{c}{Master} &
+      \multicolumn{4}{c}{Slave}                                                       \\
+      \cmidrule(lr){1-4}\cmidrule(lr){5-8}
+      $C$                        & $S$ & $R$ & $Y$ & $\overline{C}$ & $S$ & $R$ & $Q$ \\ \midrule
+      0                          & 0   & 0   & 0   & 1              & 0   & 0   & 0   \\
+      0                          & 0   & 1   & 0   & 1              & 0   & 1   & 0   \\
+      0                          & 1   & 0   & 0   & 1              & 1   & 0   & 0   \\
+      0                          & 1   & 1   & 0   & 1              & 1   & 1   & 0   \\
+      1                          & 0   & 0   & 0   & 0              & 0   & 0   & 0   \\
+      1                          & 0   & 1   & 0   & 0              & 0   & 1   & 0   \\
+      1                          & 1   & 0   & 0   & 0              & 1   & 0   & 0   \\
+      1                          & 1   & 1   & 0   & 0              & 1   & 1   & 0   \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\subsection{D Flip-flop}
+
+\dfn{D Flip-Flop}{
+  A D flip-flop is a simple flip-flop that has one input, D (Data), and one output, Q. The D flip-flop is edge-sensitive
+  and changes state at the rising edge of the clock signal. The D flip-flop is used to store one bit of information.
+}
+
+\subsection{JK Flip-flop}
+\subsection{T Flip-flop}
+
+
+\section{Characteristic Tables and Characteristic / State equations}
+
+\subsection{Characteristic Tables}
+\dfn{State tables}{
+  Defines the operation of a flip-flop in a tabular form. Where the next state is defined in terms of the current state
+  and the inputs, Where:
+  \begin{description}
+    \item[Current State $  Q \left( t \right)  $] - Refers to the current state before the clock signal
+          causes a change in state.
+    \item[Next State $  Q \left( t + 1 \right) $] - Refers to the state after the clock signal causes a
+          change in state.
+  \end{description}
+}
+
+The Characteristic table for a SR flip-flop is as follows:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $S$ & $R$ & $Q \left( t + 1 \right) $ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & $Q \left( t \right) $     \\
+      0   & 1   & 0                         \\
+      1   & 0   & 1                         \\
+      1   & 1   & Invalid                   \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+D Flip-flop:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c|c|}
+      \hline
+      $D$ & $Q \left( t \right) $ \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0                     \\
+      1   & 1                     \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+T Flip-flop:
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c|c|}
+      \hline
+      $T$ & $Q \left( t \right) $            \\ [0.5ex]
+      \hline
+      \hline
+      0   & $Q \left( t \right) $            \\
+      1   & $\overline{Q \left( t \right) }$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+And the JK flip-flop:
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c c|c|}
+      \hline
+      $J$ & $K$ & $Q \left( t + 1 \right) $        \\ [0.5ex]
+      \hline
+      \hline
+      0   & 0   & $Q \left( t \right) $            \\
+      0   & 1   & 0                                \\
+      1   & 0   & 1                                \\
+      1   & 1   & $\overline{Q \left( t \right) }$ \\
+      \hline
+    \end{tabular}
+    \caption{JK Flip-flop State table}
+  \end{center}
+\end{table}
+
+\subsection{State Equations}
+\dfn{State equation}{
+  Defines the operation of a flip-flop in an algebraic form
+}
+
+The state equation for the SR Flip-flop is:
+\[
+  Q \left( t + 1 \right)  = S + \overline{R} Q \left( t \right)
+\]
+D Flip-flop is:
+\[
+  Q \left( t + 1 \right) = D
+\]
+JK Flip-flop:
+\[
+  Q \left( t + 1 \right)  = J \overline{Q \left( t \right) } + \overline{K}Q \left( t \right)
+\]
+And the T Flip-flop:
+\[
+  Q \left( t + 1 \right) = T \oplus Q \left( t \right)
+\]
+
+\subsection{Excitation Tables}
+
+\dfn{Excitation Tables}{
+  Defines the inputs required to change the state of a flip-flop. Where:
+  \begin{description}
+    \item[Current State $  Q \left( t \right)  $] - Refers to the current state before the clock signal
+          causes a change in state.
+    \item[Next State $  Q \left( t + 1 \right) $] - Refers to the state after the clock signal causes a
+          change in state.
+  \end{description}
+}
+
+D Flip-flop:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      $Q \left( t + 1 \right) $ & $D$ & Operation \\ [0.5ex]
+      \hline
+      \hline
+      0                         & 0   & Reset     \\
+      1                         & 1   & Set       \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+SR Flip-flop:
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c c|c c|c|}
+      \hline
+      $Q \left( t \right) $ & $Q \left( t + 1 \right) $ & $S$ & $R$ & Operation \\ [0.5ex]
+      \hline
+      \hline
+      0                     & 0                         & 0   & X   & No change \\
+      0                     & 1                         & 1   & 0   & Set       \\
+      1                     & 0                         & 0   & 1   & Reset     \\
+      1                     & 1                         & X   & 0   & No change \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+JK Flip-flop:
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c c|c c|c|}
+      \hline
+      $Q \left( t \right) $ & $Q \left( t + 1 \right) $ & $J$ & $K$ & Operation \\ [0.5ex]
+      \hline
+      \hline
+      0                     & 0                         & 0   & X   & No change \\
+      0                     & 1                         & 1   & X   & Set       \\
+      1                     & 0                         & X   & 1   & Reset     \\
+      1                     & 1                         & X   & 0   & No change \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+T Flip-flop:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      $Q \left( t + 1 \right) $        & $T$ & Operation  \\ [0.5ex]
+      \hline
+      \hline
+      $Q \left( t \right) $            & 0   & No change  \\
+      $\overline{Q \left( t \right) }$ & 1   & Complement \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\subsection{Direct Inputs}
+
+Some flip-flops have asynchronous inputs to set / reset their states independently of the clock.
+
+\section{Analysis of Sequential Circuits}
+
+Analysis describes what a given circuit will do. The behaviour of a clocked sequential circuit is determined from the
+inputs and outputs and the states of the Flip-flop. The steps involved in analysis are:
+\begin{itemize}
+  \item Obtain state equations.
+  \item Fill the state table.
+  \item Draw the state diagram.
+\end{itemize}
+
+For example given the sequential circuit below:
+\begin{figure}[H]
+  \begin{center}
+    % \includegraphics[width=0.3\textwidth]{diag1.png}
+  \end{center}
+\end{figure}
+
+First we obtain the state equations:
+\begin{align*}
+  A & = xA + xB                                 \\
+  B & = \overline{A}x                           \\
+  y & = \left( B + A \right) \cdot \overline{x} \\
+\end{align*}
+
+Then we fill the state table:
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{*{6}{wc{7mm}}} \toprule
+      \multicolumn{2}{c}{Present State} &
+      \multicolumn{1}{c}{Input}         &
+      \multicolumn{2}{c}{Next State}    &
+      \multicolumn{1}{c}{Output}                                      \\
+
+      \cmidrule(lr){1-3}\cmidrule(lr){4-6}
+      $A$                               & $B$ & $x$ & $A$ & $B$ & $y$ \\
+      \midrule
+      0                                 & 0   & 0   & 0   & 0   & 0   \\
+      0                                 & 0   & 1   & 0   & 1   & 0   \\
+
+      0                                 & 1   & 0   & 0   & 0   & 1   \\
+      0                                 & 1   & 1   & 1   & 1   & 0   \\
+
+      1                                 & 0   & 0   & 0   & 0   & 1   \\
+      1                                 & 0   & 1   & 1   & 0   & 0   \\
+
+      1                                 & 1   & 0   & 0   & 0   & 1   \\
+      1                                 & 1   & 1   & 1   & 0   & 0   \\
+
+      \midrule
+      \bottomrule
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Finally we draw the state diagram:
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \node[state, initial] (s0) {00};
+    \node[state, right of=s0] (s1) {01};
+    \node[state, below of=s1] (s2) {10};
+    \node[state, below of=s0] (s3) {11};
+
+    \draw
+    (s0) edge[loop above] node{0 / 0} (s0)
+    (s0) edge[above] node{1 / 1} (s1)
+    (s1) edge[bend right] node{0 / 1} (s0)
+    (s1) edge[below] node{1 / 0} (s3)
+    (s2) edge[above] node{0 / 1} (s0)
+    (s2) edge[loop above] node{1 / 0} (s2)
+    (s3) edge[below] node{0 / 1} (s0)
+    (s3) edge[above] node{1 / 0} (s2)
+    ;
+  \end{tikzpicture}
+\end{figure}
+
+
+
+
+\subsection{Types of Finite State Machines}
+
+There are two types of finite state machines and therefore two types of sequential circuits:
+\begin{description}
+  \item[Moore Machine]  - The output depends only on the current state.
+  \item[Mealy Machine] - The output depends on both the current state and the inputs.
+\end{description}
+
+\section{State Reduction and Assignment}
+\dfn{State Reduction}{
+  The process of reducing  the number of states of a state machine while keeping the input-output behaviour unchanged.
+}
+
+Given the finite state machine below:
+\begin{figure}[H]
+  \begin{center}
+    % \includegraphics[width=0.3\textwidth]{stateDiag1.png}
+  \end{center}
+\end{figure}
+
+
+
+\end{document}
+

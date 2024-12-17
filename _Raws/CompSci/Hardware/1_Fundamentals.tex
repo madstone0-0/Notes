@@ -142,6 +142,24 @@ the system. Assembly language programs are translated into machine code by an as
 
 \section{General Terminology}
 
+\dfn{Transistor}{
+  The fundamental building block of modern electronic devices, acting as a switch for electrical signals.
+}
+
+\dfn{Latency}{
+  The speed at which memory can be accessed. The time taken for a CPU to access memory.
+}
+
+\dfn{Throughput}{
+  The amount of data that can be processed in a given amount of time. The number of instructions that can be executed per
+  second.
+}
+
+\dfn{Cache Hit Ratio}{
+  The percentage of memory accesses that are found in the cache. A high cache hit ratio indicates that the cache is
+  effectively storing frequently accessed data.
+}
+
 \dfn{RISC}{
   Reduced Instruction Set Computer. A computer architecture that uses a small set of simple instructions that can be executed
   quickly. RISC architectures are designed to be efficient and fast by simplifying the instruction set and reducing the
@@ -180,6 +198,35 @@ Improvements in processor performance has slowed down due to the following facto
   \item The unchanging power budgets for microprocessors.
   \item  The replacement of the single processor with several energy-efficient processors.
   \item The limits to multiprocessing to achieve Amdahl's Law \ref{amdahl}.
+\end{itemize}
+
+\chapter{Basic Building Blocks}
+
+\begin{itemize}
+  \item Electrons - Negatively charged particles that flow through electrical circuits.
+  \item Voltage - The difference in electric potential between two points in an electrical circuit.
+  \item Current - The flow of electrons through an electrical circuit.
+\end{itemize}
+
+\chapter{Transformation Hierarchy}
+
+\begin{itemize}
+  \item Problem
+  \item Algorithm
+  \item Program /Language
+  \item System Software
+  \item Software / Hardware Interface
+        \begin{itemize}
+          \item ISA
+                \begin{itemize}
+                  \item RISC - Modular relatively simple instructions, energy efficient.
+                  \item CISC - Complex instructions, more powerful, less energy efficient.
+                \end{itemize}
+        \end{itemize}
+  \item Micro-architecture
+  \item Logic
+  \item Devices
+  \item Electrons
 \end{itemize}
 
 \chapter{Classes of Computers}
@@ -356,5 +403,236 @@ instruction and data streams. The four categories are:
 This taxonomy is not mutually exclusive, and many computers can be classified into more than one category. For example, a GPU can be classified as both SIMD and MIMD.
 
 \chapter{Defining Computer Architecture}
+
+\section{Instruction Set Architecture}
+
+\dfn{Instruction Set Architecture (ISA)}{
+  The boundary between software and hardware. The actual instructions the computer/processor receives to process data
+}
+
+\begin{description}
+  \item[Class of ISA] - Most modern ISAs are classified as general-purpose register architectures, where operands are
+        either registers or memory locations.
+  \item[Memory Addressing]- All modern computers use byte addressing to access memory operands, with some architectures
+        like ARMv8, requiring objects to me aligned. An access to an object of size $s$ bytes at byte address $A$ is aligned
+        if $A \mod s = 0$, alignment allows for generally faster accessing.
+  \item[Addressing Modes] - In addition to specifying registers and constant operands addressing modes specify the
+        address of a memory object. For example RISC-V have addressing modes including Register, Immediate,
+        Displacement.
+  \item[Types and size of operands]- Most ISAs support operand sizes of 8-bit (ASCII characters), 16-bit (Unicode
+        character / Half word), 32-bit (integer / word), 64-bit (long integer/double word), IEEE 754 floating point
+        32-bit (single precision), and 64-bit (double precision).
+  \item[Operations] -
+\end{description}
+
+\chapter{Energy Efficiency and Systems Architecture}
+
+\dfn{System Architecture}{
+  The way in which the components of a computer system are organized and connected. System architecture includes the design
+  of the CPU, memory, IO, and bus, as well as the way in which these components interact with each other.
+}
+
+\section{Energy Efficiency}
+
+\dfn{Energy Efficiency}{
+  The ability of a computer system to perform tasks using the least amount of energy possible. Energy efficiency is
+  important for reducing the environmental impact of computing and lowering the cost of operating computer systems.
+}
+(DVFS)
+\dfn{Performance}{
+  The speed at which a computer system can perform tasks. Performance is typically measured in terms of the number of
+  instructions executed per second or the amount of data processed per second.
+  \[
+    \text{Performance} = \frac{1}{\text{Execution Time}}
+  \]
+}
+
+\subsection{Metrics}
+
+\nparagraph{Power Usage Effectiveness (PUE)}
+\dfn{Power Usage Effectiveness (PUE)}{
+  Used to evaluate the energy efficiency of a data centre. The ratio of the total facility power to the power used by the equipment in a data centre. PUE is used to measure the
+  energy efficiency of a data centre, with lower values indicating higher efficiency. Always greater than 1.
+  \[
+    \text{PUE} = \frac{\text{Total Facility Power}}{\text{IT Equipment Power}}
+  \]
+}
+
+\nparagraph{Green Energy Usage}
+\dfn{Green Energy Usage}{
+  The percentage of energy consumed by a computer system that comes from renewable sources, such as solar, wind, or
+  hydroelectric power. Reflects the system's environmental sustainability.
+}
+
+\nparagraph{Performance Per Watt (PPW)}
+\dfn{Performance Per Watt (PPW)}{
+  The amount of performance that can be achieved per watt of power consumed. PPU is used to measure the energy efficiency
+  of a computer system, with higher values indicating higher efficiency.
+  \[
+    \text{PPW} = \frac{\text{Computational performance}}{\text{Power Consumed}}
+  \]
+}
+
+\nparagraph{Energy Star Rating}
+\dfn{Energy Star Rating}{
+  A certification program indicating that a computer or other electronic devices meet specific energy efficiency
+  guidelines set by the U.S. Environmental Protection Agency (EPA). Devices with a higher star rating are more energy
+  efficient.
+}
+
+\nparagraph{Carbon Footprint}
+\dfn{Carbon Footprint}{
+  The total amount of greenhouse gas emissions, measured in Carbon Dioxide equivalents ( $CO_2$ ), produced directly or
+  indirectly by a computer system.
+}
+
+\nparagraph{Dynamic Voltage and Frequency Scaling (DVFS)}
+\dfn{Dynamic Voltage and Frequency Scaling }{
+  Allows for the adjustment of a system's voltage and frequency based on workload requirements. Measures how effectively
+  a system can scale its power consumption in response to varying workloads.
+}
+
+\nparagraph{Idle Power Consumption}
+\dfn{Idle Power Consumption}{
+  The power consumption of a computer system when it is in an idle or low-activity state. Low idle power consumption is
+  vital especially in situations where the system spends significant time in idle states.
+}
+
+\nparagraph{Energy Consumption Index (ECI)}
+\dfn{Energy Consumption Index}{
+  The total energy consumed by a computer system over a specific period of time, often normalized to a standard unit of
+  time. Provides a holistic view of the energy consumption of a system and useful in long term sustainability
+  assessments.
+}
+
+\nparagraph{Energy Efficiency Ratio (EER)}
+\dfn{Energy Efficiency Ratio }{
+  Measures the energy efficiency of a computer system by comparing the useful work output to the energy input. Commonly
+  used in terms of cooling units within data centres.
+  \[
+    \text{EER} = \frac{\text{Useful Work Output}}{\text{Energy Input}}
+  \]
+}
+
+\nparagraph{Power Supply Efficiency (PSE)}
+\dfn{Power Supply Efficiency (PSE)}{
+  Assesses the efficiency of a computer system's power supply unit. The higher the better
+  \[
+    \text{PSE} = \frac{\text{Output Power}}{\text{Input Power}} \times 100
+  \]
+}
+
+\nparagraph{Renewable Energy Factor (REF)}
+\dfn{Renewable Energy Factor (REF)}{
+  Quantifies the proportion of a data centre's energy that comes from renewable sources.
+}
+
+\section{Importance of Efficient Designs in Modern Systems}
+
+\begin{description}
+  \item[Resource Optimization] - Efficient design minimizes resource usage (CPU, Memory, energy), while maximizing
+        performance.
+  \item[Cost Saving] - Optimization resource utilization leads to less overall resources being using saving cost and
+        increasing the overall return on investment (ROI) for organizations.
+  \item[Environmental Impact] - Promotes sustainability by reducing energy consumption and carbon footprint.
+  \item[User Experience] - Enhances system responsiveness and reliability leading to a better user experience.
+\end{description}
+
+\chapter{Key Design Principles}
+
+\section{Modularity}
+\dfn{Modularity}{
+  Involves breaking a system down into independent, interchangeable and cohesive parts, with each part performing a
+  specific function. This allows for independent development, testing and maintenance of different parts of system
+  reducing complexity, i.e. Abstraction of various of the systems various operations.
+}
+
+Modularity is important as it allows for enhanced flexibility, scalability, re usability and maintainability of a
+system.
+
+\section{Scalability}
+\dfn{Scalability}{
+  A system's ability to handle an increasing workload by adding resources without significantly affecting performance. A
+  well modularized system can be easily scaled by replicating or adding more modules targeting the specific performance
+  bottleneck.
+}
+
+Scalability ensures that a system can grow and adapt to changing requirements and effectively utilize available
+resources as workload increases.
+
+\section{Reliability}
+\dfn{Reliability}{
+  A measure of a system's ability to perform its intended function consistently and accurately with minimal downtime
+  over time. Reliability is achieved through redundancy / backup systems, fault tolerance, and error detection and
+  recovery..
+}
+
+Reliability is critical for mission-critical systems, such as servers, where downtime can result in significant consequences.
+
+\section{Maintainability}
+\dfn{Maintainability}{
+  The ease at which a system can be repaired, updated, or modified. A well-designed system is easy to maintain and
+  requires minimal effort to fix issues or add new features. Maintainability is achieved through good documentation,
+  debugging tools, and modular design.
+}
+
+Maintainability reduces downtime, the cost of ownership, and extends the life of a system.
+
+\section{Balancing Trade-offs}
+
+\chapter{Digital Systems}
+
+\section{Introduction}
+
+\dfn{Digital System}{
+  A system that processes digital signals, which are discrete, quantized representations of analog signals. Digital
+  systems use binary digits (bits) to represent data and perform operations on that data.
+}
+
+\subsection{Digital vs. Analog Systems}
+
+\nparagraph{Analog Systems}
+
+Analog systems process analog signals, which are continuous, variable representations of physical quantities. Analog systems
+are used in applications where continuous data is required, such as audio and video processing, and control systems.
+
+\nparagraph{Digital Systems}
+
+Digital systems process digital signals, which are discrete, quantized representations of analog signals. Digital systems
+are used in applications where discrete data is required, such as computing, communication, and signal processing.
+
+\nparagraph{Digital vs. Analog Signals}
+
+\begin{description}
+  \item[Digital Systems] - Process digital signals, which are discrete, quantized representations of analog signals.
+  \item[Analog Systems] - Process analog signals, which are continuous, variable representations of physical quantities.
+\end{description}
+
+\subsection{Analog to Digital Conversion (ADC)}
+
+\dfn{Sampling}{
+  Sampling is the process of converting an analog signal into a digital signal by measuring the value of the analog signal at regular intervals.
+}
+
+\dfn{Quantization}{
+  Quantization is the process of converting the continuous values of an analog signal into discrete values by rounding
+  the measured values to the nearest digital value / The process of converting an analog signal into a digital signal by measuring the value of the analog signal at regular intervals and rounding the measured values to the nearest digital value.
+}
+
+To convert an analog signal into a digital signal, the analog signal is sampled at regular intervals, and the measured values are quantized to the nearest digital value. The resulting digital signal is a discrete, quantized representation of the original analog signal.
+
+\subsection{Signal Representation}
+
+\dfn{Logic HIGH}{
+  A logic HIGH signal is a logic system where a voltage level higher than 0 volts is considered a 1 and a voltage level
+  of 0 volts is considered a 0.
+}
+
+\dfn{Logic LOW}{
+  A logic LOW signal is a logic system where a voltage level of 0 volts is considered a 1 and a voltage level higher than
+  0 volts is considered a 0.
+}
+
+Logic LOW is mostly used by euro-centric systems, while Logic HIGH is used by American systems.
 
 \end{document}

@@ -1,0 +1,293 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Number Systems}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\section{Number System}
+\dfn{Number System}{
+  A set of numbers together with one or more operations that are defined on those numbers.
+}
+
+The most commonly used number system before the advent of computers was the decimal number system derived from the
+Hindu-Arabic number system. The decimal number system is a base-10 number system that uses 10 digits: 0, 1, 2, 3, 4, 5,
+6, 7, 8, 9. With the advent of computers, other number systems have been developed to suit the needs of the computer
+such as:
+\begin{itemize}
+  \item Binary number system - base-2, 1s and 0s
+  \item Hexadecimal number system - base-16, 0-9 and A-F
+  \item Octal number system - base-8, 0-7
+\end{itemize}
+
+These number systems are also refereed to as weighted / positional number systems as the value of a digit depends on its
+position in the number. I.e. a number $D$
+
+\begin{align*}
+  D & =  d_{n-1} w_{n-1} + d_{n-2} w_{n-2} + \ldots + d_1 w_1 + d_0 w_0 \\
+    & =  \displaystyle\sum_{i=0}^{n-1} d_i w_i
+\end{align*}
+
+Consists of $n$ digits with each at a position $i$. Every digit is a associated with a fixed weight $w_i$ based on its
+position. The weight $w$ is derived from the base of the number system.
+
+\subsection{Radix / Base}
+
+\dfn{Radix / Base}{
+  The number of digits in a number system including zero. This tells us the number of unique digits in the number
+  system and the value of the base. The weight of a number system is derived from the radix, where:
+  \[
+    w_i = \text{radix}^i
+  \]
+  Therefore the left most digit, usually called the \textbf{Most Significant Digit}, has a weight of $n-1$ and therefore
+  the highest weight and the right most digit, the \textbf{Least Significant Digit}, has a weight of 0.
+}
+
+For example in the decimal number system, the radix/base is 10, $\{0,1,2,3,4,5,6,7,8,9\} $, and the weights are $w_i = 10^i$.
+
+Therefore in the decimal number system the number 9203 is represented as:
+\begin{align*}
+  D & = 9 \times 10^{3} + 2 \times 10^{2} + 0 \times 10^{1} + 3 \times 10^{0} \\
+    & = 9000 + 200 + 0 + 3                                                    \\
+    & = 9203
+\end{align*}
+
+
+When a number is fractional, the digits to the left of the radix point have positive position indices and the digits to
+the right of the radix point have negative position indices. Where a number $D$ has $n$ integral digits and $m$
+fractional digits, the value of the number is given by:
+\begin{align*}
+  D & = d_{n-1} w_{n-1} + d_{n-2} w_{n-2} + \ldots + d_1 w_1 + d_0 w_0\, \cdot \, d_{-1} w_{-1} + d_{-2} w_{-2} + \ldots
+  d_{-m} w_{-m}                                                                                                          \\
+    & = \displaystyle\sum_{i=-m}^{n-1} d_i w_i                                                                           \\
+\end{align*}
+
+Therefore a fractional number in the decimal number system such as $57.6528$ is represented as:
+\begin{align*}
+  D & =  5 \times 10^{1} + 7 \times 10^{0} + 6 \times 10^{-1} + 5 \times 10^{-2} + 2 \times 10^{-3} + 8 \times 10^{-4} \\
+    & =  50 + 7 + 0.6 + 0.05 + 0.002 + 0.0008                                                                          \\
+    & =  57.6528
+\end{align*}
+
+A number $D$ with base $r$ can be denoted as $D_r$ or $ \left( D \right)_r $, i.e. $57.6528_{10}$ or $(57.6528)_{10}$.
+
+\chapter{Common Number Systems}
+
+\section{Binary Number System}
+
+\dfn{Binary Number System}{
+  A base-2 number system that uses two digits: 0 and 1. The weights of the binary number system are derived from the
+  radix, where:
+  \[
+    w_i = 2^i
+  \]
+  A \textbf{bi}nary digi\textbf{t} is called a \textbf{bit}. The left most bit is the \textbf{Most Significant Bit (MSB)} and
+  the right most bit is the \textbf{Least Significant Bit (LSB)}.
+}
+
+A decimal equivalent of a binary number can be found using the same method as the decimal number system. i.e.:
+\[
+  D = \displaystyle\sum_{i=0}^{n-1} d_i w_i
+\]
+Where $w_i = 2^{i}$. For example the binary number $1011_2$ is represented as:
+\begin{align*}
+  D & = 1 \times 2^{3} + 0 \times 2^{2} + 1 \times 2^{1} + 1 \times 2^{0} \\
+    & = 8 + 0 + 2 + 1                                                     \\
+    & =  11_{10}
+\end{align*}
+
+And for a fractional binary number such as $110.11_2$:
+\begin{align*}
+  D & = 1 \times 2^{2} + 1 \times 2^{1} + 0 \times 2^{0} + 1\times 2^{-1} + 1 \times 2^{-2} \\
+    & = 4 + 2 + 0 + 0.5 + 0.25                                                              \\
+    & = 6.75_{10}                                                                           \\
+\end{align*}
+
+\section{Octal Number System}
+
+\dfn{Octal Number System}{
+  A base-8 number system that uses eight digits: 0, 1, 2, 3, 4, 5, 6, 7. The weights of the octal number system are
+  derived from the radix, where:
+  \[
+    w_i = 8^i
+  \]
+}
+
+Each octal digit can represent 3 binary digits. Therefore an octal number can be converted to a binary number by converting
+each octal digit to a 3-bit binary number. For example the octal number $57_8$ is represented as:
+\begin{align*}
+  57 & = 101\, 111 \\
+     & = 101111_2
+\end{align*}
+
+And to decimal:
+\begin{align*}
+  D & = 5 \times 8^{1} + 7 \times 8^{0} \\
+    & = 40 + 7                          \\
+    & = 47                              \\
+\end{align*}
+
+\section{Hexadecimal Number System}
+
+\dfn{Hexadecimal Number System}{
+  A base-16 number system that uses sixteen digits: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F. The weights of the
+  hexadecimal number system are derived from the radix, where:
+  \[
+    w_i = 16^i
+  \]
+}
+
+All the letters are used to represent the numbers 10 to 15.
+Each hexadecimal digit can represent 4 binary digits. Therefore a hexadecimal number can be converted to a binary number
+by converting each hexadecimal digit to a 4-bit binary number. For example the hexadecimal number $A3F_{16}$ is
+represented as:
+\begin{align*}
+  A3F & = 1010\,0011\,1110 \\
+      & = 101000111110     \\
+\end{align*}
+
+And in decimal:
+\begin{align*}
+  D & = 10 \times 16^{2} + 3 \times 16^{1} + 15 \times 16^{0} \\
+    & = 10 \times 256 + 3 \times 16 + 15                      \\
+    & = 2623_{10}                                             \\
+\end{align*}
+
+And $9E1_{16}$ in decimal:
+\begin{align*}
+  D & = 9 \times 16^{2} + 14 \times 16^{1} + 1 \times 16^{0} \\
+    & = 2529_{10}                                            \\
+\end{align*}
+
+\section{Common Notions}
+
+\begin{itemize}
+  \item The number of possible digits in a number system is the base of the number system.
+  \item The smallest digit in a number system is 0 and the largest digit is $r-1$ where $r$ is the base of the number system.
+  \item Adding 1 to the largest digit in a number system always results in a carry, i.e. a result of $ \left( 10 \right) $
+  \item For any number system with base $r$ adding 1 to the largest $n$ digit number results in a carry to the $n-1$
+        digit, i.e. $ \left( r^{n} \right) $
+  \item  The largest $n$-digit number in a number system with base $r$ is $r^{n} - 1$
+  \item The largest value that can be expressed in $m$ fractional digits is $1 - r^{-m}$
+  \item The largest value that can be expressed in $n$ integral digits and $m$ fractional digits is $r^{n} - r^{-m}$
+  \item The total number of unique integers that can be expressed in a number system with base $r$ is $r^{n}$ and
+        the total number of both integers and fractions is $r^{n} + r^{-m}$
+\end{itemize}
+
+\chapter{Arithmetic Operations}
+
+\section{Binary Arithmetic}
+
+\subsection{Addition}
+
+\dfn{Addition}{
+  A binary operation, as in requiring two operands, that sums two numbers. The addition operation comprises of two
+  operands the augend and the addend.
+}
+
+\begin{align*}
+  \begin{split}
+    0\,0\,1\,1 \\
+    0\,1\,0\,1 \\
+    \hline
+    0\,1\,1\,0
+  \end{split}
+\end{align*}
+
+\chapter{Conversions}
+
+\section{Decimal}
+
+\subsection{Decimal to Binary}
+\begin{itemize}
+  \item Divide the decimal number by 2 and note the remainder.
+  \item Repeat the process until the quotient is 0.
+  \item The sequence of remainders in reverse order is the binary equivalent of the decimal number.
+\end{itemize}
+
+\ex{}{
+  \qs{}{
+    Convert the decimal number 57 to binary.
+  }
+
+  \sol{
+    \begin{align*}
+      57 \div 2 & = 28 \text{ remainder } 1 \\
+      28 \div 2 & = 14 \text{ remainder } 0 \\
+      14 \div 2 & = 7 \text{ remainder } 0  \\
+      7 \div 2  & = 3 \text{ remainder } 1  \\
+      3 \div 2  & = 1 \text{ remainder } 1  \\
+      1 \div 2  & = 0 \text{ remainder } 1  \\
+    \end{align*}
+    $\therefore$ 57 in binary is $111001$
+  }
+}
+
+\subsection{Decimal to Octal}
+
+\begin{itemize}
+  \item Divide the decimal number by 8 and note the remainder.
+  \item Repeat the process until the quotient is 0.
+  \item The sequence of remainders in reverse order is the octal equivalent of the decimal number.
+\end{itemize}
+
+\ex{}{
+  \qs{}{
+    Convert the decimal number 57 to octal.
+  }
+
+  \sol{
+    \begin{align*}
+      57 \div 8 & = 7 \text{ remainder } 1 \\
+      7 \div 8  & = 0 \text{ remainder } 7 \\
+    \end{align*}
+    $\therefore$ 57 in octal is $71$
+  }
+}
+
+\subsection{Decimal to Hexadecimal}
+
+\begin{itemize}
+  \item Divide the decimal number by 16 and note the remainder.
+  \item Repeat the process until the quotient is 0.
+  \item The sequence of remainders in reverse order is the octal equivalent of the decimal number.
+\end{itemize}
+
+\ex{}{
+  \qs{}{
+    Convert the decimal number 57 to hexadecimal.
+  }
+
+  \sol{
+    \begin{align*}
+      57 \div 16 & = 3 \text{ remainder } 9 \\
+      57 \div 16 & = 0 \text{ remainder } 3 \\
+    \end{align*}
+    $\therefore$ 57 in hexadecimal is $39$
+  }
+}
+
+\subsection{Decimal Fraction}
+
+\begin{itemize}
+  \item Multiply the decimal fraction by the base of the number system.
+  \item  Repeat the process until the fractional part is 0 or the desired precision is reached.
+  \item The sequence of remainders in forward order is the binary equivalent of the decimal number.
+\end{itemize}
+
+\end{document}

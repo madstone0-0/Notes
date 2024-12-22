@@ -1,0 +1,62 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\usepackage{graphicx}
+\graphicspath{ {assets/} }
+\title{\Huge{Homework 3}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+  Implement the following C code in MIPS assembly. Show the contents of the stack after the function call to the
+  function "compare" is made. Assume that the stack pointer is originally at address 0x7FFFFFFc.
+}
+
+\sol{
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=0.8\textwidth]{q1.png}
+    \end{center}
+  \end{figure}
+}
+
+\qs{}{
+  Implement the following C code in the table in MIPS assembly. Suppose that fib\_iter was called with n = 4, show the
+  contents of the stack after the function call to the function "fib\_iter" is made. Assume that the stack pointer is originally at address 0x7ffffffc.
+}
+
+\sol{
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=0.8\textwidth]{q2.png}
+    \end{center}
+  \end{figure}
+}
+
+\qs{}{
+  \begin{enumerate}
+    \item  Translate function f into MIPS assembly code, using the MIPS calling convention. If you need to use register
+          \$t0 through \$t7, use the lower-numbered registers first.
+    \item Right before your function f of Problem 3 returns, what do you know about contents of registers \$ra, and \$sp? Keep in mind that we know what the entire function f looks like, but for function func we only know its declaration.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=0.8\textwidth]{q3.png}
+    \end{center}
+  \end{figure}
+}
+
+
+
+\end{document}

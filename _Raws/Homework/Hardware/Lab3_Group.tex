@@ -1,0 +1,148 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{karnaugh-map}
+\usepackage{parskip}
+\title{\Huge{Lab 3}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+% \begin{table}[h!]
+%   \begin{center}
+%     \begin{tabular}{|c c c c c|c|}
+%       \hline
+%       $V_1$ & $V_2$ & $V_3$ & $V_4$ & $V_5$ & $A$ \\ [0.5ex]
+%       \hline \hline
+%       0     & 0     & 0     & 0     & 0     & 0   \\
+%       0     & 0     & 0     & 0     & 1     & 0   \\
+%       0     & 0     & 0     & 1     & 0     & 0   \\
+%       0     & 0     & 0     & 1     & 1     & 0   \\
+%       0     & 0     & 1     & 0     & 0     & 0   \\
+%       0     & 0     & 1     & 0     & 1     & 0   \\
+%       0     & 0     & 1     & 1     & 0     & 0   \\
+%       0     & 0     & 1     & 1     & 1     & 1   \\
+%       0     & 1     & 0     & 0     & 0     & 0   \\
+%       0     & 1     & 0     & 0     & 1     & 0   \\
+%       0     & 1     & 0     & 1     & 0     & 0   \\
+%       0     & 1     & 0     & 1     & 1     & 1   \\
+%       0     & 1     & 1     & 0     & 0     & 0   \\
+%       0     & 1     & 1     & 0     & 1     & 1   \\
+%       0     & 1     & 1     & 1     & 0     & 1   \\
+%       0     & 1     & 1     & 1     & 1     & 1   \\
+%       1     & 0     & 0     & 0     & 0     & 0   \\
+%       1     & 0     & 0     & 0     & 1     & 0   \\
+%       1     & 0     & 0     & 1     & 0     & 0   \\
+%       1     & 0     & 0     & 1     & 1     & 1   \\
+%       1     & 0     & 1     & 0     & 0     & 0   \\
+%       1     & 0     & 1     & 0     & 1     & 1   \\
+%       1     & 0     & 1     & 1     & 0     & 1   \\
+%       1     & 0     & 1     & 1     & 1     & 1   \\
+%       1     & 1     & 0     & 0     & 0     & 0   \\
+%       1     & 1     & 0     & 0     & 1     & 1   \\
+%       1     & 1     & 0     & 1     & 0     & 1   \\
+%       1     & 1     & 0     & 1     & 1     & 1   \\
+%       1     & 1     & 1     & 0     & 0     & 1   \\
+%       1     & 1     & 1     & 0     & 1     & 1   \\
+%       1     & 1     & 1     & 1     & 0     & 1   \\
+%       1     & 1     & 1     & 1     & 1     & 1   \\
+%       \hline
+%     \end{tabular}
+%   \end{center}
+% \end{table}
+
+% \begin{figure}[H]
+% \centering
+% \begin{karnaugh-map}[4][4][2][$V_5$][$V_4$][$V_3$][$V_2$][$V_1$]
+% \minterms{7, 11, 13, 14, 15, 19, 21, 22, 23, 25, 26, 27, 28, 29, 30,31}
+% \maxterms{0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 16, 17, 18, 20, 24}
+% \implicant{13}{15}
+% \implicant{7}{15}
+% \implicant{15}{11}
+% \implicant{15}{14}
+% \implicant{31}{26}
+% \implicant{28}{29}
+% \implicant{29}{25}
+% \implicant{21}{23}
+% \implicant{23}{22}
+% \implicant{19}{23}
+% \end{karnaugh-map}
+% \end{figure}
+
+\begin{align*}
+  \text{SOP} & =  V_1V_2V_3 + V_1V_3V_4 + V_2V_4V_5 + V_2V_3V_4 + V_1V_3V_5 + V_1V_2V_4 + V_3V_4V_5 + V_1V_4V_5 + V_2V_3V_5 + V_1V_2V_5                                                                        \\
+  \text{POS} & =  \left( \overline{V_1} + \overline{V_2} + \overline{V_3} \right) \left( \overline{V_1} + \overline{V_3}
+  + \overline{V_4} \right) \left( \overline{V_2} + \overline{V_4} + \overline{V_5} \right) \left( \overline{V_2} +
+  \overline{V_3} + \overline{V_4} \right) \left( \overline{V_1} + \overline{V_3} + \overline{V_5} \right) \left(
+  \overline{V_1} + \overline{V_2} + \overline{V_4} \right) \left( \overline{V_3} + \overline{V_4} + \overline{V_5} \right)
+  \\
+             & \left( \overline{V_1} + \overline{V_4} + \overline{V_5} \right) \left( \overline{V_2} + \overline{V_3} + \overline{V_5} \right) \left( \overline{V_1} + \overline{V_2} + \overline{V_5} \right) \\
+\end{align*}
+
+% NAND Gate Implementation
+\[
+  A = \overline{\overline{V_1} \cdot \overline{V_2} \cdot \overline{V_3}} \cdot \overline{\overline{V_1} \cdot \overline{V_3} \cdot \overline{V_4}} \cdot \overline{\overline{V_2} \cdot \overline{V_4} \cdot \overline{V_5}} \cdot \overline{\overline{V_2} \cdot \overline{V_3} \cdot \overline{V_4}} \cdot \overline{\overline{V_1} \cdot \overline{V_3} \cdot \overline{V_5}} \cdot \overline{\overline{V_1} \cdot \overline{V_2} \cdot \overline{V_4}} \cdot \overline{\overline{V_3} \cdot \overline{V_4} \cdot \overline{V_5}} \cdot \overline{\overline{V_1} \cdot \overline{V_4} \cdot \overline{V_5}} \cdot \overline{\overline{V_2} \cdot \overline{V_3} \cdot \overline{V_5}} \cdot \overline{\overline{V_1} \cdot \overline{V_2} \cdot \overline{V_5}}
+\]
+
+% \begin{align*}
+%   \text{SOP} & =  \overline{V_1}V_5V_2V_3 + \overline{V_1}V_3V_4V_5 + \overline{V_1}V_2V_3V_4 + \overline{V_1}V_2V_4V_5 +
+%   V_1V_2V_3\overline{V_4} + V_1V_2\overline{V_4}V_5
+%   \\
+%              & + V_1\overline{V_2}V_3V_5 + V_1\overline{V_2}V_4V_5 + V_1\overline{V_2}V_3V_4 + V_1V_2V_4                                           \\
+%              & = \overline{V_1} \left( V_5V_2V_3 +  V_3V_4V_5 +  V_2V_3V_4 +  V_2V_4V_5 \right)+ V_1V_2V_3\overline{V_4} + V_1V_2\overline{V_4}V_5
+%   \\
+%              & = \overline{V_1} \left( V_5V_2V_3 +  V_3V_4V_5 +  V_2V_3V_4 +  V_2V_4V_5 \right)+ V_1V_2V_3\overline{V_4} + V_1V_2\overline{V_4}V_5
+%   + V_1\overline{V_2}V_3V_5 + V_1\overline{V_2}V_4V_5 + V_1\overline{V_2}V_3V_4 + V_1V_2V_4                                                        \\
+%   \vdots     & \text{ Using Quine-McCluskey}                                                                                                       \\
+%              & = V_1V_2V_3 + V_1V_3V_4 + V_2V_4V_5 + V_2V_3V_4 + V_1V_3V_5 + V_1V_2V_4 + V_3V_4V_5 + V_1V_4V_5 + V_2V_3V_5 + V_1V_2V_5             \\
+% \end{align*}
+
+% \begin{align*}
+%   \text{SOP} & =  \overline{V_1}V_5V_2V_3 + \overline{V_1}V_3V_4V_5 + \overline{V_1}V_2V_3V_4 + \overline{V_1}V_2V_4V_5 +
+%   V_1V_2V_3\overline{V_4} + V_1V_2\overline{V_4}V_5
+%   \\
+%              & + V_1\overline{V_2}V_3V_5 + V_1\overline{V_2}V_4V_5 + V_1\overline{V_2}V_3V_4 + V_1V_2V_4                                           \\
+%              & = \overline{V_1} \left( V_5V_2V_3 +  V_3V_4V_5 +  V_2V_3V_4 +  V_2V_4V_5 \right)+ V_1V_2V_3\overline{V_4} + V_1V_2\overline{V_4}V_5
+%   \\
+%              & + V_1\overline{V_2}V_3V_5 + V_1\overline{V_2}V_4V_5 + V_1\overline{V_2}V_3V_4 + V_1V_2V_4                                           \\
+%              & = \overline{V_1} \left( V_5 \left( V_2V_3 +  V_3V_4 +  V_2V_4 \right) + V_2V_3V_4 \right) + V_1 \left(
+%   V_2V_3 \overline{V_4} + V_2 \overline{V_4} V_5 + \overline{V_2}V_3V_5 + \overline{V_2} V_4V_5+
+%   \overline{V_2} V_3V_4 + V_2V_4 \right)                                                                                                           \\
+%              & = \overline{V_1} \left( V_5 \left( V_2V_3 +  V_3V_4 +  V_2V_4 \right) + V_2V_3V_4 \right) + V_1 \left(
+%   V_2V_3 \overline{V_4} + V_2 \overline{V_4} V_5 + \overline{V_2}V_3V_5 + \overline{V_2}V_4 \left( V_5 + V_3 \right)  + V_2V_4 \right)
+%   \\
+%              & = \overline{V_1} \left( V_5 \left(  V_3 \left( V_2 + V_4 \right)  +  V_2V_4 \right) + V_2V_3V_4 \right) + V_1 \left(
+%   V_2V_3 \overline{V_4} + V_2 \overline{V_4} V_5 + \overline{V_2}V_3V_5 + \overline{V_2}V_4 \left( V_5 + V_3 \right)  + V_2V_4 \right)
+%   \\
+%              & = \overline{V_1} \left( V_5 \left(  V_3 \left( V_2 + V_4 \right)  +  V_2V_4 \right)  \right) + V_1 \left(
+%   V_2V_3 \overline{V_4} + V_2 \overline{V_4} V_5 + \overline{V_2}V_3V_5 + \overline{V_2}V_4 \left( V_5 + V_3 \right)  + V_2V_4 \right)
+%   \tag*{By Absorbtion, Distribution and Redundancy}                                                                                                \\
+%              & = \overline{V_1}  V_5  \left(V_3 \left( V_2 + V_4 \right)  +  V_2V_4  \right) + V_1 \left(
+%   V_2V_3 \overline{V_4} + V_2 \overline{V_4} V_5 + \overline{V_2}V_3V_5 + \overline{V_2}V_4 \left( V_5 + V_3 \right)  + V_2V_4 \right)
+%   \\
+%              & = \overline{V_1}  V_5  \left(V_3 \left( V_2 + V_4 \right)  +  V_2V_4  \right) + V_1 \left(
+%   V_2V_3 \overline{V_4} + V_2 \overline{V_4} V_5 + \overline{V_2}V_3V_5 + \overline{V_2}V_4V_5 + \overline{V_2}V_4V_5  +
+%   V_2V_4 \right)
+%   \\
+%              & = \overline{V_1}  V_5  \left(V_3 \left( V_2 + V_4 \right)  +  V_2V_4  \right) + V_1 \left(
+%   V_2V_3 \overline{V_4} + V_5 \left( V_2 \overline{V_4} + \overline{V_2}V_3 + \overline{V_2}V_4 + \overline{V_2}V_4 \right)   +
+%   V_2V_4 \right)
+%   \\
+%              & = \overline{V_1}  V_5  \left(V_3 \left( V_2 + V_4 \right)  +  V_2V_4  \right) + V_1 \left(
+%   V_2V_3 \overline{V_4} + V_5 \left( V_2 \overline{V_4} + \overline{V_2}V_3  + \overline{V_2}V_4 \right)   +
+%   V_2V_4 \right)
+%   \\
+%              & = \overline{V_1}V_5 \left( V_3V_2 + V_4V_3 + V_2V_4 \right) + V_1\left( V_2V_3\overline{V_4} + V_5V_2\overline{V_4} +
+%   V_5\overline{V_2}V_3 + V_5\overline{V_2}V_4 + V_2V_4\right)                                                                                      \\
+%              & = \overline{V_1}V_5V_3V_2 + \overline{V_1}V_5V_4V_3 + \overline{V_1}V_5V_2V_4 +V_1 V_2V_3\overline{V_4} + V_1V_5V_2\overline{V_4} +
+%   V_1V_5\overline{V_2}V_3 + V_1V_5\overline{V_2}V_4 + V_1V_2V_4                                                                                    \\
+% \end{align*}
+
+
+\end{document}

@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\title{Qhull}
+\author{Madiba Hudson-Quansah}
+\date{November 2024}
+
+\usepackage{graphicx} % For including images
+\usepackage{setspace} % For line spacing
+\usepackage{titling} % For customizing the title
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm} 
+\usepackage{algpseudocode} % For typesetting algorithms
+% \usepackage{biblatex} % For references
+% \addbibresource{./Algos.bib}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath} % For math
+
+\setlength{\droptitle}{-10em} % Adjusts the space above the title
+\doublespacing % Set double spacing for the document
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+
+    % University Logo
+    % \includegraphics[width=0.8\textwidth]{Ashesi LOGO.jpg} 
+
+    % Title of the document
+    \textbf{Quick Hull} \\
+
+
+
+    Madiba Hudson-Quansah \\
+    Kelvin K. Ahiakpor \\
+    Ronelle Cudjoe \\
+    Tanitoluwa O. Adebayo \\
+
+    \textbf{Algorithm Design and Analysis} \\
+    \textbf{Mr.} Samspon Asare \\
+    \textbf{Prof.} Olaf Hall-Holt\\
+    November 12, 2024 \\
+
+
+  \end{center}
+\end{titlepage}
+
+\section{What is a Convex Hull?}
+\section{Algorithms for finding the convex hull?}
+\section{Quick Hull}
+
+\singlespacing
+\begin{algorithm}[H]
+  \caption{QuickHull $ \left( S \right) $}
+  \Comment{}\\
+  \Comment{Find convex hull from the set $S$ of $n$ points, where $n \geq 3$} \\
+  \Comment{Input: A set $S$ of $n$ points} \\
+  \Comment{Output: The set $H$ of the points that make up the convex hull} \\
+  \begin{algorithmic}[1]
+    \State $H := \left\{  \right\} $ \Comment{The convex hull}
+    \State Find left and right most points, $A$ and $B$ to convex hull
+    \State The segment $AB$ divides the remaining $n - 2$ points into two groups $S_1$ and $S_2$ where $S_1$ are points
+    in $S$ that are on the right size of the segment $AB$
+    \State \Call{FindHull}{$S_1, A, B$}
+    \State \Call{FindHull}{$S_2, B, A$}
+
+    \\
+    \\
+
+    \Function{FindHull}{$S_k, P, Q$} \\
+    \Comment{Find points in convex hull from the set $S_k$ of points} \\
+    \Comment{that are on the right side of the segment $PQ$}\\
+    \If{ $S_k$ has no points}
+    \State \Return
+    \EndIf
+    \State From the set of points $S_k$ find the farthest point $C$ from the segment $PQ$.
+    \State Add point $C$ to $H$ at the location between $P$ and $Q$
+    \State The three points $P$, $Q$ and $C$ partition the remaining points of $S_k$ into 3 subsets: $S_0$, $S_1$ and
+    $S_2$, where:
+    \State $S_0$ are points inside the triangle $PCQ$, $S_1$ are points on the right side of the segment $PC$, and
+    $S_2$ are points on the right side of the segment $CQ$
+    \State \Call{FindHull}{$S_1, P, C$}
+    \State \Call{FindHull}{$S_2, C, Q$}
+    \EndFunction
+  \end{algorithmic}
+\end{algorithm}
+\doublespacing
+
+\end{document}

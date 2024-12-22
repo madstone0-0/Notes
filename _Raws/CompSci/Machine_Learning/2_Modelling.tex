@@ -5,6 +5,8 @@
 
 \title{\Huge{Modelling}}
 \author{\huge{Madiba Hudson-Quansah}}
+\usepackage{pgfplots}
+\usepackage{subcaption}
 \date{}
 \usepackage{parskip}
 
@@ -340,7 +342,7 @@ In training a Logistic regression model, we need to find a parameter vector $\mb
 estimates high probabilities for positive instances $y = 1$ and low probabilities for negative instances $y = 0$. The
 loss function for a single instance can then be given by:
 \[
-  L \left( \mbold{\theta} \right)  = \begin{cases}
+  \ell \left( \mbold{\theta} \right)  = \begin{cases}
     - \log \left( \hat{p} \right)     & \text{if } y = 1 \\
     - \log \left( 1 - \hat{p} \right) & \text{if } y = 0
   \end{cases}
@@ -353,31 +355,31 @@ model estimates a probability close to 0 for a negative instance or close to 1 f
 Applying this loss function over the entire training set, we want the average loss over all the training instances so we
 must find the sum of all the losses and divide by the number of instances. Given by:
 \[
-  L \left( \mbold{\theta} \right)  = -\frac{1}{m} \displaystyle\sum_{i=1}^{m} \left[ y^{i} \log \left( \hat{p}^{i}
+  \ell \left( \mbold{\theta} \right)  = -\frac{1}{m} \displaystyle\sum_{i=1}^{m} \left[ y^{i} \log \left( \hat{p}^{i}
     \right) + \left( 1 - y^{i} \right) \log \left( 1 - \hat{p}^{i} \right)    \right]
 \]
 
 This in turn was derived from the log likelihood function, which is the product of the probabilities of the instances in the
 training set being classified correctly, the use of product due to the AND operation of the probabilities. Given by:
 \[
-  \log L \left( \mbold{\theta} \right) = \log \prod_{n=1}^{m}  \left( \frac{1}{\sqrt{2 \pi \mbold{\theta}}} \right)  \exp \left( - \frac{ \left( y^{i} -
+  \log \ell \left( \mbold{\theta} \right) = \log \prod_{n=1}^{m}  \left( \frac{1}{\sqrt{2 \pi \mbold{\theta}}} \right)  \exp \left( - \frac{ \left( y^{i} -
     x^{i}\mbold{\theta} \right)^2 }{2 \theta^2} \right)
 \]
 This was simplified to a summation due to $\log \left( a\times b \right) = \log a + \log b $ giving us:
 \[
-  \log L \left( \mbold{\theta} \right) = \displaystyle\sum_{i=1}^{m} \left( \log \frac{1}{\sqrt{2 \pi \mbold{\theta}}} +
+  \log \ell \left( \mbold{\theta} \right) = \displaystyle\sum_{i=1}^{m} \left( \log \frac{1}{\sqrt{2 \pi \mbold{\theta}}} +
   \log \exp \left( \frac{ \left( y^{i} + x^{i} \mbold{\theta} \right) }{2 \mbold{\theta}^2} \right)  \right)
 \]
 This was further simplified using the properties of the logarithm function to give us:
 \[
-  \log L \left( \mbold{\theta} \right) = \displaystyle\sum_{i=1}^{m} \left( - \frac{1}{2} \log 2 \pi \mbold{\theta} - \frac{ \left( y^{i} + x^{i} \mbold{\theta} \right)^2 }{2 \mbold{\theta}^2}  \right)
+  \log \ell \left( \mbold{\theta} \right) = \displaystyle\sum_{i=1}^{m} \left( - \frac{1}{2} \log 2 \pi \mbold{\theta} - \frac{ \left( y^{i} + x^{i} \mbold{\theta} \right)^2 }{2 \mbold{\theta}^2}  \right)
 \]
 Using Bernoulli's distribution and applying the sigmoid function to the linear regression model, we can posit that the
 hypothesis function's output is the probability that the instance belongs to the positive class and now exists in the
 range $[0, 1]$. Given this we can simplify the likelihood of a positive instance and the inverse probability of a
 negative instance using the output of the hypothesis function, giving us:
 \[
-  \log L \left( \mbold{\theta} \right) = \displaystyle\sum_{i=1}^{m} \left( y^{i} \log \left( \hat{p}^{i} \right) + \left( 1 - y^{i} \right) \log \left( 1 - \hat{p}^{i} \right)  \right)
+  \log \ell \left( \mbold{\theta} \right) = \displaystyle\sum_{i=1}^{m} \left( y^{i} \log \left( \hat{p}^{i} \right) + \left( 1 - y^{i} \right) \log \left( 1 - \hat{p}^{i} \right)  \right)
 \]
 By using the log loss we are implicitly making the assumption that the instances follow a Gaussian distribution around
 the mean of their respective classes. This is a common assumption in logistic regression and is the reason why the
@@ -386,8 +388,530 @@ log loss is used as the loss function. \\
 There exists no closed-form equation to compute the value of $\mbold{\theta}$ that minimizes the cost function, but due
 to the convex nature of the cost function, we are guaranteed to find the global minimum using the Gradient Descent or
 any other optimization algorithm. The partial derivative of the cost function with respect to $\theta_j$ is given by:
+
 \[
-  \nabla_{\theta_j} L \left( \mbold{\theta} \right) = \frac{1}{m} \displaystyle\sum_{i=1}^{m} \left( \sigma \left( \mbold{\theta}^{T} \mbold{x}^{(i)} \right) - y^{(i)} \right) x_j^{(i)}
+  \nabla_{\theta_j} \ell \left( \mbold{\theta} \right) = \frac{1}{m} \displaystyle\sum_{i=1}^{m} \left( y^{i} - \sigma
+  \left( \mbold{\theta}^{T} \mbold{x}^{i} \right) \right)  x_j^{i}
 \]
+
+Giving the update rule for the Gradient Descent algorithm as:
+\[
+  \theta_j := \theta_j +  \alpha \left( y^{i} - \sigma  \left( \mbold{\theta}^{T} x^{i} \right)  \right) x_j^{  i  }
+\]
+
+\section{Newton's Method for maximizing $\ell \left( \theta \right) $}
+
+Newton's method for optimization is a second-order optimization algorithm that provides an alternative to the Gradient
+Descent Algorithm in optimizing the cost function. \\
+
+Given a function $f : \mathbb{R} \to  \mathbb{R}$ to find the value of $x$ such that $f \left( x \right) = 0 $, where
+$x \in \mathbb{R}$ is a real number. Using newton's method we can approximate the value of $x$ by iteratively updating
+it using the following update rule:
+\[
+  x := x - \frac{ f \left( x \right) }{f^{\prime} \left( x \right) }
+\]
+
+Where $f^{\prime}$ is the derivative of $f$.
+This can be thought of intuitively as approximating the function $f$ via a linear function that is tangent to the $f$ at
+the current guess $x$ and then finding the point at which the tangent function is equal to zero, i.e. intersects the
+$x$-axis. \\
+
+In optimizing $\ell \left( \theta \right) $, we use the same approach with $ f \left( x \right) = L^{\prime} \left( \theta
+  \right)  $ to obtain the update rule:
+\[
+  \theta := \theta - \frac{\ell ^{\prime} \left( \theta \right) }{\ell^{\prime\prime} \left( \theta \right) }
+\]
+
+In the case of logistic regression $\theta$ is a vector $\mbold{\theta}$, do Newton's method must be generalized to a
+multi-dimensional space, also called the Newton-Raphson method, given by:
+\[
+  \mbold{\theta} := \mbold{\theta} - H^{-1} \nabla_{\mbold{\theta}} \ell \left( \mbold{\theta} \right)
+\]
+
+Where:
+\begin{itemize}
+  \item $\nabla_{\mbold{\theta}} \ell \left( \mbold{\theta} \right) $ is the vector of partial derivatives of the loss
+        function with respect to the $\theta_i$
+  \item $H$ is a $n\times n$ matrix called the Hessian matrix, whose elements are given by:
+        \[
+          H_{ij} = \frac{\partial^2 \ell \left( \mbold{\theta} \right) }{\partial \theta_i \partial \theta_j}
+        \]
+\end{itemize}
+
+Newton's method typically converges faster than the Gradient Descent Algorithm, but is more expensive due to computing
+and inverting the Hessian matrix $H$, but if $n$ is not too large it is computationally feasible. When Newton's method
+is used to optimize the log likelihood function, $\ell \left( \mbold{\theta} \right) $, of logistic regression, it is called \textbf{Fisher Scoring}.
+
+\chapter{Perceptron}
+
+\dfn{Perceptron}{
+  A single layer neural network that classifies instances by computing a weighted sum of the input features and then
+  applying a step function to the result. Given by:
+  \[
+    g \left( z \right)  = \begin{cases}
+      0 & \text{if } z < 0    \\
+      1 & \text{if } z \geq 0
+    \end{cases}
+  \]
+  Where:
+  \begin{itemize}
+    \item $g \left( z \right) $ is the step function
+    \item $z$ is the hypothesis function given by:
+          \[
+            z = \mbold{\theta}^{T} \mbold{x}
+          \]
+
+  \end{itemize}
+}
+
+This model can be though of a predecessor to the logistic regression model, with the step function being a more discrete
+version of the sigmoid function. Thus the update rule for the Perceptron model is given by:
+\[
+  \theta_j := \theta_j + \alpha \left( y^{i} - g \left( x^{i} \mbold{\theta} \right) \right) x^{i}_j
+\]
+This is also called the perceptron learning model
+
+
+\chapter{Exponential Family of Distributions}
+
+\section{Introduction}
+
+\dfn{Exponential Family of Distributions}{
+  A family of probability distributions that can be represented in the form:
+  \[
+    \mathbb{P} \left( \mbold{y} ; \eta \right) = b \left( \mbold{y} \right) \exp \left( \eta^{T} T \left( \mbold{y} \right) - a \left( \eta \right) \right)
+  \]
+  Or
+  \[
+    \mathbb{P} \left( \mbold{y}; \eta \right) =  \frac{b \left( \mbold{y} \right) \exp \left( \eta^T T \left( \mbold{y} \right)  \right)}{e^{a \left( \eta \right) }}
+  \]
+  Where:
+  \begin{itemize}
+    \item $\mbold{y}$ is the random variable / Data
+    \item $\eta$ is the natural parameter.
+    \item $T \left( \mbold{y} \right)$ is the sufficient statistic.
+    \item $a \left( \eta \right)$ is the log partition function.
+    \item $b \left( \mbold{y} \right)$ is the base measure.
+  \end{itemize}
+}
+
+\subsection{The Sufficient Statistic}
+
+\dfn{The Sufficient Statistic}{
+  A statistic that retains all the information in the data about the parameter of interest.
+}
+
+\section{Bernoulli Distribution}
+
+\dfn{Bernoulli Distribution}{
+  Defined as:
+  \[
+    \text{Bern} \left( X | \mu  \right)  = \mu^{x} \left( 1 - \mu \right)^{1 - x}
+  \]
+  Where:
+  \begin{itemize}
+    \item $X$ is the random variable, taking values in $\left\{ 0, 1 \right\}$.
+    \item $\mu $ is the probability of success.
+  \end{itemize}
+}
+
+\begin{align*}
+  \exp \log \left( \mu^{X} \left( 1 - \mu \right)^{1 - X} \right) & = \exp \left( X \log \mu + \left( 1 - X \right) \log \left( 1 - \mu \right) \right)                  \\
+                                                                  & = \exp \left( y \log \mu  - y \log \left( 1 - \mu
+  \right) + \log \left( 1 - \mu  \right)   \right)                                                                                                                       \\
+                                                                  & = \exp \left( y \log \left( \frac{\mu  }{1 - \mu }  \right) + \log \left( 1 - \mu  \right)   \right) \\
+\end{align*}
+$\therefore$:
+\begin{description}
+  \item[ $b \left( y \right) $] = 1
+  \item [ $\eta$] = $\log \left( \frac{\mu}{1 - \mu} \right)$
+  \item[ $T \left( \mbold{y} \right) $] = y
+  \item[ $a \left( \eta \right) $] = $\log \left( 1 - \mu  \right)$
+\end{description}
+
+
+\section{Normal / Gaussian Distribution}
+\dfn{Gaussian Distribution}{
+  Defined as:
+  \[
+    \text{Norm} \left( X | \mu, \sigma^2 \right) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left( -\frac{1}{2} \frac{ \left( X - \mu \right)^2}{\sigma^2} \right)
+  \]
+  Where:
+  \begin{itemize}
+    \item $X$ is the random variable.
+    \item $\mu $ is the mean of the distribution.
+    \item $\sigma $ is the variance of the distribution.
+  \end{itemize}
+}
+
+\begin{align*}
+  \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left( -\frac{1}{2} \frac{ \left( X - \mu \right)^2}{\sigma^2} \right) & = \log \left(
+  \frac{1}{ \sqrt{2\pi \sigma ^2}} \exp \left( -\frac{1}{2} \left( \frac{X - \mu }{\sigma } \right)^2  \right)  \right)                                                                                                        \\
+                                                                                                              & = \log \left( \frac{1}{ \sqrt{2\pi \sigma ^2}} \right)  -\frac{1}{2} \left( \frac{X - \mu }{\sigma } \right)^2 \\
+                                                                                                              & = \log
+  \left(
+  1 \left(
+  2\pi \sigma
+  ^2\right)^{-\frac{1}{2}}  \right) - \frac{1}{2} \left( \frac{X - \mu }{\sigma } \right)^2                                                                                                                                    \\
+                                                                                                              & =
+  -\frac{1}{2}
+  \log
+  \left(
+  2\pi
+  \sigma ^2
+  \right) -
+  \frac{1}{2}
+  \frac{ \left(
+    X - \mu
+    \right)^2
+  }{\sigma^2 }                                                                                                                                                                                                                 \\
+                                                                                                              & = -\frac{1}{2} \log \left( 2\pi \sigma ^2 \right) - \frac{1}{2} \frac{ X^2 -2X \mu + \mu ^2 }{\sigma ^2}       \\
+                                                                                                              & = \exp
+  -\frac{1}{2}
+  \log
+  \left(
+  2\pi
+  \sigma ^2
+  \right) -
+  \frac{ X^2 -2X
+    \mu + \mu ^2
+  }{2\sigma ^2}                                                                                                                                                                                                                \\
+                                                                                                              & = \exp
+  -\frac{1}{2}
+  \log
+  \left(
+  2\pi
+  \sigma ^2
+  \right) -
+  \left( \frac{X^2}{2\sigma
+    ^2}- \frac{2X
+    \mu }{2\sigma
+    ^2} +
+  \frac{\mu ^2}{2\sigma ^2} \right)                                                                                                                                                                                            \\
+                                                                                                              & = \frac{1}{\sqrt{2 \pi \sigma^2}} - \exp \left( \frac{X^2}{2\sigma
+    ^2}- \frac{2X
+    \mu }{2\sigma
+    ^2} +
+  \frac{\mu ^2}{2\sigma ^2} \right)                                                                                                                                                                                            \\
+\end{align*}
+
+Where:
+\begin{itemize}
+  \item $\eta = \mu $
+  \item $T \left( y \right) = y $
+  \item $a \left( \eta \right) = \frac{\mu ^2}{2} $
+  \item $b \left( y \right) = \left( \frac{1}{\sqrt{2 \pi }} \right) \exp \left(  \frac{-y^2}{2}\right)   $
+\end{itemize}
+
+\chapter{Generalized Linear Models (GLMs)}
+
+\section{Introduction}
+
+\dfn{Generalized Linear Model}{
+  A generalization of linear regression that allows the dependent variable to have an error distribution other than the
+  normal distribution.
+}
+
+Given a random variable $y$ we can create a GLM to predict it's value as a function of $x$. To do
+this we must make the following assumptions:
+\begin{itemize}
+  \item $y  \mid x; \theta \sim \text{ ExponentialFamily} \left( \eta \right) $. I.e. given $x$ and $\theta$, the
+        distribution of $y$ follows some exponential family distribution, with parameter $\eta$.
+  \item Given $x$, our goal is to predict the expected value of $T \left( y \right) $ given $x$. Usually $T \left(
+          y\right) = y $, meaning we want the prediction output $h \left( x \right) $ output by our learned hypothesis
+        $h$ to satisfy:
+        \[
+          h \left( x \right) = E \left[ y  \mid x \right]
+        \]
+        For example for logistic regression we had $h_{\mbold{\theta}} \left( x \right)$ as
+        \[
+          h_{\mbold{\theta}} \left( x \right) = \mathbb{P} \left( y = 1  \mid
+          x; \theta\right) = 0 \times \mathbb{P} \left( y = 0  \mid x; \theta \right) + 1 \times \mathbb{P} \left( y = 1
+          \mid x; \theta \right) = E \left[ y  \mid x; \theta \right]
+        \]
+  \item The natural parameter $\eta$ and the input features $x$ are linearly related:
+        \[
+          \eta = x \mbold{\theta}
+        \]
+        Or if $\mbold{\eta}$:
+        \[
+          \eta_i = \theta^{T}_i x
+        \]
+\end{itemize}
+
+\chapter{Softmax Regression / Multinomial Logistic Regression}
+
+\dfn{Softmax Regression / Multinomial Logistic Regression}{
+  A generalization of Logistic Regression to support multiple classes. Where the score for a class $k$ is given by:
+  \[
+    s_k \left( \mbold{x} \right) = \left( \mbold{\theta}^{k} \right) ^T \mbold{x}
+  \]
+  Where:
+  \begin{itemize}
+    \item $\mbold{x}$ is an instance's feature vector.
+    \item $\mbold{\theta}^{k}$ is the parameter vector for the class $k$, where each class has its own parameter vector.
+  \end{itemize}
+  In matrix form:
+  \[
+    s_k \left( X \right)  = X \mbold{\Theta}
+  \]
+  Where:
+  \begin{itemize}
+    \item $X$ is the matrix containing all instances' feature vectors.
+    \item $\mbold{\Theta}$ is the parameter matrix with each row containing the parameter vector for each class. In the
+          form:
+          \[
+            \mbold{\Theta} = \begin{bmatrix}
+              \mbold{\theta}^{1} \\
+              \mbold{\theta}^{2} \\
+              \vdots             \\
+              \mbold{\theta}^{k}
+            \end{bmatrix}
+          \]
+          Where $k$ is the number of classes.
+  \end{itemize}
+  We then use the \textbf{Softmax function} to estimate the probability that an instance belongs to a particular class,
+  given by:
+  \[
+    \hat{p}_k = \sigma  \left( s \left( \mbold{x} \right)  \right)_k = \frac{\exp \left( s_k \left( \mbold{x} \right)  \right) }{\displaystyle\sum_{i = 1}^{k} \exp \left(
+      s_i \left( \mbold{x} \right) \right) }
+  \]
+}
+
+\begin{align*}
+  h_{\theta} \left( x \right)  = \exp \left( \theta ^T x^{i} \right)
+\end{align*}
+Where:
+\begin{itemize}
+  \item $x^{i} \in \mathbb{R}^{n}$
+  \item $h_{\theta} \left( x \right)  = \left[ 0, 1 \right] $
+\end{itemize}
+
+\[
+  \mathbb{P} \left( y = k  \mid X ; \theta \right) = \frac{\exp \left( \theta ^T x \right)
+  }{\displaystyle\sum_{i=1}^{k} \exp \left( \theta_j ^T X \right) }
+\]
+
+\chapter{Gaussian Discriminant Analysis}
+
+\section{Introduction}
+
+\dfn{Discriminative Algorithm}{
+  An algorithm that models the decision boundary between the classes directly from labelled examples. I.e. Determining
+  the label based on the features. This class of algorithm learns mappings from inputs to labels.
+}
+
+\dfn{Generative Algorithm}{
+  An algorithm that models the distribution of each class and then uses Bayes' theorem to estimate the probability that an
+  instance belongs to a particular class.
+}
+
+
+\dfn{Gaussian Discriminant Analysis}{
+  A generative learning algorithm that assumes that the data is generated by a Gaussian distribution. It models the
+  distribution of each class as a Gaussian distribution and uses Bayes' theorem to estimate the probability that an
+  instance belongs to a particular class. It is used for continuous valued inputs.
+}
+
+In using Gaussian Distribution Analysis we make the following assumptions:
+\begin{itemize}
+  \item The data is modelled in a Multivariate Gaussian distribution.
+        \[
+          \mathbb{P} \left( x  \mid t = k \right) = \frac{1}{ \left( 2\pi \right)^{D / 2}  \left| \Sigma_k \right|^{1 /
+          2}  } \exp \left[ -\frac{1}{2} \left( x - \mu_k \right)^T \Sigma_k^{-1} \left( x - \mu_k \right)   \right]
+        \]
+        Where:
+        \begin{itemize}
+          \item $k$ is the class.
+          \item $\Sigma $ is the covariance matrix of the distribution and thus $ \left| \Sigma  \right| $ is the
+                determinant of the covariance matrix. And each class $k$ has its own covariance matrix $\Sigma_k$.
+          \item $D$ is the number of features.
+          \item $\mu_k$ is mean vector of the distribution for each class, where $\mu_k$ has $D$ parameters for $DK$
+                total
+        \end{itemize}
+\end{itemize}
+
+The Bayes theorem is then used to estimate the probability that an instance belongs to a particular class, given by:
+\begin{align*}
+  \mathbb{P} \left( y = 1  \mid x \right) & =  \frac{\mathbb{P} \left( x  \mid y = 1 \right) \mathbb{P} \left( y = 1
+  \right)}{\mathbb{P} \left( x \right) }                                                                             \\
+\end{align*}
+
+Where:
+\begin{itemize}
+  \item $\mathbb{P} \left( x \right) $ is the probability that an instance is generated by the Gaussian distribution:
+        \[
+          \mathbb{P} \left( x \right)              = \mathbb{P} \left( x  \mid y = 1 \right) \mathbb{P} \left( y = 1
+          \right) + \mathbb{P} \left( x  \mid y = 0 \right) \mathbb{P} \left( y = 0 \right)
+        \]
+  \item  $\mathbb{P} \left( x  \mid y = 1 \right) $ is the probability that an instance belongs to class 1 given
+        the features, i.e.:
+        \[
+          \mathbb{P} \left( x  \mid y = k \right) = \frac{1}{ \left( 2\pi \right)^{D / 2}  \left| \Sigma_k \right|^{1 /
+          2}  } \exp \left[ -\frac{1}{2} \left( x - \mu_k \right)^T \Sigma_k^{-1} \left( x - \mu_k \right)   \right]
+        \]
+  \item $\mathbb{P} \left( y = 1 \right) $ is the probability of the instance belonging to class 1, which as it
+        can only be 1 or 0, is Bernoulli distributed:
+        \[
+          \mathbb{P} \left( y \right) = \phi^y \left( 1 - \phi \right)^{1 - y}
+        \]
+\end{itemize}
+
+Given this form we can optimize the parameters $\phi$, $\mbold{\mu}_k$, and $\mbold{\Sigma}_k$ to maximize the
+likelihood of an instance $\phi$ belonging to a particular class $k$. The close forms for these parameters are given by:
+\begin{align*}
+  \phi             & = \frac{1}{N} \displaystyle\sum_{i=1}^{N} r^{i}_1                                                     \\
+  \mbold{\mu_k}    & = \frac{\displaystyle\sum_{i=1}^{N} r^{i}_k \cdot \mbold{x}^{i}}{\displaystyle\sum_{i=1}^{N} r^{i}_k} \\
+  \mbold{\Sigma_k} & = \frac{1}{\displaystyle\sum_{i=1}^{N} r^{i}_k} \displaystyle\sum_{i=1}^{N} r^{i}_k \left(
+  \mbold{x}^{i} - \mbold{\mu }_k \right) \left( \mbold{x}^{i} - \mbold{\mu }_k \right)^T                                   \\
+  r^{i}_k          & = \mathbb{I} \left[ y^{i} = k \right]
+\end{align*}
+
+The decision boundary between classes is given by:
+% \[
+%   \log \mathbb{P} \left( y_k  \mid \mbold{x} \right)  = \left( \mbold{x} - \mbold{\mu}_k \right)^T
+%   \displaystyle\sum_{k}^{-1} \left( \mbold{x} - \mbold{\mu}_k \right)  = \left( \mbold{x} - \mbold{\mu}_{\ell} \right)^T
+%   \displaystyle\sum_{\ell}^{-1} \left( \mbold{x} - \mbold{\mu}_{\ell} \right) + c
+% \]
+\[
+  \log \mathbb{P} \left( y  \mid \mbold{x} \right) = \mbold{x}^T \displaystyle\sum_{\ell}^{-1} \mbold{x} - 2
+  \mbold{\mu }_{\ell}^T \displaystyle\sum_{\ell}^{-1} \mbold{x} + c
+\]
+Where $c$ is a constant that depends on the class priors and the parameters of the Gaussian distributions. With the
+shape of the decision boundary being quadratic, i.e. a quadratic discriminant function, making it a conic section.
+
+\section{Gaussian Discriminant Analysis vs. Logistic Regression}
+
+\begin{itemize}
+  \item GDA makes stronger assumptions about the data than Logistic Regression, i.e. that the data is generated by a
+        Gaussian Distribution. This can be an advantage if the data is actually generated by a Gaussian distribution, but if
+        not the quality of predictions can be worse than Logistic Regression.
+  \item Many class-conditional distributions are more efficiently modelled by a Logistic Classifier, as when these
+        distributions are non-Gaussian, which is usually the case, Logistic Regression usually beats GDA.
+  \item GDA can handle missing features.
+\end{itemize}
+
+\chapter{Naïve Bayes}
+
+\dfn{Naïve Bayes}{
+  A generative learning algorithm that assumes that the features are conditionally independent given the class, this is
+  why it is naïve . It models
+  the distribution of each class and uses Bayes' theorem to estimate the probability that an instance belongs to a
+  particular class.
+}
+
+\section{Introduction}
+Where the $\mbold{x}$ vectors used in GDA were continuous real-valued vectors, Naïve Bayes assumes that the features are
+discrete. Starting with the task of spam email classification based on the text of the email, where certain words being present
+increase the likelihood of the email being spam, we need to represent each email as a discrete vector containing
+important information about the email. This can be done by specifying a dictionary of words that are important, i.e.
+indicate an email as spam, and then representing each email as a binary vector where the $i$a-th element is 1 if the
+$i$-th word in the dictionary is present in the email and 0 otherwise, i.e.:
+\begin{align*}
+  \begin{array}{c c}
+    \mbold{x} = \begin{bmatrix} 1 \\  0 \\ \ \vdots\\  1\\  \vdots \\ 0 \end{bmatrix} &
+    \begin{bmatrix} \text{Viagra} \\ \text{Nigeria} \\ \vdots \\ \text{Money} \\ \vdots \\ \text{Bank} \end{bmatrix}
+  \end{array}
+\end{align*}
+This is known as the \textbf{Bag of Words} / \textbf{Vocabulary}, where $n$ is the dimension of $x$ and is equal to the
+number of words in our vocabulary. Having our input vector we can build a discriminative model, i.e. $\mathbb{P} \left(
+  x  \mid y\right) $. But if we have a vocabulary of $n$ words then $x \in \{0, 1\}^{n} $, i.e. $x$ is an $n$
+dimensional binary vector, and if we were to model $x$ as a Multinomial distribution, we would end up with a $2^{n} -
+  1$ dimensional parameter vector, i.e. too many parameters. Naïve Bayes avoids this in its naïve assumption that all
+the $x_i$'s are conditionally independent given $y$. This allows us to model the probability of an instance belonging
+to a particular class using the following form:
+\begin{align*}
+  \mathbb{P} \left( x_1, \ldots, x_n  \mid y \right) & = \mathbb{P} \left( x_1  \mid y \right) \times \mathbb{P} \left(
+  x_2  \mid y \right) \times \ldots \times \mathbb{P} \left( x_n  \mid y \right)                                        \\
+                                                     & = \prod_{i=1}^{n} \mathbb{P} \left( x_i  \mid y \right)          \\
+\end{align*}
+
+The model is parametrized by:
+\begin{align*}
+  \phi_{i  \mid y = 1} & = \mathbb{P} \left( x_i = 1  \mid y = 1 \right) \\
+  \phi_{i  \mid y = 0} & = \mathbb{P} \left( x_i = 1  \mid y = 0 \right) \\
+  \phi_y               & = \mathbb{P} \left( y = 1 \right)               \\
+\end{align*}
+
+Where:
+\begin{itemize}
+  \item $\phi_{i  \mid y = 1} $ is the probability that the feature $x_i$ is 1, given that the class is 1.
+  \item $\phi_{i  \mid y = 0} $ is the probability that the feature $x_i$ is 1, given that the class is 0.
+  \item $\phi_y $ is the probability that any instance belongs to class 1 / the prior probability of class 1.
+\end{itemize}
+
+Therefore given a training set $\{ \left( x^{i}, y^{i} \right); i = 1, \ldots, m \} $, the joint likelihood of the data
+is:
+\[
+  \mathcal{L} \left( \phi_y, \phi_{i \mid y = 0}, \phi_{i  \mid y = 1} \right) = \prod_{i=1}^{m}  \mathbb{P} \left(
+  x^{i}, y^{i} \right)
+\]
+Where maximizing this likelihood with respect to the parameters $\phi_y, \phi_{i \mid y = 0}, \phi_{i  \mid y = 1} $
+gives maximum likelihood estimates:
+\begin{align*}
+  \phi_{j  \mid y = 1}  & = \frac{\displaystyle\sum_{i=1}^{m} 1 \{x_j^{i} = 1 \wedge y^{i} = 1\}
+  }{\displaystyle\sum_{i=1}^{m}1 \{y^{i} = 1\} }                                                 \\
+  \phi_{j  \mid  y = 0} & = \frac{\displaystyle\sum_{i=1}^{m} 1 \{x^{i}_j = 1 \wedge y^{i} = 0\}
+  }{\displaystyle\sum_{i=1}^{m}1 \{y^{i} = 0\} }                                                 \\
+  \phi_y                & = \frac{\displaystyle\sum_{i=1}^{m} 1 \{y^{i} = 1\} }{m}               \\
+\end{align*}
+
+Where:
+\begin{itemize}
+  \item $\phi_{j  \mid y = 1}$ is the fraction of instances in class 1 that contain the word $j$.
+  \item  $\phi_{j  \mid y = 0}$ is the faction fraction of instances in class 0 that contain the word $j$.
+  \item  $\phi_y$ is the fraction of instances that belong to class 1.
+\end{itemize}
+
+Having fit all these parameters we can then make a prediction on a new instance $x$, like so:
+\begin{align*}
+  \mathbb{P} \left( y = 1  \mid x \right) & = \frac{\mathbb{P} \left( x  \mid y \right) \mathbb{P} \left( y = 1 \right)
+  }{\mathbb{P} \left( x \right) }                                                                                                                    \\
+                                          & = \frac{ \prod_{i=1}^{n} \mathbb{P} \left( x_i  \mid y = 1 \right) \mathbb{P} \left( y = 1 \right)    }{
+    \prod_{i=1}^{n} \mathbb{P} \left( x_i  \mid y = 1 \right)  \mathbb{P} \left( y = 1 \right) +
+    \prod_{i=1}^{n}  \mathbb{P} \left( x_i  \mid  y = 0 \right) \mathbb{P} \left( y = 0 \right)
+  }                                                                                                                                                  \\
+\end{align*}
+And pick the class with the highest probability.
+
+In the case where the number of classes is $k$ we would model $\mathbb{P} \left( x  \mid y \right) $ as multinomial
+instead of Bernoulli, and the parameters would be given by:
+
+\begin{align*}
+  \phi_{j  \mid y = k} & = \frac{\displaystyle\sum_{i=1}^{m} 1 \{x_j^{i} = 1 \wedge y^{i} = k\}
+  }{\displaystyle\sum_{i=1}^{m}1 \{y^{i} = k\} }                                                \\
+  \phi_y               & = \frac{\displaystyle\sum_{i=1}^{m} 1 \{y^{i} = k\} }{m}               \\
+\end{align*}
+
+\section{Laplace Smoothing}
+
+\dfn{Laplace Smoothing / Additive Smoothing}{
+A technique used to smooth categorical data. It is used to solve the problem of zero probability, i.e. when a word
+appears in the test set but not in the training set. It is given by:
+\[
+  \phi_{j  \mid y = k} = \frac{\displaystyle\sum_{i=1}^{m} 1 \{x_j^{i} = 1 \wedge y^{i} = k\} + \alpha}{
+  \displaystyle\sum_{i=1}^{m}1 \{y^{i} = k\} + \alpha \cdot n
+  }
+\]
+Where:
+\begin{itemize}
+  \item $\alpha$ is the smoothing parameter.
+  \item $n$ is the number of features.
+\end{itemize}
+}
+
+Laplace Smoothing solves a common problem in Naïve Bayes where a word appears in the test set but not in the training
+set, which would result in a zero probability. Laplace Smoothing solves this by adding a small value to the numerator
+and denominator of the probability calculation. This results in a very small probability for the word instead of a zero
+probability. This is important as with the naive assumption of independence, simplifying the probability calculation to
+a series of multiplications, a zero probability would result in the entire probability being zero, i.e.:
+\[
+  \mathbb{P} \left( x  \mid y \right) = \prod_{i=1}^{n} \mathbb{P} \left( x_i  \mid y \right)
+\]
+If for example $x_2$ was a word non-existent in our vocabulary, then $\mathbb{P} \left( x_2  \mid y \right) = 0$, making
+$\mathbb{P} \left( x  \mid y \right) = 0 $
+
+\chapter{Support Vector Machines (SVMs)}
+
 
 \end{document}

@@ -1,0 +1,10 @@
+SUN:	[0, 3] Horizontal Right
+HAPPY:	[1, 0] Horizontal Right
+SAINT:	[3, 0] Horizontal Right
+UNITED:	[4, 0] Horizontal Right
+NAA:	[4, 1] Vertical Down
+SONIC:	[2, 4] Horizontal Right
+CAIN:	[5, 6] Vertical Up
+MANIAC:	[0, 6] Vertical Down
+RAT:	[6, 6] Horizontal Left
+TAN:	[0, 0] Diagonal Bottom Right

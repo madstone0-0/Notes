@@ -1,0 +1,356 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\title{\Huge{Lab 2}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\section*{Part 1}
+\qs{}{
+  Draw the truth table for the above logical equations for a full adder.
+}
+
+\sol{
+  \begin{table}[h!]
+    \begin{center}
+      \begin{tabular}{|c c c|c|c|}
+        \hline
+        $a$ & $b$ & cin & $ \left( a \oplus b \right) \oplus \text{cin} $ & $a\cdot b + b \cdot \text{cin} + a
+        \cdot \text{cin}$                                                                                      \\ [0.5ex]
+        \hline
+        \hline
+        0   & 0   & 0   & 0                                               & 0                                  \\
+        0   & 0   & 1   & 1                                               & 0                                  \\
+        0   & 1   & 1   & 0                                               & 1                                  \\
+        1   & 0   & 1   & 0                                               & 1                                  \\
+        1   & 1   & 1   & 1                                               & 1                                  \\
+        1   & 1   & 0   & 0                                               & 1                                  \\
+        1   & 0   & 0   & 1                                               & 0                                  \\
+        0   & 1   & 0   & 1                                               & 1                                  \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+}
+
+\section*{Part 2}
+
+\qs{}{
+  Compute the additions for the following as 2-bit additions. Indicate their Sum and Carry (overflow).
+  \begin{enumerate}
+    \item 00 + 11
+    \item 10 + 01
+    \item 11 + 11
+    \item 01 + 11
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \begin{array}{c c c}
+                & 0 & 0 \\
+              + & 1 & 1 \\
+              \hline
+                & 1 & 1
+            \end{array} \\
+            \text{Carry: 0}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c}
+                & 1 & 0 \\
+              + & 0 & 1 \\
+              \hline
+                & 1 & 1
+            \end{array} \\
+            \text{Carry: 0}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c}
+                & 1 & 1 \\
+              + & 1 & 1 \\
+              \hline
+                & 1 & 0
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c}
+                & 0 & 1 \\
+              + & 1 & 1 \\
+              \hline
+                & 0 & 0
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+
+  \end{enumerate}
+}
+
+\section*{Part 3}
+
+\qs{}{
+  Compute the arithmetic for the following as 2-bit subtractions using the 2’s complement approach. Indicate their Sum and Carry (overflow).
+  \begin{enumerate}
+    \item 00 - 11
+    \item 10 - 01
+    \item 11 - 11
+    \item 01 - 11
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \begin{array}{c c c}
+                & 0 & 0                         \\
+              - & 1 & 1                         \\
+              \hline
+                & 0 & 0                         \\
+              + & 0 & 1 \tag*{Two's Complement} \\
+              \hline
+                & 0 & 1
+            \end{array} \\
+            \text{Carry: 0}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c}
+                & 1 & 0                         \\
+              - & 0 & 1                         \\
+              \hline
+                & 1 & 0                         \\
+              + & 1 & 1 \tag*{Two's Complement} \\
+              \hline
+                & 0 & 1
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c}
+                & 1 & 1                         \\
+              - & 1 & 1                         \\
+              \hline
+                & 1 & 1                         \\
+              + & 0 & 1 \tag*{Two's Complement} \\
+              \hline
+                & 0 & 0
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c}
+                & 0 & 1                         \\
+              - & 1 & 1                         \\
+              \hline
+                & 0 & 1                         \\
+              + & 0 & 1 \tag*{Two's Complement} \\
+              \hline
+                & 1 & 0
+            \end{array} \\
+            \text{Carry: 0}
+          \end{align*}
+  \end{enumerate}
+}
+
+\section*{Part 4}
+
+\qs{}{
+  Compute the additions for the following as 8-bit additions. Indicate their Sum and Carry.
+  \begin{enumerate}
+    \item 1010110 + 110100
+    \item 11001011 + 1011010
+    \item 110001 + 11100100
+    \item 1010001 + 11001
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \begin{array}{c c c c c c c c c c}
+                & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 0 \\
+              + & 0 & 0 & 1 & 1 & 0 & 1 & 0 & 0 \\
+              \hline
+                & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 0 \\
+            \end{array} \\
+            \text{Carry: 0}
+          \end{align*}
+
+    \item
+          \begin{align*}
+            \begin{array}{c c c c c c c c c c}
+                & 1 & 1 & 0 & 0 & 1 & 0 & 1 & 1 \\
+              + & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\
+              \hline
+                & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 \\
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+
+    \item
+          \begin{align*}
+            \begin{array}{c c c c c c c c c c}
+                & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 \\
+              + & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+              \hline
+                & 0 & 0 & 0 & 1 & 0 & 1 & 0 & 1 \\
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+
+    \item
+          \begin{align*}
+            \begin{array}{c c c c c c c c c c}
+                & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 1 \\
+              + & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1 \\
+              \hline
+                & 0 & 1 & 1 & 0 & 1 & 0 & 1 & 0 \\
+            \end{array} \\
+            \text{Carry: 0}
+          \end{align*}
+  \end{enumerate}
+}
+
+\section*{Part 5}
+
+\qs{}{
+  Compute the arithmetic for the following as 8-bit subtractions using the 2’s complement approach. Indicate their Sum and Carry.
+  \begin{enumerate}
+    \item FF – E6
+    \item A5 – 6F
+    \item F2 – D7
+    \item 110001 - 11100100
+    \item 1010001 - 11001
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{align*}
+            \begin{array}{c c c c c c c c c}
+                & F & F                                                 \\
+              - & E & 6                                                 \\
+              \hline
+                & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1                         \\
+              + & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 0 \tag*{Two's Complement} \\
+              \hline
+                & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1                         \\
+              \hline
+                & 1 & 9                                                 \\
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c c c c c c c}
+                & A & 5 \\
+              - & 6 & F \\
+              \hline
+                & 3 & 6 \\
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c c c c c c c}
+                & F & 2 \\
+              - & D & 7 \\
+              \hline
+                & 1 & B \\
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c c c c c c c}
+                & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1                         \\
+              - & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 0                         \\
+              \hline
+                & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1                         \\
+              + & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 0 \tag*{Two's Complement} \\
+              \hline
+                & 0 & 1 & 0 & 0 & 1 & 1 & 0 & 1
+            \end{array} \\
+            \text{Carry: 0}
+          \end{align*}
+    \item
+          \begin{align*}
+            \begin{array}{c c c c c c c c c}
+                & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 1                         \\
+              - & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1                         \\
+              \hline
+                & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 1                         \\
+              + & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1 \tag*{Two's Complement} \\
+              \hline
+                & 0 & 0 & 1 & 1 & 1 & 0 & 0 & 0
+            \end{array} \\
+            \text{Carry: 1}
+          \end{align*}
+  \end{enumerate}
+}
+
+\section*{Part 6}
+
+\qs{}{
+  How does the digital logic of a full adder circuit differ from that of a half adder?
+}
+
+\sol{
+  A full adder includes a carry-in bit, but a half adder does not.
+}
+
+\qs{}{
+  What role does the XOR gate play in the implementation of a full adder circuit?
+}
+
+\sol{
+  The XOR gate is used to calculate the sum component of the full adder using the formula $ \left( a \oplus b \right)  \oplus \text{cin}$.
+}
+
+\qs{}{
+  How does the carry-out bit in a full adder circuit influence subsequent addition operations?
+}
+
+\sol{
+  The carry-out bit is used as the carry-in bit for the next full adder in a series of full adders. This allows for the
+  addition of numbers with more than one bit, pushing the carry bit to the next full adder in the series.
+}
+
+\qs{}{
+  Can a full adder circuit be used to perform subtraction? If so, how?
+}
+
+\sol{
+  Yes. To do this the two's complement of the subtrahend is calculated and added to the minuend. This complement can be
+  done by inverting the bits and adding 1 to the least significant bit, which can be done using a NOT gate or an XOR for
+  conditional inversion.
+}
+
+\qs{}{
+  What is the significance of the XOR and AND gates in a subtractor circuit?
+}
+
+\sol{
+  In a purely subtractor circuit, the XOR gate is used to calculate the difference between the minuend and the
+  subtrahend and the AND gate is used to calculate the borrow bit.
+}
+
+\end{document}

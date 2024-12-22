@@ -1,0 +1,419 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{graphicx}
+\graphicspath{ {assets/} }
+\usepackage{karnaugh-map}
+\usepackage{parskip}
+\title{\Huge{Lab 4}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\section*{Part 1}
+\qs{}{
+  Mention the number of gates required in the implementation of the expression above.
+}
+
+\sol{
+  3 NOT Gates, 4 AND Gates each with 4 inputs, and 1 OR Gate with 3 inputs, in total 8 gates
+}
+
+\qs{}{
+  \[
+    F = \overline{A}BCD+AB\overline{C}D+ABC\overline{D}+ABCD
+  \]
+  Use the following methods to simplify the expression above:
+
+  \begin{enumerate}
+    \item  Boolean algebra
+    \item  Karnaugh mapping method
+  \end{enumerate}
+}
+
+\sol{
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c c c c|c|}
+        \hline
+        $A$ & $B$ & $C$ & $D$ & $F$ \\ [0.5ex]
+        \hline
+        \hline
+        0   & 0   & 0   & 0   & 0   \\
+        0   & 0   & 0   & 1   & 0   \\
+        0   & 0   & 1   & 0   & 0   \\
+        0   & 0   & 1   & 1   & 0   \\
+        0   & 1   & 0   & 0   & 0   \\
+        0   & 1   & 0   & 1   & 0   \\
+        0   & 1   & 1   & 0   & 0   \\
+        0   & 1   & 1   & 1   & 1   \\
+        1   & 0   & 0   & 0   & 0   \\
+        1   & 0   & 0   & 1   & 0   \\
+        1   & 0   & 1   & 0   & 0   \\
+        1   & 0   & 1   & 1   & 0   \\
+        1   & 1   & 0   & 0   & 0   \\
+        1   & 1   & 0   & 1   & 1   \\
+        1   & 1   & 1   & 0   & 1   \\
+        1   & 1   & 1   & 1   & 1   \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+  \begin{enumerate}
+  \item
+  \begin{align*}
+    F & =   \overline{A}BCD+AB\overline{C}D+ABC\overline{D}+ABCD                                 \\
+      & = B \left( \overline{A}CD + A\overline{C}D + AC\overline{D} + ACD \right)                \\
+      & = B \left( \overline{A}CD + A \left( \overline{C}D + C\overline{D} + CD \right)  \right) \\
+      & =  B \left( \overline{A}CD + A \left( \overline{C}D + C  \right)  \right)                \\
+      & = B \left( \overline{A}CD + A\overline{C}D + AC \right)                                  \\
+      & = B\overline{A}CD + BA\overline{C}D + BAC                                                \\
+      & = BCD + BAD + BAC                                                                        \\
+  \end{align*}
+  \item
+
+  \begin{figure}[H]
+  \centering
+  \begin{karnaugh-map}[4][4][1][ $CD$][ $AB$]
+  \minterms{7,13,14,15}
+  \maxterms{0,1,2,3,4,5,6,8,9,10,12,11}
+  \implicant{7}{15}
+  \implicant{13}{15}
+  \implicant{15}{14}
+  \end{karnaugh-map}
+  \end{figure}
+  \[
+    F = ABD + CDB + ABC
+  \]
+  \end{enumerate}
+}
+
+\qs{}{
+  Mention the number of gates required in the implementation of the minimized expression generated above.
+}
+
+\sol{
+  1 OR Gate with 3 inputs, 3 AND Gates each with three inputs, in total 4 gates.
+}
+
+\qs{}{
+  Assuming that each gate consumes the same power – 30mW, calculate the energy consumption for both circuits when both are in a chip that operates full-time in a day.
+}
+
+\sol{
+
+  Initial Circuit:
+  \begin{align*}
+    \text{8 gates}  & = 8 \times 30   \\
+                    & = 240 \, mW     \\
+    \text{In a day} & = 240 \times 24 \\
+                    & = 5760 \, mWh   \\
+  \end{align*}
+
+  Optimized Circuit:
+  \begin{align*}
+    \text{4 gates}  & = 4 \times 30   \\
+                    & = 120 \, mW     \\
+    \text{In a day} & = 120 \times 24 \\
+                    & = 2880 \, mWh   \\
+  \end{align*}
+}
+
+\qs{}{
+  Compute the energy savings in kWh.
+}
+
+\sol{
+  \begin{align*}
+    \text{Savings} & = 5760 - 2880 \\
+                   & = 2880 \, mW  \\
+                   & = 2.88\, kWh  \\
+  \end{align*}
+  Therefore the optimized circuit is twice as efficient as the initial circuit.
+}
+
+\section*{Part 2}
+
+\qs{}{
+  $F1$
+}
+
+\sol{
+  \[
+    F_1 = \overline{B}\overline{D} + A \overline{C} + BD + C
+  \]
+}
+
+\qs{}{
+  $F2$
+}
+
+\sol{
+  \[
+    F_2 = \overline{B} + \overline{C}D + CD
+  \]
+}
+
+\qs{}{
+  $F3$
+}
+
+\sol{
+  \[
+    F_3 = \overline{C}D + B
+  \]
+}
+
+\qs{}{
+  $F4$
+}
+
+\sol{
+  \[
+    F_4 = \overline{B}\overline{D} + \overline{B}C + B\overline{C} D + C \overline{D} + A
+  \]
+}
+
+\qs{}{
+  $F5$
+}
+
+\sol{
+  \[
+    F_5 = \overline{B}\overline{D} + C \overline{D}
+  \]
+}
+
+\qs{}{
+  $F6$
+}
+
+\sol{
+  \[
+    F_6 = \overline{C}\overline{D} + B\overline{C} + B\overline{D} + A
+  \]
+}
+
+\qs{}{
+  $F7$
+}
+
+\sol{
+  \[
+    F_7 = \overline{B}C + B \overline{C} + A + C \overline{D}
+  \]
+}
+
+\section*{Part 3}
+
+\qs{}{
+  Construct the circuit below and name your file as D\_FlipFlop1 and D\_FlipFlop2 respectively. Construct the truth table and verify if they are same.
+}
+
+\sol{
+  \begin{table}[h!]
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $D$ & $Q \left( t + 1 \right) $ & $\overline{Q \left( t + 1 \right) }$ \\ [0.5ex]
+        \hline
+        \hline
+        0   & 0                         & 1                                    \\
+        1   & 1                         & 0                                    \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+}
+
+\qs{}{
+  Construct the circuit below and name your file as SR\_FlipFlop1 and SR\_FlipFlop2 respectively. Construct the truth table and verify if they are same.
+}
+
+\sol{
+  \begin{table}[h!]
+    \begin{center}
+      \begin{tabular}{|c c|c|c|}
+        \hline
+        $S$ & $R$ & $Q \left( t + 1 \right) $ & $\overline{Q \left( t + 1 \right) }$ \\ [0.5ex]
+        \hline
+        \hline
+        0   & 0   & $Q \left( t \right) $     & $\overline{Q \left( t \right) }$     \\
+        0   & 1   & 0                         & 1                                    \\
+        1   & 0   & 1                         & 0                                    \\
+        1   & 1   & Invalid                   & Invalid                              \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+}
+
+\qs{}{
+  Construct the circuit below and name your file as JK\_FlipFlop1 and JK\_FlipFlop2 respectively. Construct the truth table and verify if they are same. NB: You are to construct the JK\_FlipFlop2.
+}
+
+\sol{
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c c|c|c|}
+        \hline
+        $J$ & $K$ & $Q \left( t + 1 \right) $        & $\overline{Q \left( t + 1 \right) }$ \\ [0.5ex]
+        \hline
+        \hline
+        0   & 0   & $Q \left( t  \right) $           & $\overline{Q \left( t \right) }$     \\
+        0   & 1   & 0                                & 1                                    \\
+        1   & 0   & 1                                & 0                                    \\
+        1   & 1   & $\overline{Q \left( t \right) }$ & $Q \left( t \right) $                \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+}
+
+\qs{}{
+  Construct the circuit below and name your file as T\_FlipFlop1 and T\_FlipFlop2 respectively. Construct the truth table and verify if they are same. NB: You are to construct the T\_FlipFlop2.
+}
+
+\sol{
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c|c|c|}
+        \hline
+        $T$ & $Q \left( t + 1 \right) $        & $\overline{Q \left( t + 1 \right) }$ \\ [0.5ex]
+        \hline
+        \hline
+        0   & $Q \left( t \right) $            & $\overline{Q \left( t \right) }$     \\
+        1   & $\overline{Q \left( t \right) }$ & $Q \left( t \right) $                \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+}
+
+\section*{Part 5}
+\qs{}{
+  Simulate and show screenshot of your circuit showing the display of:
+  \begin{enumerate}
+    \item  64
+    \item  128
+    \item  15
+  \end{enumerate}
+  In hexadecimal being shown in the hex display.
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.75\textwidth]{64_hex.png}
+            \caption{Hex 64}
+          \end{figure}
+    \item
+          \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.75\textwidth]{128_hex.png}
+            \caption{Hex 128}
+          \end{figure}
+    \item
+          \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.75\textwidth]{15_hex.png}
+            \caption{Hex 15}
+          \end{figure}
+  \end{enumerate}
+}
+
+\section*{Part 6}
+
+\qs{}{
+  What are the key differences between the D flip-flop, SR flip-flop, JK flip-flop, and T flip-flop in terms of functionality and behavior?
+}
+
+\sol{
+  \begin{description}
+    \item[D flip-flop] The D flip-flop is a follower flip-flip, meaning that the output is the same as the input at the
+          moment of the clock's pulse this
+          differs from all the other flip-flops which have do logic operations on the input before it is stored.
+    \item[SR flip-flop] The SR flip-flop is a set-reset flip-flop, meaning that it has two inputs, one to set the output
+          to 1 and the other to set the output to 0. The SR flip-flop has an invalid state where both inputs are 1.
+    \item[JK flip-flop] The JK flip-flip solves the invalid state of the SR flip-flop by toggling the output when both
+          inputs $J$ and $K$ are 1. The JK flip-flop can be used to implement all the other types of flip-flops
+          by integrating added logic operations on the inputs.
+    \item[T flip-flop] The T flip-flop is a toggle flip-flop, meaning that it toggles the output when the input is 1. It
+          has a single input $T$ and the output toggles based on this input on each clock pulse.
+  \end{description}
+}
+
+\qs{}{
+  How does the write enable (WE) pin control the writing operation in the memory cell? Why is this signal necessary in memory design?
+}
+
+\sol{
+
+  The write enable input determines whether the data input is stored or not by this boolean operation:
+  \[
+    Q \left( t + 1 \right)  = (\overline{\text{WE}}\cdot Q \left( t \right) ) + (\text{WE} \cdot  \text{Din})
+  \]
+  This ensures when $\text{WE}$ is on the data is stored as the right side of the expression will evaluate to the value
+  of $\text{Din}$ which is sufficient for the OR gate to output the value of $\text{Din}$.
+
+  \noindent This is necessary in memory design to prevent data from being written to the memory cell when it is not needed or when
+  the data is not ready to be stored. This is important in ensuring that the memory cell is not corrupted by unwanted data.
+}
+
+\qs{}{
+  How does the 8-bit counter's design reflect the principles of sequential logic? What role do the clock and enable signals play in its operation?
+}
+
+\sol{
+  The design of the 8-bit counter reflects the underlying principles of sequential logic as there is kept state in the
+  counter and the current state of the counter is used to determine its next state. The clock signal is used to
+  propagate clock pulses through the counter to allow it to change states, i.e. count up or down. The enable signal is
+  used to control the counter's operation, when the enable signal is off the counter does not change state, no matter
+  the clock signal.
+}
+
+\qs{}{
+  How does the counter behave when the Up/Down input is toggled? What observations can you make about its counting sequence in each mode?
+}
+
+\sol{
+  When the up/down input is off / LOW the counter counts down, i.e. decrements by 1 on each clock pulse. When the up/down is
+  on / HIGH the counter counts up, i.e. increments by 1 on each clock pulse. The counting sequence is linear in both
+  modes with each clock pulse resulting in a change of exactly 1 in the counter's value.
+}
+
+\qs{}{
+  What happens when the load is turned on, the clock keeps ticking, the UP/DOWN is turned off, and the enable is turned on. How does your answer differ from when the load is turned on, some data is being inputted, clock keeps ticking, the UP/DOWN is turned on and the enable is turned on?
+}
+
+\sol{
+  In this first instance when the load and enable are on, the clock is issuing pulses and the up/down counter is off the
+  value of the counter is remains constant at 0 as no data is being inputted. In the second instance, when data is being
+  inputted and up/down, load, and enable are turned on, the value of the counter remains constant at the value of the
+  inputted data.
+}
+
+\qs{}{
+  Reflect on the overall design process and teamwork dynamics during the lab session. What were the key challenges faced by the team, and how were they addressed collaboratively? What lessons can be learned from the design and implementation process for future projects or improvements?
+}
+
+\sol{
+  Some key challenges faced by the team were the complexity of the circuits and all the various tests that were required
+  to ensure that the circuits were functioning correctly. These challenges were addressed collaboratively by breaking
+  the testing process into smaller parts and ensuring that each part was functioning correctly before moving on to the
+  and using the inbuilt testing tools of logisim to ensure that the circuits were functioning correctly.
+
+  During this lab session, I gained a deeper understanding of the principles and design of sequential logic circuits and
+  how they are used practically in the design of memory cells and counters.
+}
+
+
+\end{document}

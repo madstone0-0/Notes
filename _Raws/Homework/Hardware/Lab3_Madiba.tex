@@ -1,0 +1,225 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\usepackage{graphicx}
+\graphicspath{ {assets/} }
+\title{\Huge{Lab 3}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\section*{Part 5}
+
+\qs{}{
+  Multiply A = 10 and B = 22 by hand. Indicate the product in binary.
+  Indicate a high (true) or a low (false) for the following:
+  \begin{enumerate}
+    \item $A > B$
+    \item  $A \leq B$
+  \end{enumerate}
+  Justify your responses above by simulating your circuit and attach screenshots.
+
+}
+
+\sol{
+  \begin{align*}
+    10_{10} & =  1010_{2} \\
+    22_{10} & = 10110_{2} \\
+  \end{align*}
+  \begin{align*}
+    \begin{array}{c c c c c c c c }
+             & 1 & 0 & 1 & 0 & 0         \\
+      \times &   & 1 & 0 & 1 & 1         \\
+      \hline
+             & 1 & 0 & 1 & 0 & 0 & 0     \\ % This is 1010 times 0
+             & 0 & 0 & 0 & 0 & 0 & 0     \\ % This is 1010 times 1 (shifted left)
+             & 1 & 0 & 1 & 0 & 0 &       \\ % This is 1010 times 1 (shifted left twice)
+             & 1 & 0 & 1 & 0 & 0 &       \\ % This is 1010 times 1 (shifted left thrice)
+      \hline
+             & 1 & 1 & 0 & 1 & 1 & 0 & 0 \\ % This is the final result
+    \end{array} \\
+    1101100_{2} = 220_{10}
+  \end{align*}
+
+  \begin{enumerate}
+    \item LOW
+    \item HIGH
+  \end{enumerate}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{test1_a.png}
+    \caption{Test Case A - 1}
+  \end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{test1_b.png}
+    \caption{Test Case A - 2}
+  \end{figure}
+}
+
+\qs{}{
+  Divide A = 255 and B = 5 by hand. Indicate the quotient in binary.
+  Indicate a high (true) or a low (false) for the following:
+  \begin{enumerate}
+    \item $A \neq  B$
+    \item  $A \geq B$
+  \end{enumerate}
+  Justify your responses above by simulating your circuit and attach screenshots.
+}
+
+\sol{
+
+  \begin{align*}
+    255_{10} & = 11111111_{2} \\
+    5_{10}   & = 101_{2}      \\
+  \end{align*}
+
+  \begin{align*}
+    \begin{array}{ c c}
+           & 255 \\
+      \div & 5   \\
+      \hline
+           & 51
+    \end{array} \\
+    51_{10} = 110011_{2}
+  \end{align*}
+
+  \begin{enumerate}
+    \item HIGH
+    \item HIGH
+  \end{enumerate}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{test2_a.png}
+    \caption{Test Case B - 1}
+  \end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{test2_b.png}
+    \caption{Test Case B - 2}
+  \end{figure}
+}
+
+\qs{}{
+  Subtract A = 250 and B = 27 by hand. Indicate the difference in binary.
+  Indicate a high (true) or a low (false) for the following:
+  \begin{enumerate}
+    \item  $A < B$
+    \item $A = B$
+  \end{enumerate}
+}
+
+\sol{
+  \begin{align*}
+    250_{10} & =  1111 1010_{2} \\
+    27_{10}  & =  1 1011_{2}    \\
+  \end{align*}
+  \begin{align*}
+    \begin{array}{c c c c c c c c c }
+        & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 0 \\
+      - & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 \\
+      \hline
+        & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 0 \\
+      + & 1 & 1 & 1 & 0 & 0 & 1 & 0 & 1 \\
+      \hline
+        & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 \\
+    \end{array} \\
+    11011111_{2} = 223_{10}
+  \end{align*}
+
+  \begin{enumerate}
+    \item LOW
+    \item LOW
+  \end{enumerate}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{test3_a.png}
+    \caption{Test Case C - 1}
+  \end{figure}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{test3_b.png}
+    \caption{Test Case C - 2}
+  \end{figure}
+
+}
+
+\section*{Part 7}
+\qs{}{
+  How did the selection of multiplexers contribute to the overall design of the ALU, and what were the key considerations in choosing the appropriate multiplexer configurations?
+}
+
+\sol{
+  The selection of multiplexers determined operation selection of the Arithmetic unit and Logic unit of the ALU. The
+  selection input lines of the multiplexers were used to select the operation to be performed by the ALU. The key
+  considerations in choosing the appropriate multiplexer configurations were the number of inputs into the multiplexer
+  the corresponding number of selection lines, and the operation to be performed by the ALU.
+}
+
+\qs{}{
+  Reflect on the role of comparators within the ALU design. How did these components facilitate comparison operations, and what challenges or limitations did you encounter when integrating them into the circuit?
+}
+
+\sol{
+  Comparators within the ALU were responsible for comparing two numbers at the bit level. The comparators allowed for
+  the logical operations of equality, greater than, and less than to be performed and when these operations were
+  combined they also allow for greater than or equal, inequality, and less than or equal checks to be performed. The
+  main limitation of comparators is the need to check each bit of the two numbers being compared, as this can be time
+  consuming and resource-intensive for large numbers.
+}
+
+\qs{}{
+  Discuss the significance of full adders in the ALU's arithmetic operations. How did the utilization of full adders impact the efficiency and functionality of addition and subtraction processes within the ALU?
+}
+
+\sol{
+  Full adders are significant in the ALU's arithmetic component as they allow for accurate addition and subtraction
+  factoring in carries.
+}
+
+\qs{}{
+  When implementing subtraction in the adder/subtractor circuit using two’s complement, what steps does the circuit take to perform the operation? How does this process differ from a basic addition operation, and why is two's complement used for subtraction in digital systems?
+}
+
+\sol{
+  Using two's complement for subtraction circuit, the circuit first inverts the bits of the minuend using a controlled
+  inverter (XOR gate) and then adds one to the result. This process differs from basic addition as the minuend is first
+  inverted before the addition operation is performed. Two's complement is used because it allows for subtraction and
+  addition to be done using the same circuit reducing the complexity and number of components needed in the ALU.
+}
+
+\qs{}{
+  Consider the trade-offs and design decisions involved in balancing performance, complexity, and resource utilization within the ALU design. How did you navigate these trade-offs to achieve an optimal solution?
+}
+
+\sol{
+  The trade-offs and design decisions involved in balancing performance, complexity, and resource utilization within the
+  ALU design were the choice of components, the number of components, and the number of inputs to the components. I
+  navigated these trade-offs by using multiplexers to select the operation to be performed by the ALU, using comparators
+  to handle logical operations and using full adders to handle arithmetic operations. This allowed for a balance between performance, complexity, and resource utilization.
+}
+
+\qs{}{
+  Reflect on the overall design process and teamwork dynamics during the lab session. What were the key challenges faced by the team, and how were they addressed collaboratively? What lessons can be learned from the design and implementation process for future projects or improvements?
+}
+
+\sol{
+  The key challenges faced by the team were the simplification of the derived SOP expressions using Karnaugh maps to
+  achieve a resource-efficient design. The team addressed these challenges by working in smaller subteams to try and
+  determine the most optimal simplification of the SOP expression, with some teams using overlapping implicant groups to
+  reduce the number of gates needed. The lessons learned from the design and implementation process were the importance
+  of teamwork and communication in achieving a common goal, and the importance of understanding the underlying boolean
+  algebra theory.
+}
+
+
+\end{document}

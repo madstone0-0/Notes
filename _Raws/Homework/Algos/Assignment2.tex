@@ -1,0 +1,474 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{caption}% http://ctan.org/pkg/caption
+\usepackage{parskip}
+\title{\Huge{Assignment 2}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\section*{Part A}
+
+\qs{}{
+  A network topology specifies how computers, printers, and other devices are connected
+  over a network. You are given a boolean matrix $A \left[ 0\ldots n - 1, 0 \ldots n - 1 \right] $, where $n > 3$, which is supposed to be
+  the adjacency matrix of a graph modeling a network with one of these topologies. \\
+  Your task is to determine which of these three topologies, if any, the matrix represents. Design a brute-force algorithm for this task and indicate its time efficiency class.
+}
+
+\sol{
+  \begin{algorithm}[H]
+    \caption{DetermineTopology $ \left( A, n \right) $}
+    \Comment{}\\
+    \Comment{Determine if the network topology of a given adjacency matrix $A$ is or isn't any of the three mentioned
+      topologies} \\
+    \Comment{Input: An boolean adjacency matrix $A$ of size $n\times n$} \\
+    \Comment{Output: 1 if star, 2 if mesh, 3 if ring and -1 if none} \\
+    \begin{algorithmic}[1]
+      \State isStar $ \gets T$
+      \State isRing $ \gets T$
+      \State isMesh $ \gets T$
+      \State $mI  \gets -1$
+      \State allTCount $ \gets 0$
+      \State oneTCount $ \gets 0$\\
+
+      \For{ $i \gets 0$ to $n -1$}
+      \State tCount $ \gets 0$
+      \For{ $j \gets 0$ to $n-1$}
+      \If{ $ i == j$}
+      continue
+      \EndIf\\
+
+      \If{ $A_{ij} == T$}
+      \State tCount $ \gets \text{tCount } + 1$
+      \EndIf
+      \EndFor\\
+
+      \If{tCount $== 1$}
+      \State oneTCount $ \gets \text{oneTCount } + 1$
+      \EndIf \\
+
+      \If{tCount $\neq  2$}
+      \State isRing $ \gets F$
+      \EndIf \\
+
+
+      \If{ $\text{tCount} == n - 1$}
+      \If{ $mI == -1$}
+      \State $mI \gets i$
+      \Else
+      \State isStar $ \gets F$
+      \EndIf
+      \State allTCount $ \gets \text{allTCount } + 1$
+      \EndIf
+      \EndFor
+      \algstore{determinetopo}
+
+
+    \end{algorithmic}
+  \end{algorithm}
+
+  \begin{algorithm}[H]
+    \caption{DetermineTopology (Continued) $ \left( A, n \right) $}
+    \begin{algorithmic}[1]
+      \algrestore{determinetopo}
+      \If{ allTCount $\neq m$}
+      \State isMesh $ \gets F$
+      \EndIf \\
+
+      \If{ $mI == -1$}
+      \State isStar $ \gets F$
+      \EndIf \\
+
+      \If{oneTCount $\neq m - 1$}
+      \State isStar $ \gets F$
+      \EndIf \\
+
+
+      \If{isStar}
+      \State \Return 1
+      \ElsIf{isMesh}
+      \State \Return 2
+      \ElsIf{isRing}
+      \State \Return 3
+      \Else
+      \State \Return -1
+      \EndIf
+    \end{algorithmic}
+  \end{algorithm}
+}
+
+\qs{}{
+  "Word find" (or "Word search") puzzles ask the player to find each of a given set of
+  words in a square table filled with single letters. A word can read horizontally (left or
+  right), vertically (up or down), or along a 45 degree diagonal (in any of the four
+  directions) formed by consecutively adjacent cells of the table; it may wrap around the
+  table’s boundaries, but it must read in the same direction with no zigzagging. The same
+  cell of the table may be used in different words, but, in a given word, the same cell may
+  be used no more than once. Design a brute-force algorithm for solving this puzzle.
+}
+
+\sol{
+  \begin{algorithm}[H]
+    \caption{WordFind $ \left( A, n, \text{targetWords}, m \right) $}
+    \Comment{}\\
+    \Comment{Finds the indices and directions of a set of words in a word find puzzle} \\
+    \Comment{Input: The word square $A$ with dimensions $n\times n$, A set of target words of length $m$} \\
+    \Comment{Output: A list containing the word, the start index and the found direction of each of the found words in the
+      word square in the format $ \left[\text{word}, \text{start}, \text{direction} \right] $} \\
+    \begin{algorithmic}[1]
+      \Function{checkHR}{ $\text{word}, w, A, i, j$} \Comment{Function to check if a word can be found horizontally
+        right} \\
+      \Comment{word - the word to find, $w$ - the length of the word, $A$ - the word square, $i$ - the row index, $j$ -
+        the column index}
+      \State $\text{idx} \gets j$
+      \State $\text{count} \gets 0$
+      \While{ $\text{count} < w$}
+      \If{ $\text{word}[ \text{count} ] \neq  A[i][ \text{idx} ]$}
+      \State \Return $F$
+      \EndIf
+      \State $\text{idx} \gets \left( \text{idx} + 1 \right) \bmod n $
+      \State count $ \gets \text{count} + 1 $
+      \EndWhile
+      \State \Return $T$
+      \EndFunction \\
+
+      \Function{checkHL}{ $\text{word}, w, A, i, j$} \Comment{Function to check if a word can be found horizontally
+        left} \\
+
+      \Comment{word - the word to find, $w$ - the length of the word, $A$ - the word square, $i$ - the row index, $j$ -
+        the column index}
+      \State $\text{idx} \gets j$
+      \State $\text{count} \gets 0$
+      \While{ $\text{count} < w$}
+      \If{ $\text{word}[ \text{count} ] \neq  A[i][ \text{idx} ]$}
+      \State \Return $F$
+      \EndIf
+      \State $\text{idx} \gets \left( \text{idx} - 1 \right) \bmod n $
+      \State count $ \gets \text{count} + 1 $
+      \EndWhile
+      \State \Return $T$
+      \EndFunction \\
+      \algstore{wordfind}
+
+    \end{algorithmic}
+  \end{algorithm}
+
+  \begin{algorithm}[H]
+    \ContinuedFloat
+    \caption{WordFind (Continued) $ \left( A, n, \text{targetWords}, m \right) $}
+    \begin{algorithmic}[1]
+      \algrestore{wordfind}
+      \Function{checkVD}{ $\text{word}, w, A, i, j$} \Comment{Function to check if a word can be found vertically down} \\
+      \Comment{word - the word to find, $w$ - the length of the word, $A$ - the word square, $i$ - the row index, $j$ -
+        the column index}
+      \State $\text{idx} \gets i$
+      \State $\text{count} \gets 0$
+      \While{ $\text{count} < w$}
+      \If{ $\text{word}[ \text{count} ] \neq  A[ \text{idx} ][j]$}
+      \State \Return $F$
+      \EndIf
+      \State $\text{idx} \gets \left( \text{idx} + 1 \right) \bmod n $
+      \State count $ \gets \text{count} + 1 $
+      \EndWhile
+      \State \Return $T$
+      \EndFunction \\
+
+      \Function{checkVU}{ $\text{word}, w, A, i, j$} \Comment{Function to check if a word can be found vertically up} \\
+      \Comment{word - the word to find, $w$ - the length of the word, $A$ - the word square, $i$ - the row index, $j$ -
+        the column index}
+      \State $\text{idx} \gets j$
+      \State $\text{count} \gets 0$
+      \While{ $\text{count} < w$}
+      \If{ $\text{word}[ \text{count} ] \neq  A[ \text{idx} ][j]$}
+      \State \Return $F$
+      \EndIf
+      \State $\text{idx} \gets \left( \text{idx} - 1 \right) \bmod n $
+      \State count $ \gets \text{count} + 1 $
+      \EndWhile
+      \State \Return $T$
+      \EndFunction \\
+
+      \Function{checkDTR}{ $\text{word}, w, A, i, j$} \Comment{Function to check if a word can be found diagonally top
+        right} \\
+      \Comment{word - the word to find, $w$ - the length of the word, $A$ - the word square, $i$ - the row index, $j$ -
+        the column index}
+      \State $\text{idxR} \gets i$
+      \State $\text{idxC} \gets j$
+      \State $\text{count} \gets 0$
+      \While{ $\text{count} < w$}
+      \If{ $\text{word}[\text{count}] \neq A[\text{idxR}][\text{idxC}]$}
+      \State \Return $F$
+      \EndIf
+      \State $\text{idxR} \gets \left( \text{idxR} - 1 \right) \bmod n $
+      \State $\text{idxC} \gets \left( \text{idxC} + 1 \right) \bmod n $
+      \State count $ \gets \text{count} + 1 $
+      \EndWhile
+      \State \Return $T$
+      \EndFunction \\
+
+      \algstore{wordfind}
+    \end{algorithmic}
+  \end{algorithm}
+}
+
+\begin{algorithm}[H]
+  \caption{WordFind (Continued) $ \left( A, n, \text{targetWords}, m \right) $}
+  \begin{algorithmic}[1]
+    \algrestore{wordfind}
+    \Function{checkDTL}{ $\text{word}, w, A, i, j$} \Comment{Function to check if a word can be found diagonally top
+      left} \\
+    \Comment{word - the word to find, $w$ - the length of the word, $A$ - the word square, $i$ - the row index, $j$ -
+      the column index}
+    \State $\text{idxR} \gets i$
+    \State $\text{idxC} \gets j$
+    \State $\text{count} \gets 0$
+    \While{ $\text{count} < w$}
+    \If{ $\text{word}[\text{count}] \neq A[\text{idxR}][\text{idxC}]$}
+    \State \Return $F$
+    \EndIf
+    \State $\text{idxR} \gets \left( \text{idxR} - 1 \right) \bmod n $ \Comment{Move up}
+    \State $\text{idxC} \gets \left( \text{idxC} - 1 \right) \bmod n $ \Comment{Move left}
+    \State $\text{count} \gets \text{count} + 1$
+    \EndWhile
+    \State \Return $T$
+    \EndFunction \\
+
+    \Function{checkDBL}{ $\text{word}, w, A, i, j$} \Comment{Function to check if a word can be found diagonally bottom
+      left} \\
+    \Comment{word - the word to find, $w$ - the length of the word, $A$ - the word square, $i$ - the row index, $j$ -
+      the column index}
+    \State $\text{idxR} \gets i$
+    \State $\text{idxC} \gets j$
+    \State $\text{count} \gets 0$
+    \While{ $\text{count} < w$}
+    \If{ $\text{word}[\text{count}] \neq A[\text{idxR}][\text{idxC}]$}
+    \State \Return $F$
+    \EndIf
+    \State $\text{idxR} \gets \left( \text{idxR} + 1 \right) \bmod n $ \Comment{Move down}
+    \State $\text{idxC} \gets \left( \text{idxC} - 1 \right) \bmod n $ \Comment{Move left}
+    \State $\text{count} \gets \text{count} + 1$
+    \EndWhile
+    \State \Return $T$
+    \EndFunction \\
+
+    \Function{checkDBR}{ $\text{word}, w, A, i, j$} \Comment{Function to check if a word can be found diagonally bottom
+      right} \\
+    \Comment{word - the word to find, $w$ - the length of the word, $A$ - the word square, $i$ - the row index, $j$ -
+      the column index}
+    \State $\text{idxR} \gets i$
+    \State $\text{idxC} \gets j$
+    \State $\text{count} \gets 0$
+    \While{ $\text{count} < w$}
+    \If{ $\text{word}[\text{count}] \neq A[\text{idxR}][\text{idxC}]$}
+    \State \Return $F$
+    \EndIf
+    \State $\text{idxR} \gets \left( \text{idxR} + 1 \right) \bmod n $ \Comment{Move down}
+    \State $\text{idxC} \gets \left( \text{idxC} + 1 \right) \bmod n $ \Comment{Move right}
+    \State $\text{count} \gets \text{count} + 1$
+    \EndWhile
+    \State \Return $T$
+    \EndFunction \\
+
+    \State foundIds $ \gets \left[  \right] $
+    \State $\text{wIdx} \gets 0$
+    \State $\text{found} \gets F$
+    \algstore{wordfind}
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{WordFind (Continued) $ \left( A, n, \text{targetWords}, m \right) $}
+  \begin{algorithmic}[1]
+    \algrestore{wordfind}
+    \For{ $\text{idx} \gets 0$ to $m-1$}
+    \State word $ \gets \text{targetWords}[\text{idx}]$
+    \State $w \gets$ length of word
+    \State $\text{found} \gets F$
+    \For{ $i \gets 0$ to $n-1$}
+    \If{ $\text{found}$}  \Comment{Assuming a word only appears once we break out of the word loop once it is found}
+    \State break
+    \EndIf
+    \For{ $j \gets 0$ to $n-1$}
+    \If{\Call{checkHR}{ $\text{word}, w, A, i, j$}}
+    \State $\text{foundIds}[\text{wIdx}] \gets [ \text{word}, [i,j], \text{"HR"}]$
+    \State $\text{wIdx} \gets \text{wIdx} + 1$
+    \State $\text{found} \gets T$
+    \State break
+    \ElsIf{\Call{checkHL}{ $\text{word}, w, A, i, j$}}
+    \State $\text{foundIds}[\text{wIdx}] \gets [\text{word},[i,j], \text{"HL"}]$
+    \State $\text{wIdx} \gets \text{wIdx} + 1$
+    \State $\text{found} \gets T$
+    \State break
+    \ElsIf{\Call{checkVD}{ $\text{word}, w, A, i, j$}}
+    \State $\text{foundIds}[\text{wIdx}] \gets [\text{word},[i,j], \text{"VD"}]$
+    \State $\text{wIdx} \gets \text{wIdx} + 1$
+    \State $\text{found} \gets T$
+    \State break
+    \ElsIf{\Call{checkVU}{ $\text{word}, w, A, i, j$}}
+    \State $\text{foundIds}[\text{wIdx}] \gets [\text{word},[i,j], \text{"VU"}]$
+    \State $\text{wIdx} \gets \text{wIdx} + 1$
+    \State $\text{found} \gets T$
+    \State break
+    \ElsIf{\Call{checkDTR}{ $\text{word}, w, A, i, j$}}
+    \State $\text{foundIds}[\text{wIdx}] \gets [\text{word},[i,j], \text{"TR"}]$
+    \State $\text{wIdx} \gets \text{wIdx} + 1$
+    \State $\text{found} \gets T$
+    \State break
+    \ElsIf{\Call{checkDBR}{ $\text{word}, w, A, i, j$}}
+    \State $\text{foundIds}[\text{wIdx}] \gets [\text{word},[i,j], \text{"BR"}]$
+    \State $\text{wIdx} \gets \text{wIdx} + 1$
+    \State $\text{found} \gets T$
+    \State break
+    \ElsIf{\Call{checkDTL}{ $\text{word}, w, A, i, j$}}
+    \State $\text{foundIds}[\text{wIdx}] \gets [\text{word},[i,j], \text{"TL"}]$
+    \State $\text{wIdx} \gets \text{wIdx} + 1$
+    \State $\text{found} \gets T$
+    \State break
+    \ElsIf{\Call{checkDBL}{ $\text{word}, w, A, i, j$}}
+    \State $\text{foundIds}[\text{wIdx}] \gets [\text{word},[i,j], \text{"BL"}]$
+    \State $\text{wIdx} \gets \text{wIdx} + 1$
+    \State $\text{found} \gets T$
+    \State break
+    \EndIf
+    \EndFor
+    \EndFor
+    \EndFor \\
+    \State \Return $\text{foundIds}$
+  \end{algorithmic}
+\end{algorithm}
+
+\qs{}{
+  \begin{enumerate}
+    \item Apply the DFS-based algorithm to solve the topological sorting problem for the
+          following directed acyclic graph.
+    \item Apply the source-removal algorithm to solve the topological sorting problem for the
+          following directed acyclic graph.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item The DFS-based algorithm involves performing a DFS on all the nodes of a graph and reversing the order each
+          node was visited to obtain a topological sort. This can be done by observing the stack frames made by the
+          recursive algorithm and assigning numbers to each of the nodes based on the order they where pushed on to
+          the stack and popped of the stack. Assuming the nodes are arranged in alphabetical order and prioritizing
+          alphabetical order, the stack  order
+          is:
+          \begin{align*}
+            a\, 1, 6 \\
+            b\, 2, 4 \\
+            e\, 3, 1 \\
+            g\, 4, 3 \\
+            f\, 5, 2 \\
+            c\, 6, 5 \\
+            d\, 7, 7 \\
+          \end{align*}
+          And the resulting topological sort is:\\
+          \[
+            d, a, c, b, g, f, e
+          \]
+
+    \item Using the source-removal algorithm, we remove nodes with an in-degree of 0 and add them to the beginning of
+          the topological sort. But since this graph has a cycle from $e$ to $e$, after the first source removal of $f$,
+          there are no other nodes with an in-degree of 0. Thus the graph has no topological sort and a partial topological sort is of just $f$.
+  \end{enumerate}
+}
+
+\qs{}{
+  A digraph is called strongly connected if for any pair of two distinct vertices $u$ and $v$
+  there exists a directed path from $u$ to $v$ and a directed path from $v$ to $u$. In general, a
+  digraph’s vertices can be partitioned into disjoint maximal subsets of vertices that are
+  mutually accessible via directed paths; these subsets are called strongly connected
+  components of the digraph. There are two DFS-based algorithms for identifying strongly
+  connected components. Here is the simpler (but somewhat less efficient) one of the two:
+  \begin{description}
+    \item[Step 1] Perform a DFS traversal of the digraph given and number its vertices in the
+          order they become dead ends.
+    \item[Step 2]  Reverse the directions of all the edges of the digraph.
+    \item[Step 3] Perform a DFS traversal of the new digraph by starting (and, if necessary,
+          restarting) the traversal at the highest numbered vertex among still
+          unvisited vertices.
+  \end{description}
+  The strongly connected components are exactly the vertices of the DFS trees obtained
+  during the last traversal.
+  \begin{enumerate}
+    \item Apply this algorithm to the following digraph to determine its strongly
+          connected components.
+    \item  What is the time efficiency class of this algorithm? Give separate answers for the
+          adjacency matrix representation and adjacency list representation of an input digraph.
+    \item How many strongly connected components does a dag have?  Justify your answer.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item Applying this algorithm first I start with the DFS traversal of the graph and number the
+          vertices in the order they become dead ends. The order is:
+          \begin{align*}
+            a\, 4 \\
+            b\, 3 \\
+            g\, 2 \\
+            f\, 1 \\
+            c\, 8 \\
+            d\, 5 \\
+            e\, 7 \\
+            h\, 6 \\
+          \end{align*}
+          Next I reverse the directions of the edges and perform a DFS traversal starting at the highest numbered node
+          $c$, the DFS trees obtained are:
+          \begin{align*}
+            c \to h \to e \\
+            d             \\
+            a \to  f \to g \to b
+          \end{align*}
+          Therefore the strongly connected components are: $\{c, h, e\} $, $\{d\}$ and $\{a, f, g, b\}$.
+    \item
+          \begin{description}
+            \item[Adjacency Martix] - The time efficiency class of this algorithm for the adjacency matrix representation
+                  is $O \left( n^2 \right) $, where $n$ is the number of vertices in the graph.
+
+                  This is beacause the
+                  first step of the algorithm involves performing a DFS traversal of the graph which takes $O \left(
+                    n^2\right) $ to check all the possible edges in the graph.
+
+                  The second step involves reversing the
+                  directions of all the edges which also takes $O \left( n^2 \right) $ to check and reverse all
+                  existing edges.
+
+                  The third step involves another a DFS traversal of the new graph which also takes
+                  $O \left( n^2 \right) $.
+
+                  In total this is $O \left( n^2 \right) +  O \left( n^2 \right) + O \left(
+                    n^2 \right) $ which is $O \left( n^2 \right) $.
+            \item[Adjacency List] - The time efficiency class of this algorithm for the adjacency list
+                  representation is $O \left( n + m \right) $, where $n$ is the number of vertices in the graph and $m$ is the number of edges in the graph.
+
+                  This is because the first step of the algorithm does a DFS traversal of the graph which in a
+                  adjacency list represented graph takes $O \left( n + m \right)$ as it only check each edge once
+                  using this representation.
+
+                  The second step involves reversing the directions of all the edges which takes $O \left( m \right) $
+                  time where $m$ is the number of edges in the graph as the algorithm just needs to iterate through
+                  the list of edges and reverse them.
+
+                  Finally the third step invloves another DFS traversal of the new graph which also takes $O \left( n + m \right) $ time.
+
+                  In total this is $O \left( n + m \right) + O \left( m \right) + O \left( n + m \right) $ which is $O \left( n + m \right) $.
+          \end{description}
+    \item A DAG can only have exactly $n$ strongly connected components. This is because a DAG has no cycles thus
+          it is impossible to have a directed path from $v$ to $u$ and another from $u$ to $v$, i.e. a cycle. Thus
+          each strongly connected component is a single node and there are $n$ nodes in the graph.
+  \end{enumerate}
+}
+
+
+
+\end{document}

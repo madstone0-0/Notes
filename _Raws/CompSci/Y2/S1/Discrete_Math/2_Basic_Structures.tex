@@ -44,47 +44,47 @@ There are several ways to describe a set:
 }
 
 \dfn{Empty / Null Set}{
-  A set with no elements, denoted by $\O$ or $ \left\{  \right\}  $. Can be expressed as $\{x \mid F \} $
+  A set with no elements, denoted by $\emptyset$ or $ \left\{  \right\}  $. Can be expressed as $\{x \mid F \} $
 
 }
 
 \dfn{Singleton Set}{
-  A set with exactly one element, denoted by $\left\{ a \right\} $. The set $ \left\{ \O \right\}  $ is a singleton set as
+  A set with exactly one element, denoted by $\left\{ a \right\} $. The set $ \left\{ \emptyset \right\}  $ is a singleton set as
   it is a set with one element, the empty set.
 }
 
-\subsection{Set Definitions}
+\section{Set Definitions}
 
-\subsubsection{Natural numbers}
+\subsection{Natural numbers}
 
 \[
   \mathbb{N} = \left\{ 1, 2, 3, 4, 5, \ldots \right\}
 \]
 
-\subsubsection{Integers}
+\subsection{Integers}
 
 \[
   \mathbb{Z} = \left\{ \ldots, -3, -2, -1, 0, 1, 2, 3, \ldots \right\}
 \]
 
-\subsubsection{Positive Integers}
+\subsection{Positive Integers}
 
 \[
   \mathbb{Z}^{+} = \left\{ 1, 2, 3, 4, 5, \ldots \right\}
 \]
 
-\subsubsection{Rational numbers}
+\subsection{Rational numbers}
 
 \[
   \mathbb{Q} = \left\{ \frac{p}{q} \mid p, q \in \mathbb{Z} \text{ and } q \neq 0 \right\}
 \]
 
-\subsubsection{Irrational Numbers}
+\subsection{Irrational Numbers}
 \[
   \mathbb{I} = \left\{ x \mid x \text{ is a number that cannot be expressed as a fraction} \right\}
 \]
 
-\subsubsection{Real numbers}
+\subsection{Real numbers}
 
 \[
   \mathbb{R} = \left\{ x \mid x \text{ is a point on the number line} \right\}
@@ -96,19 +96,19 @@ Or
   \mathbb{R} = \mathbb{Q} \cup \mathbb{I}
 \]
 
-\subsubsection{Positive Real numbers}
+\subsection{Positive Real numbers}
 \[
   \mathbb{R}^{+} = \left\{ x \in \mathbb{R} \mid x > 0 \right\}
 \]
 
-\subsubsection{Complex numbers}
+\subsection{Complex numbers}
 
 \[
   \mathbb{C} = \left\{ a + bi \mid a, b \in \mathbb{R} \text{ and } i^{2} = -1 \right\}
 \]
 
 
-\subsection{Venn Diagrams}
+\section{Venn Diagrams}
 
 \dfn{Universal Set}{
   The set of all objects under consideration, denoted by $U$. Can be expressed as $\{x  \mid T\} $
@@ -122,7 +122,7 @@ circles representing elements of the sets.
 % Venn diagram for the set of vowels in the English language
 
 
-\subsection{Subsets}
+\section{Subsets}
 
 \dfn{Subset}{
   A set $A$ is a \textit{subset} of a set $B$ if and only if every element of $A$ is also an element of $B$. Denoted
@@ -157,19 +157,19 @@ Shown graphically: \\
 \thm{}{
   For every set $S$
   \begin{enumerate}
-    \item $\O \subseteq S$
+    \item $\emptyset \subseteq S$
     \item $S \subseteq S$
   \end{enumerate}
 
   \begin{enumerate}
     \item
           \begin{myproof}
-            We will prove that $\O \subseteq S$, using a vacuous proof \\
+            We will prove that $\emptyset \subseteq S$, using a vacuous proof \\
             Let $S$ be a set. \\
-            To show $\O \subseteq S$ we must show that $\forall x \left( x \in \O \to x \in S \right) $ is $T$. \\
-            Because $\O$ contains no elements $x \in  \O$ is always $F$ \\
-            This follows that the implication $x \in \O \to x \in S$ is always $T$ \\
-            Hence $\O \subseteq S$ \\
+            To show $\emptyset \subseteq S$ we must show that $\forall x \left( x \in \emptyset \to x \in S \right) $ is $T$. \\
+            Because $\emptyset$ contains no elements $x \in  \emptyset$ is always $F$ \\
+            This follows that the implication $x \in \emptyset \to x \in S$ is always $T$ \\
+            Hence $\emptyset \subseteq S$ \\
           \end{myproof}
     \item
           \begin{myproof}
@@ -196,11 +196,11 @@ Shown graphically: \\
 
 \dfn{Further Equality}{
   Two sets $A$ and $B$ are equal if $A \subseteq B \wedge  B \subseteq A$ is $T$. I.e.
-  $A = \left\{ \O, \left\{ a \right\}, \left\{ a \right\}, \left\{ b \right\}, \left\{ a, b \right\}     \right\}  $
+  $A = \left\{ \emptyset, \left\{ a \right\}, \left\{ a \right\}, \left\{ b \right\}, \left\{ a, b \right\}     \right\}  $
   and $B = \left\{ x  \mid x \text{ is a subset of the set } \left\{ a,b \right\}  \right\}  $ are equal.
 }
 
-\subsection{Cardinality}
+\section{Cardinality}
 
 \dfn{Cardinality}{
   The number of distinct elements $n$ in a set $A$. Denoted by $\left| A \right| = n$.
@@ -212,7 +212,7 @@ Shown graphically: \\
 }
 
 
-\subsection{Power Set}
+\section{Power Set}
 
 \dfn{Power Set}{
   A set containing all the subsets of a given set $A$. Denoted by $\mathcal{P} \left( A \right) $. If a set has $n$
@@ -226,7 +226,7 @@ Shown graphically: \\
 
   \sol{
     \[
-      \mathcal{P}(\left\{ 0,1,2 \right\} ) = \left\{ \O, \left\{ 0 \right\}, \left\{ 1 \right\}, \left\{ 2 \right\},,
+      \mathcal{P}(\left\{ 0,1,2 \right\} ) = \left\{ \emptyset, \left\{ 0 \right\}, \left\{ 1 \right\}, \left\{ 2 \right\},,
       \left\{ 0,1 \right\}, \left\{ 0, 2  \right\}, \left\{ 1,2 \right\}, \left\{ 0,1,2 \right\}        \right\}
     \]
   }
@@ -234,27 +234,27 @@ Shown graphically: \\
 
 \ex{}{
   \qs{}{
-    What is the power set of $\O$
+    What is the power set of $\emptyset$
   }
 
   \sol{
     \[
-      \mathcal{P}(\O) = \left\{ \O \right\}
+      \mathcal{P}(\emptyset) = \left\{ \emptyset \right\}
     \]
   }
 
   \qs{}{
-    What is the power set of $\left\{ \O \right\} $
+    What is the power set of $\left\{ \emptyset \right\} $
   }
 
   \sol{
     \[
-      \mathcal{P}\left( \left\{ \O \right\}  \right) = \left\{ \O, \left\{ \O \right\}  \right\}
+      \mathcal{P}\left( \left\{ \emptyset \right\}  \right) = \left\{ \emptyset, \left\{ \emptyset \right\}  \right\}
     \]
   }
 }
 
-\subsection{N-Tuples}
+\section{N-Tuples}
 \dfn{Ordered N-Tuple}{
   N-tuple $\left( a_1, a_2, \ldots, a_n \right) $ is the ordered collection that has $a_1$ as its first element,
   $a_2$ as its second element, \ldots, and $a_n$ as its $n$th element.
@@ -268,7 +268,7 @@ Ordered 2-tuples are called \textit{ordered pairs}. The ordered pairs, $\left( a
 are equal if and only if $a = c$ and $b = d$.
 
 
-\subsection{Cartesian Products}
+\section{Cartesian Products}
 
 \dfn{Cartesian Product}{
   Let $A$ and $B$ be sets. The \textit{Cartesian Product} of $A$ and $B$, denoted by $A \times B$, is the set of all
@@ -361,7 +361,7 @@ We use the notation $A^2$ to denote $A \times A$, the Cartesian product of $A$ a
   }
 }
 
-\subsection{Set Notation with Quantifiers}
+\section{Set Notation with Quantifiers}
 
 
 We can restrict the domain of a quantifier to a set, I.e. Where $S$ is a set $\forall x \in S \left( P \left( x \right)
@@ -375,7 +375,7 @@ shorthand for $\forall x \left( x \in S \to P \left( x \right)  \right) $
   $\exists x \in \mathbb{Z} \left( x^2 = 1 \right) $ means "there exists an integer whose square is $1$"
 }
 
-\subsection{Truth Sets and Quantifiers}
+\section{Truth Sets and Quantifiers}
 
 \dfn{Truth Set}{
   For a predicate $P$ the truth set of $P$ is the set of all elements in the domain of discourse that make $P$ true.
@@ -407,110 +407,8 @@ shorthand for $\forall x \left( x \in S \to P \left( x \right)  \right) $
   $\exists x P \left( x \right) $ is $T$ over the domain $U$ if and only if the truth set of $P$ is not empty.
 }
 
-\section{Exercises}
-
-\qs{}{
-  List the members of these sets
-  \begin{enumerate}
-    \item $\left\{ x  \mid x \text{ is the square of an integer and } x < 100 \right\} $
-    \item $\left\{ x  \mid x \text{ is an integer such that } x^2 = 2 \right\} $
-  \end{enumerate}
-}
-
-\sol{
-  \begin{enumerate}
-    \item $\left\{ 1, 4, 9, 16, 25, 36, 49, 64, 81 \right\} $
-    \item $\O$
-  \end{enumerate}
-}
-
-\qs{}{
-  Use set builder notation to describe the following sets
-  \begin{enumerate}
-    \item $\left\{ -3,-2,-1,0,1,2,3 \right\} $
-    \item $\left\{ m,n,o,p \right\} $
-  \end{enumerate}
-}
-
-\sol{
-  \begin{enumerate}
-    \item $\left\{ x  \mid -3 \leq x \leq 3  \right\} $
-    \item $\left\{ x  \mid x \text{ is a letter in the word monopoly excluding "l" and "y" } \right\} $
-  \end{enumerate}
-}
-
-\qs{}{
-  Suppose that $A = \left\{ 2, 4, 6 \right\} $, $B = \left\{ 2, 6 \right\} $, $C = \left\{ 4, 6 \right\} $ and $D =
-    \left\{ 4,6,8 \right\} $. Determine which of these sets are subsets of which other sets.
-}
-
-\sol{
-  \begin{align*}
-    B \subseteq  A \\
-    C \subseteq A  \\
-    C \subseteq D  \\
-  \end{align*}
-}
-
-\qs{}{
-  Suppose that $A$, $B$, $C$, are sets such that $A \subseteq B$ and $B \subseteq C$. Show that $A \subseteq C$
-}
-
-\sol{
-
-  \begin{align*}
-    A \subseteq B  \text{ means } \forall x \left( x \in A \to x \in  B \right) \\
-    B \subseteq C \text{ means } \forall x \left( x \in B \to x \in C \right)   \\
-    A \subseteq C \text{ means } \forall x \left( x \in A \to x \in  C \right)  \\
-  \end{align*}
-
-  \begin{align*}
-    \begin{deduction}
-      \premise{ \forall x \left( x \in  A \to x \in  B \right)  }
-      \premise{ \forall x \left( x \in  B \to x \in C \right) }
-      \conclusion{ \forall x \left( x \in A \to x \in C \right) }
-    \end{deduction}
-  \end{align*}
-
-  \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
-  \begin{table}[h!]
-    \begin{center}
-      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
-        \hline
-        \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons}        \\
-        \hline
-        \hline
-        $ \forall x \left( x \in  A \to x \in  B \right)  $    & Premise 1                            \\
-        $ \forall x \left( x \in  B \to x \in C \right) $      & Premise 2                            \\
-        $x \in  A \to x \in  B$                                & Universal Instantiation of 1         \\
-        $x \in B \to x \in C$                                  & Universal Instantiation of 2         \\
-        $x \in A \to x \in C$                                  & By Hypothetical Syllogism of 3 and 4 \\
-        $\forall x \left( x \in A \to x \in C \right) $        & Universal generalization of 5        \\
-        \hline
-      \end{tabular}
-    \end{center}
-  \end{table}
-}
-
-\qs{}{
-  Find the power set of each of these sets, where $a$ and $b$ are distinct elements.
-  \begin{enumerate}
-    \item $\{a\} $
-    \item $\{a, b\} $
-    \item $\{\O, \{\O\} \} $
-  \end{enumerate}
-}
-
-\sol{
-  \begin{enumerate}
-    \item $\mathcal{P}\left( \{a\}  \right)  = \{\O, \{a\} \} $
-    \item $\mathcal{P}(\{a,b\} ) = \{\O, \{a\}, \{b\}, \{a,b\}   \} $
-    \item $\mathcal{P}(\{\O, \{\O\} \} ) = \{\O, \{\O\}\, \{\{\O\} \}, \{\O, \{\O\} \}   \} $
-  \end{enumerate}
-}
 
 
-\chapter{Set Operations}
 
 \section{Set Operations}
 
@@ -598,14 +496,14 @@ The cardinality of the union of two sets $A$ and $B$ is given by
 
 \begin{align*}
   A \cap   U = A \\
-  A \cup  \O = A
+  A \cup  \emptyset = A
 \end{align*}
 
 \subsection{Domination Laws}
 
 \begin{align*}
   A \cup U = U \\
-  A \cap \O = \O
+  A \cap \emptyset = \emptyset
 \end{align*}
 
 \subsection{Idempotent Laws}
@@ -656,7 +554,7 @@ The cardinality of the union of two sets $A$ and $B$ is given by
 \subsection{Complement Laws}
 \begin{align*}
   A \cup \overline{A} = U \\
-  A \cap \overline{A} = \O
+  A \cap \overline{A} = \emptyset
 \end{align*}
 
 \subsection{Proving Set Identities}
@@ -852,6 +750,106 @@ bitwise AND, and bitwise NOT operations, respectively.
 \qs{}{
   List the members of these sets
   \begin{enumerate}
+    \item $\left\{ x  \mid x \text{ is the square of an integer and } x < 100 \right\} $
+    \item $\left\{ x  \mid x \text{ is an integer such that } x^2 = 2 \right\} $
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item $\left\{ 1, 4, 9, 16, 25, 36, 49, 64, 81 \right\} $
+    \item $\emptyset$
+  \end{enumerate}
+}
+
+\qs{}{
+  Use set builder notation to describe the following sets
+  \begin{enumerate}
+    \item $\left\{ -3,-2,-1,0,1,2,3 \right\} $
+    \item $\left\{ m,n,o,p \right\} $
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item $\left\{ x  \mid -3 \leq x \leq 3  \right\} $
+    \item $\left\{ x  \mid x \text{ is a letter in the word monopoly excluding "l" and "y" } \right\} $
+  \end{enumerate}
+}
+
+\qs{}{
+  Suppose that $A = \left\{ 2, 4, 6 \right\} $, $B = \left\{ 2, 6 \right\} $, $C = \left\{ 4, 6 \right\} $ and $D =
+    \left\{ 4,6,8 \right\} $. Determine which of these sets are subsets of which other sets.
+}
+
+\sol{
+  \begin{align*}
+    B \subseteq  A \\
+    C \subseteq A  \\
+    C \subseteq D  \\
+  \end{align*}
+}
+
+\qs{}{
+  Suppose that $A$, $B$, $C$, are sets such that $A \subseteq B$ and $B \subseteq C$. Show that $A \subseteq C$
+}
+
+\sol{
+
+  \begin{align*}
+    A \subseteq B  \text{ means } \forall x \left( x \in A \to x \in  B \right) \\
+    B \subseteq C \text{ means } \forall x \left( x \in B \to x \in C \right)   \\
+    A \subseteq C \text{ means } \forall x \left( x \in A \to x \in  C \right)  \\
+  \end{align*}
+
+  \begin{align*}
+    \begin{deduction}
+      \premise{ \forall x \left( x \in  A \to x \in  B \right)  }
+      \premise{ \forall x \left( x \in  B \to x \in C \right) }
+      \conclusion{ \forall x \left( x \in A \to x \in C \right) }
+    \end{deduction}
+  \end{align*}
+
+  \gdef\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+  \begin{table}[h!]
+    \begin{center}
+      \begin{tabular}{ | @{\makebox[3em][r]{\rownumber\space}} | c | c | }
+        \hline
+        \multicolumn{1}{ | @{\makebox[3em][r]{~}} |c| }{Steps} & \multicolumn{1}{|c|}{Reasons}        \\
+        \hline
+        \hline
+        $ \forall x \left( x \in  A \to x \in  B \right)  $    & Premise 1                            \\
+        $ \forall x \left( x \in  B \to x \in C \right) $      & Premise 2                            \\
+        $x \in  A \to x \in  B$                                & Universal Instantiation of 1         \\
+        $x \in B \to x \in C$                                  & Universal Instantiation of 2         \\
+        $x \in A \to x \in C$                                  & By Hypothetical Syllogism of 3 and 4 \\
+        $\forall x \left( x \in A \to x \in C \right) $        & Universal generalization of 5        \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+}
+
+\qs{}{
+  Find the power set of each of these sets, where $a$ and $b$ are distinct elements.
+  \begin{enumerate}
+    \item $\{a\} $
+    \item $\{a, b\} $
+    \item $\{\emptyset, \{\emptyset\} \} $
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item $\mathcal{P}\left( \{a\}  \right)  = \{\emptyset, \{a\} \} $
+    \item $\mathcal{P}(\{a,b\} ) = \{\emptyset, \{a\}, \{b\}, \{a,b\}   \} $
+    \item $\mathcal{P}(\{\emptyset, \{\emptyset\} \} ) = \{\emptyset, \{\emptyset\}\, \{\{\emptyset\} \}, \{\emptyset, \{\emptyset\} \}   \} $
+  \end{enumerate}
+}
+
+\qs{}{
+  List the members of these sets
+  \begin{enumerate}
     \item  $\left\{ x  \mid x \text{ is a real number such that } x^2 = 1 \right\}$
     \item $\{x | x \text{ is a positive integer less than 12}\} $
     \item $\{x | x \text{ is the square of an integer and } x < 100\} $
@@ -864,7 +862,7 @@ bitwise AND, and bitwise NOT operations, respectively.
     \item $\left\{ -1, 1 \right\} $
     \item $\{1,2,3,4,5,6,7,8,9,10,11\} $
     \item $\{0, 1, 4, 9, 16, 25, 36, 49, 64, 81\} $
-    \item $ \O $
+    \item $ \emptyset $
   \end{enumerate}
 }
 
@@ -872,9 +870,9 @@ bitwise AND, and bitwise NOT operations, respectively.
   Use set builder notation to show that:
   \begin{enumerate}
     \item $A \cup U = U$
-    \item $A \cap \O = \O$
+    \item $A \cap \emptyset = \emptyset$
     \item $A \cup  \overline{A} = U$
-    \item $A \cap \overline{A} = \O$
+    \item $A \cap \overline{A} = \emptyset$
   \end{enumerate}
 }
 
@@ -890,11 +888,11 @@ bitwise AND, and bitwise NOT operations, respectively.
           \end{align*}
     \item
           \begin{align*}
-            A \cap \O & = \{ x \mid x \in A \cap \O\}  \tag*{Set builder notation}               \\
-                      & = \{x  \mid x \in A \wedge x \in \O \} \tag*{Definition of Intersection} \\
-                      & = \{x  \mid x \in A \wedge  F\} \tag*{Definition of Empty set}           \\
-                      & = \{x  \mid F\} \tag*{By Second Domination Law for propositional logic}  \\
-                      & = \O \tag*{Definition of Empty set}                                      \\
+            A \cap \emptyset & = \{ x \mid x \in A \cap \emptyset\}  \tag*{Set builder notation}               \\
+                             & = \{x  \mid x \in A \wedge x \in \emptyset \} \tag*{Definition of Intersection} \\
+                             & = \{x  \mid x \in A \wedge  F\} \tag*{Definition of Empty set}                  \\
+                             & = \{x  \mid F\} \tag*{By Second Domination Law for propositional logic}         \\
+                             & = \emptyset \tag*{Definition of Empty set}                                      \\
           \end{align*}
     \item
           \begin{align*}
@@ -913,7 +911,7 @@ bitwise AND, and bitwise NOT operations, respectively.
                                 & = \{x | x \in A \wedge  \neg \left( x \in  A \right) \} \tag*{Definition of
             Complement}                                                                                                    \\
                                 & = \{x  \mid F\} \tag*{By Second Negation law of propositional logic}                     \\
-                                & = \O \tag*{Definition of $\O$}                                                           \\
+                                & = \emptyset \tag*{Definition of $\emptyset$}                                             \\
           \end{align*}
   \end{enumerate}
 }
@@ -924,7 +922,7 @@ bitwise AND, and bitwise NOT operations, respectively.
     \item $\left( A \cap B \right) \subseteq A $
     \item $A \subseteq \left( A \cup B \right) $
     \item $A - B \subseteq A$
-    \item $A \cap \left( B - A \right) = \O $
+    \item $A \cap \left( B - A \right) = \emptyset $
     \item $A \cup \left( B - A \right) = A \cup B $
   \end{enumerate}
 }
@@ -1005,10 +1003,10 @@ bitwise AND, and bitwise NOT operations, respectively.
           \begin{align*}
             A \cap \left( B - A \right) & =  A \cap \left( B \cap \overline{A} \right) \tag*{Definition of Difference} \\
                                         & = B \cap \left( A \cap \overline{A} \right) \tag*{By Second Associative Law} \\
-                                        & = B \cap \O \tag*{By Second Complement Law}                                  \\
-                                        & = \O \tag*{By Second Domination Law}                                         \\
+                                        & = B \cap \emptyset \tag*{By Second Complement Law}                           \\
+                                        & = \emptyset \tag*{By Second Domination Law}                                  \\
           \end{align*}
-          Hence $A \cap \left( B - A \right) = \O $
+          Hence $A \cap \left( B - A \right) = \emptyset $
 
     \item
           \begin{align*}
@@ -1027,8 +1025,8 @@ bitwise AND, and bitwise NOT operations, respectively.
 \qs{}{
   Show that if $A$ is a subset of a universal set $U$, then
   \begin{enumerate}
-    \item $A \oplus A = \O$
-    \item $A \oplus  \O = A$
+    \item $A \oplus A = \emptyset$
+    \item $A \oplus  \emptyset = A$
     \item $A \oplus U = \overline{A}$
     \item $A \oplus \overline{A} = U$
   \end{enumerate}
@@ -1048,53 +1046,53 @@ bitwise AND, and bitwise NOT operations, respectively.
                        & = \{x  \mid \left( x \in A \right) \wedge \neg \left( x \in A \right)  \}
             \tag*{Definition of Complement}                                                                                     \\
                        & = \{x  \mid F\} \tag*{By First Negation Law for propositional logic }                                  \\
-                       & = \O                                                                                                   \\
+                       & = \emptyset                                                                                            \\
           \end{align*}
-          Hence $A \oplus A = \O$
+          Hence $A \oplus A = \emptyset$
     \item
           \begin{align*}
-            A \oplus \O & = \{ x  \mid A \oplus \O\} \tag*{Set Builder Notation}                                               \\
-                        & = \{x  \mid x \in \left( A - \O \right) \cup \left( \O - A \right)  \} \tag*{Definition of Symmetric
-            Difference}                                                                                                        \\
-                        & = \{x  \mid x \in \left( A - \O \right) \vee  x \in \left( \O - A \right)  \} \tag*{Definition of
-            Union}                                                                                                             \\
-                        & = \{x  \mid \left( x \in A \wedge  x \notin \O \right)\vee  \left( x \in \O \wedge x \notin A
-            \right)   \} \tag*{Definition of Difference}                                                                       \\
-                        & = \{x  \mid \left( x \in A \wedge  \neg \left( x \in \O \right)  \right) \vee  \left( x
-            \in \O \wedge
-            \neg  \left( x \in A \right) \right)  \} \tag*{Definition of Complement}                                           \\
-                        & = \{x  \mid \left( x \in A \wedge  \neg \left( F \right)  \right) \vee \left( F \wedge \neg \left( x
-            \in A\right)   \right)   \} \tag*{Definition of $\in $}                                                            \\
-                        & = \{x  \mid \left( x \in A \wedge T \right) \vee \left( F \right)  \} \tag*{By Second Domination Law
-            for propositional logic}                                                                                           \\
-                        & = \{x \mid x \in A \vee F\} \tag*{By First Identity Law for propositional logic}                     \\
-                        & = \{x  \mid x \in A\} \tag*{By Second Identity Law for propositional logic}                          \\
-                        & = A \tag*{Definition of set $A$}                                                                     \\
+            A \oplus \emptyset & = \{ x  \mid A \oplus \emptyset\} \tag*{Set Builder Notation}                                                      \\
+                               & = \{x  \mid x \in \left( A - \emptyset \right) \cup \left( \emptyset - A \right)  \} \tag*{Definition of Symmetric
+            Difference}                                                                                                                             \\
+                               & = \{x  \mid x \in \left( A - \emptyset \right) \vee  x \in \left( \emptyset - A \right)  \} \tag*{Definition of
+            Union}                                                                                                                                  \\
+                               & = \{x  \mid \left( x \in A \wedge  x \notin \emptyset \right)\vee  \left( x \in \emptyset \wedge x \notin A
+            \right)   \} \tag*{Definition of Difference}                                                                                            \\
+                               & = \{x  \mid \left( x \in A \wedge  \neg \left( x \in \emptyset \right)  \right) \vee  \left( x
+            \in \emptyset \wedge
+            \neg  \left( x \in A \right) \right)  \} \tag*{Definition of Complement}                                                                \\
+                               & = \{x  \mid \left( x \in A \wedge  \neg \left( F \right)  \right) \vee \left( F \wedge \neg \left( x
+            \in A\right)   \right)   \} \tag*{Definition of $\in $}                                                                                 \\
+                               & = \{x  \mid \left( x \in A \wedge T \right) \vee \left( F \right)  \} \tag*{By Second Domination Law
+            for propositional logic}                                                                                                                \\
+                               & = \{x \mid x \in A \vee F\} \tag*{By First Identity Law for propositional logic}                                   \\
+                               & = \{x  \mid x \in A\} \tag*{By Second Identity Law for propositional logic}                                        \\
+                               & = A \tag*{Definition of set $A$}                                                                                   \\
           \end{align*}
           By set identities:
           \begin{align*}
-            A \oplus \O & = \left( A - \O \right)  \cup \left( \O - A \right)  \tag*{Definition of Symmetric Difference}       \\
-                        & = \left( A \cap \overline{\O} \right) \cup \left( \O \cap \overline{A} \right) \tag*{Definition of
-            Difference}                                                                                                        \\
-                        & = \left( A \cap U \right) \cup \left( \O \cap \overline{A} \right) \tag*{Complementation of an Empty
-            set}                                                                                                               \\
-                        & = \left( A \right) \cup \left( \O \cap \overline{A} \right) \tag*{By First Identity Law}             \\
-                        & = A \cup \left( \overline{A} \cap \O \right) \tag*{By Second Commutative Law}                        \\
-                        & = A \cup \O \tag*{By Second Domination Law}                                                          \\
-                        & = A \tag*{By Second Identity Law}                                                                    \\
+            A \oplus \emptyset & = \left( A - \emptyset \right)  \cup \left( \emptyset - A \right)  \tag*{Definition of Symmetric Difference}     \\
+                               & = \left( A \cap \overline{\emptyset} \right) \cup \left( \emptyset \cap \overline{A} \right) \tag*{Definition of
+            Difference}                                                                                                                           \\
+                               & = \left( A \cap U \right) \cup \left( \emptyset \cap \overline{A} \right) \tag*{Complementation of an Empty
+            set}                                                                                                                                  \\
+                               & = \left( A \right) \cup \left( \emptyset \cap \overline{A} \right) \tag*{By First Identity Law}                  \\
+                               & = A \cup \left( \overline{A} \cap \emptyset \right) \tag*{By Second Commutative Law}                             \\
+                               & = A \cup \emptyset \tag*{By Second Domination Law}                                                               \\
+                               & = A \tag*{By Second Identity Law}                                                                                \\
           \end{align*}
-          Hence $A \oplus \O = A$
+          Hence $A \oplus \emptyset = A$
     \item
           \begin{align*}
-            A \oplus U & = \left( A - U \right) \cup \left( U - A \right) \tag*{Definition of Symmetric Difference}       \\
+            A \oplus U & = \left( A - U \right) \cup \left( U - A \right) \tag*{Definition of Symmetric Difference}             \\
                        & = \left( A \cap \overline{U} \right) \cup \left( U \cap \overline{A} \right) \tag*{Definition of
-            Difference}                                                                                                   \\
-                       & = \left( A \cap \O \right) \cup \left( U \cap \overline{A} \right) \tag*{Complementation of the
-            Universal set}                                                                                                \\
-                       & = \O \cup \left( U \cap \overline{A} \right) \tag*{By Second Domination Law }                    \\
-                       & = \O \cup \left( \overline{A} \cap U  \right) \tag*{By Second Commutative Law}                   \\
-                       & = \O \cup \overline{A} \tag*{By First Identity Law}                                              \\
-                       & = \overline{A} \tag*{By Second Identity Law}                                                     \\
+            Difference}                                                                                                         \\
+                       & = \left( A \cap \emptyset \right) \cup \left( U \cap \overline{A} \right) \tag*{Complementation of the
+            Universal set}                                                                                                      \\
+                       & = \emptyset \cup \left( U \cap \overline{A} \right) \tag*{By Second Domination Law }                   \\
+                       & = \emptyset \cup \left( \overline{A} \cap U  \right) \tag*{By Second Commutative Law}                  \\
+                       & = \emptyset \cup \overline{A} \tag*{By First Identity Law}                                             \\
+                       & = \overline{A} \tag*{By Second Identity Law}                                                           \\
           \end{align*}
           Hence $A \oplus U = \overline{A}$
     \item
@@ -1118,8 +1116,8 @@ bitwise AND, and bitwise NOT operations, respectively.
 
 \sol{
   \begin{align*}
-    \text{Let } A & = \O     \\
-    B             & = \{\O\} \\
+    \text{Let } A & = \emptyset     \\
+    B             & = \{\emptyset\} \\
   \end{align*}
 }
 
@@ -1127,7 +1125,7 @@ bitwise AND, and bitwise NOT operations, respectively.
   Find the power set of each of these sets, where $a$ and $b$ are distinct elements.
   \begin{enumerate}
     \item $\{a,b\} $
-    \item $\{\O, \{\O\} \} $
+    \item $\{\emptyset, \{\emptyset\} \} $
   \end{enumerate}
 }
 
@@ -1135,11 +1133,11 @@ bitwise AND, and bitwise NOT operations, respectively.
   \begin{enumerate}
     \item
           \[
-            \mathcal{P}\left(\{a,b\}   \right) = \{\O, \{a\}, \{b\}, \{a,b\}   \}
+            \mathcal{P}\left(\{a,b\}   \right) = \{\emptyset, \{a\}, \{b\}, \{a,b\}   \}
           \]
     \item
           \[
-            \mathcal{P}\left( \{\O, \{\O\} \}  \right) = \{\O, \{\O\}, \{\{\O\} \}, \{\O, \{\O\} \}   \}
+            \mathcal{P}\left( \{\emptyset, \{\emptyset\} \}  \right) = \{\emptyset, \{\emptyset\}, \{\{\emptyset\} \}, \{\emptyset, \{\emptyset\} \}   \}
           \]
   \end{enumerate}
 }
@@ -1154,7 +1152,7 @@ bitwise AND, and bitwise NOT operations, respectively.
 
 \sol{
   \begin{enumerate}
-    \item $\O$
+    \item $\emptyset$
     \item $\{ x \in \mathbb{Z} \mid x \neq 0 \wedge x \neq 1 \} $
   \end{enumerate}
 }
@@ -1164,7 +1162,7 @@ bitwise AND, and bitwise NOT operations, respectively.
   \begin{enumerate}
     \item $A \subseteq \left( A \cup B \right) $
     \item $A - B \subseteq A$
-    \item $A \cap \left( B - A \right) = \O $
+    \item $A \cap \left( B - A \right) = \emptyset $
   \end{enumerate}
 }
 
@@ -1223,15 +1221,155 @@ bitwise AND, and bitwise NOT operations, respectively.
           \begin{align*}
             A \cap \left( B - A \right) & = A \cap \left(B \cap \overline{A}  \right) \tag*{Definition of Difference}   \\
                                         & = B \cap \left( A \cap \overline{A} \right) \tag*{By Second Distributive Law} \\
-                                        & = B \cap \O \tag*{By Second Complement Law}                                   \\
-                                        & = \O  \tag*{By Second Identity Law}                                           \\
+                                        & = B \cap \emptyset \tag*{By Second Complement Law}                            \\
+                                        & = \emptyset  \tag*{By Second Identity Law}                                    \\
           \end{align*}
-          Hence $A \cap \left( B - A \right) = \O $
+          Hence $A \cap \left( B - A \right) = \emptyset $
 
 
 
   \end{enumerate}
 }
+
+
+\chapter{Functions}
+
+\chapter{Sequences and Summations}
+
+\section{Sequences}
+
+\dfn{Sequence}{
+  A sequence is a function from a subset of the set of integers (usually the set $\mathbb{N}$ or the set $\mathbb{Z}$ )
+  to a set $S$. Denoted $a_n$, where $a$ is the image of the integer $n$ under the function. We call $a_n$ a term of a
+  sequence.
+}
+
+We use $\{a_n\} $ to describe a sequence, where $a_n$ represents an individual term of the sequence $\{a_n\} $.
+Sequences are described by listing the terms of the sequence in order of increasing subscripts. I.e. $\{a_n\} $, where:
+\[
+  a_n = \frac{1}{n}
+\]
+The list of terms of the sequence $\{a_n\} $ beginning with $a_1$:
+\[
+  a_1, a_2, a_3, a_4, a_5, \ldots
+\]
+starts with
+\[
+  1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \frac{1}{5}, \ldots
+\]
+
+\dfn{Geometric Progression}{
+  A sequence in the form
+  \[
+    a, ar, ar^2, ar^3, ar^4, \ldots, ar^n, \ldots
+  \]
+  Where the initial term $a$ and the common ratio $r$ are real numbers.
+  \nt{
+    A geometric progression is a discrete analogue of the exponential function $f \left( x \right) = ar^{x}$
+  }
+}
+
+\ex{}{
+  The sequences $\{b_n\} $ with $b_n = \left( -1 \right)^{n} $, $\{c_n\} $, with $c_n = 2\times 5^{n}$, and $\{d_n\} $,
+  with $d_n = 6 \times \left( \frac{1}{3} \right)^n $ are geometric progressions, with initial terms of $1$, $2$, and
+  $6$, and common ratios of $-1$, $5$, and $\frac{1}{3}$ respectively. Starting at $n=0$, the list of terms $b_0, b_1,
+    b_2, b_3, b_4, \ldots$:
+  \[
+    1, -1 , 1, -1, 1, \ldots
+  \]
+  And so on for the other sequences.
+}
+
+\dfn{Arithmetic Progression}{
+  A sequence in the form
+  \[
+    a, a + d, a + 2d, \ldots, a + nd, \ldots
+  \]
+  where the initial term $a$ and the common difference $d$ are real numbers.
+  \nt{
+    An arithmetic sequence is a discrete analogue of the linear function $f \left( x \right) = a + dx$
+  }
+}
+
+\ex{}{
+  The sequences $\{s_n\} $, with $s_n = -1 + 4n$ and $\{t_n\} $, with $t_n = 7 - 3n$ are arithmetic progressions, with
+  initial terms of $-1$ and $7$ and common differences of $4$ and $-3$ respectively. The list of terms $s_0, s_1, s_2, s_3,
+    s_4, \ldots$:
+  \[
+    -1, 3, 7, 11, 15, \ldots
+  \]
+}
+
+\subsection{Recurrence Relations}
+\dfn{Recurrence Relation}{
+  A recurrence relation for a sequence $\{a_n\} $ is an equation that expresses $a_n$ in terms of one or more of the
+  previous terms of the sequence, namely $a_0, a_1, a_2, \ldots, a_{n-1}\, \forall n \in \mathbb{Z} \text{ where} n \geq
+    n_0$, where $n_0$ is a nonnegative integer.\\
+
+  A sequence is called a solution of a recurrence relation if its term satisfy the recurrence relation. A recurrence
+  relation is said to recursively define a sequence.
+}
+
+For the previous sequences to be defined we specified explicit formulas for their terms. However there are many other
+ways to define a sequence. One way is to specify a sequence based on one or more initial terms and a rule for
+determining subsequent terms from those that precede them. This is called a recurrence relation.
+
+\ex{}{
+  \qs{}{
+    Let $\{a_n\} $ be  a sequence that satisfies the recurrence relation $a_n= a_{n-1} + 3$ for $n = 1,2,3,\ldots$ and
+    suppose $a_0 = 2$. What are $a_1, a_2 \text{ and } a_3$
+  }
+
+  \sol{
+    \begin{align*}
+      a_n & = a_{n-1} + 3 \\
+      \\
+      a_1 & = a_0 + 3     \\
+          & = 2 + 3       \\
+          & = 5           \\
+      \\
+      a_2 & = a_1 + 3     \\
+          & = 8           \\
+      \\
+      a_3 & = a_2 + 3     \\
+          & = 11          \\
+    \end{align*}
+  }
+}
+
+\ex{}{
+  \qs{}{
+    Let $\{a_n\} $ be a sequence that satisfies the recurrence relation $a_n = a_{n-1} - a_{n-2}$ for $n = 2,
+      3,4,\ldots$ and suppose $a_0 = 3$ and $a_1 = 5$. What are $a_2 \text{ and } a_3$
+  }
+
+  \sol{
+    \begin{align*}
+      a_n & = a_{n-1} - a_{n-2} \\
+      \\
+      a_2 & = a_1 - a_0         \\
+          & = 5 - 3             \\
+          & = 2                 \\
+      \\
+      a_3 & = a_2 - a_1         \\
+          & = 2 - 5             \\
+          & = -3                \\
+    \end{align*}
+  }
+}
+
+The initial conditions for a recursively defined sequence specify the terms that precede the first term where the
+recurrence relation takes effect. The Fibonacci Sequence is a famous example of a recursively defined sequence and has
+many applications in computer science and mathematics.
+
+\dfn{Fibonacci Sequence}{
+  The Fibonacci sequence $f_0, f_1 ,f_2,\ldots$ is defined by the intimal conditions, $f_0 = 0$, $f_1 = 1$, and the
+  recurrence relation
+  \[
+    f_n = f_{n-1} + f_{n-2} \text{ for } n = 2,3,4,\ldots
+  \]
+}
+
 
 \chapter{Exercises}
 
@@ -1240,13 +1378,13 @@ bitwise AND, and bitwise NOT operations, respectively.
 \qs{}{
   Determine whether each of these statements is true or false.
   \begin{enumerate}
-    \item $0 \in \O$
-    \item $\O \in \{0\} $
-    \item $\{0\} \subset \O  $
-    \item $\O \subset \{0\} $
+    \item $0 \in \emptyset$
+    \item $\emptyset \in \{0\} $
+    \item $\{0\} \subset \emptyset  $
+    \item $\emptyset \subset \{0\} $
     \item $\{0\} \in \{0\} $
     \item $\{0\} \subset \{0\}  $
-    \item $\{\O\} \subseteq \{\O\}  $
+    \item $\{\emptyset\} \subseteq \{\emptyset\}  $
   \end{enumerate}
 }
 
@@ -1254,9 +1392,9 @@ bitwise AND, and bitwise NOT operations, respectively.
   \begin{enumerate}
     \item False, as the empty set contains no elements.
     \item False, as the empty set is not an element of the set $\{0\} $.
-    \item False, as the set $\{0\} $ cannot be a subset of $\O$ as the definition of a subset $\forall x \left( x \in
-            \{0\} \to x \in \O \right) $ fails for $0$ as $0$ is not in the empty set.
-    \item True, as $\O$ is a subset of any set and $\O \neq \{0\} $
+    \item False, as the set $\{0\} $ cannot be a subset of $\emptyset$ as the definition of a subset $\forall x \left( x \in
+            \{0\} \to x \in \emptyset \right) $ fails for $0$ as $0$ is not in the empty set.
+    \item True, as $\emptyset$ is a subset of any set and $\emptyset \neq \{0\} $
     \item False, as the element $\{0\} $ is not found in the set $\{0\} $
     \item False, as although any set is a subset of itself, for a set to be a proper subset of another set, the sets
           cannot be equal but in this case $\{0\} = \{0\}  $
@@ -1345,9 +1483,9 @@ bitwise AND, and bitwise NOT operations, respectively.
   \qs{}{
     Let $A$ and $B$ be sets. Using set builder notation show that:
     \begin{enumerate}
-      \item $A \cap \O = \O$
+      \item $A \cap \emptyset = \emptyset$
       \item $A \cup \overline{A} = U$
-      \item $A \cap \left( B - A \right) = \O $
+      \item $A \cap \left( B - A \right) = \emptyset $
     \end{enumerate}
   }
 
@@ -1355,11 +1493,11 @@ bitwise AND, and bitwise NOT operations, respectively.
     \begin{enumerate}
       \item
             \begin{align*}
-              A \cap \O & = \{x  \mid x \in A \cap \O\}  \tag*{Set Builder Notation}                 \\
-                        & = \{x  \mid x \in A \wedge x \in \O\} \tag*{By Definition of Intersection} \\
-                        & = \{x  \mid x \in A \wedge F\} \tag*{By Definition of $\O$}                \\
-                        & = \{x  \mid F\} \tag*{By Second Domination Law for propositional logic}    \\
-                        & = \O \tag*{By Definition of $\O$}                                          \\
+              A \cap \emptyset & = \{x  \mid x \in A \cap \emptyset\}  \tag*{Set Builder Notation}                 \\
+                               & = \{x  \mid x \in A \wedge x \in \emptyset\} \tag*{By Definition of Intersection} \\
+                               & = \{x  \mid x \in A \wedge F\} \tag*{By Definition of $\emptyset$}                \\
+                               & = \{x  \mid F\} \tag*{By Second Domination Law for propositional logic}           \\
+                               & = \emptyset \tag*{By Definition of $\emptyset$}                                   \\
             \end{align*}
       \item
             \begin{align*}
@@ -1383,10 +1521,11 @@ bitwise AND, and bitwise NOT operations, respectively.
                                            & = \{x  \mid F \wedge  x \in B\} \tag*{By Second Negation Law for
               propositional logic}                                                                                                                      \\
                                            & = \{x  \mid F\} \tag*{By Second Domination Law for propositional logic}                                    \\
-                                           & = \O \tag*{By Definition of Empty set}                                                                     \\
+                                           & = \emptyset \tag*{By Definition of Empty set}                                                              \\
             \end{align*}
     \end{enumerate}
   }
 }
+
 
 \end{document}

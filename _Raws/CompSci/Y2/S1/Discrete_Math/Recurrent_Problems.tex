@@ -20,6 +20,122 @@
 Problems that have been investigated repeatedly by mathematicians and whose solutions use the idea of recurrence, i.e.
 the solution to each problem depends on the solutions to smaller instances of the same problem.
 
+\section{Recurrence Relations}
+
+\subsection{Writing Recurrences from algorithms}
+
+\begin{algorithm}[H]
+  \caption{recurse1 $ \left( n \right) $}
+  \begin{algorithmic}[1]
+    \If{ $n < 3$}
+    \State \Return 80
+    \EndIf
+    \For{ $ i \gets 0$ to $n$}
+    \State \Call{print}{i}
+    \EndFor
+
+    \State v1 $ \gets $ \Call{recurse1}{ $n / 3$}
+    \State v2 $ \gets $ \Call{recurse1}{ $ n / 3$}
+
+    \State \Return $\text{v1} + \text{v2}$
+  \end{algorithmic}
+\end{algorithm}
+
+We first:
+\begin{itemize}
+  \item Find the time taken by the base case
+  \item Find the time taken by the recursive calls
+\end{itemize}
+
+$\therefore$
+\[
+  T \left( n \right)  = \begin{cases}
+    2                                 & \text{if } n < 3 \\
+    n + 2 T \left( n / 3 \right)  + 2 & \text{otherwise}
+  \end{cases}
+\]
+
+\begin{algorithm}[H]
+  \caption{factorial $ \left( n \right) $}
+  \begin{algorithmic}[1]
+    \If{ $n = 1$}
+    \State \Return 1
+    \EndIf
+
+    \State \Return $n \times  $ \Call{factorial}{ $n - 1$}
+  \end{algorithmic}
+\end{algorithm}
+\[
+  T \left( n \right)  = \begin{cases}
+    2                           & \text{if } n = 1 \\
+    T \left( n - 1 \right)  + 1 & \text{if } n > 1
+  \end{cases}
+\]
+
+\qs{}{
+  Prove by indunction that $n! > 3^{n}$ for $n \geq 7$
+}
+
+\sol{
+  \\
+  \noindent \underline{Basis Step} \\
+  \\
+  \begin{align*}
+    P \left( n \right) & : n! > 3^{n}  \\
+    P \left( 7 \right) & : 7! > 3^{7}  \\
+                       & : 5040 > 2187 \\
+  \end{align*}
+  \noindent \underline{Induction  Step} \\
+  \\
+  Assume $P \left( k \right) $ is true, i.e.:
+  \[
+    P \left( k \right) : k! > 3^{k}
+  \]
+  Now we have to prove $P \left( k + 1 \right) $ is true:
+  \begin{align*}
+    P \left( k + 1 \right) & : \left( k + 1 \right)! > 3^{k + 1} \\
+                           & : k! \left( k + 1 \right)           \\
+                           & > 3^{k} \left( k + 1 \right)        \\
+                           & > 3^{k} \left( 7 + 1 \right)        \\
+                           & 3 \times 3^{k} > 3^{k+1}
+  \end{align*}
+  $\therefore$ $P \left( k + 1 \right) $ is $T$
+}
+
+\qs{}{
+  Prove by induction that $6^{n} - 1$ is divisible by 5, for $n \geq 1$
+}
+
+\sol{
+
+  \noindent \underline{Basis Step} \\
+  \\
+  \begin{align*}
+    P \left( 1 \right) & : 6^{n} - 1 = 5k,\, k \in \mathbb{Z} \\
+                       & : 6 - 1 = 5k                         \\
+                       & : 5 \left( 1 \right)  = 5k           \\
+                       & k= 1                                 \\
+  \end{align*}
+
+  \noindent \underline{Induction  Step} \\
+  \\
+  Assume $P \left( k \right) $ is true, i.e.:
+  \[
+    P \left( k \right) : 6^{k} - 1  = 5t, \, t \in \mathbb{Z}
+  \]
+  Then $P \left( k + 1 \right) $:
+  \begin{align*}
+    P \left( k + 1 \right) & : 6^{k + 1} - 1                  \\
+                           & : 6 \left( 6^{k} \right)  -1     \\
+                           & : 6 \left( 6^{k} \right) - 6 + 5 \\
+                           & : 6\left( 6^{k} - 1 \right) + 5
+                           & \text{Let } u = 6^{k} - 1        \\
+                           & : 6u + 5                         \\
+  \end{align*}
+  $6u$ is divisible by 5 because $u$ is divisible by 5 and 5 is divisible by 5 so $P \left( k + 1 \right) $ is $T$
+}
+
+
 \section{Tower of Hanoi}
 
 Invented by French mathematician Edouard Lucas in 1883. The problem consists of a tower of eight disks initially stacked
@@ -44,7 +160,7 @@ smallest back onto the third peg where the largest disk already is, requiring an
 Thus we can transfer $n$ disks (where $n > 0$) in at most $2T_{n-1} + 1$ moves, i.e. :
 
 \[
-	T_n \leq 2T_{n-1} + 1 \quad n > 0
+  T_n \leq 2T_{n-1} + 1 \quad n > 0
 \]
 
 $\leq$ instead of $=$ due to our construction only proving that $2T_{n-1} + 1$ moves work, not that all $2T_{n-1} + 1$
@@ -55,8 +171,8 @@ moves every time.
 The result factoring in the base condition of $T_0 = 0$ is:
 
 \begin{gather*}
-	T_0 = 0\\
-	T_n = 2T_{n-1} + 1 \quad n > 0
+  T_0 = 0\\
+  T_n = 2T_{n-1} + 1 \quad n > 0
 \end{gather*}
 
 These sets of in equalities is called a recurrence / recurrence relation / recursion relation. It gives a boundary value
@@ -71,16 +187,16 @@ One way of solving a recurrence is to guess a solution, them prove our guess is 
 small cases. By successively computing $T_n$:
 
 \begin{align*}
-	T_3 = 2  \times  3 + 1 = 7   \\
-	T_4 = 2  \times  7 + 1 = 15  \\
-	T_5 = 2  \times  15 + 1 = 31 \\
-	T_6 = 2  \times  31 + 1 = 63 \\
+  T_3 = 2  \times  3 + 1 = 7   \\
+  T_4 = 2  \times  7 + 1 = 15  \\
+  T_5 = 2  \times  15 + 1 = 31 \\
+  T_6 = 2  \times  31 + 1 = 63 \\
 \end{align*}
 
 We can see it looks like: when $n \leq 6$
 
 \[
-	T_n = 2^{n} - 1 \quad n \geq 0
+  T_n = 2^{n} - 1 \quad n \geq 0
 \]
 
 This technique is called \textit{Mathematical induction}. First we prove the \textit{basis}\label{basis} (when $n$ is at its least
@@ -90,22 +206,22 @@ $n_0$ and $n - 1$ inclusive, i.e. the \textit{induction}\label{induction}.
 Applying this to our recurrence:
 
 \begin{align*}
-	T_n = 2T_{n-1} + 1       \\
-	\\
-	T_n = 2^{n} - 1          \\
-	\\
-	T_n = 2(2^{n-1} -1 ) + 1 \\
-	T_n = 2^{n} -2 + 1       \\
-	\therefore               \\
-	T_n = 2^n -1             \\
+  T_n = 2T_{n-1} + 1       \\
+  \\
+  T_n = 2^{n} - 1          \\
+  \\
+  T_n = 2(2^{n-1} -1 ) + 1 \\
+  T_n = 2^{n} -2 + 1       \\
+  \therefore               \\
+  T_n = 2^n -1             \\
 \end{align*}
 
 The Tower of Hanoi highlights the steps needed to find a closed-form expression for some quantity of interest:
 
 \begin{itemize}
-	\item Look at small cases (\ref{small}).
-	\item Find and prove a mathematical expression for he quantity of interest (\ref{expression}).
-	\item Find and prove a closed form for our mathematical expression (\ref{closed}).
+  \item Look at small cases (\ref{small}).
+  \item Find and prove a mathematical expression for he quantity of interest (\ref{expression}).
+  \item Find and prove a closed form for our mathematical expression (\ref{closed}).
 \end{itemize}
 
 

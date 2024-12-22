@@ -559,6 +559,11 @@ Requirement already satisfied: pydot in
 /home/mads/.pyenv/versions/ai/lib/python3.12/site-packages (2.0.0)
 Requirement already satisfied: pyparsing>=3 in
 /home/mads/.pyenv/versions/ai/lib/python3.12/site-packages (from pydot) (3.1.2)
+
+\textbf{[}\textcolor{ansi-blue}{notice}\textbf{]} A new release of pip is
+available: \textcolor{ansi-red}{24.2} -> \textcolor{ansi-green}{24.3.1}
+\textbf{[}\textcolor{ansi-blue}{notice}\textbf{]} To update, run:
+\textcolor{ansi-green}{pip install --upgrade pip}
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
@@ -716,6 +721,13 @@ Loss function & MSE, or huber if outliers \\
 \end{Verbatim}
 \end{tcolorbox}
 
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/mads/.pyenv/versions/ai/lib/python3.12/site-
+packages/sklearn/neural\_network/\_multilayer\_perceptron.py:697: UserWarning:
+Training interrupted by user.
+  warnings.warn("Training interrupted by user.")
+    \end{Verbatim}
+
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
 \prompt{Out}{outcolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -727,7 +739,7 @@ Pipeline(steps=[('standardscaler', StandardScaler()),
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{4}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{preds} \PY{o}{=} \PY{n}{mlpRegPipe}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{XValid}\PY{p}{)}
 \PY{n}{rmse} \PY{o}{=} \PY{n}{root\PYZus{}mean\PYZus{}squared\PYZus{}error}\PY{p}{(}\PY{n}{yValid}\PY{p}{,} \PY{n}{preds}\PY{p}{)}
@@ -736,7 +748,7 @@ Pipeline(steps=[('standardscaler', StandardScaler()),
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{4}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 0.5053326657968522
 \end{Verbatim}
@@ -791,7 +803,7 @@ Loss function & Cross-entropy & Cross-entropy & Cross-entropy \\
 \end{longtable}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{5}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{load\PYZus{}iris}
 \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network} \PY{k+kn}{import} \PY{n}{MLPClassifier}
@@ -812,7 +824,7 @@ Loss function & Cross-entropy & Cross-entropy & Cross-entropy \\
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{5}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 Pipeline(steps=[('standardscaler', StandardScaler()),
                 ('mlpclassifier',
@@ -822,7 +834,7 @@ Pipeline(steps=[('standardscaler', StandardScaler()),
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{6}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{preds} \PY{o}{=} \PY{n}{mlpClsPipe}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{XTest}\PY{p}{)}
 \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{yTest}\PY{p}{,} \PY{n}{preds}\PY{p}{)}\PY{p}{)}
@@ -844,7 +856,7 @@ weighted avg       1.00      1.00      1.00        38
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{6}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 <sklearn.metrics.\_plot.confusion\_matrix.ConfusionMatrixDisplay at
 0x72e040109430>
@@ -862,7 +874,7 @@ weighted avg       1.00      1.00      1.00        38
 API}\label{building-an-image-classifier-using-the-sequential-api}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{7}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
 
@@ -908,14 +920,14 @@ find TensorRT
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{7}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 (55000, 28, 28)
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{8}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{XTrain}\PY{p}{,} \PY{n}{XValid}\PY{p}{,} \PY{n}{XTest} \PY{o}{=} \PY{n}{XTrain} \PY{o}{/} \PY{l+m+mf}{255.0}\PY{p}{,} \PY{n}{XValid} \PY{o}{/} \PY{l+m+mf}{255.0}\PY{p}{,} \PY{n}{XTest} \PY{o}{/} \PY{l+m+mf}{255.0}
 \PY{n}{classNames} \PY{o}{=} \PY{p}{[}
@@ -941,14 +953,14 @@ find TensorRT
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{8}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 'Ankle boot'
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{9}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Set random seed for reproducible results}
 \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{set\PYZus{}random\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{)}
@@ -1028,7 +1040,7 @@ These steps can be condensed as seen below with the first \texttt{Input}
 layer dropped and the \texttt{input\_shape} specified in the first layer
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{10}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n+nb+bp}{cls} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}
     \PY{p}{[}
@@ -1089,7 +1101,7 @@ layer dropped and the \texttt{input\_shape} specified in the first layer
 
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{11}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{display}\PY{p}{(}\PY{n+nb+bp}{cls}\PY{o}{.}\PY{n}{layers}\PY{p}{)}
 \PY{n}{hid1} \PY{o}{=} \PY{n+nb+bp}{cls}\PY{o}{.}\PY{n}{layers}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
@@ -1108,7 +1120,7 @@ layer dropped and the \texttt{input\_shape} specified in the first layer
 
     
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{11}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
@@ -1134,7 +1146,7 @@ array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
 \subsubsection{Compiling the Model}\label{compiling-the-model}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{12}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{c+c1}{\PYZsh{} Loss \PYZhy{} Specifies the loss function to use when minimizing the value of the loss function}
 \PY{c+c1}{\PYZsh{} Optimize \PYZhy{} Specifies the optimization algorithm to use in reducing the loss function}
@@ -1170,7 +1182,7 @@ array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
 Model}\label{training-and-evaluating-the-model}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{13}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{hist} \PY{o}{=} \PY{n+nb+bp}{cls}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{XTrain}\PY{p}{,} \PY{n}{yTrain}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{XValid}\PY{p}{,} \PY{n}{yValid}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
@@ -1270,7 +1282,7 @@ accuracy: 0.9115 - loss: 0.2480 - val\_accuracy: 0.8730 - val\_loss: 0.3553
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{14}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
 \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{classification\PYZus{}report}\PY{p}{,} \PY{n}{ConfusionMatrixDisplay}
@@ -1339,7 +1351,7 @@ validation set. You can use the \texttt{history.history} dictionary to
 plot the learning curves.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{15}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
 
@@ -1355,7 +1367,7 @@ plot the learning curves.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{15}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 <Axes: xlabel='Epoch'>
 \end{Verbatim}
@@ -1367,7 +1379,7 @@ plot the learning curves.
     { \hspace*{\fill} \\}
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{16}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{hist} \PY{o}{=} \PY{n+nb+bp}{cls}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{XTrain}\PY{p}{,} \PY{n}{yTrain}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{XValid}\PY{p}{,} \PY{n}{yValid}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
@@ -1392,7 +1404,7 @@ accuracy: 0.9178 - loss: 0.2319 - val\_accuracy: 0.8734 - val\_loss: 0.3590
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{17}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{preds} \PY{o}{=} \PY{n+nb+bp}{cls}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{XTest}\PY{p}{)}
 \PY{n}{preds} \PY{o}{=} \PY{n}{preds}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
@@ -1440,7 +1452,7 @@ weighted avg       0.87      0.87      0.87     10000
     { \hspace*{\fill} \\}
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{18}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{hist}\PY{o}{.}\PY{n}{history}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}
     \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
@@ -1454,7 +1466,7 @@ weighted avg       0.87      0.87      0.87     10000
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{18}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 <Axes: xlabel='Epoch'>
 \end{Verbatim}
@@ -1469,7 +1481,7 @@ weighted avg       0.87      0.87      0.87     10000
 API}\label{building-a-regression-mlp-using-the-sequential-api}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{19}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{set\PYZus{}random\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{)}
 
@@ -1484,7 +1496,7 @@ API}\label{building-a-regression-mlp-using-the-sequential-api}
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{20}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{norm} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Normalization}\PY{p}{(}\PY{p}{)}
 
@@ -1502,7 +1514,7 @@ API}\label{building-a-regression-mlp-using-the-sequential-api}
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{21}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{opt} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}
 
@@ -1511,7 +1523,7 @@ API}\label{building-a-regression-mlp-using-the-sequential-api}
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{22}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{reg}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
@@ -1565,7 +1577,7 @@ API}\label{building-a-regression-mlp-using-the-sequential-api}
 
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{23}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{norm}\PY{o}{.}\PY{n}{adapt}\PY{p}{(}\PY{n}{XTrain}\PY{p}{)}
 \PY{n}{hist} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{XTrain}\PY{p}{,} \PY{n}{yTrain}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{XValid}\PY{p}{,} \PY{n}{yValid}\PY{p}{)}\PY{p}{)}
@@ -1656,7 +1668,7 @@ val\_loss: 0.2893
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{24}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mse}\PY{p}{,} \PY{n}{rmse} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{XTest}\PY{p}{,} \PY{n}{yTest}\PY{p}{)}
 \end{Verbatim}
@@ -1668,7 +1680,7 @@ RootMeanSquaredError: 0.5235 - loss: 0.2742
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{25}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{XNew} \PY{o}{=} \PY{n}{XTest}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
 \PY{n}{preds} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{XNew}\PY{p}{)}
@@ -1681,7 +1693,7 @@ RootMeanSquaredError: 0.5235 - loss: 0.2742
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{25}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 array([[0.47],
        [1.2 ],
@@ -1701,7 +1713,7 @@ through the deep path, thus simple patterns in the data may end up being
 distorted by this sequence of transformations.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{26}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{functools} \PY{k+kn}{import} \PY{n}{partial}
 \PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k+kn}{import} \PY{n}{Normalization}\PY{p}{,} \PY{n}{Dense}\PY{p}{,} \PY{n}{Concatenate}\PY{p}{,} \PY{n}{Input}
@@ -1810,7 +1822,7 @@ distorted by this sequence of transformations.
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{27}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{opt} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}
 \PY{n}{regWide}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mse}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{opt}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RootMeanSquaredError}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
@@ -1818,7 +1830,7 @@ distorted by this sequence of transformations.
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{28}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{normLayer}\PY{o}{.}\PY{n}{adapt}\PY{p}{(}\PY{n}{XTrain}\PY{p}{)}
 \PY{n}{hist} \PY{o}{=} \PY{n}{regWide}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{XTrain}\PY{p}{,} \PY{n}{yTrain}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{XValid}\PY{p}{,} \PY{n}{yValid}\PY{p}{)}\PY{p}{)}
@@ -1909,7 +1921,7 @@ val\_loss: 3.8811
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{29}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{regWide}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{XTest}\PY{p}{,} \PY{n}{yTest}\PY{p}{)}
 \end{Verbatim}
@@ -1921,7 +1933,7 @@ RootMeanSquaredError: 0.5631 - loss: 0.3174
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{29}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [0.31699109077453613, 0.5630196332931519]
 \end{Verbatim}
@@ -1931,7 +1943,7 @@ In passing different subsets of features along different paths in the
 network multiple inputs could be used.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{30}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{inputWide} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inputWide}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \PY{n}{inputDeep} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inputDeep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
@@ -2027,7 +2039,7 @@ network multiple inputs could be used.
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{31}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{opt} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}
 \PY{n}{regWide}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mse}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{opt}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RootMeanSquaredError}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
@@ -2035,7 +2047,7 @@ network multiple inputs could be used.
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{32}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{XTrainWide}\PY{p}{,} \PY{n}{XTrainDeep} \PY{o}{=} \PY{n}{XTrain}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{XTrain}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}
 \PY{n}{XValidWide}\PY{p}{,} \PY{n}{XValidDeep} \PY{o}{=} \PY{n}{XValid}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{n}{XValid}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}
@@ -2138,7 +2150,7 @@ val\_loss: 1.5700
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{33}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{mseTest} \PY{o}{=} \PY{n}{regWide}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{(}\PY{n}{XTestWide}\PY{p}{,} \PY{n}{XTestDeep}\PY{p}{)}\PY{p}{,} \PY{n}{yTest}\PY{p}{)}
 \end{Verbatim}
@@ -2150,7 +2162,7 @@ RootMeanSquaredError: 0.5803 - loss: 0.3369
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{34}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{preds} \PY{o}{=} \PY{n}{regWide}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{p}{(}\PY{n}{XNewWide}\PY{p}{,} \PY{n}{XNewDeep}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
@@ -2179,7 +2191,7 @@ There are also cases where you may want to have multiple outputs:
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{35}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{aux} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{aux}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{(}\PY{n}{hid2}\PY{p}{)}
 \PY{n}{regWide} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{Model}\PY{p}{(}
@@ -2261,7 +2273,7 @@ losses. By default Keras assigns each loss an equal weight, but since we
 are more interested in the main output we can give it a higher weight.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{36}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{normLayerDeep}\PY{o}{.}\PY{n}{adapt}\PY{p}{(}\PY{n}{XTrainDeep}\PY{p}{)}
 \PY{n}{normLayerWide}\PY{o}{.}\PY{n}{adapt}\PY{p}{(}\PY{n}{XTrainWide}\PY{p}{)}
@@ -2385,7 +2397,7 @@ val\_output\_RootMeanSquaredError: 0.7872
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{37}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{evalRes} \PY{o}{=} \PY{n}{regWide}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{n}{xtests}\PY{p}{,} \PY{n}{ytests}\PY{p}{)}
 \PY{n}{mainLoss}\PY{p}{,} \PY{n}{wSumLoss}\PY{p}{,} \PY{n}{mainRmse} \PY{o}{=} \PY{n}{evalRes}
@@ -2399,7 +2411,7 @@ aux\_RootMeanSquaredError: 0.6172 - loss: 0.3291 - output\_RootMeanSquaredError:
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{38}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{xnews} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inputWide}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{XNewWide}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inputDeep}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{XNewDeep}\PY{p}{\PYZcb{}}
 \PY{n}{preds} \PY{o}{=} \PY{n}{regWide}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xnews}\PY{p}{)}
@@ -2413,7 +2425,7 @@ aux\_RootMeanSquaredError: 0.6172 - loss: 0.3291 - output\_RootMeanSquaredError:
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{38}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \{'output': array([[0.47618163],
         [0.71396697],
@@ -2438,7 +2450,7 @@ in the constructor and use them to perform the computations in the
 created using the \texttt{Functional} API.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{39}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{class} \PY{n+nc}{WideAndDeepModel}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{Model}\PY{p}{)}\PY{p}{:}
     \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{units}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
@@ -2467,7 +2479,7 @@ created using the \texttt{Functional} API.
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{40}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{opt} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{optimizers}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{learning\PYZus{}rate}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}
 \PY{n}{wideAndDeep}\PY{o}{.}\PY{n}{compile}\PY{p}{(}
@@ -2533,7 +2545,7 @@ created using the \texttt{Functional} API.
 
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{41}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{hist} \PY{o}{=} \PY{n}{wideAndDeep}\PY{o}{.}\PY{n}{fit}\PY{p}{(}
     \PY{p}{(}\PY{n}{XTrainWide}\PY{p}{,} \PY{n}{XTrainDeep}\PY{p}{)}\PY{p}{,}
@@ -2648,7 +2660,7 @@ val\_loss: 2.2141
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{42}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{evalRes} \PY{o}{=} \PY{n}{wideAndDeep}\PY{o}{.}\PY{n}{evaluate}\PY{p}{(}\PY{p}{(}\PY{n}{XTestWide}\PY{p}{,} \PY{n}{XTestDeep}\PY{p}{)}\PY{p}{,} \PY{n}{ytests}\PY{p}{)}
 \PY{c+c1}{\PYZsh{} mainLoss, wSumLoss, mainRmse = evalRes}
@@ -2662,14 +2674,14 @@ RootMeanSquaredError: 0.5819 - RootMeanSquaredError\_1: 0.6344 - loss: 0.3451
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{42}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [0.33926549553871155, 0.577087938785553, 0.577087938785553, 0.6287933588027954]
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{43}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{preds} \PY{o}{=} \PY{n}{regWide}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{p}{(}\PY{n}{XNewDeep}\PY{p}{,} \PY{n}{XNewWide}\PY{p}{)}\PY{p}{)}
 \PY{n}{preds} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{regWide}\PY{o}{.}\PY{n}{output\PYZus{}names}\PY{p}{,} \PY{n}{preds}\PY{p}{)}\PY{p}{)}
@@ -2692,7 +2704,7 @@ https://www.tensorflow.org/api\_docs/python/tf/function for  more details.
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{43}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \{'output': array([[0.47618163],
         [0.71396697],
@@ -2719,7 +2731,7 @@ weights and optimizer's parameters by calling the
 \texttt{save\_weights()} method.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{44}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{pathlib} \PY{k+kn}{import} \PY{n}{Path}
 
@@ -2763,7 +2775,7 @@ model's weights you will need to create the model and then call the
 \texttt{load\_weights()} method.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{45}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{fashionCls} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{models}\PY{o}{.}\PY{n}{load\PYZus{}model}\PY{p}{(}\PY{n}{modelPath} \PY{o}{/} \PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}}\PY{n}{clsName}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{.keras}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 
@@ -2831,7 +2843,7 @@ weighted avg       0.87      0.87      0.87     10000
     { \hspace*{\fill} \\}
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{46}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{pbFashion} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{TFSMLayer}\PY{p}{(}
     \PY{n}{modelPath} \PY{o}{/} \PY{n}{clsName}\PY{p}{,} \PY{n}{call\PYZus{}endpoint}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{serving\PYZus{}default}\PY{l+s+s2}{\PYZdq{}}
@@ -2891,7 +2903,7 @@ in combination with the \texttt{ModelCheckpoint} callback to save the
 best model when training is interrupted.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{47}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{checkpoint} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{callbacks}\PY{o}{.}\PY{n}{ModelCheckpoint}\PY{p}{(}
     \PY{n}{modelPath} \PY{o}{/} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wideAndDeep\PYZus{}checkpoints.weights.h5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
@@ -3205,7 +3217,7 @@ prints the ratio between the validation loss and the training loss to
 detect overfitting
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{48}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{class} \PY{n+nc}{PrintValTrainRatioCallback}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{callbacks}\PY{o}{.}\PY{n}{Callback}\PY{p}{)}\PY{p}{:}
     \PY{k}{def} \PY{n+nf}{on\PYZus{}epoch\PYZus{}end}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{epoch}\PY{p}{,} \PY{n}{logs}\PY{p}{)}\PY{p}{:}
@@ -3215,7 +3227,7 @@ detect overfitting
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{49}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{hist} \PY{o}{=} \PY{n}{wideAndDeep}\PY{o}{.}\PY{n}{fit}\PY{p}{(}
     \PY{p}{(}\PY{n}{XTrainWide}\PY{p}{,} \PY{n}{XTrainDeep}\PY{p}{)}\PY{p}{,}
@@ -3320,7 +3332,7 @@ data you want to visualize to special binary log files called
 TensorBoard reads these files and displays the data.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{50}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{time} \PY{k+kn}{import} \PY{n}{strftime}
 
@@ -3334,7 +3346,7 @@ TensorBoard reads these files and displays the data.
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{51}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{norm} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Normalization}\PY{p}{(}\PY{p}{)}
 
@@ -3356,11 +3368,13 @@ TensorBoard reads these files and displays the data.
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{52}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{tensorboard} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{callbacks}\PY{o}{.}\PY{n}{TensorBoard}\PY{p}{(}\PY{n}{run}\PY{p}{,} \PY{n}{profile\PYZus{}batch}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{)}\PY{p}{)}
 \PY{n}{norm}\PY{o}{.}\PY{n}{adapt}\PY{p}{(}\PY{n}{XTrain}\PY{p}{)}
-\PY{n}{hist} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{XTrain}\PY{p}{,} \PY{n}{yTrain}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{XValid}\PY{p}{,} \PY{n}{yValid}\PY{p}{)}\PY{p}{,} \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{tensorboard}\PY{p}{]}\PY{p}{)}
+\PY{n}{hist} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}
+    \PY{n}{XTrain}\PY{p}{,} \PY{n}{yTrain}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{XValid}\PY{p}{,} \PY{n}{yValid}\PY{p}{)}\PY{p}{,} \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{tensorboard}\PY{p}{]}
+\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -3496,7 +3510,7 @@ val\_loss: 0.2669
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{53}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} tensorboard
 \PY{o}{\PYZpc{}}\PY{k}{tensorboard} \PYZhy{}\PYZhy{}logdir=./logs
@@ -3522,7 +3536,7 @@ is to use the \textbf{Keras Tuner} library.
 \subsubsection{Using Keras Tuner}\label{using-keras-tuner}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{54}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{o}{!}\PY{o}{\PYZob{}}sys.executable\PY{o}{\PYZcb{}}\PY{+w}{ }\PYZhy{}m\PY{+w}{ }pip\PY{+w}{ }install\PY{+w}{ }keras\PYZhy{}tuner
 \PY{k+kn}{import} \PY{n+nn}{keras\PYZus{}tuner} \PY{k}{as} \PY{n+nn}{kt}
@@ -3598,12 +3612,14 @@ Successfully installed keras-tuner-1.4.7 kt-legacy-1.0.5
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{55}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{def} \PY{n+nf}{buildModel}\PY{p}{(}\PY{n}{hp}\PY{p}{)}\PY{p}{:}
     \PY{n}{nHidden} \PY{o}{=} \PY{n}{hp}\PY{o}{.}\PY{n}{Int}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}hidden}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{min\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
     \PY{n}{nNeurons} \PY{o}{=} \PY{n}{hp}\PY{o}{.}\PY{n}{Int}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}neurons}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{min\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{,} \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{256}\PY{p}{)}
-    \PY{n}{learningRate} \PY{o}{=} \PY{n}{hp}\PY{o}{.}\PY{n}{Float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{min\PYZus{}value}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{,} \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{n}{sampling}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+    \PY{n}{learningRate} \PY{o}{=} \PY{n}{hp}\PY{o}{.}\PY{n}{Float}\PY{p}{(}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{learning\PYZus{}rate}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{min\PYZus{}value}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{,} \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{,} \PY{n}{sampling}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{log}\PY{l+s+s2}{\PYZdq{}}
+    \PY{p}{)}
     \PY{n}{optimizer} \PY{o}{=} \PY{n}{hp}\PY{o}{.}\PY{n}{Choice}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{optimizer}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sgd}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{adam}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
 
     \PY{k}{if} \PY{n}{optimizer} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sdg}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
@@ -3616,7 +3632,11 @@ Successfully installed keras-tuner-1.4.7 kt-legacy-1.0.5
     \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{nHidden}\PY{p}{)}\PY{p}{:}
         \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{n}{nNeurons}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
     \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{softmax}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
-    \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sparse\PYZus{}categorical\PYZus{}crossentropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{optimizer}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+    \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}
+        \PY{n}{loss}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sparse\PYZus{}categorical\PYZus{}crossentropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{n}{optimizer}\PY{o}{=}\PY{n}{optimizer}\PY{p}{,}
+        \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+    \PY{p}{)}
     \PY{k}{return} \PY{n}{model}
 \end{Verbatim}
 \end{tcolorbox}
@@ -3771,7 +3791,7 @@ With
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{56}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{load\PYZus{}sample\PYZus{}images}
 
@@ -3783,14 +3803,14 @@ With
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{56}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 TensorShape([2, 70, 120, 3])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{57}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{convLayer1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \PY{n}{fmaps} \PY{o}{=} \PY{n}{convLayer1}\PY{p}{(}\PY{n}{images}\PY{p}{)}
@@ -3799,14 +3819,14 @@ TensorShape([2, 70, 120, 3])
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{57}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 TensorShape([2, 70, 120, 32])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{58}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{kernels}\PY{p}{,} \PY{n}{biases} \PY{o}{=} \PY{n}{convLayer1}\PY{o}{.}\PY{n}{get\PYZus{}weights}\PY{p}{(}\PY{p}{)}
 \PY{n}{kernels}\PY{o}{.}\PY{n}{shape}
@@ -3814,21 +3834,21 @@ TensorShape([2, 70, 120, 32])
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{58}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 (7, 7, 3, 32)
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{59}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{biases}\PY{o}{.}\PY{n}{shape}
 \end{Verbatim}
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{59}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 (32,)
 \end{Verbatim}
@@ -3859,7 +3879,7 @@ h_{i, j} = \text{ReLU}(z_{i, j})
 \]
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{60}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{convLayer1} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}
     \PY{n}{filters}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{same}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}
@@ -3870,14 +3890,14 @@ h_{i, j} = \text{ReLU}(z_{i, j})
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{60}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 TensorShape([2, 70, 120, 32])
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{61}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{kernels}\PY{p}{,} \PY{n}{biases} \PY{o}{=} \PY{n}{convLayer1}\PY{o}{.}\PY{n}{get\PYZus{}weights}\PY{p}{(}\PY{p}{)}
 \PY{n}{kernels}\PY{o}{.}\PY{n}{shape}
@@ -3885,7 +3905,7 @@ TensorShape([2, 70, 120, 32])
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{61}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 (7, 7, 3, 32)
 \end{Verbatim}
@@ -3925,14 +3945,14 @@ spatial dimensions which will allow the CNN to be invariant to various
 features, such as rotation and scaling.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{62}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{maxPool} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{MaxPool2D}\PY{p}{(}\PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{63}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k}{class} \PY{n+nc}{DepthPool}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Layer}\PY{p}{)}\PY{p}{:}
     \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
@@ -3961,7 +3981,7 @@ max of each group. This implementation assumes that the stride is equal
 to the pooling size.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{64}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{globAvgPool} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{GlobalAveragePooling2D}\PY{p}{(}\PY{p}{)}
 \PY{n}{globAvgPool}\PY{p}{(}\PY{n}{images}\PY{p}{)}
@@ -3969,7 +3989,7 @@ to the pooling size.
 \end{tcolorbox}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{64}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 <tf.Tensor: shape=(2, 3), dtype=float32, numpy=
 array([[0.64338624, 0.5971759 , 0.5824972 ],
@@ -3992,7 +4012,7 @@ if the network is used for classification to output estimated class
 probabilities.
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{65}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{k+kn}{from} \PY{n+nn}{functools} \PY{k+kn}{import} \PY{n}{partial}
 
@@ -4141,7 +4161,7 @@ probabilities.
 \end{itemize}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{66}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{cnnCls}\PY{o}{.}\PY{n}{compile}\PY{p}{(}
     \PY{n}{loss}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sparse\PYZus{}categorical\PYZus{}crossentropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
@@ -4220,7 +4240,7 @@ probabilities.
 
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{67}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{p}{(}\PY{n}{XTrainFull}\PY{p}{,} \PY{n}{yTrainFull}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{XTest}\PY{p}{,} \PY{n}{yTest}\PY{p}{)} \PY{o}{=} \PY{n}{fmnist}
 
@@ -4232,7 +4252,7 @@ probabilities.
 \end{tcolorbox}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{68}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{hist} \PY{o}{=} \PY{n}{cnnCls}\PY{o}{.}\PY{n}{fit}\PY{p}{(}
     \PY{n}{XTrain}\PY{p}{,} \PY{n}{yTrain}\PY{p}{,} \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{validation\PYZus{}data}\PY{o}{=}\PY{p}{(}\PY{n}{XValid}\PY{p}{,} \PY{n}{yValid}\PY{p}{)}\PY{p}{,} \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{earlyStop}\PY{p}{]}
@@ -4274,7 +4294,7 @@ Epoch 10/10
     \end{Verbatim}
 
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{69}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{preds} \PY{o}{=} \PY{n}{cnnCls}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{XTest}\PY{p}{)}
 \PY{n}{preds} \PY{o}{=} \PY{n}{preds}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
@@ -4289,14 +4309,14 @@ accuracy: 0.8996 - loss: 0.3032
     \end{Verbatim}
 
             \begin{tcolorbox}[breakable, size=fbox, boxrule=.5pt, pad at break*=1mm, opacityfill=0]
-\prompt{Out}{outcolor}{69}{\boxspacing}
+\prompt{Out}{outcolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 [0.29478150606155396, 0.899399995803833]
 \end{Verbatim}
 \end{tcolorbox}
         
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{70}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{classStats}\PY{p}{(}\PY{n}{yTest}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{n}{classNames}\PY{p}{)}
 \end{Verbatim}
@@ -4328,14 +4348,14 @@ weighted avg       0.90      0.90      0.90     10000
     { \hspace*{\fill} \\}
     
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
-\prompt{In}{incolor}{71}{\boxspacing}
+\prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{plot\PYZus{}model}\PY{p}{(}\PY{n}{cnnCls}\PY{p}{,} \PY{n}{show\PYZus{}shapes}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
 \end{Verbatim}
 \end{tcolorbox}
  
             
-\prompt{Out}{outcolor}{71}{}
+\prompt{Out}{outcolor}{ }{}
     
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{Neural Networks_files/Neural Networks_103_0.png}

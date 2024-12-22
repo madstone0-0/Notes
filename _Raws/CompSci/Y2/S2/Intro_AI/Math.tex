@@ -265,7 +265,17 @@ Then we take the derivate of the last expression with respect to $\mbold{\beta}$
 \end{align*}
 
 At this point we have the derivate of the loss function $L \left( \mbold{\beta} \right) $ and can either equate it to
-zero or use gradient descent \ref{sec:grad} to find the optimal weights $\mbold{\beta}$.
+zero or use gradient descent \ref{sec:grad} to find the optimal weights $\mbold{\beta}$. If we equate the derivative to
+zero:
+\begin{align*}
+  \nabla L \left( \mbold{\beta} \right) & = \frac{2}{m} \left( \mbold{x}^{t}\mbold{x} \mbold{\beta} - \mbold{x}^{t}
+  \mbold{y}_{\text{true}}  \right)                                                                                                                   \\
+  0                                     & = \frac{2}{m} \left( \mbold{x}^{t}\mbold{x} \mbold{\beta} - \mbold{x}^{t} \mbold{y}_{\text{true}}  \right) \\
+                                        & \text{As } \frac{2}{m} \text{ is a constant, we can remove it}                                             \\
+  0                                     & = \mbold{x}^{t}\mbold{x} \mbold{\beta} - \mbold{x}^{t} \mbold{y}_{\text{true}}                             \\
+  \mbold{x}^{t} \mbold{x} \mbold{\beta} & = \mbold{x}^{t} \mbold{y}_{\text{true}}                                                                    \\
+  \mbold{\beta}                         & = \left( \mbold{x}^{t} \mbold{x} \right)^{-1} \mbold{x}^{t} \mbold{y}_{\text{true}}                        \\
+\end{align*}
 
 \subsection{Multi-Linear Regression}
 In the case of multi-linear regression, there are multiple independent variables. This relationship can be expressed as:

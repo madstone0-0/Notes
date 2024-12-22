@@ -262,8 +262,8 @@ if __name__ == "__main__":
                 "CompSci/Y2/S1/Discrete_Math",
                 "Stats",
                 "Liberal/Econs",
-                "Homework/Discrete",
-                "Homework/OOP",
+                "Homework/Y2/S1/Discrete",
+                "Homework/Y2/S1/OOP",
             ],
             "S2": [
                 "CompSci/Y2/S2/Data_Structures",
@@ -275,11 +275,13 @@ if __name__ == "__main__":
         },
         "Y3": {
             "S1": [
-                "CompSci/Algo_Design",
-                "CompSci/Web",
-                "CompSci/Hardware",
-                "CompSci/ICP",
-                "CompSci/Machine_Learning",
+                "CompSci/Y3/S1/Algo_Design",
+                "CompSci/Y3/S1/Web",
+                "CompSci/Y3/S1/Hardware",
+                "CompSci/Y3/S1/Machine_Learning",
+                "Homework/Y3/S1/Algos",
+                "Homework/Y3/S1/Hardware",
+                "Homework/Y3/S1/ML",
             ]
         },
         "Personal": [
@@ -290,7 +292,10 @@ if __name__ == "__main__":
 
     dirs = [
         *yearDict["Y3"]["S1"],
-        *yearDict["Y2"]["S2"],
+        # *yearDict["Y2"]["S1"],
+        # *yearDict["Y2"]["S2"],
+        # *yearDict["Y1"]["S2"],
+        *yearDict["Personal"],
     ]
 
     force = False

@@ -12,6 +12,8 @@ Welcome to my collection of personal and university notes! Here you'll find a mi
 - Data Structures and Algorithms
 - Machine Learning and AI
 - Statistics and Probability
+- Algorithm Design and Analysis
+- Hardware and System Fundamentals
 
 ### How to Navigate
 

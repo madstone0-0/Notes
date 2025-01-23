@@ -282,16 +282,24 @@ if __name__ == "__main__":
                 "Homework/Y3/S1/Algos",
                 "Homework/Y3/S1/Hardware",
                 "Homework/Y3/S1/ML",
-            ]
+            ],
+            "S2": [
+                "CompSci/COA",
+                "CompSci/Research",
+                "CompSci/SWE",
+                "CompSci/Simulation",
+            ],
         },
         "Personal": [
             "CompSci/Personal/Intro_To_Machine_Learning",
             "CompSci/Personal/Algorithms",
+            "Calc/Personal",
         ],
     }
 
     dirs = [
-        *yearDict["Y3"]["S1"],
+        *yearDict["Y3"]["S2"],
+        # *yearDict["Y3"]["S1"],
         # *yearDict["Y2"]["S1"],
         # *yearDict["Y2"]["S2"],
         # *yearDict["Y1"]["S2"],

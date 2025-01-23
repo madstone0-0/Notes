@@ -1,0 +1,162 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Discrete Systems}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction to Modelling}
+
+\section{The Modelling Framework}
+
+\dfn{System}{
+  Something in the real world we are interested in modelling
+}
+
+\dfn{Abstraction}{
+  Deciding which elements of the real world to include and which parts to leave out
+}
+
+\dfn{Model}{
+  The resulting abstracted system, which is a description of the system that includes only essential features. Models
+  can be represented in diagrams, equations which can be used for mathematical analysis and computer programs which can
+  run as \textit{simulations}
+}
+
+\dfn{Simulation}{
+  The process of designing a model of a real system, and conducting experiments with this model
+}
+
+The result of analysis and simulation could be a prediction about what the system will do, an explanation the system's
+behaviour, or a design intended to achieve a purpose.\\
+
+Predictions can be validated and testing by taking measurements from the real world and comparing the data obtained with
+the results from analysis and simulation. \\
+
+Some reasons to simulate a system include:
+\begin{itemize}
+  \item Estimate some quantity or measure of effectiveness (MOE)
+  \item Gain an understanding of the behaviour of the system
+  \item Evaluate various alternative strategies
+\end{itemize}
+
+\dfn{Iterative Modelling}{
+  Starting with a simple model, and adding on features gradually starting with the most essential ones.
+}
+
+\dfn{Internal Validation}{
+  Comparing the results of successive models from iterative modelling.
+}
+
+
+\dfn{External Validation}{
+  Comparing the results from the real world to generated models.
+}
+
+\subsection{Types of Models}
+\begin{description}
+  \item[Physical models]  - Resemble the system being studied.
+  \item[Scaled models] - Resemble the system under study but at a different size, i.e. a scaled up model of an atom.
+  \item[Analog models] - A model where the properties of the real object is represented by a substituted property that
+        often behaves in a similar manner, e.g. voltage through an electronic analogue computer network may represent flow of
+        goods through a system.
+  \item[Schematic model] - A pictorial representation of a system, e.g. a blueprint or a graph.
+  \item[Games / Man-Machine models] - Management games, war games, planning competition.
+  \item[Simulation models] - Have no human interaction, an abstract model, such as a discrete-event system simulation
+        model.
+  \item[Mathematical models] - A model where symbols represent entities.
+  \item[Heuristic model] - A collection of descriptors or decision rules, usually computer based which is not
+        limited by physical, diagrammatic or mathematical bounds.
+\end{description}
+
+\subsection{Characteristics of Models}
+
+\begin{description}
+  \item[Static Model] - A model that does not change / move with time. Examples include Monte Carlo Sampling.
+  \item[Dynamic Model] - A model that changes with time. Examples include Time series regression.
+  \item[Deterministic Model] - A model that has a single solution for a given input state or configuration, like a pure
+        function in functional programming.
+  \item[Stochastic / Non-Deterministic Model] - A model whose output mimics probabilistic/random phenomena.
+  \item[Discrete Model] - A model that represents the system in a discrete manner where variables change at distinct and
+        countable points in time.
+  \item[Continuous Model] - A model that represents the system in a continuous manner where variables change continuously
+        over time.
+\end{description}
+
+\section{Testing the Falling Penny Myth}
+
+\dfn{The Falling Penny Myth}{
+  A penny dropped from the top of the Empire State building would be going so fast when it hit the pavement that it
+  would be embedded in the concrete, or if it hit a person it would break their skull
+}
+
+\nt{
+  The Standard Equations of Motion (SUVAT):
+  \begin{align*}
+    v   & = u + at                           \\
+    s   & = ut + \frac{1}{2} at^2            \\
+    s   & = \left( \frac{u + v}{2} \right) t \\
+    v^2 & = u^2 + 2as                        \\
+    s   & = vt + \frac{1}{2} at^2            \\
+  \end{align*}
+  Where:
+  \begin{description}
+    \item[ $s$] - Distance
+    \item[ $u$] - Initial Velocity
+    \item[ $v$]  - Velocity
+    \item[ $a$] - Acceleration
+    \item [ $t$] - Time
+  \end{description}
+}
+
+We can test this by considering two models. The first disregards the effect of air resistance, in which case the
+primary force acting on the penny is gravity, which causes the penny to accelerate downward.
+
+If the initial velocity is 0 $u = 0$ and the acceleration $a$ is constant the velocity after $t$ seconds can be found
+using the one of the standard equations of motion:
+\[
+  v = u + at = at
+\]
+and the distance the penny is dropped is:
+\[
+  s = ut + \frac{1}{2} a t^2 = \frac{1}{2} at^2
+\]
+
+To find the time the penny hits the sidewalk we can make $t$ the subject of this equation:
+\begin{align*}
+  s            & = \frac{1}{2} at^2    \\
+  2s           & = at^2                \\
+  \frac{2s}{a} & = t^2                 \\
+  t            & = \sqrt{\frac{2s}{a}}
+\end{align*}
+
+When $a = 9.8 \text{m/s}^2$ due to gravity, and the height of the Empire State Building $s = 381 \text{m}$, $t = 8.8
+  \text{s}$. Computing the velocity we get $86.24 \text{m/s}$. However we must take into account that this model is
+based on simplifications, such as gravity is constant. Gravity is however different on different parts of the globe
+and it gets weaker as you move away from the surface of the earth. This however results in small negligible differences
+so ignoring them can be a good choice for this problem.
+
+Disregarding air resistance however is not a good choice as it has substantial effects on the velocity of the penny, as
+when the penny reaches about $29 \text{m/s}$ the upward force of air resistance equals the downward force of gravity and
+the penny stops accelerating, this point is known as the penny's terminal velocity in air.
+
+This leads into the second model where the penny accelerates until it reaches terminal velocity of $29 \text{m/s}$ and
+hits the sidewalk at this velocity, which is not fast enough to damage it.
+
+
+
+
+\end{document}

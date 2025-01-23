@@ -1,0 +1,215 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Limits and Continuity}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Preliminaries}
+
+\section{The Real Number system}
+
+\dfn{Rational Number}{
+  An integer that can be expressed in the form $\frac{p}{q}$, where $p$ and $q$ are integers and $q \neq 0$. Rational
+  numbers have decimal expansions that either terminate or repeat.
+}
+
+\dfn{Irrational Number}{
+  An integer that cannot be expressed in the form $\frac{p}{q}$. Irrational numbers do not have decimal expansions that
+  terminate or repeat.
+}
+
+\thm{}{
+  If $a$ and $b$ are real numbers and $a < b$ then:
+  \begin{itemize}
+    \item For any real number $c$, $a + c < b + c$
+    \item For real numbers $c$ and $d$ if $c < d$, then $a + c < b + d$
+    \item For any real number $c > 0$, $a \times c < b \times c$
+    \item For any real number $c < 0$, $a \times c > b \times c$
+  \end{itemize}
+}
+
+\thm{Triangle of Inequality}{
+  For any real numbers $a$ and $b$:
+  \begin{itemize}
+    \item $\left| a \times b \right| = \left| a \right|\times \left| b \right|$
+    \item $\left| a + b \right| \neq  \left| a \right| + \left| b \right|$
+    \item $\left| a + b \right| \leq \left| a \right| + \left| b \right|$
+  \end{itemize}
+}
+
+\ex{}{
+  \qs{}{
+    Solve the inequality
+    \[
+      \left| x - 2 \right| < 5
+    \]
+  }
+
+  \sol{
+    \begin{align*}
+      \left| x -2 \right| < & 5           \\
+      x - 2  < 5 \, \,      & x - 2  > -5 \\
+      x < 7 \, \,           & x > -3      \\
+      \therefore            & -3 > x > 7
+    \end{align*}
+  }
+}
+
+\section{Lines and Functions}
+
+\dfn{Slope of a Line}{
+  For $x_1 \neq  x_2$, the slope of a straight line through the points $ \left( x_1, y_1 \right) $ and $ \left( x_2, y_2
+    \right) $ is:
+  \[
+    m = \frac{y_2 - y_1}{x_2 - x_1}
+  \]
+  When $x_1 = x_2$ and $y_1 \neq  y_2$, the line through $ \left( x_1, y_1 \right) $ and $ \left( x_2, y_2 \right) $ is
+  vertical and its slope is undefined.\\
+
+  The slope of a line can also be described as the change in $y$, ($\Delta y$) divided by the change in $x$ ($\Delta
+    x$), or \textit{Rise} over \textit{Run} where rise it the change in height and run is the change in width in this
+  case. \\
+
+  The equation of a line can be written in point slope form like:
+  \[
+    y = m \left( x - x_0 \right) + y_0
+  \]
+  Where $x_0$ and $y_0$ are the starting coordinates of the line
+}
+
+Two (non-vertical) lines are parallel if they have the same slope, therefore any two vertical lines are parallel. \\
+Two (non-vertical) lines of slope $m_1$ and $m_2$ are perpendicular if the product of their slopes is $-1$ this
+indicates that they are negative reciprocals of each other.
+
+\dfn{Function}{
+  For any two subsets $A$ and $B$ of the real line, a function $f$ is a rule that assigns exactly one element $y$ in set
+  $B$ to each element $x$ in set $A$, where $y = f \left( x \right) $. \\
+
+  The set $A$ is referred to as the \textit{domain} of $f$, and the set of $B$ is called the \textit{range} of $f$, i.e.
+  $\{y  \mid  y = f \left( x \right),\, \text{ for some } x \in A \} $
+}
+
+\dfn{Polynomial}{
+  A function that can be written in the form
+  \[
+    f \left( x \right) = a_n x^{n} + a_{n-1} x^{n-1} + \ldots + a_{1} x + a_0
+  \]
+  where $a_0, a_1, \ldots, a_n$ are real numbers (coefficients) with $a_n \neq  0$ and $n \geq 0$ is an integer (degree)
+}
+
+\dfn{Rational function}{
+  Any function that can be written in the form
+  \[
+    f \left( x \right)  = \frac{p \left( x \right) }{q \left( x \right) }
+  \]
+  Where $p$ and $q$ are polynomials.
+}
+
+\thm{Factor Theorem}{
+  For any polynomial function, $f$, $f \left( a \right) = 0$ if and only if $ \left( x - a \right) $ is a factor of $f
+    \left( x \right) $
+}
+
+\section{Trigonometric Functions}
+
+\dfn{Periodic Function}{
+  A function $f$ is periodic of period $T$ if
+  \[
+    f \left( x + T \right) = f \left( x \right)
+  \]
+  For all $x$ such that $x$ and $x + T$ are in the domain of of $f$. The smallest such number $T > 0$ is called the
+  \textit{fundamental period}.
+}
+
+\[
+  \sin( x + \frac{\pi }{2}) = \cos(x)
+\]
+
+\dfn{}{
+  \begin{description}
+    \item[Tangent]
+          \[
+            \tan(x) = \frac{\sin(x)}{\cos(x)}
+          \]
+    \item[Cotangent]
+          \[
+            \cot(x) = \frac{\cos(x)}{\sin(x)} \quad / \quad  \cot(x) = \frac{1}{\tan(x)}
+          \]
+    \item[Secant]
+          \[
+            \sec(x) = \frac{1}{\cos(x)}
+          \]
+    \item[Cosecant]
+          \[
+            \csc(x) = \frac{1}{\sin(x)}
+          \]
+  \end{description}
+}
+
+\dfn{Proprieties of a periodic function}{
+  For a periodic function in the form
+  \[
+    y = A f \left( cx \right)
+  \]
+  $A$ is the amplitude of the values generated, and for any positive integer $c$, the period of the function $f$ is
+  $\frac{T}{c}$, where $T$ is the period of the function $f$.\\
+
+  The frequency of a period function can be found:
+  \[
+    f = \frac{c}{T}
+  \]
+}
+
+\thm{Trigonometric Identities}{
+  For any real numbers $\alpha$ and $\beta$, the following identities hold:
+  \begin{align*}
+    \sin(\alpha + \beta) & = \sin(\alpha)\cos(\beta) + \sin(\beta)\cos(\alpha)  \\
+    \cos(\alpha + \beta) & = \cos(\alpha) \cos(\beta) - \sin(\alpha)\sin(\beta) \\
+    \sin^2(\alpha)       & = \frac{1}{2} \left( 1 - 2 \cos(2 \alpha) \right)    \\
+    \cos^2(\alpha)       & = \frac{1}{2} \left( 1 + \cos(2 \alpha) \right)      \\
+  \end{align*}
+}
+
+\section{Transformations of Functions}
+
+\dfn{Function Combinations}{
+  Suppose that $f$ and $g$ are functions with domains $D_1$ and $D_2$, respectively. The functions $f + g$, $f - g$ and
+  $f \times g$ are defined by:
+  \begin{align*}
+    \left( f + g \right) \left( x \right)       & = f \left( x \right) + g \left( x \right)       \\
+    \left( f - g \right) \left( x \right)       & = f \left( x \right) - g \left( x \right)       \\
+    \left( f \times g \right)  \left( x \right) & =  f \left( x \right) \times g \left( x \right) \\
+  \end{align*}
+  $\forall x$ where $x \in D_1 \cap D_2$. The function $\frac{f}{g}$ is defined by:
+  \[
+    \left( \frac{f}{g} \right) \left( x \right)  = \frac{f \left( x \right) }{g \left( x \right) }
+  \]
+  $\forall x$ where $x \in D_1 \cap  D_2$ such that $g \left( x \right) \neq  0 $
+}
+
+\dfn{Composition}{
+  The composition of functions $f$ and $g$ is written $f \circ g$ and is defined by
+  \[
+    \left( f \circ g \right) \left( x \right)  = f \left( g \left( x \right)  \right)
+  \]
+  $\forall x$ where $x$ is in the domain of $g$ and $g \left( x \right) $ is in the domain of $f$
+}
+
+\chapter{The Concept of Limit}
+
+
+\end{document}

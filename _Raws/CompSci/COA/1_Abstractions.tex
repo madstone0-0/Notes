@@ -1,0 +1,310 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Introduction}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\usepackage{booktabs}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+
+\chapter{Eight Great Ideas In Computer Architecture}
+
+\begin{itemize}
+  \item Design for Moore's Law
+  \item Use abstraction to simplify design
+  \item Make the common case fast
+  \item Performance via parallelism
+  \item Performance via pipelining
+  \item Performance via prediction
+  \item  Hierarchy of memories
+  \item Dependability via redundancy
+\end{itemize}
+
+\section{Design for Moore's Law}
+Moore's law states that the number of transistors that can be placed on a chip doubles every two years. As computer
+designs can take years to complete and implement, it is important to have this in mind when designing to exploit
+increased transistor count for better performance, rather than relying solely on increasing clock speeds.
+
+\section{Use Abstraction to Simplify Design}
+Abstractions allow us to represent a design at different levels of representation with details irrelevant to the current
+level being hidden. This allows for greater productivity as  designers can focus on the current level of abstraction.
+
+\section{Make the Common Case Fast}
+Optimize the design for the most common operations to achieve better performance in typical scenarios. This encourages
+focusing on optimizing the execution of frequently used operations / instructions
+
+\section{Performance via Parallelism}
+Parallelism involves executing multiple operations simultaneously to enhance performance. This idea underscores the
+importance of exploiting both instruction-level parallelism (ILP) and data-level parallelism (DLP) to achieve  better
+overall system performance.
+
+\section{Performance via Pipelining}
+Pipelining is s technique that divides the execution of instruction into stages, allowing multiple instructions to be
+processed concurrently. This idea promotes the use of pipelining to improve instruction throughput and overall system
+performance.
+
+\section{Performance via Prediction}
+This idea involves the use of prediction mechanisms to foresee events and make intelligent decisions to optimize
+performance.
+
+\section{Hierarchy of Memories}
+The memory hierarchy involves organizing different levels of memory with varying  speeds and sizes. This idea
+emphasizes the importance of using faster, smaller and more expensive memory close to the processor and larger, slower
+and cheaper memory farther away.
+
+\section{Dependability via Redundancy}
+This idea focuses on enhancing system reliability and dependability through redundancy.  Techniques such as error
+detection and correction, redundant components, and fault-tolerant designs are employed to minimize the impact of
+hardware failures.
+
+
+\chapter{Building processors}
+\section{Semiconductors}
+
+\dfn{Semiconductor}{
+  A material that has an electrical conductivity between that of a conductor and an insulator.
+}
+
+\dfn{P-Type}{
+  A semiconductor material that has been doped with an electron acceptor element. This creates a material that has a net positive charge.
+}
+
+\dfn{N-Type}{
+  A semiconductor material that has been doped with an electron donor element. This creates a material that has a net negative charge.
+}
+
+\dfn{PNP Transistor}{
+  A type of transistor that consists of a layer of N-type semiconductor between two layers of P-type semiconductor.
+}
+
+\dfn{NPN Transistor}{
+  A type of transistor that consists of a layer of P-type semiconductor between two layers of N-type semiconductor.
+}
+
+Semiconductors are used in the construction of transistors, which are the building blocks of modern computers.
+Transistors are made up of three parts:
+\begin{itemize}
+  \item Gate
+  \item Drain
+  \item Source
+\end{itemize}
+
+\dfn{Von Neumann Process}{
+  \begin{itemize}
+    \item Fetch instruction
+    \item Decode instruction
+    \item Determine Operand Address(es)
+    \item Fetch Operands
+    \item Perform operation
+    \item Store result
+    \item Repeat for next instruction
+  \end{itemize}
+  (F D E S)
+}
+
+\chapter{Performance}
+
+\section{Defining Performance}
+\dfn{Execution Time}{
+  The total time required for the computer to complete a task, including disk accesses, memory accesses, I/O operations,
+  operating system overhead, and so on.
+}
+
+\dfn{Performance}{
+  A measure of how quickly a computer system completes a task.
+  \[
+    \text{Performance} = \frac{1}{\text{Execution Time}}
+  \]
+}
+
+\dfn{Throughput / Bandwidth}{
+  The number of tasks completed per unit time.
+}
+
+A decrease in execution time almost always results in an increase in throughput as more tasks can be completed in the
+same amount of time. In discussing the performance of individual computers such as desktops we are mostly concerned with
+execution time, and thus if we had computers $X$ and $Y$ we can determine the performance of $X$ relative to $Y$:
+\[
+  n = \frac{\text{Performance}_X}{\text{Performance}_Y}
+\]
+This conveys that "$X$ is $n$ times faster than $Y$". Due to the definition of performance this can also be written:
+\[
+  n = \frac{\text{Execution time}_Y}{\text{Execution time}_X}
+\]
+\nt{
+  The smaller execution time is always the denominator.
+}
+
+\section{Measuring Performance}
+
+Time is the measure of computer performance, i.e. the computer that performs the same amount of work in the least amount
+of time is the fastest / most performant.
+
+\dfn{CPU (Execution) Time }{
+  The actual amount of time the CPU spends computing for a specific task. Does not include things like overhead from
+  waiting for I/O or running other programs.
+}
+
+\dfn{User CPU Time}{
+  The CPU time spent in a program itself, i.e. the time the CPU spends executing all the instructions in the program.
+}
+
+\dfn{System CPU Time}{
+  The CPU time spent in the operating system performing tasks on behalf of the program.
+}
+
+\dfn{Clock Cycle / Tick }{
+  The time for one clock period, usually of the processor clock, which runs at a constant rate. Where the clock period
+  is the time taken to complete a clock cycle (e.g. 4 gigahertz / GHz). Designers derive the clock rate from this clock cycle as the inverse of
+  the clock period, i.e.:
+  \[
+    \text{Clock Rate} = \frac{1}{\text{Clock Period}}
+  \]
+
+}
+
+\section{Performance and it's Factors}
+
+Users and Designers examine performance differently, thus it is important to relate the two to determine the effect of a
+design change on user performance. As we are focusing on CPU performance we can relate the number of clock cycles a
+program takes to complete with the clock period, i.e.:
+\[
+  \text{CPU execution time for a program} = \text{CPU clock cycles for a program} \times \text{Clock cycle time / Clock
+    period}
+\]
+Or
+\[
+  \text{CPU execution time for a program} = \frac{\text{CPU clock cycles for a program}}{\text{Clock Rate}}
+\]
+
+\section{Instruction Performance}
+Another way to think of CPU performance is in instructions. As the program will require the CPU to execute instructions
+the execution time will depend on the number of instructions generated by the program and the average clock cycles
+needed to run all those instructions, i.e.:
+\[
+  \text{CPU clock cycles}  = \text{Instructions for a program} \times  \text{Average Clock cycles per instruction}
+\]
+\dfn{Clock Cycles Per Instruction (CPI)}{
+  Average number of clock cycles per instruction for a program or program fragment
+}
+
+Since different instructions may take different amounts of time depending on what they do, CPI is an average of all the
+instructions executed in the program.
+
+\ex{}{
+  \qs{}{
+    Suppose we have two implementations of the same instruction set architecture.
+    Computer A has a clock cycle time of 250 ps and a CPI of 2.0 for some program,
+    and computer B has a clock cycle time of 500 ps and a CPI of 1.2 for the same
+    program. Which computer is faster for this program and by how much?
+  }
+
+  \sol{
+    Let $I$ be the number of instructions in each program as they have the same ISA.
+    \begin{align*}
+      \text{CPU Clock Cycles}_A & =  2.0 \times I           \\
+      \text{CPU Clock Cycles}_B & =  1.2 \times I           \\
+      \\
+      \text{CPU Time}_A         & = 250 \times 2.0 \times I \\
+                                & = 500I \text{ ps}         \\
+      \text{CPU Time}_B         & = 500 \times 1.2 \times I \\
+                                & = 600I \text{ ps}         \\
+      \\
+      n                         & = \frac{600I}{500I}       \\
+                                & = 1.2                     \\
+    \end{align*}
+    Computer A is $1.2$ times or $20\%$ faster than B for this program
+  }
+}
+
+This now gives us the CPU time equation in terms of instruction count, clock cycles per instruction and clock period as
+\[
+  \text{CPU Time} = \text{Instruction count} \times CPI \times \text{Clock cycle time}
+\]
+Or
+\[
+  \text{CPU Time} = \frac{\text{Instruction count} \times CPI}{\text{Clock Rate}}
+\]
+
+\ex{}{
+  \qs{}{
+    A compiler designer is trying to decide between two code sequences for a
+    particular computer. The hardware designers have supplied the following facts:
+    \begin{table}[H]
+      \begin{center}
+        \begin{tabular}{*{4}{wc{20mm}}} \toprule
+          \multicolumn{1}{c}{} &
+          \multicolumn{3}{c}{CPI for each instruction class} \\
+
+          \cmidrule(lr){2-4}
+                               & $A$ & $B$ & $C$             \\
+          \midrule
+          CPI                  & 1   & 2   & 3               \\
+
+          \bottomrule
+        \end{tabular}
+      \end{center}
+    \end{table}
+
+    For a particular high-level language statement, the compiler writer is
+    considering two code sequences that require the following instruction counts:
+    Instruction counts for each instruction class
+    \begin{table}[H]
+      \begin{center}
+        \begin{tabular}{*{4}{wc{20mm}}} \toprule
+          \multicolumn{1}{c}{} &
+          \multicolumn{3}{c}{Instruction counts for each instruction class} \\
+
+          \cmidrule(lr){1-1}\cmidrule(lr){2-4}
+          Code sequence        & $A$ & $B$ & $C$                            \\
+          \midrule
+          1                    & 2   & 1   & 2                              \\
+          2                    & 4   & 1   & 1                              \\
+
+          \bottomrule
+        \end{tabular}
+      \end{center}
+    \end{table}
+
+    Which code sequence executes the most instructions? Which will be faster?
+    What is the CPI for each sequence?
+  }
+
+  \sol{
+    Sequence 1 executes $2 + 1 + 2 = 5$ instructions while Sequence 2 executes $4 + 1 + 1 = 6$ instructions.
+    \begin{align*}
+      \text{CPU Clock Cycles}   & = \displaystyle\sum_{i=1}^{n} \left( CPI_i \times C_i  \right)                      \\
+      \\
+      \text{CPU Clock Cycles}_1 & = \left( 2 \times 1 \right) + \left( 1 \times 2 \right) + \left( 2 \times 3 \right) \\
+                                & = 10 \text{ ps}                                                                     \\
+      \text{CPU Clock Cycles}_2 & = \left( 4 \times 1 \right) + \left( 1 \times 2 \right) + \left( 1 \times 3 \right) \\
+                                & = 9 \text{ ps}                                                                      \\
+      \\
+      CPI                       & = \frac{\text{CPU Clock Cycles}}{\text{Instruction Count}}                          \\
+      CPI_1                     & = \frac{10}{5}                                                                      \\
+                                & = 2                                                                                 \\
+      CPI_2                     & = \frac{9}{6}                                                                       \\
+                                & = 1.5                                                                               \\
+      \\
+    \end{align*}
+  }
+}
+
+
+\chapter{The Power Wall}
+
+
+\end{document}

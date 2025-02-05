@@ -1,0 +1,152 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Preliminaries}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{$\mathbb{R}^{n}$}
+
+$\mathbb{R}^{n}$ denotes the set of real numbers / scalars. If $n$ is a positive integer then $\mathbb{R}^{n}$ is
+defined to be the set of all sequences $\mbold{x}$ of $n$ real numbers
+\[
+  \mbold{x} = \left( x_1, x_2, \ldots, x_n \right)
+\]
+Multivariable calculus studies functions that act on these sets, functions in the form of
+\[
+  f : \mathbb{R}^{n} \to  \mathbb{R}^{m}
+\]
+or more accurately
+\[
+  f : A \to \mathbb{R}^{m}
+\]
+Where $A$ is a subset of $\mathbb{R}^{n}$.
+
+\section{Vector Arithmetic}
+
+Every vector $\mbold{x} = \left( x_1,x_2, \ldots, x_n \right) $ in $\mathbb{R}^{n}$ can be decomposed as a sum along the
+coordinate directions
+\begin{align*}
+  \mbold{x} & = \left( x_1, 0, \ldots, 0 \right) + \left( 0, x_2, 0, \ldots, 0 \right)  + \left( 0, \ldots, x_n \right)
+  \\
+            & = x_1 \left( 1, 0, \ldots, 0 \right) + x_2 \left( 0, 1, 0, \ldots, 0 \right) + x_n \left( 0, \ldots, 1 \right) \\
+\end{align*}
+The vectors $ \mbold{e}_1 = \left( 1, 0, \ldots, 0 \right) $, $\mbold{e}_2 = \left( 0,1,\ldots, 0 \right) $,
+$\mbold{e}_n = \left( 0, \ldots, 1 \right) $, with a 1 in a single component corresponding to the value of $n$ and zeros
+everywhere else, are called the \textbf{standard basis vectors}. I.e.:
+\[
+  \mbold{x} = x_1\mbold{e}_1 + x_2\mbold{e}_2 + \ldots + x_n\mbold{e}_n
+\]
+Where the scalar coefficients $x_i$ are the coordinates of $\mbold{x}$.
+
+\section{Linear Transformations}
+\dfn{Linear Transformation}{
+  A function $T : \mathbb{R}^{n} \to  \mathbb{R}^{m}$ is a linear transformation if:
+  \begin{itemize}
+    \item $T \left( \mbold{x} + \mbold{y} \right) = T \left( \mbold{x} \right) + T \left( \mbold{y} \right)   $
+    \item $T \left( c \mbold{x} \right) = c T \left( \mbold{x} \right)  $
+  \end{itemize}
+  $\forall c \in \mathbb{R}$ and $\forall \mbold{x} \in \mathbb{R}^{n} \wedge \forall \mbold{y} \in \mathbb{R}^{n}$
+}
+
+\section{The Matrix of a linear Transformation}
+
+Let $T : \mathbb{R}^{n} \to \mathbb{R}^{m}$ be a linear transformation. Thus:
+\begin{align*}
+  T \left( \mbold{x} \right) & = T \left( x_1\mbold{e}_1 + x_2\mbold{e}_2 + \ldots + x_n\mbold{e}_n \right)                                      \\
+                             & = x_1 T \left( \mbold{e}_1 \right) + x_2 T \left( \mbold{e}_2 \right) + \ldots + x_n T \left( \mbold{e}_n \right) \\
+                             & = x_1 \mbold{a}_1 + x_2 \mbold{a}_2 + \ldots + x_n \mbold{a}_n                                                    \\
+\end{align*}
+Where $\mbold{a}_j = T \left( \mbold{e}_j \right) \text{ for } j = 1,2,\ldots,n $. A linear transformation $T :
+  \mathbb{R}^{n} \to  \mathbb{R}^{m}$ is completely determined by the vectors $\mbold{a}_1, \mbold{a}_2, \ldots,
+  \mbold{a}_n$
+
+\dfn{Dot Product}{
+  Given $\mbold{x} = \left( x_1, x_2, \ldots, x_n \right) $ and $\mbold{y} = \left( y_1, y_2, \ldots, y_n \right) $ in
+  $\mathbb{R}^{n}$, the dot product, denoted by $\mbold{x} \cdot \mbold{y}$, is defined by:
+  \[
+    \mbold{x} \cdot \mbold{y} = x_1y_1 + x_2y_2 + \ldots + x_n y_n
+  \]
+}
+We have shown the every real valued linear transformation, $T : \mathbb{R}^{n} \to  \mathbb{R}$ has the form
+\[
+  T \left( \mbold{x} \right)  = \mbold{a} \cdot  \mbold{x}
+\]
+Where $\mbold{a} = \left( a_1, a_2, \ldots, a_n \right) $ in $\mathbb{R}^{n}$. Generalizing for the case $T :
+  \mathbb{R}^{n} \to \mathbb{R}^{m}$, the objects in $\mbold{a}$ are now vectors in $\mathbb{R}^{m}$, i.e. $\mbold{a}_j
+  = T \left( \mbold{e}_j \right) $, $\mbold{a}$ then becomes the matrix $A$, thus we have the form:
+\[
+  T \left( \mbold{x} \right)  = A \mbold{x}
+\]
+
+\ex{}{
+  Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be the counter-clockwise rotation by $\frac{\pi }{3}$ about the origin. Then
+  $T$ rotates the vector $\mbold{e}_1 = \left( 1, 0 \right) $ to the vector on the unit circle that makes an angle of
+  $\frac{\pi }{3}$ with the positive $x_1\text{-axis}$. That is $T \left( \mbold{e}_1 \right) = \left( \cos(\frac{\pi }{3}),
+    \sin(\frac{\pi }{3}) \right) = \left( \frac{1}{2}, \frac{\sqrt{3} }{2} \right)   $. Similarly, $T \left( \mbold{e}_2
+    \right) = \left( \cos(\frac{5\pi}{6}), \sin(\frac{5\pi}{6}) \right) = \left( -\frac{\sqrt{3} }{2}, \frac{1}{2} \right)
+  $. Hence the matrix of $T$ with respect to the standard bases is:
+  \[
+    A = \begin{bmatrix}
+      \frac{1}{2}          & \frac{\sqrt{3} }{2} \\
+      -\frac{\sqrt{3} }{2} & \frac{1}{2}
+    \end{bmatrix}
+  \]
+}
+
+\ex{}{
+  If $T : \mathbb{R}^{3} \to  \mathbb{R}^{2}$ is the projection of the $x_1x_2x_3$ space onto the $x_1x_2$-plane, then
+  $T \left( \mbold{e}_1 \right) = T \left( 1,0,0 \right) = \left( 1,0 \right)   $, $T \left( \mbold{e}_2    \right) = T
+    \left( 0,1,0 \right) = \left( 0,1 \right)  $,
+  and $T \left( \mbold{e}_3 \right) = T \left( 0,0,0 \right) = \left( 0,0 \right)   $, therefore:
+  \[
+    A = \begin{bmatrix}
+      1 & 0 & 0 \\
+      0 & 1 & 0
+    \end{bmatrix}
+  \]
+}
+
+\section{The geometry of the dot product}
+
+\dfn{Norm / Magnitude}{
+  Denoted by $\|\mbold{x}\|$ is defined as:
+  \[
+    \|\mbold{x}\| = \sqrt{x_1^2 + x_2^2 + \ldots + x_n^2}
+  \]
+}
+
+\begin{prop}[]
+  If $\mbold{x} \in \mathbb{R}^{n}$, then $\mbold{x} \cdot \mbold{x} = \|\mbold{x}\|^2$
+  \begin{proof}
+    Both sides equal $x_1^2 + x_2^2 + \ldots + x_n^2$
+  \end{proof}
+
+\end{prop}
+
+Examining these notions in $\mathbb{R}^2$, If $\mbold{x} = \left( x_1, x_2 \right) $, then $\|\mbold{x}\| = \sqrt{x_1^2
+    + x_2^2} $. By the Pythagorean theorem, this is the length of the hypotenuse of a right triangle with legs $\left| x_1
+  \right|$ and $\left| x_2 \right|$. If we think of $\mbold{x}$ as an arrow originating from the origin, then
+$\|\mbold{x}\|$ is the length of the arrow, if instead we think of $\mbold{x}$ as point $\|\mbold{x}\|$ is the
+distance from the point to the origin.
+
+Given two points $\mbold{x}$ and $\mbold{y}$ in $\mathbb{R}^{2}$, the distance between them is the length of the arrow
+that connects them $\vec{\mbold{y}\mbold{x}} = \mbold{x} - \mbold{y}$, Hence:
+\[
+  \text{dist} \left( \mbold{x}, \mbold{y} \right)  = \|\mbold{x} - \mbold{y}\|
+\]
+
+\end{document}

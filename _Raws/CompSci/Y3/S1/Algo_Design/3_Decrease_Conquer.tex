@@ -68,17 +68,17 @@ for $n-1$ instead, i.e.
 This allows the function $f \left( n \right) = a^{n} $ to be computed top down, recursively, by:
 \[
   a^{n} = \begin{cases}
-    \left( a^{\frac{n}{2}} \right) ^2         & \text{if $n$ is even and positive} \\
-    \left( a^{\frac{n-1}{2}} \right) \times a & \text{if $n$ is odd}               \\
-    1                                         & \text{if $n = 0$}
+    \left( a^{\frac{n}{2}} \right) ^2           & \text{if $n$ is even and positive} \\
+    \left( a^{\frac{n-1}{2}} \right)^2 \times a & \text{if $n$ is odd}               \\
+    1                                           & \text{if $n = 0$}
   \end{cases}
 \]
 Or bottom up, iteratively, by:
 \[
   a^{n} = \begin{cases}
-    \prod_{i = 1}^{n/2} a \times a     & \text{if $n$ is even and positive} \\
-    \prod_{i = 1}^{(n-1)/2} a \times a & \text{if $n$ is odd}               \\
-    1                                  & \text{if $n = 0$}
+    \prod_{i = 1}^{n/2} a \times a                             & \text{if $n$ is even and positive} \\
+    \left( \prod_{i = 1}^{(n-1)/2} a \times a \right) \times a & \text{if $n$ is odd}               \\
+    1                                                          & \text{if $n = 0$}
   \end{cases}
 \]
 In both cases the number of operations done each step reduces by a factor of two, making the algorithm run in $\Theta

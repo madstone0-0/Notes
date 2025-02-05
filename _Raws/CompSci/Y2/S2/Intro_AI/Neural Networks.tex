@@ -548,7 +548,7 @@ a solution.⁠ This is called the \textbf{perceptron convergence theorem}.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import} \PY{n+nn}{sys}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{sys}
 
 \PY{o}{!}\PY{o}{\PYZob{}}sys.executable\PY{o}{\PYZcb{}}\PY{+w}{ }\PYZhy{}m\PY{+w}{ }pip\PY{+w}{ }install\PY{+w}{ }pydot
 \end{Verbatim}
@@ -569,9 +569,9 @@ available: \textcolor{ansi-red}{24.2} -> \textcolor{ansi-green}{24.3.1}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{load\PYZus{}iris}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k+kn}{import} \PY{n}{Perceptron}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{numpy}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{np}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{load\PYZus{}iris}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{Perceptron}
 
 \PY{n}{iris} \PY{o}{=} \PY{n}{load\PYZus{}iris}\PY{p}{(}\PY{n}{as\PYZus{}frame}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
 \PY{n}{X} \PY{o}{=} \PY{n}{iris}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{petal length (cm)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{petal width (cm)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}
@@ -698,12 +698,12 @@ Loss function & MSE, or huber if outliers \\
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{3}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{fetch\PYZus{}california\PYZus{}housing}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network} \PY{k+kn}{import} \PY{n}{MLPRegressor}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k+kn}{import} \PY{n}{Pipeline}\PY{p}{,} \PY{n}{make\PYZus{}pipeline}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k+kn}{import} \PY{n}{StandardScaler}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{root\PYZus{}mean\PYZus{}squared\PYZus{}error}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{fetch\PYZus{}california\PYZus{}housing}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{MLPRegressor}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{Pipeline}\PY{p}{,} \PY{n}{make\PYZus{}pipeline}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{StandardScaler}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{root\PYZus{}mean\PYZus{}squared\PYZus{}error}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
 
 \PY{n}{housing} \PY{o}{=} \PY{n}{fetch\PYZus{}california\PYZus{}housing}\PY{p}{(}\PY{p}{)}
 \PY{n}{XTrainFull}\PY{p}{,} \PY{n}{XTest}\PY{p}{,} \PY{n}{yTrainFull}\PY{p}{,} \PY{n}{yTest} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}
@@ -805,9 +805,9 @@ Loss function & Cross-entropy & Cross-entropy & Cross-entropy \\
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{load\PYZus{}iris}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network} \PY{k+kn}{import} \PY{n}{MLPClassifier}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{classification\PYZus{}report}\PY{p}{,} \PY{n}{ConfusionMatrixDisplay}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{load\PYZus{}iris}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{MLPClassifier}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{classification\PYZus{}report}\PY{p}{,} \PY{n}{ConfusionMatrixDisplay}
 
 \PY{n}{iris} \PY{o}{=} \PY{n}{load\PYZus{}iris}\PY{p}{(}\PY{p}{)}
 \PY{n}{XTrainFull}\PY{p}{,} \PY{n}{XTest}\PY{p}{,} \PY{n}{yTrainFull}\PY{p}{,} \PY{n}{yTest} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}
@@ -876,7 +876,7 @@ API}\label{building-an-image-classifier-using-the-sequential-api}
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{tensorflow}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{tf}
 
 \PY{n}{fmnist} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{datasets}\PY{o}{.}\PY{n}{fashion\PYZus{}mnist}\PY{o}{.}\PY{n}{load\PYZus{}data}\PY{p}{(}\PY{p}{)}
 \PY{p}{(}\PY{n}{XTrainFull}\PY{p}{,} \PY{n}{yTrainFull}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{XTest}\PY{p}{,} \PY{n}{yTest}\PY{p}{)} \PY{o}{=} \PY{n}{fmnist}
@@ -944,7 +944,7 @@ find TensorRT
 \PY{p}{]}
 
 
-\PY{k}{def} \PY{n+nf}{name}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{name}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
     \PY{k}{return} \PY{n}{classNames}\PY{p}{[}\PY{n}{x}\PY{p}{]}
 
 
@@ -1284,11 +1284,11 @@ accuracy: 0.9115 - loss: 0.2480 - val\_accuracy: 0.8730 - val\_loss: 0.3553
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{classification\PYZus{}report}\PY{p}{,} \PY{n}{ConfusionMatrixDisplay}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{plt}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{classification\PYZus{}report}\PY{p}{,} \PY{n}{ConfusionMatrixDisplay}
 
 
-\PY{k}{def} \PY{n+nf}{classStats}\PY{p}{(}\PY{n}{actuals}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{n}{classNames}\PY{p}{)}\PY{p}{:}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{classStats}\PY{p}{(}\PY{n}{actuals}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{n}{classNames}\PY{p}{)}\PY{p}{:}
     \PY{n+nb}{print}\PY{p}{(}\PY{n}{classification\PYZus{}report}\PY{p}{(}\PY{n}{actuals}\PY{p}{,} \PY{n}{preds}\PY{p}{)}\PY{p}{)}
     \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
     \PY{n}{ConfusionMatrixDisplay}\PY{o}{.}\PY{n}{from\PYZus{}predictions}\PY{p}{(}
@@ -1353,7 +1353,7 @@ plot the learning curves.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{pandas}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{pd}
 
 \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{hist}\PY{o}{.}\PY{n}{history}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}
     \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}
@@ -1715,8 +1715,8 @@ distorted by this sequence of transformations.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{functools} \PY{k+kn}{import} \PY{n}{partial}
-\PY{k+kn}{from} \PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k+kn}{import} \PY{n}{Normalization}\PY{p}{,} \PY{n}{Dense}\PY{p}{,} \PY{n}{Concatenate}\PY{p}{,} \PY{n}{Input}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{functools}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{partial}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{tensorflow}\PY{n+nn}{.}\PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{Normalization}\PY{p}{,} \PY{n}{Dense}\PY{p}{,} \PY{n}{Concatenate}\PY{p}{,} \PY{n}{Input}
 
 \PY{n}{hidLay} \PY{o}{=} \PY{n}{partial}\PY{p}{(}\PY{n}{Dense}\PY{p}{,} \PY{n}{units}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 
@@ -2452,8 +2452,8 @@ created using the \texttt{Functional} API.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k}{class} \PY{n+nc}{WideAndDeepModel}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{Model}\PY{p}{)}\PY{p}{:}
-    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{units}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+\PY{k}{class}\PY{+w}{ }\PY{n+nc}{WideAndDeepModel}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{Model}\PY{p}{)}\PY{p}{:}
+    \PY{k}{def}\PY{+w}{ }\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{units}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
         \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{normLayerWide} \PY{o}{=} \PY{n}{Normalization}\PY{p}{(}\PY{p}{)}
         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{normLayerDeep} \PY{o}{=} \PY{n}{Normalization}\PY{p}{(}\PY{p}{)}
@@ -2462,7 +2462,7 @@ created using the \texttt{Functional} API.
         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{mainOut} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{auxOut} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
 
-    \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{)}\PY{p}{:}
+    \PY{k}{def}\PY{+w}{ }\PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{)}\PY{p}{:}
         \PY{n}{inputWide}\PY{p}{,} \PY{n}{inputDeep} \PY{o}{=} \PY{n}{inputs}
         \PY{n}{normWide} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{normLayerWide}\PY{p}{(}\PY{n}{inputWide}\PY{p}{)}
         \PY{n}{normDeep} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{normLayerDeep}\PY{p}{(}\PY{n}{inputDeep}\PY{p}{)}
@@ -2733,7 +2733,7 @@ weights and optimizer's parameters by calling the
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{pathlib} \PY{k+kn}{import} \PY{n}{Path}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{pathlib}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{Path}
 
 \PY{n}{modelPath} \PY{o}{=} \PY{n}{Path}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./models}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \PY{n}{modelPath}\PY{o}{.}\PY{n}{mkdir}\PY{p}{(}\PY{n}{exist\PYZus{}ok}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
@@ -3219,8 +3219,8 @@ detect overfitting
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k}{class} \PY{n+nc}{PrintValTrainRatioCallback}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{callbacks}\PY{o}{.}\PY{n}{Callback}\PY{p}{)}\PY{p}{:}
-    \PY{k}{def} \PY{n+nf}{on\PYZus{}epoch\PYZus{}end}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{epoch}\PY{p}{,} \PY{n}{logs}\PY{p}{)}\PY{p}{:}
+\PY{k}{class}\PY{+w}{ }\PY{n+nc}{PrintValTrainRatioCallback}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{callbacks}\PY{o}{.}\PY{n}{Callback}\PY{p}{)}\PY{p}{:}
+    \PY{k}{def}\PY{+w}{ }\PY{n+nf}{on\PYZus{}epoch\PYZus{}end}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{epoch}\PY{p}{,} \PY{n}{logs}\PY{p}{)}\PY{p}{:}
         \PY{n}{ratio} \PY{o}{=} \PY{n}{logs}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{val\PYZus{}loss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{/} \PY{n}{logs}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Epoch=}\PY{l+s+si}{\PYZob{}}\PY{n}{epoch}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{, ratio=}\PY{l+s+si}{\PYZob{}}\PY{n}{ratio}\PY{l+s+si}{:}\PY{l+s+s2}{.2f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}
@@ -3334,10 +3334,10 @@ TensorBoard reads these files and displays the data.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{time} \PY{k+kn}{import} \PY{n}{strftime}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{time}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{strftime}
 
 
-\PY{k}{def} \PY{n+nf}{get\PYZus{}run\PYZus{}logdir}\PY{p}{(}\PY{n}{root\PYZus{}logdir}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{logs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{get\PYZus{}run\PYZus{}logdir}\PY{p}{(}\PY{n}{root\PYZus{}logdir}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{logs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
     \PY{k}{return} \PY{n}{Path}\PY{p}{(}\PY{n}{root\PYZus{}logdir}\PY{p}{)} \PY{o}{/} \PY{n}{strftime}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{run\PYZus{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{Y\PYZus{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{m\PYZus{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZhy{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{H\PYZus{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{M\PYZus{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{S}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 
 
@@ -3539,7 +3539,7 @@ is to use the \textbf{Keras Tuner} library.
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PY{o}{!}\PY{o}{\PYZob{}}sys.executable\PY{o}{\PYZcb{}}\PY{+w}{ }\PYZhy{}m\PY{+w}{ }pip\PY{+w}{ }install\PY{+w}{ }keras\PYZhy{}tuner
-\PY{k+kn}{import} \PY{n+nn}{keras\PYZus{}tuner} \PY{k}{as} \PY{n+nn}{kt}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{keras\PYZus{}tuner}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{kt}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -3614,7 +3614,7 @@ Successfully installed keras-tuner-1.4.7 kt-legacy-1.0.5
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k}{def} \PY{n+nf}{buildModel}\PY{p}{(}\PY{n}{hp}\PY{p}{)}\PY{p}{:}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{buildModel}\PY{p}{(}\PY{n}{hp}\PY{p}{)}\PY{p}{:}
     \PY{n}{nHidden} \PY{o}{=} \PY{n}{hp}\PY{o}{.}\PY{n}{Int}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}hidden}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{min\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
     \PY{n}{nNeurons} \PY{o}{=} \PY{n}{hp}\PY{o}{.}\PY{n}{Int}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}neurons}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{min\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{16}\PY{p}{,} \PY{n}{max\PYZus{}value}\PY{o}{=}\PY{l+m+mi}{256}\PY{p}{)}
     \PY{n}{learningRate} \PY{o}{=} \PY{n}{hp}\PY{o}{.}\PY{n}{Float}\PY{p}{(}
@@ -3793,7 +3793,7 @@ With
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{load\PYZus{}sample\PYZus{}images}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{load\PYZus{}sample\PYZus{}images}
 
 \PY{n}{images} \PY{o}{=} \PY{n}{load\PYZus{}sample\PYZus{}images}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{images}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
 \PY{n}{images} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{CenterCrop}\PY{p}{(}\PY{n}{height}\PY{o}{=}\PY{l+m+mi}{70}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mi}{120}\PY{p}{)}\PY{p}{(}\PY{n}{images}\PY{p}{)}
@@ -3954,12 +3954,12 @@ features, such as rotation and scaling.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k}{class} \PY{n+nc}{DepthPool}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Layer}\PY{p}{)}\PY{p}{:}
-    \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
+\PY{k}{class}\PY{+w}{ }\PY{n+nc}{DepthPool}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Layer}\PY{p}{)}\PY{p}{:}
+    \PY{k}{def}\PY{+w}{ }\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{pool\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
         \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool\PYZus{}size} \PY{o}{=} \PY{n}{pool\PYZus{}size}
 
-    \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{)}\PY{p}{:}
+    \PY{k}{def}\PY{+w}{ }\PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{)}\PY{p}{:}
         \PY{n}{shape} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}
         \PY{n}{groups} \PY{o}{=} \PY{n}{shape}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/}\PY{o}{/} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool\PYZus{}size}
         \PY{n}{newShape} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{shape}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{groups}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool\PYZus{}size}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
@@ -4014,7 +4014,7 @@ probabilities.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{ }{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{functools} \PY{k+kn}{import} \PY{n}{partial}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{functools}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{partial}
 
 \PY{n}{conv2DLayer} \PY{o}{=} \PY{n}{partial}\PY{p}{(}
     \PY{n}{tf}\PY{o}{.}\PY{n}{keras}\PY{o}{.}\PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{,}

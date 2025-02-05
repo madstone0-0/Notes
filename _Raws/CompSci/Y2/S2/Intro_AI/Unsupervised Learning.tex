@@ -408,9 +408,9 @@
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{1}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-\PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
-\PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{numpy}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{np}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{pandas}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{pd}
+\PY{k+kn}{import}\PY{+w}{ }\PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot}\PY{+w}{ }\PY{k}{as}\PY{+w}{ }\PY{n+nn}{plt}
 \end{Verbatim}
 \end{tcolorbox}
 
@@ -442,10 +442,10 @@ roll.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{2}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{make\PYZus{}swiss\PYZus{}roll}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{make\PYZus{}swiss\PYZus{}roll}
 
 
-\PY{k}{def} \PY{n+nf}{set\PYZus{}xyz\PYZus{}axes}\PY{p}{(}\PY{n}{ax}\PY{p}{,} \PY{n}{axes}\PY{p}{)}\PY{p}{:}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{set\PYZus{}xyz\PYZus{}axes}\PY{p}{(}\PY{n}{ax}\PY{p}{,} \PY{n}{axes}\PY{p}{)}\PY{p}{:}
     \PY{n}{ax}\PY{o}{.}\PY{n}{xaxis}\PY{o}{.}\PY{n}{set\PYZus{}rotate\PYZus{}label}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
     \PY{n}{ax}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{set\PYZus{}rotate\PYZus{}label}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
     \PY{n}{ax}\PY{o}{.}\PY{n}{zaxis}\PY{o}{.}\PY{n}{set\PYZus{}rotate\PYZus{}label}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
@@ -627,7 +627,7 @@ array([[ 4.45646186, -8.53342194],
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{7}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k+kn}{import} \PY{n}{PCA}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{PCA}
 
 \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
 \PY{n}{X2D} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{swiss}\PY{p}{)}
@@ -711,7 +711,7 @@ reduce the dimensionality down to 2 or 3.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{11}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{fetch\PYZus{}openml}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{fetch\PYZus{}openml}
 
 \PY{n}{mnist} \PY{o}{=} \PY{n}{fetch\PYZus{}openml}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mnist\PYZus{}784}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{as\PYZus{}frame}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{data\PYZus{}home}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../datasets}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cache}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
 \end{Verbatim}
@@ -767,9 +767,9 @@ like any other hyperparamter, as shown in the code below
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{16}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k+kn}{import} \PY{n}{RandomForestClassifier}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k+kn}{import} \PY{n}{RandomizedSearchCV}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline} \PY{k+kn}{import} \PY{n}{make\PYZus{}pipeline}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{RandomForestClassifier}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{RandomizedSearchCV}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{pipeline}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{make\PYZus{}pipeline}
 
 \PY{n}{randSkogPipe} \PY{o}{=} \PY{n}{make\PYZus{}pipeline}\PY{p}{(}
     \PY{n}{PCA}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}\PY{p}{,} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
@@ -881,7 +881,7 @@ smaller than \(n\).
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{19}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{root\PYZus{}mean\PYZus{}squared\PYZus{}error}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{root\PYZus{}mean\PYZus{}squared\PYZus{}error}
 
 \PY{n}{rndPCA} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{154}\PY{p}{,} \PY{n}{svd\PYZus{}solver}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{randomized}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
 \PY{n}{XRedRand} \PY{o}{=} \PY{n}{rndPCA}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{XTrain}\PY{p}{)}
@@ -914,7 +914,7 @@ online.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{20}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k+kn}{import} \PY{n}{IncrementalPCA}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{IncrementalPCA}
 
 \PY{n}{n\PYZus{}batches} \PY{o}{=} \PY{l+m+mi}{100}
 \PY{n}{incPCA} \PY{o}{=} \PY{n}{IncrementalPCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{154}\PY{p}{)}
@@ -939,8 +939,8 @@ characteristics / groups of similar instances.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{21}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k+kn}{import} \PY{n}{KMeans}
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets} \PY{k+kn}{import} \PY{n}{make\PYZus{}blobs}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{KMeans}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{make\PYZus{}blobs}
 
 \PY{n}{blob\PYZus{}centers} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}
     \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{2.3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mf}{2.3}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{2.8}\PY{p}{,} \PY{l+m+mf}{1.8}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{2.8}\PY{p}{,} \PY{l+m+mf}{2.8}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{2.8}\PY{p}{,} \PY{l+m+mf}{1.3}\PY{p}{]}\PY{p}{]}
@@ -1021,11 +1021,11 @@ array([4, 4, 3, 3], dtype=int32)
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{25}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k}{def} \PY{n+nf}{plotData}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{plotData}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
     \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{k.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
 
 
-\PY{k}{def} \PY{n+nf}{plotCentroids}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{circle\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cross\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{plotCentroids}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{circle\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{cross\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{k}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
     \PY{k}{if} \PY{n}{weights} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
         \PY{n}{centroids} \PY{o}{=} \PY{n}{centroids}\PY{p}{[}\PY{n}{weights} \PY{o}{\PYZgt{}} \PY{n}{weights}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{10}\PY{p}{]}
     \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}
@@ -1050,7 +1050,7 @@ array([4, 4, 3, 3], dtype=int32)
     \PY{p}{)}
 
 
-\PY{k}{def} \PY{n+nf}{plotDecBounds}\PY{p}{(}
+\PY{k}{def}\PY{+w}{ }\PY{n+nf}{plotDecBounds}\PY{p}{(}
     \PY{n}{clusterer}\PY{p}{,}
     \PY{n}{X}\PY{p}{,}
     \PY{n}{resolution}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,}
@@ -1192,7 +1192,7 @@ increase in speed comes with the drawback of slightly increased inertia.
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{31}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k+kn}{import} \PY{n}{MiniBatchKMeans}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{MiniBatchKMeans}
 
 \PY{n}{miniKM} \PY{o}{=} \PY{n}{MiniBatchKMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{k}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
 \PY{n}{miniKM}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
@@ -1278,7 +1278,7 @@ have been assigned to the wrong cluster
     \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
 \prompt{In}{incolor}{34}{\boxspacing}
 \begin{Verbatim}[commandchars=\\\{\}]
-\PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k+kn}{import} \PY{n}{silhouette\PYZus{}score}
+\PY{k+kn}{from}\PY{+w}{ }\PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics}\PY{+w}{ }\PY{k+kn}{import} \PY{n}{silhouette\PYZus{}score}
 
 \PY{n}{silhouette\PYZus{}score}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{km}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{)}
 \end{Verbatim}

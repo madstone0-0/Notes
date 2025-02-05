@@ -178,7 +178,8 @@ We can call $\text{Span}\{\mbold{v}_1, \ldots, \mbold{v}_p\} $ \textbf{the subsp
 
 \ex{}{
   \qs{}{
-    For what value(s) of $h$ will $\mbold{y}$ be in the subspace of $\mathbb{R}^3$ spanned by $\mbold{v}_1, \mbold{v}_2, pmbold{v}_3$, if
+    For what value(s) of $h$ will $\mbold{y}$ be in the subspace of $\mathbb{R}^3$ spanned by $\mbold{v}_1, \mbold{v}_2,
+      \mbold{v}_3$, if
     \[
       \mbold{v}_1 = \begin{bmatrix} 1 \\ -1\\ 2 \end{bmatrix},\, \mbold{v}_2 = \begin{bmatrix} 5 \\ -4 \\ -7
       \end{bmatrix},\, \mbold{v}_3 = \begin{bmatrix} -3 \\ 1 \\ 0 \end{bmatrix},\,  \text{ and } \mbold{y} = \begin{bmatrix} -4\\ 3 \\ h \end{bmatrix}
@@ -351,6 +352,81 @@ We can call $\text{Span}\{\mbold{v}_1, \ldots, \mbold{v}_p\} $ \textbf{the subsp
                   \end{align*}
 
           \end{description}
+    \item No this is not a subspace of $\mathbb{P}_n$ as:
+          \begin{description}
+            \item[Does not contain the zero vector] There is no value of $a$ for which $a + t^2 = 0$
+          \end{description}
+    \item Yes this is a subspace of $\mathbb{P}_n$ as:
+          \begin{description}
+            \item[Contains the zero vector]  When $a = 0$:
+                  \begin{align*}
+                    \mbold{p} \left( t \right) & = 0 t^{1} \\
+                                               & = 0       \\
+                    \\
+                    \mbold{p} \left( t \right) & = 0 t^{2} \\
+                                               & = 0       \\
+                    \\
+                    \mbold{p} \left( t \right) & = 0 t^{3} \\
+                                               & = 0       \\
+                  \end{align*}
+            \item[Closed under vector addition] Let $\mbold{w}$ and $\mbold{q}$ be vectors of the appropriate form in
+                  each case:
+                  \begin{align*}
+                    \mbold{w} + \mbold{q} & = wt^{1} + qt ^{1}           \\
+                                          & = \left( w + q \right)t ^{1} \\
+                                          & \text{Let $w + q = a$}       \\
+                                          & = a t ^{1}                   \\
+                    \\
+                    \mbold{w} + \mbold{q} & = wt^{2} + qt ^{2}           \\
+                                          & = \left( w + q \right)t ^{2} \\
+                                          & \text{Let $w + q = a$}       \\
+                                          & = a t ^{2}                   \\
+                    \\
+                    \mbold{w} + \mbold{q} & = wt^{3} + qt ^{3}           \\
+                                          & = \left( w + q \right)t ^{3} \\
+                                          & \text{Let $w + q = a$}       \\
+                                          & = a t ^{3}                   \\
+                  \end{align*}
+            \item[Closed under scalar multiplication] Again let $\mbold{w}$ and be a vector of the
+                  appropriate form in each case:
+                  \begin{align*}
+                    c \mbold{w} & = c \left( w t^{1} \right)  \\
+                                & = \left( c w \right) t ^{1} \\
+                                & \text{Let $cw = a$}         \\
+                                & =  at ^{1}                  \\
+                    \\
+                    c \mbold{w} & = c \left( w t^{2} \right)  \\
+                                & = \left( c w \right) t ^{2} \\
+                                & \text{Let $cw = a$}         \\
+                                & =  at ^{2}                  \\
+                    \\
+                    c \mbold{w} & = c \left( w t^{3} \right)  \\
+                                & = \left( c w \right) t ^{3} \\
+                                & \text{Let $cw = a$}         \\
+                                & =  at ^{3}                  \\
+                    \\
+                  \end{align*}
+
+          \end{description}
+    \item Yes this is not a subspace of $\mathbb{P}_n$ as:
+          \begin{description}
+            \item[Contains the zero vector] $\forall a \in \mathbb{R}$:
+                  \begin{align*}
+                    \mbold{p} \left( 0 \right) & = a\times 0 \\
+                                               & = 0         \\
+                  \end{align*}
+            \item[Closed under vector addition] Let $\mbold{w}$ and $\mbold{q}$ be vectors of the appropriate form
+                  \begin{align*}
+                    \mbold{w} + \mbold{q} & = w\times 0 + t \times 0 \\
+                                          & = 0                      \\
+                  \end{align*}
+            \item[Closed under scalar multiplication] Let $\mbold{w}$ be a vector of appropriate form
+                  \begin{align*}
+                    c \mbold{w} & = c \left( w\times 0 \right) \\
+                                & = 0                          \\
+                  \end{align*}
+          \end{description}
+
   \end{enumerate}
 }
 
@@ -506,6 +582,65 @@ follows from the definition of $\text{Col }A$ and the fact that the columns of $
   The column space of an $m\times n$ matrix $A$ is all of $\mathbb{R}^{m}$ if and only if the equation $A\mbold{x} =
     \mbold{b}$ has a solution for each $\mbold{b}$ in $\mathbb{R}^{m}$
 }
+
+\section{The Contrast between Nul $A$ and Col $A$ }
+
+\ex{}{
+  \qs{}{
+    Let
+    \[
+      A = \begin{bmatrix}
+        2  & 4  & -2 & 1 \\
+        -2 & -5 & 7  & 3 \\
+        3  & 7  & -8 & 6
+      \end{bmatrix}
+    \]
+    \begin{enumerate}
+      \item If the column space of $A$ is a subspace of $\mathbb{R}^{k}$, what is $k$?
+      \item If the null space of $A$ is a subspace of $\mathbb{R}^{k}$, what is $k$?
+    \end{enumerate}
+  }
+
+  \sol{
+    \begin{enumerate}
+      \item The columns if $A$ each have three entries so $\text{Col } A$ is a subspace of $\mathbb{R}^{k}$, where $k =
+              3$
+      \item A vector $\mbold{x}$ such that $A\mbold{x}$ is defined must have four entries, so $\text{Nul } A$ is a
+            subspace of $\mathbb{R}^k$ where $k = 4$
+    \end{enumerate}
+  }
+}
+
+When a matrix is not square as with the example above the vectors in  $\text{Col } A$ and $\text{Nul } A $ live in
+different "universes", for example no linear combination of vectors in $\mathbb{R}^{3}$ can produce a vector in
+$\mathbb{R}^{4}$. When $A$ is square $\text{Nul } A$ and $\text{Col } A$ have the zero vector in common, and in special
+cases can also have some nonzero vectors in common.
+
+\ex{}{
+  \qs{}{
+    With the same $A$ find a nonzero vector $\text{Col }A$ and a nonzero vector in $\text{Nul }A$
+  }
+
+  \sol{
+
+    $\text{Col } A = \begin{bmatrix} 2 \\ -2 \\ 3 \end{bmatrix} $ \\
+
+    $\text{Nul }A$
+    \begin{align*}
+      A\mbold{x}                        & = \mbold{0}              \\
+      \left[ A  \mid  \mbold{0} \right] & \sim  \begin{bmatrix}
+                                                  1 & 0 & 9  & 0 & 0 \\
+                                                  0 & 1 & -5 & 0 & 0 \\
+                                                  0 & 0 & 0  & 1 & 0
+                                                \end{bmatrix} \\
+    \end{align*}
+    Thus, if $\mbold{x}$ satisfies $A\mbold{x} = \mbold{0}$, then $x_1 = -9x_3$, $x_2 = 5x_3$, $x_4 = 0$, and $x_3$ is
+    free. Assigning a nonzero value to $x_3$, like $1$, we obtain a vector in $\text{Nul }A$, $\mbold{x} = \left( -9, 5,
+      1, 0\right) $
+  }
+}
+
+\section{Kernel and Range of a Linear Transformation}
 
 
 \end{document}

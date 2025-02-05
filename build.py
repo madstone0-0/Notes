@@ -288,20 +288,22 @@ if __name__ == "__main__":
                 "CompSci/Research",
                 "CompSci/SWE",
                 "CompSci/Simulation",
+                "Homework/COA",
             ],
         },
         "Personal": [
             "CompSci/Personal/Intro_To_Machine_Learning",
             "CompSci/Personal/Algorithms",
-            "Calc/Personal",
+            "Calc/Personal/Calc_I_II",
+            "Calc/Personal/Calc_I_III",
         ],
     }
 
     dirs = [
         *yearDict["Y3"]["S2"],
-        # *yearDict["Y3"]["S1"],
-        # *yearDict["Y2"]["S1"],
-        # *yearDict["Y2"]["S2"],
+        *yearDict["Y3"]["S1"],
+        *yearDict["Y2"]["S1"],
+        *yearDict["Y2"]["S2"],
         # *yearDict["Y1"]["S2"],
         *yearDict["Personal"],
     ]

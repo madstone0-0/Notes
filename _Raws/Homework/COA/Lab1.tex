@@ -1,0 +1,211 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{karnaugh-map}
+\title{\Huge{Lab 1}}
+\author{\huge{Madiba Hudson-Quansah}}
+\graphicspath{ {assets/} }
+\date{}
+
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+  \begin{enumerate}
+    \item Complete the truth table for R and C as a function of $Q_1$, $Q_2$, $Q_3$, and $X$
+    \item Complete the state table based on the state transition diagram as above.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+  \item
+  \begin{table}[h!]
+    \begin{center}
+      \begin{tabular}{|c c c c |c|c|c|c|}
+        \hline
+        $Q_1$ & $Q_2$ & $Q_3$ & $X$ & Total Amount & Temp & $R$ & $C$ \\ [0.5ex]
+        \hline
+        \hline
+        0     & 0     & 0     & 0   & \$0.00       & 00   & 0   & 0   \\
+        0     & 0     & 0     & 1   & \$0.00       & 00   & 0   & 0   \\
+        0     & 0     & 1     & 0   & \$0.25       & 01   & 0   & 0   \\
+        0     & 0     & 1     & 1   & \$0.25       & 01   & 0   & 0   \\
+        0     & 1     & 0     & 0   & \$0.25       & 01   & 0   & 0   \\
+        0     & 1     & 0     & 1   & \$0.25       & 01   & 0   & 0   \\
+        0     & 1     & 1     & 0   & \$0.50       & 10   & 0   & 0   \\
+        0     & 1     & 1     & 1   & \$0.50       & 10   & 1   & 0   \\
+        1     & 0     & 0     & 0   & \$0.25       & 01   & 0   & 0   \\
+        1     & 0     & 0     & 1   & \$0.25       & 01   & 0   & 0   \\
+        1     & 0     & 1     & 0   & \$0.50       & 10   & 0   & 0   \\
+        1     & 0     & 1     & 1   & \$0.50       & 10   & 1   & 0   \\
+        1     & 1     & 0     & 0   & \$0.50       & 10   & 0   & 0   \\
+        1     & 1     & 0     & 1   & \$0.50       & 10   & 1   & 0   \\
+        1     & 1     & 1     & 0   & \$0.75       & 11   & 1   & 1   \\
+        1     & 1     & 1     & 1   & \$0.75       & 11   & 1   & 0   \\
+
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+  \item
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c c c c c|c c c|}
+        \hline
+        Present State & $Q_1$ & $Q_2$ & $Q_3$ & $X$ & Next State & $R$ & $C$ \\ [0.5ex]
+        \hline
+        \hline
+        S0            & 0     & 0     & 0     & 0   & S0         & 0   & 0   \\
+        S0            & 0     & 0     & 1     & 0   & S1         & 0   & 0   \\
+        S0            & 0     & 1     & 0     & 0   & S1         & 0   & 0   \\
+        S0            & 1     & 0     & 0     & 0   & S1         & 0   & 0   \\
+        S0            & 0     & 0     & 1     & 1   & S1         & 0   & 0   \\
+        S0            & 0     & 1     & 0     & 1   & S1         & 0   & 0   \\
+        S0            & 1     & 0     & 0     & 1   & S1         & 0   & 0   \\
+        S1            & 0     & 0     & 1     & 0   & S2         & 0   & 0   \\
+        S1            & 0     & 1     & 0     & 0   & S2         & 0   & 0   \\
+        S1            & 1     & 0     & 0     & 0   & S2         & 0   & 0   \\
+        S1            & 0     & 0     & 1     & 1   & S2         & 1   & 0   \\
+        S1            & 0     & 1     & 0     & 1   & S2         & 1   & 0   \\
+        S1            & 1     & 0     & 0     & 1   & S2         & 1   & 0   \\
+        S2            & 0     & 0     & 1     & 0   & S3         & 1   & 0   \\
+        S2            & 0     & 1     & 0     & 0   & S3         & 1   & 0   \\
+        S2            & 1     & 0     & 0     & 0   & S3         & 1   & 0   \\
+        S2            & 0     & 0     & 1     & 1   & S3         & 1   & 1   \\
+        S2            & 0     & 1     & 0     & 1   & S3         & 1   & 1   \\
+        S2            & 1     & 0     & 0     & 1   & S3         & 1   & 1   \\
+        S3            & 1     & 0     & 0     & 0   & S3         & 1   & 0   \\
+        S3            & 0     & 0     & 1     & 1   & S3         & 1   & 1   \\
+        S3            & 0     & 1     & 0     & 1   & S3         & 1   & 1   \\
+        S3            & 1     & 0     & 0     & 1   & S3         & 1   & 1   \\
+
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+  \item
+  \begin{figure}[H]
+  \centering
+  \begin{karnaugh-map}[4][4][1][ $Q_3$ $X$ ][ $Q_1$ $Q_2$ ]
+  \minterms{6, 7, 10, 11, 12, 13, 14, 15}
+  \maxterms{0,1,2,3,4,5,8,9}
+  \implicant{7}{14}
+  \implicant{15}{10}
+  \implicant{12}{14}
+  \end{karnaugh-map}
+  \caption{ $D_1$}
+  \end{figure}
+  \[
+    D_1 = Q_1Q_2 + Q_2Q_3 + Q_1Q_3
+  \]
+
+  \begin{figure}[H]
+  \centering
+  \begin{karnaugh-map}[4][4][1][$Q_3X$][$Q_1Q_2$]
+  \minterms{2, 3, 4, 5, 8, 9, 14, 15}
+  \maxterms{0,1,6,7,10,11,12,13}
+  \implicant{3}{2}
+  \implicant{4}{5}
+  \implicant{15}{14}
+  \implicant{8}{9}
+  \end{karnaugh-map}
+  \caption{ $D_0$}
+  \end{figure}
+
+  \begin{align*}
+    D_0 & = \overline{Q_1}\overline{Q_2} Q_3 + \overline{Q_1} Q_2 \overline{Q_3} + Q_1Q_2Q_3 +
+    Q_1\overline{Q_2}\overline{Q_3}                                                            \\
+        & = Q_1 \oplus Q_2 \oplus Q_3                                                          \\
+  \end{align*}
+
+
+  \end{enumerate}
+}
+
+\qs{}{
+  Xilinx Vivado
+}
+
+\sol{
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{pic2.png}
+    \caption{Test Bench}
+  \end{figure}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{pic1.png}
+    \caption{Test Bench Behavioural simulation}
+  \end{figure}
+}
+
+\qs{}{
+  What assumptions did you make while designing the vending machine coin counter? Were these assumptions realistic and clearly justified?
+}
+
+\sol{
+  \begin{itemize}
+    \item Coin Slots are independent - Each slot is independent of the other and the machine does not check which
+          specific slot the quarters were placed in only the total amount. This is a realistic assumption as this reflects
+          how real vending machines work.
+    \item Change is limited to 1 quarter - The machine only returns 1 quarter as change. This is an assumption to keep
+          the design simple and easy to implement.
+    \item Slots only accept valid quarters - Only valid U.S. quarters are accepted by the machine. This is a realistic
+          assumption as the machine is designed to accept only quarters.
+  \end{itemize}
+}
+
+\qs{}{
+  How did you decide the outputs for R (release soda) and C (return change)? Could there be alternative conditions or approaches to achieve the same functionality?
+}
+
+\sol{
+  The outputs for $R$ and $C$ were decided based on the total amount of money given to the machine and the soda chosen
+  by the user. The machine releases a soda if the total amount is greater than or equal to the cost of the soda. An
+  alternative implementation could be to have the machine release a soda if the total amount is greater than the cost of
+  the soda by a certain amount. This would allow the machine to release a soda even if the user gives more money than
+  required for the soda.
+}
+
+\qs{}{
+  While creating the state table, how did you ensure all possible transitions were accounted for? Were there any ambiguous or conflicting states that required special handling?
+}
+
+\sol{
+  I ensured all possible transitions were accounted for by creating a state transition diagram and then creating a state
+  table based on the diagram. I made sure to include all possible states and transitions in the state table. There were no
+  ambiguous or conflicting states that required special handling.
+}
+
+\qs{}{
+  What were the key challenges you faced during the installation of Xilinx Vivado? Were there any system requirements or errors you needed to address?
+}
+
+\sol{
+  I faced no challenges during the installation of Xilinx Vivado.
+}
+
+\qs{}{
+  How would you explain the importance of hardware description languages (like VHDL) in modern digital design to someone unfamiliar with the field?
+}
+
+\sol{
+  Hardware description languages serve as a way to describe the behaviour of digital circuits in a way that is easily
+  understood by both humans and computers. They allow designers to create complex digital circuits without having to
+  worry about the low-level details of the hardware. This makes it easier to design, test, and debug digital circuits
+  and allows for faster development times.
+}
+
+
+
+\end{document}

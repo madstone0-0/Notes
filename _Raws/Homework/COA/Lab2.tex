@@ -1,0 +1,163 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{graphicx}
+\usepackage{parskip}
+\title{\Huge{Lab 2}}
+\author{\huge{Madiba Hudson-Quansah}}
+\graphicspath{ {assets/} }
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{adder.png}
+  \caption{Full Adder}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{halfadder.png}
+  \caption{Half Adder}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{decoder.png}
+  \caption{Decoder 2x4}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mux41.png}
+  \caption{Multiplexer 4x1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{safetylock.png}
+  \caption{Safety Lock}
+\end{figure}
+
+\qs{Understanding FPGA Architecture}{
+  \begin{enumerate}
+    \item How does the programmability of FPGA interconnections contribute to its flexibility in implementing designs such as a 4x1 multiplexer or a 2x4 decoder?
+    \item  Reflect on how you would use FPGA’s programmable logic blocks (PLBs) to create a modular design for a 4x1 multiplexer.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item The programmability of FPGA interconnections allows designers to use general purpose logic blocks to implement
+          custom logic functions. This flexibility enables the implementation of complex designs like a 4x1 multiplexer or a 2x4 decoder by configuring the interconnections between logic blocks to realize the desired functionality. By programming the interconnections, designers can create custom logic circuits that are tailored to the specific requirements of the design, making FPGA an ideal platform for implementing digital systems with varying levels of complexity.
+    \item To increase the modularity of my 4x1 multiplexer design, I would take advantage of FPGA's ability to
+          create reusable components to break down the design into smaller, more manageable units.
+  \end{enumerate}
+}
+
+\qs{Design and Simulation in HDL}{
+  \begin{enumerate}
+    \item Why is simulation an essential step when designing components like adders, decoders, or multiplexers in VHDL?
+    \item How does the testbench simulation process help in validating the behavior of a 2x4 decoder or an
+          adder?
+  \end{enumerate}
+
+}
+
+\sol{
+  \begin{enumerate}
+    \item Simulation is an essential step in designing components because it allows designers to verify the correctness of
+          their VHDL code before committing to the hardware implementation on an FPGA. By simulating the behaviour of the design, designers can identify and fix errors in the code, test different input scenarios, and ensure that the design meets the specified requirements. This process helps to reduce the risk of errors in the final implementation and ensures that the design functions as intended.
+    \item The testbench simulation process helps to validate all possible input and output combinations of the 2x4
+          decoder especially as it is a combinational circuit. By simulating the decoder with different input values, designers can verify that the output matches the expected behaviour for all possible input combinations. Similarly, for an adder, the testbench simulation process helps to validate the correctness of the addition operation by testing the adder with different input values and verifying that the output is correct for each test case.
+  \end{enumerate}
+}
+
+\qs{Practical Design Using VHDL}{
+  \begin{enumerate}
+    \item What are the key differences in implementing a 4x1 multiplexer versus a 2x4 decoder using VHDL, and how do these differences affect the overall architecture of your design?
+    \item When designing an adder in VHDL, how would you ensure scalability for larger bit-widths? Reflect on the importance of abstraction in this context.
+  \end{enumerate}
+
+}
+
+\sol{
+  \begin{enumerate}
+    \item The main differences between the implementation of a 4x1 multiplexer and a 2x4 decoder using VHDL is in the
+          number of inputs and outputs, as well as the logic required to arrive at an output. For a 4x1 multiplexer, the
+          design requires four inputs and one output, with the output being selected based on the value of the select input,
+          while the 2x4 decoder has two inputs and four outputs, with each output being activated based on the value of the
+          inputs.
+    \item For scaling up to larger bit-widths I could use multiple instances of a single-bit adder component to create a
+          multi-bit adder. By abstracting the single-bit adder into a separate component, I can reuse the same component
+          multiple times to create a multi-bit adder with the desired bit-width. This approach helps to simplify the design
+          process and improve code reusability by separating the implementation details of the adder from the rest of the
+          design.
+  \end{enumerate}
+}
+
+\qs{Optimization and FPGA Utilization}{
+  \begin{enumerate}
+    \item While implementing a 4x1 multiplexer or an adder in an FPGA, how would you optimize resource usage to fit into the limited number of programmable logic blocks?
+    \item How would understanding the specific features of VHDL, such as portability and abstraction, help in creating efficient designs for these components?
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item To optimize resource usage, I would use the available logic blocks efficiently by minimizing the number of
+          logic gates and interconnections required to implement the design. This could involve simplifying the logic
+          expressions, reusing common subcomponents, and minimizing the number of levels of logic to reduce the overall
+          resource utilization. By optimizing the design, I can ensure that the 4x1 multiplexer or adder fits within the
+          available programmable logic blocks of the FPGA without exceeding the resource constraints.
+    \item A better understanding of the features of VHDL could allow for more modular designs to ensure better efficiency
+          and upgradability.
+  \end{enumerate}
+}
+
+\qs{Hierarchy and Modularity in VHDL Design}{
+  \begin{enumerate}
+    \item Reflect on the role of entity and architecture in organizing your VHDL code for a 2x4 decoder. How does separating these units improve the design and debugging process?
+    \item When designing a 4-bit adder, how can modular design practices in VHDL help you reuse components across different projects?
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item Entity describes the inputs and outputs of the component while the architecture describes the actual
+          implementation of the logic of the component.
+    \item Design a 4-bit using modular design principles can be done reusing a single bit adder modularly.
+  \end{enumerate}
+}
+
+\qs{Real-World Applications of FPGA Designs}{
+  \begin{enumerate}
+    \item How can designs like a 4x1 multiplexer, a 2x4 decoder, or an adder be applied in real-world FPGA applications, such as data routing or arithmetic operations in digital systems?
+    \item Reflect on how the flexibility of FPGA and the features of VHDL make it possible to rapidly prototype and test these designs in real-world scenarios.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item A 4x1 multiplexer can be used in data routing applications to select between multiple input signals and route
+          them to a single output based on a control signal. A 2x4 decoder can be used to decode binary input signals into
+          multiple output signals, which can be used to control different components in a digital system. An adder can be
+          used to perform arithmetic operations such as addition, subtraction, and multiplication in digital systems.
+    \item The flexibility of FPGA and the features of VHDL make it possible to rapidly prototype and test these designs
+          in real-world scenarios by allowing designers to quickly implement and verify the functionality of the designs on
+          the FPGA hardware. By using VHDL to describe the behaviour of the designs, designers can easily modify and test
+          different configurations of the designs to meet the specific requirements of the application. This flexibility
+          enables designers to iterate on the design quickly and efficiently, reducing the time to market for the final
+          product.
+  \end{enumerate}
+}
+
+
+
+\end{document}

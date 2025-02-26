@@ -70,6 +70,7 @@ def cleanLatexArtifacts(startDir: Path):
         ".600gf",
         ".xdv",
         ".out",
+        ".pytxcode",
     ]
     for file in (
         item
@@ -98,6 +99,7 @@ def compileLatex(file: Path, exportDir: Path) -> str:
             [
                 f"{latexPath}",
                 "-xelatex",
+                # "-lualatex",
                 # "-pdf",
                 "-synctex=1",
                 "-interaction=nonstopmode",

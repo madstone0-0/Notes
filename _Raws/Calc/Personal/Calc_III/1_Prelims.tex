@@ -148,5 +148,80 @@ that connects them $\vec{\mbold{y}\mbold{x}} = \mbold{x} - \mbold{y}$, Hence:
 \[
   \text{dist} \left( \mbold{x}, \mbold{y} \right)  = \|\mbold{x} - \mbold{y}\|
 \]
+Next let $\mbold{x} = \left( x_1, x_2 \right) $ and $\mbold{y} = \left( y_1, y_2 \right) $ be non-zero elements of $\mathbb{R}^2$, represented as arrows emitting from the origin. If the lines are perpendicular then the slopes of these lines through the origin that contain them are defined and are negative reciprocals, i.e.  let $m$ be the gradient of a line, the gradient of the line perpendicular to this line is $-\frac{1}{m}$. As the slope is the ratio of vertical to horizontal displacement, then
+\begin{align*}
+  \frac{x_2}{x_1} & = -\frac{y_2}{y_1}           \\
+  0               & =x_1y_1 + x_2y_2             \\
+  \text{Or}                                      \\
+  0               & =  \mbold{x} \cdot \mbold{y}
+\end{align*}
+Thus:
+\[
+  \text{In $\mathbb{R}^2$ $\mbold{x}$ and $\mbold{y}$ are perpendicular if and only if $\mbold{x} \cdot \mbold{y} = 0$}
+\]
+For vectors in a plane in general, let $\theta$ be the angle between two vectors $\mbold{x}$ and $\mbold{y}$. Assuming none of the vectors are scalar products of each other, i.e. $\theta \neq 0$ we can study the relationship by recognizing the triangle whose vertices are $\mbold{0}$, $\mbold{x}$ and $\mbold{y}$. Two of the sides of this triangle have lengths $\|x\|$ and $\|y\|$ and the length of the third is $\text{dist} \left( \mbold{x}, \mbold{y} \right) $. Using the cosine rule:
+\begin{align*}
+  \text{dist} \left( \mbold{x}, \mbold{y} \right)^2                                 & = \|\mbold{x}\|^2 + \|\mbold{y}\|^2 - 2 \|x\| \, \|y\| \cos(\theta)                                      \\
+  \left( \mbold{x} - \mbold{y} \right) \cdot  \left( \mbold{x} - \mbold{y} \right)  & = \mbold{x} \cdot \mbold{x} + \mbold{y} \cdot \mbold{y} - 2 \|x\| \, \|y\| \cos(\theta)                  \\
+  \mbold{x}\cdot \mbold{x} - 2\mbold{y} \cdot \mbold{x} + \mbold{y} \cdot \mbold{y} & = \mbold{x} \cdot \mbold{x} + \mbold{y} \cdot \mbold{y}  - 2 \|\mbold{x}\| \, \|\mbold{y}\| \cos(\theta) \\
+  -2 \mbold{x} \cdot \mbold{y}                                                      & = - 2 \|\mbold{x}\| \, \|\mbold{y}\| \cos(\theta)                                                        \\
+  \mbold{x} \cdot \mbold{y}                                                         & = \|\mbold{x}\| \, \|\mbold{y}\| \cos(\theta)                                                            \\
+\end{align*}
+When out assumption does not hold, i.e. the vectors are scalar multiples of each other then $\theta = 0 \text{ or } \pi $. For instance when $\mbold{y} = c \mbold{x} $, then $\mbold{x} \cdot \mbold{y} = \mbold{x} \cdot c \left( \mbold{x} \right) = c \|\mbold{x}\|^2 $. Meanwhile $\|\mbold{y}\| = \left| c \right| \|\mbold{x}\| $ so $\|\mbold{x}\| \,\|\mbold{y}\| \cos(\theta) = \left| c \right|\|\mbold{x}\|^2 \cos(\theta)$.\\
+
+We can use these notions about $\mathbb{R}^2$ to create some intuition about $\mathbb{R}^{n}$ where $n \geq 3$. For instance, if $\mbold{v}$ is a nonzero vector in $\mathbb{R}^{n}$, we think of the set of all scalar multiple $c \mbold{v}$ as a "line". If a second vector $\mbold{w}$ is not a scalar multiple of $\mbold{v}$ and $c$ and $d$ are scalars, by the parallelogram law of addition the combination $c\mbold{v} + d\mbold{w}$ lies in a "plane" determined by $\mbold{v}$ and $\mbold{w}$, and that $c$ and $d$ range over all possible scalars, $c\mbold{v} + d\mbold{w}$ should sweep out this plane. As a result the set of all vectors $c\mbold{v} + d\mbold{w}$, where $c, d \in \mathbb{R}$ is called the plane spanned by $\mbold{v}$ and $\mbold{w}$, denoted by $ \mathcal{P}$.\\
+
+Relating this plane $ \mathcal{P}$ to $\mathbb{R}^2$, we begin by choosing two vector $\mbold{u}_1$ and $\mbold{u}_2$ in $ \mathcal{P}$ such that $\mbold{u}_1 \cdot \mbold{u}_1 = \mbold{u}_2 \cdot \mbold{u}_2 = 1$ and $\mbold{u}_2 \cdot \mbold{u}_1 = 0$. These vectors become the standard basis vectors $\mbold{e}_1$ and $\mbold{e}_2$, which of course satisfy the same relations, i.e. orthogonal bases. These two vectors can be use to establish a two-dimensional coordinate space internal to $ \mathcal{P}$, where every element in $\mathcal{P}$ can be written in the form $\mbold{x} = a_1\mbold{u}_1 + a_2\mbold{u}_2$ for some scalars $a_1$ and $a_2$. We can then think of $\sqrt{a_1^2 + a_2^2} $ as the distance from the origin, i.e. the length of $\mbold{x}$. If $\mbold{y} = b_1 \mbold{u}_1 + b_2 \mbold{u}_2$ is also in $\mathcal{P}$, then:
+\begin{align*}
+  \mbold{x} \cdot \mbold{y} & = \left( a_1\mbold{u}_1 + a_2\mbold{u}_2 \right) \cdot \left( b_1\mbold{u}_1 + b_2\mbold{u}_2 \right)                            \\
+                            & = a_1b_1 \mbold{u}_1 \cdot \mbold{u}_2 + \left( a_1b_2 + a_2b_1 \right) \mbold{u}_1 \mbold{u}_2 + a_2b_2 \mbold{u}_2 \mbold{u}_2 \\
+                            & = a_1b_1 + a_2b_2                                                                                                                \\
+\end{align*}
+Thus the dot product in $\mathbb{R}^{n}$ agrees with the general expectation in our internal coordinate system in $\mathcal{P}$. Continuing in this way we can build up $\mathcal{P}$ as a copy of $\mathbb{R}^2$ porting over the notions familiar in this plane of geometry such as angle and distance.
+\dfn{Unit vector}{
+  A vector $\mbold{x}$ in $\mathbb{R}^{n}$ such that:
+  \[
+    \|\mbold{x}\| = 1
+  \]
+  The standard basis vectors $\mbold{e}_i = \left( 0, 0, \ldots, 0, 1, 0, \ldots, 0 \right) $ are unit vectors.
+}
+
+\cor{}{
+  If $\mbold{x}$ is a vector in $\mathbb{R}^{n}$, then $\mbold{u} = \frac{1}{\|\mbold{x}\|} \mbold{x}$ is a unit vector in the same direction as $\mbold{x}$
+}
+
+\thm{}{
+  If $\mbold{x}$ and $\mbold{y}$ are vectors $\mathbb{R}^{n}$ then:
+  \[
+    \mbold{x} \cdot \mbold{y} = \|\mbold{x}\| \, \|\mbold{y}\| \cos(\theta)
+  \]
+}
+
+\dfn{Orthogonal Vectors}{
+  Two vectors $\mbold{x}$ and $\mbold{y}$ are orthogonal if $\mbold{x} \cdot \mbold{y} = 0$
+}
+
+\section{Determinants}
+
+The determinant is a function that assigns a real number to any $n\times n$ matrix. The determinant is not defined for $m\times n$ matrices.
+The determinant of a $2\times 2$ matrix is defined as:
+\[
+  \det \begin{bmatrix}
+    a_{11} & a_{12} \\
+    a_{21} & a_{22}
+  \end{bmatrix}  = a_{11}a_{22} - a_{12}a_{21}
+\]
+I.e, the product of the entries on the main diagonal minus the product of the entries on the secondary diagonal. \\
+One often thinks of the determinant as a function of the rows of the matrix. If $\mbold{x} = \left( x_1, x_2 \right) $ and $\mbold{y} = \left( y_1, y_2 \right) $, let $ \left[ \mbold{x} \,\mbold{y} \right] $, denote a matrix whose rows are $\mbold{x}$ and $\mbold{y}$:
+\[
+  \det \begin{bmatrix} \mbold{x} & \mbold{y} \end{bmatrix} = \det \begin{bmatrix}
+    x_1 & x_2 \\
+    y_1 & y_2
+  \end{bmatrix} = x_1y_2 - x_2y_1
+\]
+
+
+
+
 
 \end{document}

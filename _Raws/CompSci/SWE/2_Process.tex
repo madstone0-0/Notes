@@ -1,0 +1,248 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{The Software Process}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Process Models}
+
+\section{Generic Process Model}
+
+\dfn{Process Model}{
+  A model/framework in which activities, actions, and tasks reside within and define relationships betwixt them.
+}
+
+\dfn{Process Flow}{
+  Describes how the framework activities and the actions, and tasks within them are organized with respect to sequence and time.
+}
+
+\dfn{Linear Process Flow}{
+  The process activities are completed in sequence (one after another) from Communication to Deployment.
+}
+
+\dfn{Iterative Process Flow}{
+  Like a linear process flow, but one or more activities are repeated before moving to the next activity.
+}
+
+\dfn{Evolutionary Process Flow}{
+  Executes activities in a circular manner, with each circuit of the five activities leading to a more complete version of the software.
+}
+
+\dfn{Parallel Process Flow}{
+  Executes one or more activities in parallel
+}
+
+\subsection{Defining a Framework Activity}
+
+\dfn{Software Engineering Action}{
+  A task that is part of a framework activity
+}
+
+\dfn{Task Set}{
+  Defines the actual work to be done to accomplish the objectives of a software engineering action.
+}
+
+A framework activity is made up of up several software engineering action, which themselves are made up of task sets. Task sets should be identified based on the best actions that accommodate the needs of the project and characteristics of the team.
+
+\subsection{Process Patterns}
+
+\dfn{Process Pattern}{
+  Describes a process related problem that is encountered during software engineering work, identifies the context in which the problem occurs, and suggests one or more proven solutions to the problem
+}
+
+There are three types of process patterns:
+\begin{description}
+  \item[Task Patterns] - Defines a problem associated with a software engineering task or work task, i.e Elicitation, Design, etc. Example RequirementsGathering
+  \item[Stage Patterns]  - Defines a problem associated with a framework activity for the process, i.e. Communication, Construction, etc. Incorporate multiple task patterns as they encompass several software actions and work tasks. Example EstablishingCommunication.
+  \item[Phase Patterns] - Defines the sequence of framework activities that occurs within the process, even when the overall flow of activities is iterative in nature, for example SpiralModel and Prototyping.
+\end{description}
+
+Ambler proposes the following process pattern template:
+\begin{description}
+  \item[Pattern Name]  - A meaningful name describing the pattern in the context of the software engineering process.
+  \item[Forces] - The environment in which the pattern encountered, and issues that make the problem visible and may affect its solution.
+  \item[Type] - The type of pattern, i.e. Task, Stage, or Phase.
+  \item[Initial Context] - The conditions where the process pattern is applicable. Prior to the application of the pattern
+        \begin{itemize}
+          \item What organizational or team-related activities have already occurred.
+          \item What is the entry state for the process
+          \item What software engineering / project information already exists.
+        \end{itemize}
+  \item[Problem] - The specific problem to be solved by the pattern.
+  \item[Solution] - Describes how to implement the pattern successfully, including how the initial state of the project is modified as a result of the initiation of the pattern, how software engineering / project information is transformed as a result of the pattern.
+  \item[Resulting Context] - Describes the state of the project after the pattern has been applied. Includes:
+        \begin{itemize}
+          \item What organizational or team-related activities must have occurred.
+          \item What is the exit state for the process.
+          \item What software engineering / project information has been developed.
+        \end{itemize}
+  \item[Related Patterns] - Provides a list of related process patterns
+  \item[Known Uses / Examples] - Indicates specific instances where the pattern is applicable.
+\end{description}
+
+\section{Process Assessment and Improvement}
+A number of different approaches to software process assessment and improvement have been proposed, including:
+\begin{description}
+  \item[Standard CMMI Assessment Method for Process Improvement (SCANPI)]  - Provides a five step \textbf{process assessment} model that incorporates five phases:
+        \begin{itemize}
+          \item Initiating
+          \item Diagnosing
+          \item Establishing
+          \item Acting
+          \item Learning
+        \end{itemize}
+
+  \item[CMM-Based Appraisal for Internal Process Improvement (CBA IPI)] - Provides a diagnostic technique for \textbf{assessing relative maturity of a software organization}, uses SEI CMM as the basis for the assessment.
+
+  \item[SPICE (ISO/IEC 15504)] - A standard that defines a set of requirements for \textbf{software process assessment}. Intended to \textbf{assist organizations in developing and objective evaluation on the efficacy of any defined software process}.
+
+  \item[ISO 9001:2000 for Software] - A generic standard that applies to any organization that wants to improve the \textbf{overall quality} of its products, systems or services.
+\end{description}
+
+\section{Prescriptive Process Models}
+
+\dfn{Prescriptive Process Model}{
+  Advocates for an orderly approach to software engineering, these models prescribing a set of process elements (framework activities, software engineering actions, tasks, work products, etc.) for each product.
+}
+
+\subsection{Waterfall Model}
+\dfn{Waterfall Model}{
+  A linear model that suggests a systematic, sequential approach to software development that begins with customer speciation of requirements (Communication) and progresses linearly through all the framework sections, culminating in ongoing support of the completed software.
+}
+
+Good for situations where:
+\begin{itemize}
+  \item  Requirements are well understood
+  \item Product definition is stable
+\end{itemize}
+
+
+\subsection{V Model}
+\dfn{V Model}{
+  A model that extends the waterfall model by associating a testing phase for each corresponding state of development.
+}
+
+Good for situations where:
+\begin{itemize}
+  \item Critical systems are being developed, i.e. robustness is a key concern
+  \item  Requirements are well understood
+  \item  Product definition is stable
+\end{itemize}
+
+This model and the waterfall model fail as:
+\begin{itemize}
+  \item Real projects rarely follow the sequential flow.
+  \item Requirements are rarely stable and explicitly stated.
+  \item The customer must have patience to wait for the software to be delivered after the end of the whole process
+\end{itemize}
+
+\subsection{Incremental Process Models}
+\dfn{Incremental Process Model}{
+  A model that combines elements of linear and parallel process flows, applying linear sequences in a staggered fashion, producing deliverable increments of the software, similar to the evolutionary process flow.
+}
+When the incremental model is used, the first increment is often a core product, i.e. basic requirements are addressed with additional features added in subsequent increments. This allows for evaluation of increments by stakeholders to gain feedback and improve the software.
+
+Good for situations where:
+\begin{itemize}
+  \item Staffing is unavailable for a complete implementation by the deadline.
+  \item Requirements are relatively well understood.
+  \item Overall scope of the development effort doesn't fit into a linear process, i.e. large complex projects.
+  \item The customer needs a limited set of software features quickly.
+\end{itemize}
+
+Fails when:
+\begin{itemize}
+  \item The customer is unsure of what they want.
+  \item  The customer is unable to provide feedback on the software.
+\end{itemize}
+
+\subsection{Evolutionary Process Models}
+
+\dfn{Evolutionary Process Model}{
+  An iterative model characterized in a manner that allows for the development of increasingly more complete versions of the software.
+}
+
+\nparagraph{Prototyping Model}
+\dfn{Prototyping Model}{
+  A model that allows for the development of a prototype, a partial implementation of the software that is used to better understand the requirements of the software. This model begins with Communication, identifying known requirements and areas where further clarification is needed. Then a prototyping iteration is planned, and modelling in the form of quick-design, which focuses on a representation of the parts of the software that will be visible to the end user. Using this design a prototype is constructed, deployed and evaluated by stakeholders. Stakeholder feedback is taken in to improve the prototype in the next prototype iteration.
+}
+
+Prototyping is mostly used as a technique that can be implemented in any other process model, rather than a stand-alone model.
+
+Good for situations where:
+\begin{itemize}
+  \item The customer has a general idea of what they want but does not identify detailed requirements for functions and features.
+  \item The developer may be unsure of specific design choices, the efficiency of an algorithm, or the adaptability of an operating system.
+\end{itemize}
+
+Disadvantages include:
+\begin{itemize}
+  \item Stakeholders see what appears to be a finished product unaware that the prototype is held together with glue and duct tape.
+  \item Implementation compromises and hacks may be made to meet deadlines which can lead to complacency allowing these hacks to become permanent.
+\end{itemize}
+
+\nparagraph{Spiral Model}
+\dfn{Spiral Model}{
+  A model that combines the iterative nature of prototyping with the controlled and systematic nature of the waterfall model, providing the potential for rapid development of increasingly more complete versions of the software.
+}
+
+Using this model, the software is developed in a series of evolutionary releases, with early iterations being closer to a prototype than a final product, and later iterations generating increasingly more complete versions of the software.
+
+Good for:
+\begin{itemize}
+  \item Large, complex projects as it allows for the development of a prototype that can be used to identify and mitigate risks.
+  \item Projects where the requirements are not well understood.
+  \item Projects where the requirements are likely to change.
+  \item Projects where the software must be developed quickly.
+  \item A consideration of risk is important.
+\end{itemize}
+
+Fails when:
+\begin{itemize}
+  \item Risk analysis is not performed properly thus risk goes unmitigated and unmanaged.
+  \item The customer cannot be convinced that the evolutionary process is controllable.
+\end{itemize}
+
+\nparagraph{Concurrent Models}
+\dfn{Concurrent Model}{
+  A software process model that represents iterative and concurrent elements of other process models, allowing different software engineering activities to exist simultaneously but in different states.
+}
+The concurrent development model (also called concurrent engineering) enables software teams to work on multiple activities in parallel. Each activity (e.g., modeling, communication, construction) can exist in one of several states: inactive, under development, awaiting changes, or done. The model creates a process network where transitions between states are triggered by events generated at various points in the network.
+
+
+Good for:
+\begin{itemize}
+  \item Projects requiring parallel development activities
+  \item Providing an accurate representation of a project's current state
+  \item Adapting to changes in any phase of development
+  \item Incorporating elements from other process models (spiral, prototyping, etc.)
+  \item Complex systems where different components may be in different stages of development
+\end{itemize}
+
+Fails when:
+\begin{itemize}
+  \item Team coordination is poor
+  \item State transitions and events aren't clearly defined
+  \item Project management lacks experience with concurrent development approaches
+  \item Team size is too small to effectively work on parallel activities
+  \item The project is simple enough that sequential development would be more efficient
+\end{itemize}
+
+\chapter{Agile Development}
+
+
+\end{document}

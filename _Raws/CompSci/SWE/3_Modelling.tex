@@ -1,0 +1,107 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Modelling}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+% \usepackage{plantuml}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Principles that guide practice}
+
+\chapter{Unified Modelling Language (UML)}
+
+\section{Introduction}
+
+\dfn{UML}{
+  A standard graphical language for modelling object-oriented software systems.
+}
+
+UML can be used to model the following:
+\begin{description}
+  \item[Class Diagrams] - Describe classes and their relationships.
+  \item[Interaction Diagrams] - Show the behaviour of systems in terms of how they interact with each other.
+  \item[State Diarams and Activity Diagrams] - Show how systems behave internally
+  \item[Component and Deployment Diagrams] - Show how the various components of systems are arranged logically and physically.
+\end{description}
+
+\section{Class Diagrams}
+The main symbols seen in class diagrams are:
+\begin{description}
+  \item[Class]  - Represents the type of data, represented by a rectangle with three compartments.
+  \item[Association] - Represents linkage between instances of classes, represented by a line connecting the classes.
+  \item[Attribute] - Simple data found in classes and their instances, represented by a name and a type.
+  \item[Operation] - Represent the functions performed by classes, and their instances, represented by a name and a type.
+  \item[Generalization] - Groups classes into inheritance hierarchies, represented by a line with a triangle pointing to the superclass.
+\end{description}
+
+\subsection{Class}
+
+\begin{description}
+  \item[Class Name] - The name of the class.
+  \item[Attributes] - The data that the class holds, with format \lstinline{visibility attributeName: type}. Where the available visibilities are:
+        \begin{description}
+          \item[+] - Public
+          \item[-] - Private
+          \item[\#] - Protected
+          \item[\~] - Package
+        \end{description}
+  \item[Operations] - The functions that the class can performed, with signature \lstinline{operationName(parameters): returnType}.
+\end{description}
+
+% \begin{plantuml}
+%   @startuml
+%   class Class {
+%       + attribute1: type
+%       - attribute2: type
+%       # attribute3: type
+%       ~ attribute4: type
+%
+%       + operation1(parameters): returnType
+%       - operation2(parameters): returnType
+%       # operation3(parameters): returnType
+%       ~ operation4(parameters): returnType
+%     }
+%   @enduml
+% \end{plantuml}
+
+\subsection{Associations and Multiplicity}
+Show that two classes are related to each other, with symbols indicating the multiplicity of the relationship at the end of the line. With the following symbols:
+\begin{description}
+  \item[0..1] - Zero or one
+  \item[0..* / *] - Zero or more
+  \item[$n$] - Exactly $n$
+  \item[$m..n$] - Between $m$ and $n$
+  \item[0, $m..n$] - Zero or between $m$ and $n$
+\end{description}
+
+There are three classes of multiplicities:
+\begin{description}
+  \item[Many-to-Many] - Both classes can have many instances of the other, for example a student can take many courses and a course can be taken by many students.
+  \item[Many-to-One / One-to-Many] - One class can have many instances of the other, for example a branch can have many workers.
+  \item[One-to-One] - One class can have only one instance of the other, for example a person can have only one passport.
+\end{description}
+
+It is possible for an association to connect a class to itself, this is called a \textbf{self-association / reflexive association}. For example, a person can be married to another person. \\
+
+
+Associations are bi-directional by default, but can be made one way by adding an arrowhead to the line. \\
+
+\subsection{Generalization}
+Generalization is used to show that one class is a superclass of another class. The superclass is the parent class, and the subclass is the child class. The subclass inherits the attributes and operations of the superclass. The discriminator is a label that describes the criteria used in the specialization \\
+
+
+
+\end{document}

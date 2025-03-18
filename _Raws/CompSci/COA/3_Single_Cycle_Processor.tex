@@ -1,0 +1,471 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Single Cycle Processor}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+\usepackage{tabularx}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Instructions}
+
+Each instruction in MIPS is the same size (32 bits). There are three types of instructions in MIPS:
+\begin{itemize}
+  \item R-Type: Register, example \texttt{add \$t0, \$t1, \$t2}
+  \item I-Type: Immediate, example \texttt{addi \$t0, \$t1, 100}
+  \item J-Type: Jump, example \texttt{j 1000}
+\end{itemize}
+
+\section{R-Type Instructions}
+
+Register operations. Arithmetic and logical operations directly on registers.
+
+\subsection{Structure of R-Type Instructions}
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \texttt{opcode} & \texttt{rs} & \texttt{rt} & \texttt{rd} & \texttt{shamt} & \texttt{funct} \\
+      \hline
+      6 bits          & 5 bits      & 5 bits      & 5 bits      & 5 bits         & 6 bits         \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+For R-type instructions, the \texttt{opcode} field is always 0, i.e. $000000$ as the \texttt{funct} determines the operation type. This is only for R-type instructions.
+Where:
+\begin{description}
+  \item[\texttt{opcode}] The operation code. Used to specify the operation.
+  \item[\texttt{rs}] The source register. Used to store the first operand.
+  \item[\texttt{rt}] The target register. Used to store the second operand.
+  \item[\texttt{rd}] The destination register. Used to store the result of the operation.
+  \item[\texttt{shamt}] The shift amount. Used to specify the number of bits to shift.
+  \item[\texttt{funct}] The function code. Used to specify the operation, example \texttt{add}, \texttt{sub}, \texttt{and}, \texttt{or}, etc.
+\end{description}
+
+\section{I-Type Instructions}
+Memory access and immediate values.
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \texttt{opcode} & \texttt{rs} & \texttt{rt} & \texttt{immediate} \\
+      \hline
+      6 bits          & 5 bits      & 5 bits      & 16 bits            \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Where:
+\begin{description}
+  \item[\texttt{opcode}] The operation code. Used to specify the operation.
+  \item[\texttt{rs}] The source register. Used to store the register operand
+  \item[\texttt{rt}] The target register. The desination register.
+  \item [\texttt{immediate}] The immediate value. Used to store the immediate value operand
+\end{description}
+
+\section{J-Type Instructions}
+
+Branching and jumping.
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+      \texttt{opcode} & \texttt{address} \\
+      \hline
+      6 bits          & 26 bits          \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Where:
+\begin{description}
+  \item[\texttt{opcode}] The operation code. Used to specify the operation.
+  \item[\texttt{address}] The address. Target address of the jump.
+\end{description}
+
+\chapter{Processor Design}
+
+In designing a processor for an ISA one goes through the following steps
+\begin{description}
+  \item[Analyse the Instruction Set ] - To determine data path requirements and control signals
+  \item[Select Data path components and clocking methodology] - Based on the instruction set
+  \item[Assemble the datapath meeting the requirements]
+  \item[Analyse the implementation of each instruction] - To determine the needed control signals
+  \item[Assemble the control logic] - To generate the control signals
+\end{description}
+
+Taking into account only a subset of the MIPS instructions:
+\begin{description}
+  \item[ALU Instructions (R-Type)] - \texttt{add, sub, and, or, slt}
+  \item[Immediate Instructions (I-Type)] - \texttt{addi, lw, sw, beq}
+  \item[Load and Store (I-Type)] - \texttt{lw, sw}
+  \item[Branch (I-Type)] - \texttt{beq, bne}
+  \item[Jump (J-Type)] - \texttt{j}
+\end{description}
+
+\section{Register Transfer Level (RTL)}
+
+\dfn{Register Transfer Level (RTL)}{
+  A description of data flow between registers in a processor. It is a way of describing the implementation of a processors instructions at the register level.
+}
+
+Instructions are first fetched from memory using the \textbf{Program Counter (PC)} to get the address. The instruction is then decoded to determine the operation type and then executed using accordingly.
+\begin{description}
+  \item[ADD]  - $\text{Reg (rd)} \gets \text{Reg (rs)} + \text{Reg (rt)}; PC \gets PC + 4$
+\end{description}
+
+In terms of processor design a hybrid Von-Nuemann Harvard architecture is used, where instruction memory is separate from data memory. In terms of MIPS there are
+31 general purpose registers each 32-bit wide with $R0$ always being 0. The program counter is stored in the PC registers and an adder is used to increment the PC.
+
+\section{Data Path Components and Clocking Methodology}
+
+\subsection{Data Path Components}
+
+\dfn{Data Path}{
+  The part of the processor that is responsible for executing instructions by performing arithmetic operations, data movement and logical operations.
+}
+
+The data path is made up of the following components:
+\begin{description}
+  \item[Registers] - Small fast memory within the processor. Used to store data temporarily during execution. Registers can include
+        \begin{description}
+          \item[General Purpose Registers]  - Used to hold data and intermediate results during execution
+          \item[Special-Purpose Registers] - Used for specific purposes such as keeping track of the program counter (PC), instruction register (IR), stack pointer (SP), status flags, etc.
+        \end{description}
+  \item[Arithmetic Logic Unit (ALU)] - Performs arithmetic and logical operations on data. Arithmetic operations include addition, subtraction, multiplication
+        and logical operations include AND, OR, NOT, XOR, etc.
+  \item[Data Paths] - The connections between registers, the ALU and other functional units of the processor.
+  \item[Memory Interface] - Enables communication between the processor and system memory (RAM). Includes components such as the
+        memory address register (MAR) for storing memory addresses, and memory data register (MDR) for storing data read from or written to memory.
+  \item[Multiplexers and Demultiplexers] - For selecting between multiple data paths between different components such as registers and ALUs based on control signals generated by the control unit
+  \item[Buses] - Communication pathways that transfer data and control signals between different components of the CPU and system memory. Buses
+        include the data bus, address bus, and control bus.
+  \item[Instruction Fetch and Decode Logic] - The instruction fetch unit retrieves instructions from memory based on the program counter (PC) and
+        send them to the instruction decode unit which decodes the instruction to determine appropriate operation to execute.
+  \item[Pipeline Stages] - The data path can also be divided in to pipeline stages to improve throughput and performance. Each pipeline stage
+        performs a specific task such as instruction fetch, decode, execute, and write-back.
+  \item[Cache Interface] - For storing frequently accessed data and instruction closer to the CPU cores for faster access.
+  \item[Control Signals] - Generated by the control unit to coordinate the operation of different components within the data path.
+        Control signals determine which operations are performed by the ALU, which data paths are selected and when data is transferred between registers and memory.
+\end{description}
+
+The design of the Data path is critical to processor design as it determines how fast the processor can execute instructions and how efficiently
+it can perform computations. It must be optimized to ensure that instructions are executed correctly and efficiently while minimizing latency
+and maximizing throughput. Modern processors employ complex data paths with some of the following features:
+\begin{itemize}
+  \item Pipelining
+  \item Out-of-order execution
+  \item Speculative execution
+\end{itemize}
+
+\subsubsection{Pipelining}\label{sec:pipelining}
+
+\dfn{Pipelining}{
+  The execution of an instruction is broken down into multiple stages, i.e. fetch, decode, etc, then stages of instruction execution are executed in an overlapping manner allowing multiple instructions to executed simultaneously.
+}
+
+\subsubsection{Out-of-order Execution}\label{sec:out-of-order-execution}
+
+\dfn{Out-of-order Execution}{
+  Instructions are executed in an order different from the order they appear in the program, based on data dependencies and resource availability.
+  This allows the processor to execute instructions more efficiently by avoiding stalls and keeping the execution units busy.
+}
+
+\subsubsection{Speculative Execution}\label{sec:speculative-execution}
+
+\dfn{Speculative Execution}{
+  The processor executes instructions under an execution branch before the result of the branch is known, i.e. if the branch is taken or not.
+  This potentially allows the processor to be more performant by executing instructions that are likely to be executed.
+}
+
+\subsection{Clocking Methodology}
+
+\dfn{Clocking Methodology}{
+  The method used to synchronize the operations of the different components of the processor. This defines when data can be written to and read from.
+}
+
+We assume edge-triggered clocking where all state changes happen on the same clock edge. Data must be valid and stable before the clock edge and the output must be valid after the clock edge. Edge-trigged clocking allows data to be read and written during the same clock cycle, for example data could be read during the
+rising edge and written during the falling edge. \\
+
+With edge-triggered clocking the clock cycle must be long enough to allow all operations to complete, therefore the clock cycle speed is determined by
+the time taken by slowest instruction. This shown by the equation:
+\[
+  T_{\text{cycle}} \geq T_{\text{clk} - \text{q}} + T_{\text{max\_comb}} + T_s
+\]
+Where:
+\begin{description}
+  \item[$T_{\text{cycle}}$] - The clock cycle time
+  \item[$T_{\text{clk}}$] - The clock to output delay through register, i.e time taken for data to be read from a register
+  \item[$T_{\text{max\_comb}}$] - The longest delay through combinatorial logic, i.e. the longest time taken for data to be processed (instruction execution)
+  \item [$T_s$] - Setup time, the time data must be stable before the clock edge
+  \item [$T_h$] - Hold time, the time data must be stable after the clock edge, normally satisfied since $T_{\text{clk} - \text{q}} > T_h$
+\end{description}
+
+\subsubsection{Clock Skew}
+
+\dfn{Clock Skew}{
+  The absolute difference in time between when two storage elements see a clock edge.
+}
+
+Clock skew arises from the fact that the clock signal uses different paths each with differing delays to reach state elements, like flip-flops. This
+has to be accounted for to ensure that the cycle time can accommodate all read and write operation irrespective of the time the registers they are clocked.
+This results in the new equation:
+\[
+  T_{\text{cycle}} \geq T_{\text{clk} - \text{q}} + T_{\text{max\_comb}} + T_s + T_{\text{skew}}
+\]
+This skew amount can however be minimized by balancing the clock delays to all storage elements.
+
+\chapter{Instruction Type Data Paths}
+
+\section{R-Type Instructions}
+
+\section{I-Type Instructions}
+
+\section{J-Type Instructions}
+
+\chapter{Limitations of Single Cycle Processors}
+
+Each instruction execution can be categorized into the following categories based on their common stages:
+\begin{description}
+  \item [ALU]
+        \begin{table}[H]
+          \begin{center}
+            \begin{tabular}{|c|c|c|c|}
+              \hline
+              Instruction Fetch & Decode / Register Read & ALU & Register Write \\
+              \hline
+            \end{tabular}
+          \end{center}
+        \end{table}
+  \item[  Load ]
+        \begin{table}[H]
+          \begin{center}
+            \begin{tabular}{|c|c|c|c|c|}
+              \hline
+              Instruction Fetch & Decode / Register Read & Compute Address & Memory Read & Register Write \\
+              \hline
+            \end{tabular}
+          \end{center}
+        \end{table}
+  \item[  Store ]
+        \begin{table}[H]
+          \begin{center}
+            \begin{tabular}{|c|c|c|c|}
+              \hline
+              Instruction Fetch & Decode / Register Read & Compute Address & Memory Write \\
+              \hline
+            \end{tabular}
+          \end{center}
+        \end{table}
+  \item[  Branch]
+        \begin{table}[H]
+          \begin{center}
+            \begin{tabular}{|c|c|c|}
+              \hline
+              Instruction Fetch & Register read / Branch Target & Compare and Update PC \\
+              \hline
+            \end{tabular}
+          \end{center}
+        \end{table}
+  \item[  Jump ]
+        \begin{table}[H]
+          \begin{center}
+            \begin{tabular}{|c|c|}
+              \hline
+              Instruction Fetch & Decode / Update PC \\
+              \hline
+            \end{tabular}
+          \end{center}
+        \end{table}
+\end{description}
+
+With the Load instruction category being the slowest, meaning the cycle time must be long enough to accommodate the load instruction. This has several implications:
+\begin{description}
+  \item[Clock Speed Constraint] - The clock cycle time must be long enough to accommodate the longest instruction, i.e. the load instruction. This means that
+        shorter instructions waste time waiting for the longer ones to complete and in the case where a shorter one completes before the cycle is over, the processor
+        is idle for the rest of the cycle.
+  \item[Resource Utilization] - All resources such as ALUs, memory and registers are only used once per cycle. This means that the processor is not
+        fully utilising its resources most of the time.
+  \item[Complexity in Control] - The control unit must manage all the operations in a single cycle increasing the complexity of design.
+  \item[Power Consumption] - Due to the need to complete all operations in a single cycle, the processor will need to consume more power drive all the
+        functional units simultaneously.
+  \item[Scalabity] - As more instructions are added to the ISA, the cycle time will need to be adjusted to accommodate the longest instruction, placing
+        a limit on the ability to scale the processor for better performance.
+  \item[Peformance] - Since the clock cycle time is constrained by the slowest instruction, the processor is not able to achieve the best performance
+        by executing multiple instructions simultaneously.
+\end{description}
+
+\section{Overcoming Limitations}
+
+To overcome the limitations of the single cycle processor, the following techniques can be employed:
+\begin{description}
+  \item[Pipelining] \ref{sec:pipelining}
+  \item[Multi-Cycle Design] - Breaks down an instruction execution into multiple stages, with each stage taking one cycle to execute. This allows the clock cycle
+        time to be reduced as it is no longer constrained by the slowest instruction rather the slowest stage.
+  \item[Superscalar Architecture] - Involves the use of multiple execution units, i.e. multiple ALUs, allowing multiple instructions to be executed
+        simultaneously. By fetching and dispatching multiple instructions per cycle, superscalar processors increase instruction throughput.
+  \item[Out-of-order Execution] \ref{sec:out-of-order-execution}
+  \item[Branch Prediction and Speculative Execution] - Predicts the outcome of a branch instruction before it is executed, allowing the processor to speculatively execute \ref{sec:speculative-execution}
+  \item[Instruction Level Parallelism] - Techniques such as loop unrolling, software pipelining, vectorization and instruction reordering can allow for more
+        parallelism in instruction execution.
+  \item[Caching] - Improves performance by storing frequently accessed data and instructions closer to the processor cores reducing the latency
+        of memory access.
+  \item[Register Renaming] - Dynamically allocates physical registers to logical registers, i.e. dynamically mapping concurrently used logical registers to avoid what is the hardware equivalent of a race condition , to avoid hazards and dependencies between instructions.
+
+\end{description}
+
+\section{Multi-Cycle vs Pipelining}
+
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|}
+      \hline
+      \textbf{Feature}     & \textbf{Multi-Cycle Processor Design}                                                                   & \textbf{Pipelined Processor Design}                                                    \\ [0.5ex]
+      \hline
+      \hline
+      Execution Phases     & Instructions are executed over several cycles in the form of stages                                     & Instructions are divided into stages that overlap execution                            \\
+      \hline
+      Hardware Utilization & Resources are reused across different cycles for different stages                                       & More hardware resources are needed to execute multiple stages simultaneously           \\
+      \hline
+      Control Complexity   & Complex control unit normally implemented as a finite state machine (FSM)                               & Complex control logic needed to manage simultaneous execution of multiple stages       \\
+      \hline
+      Cycle Time           & Clock cycle time is determined by the slowest stage                                                     & Clock cycle time is determined by the longest stage                                    \\
+      \hline
+      Performance          & Instructions are completed in several cycles, but each cycle is faster than in a single-cycle processor & Instruction throughput can approach one instruction per cycle due to stage overlapping \\
+      \hline
+    \end{tabularx}
+  \end{center}
+\end{table}
+
+\section{Multi-Cycle Implementation}
+
+First break each instruction into five stages:
+\begin{itemize}
+  \item Instruction Fetch (IF)
+  \item Instruction Decode / Register Read or Target Address for jump/branch. (ID)
+  \item Execution / Memory address computation or branch outcome. (EX)
+  \item Memory Access / ALU instruction completion (MEM)
+  \item Load instruction completion (WB)
+\end{itemize}
+
+Each stage takes one clock cycle to complete, i.e. the categories of instructions break down into the following cycle counts
+\begin{description}
+  \item[ALU] - 4
+  \item[Load] - 5
+  \item[Store] -4
+  \item[Branch] - 3
+  \item[Jump] - 2
+\end{description}
+
+\ex{}{
+  \qs{}{
+    Assuming the following operation times for components:
+    \begin{itemize}
+      \item Access time for instruction and data memories is 200 ps
+      \item Delay in ALU and adders is 180 ps
+      \item Delay in decode and register file access (read or write) is 150 ps
+      \item Ignore all other delays in PC, mux, extender, and wires
+    \end{itemize}
+    Which of the following designs would be faster and by how much?
+    \begin{enumerate}
+      \item Single cycle processor
+      \item Multi-cycle processor
+    \end{enumerate}
+    Assume the following instruction mix: 40\% ALU, 20\% Load, 10\% Store, 20\% Branch, 10\% Jump
+  }
+
+  \sol{
+    \begin{description}
+      \item[ALU]  - $200 + 150 + 180 + 150 = 680 \text{ps}$
+      \item[Load] - $200 + 150 + 180 + 200 + 150 = 880 \text{ps}$
+      \item [Store] - $200 + 150 + 180 + 150 = 680 \text{ps}$
+      \item[Branch] - $200 + 150 + 180 = 530 \text{ps}$
+      \item[Jump] - $200 + 180 = 280 \text{ps}$
+    \end{description}
+    \begin{enumerate}
+      \item Each single cycle processor cycle has to be as long as the longest instruction, i.e. $880 \text{ps}$
+      \item Each multi cycle processor cycle has to be as long as the longest stage i.e. $200 \text{ps}$.
+            \begin{align*}
+              \text{CPI} & = 0.4\times 4 + 0.2 \times 5 + 0.1 \times 4 + 0.2 \times 3 + 0.1 \times 2 \\
+                         & = 3.8                                                                     \\
+            \end{align*}
+            $ \therefore \text{Clock Period} = 3.8 \times 200 = 760$
+    \end{enumerate}
+    \[
+      \frac{880}{760} = 1.16
+    \]
+    $\therefore$ the multi-cycle design is faster by about 16 \%
+  }
+}
+
+\section{Pipelining Implementation}
+
+Consider a task that can be divided into $k$ subtasks, where $k$ subtasks are executed on $k$ different stages. Each subtask requires one time unit and the total
+execution time of the task is $k$ time units. Pipelining is to overlap the execution such that the $k$ stages work in parallel on $k$ different tasks, where each
+task leaves and enters the pipeline at a rate of one task per time unit. \\
+
+
+Let $ \tau_i$ be time delay in stage $S_i$. The Clock Cycle is the maximum stage delay, i.e. $ \tau = \max \left( \tau_i \right) $, and accordingly
+the clock rate/frequency is $\frac{1}{\tau}$ or $\frac{1}{\max \left( \tau_i \right) }$. A pipeline can process $n$ tasks in $k + n - 1$ cycles where
+$k$ cycles are needed to complete the first task and $n - 1$ cycles are needed to complete the remaining tasks. This gives the following equation:
+\[
+  S_k = \frac{\text{Serial execution in cycles}}{\text{Pipelined execution in cycles}} = \frac{nk}{k + n - 1}\, S_k = k \text{ for large } n
+\]
+
+Given the five stages:
+\begin{itemize}
+  \item Instruction Fetch (IF)
+  \item Instruction Decode (ID)
+  \item Execution (EX)
+  \item Memory Access (MEM)
+  \item Write Back (WB)
+\end{itemize}
+
+\ex{}{
+  \qs{}{
+    Consider a 5-stage instruction execution in which
+    \begin{itemize}
+      \item IF = ALU = Data Memory Access = 200 ps
+      \item Register Read = Register Write = 150 ps
+    \end{itemize}
+    \begin{enumerate}
+      \item What is the clock cycle time for a single cycle processor
+      \item What is the clock cycle time for a pipelined processor
+      \item What is the speed-up factor of the pipelined processor
+    \end{enumerate}
+  }
+
+  \sol{
+    \begin{enumerate}
+      \item $200 + 200 + 200 + 150 + 150 = 900 \text{ps}$
+      \item $200 \text{ps}$, i.e. max stage delay
+      \item
+            \begin{align*}
+              S_k & = \frac{900}{200} = 4.5
+            \end{align*}
+    \end{enumerate}
+  }
+}
+
+
+
+\end{document}

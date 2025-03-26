@@ -9,6 +9,7 @@ from hashlib import md5
 from typing import Dict
 import datetime
 import json
+from tqdm import tqdm
 
 # from icecream import ic
 from multiprocessing import SimpleQueue
@@ -39,7 +40,7 @@ def writeChecksumJSON(filepaths: list[Path]):
                 if item.is_file():
                     checksums[str(item)] = genChecksum(item)
             if Path(file / "notebooks").exists():
-                for item in file.rglob("*.ipynb"):
+                for item in file.rglob("*.ipynb", recurse_symlinks=True):
                     if item.is_file():
                         checksums[str(item)] = genChecksum(item)
 
@@ -187,8 +188,9 @@ def compileOne(dir: str, force: bool, mtime: bool, notebooks: bool = True) -> li
     workingDir = rawPath / Path(dir)
     now = datetime.datetime.now()
 
-    def walkDir(suffix: str, f: Callable[[Path], str]):
-        for file in workingDir.rglob(f"*{suffix}"):
+    def walkDir(suffix: str, f: Callable[[Path, Path], str]):
+        files = list(workingDir.rglob(f"*{suffix}"))
+        for file in tqdm(files, desc=f"Processing {suffix} files", leave=False):
             modTime = file.stat().st_mtime
             nowUpper = now + datetime.timedelta(minutes=5)
             nowUpper = nowUpper.timestamp()
@@ -205,19 +207,44 @@ def compileOne(dir: str, force: bool, mtime: bool, notebooks: bool = True) -> li
     if notebooks:
         nbPath = Path(workingDir / "notebooks")
         if nbPath.exists():
+            nbQueue: SimpleQueue[Path] = SimpleQueue()
             for nb in nbPath.rglob("*.ipynb"):
-                modTime = nb.stat().st_mtime
-                nowUpper = now + datetime.timedelta(minutes=5)
-                nowUpper = nowUpper.timestamp()
-                nowLower = now - datetime.timedelta(minutes=5)
-                nowLower = nowLower.timestamp()
+                nowUpperD = now + datetime.timedelta(minutes=5)
+                nowUpper = nowUpperD.timestamp()
+                nowLowerD = now - datetime.timedelta(minutes=5)
+                nowLower = nowLowerD.timestamp()
 
                 # if (
                 #     genChecksum(nb) != checksums[str(nb)]
                 #     or force
                 #     or (mtime and (modTime > nowLower and modTime < nowUpper))
                 # ):
-                out.append(convertNotebook(nb, workingDir))
+                nbQueue.put(nb)
+
+            with ThreadPoolExecutor(5) as exc:
+                jobs = {}
+                while not nbQueue.empty():
+                    nb = nbQueue.get()
+                    modTime = nb.stat().st_mtime
+                    nowUpperD = now + datetime.timedelta(minutes=5)
+                    nowUpper = nowUpperD.timestamp()
+                    nowLowerD = now - datetime.timedelta(minutes=5)
+                    nowLower = nowLowerD.timestamp()
+                    if (
+                        genChecksum(nb) != checksums[str(nb)]
+                        or force
+                        or (mtime and (modTime > nowLower and modTime < nowUpper))
+                    ):
+                        job = exc.submit(convertNotebook, nb, workingDir)
+                        jobs[job] = nb
+
+                for future in tqdm(
+                    as_completed(jobs),
+                    total=len(jobs),
+                    desc="Processing notebooks",
+                    leave=False,
+                ):
+                    out.append(future.result())
 
     walkDir(".tex", compileLatex)
     walkDir(".md", compileMarkdown)
@@ -225,6 +252,7 @@ def compileOne(dir: str, force: bool, mtime: bool, notebooks: bool = True) -> li
 
 
 def compileMany(dirs: list[str], force: bool, mtime: bool, notebooks: bool):
+    print(f"Compiling {len(dirs)} directories.")
     FolderQueue: SimpleQueue[str] = SimpleQueue()
     todo_list_map = {}
     with ThreadPoolExecutor(10) as exc:
@@ -234,13 +262,14 @@ def compileMany(dirs: list[str], force: bool, mtime: bool, notebooks: bool):
         if not FolderQueue.empty():
             while True:
                 folder = FolderQueue.get()
+                print(f"Compiling {folder}")
                 job: Future = exc.submit(compileOne, folder, force, mtime, notebooks)
                 todo_list_map[job] = folder
                 if FolderQueue.empty():
                     break
 
     try:
-        for future in as_completed(todo_list_map):
+        for future in tqdm(as_completed(todo_list_map), total=len(todo_list_map)):
             futureString = (
                 "\n".join(future.result()) if future.result() else "No work done."
             )

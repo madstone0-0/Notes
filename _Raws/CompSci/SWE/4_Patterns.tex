@@ -1,0 +1,169 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Design Patterns}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\dfn{Design Pattern}{
+  A design pattern describes a recurring problem in the construction phase and, then describes
+  the core of the solution to the problem in a way that promotes re-usability and modularity in
+  any context.
+}
+Design Patterns capture the best practices of experienced object oriented software developers, and are
+general solutions to software development problems. Each pattern is comprised of four parts:
+
+\begin{description}
+  \item [ The pattern name ] - A handle to describe a design problem, its solution and consequences succinctly.
+  \item [ The problem ] - Describes when to apply the pattern.
+        \begin{itemize}
+          \item Explains the problem and its context.
+          \item It might describe specific design problems such as how to represent algorithms as objects.
+          \item It might describe class or object structures that are symptomatic of an inflexible design.
+          \item May include a list of conditions that must be met before it makes sense to apply the pattern.
+        \end{itemize}
+  \item [ The solution ] - Describes the elements that make up the design, their relationships, responsibilities and collaborations.
+        \begin{itemize}
+          \item Does not describe a particular concrete design or implementation.
+          \item Provides an abstract description of a design problem and how a general arrangement of elements solves it.
+        \end{itemize}
+  \item [ The consequences ] - Describes the results and trade-offs of applying the pattern.
+        \begin{itemize}
+          \item Space and time trade-offs.
+          \item Language and implementation issues.
+          \item Impact on system flexibility, extensibility or portability.
+        \end{itemize}
+\end{description}
+
+\chapter{Types of Design Patterns}
+Erich Gamma, Richard Helm, Ralph Johnson and John Vlisides in their Design Patterns book define 23 design patterns  divided into three types:
+
+\begin{description}
+  \item[Creational Patterns]  - Patterns that create objects for you, rather than having you instantiate objects directly.
+  \item[Structural Patterns] - Patterns that compose groups of objects into larger structures.
+  \item[Behavioral Patterns] - Patterns that define how objects interact.
+\end{description}
+
+\section{Creational Patterns}
+Here are the creational patterns:
+\begin{description}
+  \item[Factory Pattern]  - A decision making class that returns one of several possible subclasses of an abstract base class depending on the data provided to it.
+  \item[Abstract Factory Pattern] - Provides and interface to create and return one of several families of related objects.
+  \item[Builder Pattern] - A class that constructs a complex object step by step.
+  \item[Prototype Pattern] - A class that creates a new object by copying an existing object rather than creating new instances.
+  \item[Singleton Pattern] - A class of which only a single instance can exist.
+\end{description}
+
+\subsection{Factory Pattern}
+\lstinputlisting[language=C++, caption=Factory Pattern]{/home/mads/projects/C++/Learning/src/Patterns/_patterns/Factory.hpp}
+
+This \lstinline{ShapeFactory} class is a factory class that returns a subclass of the \lstinline{Shape} class depending on the data provided to it. The \lstinline{Shape} class is an abstract class that has a pure virtual function \lstinline{getArea()}.
+
+The Factory Pattern should be used when:
+\begin{itemize}
+  \item A class can't anticipate the class of objects it must create.
+  \item A class uses it's subclasses to specify the objects it creates.
+  \item You want to abstract away the knowledge of the concrete classes from the client.
+\end{itemize}
+
+\subsection{Abstract Factory Pattern}
+The Abstract Factory Pattern sits one level of abstraction higher than the Factory Pattern. The Abstract Factory Pattern is a factory object that returns
+one of several factories, i.e. A factory of factories. An example of this could be for a GUI library that has a factory for elements of a
+certain themes, e.g. a Windows theme or a Mac theme.
+\lstinputlisting[language=C++, caption=Abstract Factory Pattern]{/home/mads/projects/C++/Learning/src/Patterns/_patterns/AbstractFactory.hpp}
+
+This \lstinline{ArmyMaker} class is an abstract factory class that returns a subclass of the \lstinline{Army} class depending on the data provided to it. The \lstinline{Army} class is an abstract class that has the pure virtual functions
+\lstinline{createInfantry()}, \lstinline{createRanged()} and \lstinline{createMounted()} that return instances of the \lstinline{Unit} class.
+
+The Abstract Factory Pattern isolates the creation of objects from the client and because of this it is easier to change or interchange
+the product class families freely. The Abstract Factory Pattern should be used when:
+\begin{itemize}
+  \item A system should be independent of how its products are created, composed and represented.
+  \item A system should be configured with one of multiple families of products.
+  \item A family of related product objects is designed to be used together and you need to enforce this constraint.
+\end{itemize}
+
+\subsection{Builder Pattern}
+The Builder pattern separates the construction of a complex object from its representation so that the same construction process can create different representation.
+
+\lstinputlisting[language=C++, caption=Builder Pattern]{/home/mads/projects/C++/Learning/src/Patterns/_patterns/Builder.hpp}
+
+The builder pattern should be used when:
+\begin{itemize}
+  \item The algorithm for creating a complex object should be independent of the parts that make up the object and how they are assembled.
+  \item The construction process must allow different representations for the object that is constructed.
+\end{itemize}
+
+\subsubsection{Consequences of the Builder Pattern}
+\begin{itemize}
+  \item The Builder Pattern lets you vary a product's internal representation.
+  \item Each specific builder is independent of the others and the rest of the program.
+  \item You have more control over the each final product that is constructed as it is constructed step by step.
+  \item The Builder pattern is somewhat like an Abstract Factory in that they both return classes made up of a number of methods and objects. The
+        difference is that the Abstract Factory returns a family of related classes, the Builder constructs a complex object step by step depending
+        on the data provided to it.
+\end{itemize}
+
+\subsection{Prototype Pattern}
+Specifies types of objects using a prototypical instance, and create new objects by copying this prototype. The Prototype Pattern should be used when:
+
+\lstinputlisting[language=C++, caption=Prototype Pattern]{/home/mads/projects/C++/Learning/src/Patterns/_patterns/Prototype.hpp}
+
+\begin{itemize}
+  \item Creating a new instance is more expensive than copying an existing instance.
+  \item You need classes that differ only in the type of processing they offer, for example parsing of strings representing different radixes.
+\end{itemize}
+
+\subsubsection{Consequences of the Prototype Pattern}
+\begin{itemize}
+  \item You can add and remove classes at runtime as needed.
+  \item You can revise the internal data representation of classes at runtime based on program conditions.
+  \item You can specify new objects at runtime without creating a lot of classes and subclasses.
+  \item Classes that have circular references cannot be cloned easily.
+  \item Language implementation issues may arise for example in Java, if the classes already exist, you may not be able to change them to implement
+        the Cloneable interface. The deep clone method can be particularly difficult to implement if the all the class objects contained in a class
+        cannot be declared to implement the Serializable interface.
+\end{itemize}
+
+\subsection{Singleton Pattern}
+
+Sometimes it is appropriate to only have one instance of a class for example:
+\begin{itemize}
+  \item Window Managers
+  \item Texture Managers for games
+  \item Print Spoolers
+  \item File Systems
+\end{itemize}
+Typically singleton objects are accessed by disparate objects throughout a system, and therefore require a global point of access. With a singleton pattern
+you can:
+\begin{itemize}
+  \item Ensure that a class has only one instance.
+  \item Provide a global point of access to the instance.
+  \item Allow multiple instances in the future without affecting a singleton class's clients.
+\end{itemize}
+\lstinputlisting[language=C++, caption=Singleton Pattern]{/home/mads/projects/C++/Learning/src/Patterns/_patterns/Singleton.hpp}
+
+\subsubsection{Consequences of the Singleton Pattern}
+\begin{itemize}
+  \item It can be difficult to subclass a singleton class, since it can only work if the base singleton class has not yet been initialized
+  \item It is possible to have multiple instances of a singleton class if the singleton class is not implemented correctly.
+  \item The number of instances of a singleton class can be controlled.
+\end{itemize}
+
+
+\end{document}

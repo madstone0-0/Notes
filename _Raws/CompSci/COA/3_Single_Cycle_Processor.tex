@@ -417,55 +417,5 @@ Each stage takes one clock cycle to complete, i.e. the categories of instruction
   }
 }
 
-\section{Pipelining Implementation}
-
-Consider a task that can be divided into $k$ subtasks, where $k$ subtasks are executed on $k$ different stages. Each subtask requires one time unit and the total
-execution time of the task is $k$ time units. Pipelining is to overlap the execution such that the $k$ stages work in parallel on $k$ different tasks, where each
-task leaves and enters the pipeline at a rate of one task per time unit. \\
-
-
-Let $ \tau_i$ be time delay in stage $S_i$. The Clock Cycle is the maximum stage delay, i.e. $ \tau = \max \left( \tau_i \right) $, and accordingly
-the clock rate/frequency is $\frac{1}{\tau}$ or $\frac{1}{\max \left( \tau_i \right) }$. A pipeline can process $n$ tasks in $k + n - 1$ cycles where
-$k$ cycles are needed to complete the first task and $n - 1$ cycles are needed to complete the remaining tasks. This gives the following equation:
-\[
-  S_k = \frac{\text{Serial execution in cycles}}{\text{Pipelined execution in cycles}} = \frac{nk}{k + n - 1}\, S_k = k \text{ for large } n
-\]
-
-Given the five stages:
-\begin{itemize}
-  \item Instruction Fetch (IF)
-  \item Instruction Decode (ID)
-  \item Execution (EX)
-  \item Memory Access (MEM)
-  \item Write Back (WB)
-\end{itemize}
-
-\ex{}{
-  \qs{}{
-    Consider a 5-stage instruction execution in which
-    \begin{itemize}
-      \item IF = ALU = Data Memory Access = 200 ps
-      \item Register Read = Register Write = 150 ps
-    \end{itemize}
-    \begin{enumerate}
-      \item What is the clock cycle time for a single cycle processor
-      \item What is the clock cycle time for a pipelined processor
-      \item What is the speed-up factor of the pipelined processor
-    \end{enumerate}
-  }
-
-  \sol{
-    \begin{enumerate}
-      \item $200 + 200 + 200 + 150 + 150 = 900 \text{ps}$
-      \item $200 \text{ps}$, i.e. max stage delay
-      \item
-            \begin{align*}
-              S_k & = \frac{900}{200} = 4.5
-            \end{align*}
-    \end{enumerate}
-  }
-}
-
-
 
 \end{document}

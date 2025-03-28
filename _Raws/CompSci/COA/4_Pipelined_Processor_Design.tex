@@ -1,0 +1,126 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Pipelined Processor Design}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\dfn{Pipelining}{
+  The execution of an instruction is broken down into multiple stages, i.e. fetch, decode, etc, then stages of instruction execution are executed in an overlapping manner allowing multiple instructions to executed simultaneously.
+}
+
+\section{Pipelining Implementation}
+
+Consider a task that can be divided into $k$ subtasks, where $k$ subtasks are executed on $k$ different stages. Each subtask requires one time unit and the total
+execution time of the task is $k$ time units. Pipelining is to overlap the execution such that the $k$ stages work in parallel on $k$ different tasks, where each
+task leaves and enters the pipeline at a rate of one task per time unit. \\
+
+
+Let $ \tau_i$ be time delay in stage $S_i$. The Clock Cycle is the maximum stage delay, i.e. $ \tau = \max \left( \tau_i \right) $, and accordingly
+the clock rate/frequency is $\frac{1}{\tau}$ or $\frac{1}{\max \left( \tau_i \right) }$. A pipeline can process $n$ tasks in $k + n - 1$ cycles where
+$k$ cycles are needed to complete the first task and $n - 1$ cycles are needed to complete the remaining tasks. This gives the following equation:
+\[
+  S_k = \frac{\text{Serial execution in cycles}}{\text{Pipelined execution in cycles}} = \frac{nk}{k + n - 1}\, S_k = k \text{ for large } n
+\]
+
+Given the five stages:
+\begin{itemize}
+  \item Instruction Fetch (IF)
+  \item Instruction Decode (ID)
+  \item Execution (EX)
+  \item Memory Access (MEM)
+  \item Write Back (WB)
+\end{itemize}
+
+\ex{}{
+  \qs{}{
+    Consider a 5-stage instruction execution in which
+    \begin{itemize}
+      \item IF = ALU = Data Memory Access = 200 ps
+      \item Register Read = Register Write = 150 ps
+    \end{itemize}
+    \begin{enumerate}
+      \item What is the clock cycle time for a single cycle processor
+      \item What is the clock cycle time for a pipelined processor
+      \item What is the speed-up factor of the pipelined processor
+    \end{enumerate}
+  }
+
+  \sol{
+    \begin{enumerate}
+      \item $200 + 200 + 200 + 150 + 150 = 900 \text{ps}$
+      \item $200 \text{ps}$, i.e. max stage delay
+      \item
+            \begin{align*}
+              S_k & = \frac{900}{200} = 4.5
+            \end{align*}
+    \end{enumerate}
+  }
+}
+
+\section{Pipeline Data Path}
+
+A single cycle design can be converted into a pipelined design by introducing pipeline registers at the end of each stage, i.e. IF/ID, ID/EX, EX/MEM, MEM/WB.
+The pipeline registers store intermediate results and control signals and the same clock edge that triggers the next stage also triggers the pipeline registers.
+There arises a problem with this design where the instruction in the Instruction Decode (ID) stage is different from the one in the Write Back (WB) stage, i.e.
+the WB stage is writing to a different destination register. This is solved by pipelining the destination register from ID to WB, i.e. the destination register
+is passed along the pipeline. This is known as \textbf{Forwarding}.
+
+Ideally all the pipeline is executing all the instruction stages at the same time, but in reality the pipeline is not always full, i.e. there are bubbles in the pipeline.
+Some instruction types skip stages, i.e.:
+\begin{itemize}
+  \item Store instructions skip the WB stage
+  \item ALU instructions skip the MEM stage
+  \item Branch instructions skip the MEM and WB stages
+  \item Jump instructions skip the ID, EX, MEM, and WB stages
+\end{itemize}
+
+With the addition of pipeline registers more control signals are needed to control the pipeline. These control signals are generated in the ID stage .
+
+\section{Pipeline Hazards}
+
+\dfn{Hazard}{
+  A situation that would cause incorrect execution of the pipeline.
+}
+
+There are three types of hazards:
+\begin{description}
+  \item[Structural Hazards] - Caused by resource contention, i.e. two instructions require the same resource in the same cycle.
+  \item[Data Hazards] - Cause by data dependencies between instructions, i.e. An instruction computes a result needed by another instruction.
+  \item[Control Hazards] - Caused by instructions that change the control flow (branches/jumps), i.e. delays in changing the flow of control.
+\end{description}
+
+\subsection{Structural Hazards}
+This hazard can be solved by:
+\begin{description}
+  \item[Delay access to resource] - Requires a mechanism to delay instruction access to resource.
+  \item[Add more hardware resources] - Requires more hardware resources to allow multiple instructions to access the same resource.
+\end{description}
+
+\subsection{Data Hazards}
+\dfn{Read After Write (RAW) Hazard}{
+  An instruction reads a register before a previous instruction writes to it.
+}
+An example of this hazard is the RAW (Read After Write) hazard. This can be solved by:
+\begin{description}
+  \item[Stalling]  - Inserting a bubble in the pipeline, i.e. waiting for the previous instruction to write to the register. This wastes a cycle.
+  \item[Forwarding] - Forwarding data from the instruction that writes to the instruction that reads.
+\end{description}
+
+
+\end{document}

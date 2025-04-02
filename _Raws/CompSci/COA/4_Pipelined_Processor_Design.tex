@@ -92,6 +92,23 @@ Some instruction types skip stages, i.e.:
 
 With the addition of pipeline registers more control signals are needed to control the pipeline. These control signals are generated in the ID stage .
 
+\section{Control Signals}
+Control signals are generated during the Instruction Decode (ID) stage. In a pipelined processor
+due to the overlapping of stages, the control signals are generated in the ID stage and passed to the EX stage. The control signals are:
+\begin{description}
+  \item[RegDst] - Selects the destination register for the Write Back (WB) stage.
+  \item[ExtOP] - Selects the type of immediate value to be used in the ALU operation.
+  \item[ALUSrc] - Selects the source of the second operand for the ALU operation.
+  \item[ALUOp] - Selects the type of ALU operation to be performed.
+  \item[BEQ] - Selects the branch instruction to be executed.
+  \item[BNE] - Selects the branch instruction to be executed.
+  \item[MemRd] - Selects the memory read operation to be performed.
+  \item[MemWr] - Selects the memory write operation to be performed.
+  \item[WBdata] - Selects the data to be written back to the register file.
+  \item[RegWr] - Selects the register write operation to be performed.
+  \item[PCSrc] - Selects the source of the next instruction address.
+\end{description}
+
 \section{Pipeline Hazards}
 
 \dfn{Hazard}{
@@ -106,10 +123,13 @@ There are three types of hazards:
 \end{description}
 
 \subsection{Structural Hazards}
+A Structural hazard can arise when trying to use the same hardware resource concurrently in the same clock cycle. For example writing back the result of an
+ALU operation and writing the result of a load operation to the register file at the same time.
 This hazard can be solved by:
 \begin{description}
-  \item[Delay access to resource] - Requires a mechanism to delay instruction access to resource.
-  \item[Add more hardware resources] - Requires more hardware resources to allow multiple instructions to access the same resource.
+  \item[Delay access to resource] - Requires a mechanism to delay instruction access to resource, i.e. impose a delay on the instruction that requires the resource.
+  \item[Add more hardware resources] - Requires more hardware resources to allow multiple instructions to access the same resource, i.e. more write ports
+        in the register file.
 \end{description}
 
 \subsection{Data Hazards}
@@ -119,8 +139,44 @@ This hazard can be solved by:
 An example of this hazard is the RAW (Read After Write) hazard. This can be solved by:
 \begin{description}
   \item[Stalling]  - Inserting a bubble in the pipeline, i.e. waiting for the previous instruction to write to the register. This wastes a cycle.
-  \item[Forwarding] - Forwarding data from the instruction that writes to the instruction that reads.
+  \item[Forwarding] - Forwarding data from the instruction that writes to the instruction that reads. This requires additional hardware to forward the data but
+        does not waste a cycle.
 \end{description}
+
+\dfn{Load Delay}{
+  The load instruction has a delay that cannot be overcome by forwarding. This is because the load instruction takes two cycles to complete and the data is not available until the second cycle.
+}
+
+An example of this hazard is when a load instruction is followed by an instruction that uses the data from the load instruction. This can be solved by:
+\begin{description}
+  \item[Stalling]  - Inserting a NOP (No operation) instruction which wastes a cycle
+  \item[Code scheduling] - Reordering the instructions to avoid the hazard. This requires additional hardware to reorder the instructions but does not waste a cycle.
+\end{description}
+
+\dfn{Write After Read (WAR)}{
+  A situation where two instructions use the same register name but do not have a data dependency.
+}
+An example of this hazard is when two instructions read then write to the same registers respectively. This can be solved by:
+\begin{description}
+  \item[Register Renaming] - Mapping logical register names to physical register names
+\end{description}
+
+\dfn{Write After Write (WAW)}{
+  A situation where two instructions write to the same register but do not have a data dependency.
+}
+
+An example of this hazard is when two instructions write to the same register. This can also be solved by register renaming
+
+WAR and WAW are examples of \textbf{anti-dependency} and \textbf{output dependency} respectively and are collectively known as \textbf{name dependencies}.
+
+\subsection{Control Hazards}
+Caused by instructions that change the control flow (branches/jumps), i.e. delays in changing the flow of control. This can be solved by:
+\begin{description}
+  \item[Dynamic Branch Prediction]  - Using a branch history table to predict the outcome of a branch instruction. This requires additional hardware to implement the branch history table.
+  \item[Delayed Branching] - Reordering the instructions to avoid the hazard. This requires additional hardware to reorder the instructions but does not waste a cycle.
+  \item[Predict Branch not taken] - Assuming that the branch instruction will not be taken. This is a simple and effective solution but can lead to incorrect execution of the pipeline.
+\end{description}
+
 
 
 \end{document}

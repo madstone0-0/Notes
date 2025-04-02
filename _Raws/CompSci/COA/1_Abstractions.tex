@@ -130,7 +130,7 @@ Transistors are made up of three parts:
   \]
   Or
   \[
-    \text{Performance} = \frac{\text{Number of Instructions}}{\text{Execution Time}}
+    \text{Performance} = \frac{\text{Number of Instructions}}{\text{}}
   \]
 }
 
@@ -308,11 +308,43 @@ Or
 }
 
 
-\chapter{The Power Wall}
+\chapter{Layers of Abstraction}
 
-\dfn{Power}{
+The layers of abstraction in a computer system is as follows:
 
-}
+\section{Hardware / Digital Logic Layer}
+
+This layer is the physical level where computers are made up of transistors, logic gates and other electronic components. It is
+where the orchestration of electrons occurs to perform computations. At this level, we have the following components:
+\begin{itemize}
+  \item Transistors
+  \item Logic Gates
+  \item Flip-Flops
+  \item Multiplexers
+  \item Demultiplexers
+\end{itemize}
+An explicit example of an abstraction at this layer is an integrated circuit with millions of transistors that implements an Arithmetic Logic Unit (ALU).
+
+\section{Microarchitecture Layer}
+
+This layer is where the organization and design of the processor is defined. It describes how hardware components like, ALU, registers, caches, and pipelines
+interact to implement the Instruction Set. An example the choice of a single cycle, multi-cycle or pipelined implementation of the processor.
+
+\section{Instruction Set Architecture (ISA) Layer}
+
+This layer is an abstract model that defines the interface between the hardware and software, describing the set of instructions that the processor can execute.
+Some examples include the MIPS32, x86, x86\_64, ARM, and RISC-V instruction sets. The ISA defines the instruction formats, addressing modes, and the behaviour of each instruction.
+
+\section{Operating System Layer}
+
+This layer provides higher level abstractions for hardware resources and offers an interface through which applications can interact with the hardware.
+Some examples include GNU/Linux, Windows, and macOS. The OS manages resources such as memory, processes, and I/O devices, providing services like process scheduling, memory management, and file systems.
+The kernel is the core component of the OS that interacts directly with the hardware and manages system resources.
+
+\section{High-Level Language / Application  Layer}
+This layer is where high-level programming languages (HLLs) and applications reside. HLLs provide abstractions that allow programmers to write code without needing to understand the underlying hardware details.
+An example of this is a web browser written in C++.
+
 
 
 \end{document}

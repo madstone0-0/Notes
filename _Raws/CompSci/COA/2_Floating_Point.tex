@@ -1,0 +1,273 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Floating Point}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{tabularx}
+\usepackage{parskip}
+\usepackage{listings}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{IEEE 754}
+
+\section{Introduction}
+
+\dfn{Floating Point}{
+  A way to represent real numbers in a computer system.
+}
+
+Floating point numbers are represented in scientific notation bitwise under the IEEE 754 specification, i.e.:
+\[
+  \pm d.\text{fraction} \times 2^{\text{exponent}}
+\]
+Floating point numbers should be normalized, i.e. exactly one non-zero digit should appear before the decimal point. This number
+can be any digit in the number base except zero.
+For example in decimal the possible numbers are 1 to 9, and in binary the possible numbers are 1.
+
+A floating point number is represented in the following way:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      \textbf{Sign Bit} & \textbf{Exponent} & \textbf{Fraction / Mantissa} \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+Where:
+\begin{description}
+  \item[Sign Bit]  - 0 is positive and 1 is negative.
+  \item[Exponent] - The exponent is stored in a biased form. The bias is the value that is added to the exponent to get the actual exponent.
+        Very large numbers have large exponents and very small close to zero numbers have negative exponents. The more bits in the
+        exponent field increases the range of numbers that can be represented.
+  \item[Fraction / Mantissa] - The fraction is the part of the number that is multiplied by the base raised to the exponent. The more bits in the
+        fraction field increases the precision of the number. The fraction is also called the mantissa.
+\end{description}
+
+Single precision floating point numbers are represented in 32 bits, with:
+\begin{description}
+  \item[Sign Bit]  - 1 bit
+  \item[Exponent] - 8 bits
+  \item[Fraction / Mantissa] - 23 bits
+\end{description}
+
+Double precision floating point numbers are represented in 64 bits, with:
+\begin{description}
+  \item[Sign Bit]  - 1 bit
+  \item[Exponent] - 11 bits
+  \item[Fraction / Mantissa] - 52 bits
+\end{description}
+
+For a normalized floating point number in binary this is the representation:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c|c|c|}
+      \hline
+      \textbf{Sign Bit} & \textbf{Exponent}      & \textbf{Fraction / Mantissa} \\
+      \hline
+      $S$               & $E = e_1, \ldots, e_n$ & $F = f_1, \ldots, f_m$       \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\dfn{Significand}{
+  The significand is the part of a number that contains its significant digits. The significand is also called the mantissa.
+  IEEE 754 assumes that the significand is normalized, i.e. it is in the form of $1.f_1f_2\ldots f_m$. The significand is 1 bit longer
+  than the fraction field, i.e. it is 1 bit longer than the mantissa. The significand is equal to:
+  \[
+    \left( 1.F \right) _2 = \left( 1.f_1f_2f_3f_4\ldots f_m \right)
+  \]
+  Therefore the value of the significand is:
+  \[
+    1 + f_1\times 2^{-1} + f_2\times 2^{-2} + f_3\times 2^{-3} + \ldots + f_m\times 2^{-m}
+  \]
+}
+IEEE 754 uses biased exponent representation, i.e.:
+\[
+  E = \text{Exponent} - \text{Bias}
+\]
+The bias term depends on the number of bits in the exponent field. Defined by the formula:
+\[
+  \text{Bias} = 2^{(k-1)} - 1
+\]
+Where $k$ is the number of bits in the exponent field. Therefore the bias for the exponent field is:
+\begin{description}
+  \item[Single Precision] - 127, i.e. $2^{(8-1)} - 1$
+  \item [Double Precision] - 1023, i.e. $2^{(11-1)} - 1$
+\end{description}
+
+Finally the value of a normalized floating point number is:
+\[
+  \left( -1 \right)^{S} \times \left( 1 + f_1\times 2^{-1} + f_2\times 2^{-2} + f_3\times 2^{-3} + \ldots + f_m\times 2^{-m} \right) \times 2^{E}
+\]
+
+\ex{}{
+\qs{}{
+What is the decimal value of the following single precision floating point number?
+\[
+  \underbrace{1}_{\text{Sign}} \quad
+  \underbrace{01111100}_{\text{Exponent}} \quad
+  \underbrace{01000000000000000000000}_{\text{Fraction}}
+\]
+}
+
+\sol{
+  \begin{align*}
+    S & = 1                                                               \\
+    E & = \left( 01111100 \right)_2 - 127                                 \\
+      & = 124 - 127                                                       \\
+      & = -3                                                              \\
+    F & = 1 + 1\times 2^{-2}                                              \\
+    \\
+    D & =  \left( -1 \right)^{1} \times \left( 1.25 \right) \times 2^{-3} \\
+      & =  -0.15625                                                       \\
+  \end{align*}
+}
+
+
+\qs{}{
+What is the decimal value of the following single precision floating point number?
+\[
+  \underbrace{0}_{\text{Sign}} \quad
+  \underbrace{10000010}_{\text{Exponent}} \quad
+  \underbrace{01001100000000000000000}_{\text{Fraction}}
+\]
+}
+
+\sol{
+  \begin{align*}
+    S & = 0                                                               \\
+    E & = \left(  10000010\right) - 127                                   \\
+      & = 130 - 127                                                       \\
+      & = 3                                                               \\
+    F & = 1 + 1\times 2^{-2} + 1\times 2^{-5} + 1\times 2^{-6}            \\
+      & = 1.296875                                                        \\
+    D & = \left( -1 \right)^0 \times \left( 1.296875 \right) \times 2^{3} \\
+      & = 10.375                                                          \\
+  \end{align*}
+}
+}
+
+\ex{}{
+  \qs{}{
+    Convert $-0.8125$ to single and double precision floating point IEEE 754 format.
+  }
+
+  \sol{
+    \begin{align*}
+      S & = 1                                                                                                                                                                \\
+      F & = 0.8125 \times 2 = 1.625                                                                                                                                          \\
+        & = 0.625 \times 2 = 1.25                                                                                                                                            \\
+        & = 0.25 \times 2 = 0.5                                                                                                                                              \\
+        & = 0.5 \times 2 = 1                                                                                                                                                 \\
+        & = \left( 0.1101 \right)_2                                                                                                                                          \\
+        & = \underbrace{\left( 1.101 \right)_2 \times 2^{-1}}_{\text{The exponent is the number of times we moved the decimal point to the right or left. Negative for right
+          and positive for left.}
+      }                                                                                                                                                                      \\
+    \end{align*}
+
+    \begin{align*}
+      E & =  -1 + 127                        \\ \tag*{Add bias when converting to IEEE 754}
+        & =  126                             \\
+      \\
+        & \underbrace{1}_{\text{Sign}} \quad
+      \underbrace{0111 1110}_{\text{Exponent}} \quad
+      \underbrace{10100000000000000000000}_{\text{Fraction}}
+    \end{align*}
+
+    \begin{align*}
+      E & =  -1 + 1023                       \\
+        & =  1022                            \\
+      \\
+        & \underbrace{1}_{\text{Sign}} \quad
+      \underbrace{011 1111 1110}_{\text{Exponent}} \quad
+      \underbrace{1010000000000000000000000000000000000000000000000000}_{\text{Fraction}}
+    \end{align*}
+  }
+
+  \qs{}{
+    Convert $-125.343$ into a single and double precision floating point integer.
+  }
+
+  \sol{
+    \begin{align*}
+      S & = 1                        \\
+      F & = 0.343 \times 2 = 0.686   \\
+        & = 0.686 \times 2 = 1.372   \\
+        & = 0.372 \times 2 = 0.744   \\
+        & = 0.744 \times 2 = 0.488   \\
+        & = 0.488 \times 2 = 0.976   \\
+        & = 0.976 \times 2 = 1.952   \\
+        & = 0.952 \times 2 = 1.904   \\
+        & = 0.904 \times 2 = 1.808   \\
+        & = 0.808 \times 2 = 1.616   \\
+        & = 0.616 \times 2 = 1.232   \\
+        & = 0.232 \times 2 = 0.464   \\
+        & = 0.464 \times 2 = 0.928   \\
+        & = 0.928 \times 2 = 1.856   \\
+        & = 0.856 \times 2 = 1.712   \\
+        & = 0.712 \times 2 = 1.424   \\
+        & = 0.424 \times 2 = 0.848   \\
+      F & = 1111101.0100011111001110 \\
+      F & = 1111101.0100011111001110 \\
+      F & = 1.1111010100011111001110 \\
+    \end{align*}
+    \begin{align*}
+      E & = 6 + 127                          \\
+        & = 133                              \\
+        & \underbrace{1}_{\text{Sign}} \quad
+      \underbrace{1000 0101}_{\text{Exponent}} \quad
+      \underbrace{11110101000111110011100}_{\text{Fraction}}
+    \end{align*}
+    \begin{align*}
+      E & = 6 + 1023                         \\
+        & = 1029                             \\
+        & \underbrace{1}_{\text{Sign}} \quad
+      \underbrace{100 0000 0101}_{\text{Exponent}} \quad
+      \underbrace{1111010100011111001110000000000000000000000000000000}_{\text{Fraction}}
+    \end{align*}
+  }
+}
+
+The largest normalized single precision IEEE 754 float is:
+\[
+  \underbrace{0}_{\text{Sign}} \quad
+  \underbrace{1111 1110}_{\text{Exponent}} \quad
+  \underbrace{11111111111111111111111}_{\text{Fraction}}
+\]
+$\therefore$ $ \left( -1 \right)^{0} \times 1 + \sum_{i=1}^{23} 1\times 2^{-i} \times 2^{127} = 3.4028\ldots\times 10^{38} $
+And largest normalized double precision IEEE 754 float is:
+\[
+  \underbrace{0}_{\text{Sign}} \quad
+  \underbrace{111 1111 1110}_{\text{Exponent}} \quad
+  \underbrace{1111111111111111111111111111111111111111111111111111}_{\text{Fraction}}
+\]
+$\therefore$ $ \left( -1 \right)^{0} \times 1 + \sum_{i=1}^{52} 1\times 2^{-i} \times 2^{1023} = 1.79769...\ldots\times 10^{308} $
+
+\chapter{MIPS Floating-Point Instructions}
+
+\dfn{MIPS}{
+  Microprocessor without Interlocked Pipeline Stages
+}
+
+\dfn{Computer Architecture vs Computer Organization}{
+  \begin{itemize}
+    \item Computer Architecture: The attributes of a system that are visible to a programmer.
+    \item Computer Organization: The operational units and their interconnections that realize the architectural specifications.
+  \end{itemize}
+}
+
+\end{document}

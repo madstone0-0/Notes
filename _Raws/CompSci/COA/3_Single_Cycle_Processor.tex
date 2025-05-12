@@ -28,9 +28,18 @@ Each instruction in MIPS is the same size (32 bits). There are three types of in
   \item J-Type: Jump, example \texttt{j 1000}
 \end{itemize}
 
+MIPS supports various addressing modes, including:
+\begin{description}
+  \item[Immediate] - Operand is a constant value embedded in the instruction itself. Example: \texttt{addi \$t0, \$t1, 100}
+  \item[Register] - Operand is stored in a register. Example: \texttt{add \$t0, \$t1, \$t2}
+  \item[Base] - Operand is stored in memory, and the address is calculated using a base register and an offset. Example: \texttt{lw \$t0, 100(\$t1)}
+  \item[PC-Relative] - Operand is stored in memory, and the address is calculated using the program counter (PC) and an offset. Example: \texttt{beq \$t0, \$t1, 100}
+  \item[Pseudo-Direct] - Operand is stored in memory, and the address is calculated using a pseudo-direct addressing mode. Example: \texttt{j 1000}
+\end{description}
+
 \section{R-Type Instructions}
 
-Register operations. Arithmetic and logical operations directly on registers.
+Register operations. Arithmetic and logical operations directly on registers. MIPS defines 32 general purpose register each 32 bits wide. The registers are numbered from 0 to 31, with register 0 always being 0.
 
 \subsection{Structure of R-Type Instructions}
 
@@ -236,11 +245,73 @@ This skew amount can however be minimized by balancing the clock delays to all s
 
 \chapter{Instruction Type Data Paths}
 
+\section{Control Signals}
+The MIPS ISA defines the following control signals:
+\begin{description}
+  \item[IsJAL] - Used when the instruction is a Jump and Link instruction, which saves the return address in the link register.
+  \item[IsShamt] - Determines if the instruction is a shift operation which requires the shamt field to be used.
+  \item[ALUSrc] - Chooses whether the second operand for the ALU comes from a register ($rt$) or an immediate value.
+  \item[IsSyscall] - Determines whether the instruction is a system call.
+  \item[ExtOp] - Determines whether the immediate value should be zero-extended or sign-extended.
+  \item[MemRead] - Controls whether memory should be read to.
+  \item[Jump] - Determines whether the instruction is a jump instruction.
+  \item[Branch] - Determines whether the instruction is a branch instruction.
+  \item[RegDst] - Determines whether the destination register comes from $rt$ (I-type) or $rd$ (R-type).
+  \item[IsJR] - Determines whether the instruction is a jump register instruction, which jumps to the address in a register.
+  \item[ReadRS/ReadRT] - Determines whether the instruction should read from the source register ($rs$) or target register ($rt$).
+  \item[ALUOp] - Determines the operation to be performed by the ALU, such as addition, subtraction, logical AND, etc.
+  \item[RegWR] - Determines whether the instruction should write to a register.
+\end{description}
+
 \section{R-Type Instructions}
 
+For R-type instructions the datapath is as follows:
+\begin{description}
+  \item[IF]  - The instruction is fetched from instruction memory (ROM) using the program counter and stored in the instruction register (IR).
+  \item[ID] - The instruction is decoded by the control unit to determine the operation type and the destination ($rd$) and operand registers ($rs$ and $rt$). At this stage these are the control signals activated:
+        \begin{description}
+          \item[ALUOp] - As opcode is 0, the ALUOp is determined by the funct field of the instruction.
+          \item[ALUSrc] - The second operand for the ALU comes from the register file ($rt$)
+          \item[RegDst] - The destination register comes from the $rd$ field of the instruction.
+          \item[RegWR] - Enables writing of the ALU result.
+        \end{description}
+  \item[EX] - The ALU performs the operation specified by the ALUOp.
+  \item[WB] - The result of the ALU operation is written back to the destination register ($rd$) in the register file.
+\end{description}
+
 \section{I-Type Instructions}
+For I-type instructions the datapath is as follows:
+\begin{description}
+  \item[IF]  - The instruction is fetched from instruction memory (ROM) using the program counter and stored in the instruction register (IR).
+  \item[ID] - The instruction is decoded by the control unit to determine the operation type $op$, and the destination ($rt$), operand register ($rs$) and immediate value. At this stage these are the control signals activated:
+        \begin{description}
+          \item[ALUOp] - The ALUOp is determined by the opcode field of the instruction.
+          \item[ALUSrc] - The second operand for the ALU comes from the immediate value.
+          \item[RegDst] - The destination register comes from the $rt$ field of the instruction.
+          \item[RegWR] - Enables writing of the ALU result.
+          \item[ExtOp] - Determines whether the immediate value should be zero-extended or sign-extended as the 16-bit immediate value needs to be extended to 32 bits for ALU operations.
+        \end{description}
+  \item[EX] - The ALU performs the operation specified by the ALUOp using the immediate value and the value in the $rs$ register.
+  \item[MEM] - Activated depending on the type of instruction, i.e. load/store instructions
+        \begin{description}
+          \item[Load] - The memory address is computed by adding the immediate value to the value in the $rs$ register. The data is then read from memory and stored in the $rt$ register.
+          \item[Store] - The memory address is computed by adding the immediate value to the value in the $rs$ register. The data from the $rt$ register is then written to memory.
+          \item[Branch] - The branch target address is computed by adding the immediate value to the program counter (PC). The branch is taken if the condition is met.
+        \end{description}
+  \item[WB] - The result of the ALU operation is written back to the destination register ($rt$) in the register file.
+\end{description}
 
 \section{J-Type Instructions}
+For J-type instructions the datapath is as follows:
+\begin{description}
+  \item[IF]  - The instruction is fetched from instruction memory (ROM) using the program counter and stored in the instruction register (IR).
+  \item[ID] - The instruction is decoded by the control unit to determine the operation type $op$, and the target address. At this stage these are the control signals activated:
+        \begin{description}
+          \item[Jump] - The jump target address is computed by shifting the 26-bit address left by 2 bits and then concatenating with the upper 4 bits of $PC + 4$
+          \item[IsJAL] - Determines whether the instruction is a jump and link instruction, which saves the return address in the link register.
+        \end{description}
+  \item[EX] - The new program counter (PC) is computed by adding the jump target address to the current program counter (PC), depending on the type of jump instruction.
+\end{description}
 
 \chapter{Limitations of Single Cycle Processors}
 

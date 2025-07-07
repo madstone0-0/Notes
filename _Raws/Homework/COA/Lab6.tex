@@ -1,0 +1,89 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{graphicx}
+\usepackage{parskip}
+\title{\Huge{Lab 6}}
+\author{\huge{Madiba Hudson-Quansah}}
+\graphicspath{ {assets/Lab6} }
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{mod.png}
+  \caption{Modified Vault}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{safe1.png}
+  \caption{Correct Code}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{safe2.png}
+  \caption{Incorrect Code}
+\end{figure}
+
+
+\qs{}{
+  What was the most challenging part about writing the conditional check in MIPS compared to languages like Python or C?
+}
+
+\sol{
+  The most challenging thing about branches in MIPS is manually setting the branch target and handling returning back to the main execution flow.
+  In Python and C branches are contained syntactically within a code block making it easy to follow the program flow and logic, but with MIPS the branch target
+  is separated from the branch instruction making it harder to follow.
+}
+
+\qs{}{
+  How do you handle the concept of else in MIPS, where there are no direct "else" keywords?
+}
+
+\sol{
+  Else logic can be handled in MIPS in two ways.  In the case of an else if another branch instruction with a corresponding branch target can be used
+  but in the case of a simple else the condition logic can be made so that when the if condition fires the branch target skips over the else block logic.
+}
+
+\qs{}{
+  What would happen if you accidentally reversed the operands in the bgt instruction?
+}
+
+\sol{
+  It would change the logic of that instruction. For example if the original instruction was \texttt{bgt \$t0, \$t1, label} meaning
+  if the value in register \$t0 is greater than the value in register \$t1 then branch to label. If the operands were reversed to \texttt{bgt \$t1, \$t0, label}
+  then the instruction would mean if the value in register \$t1 is greater than the value in register \$t0 then branch to label.
+}
+
+\qs{}{
+  If you wanted to compare three numbers instead of two, how would you extend your logic?
+}
+
+\sol{
+  I would use the principle of associativity to compare the numbers. Given numbers $a$, $b$ and $c$, I would first compare $a$ and $b$ and then compare the result
+  with $c$. Therefore in the case where $a > b$ and $b < c$ it can be inferred that $a > c > b$ and so on.
+}
+
+\qs{}{
+  How did you go about your space-separated input in Case challenge 1? What was your logic?
+
+}
+
+\sol{
+  My logic involved first skipping leading spaces by checking for the ascii value of the space character (32) while iterating through the input string, and
+  storing the index of the first non-space character in a register. Then from that point I would iterate through the string converting the ascii number
+  to a integer by subtracting its value from the ascii value of the character '0' (48) and multiplying the result by 10 and adding it to the sum, until a space or a newline was found.
+  I then placed these values into an integer array repeating the process until the end of the string was reached.
+}
+
+
+
+\end{document}

@@ -327,6 +327,7 @@ if __name__ == "__main__":
             "CompSci/Personal/Algorithms",
             "Calc/Personal/Calc_I_II",
             "Calc/Personal/Calc_I_III",
+            "CompSci/Personal/Deep_Learning",
         ],
     }
 

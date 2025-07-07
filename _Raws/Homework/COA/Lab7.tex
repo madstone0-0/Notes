@@ -1,0 +1,125 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\usepackage{graphicx}
+\graphicspath{ {assets} }
+\title{\Huge{Lab 7}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{alu_tb.png}
+  \caption{ALU 8 bit}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{sixout.png}
+  \caption{6-bit Parallel-in / Serial-Out Register}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{reg8.png}
+  \caption{8 bit Register test bench}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{reg8_sch.png}
+  \caption{8 bit Register schematic}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{dp_A.png}
+  \caption{Datapath Register A Test}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{dp_B.png}
+  \caption{Datapath Register B Test}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{dp_alu.png}
+  \caption{Datapath ALU Test}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{dp_ir.png}
+  \caption{Datapath Instruction Register Test}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{dp_mar.png}
+  \caption{Datapath Memory Address Register Test}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{dp_or.png}
+  \caption{Datapath Output Register Test}
+\end{figure}
+
+
+\qs{}{
+  How does the size and structure of memory cells impact CPU performance?
+}
+
+\sol{
+  The size of a memory structure determines the access latency of the memory, i.e. the larger the memory the slower read and writes to it will be.
+  This affects the performance of the CPU as the CPU will have to wait for the memory to be read or written to before it can continue executing instructions.
+  Therefore smaller memory structures are preferred for better CPU performance in computations.
+}
+
+\qs{}{
+  How does the choice of memory hierarchy affect CPU performance in real-world applications?
+}
+\sol{
+  The choice of memory hierarchy determines the access latency of the memory, i.e. the larger the memory the slower read and writes to it will be. In real-world applications, the CPU will have to wait for the memory to be read or written to before it can continue executing instructions. Therefore smaller memory structures are preferred for better CPU performance in computations.
+}
+
+\qs{}{
+  Discuss the significance of pipelining in CPU design and its relationship with Datapath.
+}
+\sol{
+  Pipelining is a technique used to increase instruction level parallelism through overlapping instruction execution stages. This improves CPU design by allowing multiple instructions to be executed simultaneously.
+  For a CPU to be pipelined the Datapath has to support it through the use of registers to store intermediate results of the instruction execution stages, and
+  the ability to independently perform the steps of Instruction Fetch, Instruction Decode, Execute, Memory Access, and Write Back.
+}
+
+\qs{}{
+  Explain how the von Neumann architecture impacts modern CPU design and performance.
+}
+\sol{
+  The Von Neumann architecture describes a shared memory computation model where instructions and data are stored in the same memory and accessed through the same bus. This can lead to performance issues as instructions and data cannot be accessed at the same time.
+}
+
+\qs{}{
+  How do advancements in memory technology, such as non-volatile memory and high-bandwidth memory, shape future CPU architectures?
+}
+\sol{
+  Both non-volatile and high-bandwidth memory have implications of reducing memory access latency and increasing memory bandwidth. Non-volatile memory is
+  memory that retains its state even if it is not powered, this can be used to store data that is not accessed as frequently allowing more frequently accesd
+  data to be stored in faster memory. High-bandwidth memory allows for faster data transfer between the CPU and memory as a high-bandwidth allows
+  for more data to be transferred in a given time period. This can be used to increase the performance of the CPU by reducing the time it takes to access memory.
+}
+
+
+
+\end{document}

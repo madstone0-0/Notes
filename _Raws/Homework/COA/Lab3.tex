@@ -1,0 +1,207 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{karnaugh-map}
+\usepackage{graphicx}
+\usepackage{parskip}
+\title{\Huge{Lab 3}}
+\author{\huge{Madiba Hudson-Quansah}}
+\graphicspath{ {assets/Lab3} }
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{halfbit_sig.png}
+  \includegraphics[width=0.75\textwidth]{halfbit_sch.png}
+  \caption{Half Subtracter}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{fullbit_sig.png}
+  \includegraphics[width=0.75\textwidth]{fullbit_sch.png}
+  \caption{Full Subtracter}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\textwidth]{fourbit_sig.png}
+  \includegraphics[width=0.75\textwidth]{fourbit_sch.png}
+  \caption{Four Bit Subtracter}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{center}
+    \begin{tabular}{|c c|c c|}
+      \hline
+      $A$    & $B$    & Difference & Borrow Out \\ [0.5ex]
+      \hline
+      \hline
+      $0110$ & $0011$ & $0011$     & $0$        \\
+      $1001$ & $0110$ & $0011$     & $0$        \\
+      $0010$ & $0101$ & $1101$     & $1$        \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \includegraphics[width=0.75\textwidth]{fourbit_ans.png}
+  \caption{Four Bit Subtracter Table}
+\end{figure}
+
+
+
+\qs{}{
+  Pedestrian Crossing
+  \begin{enumerate}
+    \item Using Karnaugh maphs, provide the state equations
+    \item Implement your circuit design in Vivado providing a screenshot of your schematic design and simulation with signals in ns not ps. Name file as Pedestrian\_Traffic.vhdl andtestbench as Pedestrian\_Traffic.vht.
+    \item Is this a Moore or Mealy Machine? Justify.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c c|c c|}
+        \hline
+        Current State & Next State & $D_1$ & $D_2$ \\ [0.5ex]
+        \hline
+        \hline
+        $00$          & $01$       & $0$   & $1$   \\
+        $01$          & $10$       & $1$   & $0$   \\
+        $10$          & $00$       & $0$   & $0$   \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+  \begin{enumerate}
+
+  \item \begin{figure}[H]
+  \centering
+  \begin{karnaugh-map}[2][2][1][$Q_0$][$Q_1$]
+  \minterms{1}
+  \maxterms{0,2}
+  \autoterms[X]
+  \implicant{1}{ 3 }
+  \end{karnaugh-map}
+  \caption{ $D_1$}
+  \[
+    Q \left( t + 1 \right) = Q_0   \overline{Q_1}
+  \]
+  \end{figure}
+
+  \begin{figure}[H]
+  \centering
+  \begin{karnaugh-map}[2][2][1][$Q_0$][$Q_1$]
+  \minterms{0}
+  \maxterms{1,2}
+  \autoterms[X]
+  \implicant{0}{0}
+  \implicant{3}{3}
+  \end{karnaugh-map}
+  \caption{ $D_0$}
+  \[
+    Q \left( t + 1 \right) = \overline{Q_1}\overline{Q_0}
+  \]
+  \end{figure}
+
+  \item  \begin{figure}[H]
+    \centering
+
+    \includegraphics[width=0.75\textwidth]{ped_sig.png}
+    \includegraphics[width=0.75\textwidth]{ped_sch.png}
+  \end{figure}
+  \item This is a Moore machine, as the output, i.e. the lights, depends solely on the state.
+  \end{enumerate}
+}
+
+\qs{}{
+  Conceptual Understanding
+  \begin{enumerate}
+    \item What is the fundamental difference between a half subtractor and a full subtractor?
+    \item  Why does a full subtractor require a borrow-in, while a half subtractor does not?
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item A half subtracter does not take in a borrow in bit while a full subtracter does.
+    \item  A full subtracter needs a borrow in bit to account for previous borrows outs from possible previous subtracters. This allows multiple subtracters to be chained together allowing for subtraction of progressively larger bit widths.
+  \end{enumerate}
+}
+
+
+\qs{}{
+  Logic and Implementation
+  \begin{enumerate}
+    \item What happens when you subtract a larger number from a smaller number in unsigned binary subtraction? How does the borrow bit behave?
+    \item  If we cascade full subtractors to create an N-bit subtractor, how does the borrow propagate through the chain?
+  \end{enumerate}
+
+}
+
+\sol{
+  \begin{enumerate}
+    \item When subtracting a larger number from a smaller number the operation underflows since unsigned numbers cannot be negative, i.e. the largest number that can be represented is subtracted from the smallest number that can be represented. The borrow bit is then set to 1 indicating an underflow occured
+    \item Each successive subtracter will take in the borrow out from the previous subtracter as its borrow in with the first subtracter in the chain taking in the original borrow in.
+  \end{enumerate}
+}
+
+\qs{}{
+  Overflow \& Sign in Signed vs. Unsigned Numbers
+  \begin{enumerate}
+    \item  What is the difference between sign and overflow in signed and unsigned number systems?
+    \item  Can an overflow occur in an unsigned subtraction? Explain why or why not.
+    \item  How does two’s complement affect the way we handle subtraction in signed binary numbers?
+  \end{enumerate}
+
+}
+
+\sol{
+  \begin{enumerate}
+    \item Sign refers to whether a number is positive or negative and only
+          signed numbers have a sign bit that represents this. Overflow refers to
+          when the result of an operation exceeds the limits of the current number
+          system and so wraps around to be contained in the number system again.
+    \item In the case of unsigned subtraction, overflow cannot occur as the
+          result will always be positive and within the bounds of the number
+          system, underflow can occur however if the result is negative.
+  \end{enumerate} }
+
+\qs{}{
+  FSM Understanding
+  \begin{enumerate}
+    \item    How does the system transition between states without requiring an explicit input?
+    \item  Why do we include the clock (CLK) and reset (R) signals, even in an automatic FSM?
+    \item  What would happen if we added a pedestrian push button as an input? How would this change the FSM design?
+    \item  If we wanted to add a yellow (caution) phase before stopping, how would the state diagram and VHDL implementation change?
+  \end{enumerate}
+
+}
+
+\sol{
+  \begin{enumerate}
+    \item The system transitions based on the rising edge of the clock signal this allows the system to transition between states without requiring an explicit input.
+    \item  The clock signal is used to synchronize the system and ensure that the system transitions between states at the correct time. The reset signal is used to reset the system to a known initial state
+    \item The FSM would have to include a state for the pedestrian push button and the system would have to transition to the stop state when the button is pressed.
+    \item  The state diagram would now have four states instead of three, which is possible to include in the current implementation as we disregard the $11$ state. This new state would be in-between the BLINK and STOP states making the state assignment
+          \begin{itemize}
+            \item $S_0$ / $00$ - STOP
+            \item $S_1$ / $01$ - GO
+            \item $S_2$ / $10$ - BLINK
+            \item $S_3$ / $11$ - YELLOW
+          \end{itemize}
+          This would change the next state equations for $D_1$ and $D_0$ flip-flops to include the new state. Another possible implementation in VHDL would just to detect the current state enum and update the light outputs accordingly in a switch statement, i.e. if the current state is STOP, we set the State to GO and set the light output to $01$.
+  \end{enumerate}
+}
+
+
+\end{document}

@@ -1,0 +1,54 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Linear Modelling}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\section{Linear Model}
+
+\dfn{Linear Model}{
+  The equation of a simple linear model is in the form:
+  \[
+    Y = b_0 + b_1 X + \epsilon
+  \]
+  Where:
+  \begin{itemize}
+    \item $Y$ - Dependent variable
+    \item $X$ - Independent variable
+    \item $b_0$ - $Y$ intercept
+    \item $b_1$ - Slope
+    \item $\epsilon$ - Error term / Residuals (unexplained variance / noise)
+  \end{itemize}
+}
+
+\[
+  \text{Residual Sum of Squares (RSS)} = \displaystyle\sum \left( Y_i - \hat{Y_i} \right)^2
+\]
+
+The best-fit slope ($\beta_0$) and intercept ($\beta_1$) are given by:
+\[
+  \beta_1 = \frac{\displaystyle\sum \left( X_i - \overline{X} \right) \left( Y_i - \overline{Y} \right)
+  }{\displaystyle\sum \left( X_i - \hat{X_i} \right)^2 }
+\]
+\[
+  \beta_0 = \overline{Y} - \beta_1\overline{X}
+\]
+
+
+\end{document}

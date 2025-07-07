@@ -1,0 +1,77 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Optimizing Numerical Linear Algebra Operations with Randomization - Thesis / Applied}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Strat}
+
+\section{Research Topics}
+
+\nt{
+  Seems like the field of RandNLA is exploring new sampling techniques for sketching, particularly Determinantal Point
+  Processes (DPP)
+}
+
+\subsection{Randomized Hessian Sketching for Second Order Optimization}
+\nt{
+  Overview from ChatGPT:\\
+  Second-order methods (e.g., Newton or quasi-Newton methods) have attractive convergence properties but are often impractical in large-scale deep learning due to the cost of computing or inverting the Hessian matrix. Randomized Hessian sketching can approximate the Hessian (or its inverse) efficiently while preserving enough curvature information to accelerate convergence.
+
+  Potential Research Directions:
+
+  \begin{itemize}
+    \item Investigate different sketching techniques (e.g., random projections, subsampling with leverage scores) for approximating the Hessian in logistic regression or shallow neural network training.
+    \item Analyze trade-offs between sketch size, approximation error, and convergence speed.
+    \item Implement a small-scale experimental study comparing traditional SGD with a second-order method enhanced by a randomized Hessian approximation.
+  \end{itemize}
+
+}
+
+\subsubsection{Research Problem}
+
+\subsubsection{Literature Review}
+
+\nparagraph{Current State of the field}
+
+\nparagraph{Gaps / Problems in the field}
+
+\subsection{Enhanced Nyström Methods for Kernel Approximation}
+\nt{
+  Overview from ChatGPT:\\
+
+  Kernel methods are central to many machine learning applications, but forming and manipulating the full kernel matrix is computationally expensive. The Nyström method uses random sampling to generate low‐rank approximations that can dramatically reduce computation. Recent advances—such as DPP-based sampling or improved importance sampling via leverage scores—offer new ways to improve both the approximation quality and the computational efficiency.
+
+  Potential Research Directions:
+
+  \begin{itemize}
+    \item Compare standard uniform sampling with DPP‐based or leverage score–based sampling strategies in the context of kernel ridge regression.
+    \item Develop or implement simple autotuning strategies for the sampling parameters to balance accuracy versus computational cost.
+    \item Experiment on real-world datasets (e.g., image or text kernels) to assess both prediction performance and runtime improvements.
+  \end{itemize}
+}
+
+\subsubsection{Research Problem}
+
+\subsubsection{Literature Review}
+
+\nparagraph{Current State of the field}
+
+\nparagraph{Gaps / Problems in the field}
+
+
+\end{document}

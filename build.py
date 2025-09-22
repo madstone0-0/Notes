@@ -315,11 +315,11 @@ if __name__ == "__main__":
                 "Homework/Y3/S1/ML",
             ],
             "S2": [
-                "CompSci/COA",
-                "CompSci/Research",
-                "CompSci/SWE",
-                "CompSci/Simulation",
-                "Homework/COA",
+                "CompSci/Y3/S2/COA",
+                "CompSci/Y3/S2/Research",
+                "CompSci/Y3/S2/SWE",
+                "CompSci/Y3/S2/Simulation",
+                "Homework/Y3/S2/COA",
             ],
         },
         "Personal": [

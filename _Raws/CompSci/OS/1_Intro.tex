@@ -1,0 +1,400 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Introduction}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\dfn{Operating System}{
+  Central software component that manages all hardware and software, controlling
+  \begin{itemize}
+    \item Files, devices, section of main memory, and CPU time
+    \item Who can use the system and how the system is used
+  \end{itemize}
+}
+
+\dfn{Subsystem}{
+  A component of an operating system that manages a specific resource.
+}
+
+Operating systems include for essential subsystem managers, where each manager works with other manager, and performs
+a unique role.
+
+\begin{itemize}
+  \item Memory Manager
+  \item Processor Manager
+  \item  Device Manager
+  \item File Manager
+  \item Optionally, Network Manager
+\end{itemize}
+
+Each manager performs the following classes of tasks:
+\begin{itemize}
+  \item Monitor the system's resources continuously
+  \item Enforce the system's security and protection mechanisms
+\end{itemize}
+
+\dfn{User Interface}{
+  Allows the user to issue commands to the operating system.
+}
+
+\section{Memory Manager}
+
+In charge of main memory (RAM) and read-only memory (ROM).
+The memory manager is responsible for:
+\begin{itemize}
+  \item Checking validity and legality of memory space request
+  \item Reallocating memory to make more useable space available
+  \item Deallocating memory to reclaim it
+  \item Protecting space in main memory occupied by the operating system
+\end{itemize}
+
+\subsection{ROM}
+Holds firmware, and is non-volatile.
+\dfn{Firmware}{
+  Determines when and how to load each piece of the operating system after the power is turned on. For example, loading the kernel, BIOS, etc.
+}
+
+\section{Processor Manager}
+
+In charge of the CPU.
+\begin{itemize}
+  \item Tracks process status, including which process is currently using the CPU
+  \item Reclaims the CPU when a process if finished or reached the maximum computation time.
+\end{itemize}
+
+Processes are identified by a unique process ID (PID), which is stored in a process control block (PCB).
+
+\section{Device Manager}
+
+In charge of connecting with every available device, responsible for:
+\begin{itemize}
+  \item Choosing the most efficient resource allocation method, i.e. scheduling processor.
+  \item Identifying each device uniquely
+  \item Starting device operation when appropriate.
+  \item Monitoring device operation and progress
+  \item Deallocating the device when the operation is complete
+\end{itemize}
+
+\section{File Manager}
+
+In charge of tracking every file in the system, data files, program files, compilers, application programs, etc. is responsible for:
+\begin{itemize}
+  \item Enforcing user/program resource access restrictions
+  \item Controlling user/program modification restrictions
+  \item Allocating space for a file on secondary storage
+  \item Retrieving files efficiently
+\end{itemize}
+
+\section{Network Manager}
+
+In change of sharing resources between multiple computers, responsible for:
+
+\section{User Interface}
+
+\dfn{User Interface}{
+  The section of the operating system that allows fir direct interaction with users
+}
+
+There are two primary types of user interfaces:
+
+\begin{itemize}
+  \item Graphical User Interface (GUI)
+        \begin{itemize}
+          \item Input from pointing devices
+          \item Menu options, desktop metaphors, and windows
+        \end{itemize}
+  \item Command-Line Interface (CLI)
+        \begin{itemize}
+          \item Input from keyboard
+          \item Commands with options and arguments
+        \end{itemize}
+\end{itemize}
+
+\section{Types of Operating Systems}
+
+Operating Systems fall into five categories:
+\begin{itemize}
+  \item Batch
+  \item Interactive
+  \item Real-time
+  \item Hybrid
+  \item Embedded
+\end{itemize}
+These categories are distinguished by two features:
+\begin{itemize}
+  \item Response time
+  \item Method of data entry
+\end{itemize}
+
+\subsection{Batch Systems}
+\begin{itemize}
+  \item Jobs entered as a whole and in sequence
+  \item Input relied no punched cards or tape
+  \item  Efficiency measured in throughput
+\end{itemize}
+
+\subsection{Interactive Systems}
+\begin{itemize}
+  \item Allows multiple jobs
+  \item Faster turnaround than batch systems
+  \item Slower than real-time systems
+  \item Introduced to provide fast turnaround when debugging programs
+  \item Requires complex algorithms as jobs share processing power
+\end{itemize}
+
+\subsection{Hybrid Systems}
+\begin{itemize}
+  \item Combination of batch and interactive systems
+  \item Light interactive load
+  \item Accepts and runs batch programs in the background
+\end{itemize}
+
+\subsection{Real-time Systems}
+\begin{itemize}
+  \item Reliability is critical
+  \item Used in time-critical environments (Spacecraft, Airport traffic control, Fly-by-wire aircraft, etc.)
+  \item Two types of real-time systems
+        \begin{description}
+          \item[Hard real-time systems] - Risk total system failure if a single predict time deadline is missed
+          \item[Soft real-time systems] - Suffer performance degradation as a consequence if a deadline is missed
+        \end{description}
+\end{itemize}
+
+\subsection{Network Systems}
+
+\begin{itemize}
+  \item Special class of software
+  \item Users perform tasks using few, if any, local resource, e.g. cloud computing
+  \item Wireless Networking Capability
+  \item Standard feature in many computing devices (cell phone, tables, and other handheld web browsers)
+\end{itemize}
+
+\subsection{Embedded Systems}
+\begin{itemize}
+  \item Computers placed inside other products (automobiles, digital music players, elevators, pacemakers, etc.)
+  \item Adds features and capabilities
+  \item Performs a specific set of programs/functions
+  \item Non-interchangeable among systems
+  \item Small kernel and simple function capabilities
+\end{itemize}
+
+
+\chapter{Early Memory Management Systems}
+
+\section {Single-User Contiguous Scheme}
+
+\begin{itemize}
+  \item Entire program is loaded into memory
+  \item  Contiguous allocation of memory space
+  \item Jobs are processed sequentially
+  \item The memory manager performs minimal work
+        \begin{itemize}
+          \item Evaluates incoming process size, loading jobs if small enough to fit in memory
+        \end{itemize}
+\end{itemize}
+
+Disadvantages:
+\begin{itemize}
+  \item Multiprogramming and networking is not possible, as only one job can be in memory at a time
+  \item Not cost effective, as memory is often idle
+\end{itemize}
+
+\section{Fixed Partition Scheme}
+
+\begin{itemize}
+  \item Memory is divided into fixed number of partitions, where each partition handles one job and reconfiguration requires system shutdown
+  \item This partitioning scheme requires protecting each job's memory space, and matching jobs sizes with partition sizes
+  \item Requires contiguous loading of entire program
+  \item  Uses the first available partition with required size method for allocating memory
+  \item To work well all jobs should have similar size and memory size known in advance
+  \item Multiprogramming is possible
+  \item Arbitrary partition sizes can lead to internal fragmentation, i.e. wasted space within a partition
+\end{itemize}
+
+\section{Dynamic Partition Scheme}
+
+\begin{itemize}
+  \item Memory is partitioned dynamically as jobs arrive, i.e. a partition conforms to the size of the job
+  \item Jobs are allocated on a first come, first served basis
+  \item After the first partition sizing and allocation, all subsequent jobs are allocated using those partitions that are free and large enough to hold the job
+  \item First job allocation can lead to external fragmentation, i.e. wasted space between partitions
+\end{itemize}
+
+\section{Best-Fit and First-Fit Allocation}
+
+Two methods for free space allocation
+\begin{itemize}
+  \item First-Fit
+  \item Best-Fit
+\end{itemize}
+
+\subsection{First-Fit}
+\dfn{First-Fit}{
+  Free and Busy lists are organized by memory locations
+}
+
+\begin{itemize}
+  \item Jobs are assigned to the first available partition large enough to hold it
+  \item Fast, as it searches from the beginning of memory and stops when a large enough partition is found
+\end{itemize}
+
+\begin{description}
+  \item[Advantage]  - Faster allocation
+  \item [Disadvantage] - Can lead to many small unusable partitions at the beginning of memory
+\end{description}
+
+The memory manager keeps two lists:
+\begin{itemize}
+  \item Free memory partitions
+  \item Busy memory partitions
+\end{itemize}
+Then compares jobs sizes to the free list, allocating the first partition that is large enough to hold the job. If the entire list is searched and finds no memory block large enough to hold the job, the job is placed into a waiting queue, and the memory manager fetches the next job in the queue.
+
+\subsection{Best-Fit}
+
+\dfn{Best-Fit}{
+  Free and Busy lists are organized by partition size
+}
+
+\begin{itemize}
+  \item Jobs are assigned to the smallest available partition large enough to hold it
+  \item More efficient use of memory, as it searches the entire list to find the smallest
+\end{itemize}
+
+\section{Deallocation}
+
+\dfn{Block}{
+  Another word for partition
+}
+
+\dfn{Deallocation}{
+  Releasing allocated memory space
+}
+
+For a fixed-partition system deallocation is trivial as partition sizes are fixed so the partition's busy flag is set to free.
+
+For a dynamic-partition system, the goal of deallocation is reduce external fragmentation, there are three dynamic partition system cases
+\begin{itemize}
+  \item The free block is adjacent to another free block
+  \item The free block is to two other free blocks
+\end{itemize}
+
+\section{Joining Two Adjacent Free Blocks}
+
+The two free blocks are combined into one block and assigned to the free list
+
+\section{Joining Three Adjacent Free Blocks}
+
+\chapter{Memory Management Includes Virtual Memory}
+
+\section{Paged Memory Allocation}
+
+\dfn{Sector}{
+  A fixed-length contiguous block of data on a disk
+}
+
+\dfn{Page Frame / Frame}{
+  A fixed-length contiguous block of data in main memory, this could be parts of a job or an entire job
+}
+
+\begin{itemize}
+  \item Incoming jobs are divided into pages of equal size
+  \item Pages are loaded into page frames in main memory
+  \item In the best case pages, sectors and page frames are the same size, with sizes determined by a disk's sector size
+  \item The memory manager prior to program execution:
+        \begin{itemize}
+          \item Determines the number of pages in a program
+          \item Locates enough empty page frames in main memory
+          \item Loads all program pages into page frames
+        \end{itemize}
+  \item Programs can be stored in non-contiguous page frames
+  \item Internal fragmentation can occur if a page is not completely filled and only happens on the job's last page
+\end{itemize}
+
+There are three tables used to track pages:
+\begin{itemize}
+\item Job Table (JT)
+\item Page Map Table (PMT)
+\item  Memory Map Table (MMT)
+
+\subsection{Job Table (JT)}
+
+The job table stores information for each active job
+\begin{itemize}
+  \item Job Size
+  \item Memory location of the job's PMT
+\end{itemize}
+
+\subsection{Page Map Table (PMT)}
+
+The page map table stores information for each page in a job. Every job has its own PMT, which includes:
+\begin{itemize}
+  \item Page number starting from 0
+  \item Memory address of the page frame where the page is loaded
+\end{itemize}
+
+\subsection{Memory Map Table (MMT)}
+
+The memory map table stores information for each page frame in main memory, which includes:
+\begin{itemize}
+  \item The locations of the page of which this frame is holding
+  \item  Free/Busy status of each frame
+\end{itemize}
+
+\subsection{Lines}
+
+\dfn{Line}{
+  The smallest unit of data that can be transferred between main memory and the CPU. A page frame is made up of multiple lines.
+}
+
+To determine the page number and displacement of a line we:
+\begin{enumerate}
+  \item Divide the job space address by the page size
+  \item The page number is the integer quotient
+  \item The displacement is the remainder
+\end{enumerate}
+
+To determine the exact location of an instruction or data item in main memory we:
+\begin{enumerate}
+  \item Determine the page number/displacement of the line
+  \item Refer to the job's PMT to determine the page frame containing the required page
+  \item Obtain the beginning address of the page frame
+  \item Multiply the page frame number by the page size
+  \item Add the displacement to the starting address of the page frame
+\end{enumerate}
+This is also called address resolution / translation converting a logical address (job space address) to a physical address (main memory address).
+
+\subsection{Advantages of Paged Memory Allocation}
+\begin{itemize}
+  \item Efficient use of memory, as jobs are loaded into any available page frame
+\end{itemize}
+
+\subsection{Disadvantages of Paged Memory Allocation}
+\begin{itemize}
+  \item Internal fragmentation can occur on the last page of a job
+  \item  Additional overhead is required for address translation
+\end{itemize}
+
+\chapter{Demand Paging Memory Allocation}
+
+Loads only a part of the job into memory. This removes the requirement that an entire job must be in memory before execution can begin. This requires high-speed page access.
+
+
+\end{document}
+

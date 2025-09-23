@@ -1,0 +1,281 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Threats and Attacks}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Threat Categories}
+
+\dfn{Threat}{
+  A threat is a potential cause of an unwanted incident, which may result in harm to a system or organization.
+}
+
+There are 12 categories of threats:
+\begin{itemize}
+  \item Compromises to Intellectual Property
+  \item Deviations in quality of service
+  \item Espionage / Trespass
+  \item Forces of Nature
+  \item Human error / Failure
+  \item Information Extortion
+  \item Sabotage / Vandalism
+  \item Technical Hardware failures / Errors
+  \item Technical Software failures / Errors
+  \item Technological Obsolescence
+\end{itemize}
+
+\section{Compromises to Intellectual Property}
+
+\dfn{Intellectual Property}{
+  Creation, ownership, and control of original ideas, information, and creative works.
+}
+
+IP breaches compromise the \textbf{Confidentiality} of information, some examples are piracy, and copyright infringement.
+
+\subsection{Technical Controls}
+
+\begin{itemize}
+  \item Watermarking
+  \item Embedded Code
+  \item Registration Keys
+  \item Intentional Corruption
+  \item Obfuscation
+\end{itemize}
+
+\subsection{Administrative/Legal Controls}
+
+\begin{itemize}
+  \item  End User License Agreements (EULA)
+  \item Copyrights
+  \item Licenses
+\end{itemize}
+
+\section{Deviations in Quality of Service}
+
+Deviations in quality of service occur when products or services are not delivered as expected, this compromises the \textbf{Availability} of a system. This is commonly cause by:
+\begin{itemize}
+  \item Failure of interdependent support systems
+  \item Supply Chain failures
+  \item Failure of critical infrastructure (e.g power grid)
+\end{itemize}
+
+\subsection{Technical Controls}
+\begin{itemize}
+  \item Redundancy
+  \item Failover Systems / Redundant Systems (e.g. Redundant Array of Independent Disks (RAID))
+  \item Backup Internet Service Providers (ISPs)
+  \item Load Balancing
+  \item Cloud Geographic Distribution
+\end{itemize}
+
+\subsection{Administrative Controls}
+\begin{itemize}
+  \item Service Level Agreements (SLAs) - Contract between service provider and customer that specifies the level of service expected during its term.
+  \item Policies and Procedures to deal with QoS issues
+\end{itemize}
+
+\section{Espionage / Trespass}
+
+\dfn{Espionage / Spying}{
+  Gaining unauthorized access to the information of an organization.
+  The practice of obtaining information about an organization without the permission of the holder of the information.
+}
+
+\dfn{Trespass}{
+  The act of entering someone's land or property without permission.
+}
+
+Espionage and Trespass primarily compromise the \textbf{Confidentiality}. Some examples include:
+\begin{itemize}
+  \item Shoulder Surfing - Observing a person's private information over their shoulder.
+  \item Industrial Espionage
+  \item Hacking
+  \item Governmental Espionage
+  \item Social Engineering
+\end{itemize}
+
+\section{Information Extortion / Cyberextortion}
+
+An attacker steals information from a computer system and demands compensation for it's return or non-disclosure. Cyberextortion primarily compromises \textbf{Availability}, then \textbf{Integrity} and \textbf{Confidentiality} if data is exfiltrated. There are two types of ransomware attacks:
+\begin{itemize}
+  \item Lock screen - Prevents access to the device
+  \item Encryption - Encryptions sensitive files
+\end{itemize}
+
+
+\subsection{Technical Controls}
+\begin{itemize}
+  \item Anti-Malware Software
+  \item Email and Web Filtering
+  \item Data Backups
+\end{itemize}
+
+\subsection{Administrative Controls}
+
+\begin{itemize}
+  \item User Training
+  \item Incident Response Plan
+  \item Regular Software Updates and Patch Management
+\end{itemize}
+
+\section{Sabotage / Vandalism}
+
+\dfn{Sabotage}{
+  The obstruction of a system's operations or intended functions. Sabotage is often directed with an explicit reason / goal.
+}
+
+\dfn{Vandalism}{
+  The intentional destruction or defacement of property. The main intention of vandalism is destruction.
+}
+
+Involves the deliberate sabotage of a computer system or business, or acts of vandalism to destroy and asset or damage the image of an organization. This primarily compromises \textbf{Integrity} and \textbf{Availability}. Some examples include:
+
+\begin{itemize}
+  \item Website defacing - Erodes consumer confidence
+  \item Hacktivism / Cyberactivism
+  \item Cyberterrorism / Cyberwarfare.
+\end{itemize}
+
+\subsection{Technological Controls}
+
+\begin{itemize}
+  \item Web Application Firewalls (WAF)
+  \item Distributed Denial of Service (DDoS) protection
+  \item Website defacement monitoring
+  \item Backups
+\end{itemize}
+
+\subsection{Administrative Controls}
+\begin{itemize}
+  \item Policies and Procedures
+  \item Legal Enforcement
+  \item Awareness Training
+\end{itemize}
+
+\subsection{Operational Controls}
+\begin{itemize}
+  \item Physical security of equipment.
+  \item Host Redundancy
+  \item Incident Response
+  \item Monitoring
+\end{itemize}
+
+\section{Software Attacks}
+
+\dfn{Malware}{
+  Malicious software designed to infiltrate or damage a computer system without the owner's informed consent.
+}
+
+Involve designing and deploying malware to compromise a system. Software attacks may overwhelm the processing capabilities of online systems or allow access to protected systems by hidden means. Software attacks primarily compromise \textbf{Confidentiality}, \textbf{Integrity}, and \textbf{Availability} to varying severities. Some examples include:
+\begin{description}
+  \item[Traditinoal Malware] Viruses, Worms, Trojans, Spyware, Adware, Ransomware, Rootkits, Keyloggers
+  \item[Access/Control Malware] Backdoors, Botnets, Remote Access Trojans (RATs)
+  \item[Disruption Attacks] Denial of Service (DoS), Distributed Denial of Service (DDoS)
+  \item[Interception Attacks] Spoofing, Man-In-the-Middle (MitM), Session Hijacking, Packet sniffing, pharming
+\end{description}
+
+\dfn{Viruses}{
+  A type of malware that attaches itself to a legitimate program or file and spreads to other programs and files when executed.
+}
+
+\dfn{Worm}{
+  A type of malware that can replicate itself and spread independently without needing to attach to a host program.
+}
+
+\dfn{Trojan}{
+  A type of malware that disguises itself as a legitimate program or file to trick users into installing it, often creating a backdoor for unauthorized access.
+}
+
+\dfn{Logic Bomb}{
+  A type of malware that is triggered by a specific event or condition, such as a date or the deletion of a file.
+}
+
+\dfn{Zero-Day Attack}{
+  An attack that exploits a previously unknown vulnerability in a computer application, meaning there is no existing patch or fix for the vulnerability.
+}
+
+\dfn{Pharming}{
+  A cyberattack that redirects a website's traffic to a fraudulent website, often through DNS cache poisoning or modifying the hosts file on a victim's computer.
+}
+
+\dfn{Phising}{
+  A cyberattack that uses fraudulent emails or websites to trick individuals into revealing sensitive information, such as passwords or credit card numbers.
+}
+
+\subsection{Technical Controls}
+
+\begin{itemize}
+  \item Anti-Virus / Anti-Malware Software
+  \item Firewalls
+  \item Intrusion Detection Systems (IDS) / Intrusion Prevention Systems (IPS)
+  \item Patch Management
+  \item Secure Software Development Practices
+\end{itemize}
+
+\subsection{Administrative Controls}
+
+\begin{itemize}
+  \item Security Policies on patching
+  \item User Training
+  \item Software Inventory Management
+\end{itemize}
+
+\subsection{Operational Controls}
+
+\begin{itemize}
+  \item Incident Response Planning and Policies
+  \item  Malware Analysis Teams
+  \item Threat Intelligence Sharing
+  \item Backups
+\end{itemize}
+
+\section{Technical Hardware Failures / Errors}
+
+Occurs when a manufacturer distributes equipment containing a known or unknown flaw. This primarily compromises \textbf{Availability} and \textbf{Integrity}. Some examples include:
+\begin{itemize}
+  \item Pentium II Floating Point Division Bug
+  \item Spectre and Meltdown CPU Vulnerabilities
+  \item Hardware crashes
+  \item RAM failures
+\end{itemize}
+
+\subsection{Technical Controls}
+
+\begin{itemize}
+  \item Redundancy (e.g RAID)
+  \item Error Checking RAM
+  \item Uninterruptible Power Supplies (UPS)
+\end{itemize}
+
+\subsection{Administrative Controls}
+
+\begin{itemize}
+  \item Vendor Risk Assessment
+  \item Procurement Policies
+  \item Warranty and Maintenance Agreements
+\end{itemize}
+
+\subsection{Operational Controls}
+
+\begin{itemize}
+  \item Preventative Maintenance Schedules
+  \item Hardware Monitoring Tools
+  \item Asset Lifecycle Management
+\end{itemize}
+
+
+\end{document}

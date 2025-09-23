@@ -1,0 +1,97 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Vector Valued functions of one variable}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Paths and Curves}
+
+Describing curves in $\mathbb{R}^{n}$ space, formally does not involve a defining equation which is intuitive in $\mathbb{R}^2$ and $\mathbb{R}^{3}$ but rather by how it it swept out like the trace of a skywriter. Thus the characteristics of a curve are not only given by its length, but also by the tracer's velocity and acceleration.
+
+\section{Parametrizations}
+
+\dfn{Path}{
+  Let $I$ be an interval of real numbers, typically $I = \left[ a, b \right], \left( a, b \right) \text{ or } \mathbb{R} $.
+
+  A continuous function $ \alpha: I \to  \mathbb{R}^{n} $, is called a \textbf{path}. As $t$ varies over $I$, $ \alpha \left( t \right) $ traces out a \textbf{curve}, $C$, i.e.
+  \[
+    C = \left\{ \mbold{x} \in \mathbb{R}^{n} : \mbold{x} = \alpha \left( t \right)\,  \exists t \in I  \right\}
+  \]
+  This is also called the \textbf{image} of $\alpha$, we then say that $\alpha$ \textbf{parametrizes} the curve $C$. We often refer to the input variable $t$ as the \textbf{time} and $ \alpha \left( t \right) $ as the \textbf{position} of a moving object at time $t$.
+}
+
+A path is a vector valued function of one variable, i.e. $t$. For each $t$ in $I$, $ \alpha \left( t \right) $ is a point in $\mathbb{R}^{n}$, so can be written
+$ \alpha \left( t \right) = \left( x_1 \left( t \right), x_2 \left( t \right), \ldots x_n \left( t \right)  \right)  $, where each of the $n$ coordinates is a real number that depends on $t$.
+
+\ex{Circles in $\mathbb{R}^2$}{
+  I.e. $x^2 + y^2 = a^2$, where $a$ is the radius of the circle. This can be rewritten:
+  \[
+    \frac{x^2}{a^2} + \frac{y^2}{a^2} = 1
+  \]
+  To parametrize a circle we use the identity $ \cos^2 t + \sin^2 t = 1 $, and let $\frac{x}{a} = \cos(t)$ and $\frac{y}{a} = \sin(t)$, or
+  $x = a \cos(t)$ and $y = a \sin(t)$, Thus we have the parametrization:
+  \[
+    \alpha \left( t \right)  = \left( a \cos(t), a \sin(t) \right), \, a > 0, \, t \in \mathbb{R}
+  \]
+}
+
+\ex{Graphs of $y = f \left( x \right) $}{
+  Consider the curve described by $y = \sin(x)$ in $\mathbb{R}^2$, where $0 \leq x \leq \pi $, it consists of points of the form $\left( x, \sin(x) \right)$, where $x$ varies over the interval $[0, \pi]$. $x$ can be used as a parameter, thus we can write the parametrization as:
+  \[
+    \alpha \left( x \right)  = \left( x, \sin(x) \right)
+  \]
+
+}
+
+\section{Velocity, Acceleration, Speed and Arc Length}
+
+\dfn{Derivative of a path}{
+  Given a path $ \alpha: I \to  \mathbb{R}^{n}$, the \textbf{derivative} of $ \alpha$ is defined by
+  \begin{align*}
+    \alpha^{\prime} \left( t \right) & = \lim_{h \to 0} \frac{ \alpha \left( t + h \right) - \alpha \left( t \right)  }{h}                                                                                                                                        \\
+                                     & = \lim_{h  \to -0} \left(
+    \frac{1}{h} \left(  \left( x_1 \left( t + h \right), x_2 \left( t + h \right)  , \ldots, x_n \left( t + h \right) \right)
+      - \left( x_1 \left( t \right), x_2 \left( t \right), \ldots, x_n \left( t \right)    \right)
+      \right)
+    \right)                                                                                                                                                                                                                                                       \\
+                                     & = \lim_{h \to 0} \left( \frac{x_1 \left( t + h \right) - x_1 \left( t \right) }{h}, \frac{x_2 \left( t + h \right) - x_2 \left( t \right) }{h}, \ldots, \frac{x_n \left( t + h \right) - x_n \left( t \right) }{h} \right) \\
+                                     & = \left( x_1^{\prime} \left( t \right), x_2^{\prime} \left( t \right), \ldots x_n^{\prime} \left( t \right)  \right)                                                                                                       \\
+  \end{align*}
+  Provided the limit exists. The derivative is also called the \textbf{velocity} ($\mbold{v} \left( t \right) $) of $ \alpha$. And thus $ \alpha ^{\prime\prime} $ is the \textbf{acceleration} ($\mbold{a} \left( t \right) $) of $ \alpha$.
+}
+
+For some time $t_0$, and for any time $t$, let $s \left( t \right) $ be the distance travelled by the path from $ \alpha \left( t_0 \right) $ to $ \alpha \left( t \right) $, $s \left( t \right) $ is called the \textbf{arclength} function and the magnitude of it's derivative is the speed.
+
+
+\dfn{Speed}{
+  If $ \alpha: I \to  \mathbb{R}^{n}$ is a differentiable path, then its speed, denoted bu $v \left( t \right) $, is defined:
+  \[
+    v \left( t \right)  = \|\mbold{v} \left( t \right) \|
+  \]
+  Where $v \left( t \right) $ is a scalar quantity.
+}
+
+\dfn{Arclength}{
+  The arclength from $t = a$ to $t = b$ is defined to be
+  \[
+    s \left( t \right) = \displaystyle\int_{a}^{b} v \left( t \right) \, dt = \displaystyle\int_{a}^{b} \|\mbold{v} \left( t \right) \| \, dt
+  \]
+}
+
+
+
+\end{document}

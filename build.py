@@ -322,6 +322,9 @@ if __name__ == "__main__":
                 "Homework/Y3/S2/COA",
             ],
         },
+        "Y4": {
+            "S1": ["CompSci/ISS", "CompSci/OS", "Liberal/Finance"],
+        },
         "Personal": [
             "CompSci/Personal/Intro_To_Machine_Learning",
             "CompSci/Personal/Algorithms",
@@ -332,6 +335,7 @@ if __name__ == "__main__":
     }
 
     dirs = [
+        *yearDict["Y4"]["S1"],
         *yearDict["Y3"]["S2"],
         *yearDict["Y3"]["S1"],
         *yearDict["Y2"]["S1"],

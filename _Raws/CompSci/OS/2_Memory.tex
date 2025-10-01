@@ -1,0 +1,579 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Memory Manager}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Early Memory Management Systems}
+
+\section {Single-User Contiguous Scheme}
+
+\begin{itemize}
+  \item Entire program is loaded into memory
+  \item  Entirely contiguous allocation of memory space
+  \item Jobs are processed sequentially
+  \item The memory manager performs minimal work
+        \begin{itemize}
+          \item Evaluates incoming process size, loading jobs if small enough to fit in memory
+          \item Monitors occupied memory space and clears entire memory space when a job is completed
+        \end{itemize}
+\end{itemize}
+
+In this scheme before a job can be executed it must be loaded in its entirely into memory and is allocated as much contiguous memory space in  memory as it requires.  If the program is too lage to fit into the available memory space it cannot be begin execution.
+
+Single-user systems in a non-networked environment allocated to each user, access to all available main  memory for each job. To allocate memory the memory manager performs the following steps:
+\begin{enumerate}
+  \item Evaluate the incoming job to see if it small enough to fit into the available memory space. If it is load it into memory, else reject it and evaluate the next incoming process. A rejected job is never reconsidered as it can never fit into the available memory space.
+  \item Monitors the occupied memory space. When the resident job ends its execution and no longer needs to be in memory, indicate that the entire amount of main memory space is now available and return to step 1.
+\end{enumerate}
+
+\subsection{Advantages}
+\begin{itemize}
+  \item Simple to implement
+\end{itemize}
+
+\subsection{Disadvantages}
+\begin{itemize}
+  \item Multiprogramming and networking is not possible, as only one job can be in memory at a time
+  \item Not cost effective, as memory is often idle
+\end{itemize}
+
+\section{Fixed / Static Partition Scheme}
+
+\begin{itemize}
+  \item Memory is divided into fixed number of partitions, where each partition handles one job and reconfiguration requires system shutdown
+  \item This partitioning scheme requires protecting each job's memory space, and matching jobs sizes with partition sizes
+  \item The memory manager allocates memory space to jobs with job information stored in a table
+        \begin{itemize}
+          \item Multiprogramming is possible
+          \item  Uses the first available partition with required size method for allocating memory
+          \item Requires contiguous loading of entire program
+          \item To work well all jobs should have similar size and memory size known in advance
+          \item Arbitrary partition sizes can lead to internal fragmentation, i.e. wasted space within a partition
+        \end{itemize}
+\end{itemize}
+
+\dfn{Internal Fragmentation}{
+  Unused space inside a partition. Less than complete use of memory space within a partition
+}
+
+The first attempt to create a scheme that allows multiprogramming. The memory is divided into a fixed number of partitions, where the entirety of each partition is assigned to a single job, this allows multiple jobs to execute at the same time. To allocate memory the memory manager performs the following steps assuming there are two partitions but this generalizes to any number of partitions:
+\begin{enumerate}
+  \item Check the incoming job's memory requirements. If it's greater then the size of the largest partition, reject the job and go to the next waiting job else go to step 2.
+  \item  Check the job size against the size of the first available partition. If the job is small enough to fit, see if the partition is free. If it is, load the job into that partition else go to step 3.
+  \item Check the job size against the size of the second available partition. If the job is small enough to fit, check to see if that partition is free. If it is available, load the incoming job into that partition else go to step 4.
+  \item No partition is available now, so place the incoming job into the waiting queue for loading at a later time.
+\end{enumerate}
+
+In order to allocate memory spaces to jobs the memory manager must have a table showing each partition's size, address, access restrictions, and its current status (free or busy). For example:
+\begin{table}[h!]
+  \begin{center}
+    \begin{tabular}{|c c c c c|}
+      \hline
+      Partition Size & Memory Size & Access & Partition Status \\ [0.5ex]
+      \hline
+      \hline
+      100K           & 200K        & Job 1  & Busy             \\
+      50K            & 300K        &        & Free             \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\subsection{Advantages}
+\begin{itemize}
+  \item More flexible than the single-user scheme as it allows multiple jobs to execute concurrently
+\end{itemize}
+
+\subsection{Disadvantages}
+\begin{itemize}
+  \item Requires the entire program to be loaded contiguously into memory
+\end{itemize}
+
+\section{Dynamic Partition Scheme}
+
+\begin{itemize}
+  \item Memory is partitioned dynamically as jobs arrive, i.e. a partition conforms to the size of the job
+  \item Jobs are allocated on a first come, first served basis
+  \item After the first partition sizing and allocation, all subsequent jobs are allocated using those partitions that are free and large enough to hold the job
+\end{itemize}
+
+\dfn{External Fragmentation}{
+  Unused space between partitions. Less than complete use of memory space between partitions
+}
+
+Memory is rationed to an incoming jobs in one contiguous block, with each job given the exact amount of memory it requires. Works well when the first jobs are loaded and partitions form based on the sizes of those first jobs, but when the next jobs arrive, which are not the same size as those just deallocated, they are allocated space in the available partition spaces on a priority basis. Jobs allocated in memory are said to be in a partition exactly the size of the job. This means that there can only be unused space between partitions, i.e. internal fragmentation is not possible here.
+
+\subsection{Advantages}
+\begin{itemize}
+  \item Reduces internal fragmentation, as partitions are sized to fit jobs exactly
+  \item More flexible than fixed-partition scheme, as partitions are created dynamically
+\end{itemize}
+
+\subsection{Disadvantages}
+\begin{itemize}
+  \item Full memory utilization only occurs when the first jobs are loaded or if a job exactly fits a free partition
+  \item External fragmentation can occur between partitions
+\end{itemize}
+
+\section{First-Fit Allocation}
+\dfn{First-Fit Allocation}{
+  Free and Busy lists are organized by memory locations, from low to high order memory addresses
+}
+
+\begin{itemize}
+  \item Jobs are assigned to the first available partition large enough to hold it
+  \item Fast, as it searches from the beginning of memory and stops when a large enough partition is found
+\end{itemize}
+
+For both fixed and dynamic partition schemes, the operating system must keep track of each memory location's status, i.e. free or busy. This is done using lists that track memory partitions and their corresponding memory locations. These are the called the Free and Busy lists. For the first-fit allocation method both lists are organized by memory locations, from low to high order memory addresses, i.e. from 0 (if not reserved) to the highest memory address.
+
+When a job comes in the memory manager  compares jobs sizes to the free list, allocating the first partition that is large enough to hold the job. If the entire list is searched and finds no memory block large enough to hold the job, the job is placed into a waiting queue, and the memory manager fetches the next job in the queue.
+
+\subsection{Advantages}
+\begin{itemize}
+  \item Faster allocation
+\end{itemize}
+
+\subsection{Disadvantages}
+\begin{itemize}
+  \item Can lead to many small unusable partitions at the beginning of memory
+\end{itemize}
+
+\section{Best-Fit}
+
+\dfn{Best-Fit}{
+  Free and Busy lists are organized by partition size, from smallest to largest
+}
+
+\begin{itemize}
+  \item Jobs are assigned to the smallest available partition large enough to hold it
+  \item More efficient use of memory, as it searches the entire list to find the smallest
+\end{itemize}
+
+For the best-fit allocation method both lists are organized by partition size, from smallest to largest. When a job comes in the memory manager compares jobs sizes to the free list, allocating the smallest partition that is large enough to hold the job. If the entire list is searched and finds no memory block large enough to hold the job, the job is placed into a waiting queue, and the memory manager fetches the next job in the queue.
+
+\subsection{Advantages}
+\begin{itemize}
+  \item Best use of memory space
+\end{itemize}
+
+\subsection{Disadvantages}
+\begin{itemize}
+  \item Slower allocation, as it searches the entire free list
+\end{itemize}
+
+\section{Deallocation}
+
+\dfn{Block}{
+  A contiguous region of memory (a contiguous range of addresses) treated as a unit by the allocator; it can be either a free hole or an allocated partition.
+}
+
+\dfn{Deallocation}{
+  Releasing allocated memory space
+}
+
+
+\subsection{Fixed and Dynamic Partition Deallocation}
+For a fixed-partition system deallocation is trivial as partition sizes are fixed so the partition's busy flag is set to free.
+
+For a dynamic-partition system, the goal of deallocation is reduce external fragmentation, there are three dynamic partition system cases depending on the location of the to-be-freed block:
+\begin{enumerate}
+  \item Adjacent to another free block
+  \item Between two free blocks
+  \item Isolated from other free blocks
+\end{enumerate}
+
+\subsection{Joining Two Adjacent Free Blocks}
+
+The block to be freed is adjacent to another free block. In this case the two blocks are joined to form a larger free block, with the new block's beginning address being the smallest beginning address. For example this free list:
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c c c|}
+      \hline
+      Beginning Address & Memory Block Size & Status \\ [0.5ex]
+      \hline
+      \hline
+      7560              & 20                & Free   \\
+      (7600)            & (500)             & (Busy) \\
+      *8100             & 100               & Free   \\
+      9000              & 200               & Free   \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+Where the block at address 7600 is to be freed. The resulting free list is:
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c c c|}
+      \hline
+      Beginning Address & Memory Block Size & Status \\ [0.5ex]
+      \hline
+      \hline
+      7560              & 20                & Free   \\
+      7600              & 510               & Free   \\
+      9000              & 200               & Free   \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\subsection{Joining Three Adjacent Free Blocks}
+The block to be freed is between two other free blocks. In this case the three blocks are joined to form a larger free block, with the new block's beginning address being the smallest beginning address. For example this free list:
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c c c|}
+      \hline
+      Beginning Address & Memory Block Size & Status \\ [0.5ex]
+      \hline
+      \hline
+      7560              & 20                & Free   \\
+      *7600             & 500               & Free   \\
+      (8100)            & (100)             & (Busy) \\
+      *8200             & 200               & Free   \\
+      10000             & 50                & Free   \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+Where the block at address 8100 is to be freed. The resulting free list is:
+\begin{table}[H]
+  \begin{center}
+    \begin{tabular}{|c c c|}
+      \hline
+      Beginning Address & Memory Block Size & Status       \\ [0.5ex]
+      \hline
+      \hline
+      7560              & 20                & Free         \\
+      7600              & 800               & Free         \\
+      *                 &                   & (null entry) \\
+      10000             & 50                & Free         \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+We add a null entry to prevent the shifting all the entries in the free list at the expense of memory.
+
+\subsection{Isolated Free Block}
+The block to be freed is isolated from other free blocks, i.e. it is not adjacent to any other free block. In this case the block is added to the free list at the appropriate location i.e. below the block with the next lowest beginning address. For example this free list and busy list:
+% Free List
+\begin{table}[H]
+  \caption{Free List}
+  \begin{center}
+    \begin{tabular}{|c c c|}
+      \hline
+      Beginning Address & Memory Block Size & Status       \\ [0.5ex]
+      \hline
+      \hline
+      1000              & 100               & Free         \\
+      *                 &                   & (null entry) \\
+      2000              & 200               & Free         \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+% Busy List (in address order)
+\begin{table}[H]
+  \caption{Busy List}
+  \begin{center}
+    \begin{tabular}{|c c c|}
+      \hline
+      Beginning Address & Memory Block Size & Status \\ [0.5ex]
+      \hline
+      \hline
+      1100              & 300               & Busy   \\
+      1400              & 250               & Busy   \\
+      1650              & 300               & Busy   \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+Where the block at address 8400 is to be freed. The resulting free and busy lists are:
+% Free List (after freeing 1400..1649)
+\begin{table}[H]
+  \caption{Free List}
+  \begin{center}
+    \begin{tabular}{|c c c|}
+      \hline
+      Beginning Address & Memory Block Size & Status \\ [0.5ex]
+      \hline
+      \hline
+      1000              & 100               & Free   \\
+      1400              & 250               & Free   \\ % newly freed (isolated)
+      2000              & 200               & Free   \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+% Busy List (after)
+\begin{table}[H]
+  \caption{Busy List}
+  \begin{center}
+    \begin{tabular}{|c c c|}
+      \hline
+      Beginning Address & Memory Block Size & Status       \\ [0.5ex]
+      \hline
+      \hline
+      1100              & 300               & Busy         \\
+      *                 &                   & (null entry) \\
+      1650              & 300               & Busy         \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\chapter{Memory Management Includes Virtual Memory}
+
+\section{Paged Memory Allocation}
+
+\begin{itemize}
+  \item Incoming jobs are divided into pages of equal size
+  \item Pages are loaded into page frames in main memory
+  \item In the best case pages, sectors and page frames are the same size, with sizes determined by a disk's sector size
+  \item The memory manager prior to program execution:
+        \begin{itemize}
+          \item Determines the number of pages in a program
+          \item Locates enough empty page frames in main memory
+          \item Loads all program pages into page frames
+        \end{itemize}
+  \item Programs can be stored in non-contiguous page frames
+  \item Internal fragmentation can occur if a page is not completely filled and only happens on the job's last page
+\end{itemize}
+
+\dfn{Sector}{\label{def:sector}
+  A fixed-length contiguous block of data on a disk
+}
+
+\dfn{Page}{\label{def:page}
+  An equal sized division of a job.
+}
+
+\dfn{Page Frame / Frame}{\label{def:pageframe}
+  A fixed sized division of main memory that holds a page.
+}
+
+
+Paged memory allocation, is based on the idea that jobs are divided into units of equal size called pages. These pages are loaded into memory occupying page frames. The size of a page frame is determined by the size of a disk's sectors, as pages are often read from disk into memory. Pages can be stored non-contiguously in main memory. The memory manager prior to program execution performs the following steps:
+\begin{itemize}
+  \item Determines the number of pages in a job
+  \item Locates enough empty page frames in main memory
+  \item Loading all of the job's pages into page frames
+\end{itemize}
+
+\ex{}{
+  A job of size 350 bytes is to be loaded into memory using paged memory allocation, where the page size is 100 bytes. The job is divided into 4 pages, each 100 bytes except the last page which is 50 bytes. There is internal fragmentation of 50 bytes in the last page of the job when loaded into memory.
+}
+
+There are three tables used to track pages:
+\begin{itemize}
+  \item Job Table (JT) - Stores information for each active job
+        \begin{itemize}
+          \item Job Size
+          \item Memory location of the job's PMT
+        \end{itemize}
+  \item Page Map Table (PMT) - Stores information for each page in a job, every active job has a PMT
+        \begin{itemize}
+          \item Page number starting from 0
+          \item Memory address of the page frame where the page is loaded
+        \end{itemize}
+  \item  Memory Map Table (MMT) - Stores information for each page frame in main memory
+        \begin{itemize}
+          \item The locations of the page of which this frame is holding
+          \item  Free/Busy status of each frame
+        \end{itemize}
+\end{itemize}
+
+\subsection{Page Displacement}
+
+\dfn{Line / Byte / Word}{
+  The smallest unit of data that can be transferred between main memory and the CPU. A page frame is made up of multiple lines. Also called a word or byte depending on the architecture.
+}
+
+
+\dfn{Page Displacement / Offset}{
+  The distance of a line from the beginning of a page. It is a relative factor used to locate a certain line within its page frame.
+}
+
+To determine the page number and displacement of a line we:
+\begin{enumerate}
+  \item Divide the job space address by the page size
+  \item The page number is the integer quotient
+  \item The displacement is the remainder
+\end{enumerate}
+I.e.:
+\begin{align*}
+  \text{Page Number}  & = \left\lfloor \frac{\text{Job Space Address}}{\text{Page Size}} \right\rfloor \\
+  \text{Displacement} & = \text{Job Space Address} \mod \text{Page Size}                               \\
+\end{align*}
+
+\ex{}{
+  \qs{}{
+    With a page size of 4096 bytes find the page and displacement of line 7149
+  }
+
+  \sol{
+    \begin{align*}
+      \text{Page Number}  & = 7149 \div 4096  \\
+                          & = 1               \\
+      \text{Displacement} & = 7149 \bmod 4096 \\
+                          & = 3053            \\
+    \end{align*}
+  }
+}
+
+To determine the exact location of an instruction or data item in main memory we:
+\begin{enumerate}
+  \item Determine the page number/displacement of the line
+  \item Refer to the job's PMT to determine the page frame containing the required page
+  \item Obtain the beginning address of the page frame
+  \item Multiply the page frame number by the page size
+  \item Add the displacement to the starting address of the page frame
+\end{enumerate}
+This is also called address resolution / translation converting a logical address (job space address) to a physical address (main memory address).
+
+\subsection{Advantages}
+\begin{itemize}
+  \item Pages don't have to be loaded contiguously
+  \item Efficient use of memory, as jobs are loaded into any available page frame
+  \item Compaction and relocation are not required
+\end{itemize}
+
+\subsection{Disadvantages}
+\begin{itemize}
+  \item Internal fragmentation can occur on the last page of a job
+  \item Additional overhead is required for address translation
+  \item Requires entire job to be loaded into memory before execution can begin
+\end{itemize}
+
+\section{Demand Paging Memory Allocation}
+
+\begin{itemize}
+  \item Loads only a part of the program into memory
+  \item Exploits programming techniques where only a small part of the program is needed at any one time
+  \item Simulates a larger amount of memory than is physically available, i.e. Virtual Memory
+  \item Modifies PMT to include:
+        \begin{itemize}
+          \item If the page is already in memory
+          \item Are the page contents modified
+          \item Has the page been referenced recently
+          \item Page Frame Number
+        \end{itemize}
+  \item Swapping / Paging is used to move pages between main memory and secondary memory
+        \begin{itemize}
+          \item When a page is needed that is not in memory a page fault occurs
+          \item A resident memory page is freed based on a policy
+          \item If the resident page has been modified it is copied to secondary memory
+          \item The new page is copied into the freed page frame
+        \end{itemize}
+\end{itemize}
+
+
+\dfn{Page Fault}{
+  The event that occurs when a program tries to access a page that is not currently in main memory, causing a page interrupt
+}
+
+\dfn{Page Interrupt}{
+  An interrupt generated when a page fault occurs, causing the operating system to fetch the required page from secondary memory into main memory
+}
+
+\dfn{Swapping / Paging}{
+  The process of moving pages between main memory and secondary memory
+}
+
+\dfn{Thrashing}{
+  Excessive swapping of pages between main memory and secondary memory, leading to a significant decrease in system performance. Mainly occurs when:
+  \begin{itemize}
+    \item There is insufficient memory to hold the working set of a process, i.e. large number of jobs and limited free pages
+    \item The operations of pages cross page boundaries frequently, i.e. a loop that spans multiple pages
+  \end{itemize}
+}
+
+Demand paging
+
+\subsection{Page Replacement Policies}
+\begin{itemize}
+  \item First-In-First-Out (FIFO)
+        \begin{itemize}
+          \item The oldest page in memory is replaced
+        \end{itemize}
+  \item Least Recently Used (LRU)
+        \begin{itemize}
+          \item The page that has not been used for the longest time is replaced
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{First-In First-Out (FIFO)}
+\begin{itemize}
+  \item Removes the page that has been in memory the longest
+  \item Failure rate is determined by the ratio of page interrupts to page requests
+  \item More memory does not guarantee better performance (Belady's Anomaly)
+\end{itemize}
+
+\subsubsection{Least Recently Used (LRU)}
+\begin{itemize}
+  \item Removes the page that has not been used for the longest time
+  \item Takes advantage of the principle of locality, i.e. if a page has not been used for a long time it is unlikely to be used in the near future
+  \item More memory guarantees better performance
+  \item Has various implementations
+        \begin{itemize}
+          \item Clock Replacement - A pointer steps through active pages' reference bits and replaces the first page with a reference bit of 0
+          \item Bit-Shifting - Each page has an 8-bit register, every time a page is referenced its register is shifted right by one bit and a 1 is placed in the leftmost bit. The page with the smallest value is replaced
+        \end{itemize}
+\end{itemize}
+
+\subsection{Working Set}
+
+\begin{itemize}
+  \item Loads a set of related pages into memory allowing direct access without incurring a page fault
+  \item Takes advantage of the principle of locality, i.e. programs tend to use a small set of pages intensively for a period of time
+  \item Requires the system define the number of pages that makes up a working set and the maximum number of pages allowed in a working set.
+\end{itemize}
+
+\subsection{Advantages}
+\begin{itemize}
+  \item Reduces the amount of memory required by a job
+  \item Reduces the time required to load a job into memory
+  \item Allows larger jobs to be run in memory
+\end{itemize}
+
+\subsection{Disadvantages}
+\begin{itemize}
+  \item Requires high-speed page access
+\end{itemize}
+
+\section{Segmented Memory Allocation}
+
+\dfn{Segment}{
+  A logical unit of a program containing code the performs related functions, e.g. main program, subroutine, data table, etc.
+}
+
+\begin{itemize}
+  \item A program is divided into segments of variable length
+  \item Each segment is loaded into a memory partition large enough to hold it
+  \item Segments are loaded non-contiguously
+  \item A segment table (ST) is used to track segments
+\end{itemize}
+
+\section{Segmented/Demand Paged Memory Allocation}
+
+Each segment is divided into pages, and only the required pages of a segment are loaded into memory.
+
+
+\end{document}

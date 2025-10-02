@@ -505,7 +505,28 @@ This is also called address resolution / translation converting a logical addres
   \end{itemize}
 }
 
-Demand paging
+The demand paging scheme loads only parts of a job into memory at any given time. With demand paging jobs are still divided into equally sized pages but pages are only loaded into memory when needed. Demand paging takes advantage of the usually sequential nature of program execution.
+
+Successful demand paging implementation requires the use of high-speed Direct Access Storage Devices (DASD), as pages must be quickly passed from secondary storage into main memory as needed. Demand paging modifies the PMT to include additional information about each page:
+\begin{itemize}
+  \item If the page is already in memory - Contains where the page is located in memory if it has been loaded into memory.
+  \item Have the page contents been modified -  Indicates if the page has been changed since it was loaded into memory, it is used to save time when pages are removed from main memory and saved back to secondary memory. If the page hasn't been modified it doesn't have to saved back to secondary storage saving time.
+  \item Has the page been referenced recently - Used to determine which pages show the most processing activity and which are relatively inactive. This information can be used by page replacement policies to determine which pages should remain in main memory and which should be swapped.
+  \item The page frame number
+\end{itemize}
+
+\dfn{Page Fault Handler}{
+  Determines whether there are empty page frames in memory so that the requested page can be swapped into memory. If all page frames are busy then the page fault handler must decide which page with be swapped out of memory based on a page replacement policy.
+}
+
+When a program tries to access a page that is not currently in memory a page fault occurs, causing a page interrupt. The section of the operating system that resolves page faults its called the page fault handler.
+
+Excessive swapping can reduce performance as the system spends more time swapping pages in and out of memory than executing jobs. This is called thrashing. Thrashing can occur in several instances:
+\begin{itemize}
+  \item When a large umber of jobs are supposed to execute with a relatively small number of free page frames
+  \item When a job's operations cross page boundaries frequently, e.g. a loop that spans multiple pages
+\end{itemize}
+
 
 \subsection{Page Replacement Policies}
 \begin{itemize}
@@ -519,12 +540,22 @@ Demand paging
         \end{itemize}
 \end{itemize}
 
+A page replacement policy is used to determine which page in memory should be swapped out to resolve a page fault.
+
 \subsubsection{First-In First-Out (FIFO)}
 \begin{itemize}
   \item Removes the page that has been in memory the longest
   \item Failure rate is determined by the ratio of page interrupts to page requests
   \item More memory does not guarantee better performance (Belady's Anomaly)
 \end{itemize}
+
+The first-in first-out policy will remove the pages that have been in memory the longest, i.e. those that were first in. Each time a needed page is not found in memory it wall cause an interrupt, leading to swapping. We can count the number of interrupts and use it to determine the success and failure rates of a page replacement policy, i.e.:
+\begin{align*}
+  \text{Success Rate} & =  \frac{\text{Page Requests Made} - \text{Number of interrupts}}{\text{Page Requests Made}} \\
+  \text{Failure Rate} & =  \frac{\text{Number of interrupts}}{\text{Page Requests Made}}
+\end{align*}
+
+FIFO suffers from Belady's Anomaly, where increasing the number of page frames, i.e. buying more memory, does not guarantee better performance.
 
 \subsubsection{Least Recently Used (LRU)}
 \begin{itemize}
@@ -537,6 +568,20 @@ Demand paging
           \item Bit-Shifting - Each page has an 8-bit register, every time a page is referenced its register is shifted right by one bit and a 1 is placed in the leftmost bit. The page with the smallest value is replaced
         \end{itemize}
 \end{itemize}
+
+\dfn{Principle of Locality}{
+  The tendency of a program to access a relatively small portion of its address space at any given time. This means that if a program accesses a particular memory location, it is likely to access nearby memory locations in the near future.
+}
+
+\dfn{Temporal Locality}{
+  The tendency of a program to access the same memory location multiple times within a short period of time. This means that if a program accesses a particular memory location, it is likely to access that same memory location again in the near future.
+}
+
+The lest recently used (LRU) policy swaps out the pages that show the least recent activity, taking advantage of the principle of locality, specifically temporal locality.
+
+\nparagraph{Clock Replacement Variation}
+
+\nparagraph{Bit-Shifting Variation}
 
 \subsection{Working Set}
 
@@ -569,6 +614,36 @@ Demand paging
   \item Each segment is loaded into a memory partition large enough to hold it
   \item Segments are loaded non-contiguously
   \item A segment table (ST) is used to track segments
+\end{itemize}
+
+Segmented memory allocation divides a program into logical units called segments, which each segment containing logical groupings of code. Segments can be of differing sizes, and are loaded into dynamically allocated memory partitions. Segmented Memory Allocation differs from Paged Memory Allocation in that segments can be of varying sizes, while pages are of fixed size and main memory is not divided into page frames and segments are allocated like dynamic partitions. When a job arrives the memory manager divides the program into segments, and stored in a Segement Map Table (SMT) which contains:
+\begin{itemize}
+  \item Segment Number
+  \item Segment Size
+  \item Access Rights
+  \item Status
+  \item Memory Address
+\end{itemize}
+The memory manager also maintains a Job Table, and a Memory Map Table. To access a specific location within a segment we perform a similar process to paged memory allocation:
+\begin{align*}
+  \text{Segment Number} & = \left\lfloor \frac{\text{Job Space Address}}{\text{Segment Size}} \right\rfloor \\
+  \text{Displacement}   & = \text{Job Space Address} \mod \text{Segment Size}                               \\
+\end{align*}
+As segments can vary in size the displacement bys be verified to make sure it isn't outside the segment's range.
+
+\subsection{Advantages}
+\begin{itemize}
+  \item Reduces internal fragmentation, as segments are sized to fit jobs exactly
+  \item More flexible than fixed-partition scheme, as partitions are created dynamically
+  \item Segments can be shared between jobs
+  \item Segments can be protected with access rights
+\end{itemize}
+
+\subsection{Disadvantages}
+\begin{itemize}
+  \item External fragmentation can occur between segments
+  \item Requires entire job to be loaded into memory before execution can begin
+  \item More complex to implement than paged memory allocation
 \end{itemize}
 
 \section{Segmented/Demand Paged Memory Allocation}

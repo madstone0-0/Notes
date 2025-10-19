@@ -1,0 +1,1389 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Processor Management}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{circuitikz}
+\usepackage{array}
+\usepackage{graphicx}
+\usetikzlibrary{arrows, positioning, shapes.gates.logic.US,
+circuits.logic.US, shapes.misc, automata}
+
+\tikzset{
+  ->, % makes the edges directed
+  % >=stealth’, % makes the arrow heads bold
+  node distance=3cm, % specifies the minimum distance between two
+  % nodes. Change if necessary.
+  every state/.style={thick, fill=gray!10}, % sets the properties for
+  % each ’state’ node
+  initial text=$ $, % sets the text that appears on the start arrow
+}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Processor Management}
+
+\section{Definitions}
+
+\dfn{Processor}{
+  The part of the hardware that performs calculations and executes programs.
+}
+
+\dfn{Program}{
+  An inactive unit, stored on disk. A work unit submitted by a user.
+}
+
+\dfn{Process / Task}{
+  A program that has been given CPU time to execute. A program loaded
+  into memory with a current activity. A process requires requires a
+  set of resources, including a processor and special registers to
+  perform its function.
+}
+
+\dfn{Thread}{
+  A portion of a process created by a process that can be scheduled
+  for execution independently of it's parent process. A process can
+  consist of multiple threads where the parent process can own
+  allocated resources, and becomes passive as its threads utilize
+  these resources, including CPU time.
+}
+
+\dfn{Multithreading}{
+  Allows applications to manager a separate process with several
+  threads of control.
+}
+
+\dfn{Multiprogramming}{
+  Requires the processor be allocated to each job or to each process
+  for a period of time and deallocated at an appropriate moment.
+}
+
+\dfn{Interrupt}{
+  A signal to the processor emitted by hardware or software
+  indicating an event that needs immediate attention. Facilitates the
+  switching of the CPU from one process or job to another.
+}
+
+\dfn{Context Switch}{\label{def:context-switch}
+  Saving job processing information when an interrupt occurs, so that
+  the job can be continued correctly at a later time. This is done
+  via the PCB saving the
+  current state of the job, including the program counter and
+  register contents.
+}
+
+\section{Scheduling Submanagers}
+\begin{itemize}
+  \item The process manager is composed of at least two submanagers:
+    \begin{description}
+      \item[Job Scheduler] - A higher-level scheduler that handles
+        job scheduling, and job initiation based on certain criteria.
+      \item[Process Scheduler] - A lower-level scheduler that handles
+        process scheduling, determining execution steps, based on
+        certain criteria.
+    \end{description}
+\end{itemize}
+
+Jobs can be views either as a series of global job steps, i.e.
+compilation, loading and execution, or as one monolithic step, like
+execution. The scheduling of jobs is handled on two levels by most
+operating systems in a hierarchical manner between the Job Scheduler
+and the Process Scheduler.
+
+\subsection{Job Scheduler}
+\begin{itemize}
+  \item Selects incoming jobs from the job queue.
+  \item Places them into the process queue
+  \item Decides on job initiation criteria based on process
+    scheduling algorithm and priority.
+  \item The goals of the job scheduler include:
+    \begin{itemize}
+      \item Sequence jobs to ensure efficient system resource utilization.
+      \item Balance I/O interaction and computation.
+      \item Keep most system components busy.
+    \end{itemize}
+\end{itemize}
+
+Scheduling jobs are based on priority, with each job initiated by the
+job scheduler based on certain criteria and characteristics. The Job
+Scheduler's goal is to put the jobs in a sequence that best meets the
+designers or administrator's goals, for example efficient resource
+utilization. Once a job is selected for execution, the Process
+Scheduler determines when each step, or set of steps of the job is
+executed, also based on certain criteria.
+
+\section{Process Scheduler}
+\begin{itemize}
+  \item Determines which job gets CPU time, when and for how long.
+  \item Decides when to interrupt a running process.
+  \item Determines queues for job movement during execution.
+  \item Recognizes job conclusion and determines job termination.
+  \item Assigns CPU time to individual jobs placed in the ready queue
+    by the job scheduler.
+  \item The Process Scheduler exploits common computer program traits
+    \begin{itemize}
+      \item CPU and I/O cycles - Programs alternate between CPU and I/O cycles.
+      \item Frequency and CPU cycle durations - Most programs spend
+        more time in I/O cycles than in CPU cycles.
+      \item I/O bound and CPU bound programs - I/O bound programs
+        spend more time in I/O cycles, while CPU bound programs spend
+        more time in CPU cycles.
+    \end{itemize}
+\end{itemize}
+
+After a job a has been accepted by the Job Scheduler it is placed in
+the ready queue, where the Process Scheduler takes over. The Process
+Scheduler determines which processes will get the CPU, when and for
+how long. The Process Scheduler also determines what to do when
+processing is interrupted, which waiting lines (queues) the job
+should be allocated to during its execution, and when the job is completed.
+
+The Process Scheduler is a low-level scheduler that assigns the CPU
+time to execute instructions for those jobs placed on the ready queue
+by the Job Scheduler, this orchestration allows for context switching
+between jobs, and the illusion of simultaneous execution. In
+scheduling the CPU, the Process Scheduler takes into account common
+traits of computer programs, mostly how they alternate between
+different cycles of CPU and I/O activity. Although the duration and
+frequency of CPU cycles vary between programs there are general
+trends most programs exhibit, i.e.:
+\begin{itemize}
+  \item CPU Bound Jobs / Programs - Utilize the CPU more frequently
+    than I/O devices, thus spending more time in CPU cycles. Examples
+    include scientific calculations and graphics processing.
+  \item I/O Bound Jobs / Programs - Utilize I/O devices more
+    frequently than the CPU, thus spending more time in I/O cycles.
+    Examples include word processors and database management systems.
+\end{itemize}
+
+In very interactive systems there is a third layer of the Processor
+Manager called the Middle-Level Scheduler, which handles active job
+removal in the case of system overload. This allows other jobs to be
+completed faster as it removes less important jobs from the system
+temporarily allowing more important jobs to be completed faster.
+These removed jobs are reintroduced into the system when the load decreases.
+
+\subsection{Job and Process States}
+\begin{itemize}
+  \item HOLD
+  \item READY
+  \item WAITING
+  \item RUNNING
+  \item FINISHED
+\end{itemize}
+
+As a unit of execution (job, process, thread) moves through the
+system it changes status, often from HOLD, to READY, to RUNNING, to
+WAITING, and eventually, to FINISHED. These are called job status,
+process status, or thread status depending on the unit of execution
+being described. The following are the common states a job, process
+or thread can be in as show by the state diagram.
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance={5cm},thick,main/.style = {draw, circle}]
+    \node[state, initial] (hold) {Hold State};
+    \node[state, right of=hold] (ready) {Ready State};
+    \node[state, right of=ready] (run) {Running State};
+    \node[state, below of=ready] (wait) {Waiting State};
+    \node[state, right of=run] (fin) {Finished};
+
+    \draw
+    (hold) edge[above] node {Inserted by Job Scheduler} (ready)
+    (ready) edge[above] node {} (run)
+    (run) edge[above] node {Controlled by Job Scheduler} (fin)
+    (wait) edge[left] node {Signal to continue processing} (ready)
+    (run) edge[right] node {I/O request page fault} (wait)
+    (run) edge[bend left] node {Interrupt} (ready)
+    ;
+
+  \end{tikzpicture}
+  \caption{Job / Process State Diagram}
+\end{figure}
+
+When a job is accepted by the system it goes through the following states:
+
+The job is put on HOLD and placed in a queue. In some systems the job
+spooler / disk controller creates a table with the characteristics of
+each job in the queue, and notes the important features of each job
+such as estimated CPU time, priority, special I/O devices, required
+and maximum memory required. This table is used by the Job Scheduler
+to decide which job to run next.
+
+Then the job moves to the READY state after the interrupts have been
+resolved or placed on the READY queue directly in some systems. The
+process then moves to RUNNING when the Process Scheduler allocates
+CPU time to it. WAITING means the process can't continue until a
+specific resource is allocated or an I/O operation as finished, and
+then it can move back to READY. When the process is completed it
+moves to the FINISHED state and is removed from the system.
+
+Transitions from job statuses (HOLD $\to $ READY, RUNNING $\to $
+FINISHED) are controlled by the Job Scheduler, while transitions
+between process / thread statuses, i.e. all other transitions, are
+controlled by the Process Scheduler.
+
+\subsection{Thread States}
+\begin{itemize}
+  \item READY
+  \item RUNNING
+  \item WAITING
+  \item DELAYED
+  \item BLOCKED
+\end{itemize}
+
+Threads move through five states as they are processed by the system,
+as show n in the state diagram below. When a process creates a thread
+it is made ready by allocating to it the needed resources and placing
+it in the READY queue. The thread state changes from READY to RUNNING
+when the Process Scheduler assigns it to a processor.
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[node distance={3cm},thick,main/.style = {draw, rectangle}]
+    \node[state, initial] (create) {Creation};
+    \node[state, right of=create] (ready) {Ready};
+    \node[state, right of=ready] (run) {Running};
+    \node[state, right of=run] (fin) {Finished};
+    \node[state, below of=ready] (wait) {Waiting};
+    \node[state, below of=wait] (delay) {Delayed};
+    \node[state, below of=delay] (block) {Blocked};
+
+    \draw
+    (create) edge[above] node {} (ready)
+    (ready) edge[above] node {} (run)
+    (run) edge[above] node {} (fin)
+
+    (run) edge[right] node {} (wait)
+    (run) edge[bend left] node {} (delay)
+    (run) edge[bend left] node {} (block)
+
+    (wait) edge[bend left] node {} (ready)
+    (delay) edge[bend left] node {} (ready)
+    (block) edge[bend left] node {} (ready)
+    ;
+
+  \end{tikzpicture}
+  \caption{Thread State Diagram}
+\end{figure}
+
+A thread can move from RUNNING to WAITING when it has to wait for an
+event outside it's control to occur, like, an I/O operation or an
+input from the user, then back to READY when the event has occurred.
+Alternatively another thread that is finished running can send a
+signal indicating that the waiting thread can continue processing.
+
+When an application has the ability to delay the processing of a
+thread for some time, it causes the thread to move from RUNNING to
+DELAYED. When he delay time has passed the thread moves from DELAYED
+back to READY, for example the saving of a document every five minutes.
+
+A thread moves from RUNNING to BLOCKED when an I/O request is issued.
+After the I/O operation is done, the thread returns to the READY
+state. When a thread is finished it moved to the FINISHED state and
+all the allocated resources are deallocated.
+
+\subsection{Control Blocks}
+\dfn{Process Control Block (PCB)}{
+  Contains information about each process in a system, including:
+  \begin{itemize}
+    \item Process Identifier (PID) - Unique Identifier assigned by
+      the Job Scheduler
+    \item Process Status - The current status of the job, i.e. READY,
+      RUNNING, WAITING
+    \item Process state - Contains all the information needed to
+      indicate the current state of the job
+      \begin{itemize}
+        \item Process Status Word - The current instruction counter
+          and register contents when the job isn't running but is
+          either on HOLD, READY or WAITING.
+        \item Register Contents - The contents of the register if the
+          job has been interrupted and is waiting to resume processing.
+        \item Main Memory - The address where the job is stored, and
+          in the case of virtual memory, the linking between the
+          virtual and physical memory locations.
+        \item Resources - Information about all the resources
+          allocated to this job, with each resources having an
+          identification field listing its type, details of its
+          allocation such as the sector address on a disk.
+        \item Process Priority - Used by priority scheduling
+          algorithms to select which job to run next.
+      \end{itemize}
+    \item Accounting Information - Information used for billing
+      purposes and performance measurement.
+  \end{itemize}
+}
+
+\dfn{Thread Control Block (TCB)}{
+  Contains information about each thread in a system, including:
+  \begin{itemize}
+    \item Thread Identifier (TID) - Unique Identifier assigned by
+      the Process Scheduler when the thread is created.
+    \item Thread State - The current state of the thread, i.e. READY,
+    \item CPU Information - Everything the operating system needs to know.
+      \begin{itemize}
+        \item Program Counter - How far the thread has progressed in
+          its execution, and which instruction is currently being executed.
+        \item Register Contents - The contents of the registers when the
+          thread is not running.
+      \end{itemize}
+    \item Thread Priority - Used to indicate the weight of a thread
+      relative to other thread. Determines which thread should be
+      selected from the READY queue next.
+    \item Pointer to process that created the thread - Indicates the
+      process that created the thread.
+    \item Pointers to all other threads created by this thread -
+      Indicates child threads created by this thread.
+  \end{itemize}
+}
+
+Each process in the system is represented by a Process Control
+Block(PCB), and each thread is represented by a Thread Control
+Block(TCB). These control blocks contain necessary management
+information about the processes and threads, allowing the operating
+system to manage them effectively.
+
+The PCB is created when the Job Scheduler accepts the job and its
+updated as the job progresses from the beginning to the end of the
+its execution, while the TCB is created when a thread is created by a
+process and updated as the thread progresses through its states.
+
+Queues use control blocks to track jobs. As the job moves through the
+system its progress is noted in the control block. This allows for
+interrupted processes and threads to be resumed after a delay. The
+control block is linked to other control blocks to form queues, for
+example the READY queue.
+
+\section{Scheduling Policies and Algorithms}
+
+\dfn{Turnaround Time}{
+  The total time taken between the submission of a process and its
+  completion. It includes the time spent waiting to get into memory,
+  waiting in the ready queue, executing on the CPU and doing I/O
+  operations.
+}
+
+\dfn{Natural Wait}{
+  The time a process spends waiting for I/O operations to complete.
+}
+
+\dfn{Pre-emptive Scheduling}{
+  A scheduling strategy that interrupts the processing of a job and
+  transfers the CPU to another job.
+}
+
+\dfn{Non-Pre-emptive Scheduling}{
+  A scheduling strategy that allows a job to run until it completes or
+  switches to the WAITING state.
+
+}
+
+In a multiprogramming environment, the operating system must decide
+how to resolve three limitations of the system before scheduling
+processes effectively:
+\begin{itemize}
+  \item There are a finite number of resources
+  \item Some resources are non-shareable once allocated.
+  \item Some resources require operator intervention to allocate or deallocate.
+\end{itemize}
+
+A good scheduling policy should aim to achieve the following goals,
+even though some goals may contradict each other:
+\begin{description}
+  \item[Maximize Throughput]  - Run as many jobs as possible in a
+    given amount of time.
+  \item[Minimize Response Time ] - Quickly turn
+    around interactive requests.
+  \item[Minimize Turnaround time] - Move entire jobs in and out of
+    the system quickly.
+  \item[Minimize Waiting Time] - Move jobs out of the READY queue as
+    quickly as possible.
+  \item[Maximize CPU efficiency] - Keep the CPU busy 100\% of the time.
+  \item[Ensure fairness for all jobs] - Give every job an equal
+    amount of CPU and I/O time.
+\end{description}
+
+\section{Scheduling Algorithms}
+
+\dfn{Scheduling Algorithm}{
+  A set of rules that the operating system uses to allocate the CPU
+  in the best way for moving jobs through the system efficiency.
+}
+
+\subsection{First-Come, First-Served (FCFS)}
+
+A nonpreemtive scheduling algorithm that handles all incoming objects
+according to their arrival time: The earlier they arrive the sooner
+they're processed. This algorithm is commonly used for batch systems,
+and is unacceptable for many interactive systems because interactive
+users expect quick response time.
+
+With FCFS as a new job enters the system, its PCB is placed at the
+end of the READY queue, and when the CPU becomes available the job at
+the front of the READY queue is selected for processing. In a strict
+FCFS system there is no WAITING state because each job is run to its
+completion, although there are many systems allowing context switches
+on natural wait requests, with execution resuming when the I/O
+operation is completed. Assuming there's no multiprogramming,
+turnaround time is unpredictable with a strict FCFS policy, as each
+jobs runs to completion so all other jobs must wait until the job is done.
+
+\ex{}{
+  Given the following jobs arrive in the order listed:
+  \begin{itemize}
+    \item Job A - 15 ms CPU time
+    \item Job B - 2 ms CPU time
+    \item Job C - 1 ms CPU time
+  \end{itemize}
+
+  If all three jobs arrive at time 0, the turnaround time (finish
+  time $-$ arrival time) for each job is:
+  \begin{align*}
+    \text{Job A} &=  15 - 0 = 15 \\
+    \text{Job B} &= 17 - 0 = 17 \\
+    \text{Job C} &= 18 - 0 = 18 \\
+  \end{align*}
+  The average turnaround time is:
+  \begin{align*}
+    \frac{15 +  17 + 18}{3} &= 16.67  \\
+  \end{align*}
+
+  However if the jobs arrived in the order C, B, A, the turnaround times, are:
+  \begin{align*}
+    \text{Job C} &= 1 - 0 = 1 \\
+    \text{Job B} &= 3 - 0 = 3 \\
+    \text{Job A} &= 18 - 0 = 18 \\
+  \end{align*}
+  The average turnaround time is:
+  \begin{align*}
+    \frac{1 + 3 + 18}{3} &= 7.34  \\
+  \end{align*}
+
+}
+
+Due to the unpredictability of turnaround times, the average
+turnaround times are rarely minimized. If one job monopolizes the
+system the effect on system performance depends on the type of job,
+i.e. CPU bound or I/O bound. With a CPU bound job using the  CPU, the
+other jobs in the system that are waiting for processing or finishing
+I/O requests have to wait longer to for CPU time. If I/O requests are
+not being serviced the I/O queue remain stable while the READY queue
+grows with new arrivals, with extreme cases having the READY queue
+filled to capacity while the I/O queue is empty.
+
+On the other hand if an I/O bound job is using the CPU, the other
+jobs in the system that are waiting for processing or finishing I/O
+requests have to wait less time for CPU time. Since I/O bound jobs
+frequently issue I/O requests, the I/O queue grows while the READY
+queue shrinks as jobs complete their I/O requests and return to the
+READY queue, leaving the CPU idle waiting for the next job to arrive.
+
+\subsubsection{Key Points of FCFS}
+\begin{itemize}
+  \item Simple and easy to implement.
+  \item Non pre-emptive
+  \item Mostly used in batch systems.
+  \item FIFO queue.
+  \item Turnaround time is unpredictable and not minimized.
+\end{itemize}
+
+\subsection{Shortest Job Next (SJN) / Shortest Job First (SJF)  }
+
+A nonpreemtive scheduling algorithm that chooses jobs based on the
+length of their CPU cycle time. This algorithm works best in an
+environment where the estimated CPU time required to run the job is
+given in advance by each user at the start of the job, i.e. a batch
+system. In interactive systems this information is not usually
+available so SJN is not commonly used.
+
+\ex{}{
+  Given the following jobs all arriving at time 0:
+  \begin{itemize}
+    \item Job A - 5 CPU cycles
+    \item Job B - 2 CPU cycles
+    \item Job C - 6 CPU cycles
+    \item Job D - 4 CPU cycles
+  \end{itemize}
+
+  The SJN algorithm would schedule the jobs with the shortest CPU
+  cycles first, resulting in this order: B, D, A, C. This gives the
+  following turnaround times:
+  \begin{align*}
+    \text{Job B} &= 2 - 0 = 2  \\
+    \text{Job D} &= 6 - 0 = 6 \\
+    \text{Job A} &= 11 - 0 = 11 \\
+    \text{Job C} &= 17 - 0 = 17 \\
+  \end{align*}
+  Resulting in an average turnaround time of:
+  \begin{align*}
+    \frac{2 + 6 + 11 + 17}{4} &= 9 \\
+  \end{align*}
+}
+
+The SJN algorithm consistently minimizes the average turnaround time
+because the time for the first job has the biggest impact on the
+average turnaround time as it affects the waiting time of all other
+jobs in the READY queue. By executing the shortest jobs first, SJN
+reduces the waiting time for all other jobs, leading to a lower
+average turnaround time overall.
+
+However SJN is only optimal if all jobs arrive at the same time, and
+the CPU can accurately predict the CPU time required for each job.
+
+\subsubsection{Key Points of SJN}
+\begin{itemize}
+  \item Simple and easy to implement.
+  \item Non pre-emptive
+  \item Mostly used in batch systems.
+  \item Requires knowledge of CPU time required for each job.
+  \item Minimizes average turnaround time.
+  \item Only optimal if all jobs arrive at the same time and accurate
+    CPU time predictions are available.
+\end{itemize}
+
+\subsection{Priority Scheduling}
+
+Nonpreemtive algorithm that gives preference to important jobs based
+on some criteria. Important jobs aren't interrupted until their CPU
+cycles are completed or a natural wait occurs.  If two or more jos
+with equal priority are present in the READY queue, the processor is
+allocated using FCFS.
+
+Priorities can be assigned by a system administrator using extrinsic job
+characteristics. With a priority algorithm job PCBs are usually
+placed at the end of one of several READY queues by the Job Scheduler
+based on their priority so that the Process Scheduler manages
+multiple READY queues. Some intrinsic characteristics that can be
+used to assign priorities include:
+\begin{description}
+  \item[Memory Requirements]  - Jobs requiring large amounts of
+    memory could have lower priorities, or vice versa.
+  \item[Number and type of I/O devices] - Jobs requiring many I/O
+    devices could be given lower priorities, than those requiring few
+    I/O devices.
+  \item[Total CPU time] - Jobs having a long CPU cycle or estimated
+    run time could be given lower priorities, than those with short CPU cycles.
+  \item[Amount of time already spent in the system] - Some systems
+    increase the priority of jobs that have been in the system for an
+    unusually long time to prevent starvation. This is called \textbf{ageing}.
+\end{description}
+
+\subsubsection{Key Points of Priority Scheduling}
+\begin{itemize}
+  \item Non pre-emptive
+  \item Can be used in both batch and interactive systems.
+  \item Requires knowledge of job characteristics to assign priorities.
+  \item Can lead to starvation of low-priority jobs.
+\end{itemize}
+
+\subsection{Shortest Remaining Time (SRT)}
+
+A preemptive version of the SJN algorithm, that allocates jobs
+closest to completion, allowing new jobs with shorter remaining times
+to interrupt running jobs. When using SRT if several jobs have the
+same amount of time remaining the algorithm falls back to FCFS.
+
+This algorithm cannot be implemented in an interactive system because
+it requires knowledge of the exact CPU time required to finish each
+job, which is only available in batch systems. SRT involves more
+overhead than SJN in the form of context switching and monitoring of
+remaining times.
+
+\ex{}{
+  Given the following jobs:
+  \begin{itemize}
+    \item Job A - 6 ms CPU time, arrives at time 0
+    \item Job B - 3 ms CPU time, arrives at time 1
+    \item Job C - 1 ms CPU time, arrives at time 2
+    \item Job D - 4 ms CPU time, arrives at time 3
+  \end{itemize}
+  The finish times for each job using SRT are:
+  \begin{itemize}
+    \item Job A - Starts at time 0, interrupted at time 1, resumes at
+      time 9, finishes at time 14
+    \item Job B - Starts at time 1, interrupted at time 2, resumes at
+      time 3, finishes at time 5
+    \item Job C - Starts at time 2, finishes at time 3
+    \item Job D - Starts at time 5, finishes at time 9
+  \end{itemize}
+  For each job the turnaround time is:
+  \begin{align*}
+    \text{Job A} &= 14 - 0 = 14  \\
+    \text{Job B} &=  5 - 1 = 4 \\
+    \text{Job C} &= 3 - 2 = 1 \\
+    \text{Job D} &=  9 - 3 = 6 \\
+  \end{align*}
+  Resulting in an average turnaround time of:
+  \begin{align*}
+    \frac{14 + 4 + 1 + 6}{4} &= 6.25 \\
+  \end{align*}
+}
+
+SRT is often affected by the time needed for context switching, especially if
+many jobs with short remaining times arrive frequently, causing
+numerous interruptions. How context switching is done depends on the
+CPU architecture, which the overhead depending on the way the CPU
+handles interrupts. Although SRT appears to be faster, in a real
+operating environment its advantages may be negated by the time spent
+context switching.
+
+\subsubsection{Key Points of SRT}
+\begin{itemize}
+  \item Pre-emptive
+  \item Mostly used in batch systems.
+  \item Requires knowledge of CPU time required for each job.
+  \item Minimizes average turnaround time.
+  \item Affected by context switching overhead.
+\end{itemize}
+
+\subsection{Round Robin (RR)}
+A preemptive scheduling algorithm, used in interactive systems, that
+allocates CPU time to each job in a FCFS manner for a fixed time
+period called a \textbf{time quantum} or \textbf{time slice}.
+
+Jobs are placed in the READY queue using a FIFO structure, with the
+job at the front of the queue being allocated the CPU for a time
+quantum. If processing isn't finished when the time quantum expires,
+the job is interrupted and put at the end of the READY queue, with
+it's information saved in its PCB. The next job in the READY queue is
+then allocated the CPU for a time quantum, and this process continues
+until all jobs are completed.
+
+If the job's CPU cycle is smaller than the time quantum one of two
+actions can take place:
+\begin{itemize}
+  \item If this is the job's last CPU cycle and the job is finished,
+    then all resources allocated to it are released and the completed
+    job is returned to the user.
+  \item If the CPU has been interrupted by an I/O request, then the
+    information about the job is saved in its PCB and the job is
+    placed in the WAITING queue. When the I/O operation is completed
+    the job is placed at the end of the READY queue.
+\end{itemize}
+
+\ex{}{
+  Given the following jobs:
+  \begin{itemize}
+    \item Job A - 8 ms CPU time, arrives at time 0
+    \item Job B - 4 ms CPU time, arrives at time 1
+    \item Job C - 9 ms CPU time, arrives at time 2
+    \item  Job D - 5 ms CPU time, arrives at time
+  \end{itemize}
+  With a time quantum of 4 ms, the finish times for each job using RR are:
+  \begin{itemize}
+    \item Job A - Starts at time 0, interrupted at 4, resumes at 16 and
+      finishes at time 20
+    \item Job B - Starts at time 4, interrupted at time 8, finishes at time 8
+    \item Job C - Starts at time 8, interrupted at time 12, resumes
+      at time 20, and is interrupted at time 24, resumes at time 25 and
+      finishes at time 26
+    \item Job D - Starts at time 12, interrupted at time 16, resumes
+      at time 24 and
+      finishes at time 25
+  \end{itemize}
+  For each job the turnaround time is:
+  \begin{align*}
+    \text{Job A} &= 20 - 0 = 20 \\
+    \text{Job B} &= 8 - 1 = 7 \\
+    \text{Job C} &=26 - 2 = 24 \\
+    \text{Job D} &= 25 - 3 = 22 \\
+  \end{align*}
+}
+
+The length of the time quantum is critical to the performance of the RR
+algorithm. If the system is a time-critical system requiring low
+response times, then the time quantum should be small allowing jobs
+to be processed quickly. If it's an archival system, turnaround time
+and overhead become critically important, so a larger time quantum is preferred.
+
+The general rules for selecting a time quantum are:
+\begin{enumerate}
+  \item It should be long enough to allow 80\% of the CPU cycles to
+    run to completion
+  \item It should be at least 100 times longer than the time required
+    to perform one context switch.
+\end{enumerate}
+
+\subsubsection{Key Points of RR}
+\begin{itemize}
+  \item Pre-emptive
+  \item Mostly used in interactive systems.
+  \item Time quantum critical to performance.
+  \item Provides good response time.
+  \item Can lead to high turnaround time and overhead if time quantum
+    is too small.
+\end{itemize}
+
+\subsection{Multiple-Level Queues (MLQ)}
+
+Multiple-Level queues isn't a specific scheduling algorithm, but
+works in conjunction with several schemes to handle jobs that can be
+grouped according  to one or more common characteristics. An example
+is the priority scheduling algorithm where jobs are grouped according to
+their priority levels.
+
+Another approach is to group jobs according to their processing
+characteristics, i.e. CPU bound or I/O bound, with the Process
+Scheduler alternating between jobs from each group to keep the system
+balanced ensuring that neither CPU nor I/O devices are idle for long periods.
+
+Another example would be a preemptive approach in a hybrid
+environment where batch jobs are put into one queue, the background
+queue, and interactive jobs are put into another queue, the
+foreground queue. The jobs in the foreground queue are given higher
+priority, focusing on faster turnaround, than those in the background queue.
+
+There are four primary methods for determining movement:
+\begin{itemize}
+  \item No Movement Between Queues
+  \item Movement Between Queues
+  \item Variable Time Quantum Per Queue
+  \item Ageing
+\end{itemize}
+
+\subsubsection{No Movement Between Queues}
+
+A simple policy that works best with high priority jobs. The
+processor is allocated to the jobs in the highest priority queue in a
+FCFS manner until the queue is empty, then the next highest priority
+queue is processed, and so on. This policy works best when there are
+relatively free users with hight priority jobs so that the top queues
+quickly empty out, allowing the processor to spend most of its time
+processing lower priority jobs.
+
+\subsubsection{Movement Between Queues}
+
+A policy that adjusts the priorities assigned to each job. High
+priority jobs are treated like all others once they enter the system,
+allowing them to move between queues based on their behaviour. When a
+time quantum interrupt occurs the job is moved to the end of the next
+lower priority queue, and so on. A job can also have its priority
+increased in cases when it issues an I/O request before its time
+quantum expires, moving it to the end of the next higher priority queue.
+
+This policy works best in a system where jobs are handled according
+to  their computing cycle characteristics, i.e. CPU bound or I/O
+bound. This assumes that a job that exceeds its time quantum is CPU
+bound and will require more CPU time than one that requests I/O
+before the time quantum expires. There fore the CPU-bound jobs are
+placed at the end of the next lower-level queue when they're
+interrupted because of the time quantum expiring, while I/O bound
+jobs are returned to the end of the next higher-level queue once
+their I/O request has finished. This facilitates I/O-bound jobs and
+works well for interactive systems.
+
+\subsubsection{Variable Time Quantum Per Queue}
+
+A variant of the movement between queues policy, allowing faster
+turnaround for CPU-bound jobs. Each queue is given a time quantum
+twice as long as the one before it. For example if the highest
+priority queue has a time quantum of 100 ms, the next lower priority
+queue has a time quantum of 200ms, and so on.
+
+If a job doesn't finish its CPU cycle using the first time quantum,
+it is moved to the end of the next lower-level queue, and when the
+processor is next allocated ot it the job is allowed to execute for
+longer and longer periods of time, thus improving its chances of
+finishing in a reasonable amount of time.
+
+\subsubsection{Ageing}
+
+\dfn{Starvation}{
+  A situation where a low-priority job is perpetually denied access
+  to the CPU because higher-priority jobs keep arriving.
+}
+
+Used to ensure that jobs in the lower-level queues will eventually
+complete their execution. The operating system keeps track of each
+job's waiting time, and when a job gets too old, i.e. when it has
+waited in the queues for so long that it has reached a certain time
+limit, the system moves the job into the next highest queue and so
+on, until it reaches the highest priority queue. Ageing prevents
+indefinite postponement of low-priority jobs, ensuring that all jobs
+eventually get processed. Eventually the situation could lead to the
+old job's starvation, causing it to never be processed. This poses a
+significant threat to a system if the job is allocated critical resources.
+
+\subsection{Earliest Deadline First (EDF)}
+A Dynamic preemptive priority algorithm used to address the critical
+processing requirements of real-time systems and their deadlines.
+With EDF the priority of a job can be adjusted as the job moves
+through execution from START to FINISHED.
+
+The goal of EDF is to process all jobs in the order that is most
+likely to allow each to run to completion before reaching their
+respective deadlines. Initially jobs are assigned priorities based on
+the amount of time remaining until the job's impending deadline, i.e.
+inversely proportional to its absolute deadline. Therefore the closer
+the deadline, the higher the priority. As new jobs arrive or existing
+jobs complete, the priorities are recalculated to ensure that the job
+with the nearest deadline is always given precedence, and if two or
+more jobs have the same deadline, the job that arrived first is given priority.
+
+\ex{}{
+  Given the following jobs:
+  \begin{itemize}
+    \item  Job A - 3 ms CPU time, arrives at time 0, deadline at 6
+    \item Job B - 1 ms CPU time, arrives at time 2, deadline at 2
+    \item  Job C - 5 ms CPU time, arrives at time 2, deadline at j
+  \end{itemize}
+}
+
+\section{Managing Interrupts}
+
+\dfn{Interrupt Handler}{
+  A control program that handles the interruption sequence of events
+  when an interrupt occurs.
+}
+
+Interrupts can be sent by many events including:
+\begin{itemize}
+  \item Page faults
+  \item I/O requests
+  \item Timer expirations
+  \item Illegal arithmetic operations
+  \item Illegal job instructions
+\end{itemize}
+
+Interrupts are handled by the interrupt handler, when operation
+system detect an error that is not recoverable, the interrupt handler
+typically follows this sequence:
+\begin{enumerate}
+  \item The type of interrupt is described and stored to be passed on
+    to the user as an error message.
+  \item The state of the interrupted process is saved, including the
+    value of the program counter, the mode specification, and the
+    contents of all registers.
+  \item  The interrupt is processed:
+    \begin{itemize}
+      \item The error message and the state of the of the interrupted
+        process are sent to the user
+      \item The program execution is halted
+      \item Any resources allocated the job are released
+      \item And the job exits the system.
+    \end{itemize}
+  \item The process resumes normal operation.
+\end{enumerate}
+
+However if he interrupt is nonrecoverable the job is terminated in Step 3.
+
+\chapter{Process Synchronization}
+
+\section{Consequences of Poor Synchronization}
+
+\dfn{Deadlock}{
+  A system-wide tangle of resource requests that begins when two or
+  more jobs are put on hold, each waiting for a vital resource to be
+  become available, but if the resources needed by those jobs are the
+  resources held by the other jobs in the deadlock, none of the jobs
+  can proceed. The deadlock is complete if the remainder of the
+  system comes to a halt too.
+}
+
+Fixing deadlocks is critical to maintaining system stability and
+performance. Deadlocks can lead to several negative consequences,
+including:
+\begin{description}
+  \item[Starvation]  - Low-priority jobs may never get access to
+    resources if higher-priority jobs keep arriving.
+  \item[Reduced System Throughput]  - Deadlocks can lead to a
+    significant reduction in system throughput as resources are
+    tied up in deadlocked processes, preventing other processes from
+    executing.
+  \item[Increased Response Time]  - Deadlocks can lead to increased
+    response times for processes as they wait for resources to
+    become available.
+\end{description}
+
+\section{Examples of Deadlocks}
+
+A deadlock can occur when a nonshareable  and nonpreemtive resources,
+such as printers or scanners, are allocated to jobs that eventually
+require other nonshareable, nonpreemtive resources that have been
+allocated to other jobs.
+
+\subsection{Deadlocks on File Requests}
+
+If jobs are allowed to request and hold files for the duration of
+their execution a deadlock can occur. In this case each job holds one
+file and requests another file held by another job. For example Job A
+holds File 1 and requests File 2, while Job B holds File 2 and
+requests File 1. Neither job can proceed because each is waiting for a
+file held by the other job, resulting in a deadlock.
+
+\subsection{Deadlocks in Databases}
+
+A deadlock can also occur if two process access and lock records in a
+database. For example Process A locks Record 1 and requests
+Record 2, while Process B locks Record 2 and requests Record 1. Neither
+process can proceed because each is waiting for a record locked by the
+other process, resulting in a deadlock.
+
+\subsection{Deadlocks in Dedicated Device Allocation}
+
+\subsection{Deadlocks in Multiple Device Allocation}
+
+\subsection{Deadlocks in Spooling}
+
+\subsection{Livelock while Disk Sharing}
+
+\dfn{Livelock}{
+  A situation where two or more processes continuously change their
+  state in response to changes in the other processes without making
+  any progress.
+}
+
+\section{Necessary Conditions of Deadlocks}
+
+In each example of deadlock/livelock, there was some interaction of
+several processes and resources but each time, it was preceded by the
+simultaneous occurrence of four conditions that the operating system
+could have recognized:
+\begin{description}
+  \item[Mutual Exclusion]  - At least one resource must be held in a
+    nonshareable mode, meaning that only one process can use the
+    resource at any given time.
+  \item[Resource Holding]  - A process must be holding at least one
+    resource and waiting to acquire additional resources that are
+    currently being held by other processes.
+  \item[No Preemption]  - Resources cannot be forcibly removed from
+    processes holding them until the resources are used to
+    completion.
+  \item[Circular Wait]  - A set of processes must exist such that
+    each process is waiting for a resource that is held by the next
+    process in the chain, forming a circular chain of processes
+    where each process is waiting for a resource held by the next
+    process.
+\end{description}
+
+All four conditions must hold simultaneously for a deadlock to occur,
+and as long as these four conditions persist, the deadlock will
+persist. So if one condition is removed the deadlock will be
+resolved, in fact if the four conditions can be prevented from ever
+occurring simultaneously then deadlocks can be completely avoided.
+
+\section{Strategies for Handling Deadlocks}
+\begin{itemize}
+  \item Prevention - Prevent occurrence of one condition.
+    \begin{itemize}
+      \item Mutual Exclusion - Some resources must allocate
+        exclusively. Bypassed if I/O device uses spooling.
+      \item  Resource Holding
+        \begin{itemize}
+          \item Bypassed if jobs request every necessary resource at
+            creation time.
+          \item  Multiprogramming degree significantly decreased
+          \item  Idle peripheral devices
+        \end{itemize}
+
+    \end{itemize}
+  \item  Avoidance - Avoid deadlock if it becomes probable.
+  \item Detection - Detect deadlock when it occurs.
+  \item  Recovery - Resume in a graceful manner.
+\end{itemize}
+
+Generally operating systems use a combination of several strategies
+to deal with deadlocks.
+\begin{description}
+  \item[Prevention] - Preventing deadlocks by ensuring that at least
+    one of the necessary conditions cannot hold.
+  \item[Avoidance] - Avoiding deadlocks by careful resource allocation
+    based on knowledge of future resource requests.
+  \item[Detection] - Detecting deadlocks when they occur using
+    algorithms that periodically check the system for deadlocks.
+  \item[Recovery] - Recovering from deadlocks by terminating or
+    rolling back one or more processes involved in the deadlock.
+\end{description}
+
+\subsection{Prevention}
+
+To prevent a deadlock the operating system must eliminate one of the
+four necessary conditions for deadlock, further complicated by the
+fact that the same conditions can't be eliminated from every resource.
+
+\dfn{Spooling}{
+  A process where data is temporarily gathered and stored to be
+  accessed and processed by a device, program or the user at a later
+  time.
+}
+
+Mutual exclusion is necessary in any computer system because some
+resources, such as memory, CPU, and dedicated drivers, must be
+exclusively allocated to one user at a time. In the case of I/O
+devices such, the mutual exclusion may be bypassed by spooling which
+allows the output from many jobs to be stored in separate temporary
+spool files tat the same time, and each complete output file is then
+selected for use when the I/O device becomes available. However this
+solution may trade one problem (Deadlock in Device Allocation) for
+another (Deadlocks in Spooling).
+
+Resources holding can be resolved by forcing each job to request
+every resource it will need to run to completion at the time of its creation.
+This would significantly decrease the degree of multiprogramming in the system
+because many resources would be tied up waiting for jobs to complete,
+and I/O devices would be idle much of the time.
+
+No preemption could be bypassed by allowing the operating system to
+deallocate resources from jobs, using context switching to save the
+current state of the job. This approach would also require complex
+recovery tasks in the cause of the preemption of a dedicated I/O
+resource, or files modified by the job.
+
+Circular wait can be resolved if the operating system prevents the
+formation of a circular chain of processes. This can be done by
+numbering the available resources
+in a system and requiring that each job requests resources in
+ascending order, i.e. a job holding Resource 1 can only request
+Resource 2, 3, and so on, This removes the possibility of a circular
+wait preventing deadlocks. However this approach may lead to long
+idle times for unused resources allocated in the lower numbers.
+
+\subsection{Avoidance}
+
+The operating system can avoid deadlocks if the system knows ahead of
+time the sequence of requests associated with each of the active processes.
+
+The Banker's Algorithm proposed by Dijkstra (1965) can be used to
+regulate resource allocation to avoid deadlocks. It is based on a
+bank with a fixed amount  of capital that operates on the following principles:
+\begin{itemize}
+  \item No customer will be granted a loan exceeding the bank's total capital.
+  \item All customers will be given a maximum credit limit when
+    opening an account.
+  \item No customer will be allowed to borrow over the limit.
+  \item The sum of all loans won't exceed the bank's total capital.
+\end{itemize}
+
+To remain in a safe state the bank must ensure it has sufficient
+funds to satisfy at least one customer.
+
+\ex{}{
+  Given a system with 10 resources available and three processes,
+  with the following maximum resource requirements:
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c c c c|}
+        \hline
+        Job No. & Devices Allocated & Maximum Required & Remaining
+        Needs \\ [0.5ex]
+        \hline
+        \hline
+        1 & 0 & 4 & 4 \\
+        2 & 2 & 5 & 3 \\
+        3 & 4 & 8 & 4 \\
+        \hline
+        Total number of devices allocated = 6 & & & \\
+        \hline
+        Total number of devices in system = 10 & & & \\
+        \hline
+        Available devices = 4 & & & \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+  This is a \textbf{safe state} because available devices (4) $\geq$
+  smallest remaining need (3 for Job 2), so at least one job can complete.
+
+  The OS allocates more resources to Jobs 1 and 2 and enters an unsafe state:
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c c c c|}
+        \hline
+        Job No. & Devices Allocated & Maximum Required & Remaining
+        Needs \\ [0.5ex]
+        \hline
+        \hline
+        1 & 2 & 4 & 2 \\
+        2 & 3 & 5 & 2 \\
+        3 & 4 & 8 & 4 \\
+        \hline
+        Total number of devices allocated = 9 & & & \\
+        \hline
+        Total number of devices in system = 10 & & & \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+  This state is \textbf{unsafe} because with only one device
+  available, the system
+  can't satisfy anyone's minimum remaining needs (all jobs need at
+  least 2 devices).
+  If the system allocated the last resource to any process, it would enter a
+  deadlock because it wouldn't be able to satisfy the remaining needs
+  of any process. An unsafe state doesn't necessarily lead to
+  a deadlock, but it does indicate the possibility of one occurring.
+
+  The operating system must never satisfy a request that moves it
+  from a safe state to an unsafe state. Therefore, as user's requests
+  are satisfied, the OS must identify the job with the smallest number
+  of remaining resources and make sure that the number of available
+  resources is always equal to or greater than the number needed for
+  this job to run to completion.
+
+  The correct sequence of resource allocation to keep the system in a safe
+  state is as follows:
+
+  \textbf{Step 1:} Starting from the initial safe state, allocate 3
+  resources to Job 2 (smallest remaining need):
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c c c c|}
+        \hline
+        Job No. & Devices Allocated & Maximum Required & Remaining
+        Needs \\ [0.5ex]
+        \hline
+        \hline
+        1 & 0 & 4 & 4 \\
+        2 & 5 & 5 & 0 \\
+        3 & 4 & 8 & 4 \\
+        \hline
+        Total number of devices allocated = 9 & & & \\
+        \hline
+        Total number of devices in system = 10 & & & \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+  Job 2 completes and releases all 5 devices. Available devices = 1 + 5 = 6.
+
+  \textbf{Step 2:} Allocate 4 resources to Job 1:
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c c c c|}
+        \hline
+        Job No. & Devices Allocated & Maximum Required & Remaining
+        Needs \\ [0.5ex]
+        \hline
+        \hline
+        1 & 4 & 4 & 0 \\
+        2 & \textit{finished} & -- & -- \\
+        3 & 4 & 8 & 4 \\
+        \hline
+        Total number of devices allocated = 8 & & & \\
+        \hline
+        Total number of devices in system = 10 & & & \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+  Job 1 completes and releases all 4 devices. Available devices = 2 + 4 = 6.
+
+  \textbf{Step 3:} Allocate 4 resources to Job 3:
+  \begin{table}[H]
+    \begin{center}
+      \begin{tabular}{|c c c c|}
+        \hline
+        Job No. & Devices Allocated & Maximum Required & Remaining
+        Needs \\ [0.5ex]
+        \hline
+        \hline
+        1 & \textit{finished} & -- & -- \\
+        2 & \textit{finished} & -- & -- \\
+        3 & 8 & 8 & 0 \\
+        \hline
+        Total number of devices allocated = 8 & & & \\
+        \hline
+        Total number of devices in system = 10 & & & \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{table}
+
+  Job 3 completes and releases all 8 devices. All jobs have completed
+  successfully.
+
+  The safe sequence is: \textbf{Job 2 $\rightarrow$ Job 1 $\rightarrow$ Job 3}.
+}
+
+In implementing the Banker's Algorithm the system must setup  a
+resource assignment table for each type of resource, and tracks each
+table to keep the system in a safe state.
+
+Although the Banker's Algorithm can effectively avoid deadlocks, it
+has several limitations:
+\begin{itemize}
+  \item  As jobs enter the system they must declare the maximum
+    number of resources they need, which is difficult in interactive systems.
+  \item The number of total resources for each class must remain
+    constant. If a device fails and becomes unavailable the algorithm
+    may no longer be able to keep the system in a safe state.
+  \item The number of jobs must remain fixed, which is hard to do in
+    an interactive system.
+  \item High overhead as the algorithm must be executed each time a
+    jobs requests a resource.
+\end{itemize}
+
+\section{Detection}
+
+Deadlock detection can be modelled as a directed graph problem,
+allowing use of cycle detection algorithms to identify deadlocks.
+Unlike avoidance algorithms which must be executed on each request,
+cycle detection algorithms can be executed when appropriate, i.e.
+every hour, once a day, or manually by the system administrator.
+
+Beginning with a system in use, the steps to detect deadlocks are:
+\begin{enumerate}
+  \item Find a process that is currently using a resource and waiting
+    for one . This process can be removed from the graph by
+    disconnecting the link tying the resource to the process. The
+    resource can then be returned to the available list. This is
+    possible because the process would eventually finish and return
+    the resource.
+  \item Find a process that's waiting only for resources classes that
+    aren't fully allocated. This process isn't contributing to
+    deadlock since it would eventually get he resource it's waiting
+    for, finish it's work and return the resource at he available list.
+  \item Repeat step 1 and continue with steps 1 and 2 until all the
+    lines connect resources to processes have been removed.
+\end{enumerate}
+
+If there are any edges left in the graph this indicates that request
+of the process in question can't be satisfied and the process is deadlocked.
+
+\section{Recovery}
+
+Once a deadlock is detected it must be resolved and the system
+returned to normal as quickly as possible. There are several recovery
+algorithms but they all have a common approach: sacrificing at least
+one victim, i.e. an expendable job, which when removed from the
+deadlock, will free the system. Removal generally involves restarting
+the job from the beginning or from a previously saved checkpoint.
+
+The first approach is to terminate every job that's active in the
+system and restart them from the beginning. This is a simple approach
+but is drastic and results in significant loss of processing time.
+
+The second approach is to terminate only the jobs involved in the
+deadlock and ask their users to resubmit them. This approach is less drastic but
+still results in significant loss of processing time for the
+terminated jobs.
+
+The third approach is to identify which jobs are involved in the
+deadlock and terminate them one at a time, checking to see if the
+deadlock is resolved after each removal, until the deadlock is
+resolved. This approach minimizes the number of jobs terminated but
+requires more overhead to check for deadlock after each removal.
+
+The fourth approach can be used only if the job keeps a record or a
+checkpoint of its progress so it can be interrupted and continued
+without starting again from the beginning of its execution.
+
+The following methods focus on the non-deadlocked jobs and the
+resources they hold
+
+The fifth approach is to select a non-deadlocked job, then preempt
+the resources it's holding, and allocates then to deadlocked process
+so that it can resume execution, resolving the deadlock. This
+approach requires the ability to preempt resources, which may not be
+possible for all resource types.
+
+The sixth method stops new jobs from entering the system, allowing
+the non-deadlocked jobs to finish so they'll release their resources
+to the deadlocked jobs. This approach is the only one listed that
+doesn't require a sacrifice. This method can be effective if the
+deadlock involves only a few jobs and the non-deadlocked jobs will
+finish in a reasonable amount of time, and is not guaranteed to work
+unless the number of avail be resources is greater than the number
+needed by at least one of the deadlocked jobs.
+
+Several factors must be considered when selecting a sacrifice that
+will have the least-negative effect on the system, including:
+\begin{description}
+  \item[Priority]  - High priority jobs are usually not sacrificed.
+  \item[CPU time used] - Jobs close to completion are usually not sacrificed.
+  \item[Number of releated jobs] - Jobs with many related jobs are
+    usually not sacrificed.
+\end{description}
+
+\section{Starvation}
+
+\dfn{Starvation}{
+  A single job is prevented from completing its execution because it
+  is waiting for resources that never become available.
+}
+
+Starvation can occur in systems that use priority scheduling, and can
+have the followin g consequences:
+\begin{description}
+  \item[Increased Response Time] - Starvation can lead to increased
+    response times for low-priority jobs as they wait indefinitely
+    for resources to become available.
+  \item[Reduced System Throughput] - Starvation can lead to a
+    reduction in system throughput as low-priority jobs are unable to
+    complete their execution.
+  \item[Unfair Resource Allocation] - Starvation can lead to unfair
+    resource allocation, where high-priority jobs are given
+    preferential treatment over low-priority jobs.
+\end{description}
+
+To address this problem an algorithm can be used to track how long
+each job has been waiting for resources, the same as \textbf{ageing}.
+Once starvation has been detected, the system can block incoming
+requests from other jobs until the starving jobs have been satisfied.
+
+\chapter{Concurrent Processing}
+
+\section{Parallel Processing}
+
+\subsection{Levels Of Multiprocessing}
+
+\subsection{Multi-Core Processors}
+
+\section{Typical Multiprocessing Configurations}
+
+\subsection{Master / Slave Configuration}
+
+\subsection{Loosely Coupled Configuration}
+
+\subsection{Symmetric Configuration}
+
+\section{Process Synchronization Software}
+
+\subsection{Test-and-Set}
+
+\subsection{WAIT and SIGNAL}
+
+\subsection{Semaphores}
+
+\section{Process Cooperation}
+
+\subsection{Producers and Consumers}
+
+\subsection{Readers and Writers}
+
+\section{Concurrent Programming}
+
+\subsection{Amdahl's Law}
+
+\subsection{Order of Operations}
+
+\subsection{Applications of Concurrent Programming}
+
+\subsubsection{Array Operations}
+
+\subsubsection{Matrix Multiplication}
+
+\subsubsection{Sorting and Merging Files}
+
+\subsubsection{Data Mining}
+
+\section{Threads and Concurrent Programming}
+
+\end{document}

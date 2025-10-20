@@ -795,7 +795,7 @@ queue has a time quantum of 200ms, and so on.
 
 If a job doesn't finish its CPU cycle using the first time quantum,
 it is moved to the end of the next lower-level queue, and when the
-processor is next allocated ot it the job is allowed to execute for
+processor is next allocated to it the job is allowed to execute for
 longer and longer periods of time, thus improving its chances of
 finishing in a reasonable amount of time.
 
@@ -1320,7 +1320,7 @@ will have the least-negative effect on the system, including:
 }
 
 Starvation can occur in systems that use priority scheduling, and can
-have the followin g consequences:
+have the following consequences:
 \begin{description}
   \item[Increased Response Time] - Starvation can lead to increased
     response times for low-priority jobs as they wait indefinitely
@@ -1342,48 +1342,363 @@ requests from other jobs until the starving jobs have been satisfied.
 
 \section{Parallel Processing}
 
+\dfn{Parallel Processing}{
+  The simultaneous operation and execution of two or more processors
+  in one system
+  at the same time.
+}
+
+The processor manager coordinates the activities of each processor,
+and synchronizes interaction among CPUS. This allows for increased
+reliability, as there is failover capability if one processor fails,
+and faster processing as instructions can be executed in parallel
+across multiple processors.
+
+Processing can be done in several ways:
+\begin{itemize}
+  \item Each CPU could be allocated to each program or job
+  \item Each CPU could be allocated to each working set or parts of it.
+  \item Each individual instruction could be subdivided with each
+    subdivision processed simultaneously
+\end{itemize}
+
+However there are challenges in parallel processing:
+\begin{itemize}
+  \item Connecting processors into configurations that allow efficient
+    communication among them.
+  \item Orchestrating processor interaction
+\end{itemize}
+
 \subsection{Levels Of Multiprocessing}
+
+Multiprocessing can occur at three levels:
+\begin{description}
+  \item[Job Level]  - Several jobs are processed simultaneously,
+    each job allocated to a different processor. No explicit synchronization.
+  \item[Process Level]  - Several processes within a job are
+    processed simultaneously, each process allocated to a different
+    processor. Some level of synchronization.
+  \item[Thread Level] - Several threads within a process are processed
+    simultaneously, each thread allocated to a different processor.
+    High degree of synchronization needed to track each process and each thread.
+\end{description}
 
 \subsection{Multi-Core Processors}
 
+\dfn{Multi-Core Processor}{
+  A single computing component (chip) with two or more independent
+  processing units called cores, which read and execute program
+  instructions.
+}
+
+Multi-core processors suffer from current leakage (tunnelling) as a
+result of the
+small size of the transistors used to build them. This leakage causes
+increased power consumption and heat generation, which can lead to
+reduced performance and reliability. To mitigate these issues,
+multi-core processors often
+reduce the speed of groups of adjacent cores when they are in use at
+the same time to reduce heat generation.
+
 \section{Typical Multiprocessing Configurations}
 
+The configuration of multiple processors in a system affects how they
+communicate and synchronize with each other. There are three typical
+configurations:
+\begin{itemize}
+  \item Master / Slave Configuration
+  \item Loosely Coupled Configuration
+  \item Symmetric Configuration
+\end{itemize}
+
 \subsection{Master / Slave Configuration}
+An asymmetric multiprocessing configuration where one processor/core
+is designate as a master processor and all the others are designated
+as slave processors managed by the master.
+The master processor is responsible for
+\begin{itemize}
+  \item Managing the system
+  \item Maintaining the status of all processes
+  \item Managing storage
+  \item Schedules work for other processors
+  \item Executes control programs
+\end{itemize}
+
+This configuration is simple to implement and manage.
+
+However it has several disadvantages:
+\begin{description}
+  \item[Reliability] - If the master processor fails the entire system
+    may become inoperable.
+  \item[Poor Resources Usage] - As slave processors may be idle
+    while waiting for the master to allocate work to them.
+  \item[Increased Interrupts] - The master processor may become
+    overwhelmed with interrupts from slave processors requesting
+    work or reporting status.
+\end{description}
 
 \subsection{Loosely Coupled Configuration}
+Several processors each manage their own resources, with each
+processor communicating and cooperating with others as needed.
+
+This configuration requires several policies for job scheduling and
+conditions. There is failover capability if one processor fails, and
+processors can be added or removed
+from the system as needed however failure is difficult to detect.
+
+This configuration has several disadvantages:
+\begin{description}
+  \item[Requires Several Resouces] - Each processor must have its own memory
+    and I/O devices, increasing the cost of the system.
+  \item[Complex Communication] - Processors must communicate over a
+    network, which can be slow and unreliable.
+  \item[Complex Synchronization] - Processors must synchronize their
+    activities, which can be difficult to implement.
+\end{description}
 
 \subsection{Symmetric Configuration}
 
+All processors share resources and communicate with each other with
+decentralized processor scheduling, where each processor uses the
+same scheduling algorithm.
+
+This configuration has several advantages:
+\begin{description}
+  \item[Relaiblity] -  If one processor fails, the others can continue
+    to operate.
+  \item[Efficient Resource Usage] - Processors can share resources,
+    reducing idle time.
+  \item[Load Balancing] - Work can be distributed evenly among processors,
+    improving performance.
+  \item[Graceful Degradation] - The system can continue to operate at a reduced
+    capacity if one or more processors fail.
+\end{description}
+
+However it has several disadvantages:
+\begin{description}
+  \item[Difficult to Implement]  - Requires synchronization to
+    prevent race conditions, deadlocks, and starvation.
+  \item[Increased Overhead] - Due to the need for interrupt
+    processing and updating process lists.
+  \item[More Conficts] - As several processors access shared resources
+    simultaneously.
+\end{description}
+
 \section{Process Synchronization Software}
+
+\dfn{Critical Region / Section }{
+  A part of a program that accesses a shared resource (data structure,
+  file, device) that must not be concurrently accessed by more than one
+  thread of execution.
+}
+
+To achieve process synchronization shared resources must be locked to
+indicate use by another process to prevent conflicts, and only when
+the resource is released can waiting processes access it.
+
+Mistakes in synchronization can result in starvation, as jobs are
+left waiting indefinitely and deadlock if two or more jobs are
+waiting for resources held by each other.
+
+In synchronization a critical region must be defined for each shared
+resource, allowing only one process to access the resource at a time.
+Processes within this critical region cannot be interleaved as this
+threatens the integrity of the operation.
+
+Synchronization can be implemented as a lock-and-key arrangement,
+where processes determine key availability, i.e. if a process can
+enter the critical region or must wait. If a process wants to enter a
+critical region it must first obtain a key to gain access, this makes
+the key unavailable to other processes until the process leaves the
+critical region and releases the key.
+
+There are three types of locking mechanisms:
+\begin{itemize}
+  \item Test-and-Set
+  \item WAIT and SIGNAL
+  \item Semaphores
+\end{itemize}
 
 \subsection{Test-and-Set}
 
+\dfn{Atomic}{
+  An instruction that runs to completion without the possibility of
+  interruption.
+}
+
+An atomic instruction that checks if a key is available, and if
+it is acquires it all in a single cycle. The key can be represented
+as a single bit in a storage location with zero indicating the key is
+available and one indicating the key is unavailable.
+
+Before a process enters a critical region, it executes the
+test-and-set (TS) instruction
+if there is no process in the critical region, the TS instruction
+sets the key to
+one and allows the process to enter, when the process leaves the
+critical region it
+sets the key back to zero, allowing other processes to enter.
+
+This approach has several advantages:
+\begin{itemize}
+  \item Simple to implement
+  \item  Works well for a small number of processes
+\end{itemize}
+
+And several disadvantages:
+\begin{description}
+  \item[Starvation]  - Many processes may be waiting to enter a
+    critical region as processes gain access arbitrarily.
+  \item[Busy Waiting] - Waiting processes remain in unproductive,
+    resource-consuming wait loops.
+\end{description}
+
 \subsection{WAIT and SIGNAL}
+
+Improves upon test and set by removing busy waiting. This introduces
+two mutually exclusive operations:
+\begin{description}
+  \item[WAIT]  - Activated when a process encounters the busy
+    condition code. The
+    process is placed in a waiting queue until the condition code is cleared.
+  \item[SIGNAL] - Activated when process exits the critical region
+    and the condition code is cleared. If there are processes in the
+    waiting queue, one is removed and allowed to enter the critical region.
+\end{description}
 
 \subsection{Semaphores}
 
+A non-negative integer variable access through atomic operations used
+to indicate the status of a resource. It uses two atomic operations:
+\begin{description}
+  \item[P (Proberen)] - Tests the semaphore value, if it's greater
+    than zero it decrements the value and allows the process to enter
+    the critical region. If the value is zero the process is placed in
+    a waiting queue until the value becomes greater than zero.
+  \item[V (Verhogen)] - Increments the semaphore value when a process
+    exits the critical region. If there are processes in the waiting
+    queue, one is removed and allowed to enter the critical region.
+\end{description}
+
+A semaphore with vale 0 indicates that the resource is unavailable,
+so the process calling the P operation is placed in the waiting
+queue, and must wait until the value is greater than 0. In this way a
+semaphore can allow multiple restricted access to a certain number of
+processes simultaneously by initializing the semaphore to the number
+of allowed processes.
+
+This ensures mutual exclusion, as only the allowed number of processes can
+enter the critical region at the same time, while other processes are
+placed in the waiting queue.
+
 \section{Process Cooperation}
+Several processes may need to cooperate to complete a task, sharing data
+and resources. This requires synchronization and mutual exclusion to
+ensure that processes
+access shared resources in a controlled manner, and that data integrity is
+maintained. This can be approached using several models:
+\begin{itemize}
+  \item Producer-Consumer Model
+  \item Reader-Writer Model
+\end{itemize}
 
 \subsection{Producers and Consumers}
 
+A model where one process produces data (producer), placing it into a
+buffer, and other processes
+consume the data (consumers). The producer generates data and places
+
 \subsection{Readers and Writers}
+
+A model where multiple processes read data from a shared resource
+(readers), while other processes write data to the shared resource
+(writers). Readers can access the shared resource simultaneously,
+but writers require exclusive access to prevent data corruption.
 
 \section{Concurrent Programming}
 
+A type of multiprocessing where one job executes multiple sets of
+instructions in parallel using several processors or cores. This
+requires programming language and system support.
+
+Parallelism can be achieved at several levels:
+\begin{description}
+  \item[Data Level Parallelism] - The same operation is performed on
+    multiple data items simultaneously.
+  \item[Instruction Level Parallelism] - Multiple instructions are executed
+    simultaneously.
+\end{description}
+
 \subsection{Amdahl's Law}
+
+\thm{Amdahl's Law}{\label{amdahl}
+  Amdahl's Law is a formula that describes the theoretical speedup of
+  a program when running on multiple processors. The
+  formula states that the speedup of a program is limited by the
+  fraction of the program that can be parallelized. Amdahl's
+  Law is used to analyse the performance of parallel computing systems.
+  \[
+    S(n) = \frac{1}{(1 - P) + \frac{P}{n}}
+  \]
+  Where $S(n)$ is the speedup of the program running on $n$
+  processors, $P$ is the fraction of the program that can be parallelized.
+}
 
 \subsection{Order of Operations}
 
+The precedence of operations determines the priority in which
+arithmetic operations are evaluated, usually from left to right
+making use of BODMAS. These evaluations can be done in parallel if there are
+no dependencies among them, like in the following example:
+\begin{align*}
+  Z &= 10 - A / B + C (D + E)^{F - G} \\
+\end{align*}
+
+This can be parallelized as follows:
+\begin{align*}
+  T1 &= A / B \\
+  T2 &= D + E \\
+  T3 &= F - G \\
+  T4 &= T2^{T3} \\
+  Z &= 10 - T1 + C * T4 \\
+\end{align*}
+
+This could be spread across multiple CPUs using the COBEGIN and
+COEND constructs to indicate the beginning and end of concurrent
+processing.
+
 \subsection{Applications of Concurrent Programming}
+Concurrent programming can also be used to reduce complexity and
+computational time in many cases, including:
+\begin{itemize}
+  \item Array Operations
+  \item Matrix Multiplication
+  \item Sorting and Merging Files
+  \item Data Mining
+\end{itemize}
 
-\subsubsection{Array Operations}
+% \subsubsection{Array Operations}
+%
+% \subsubsection{Matrix Multiplication}
+%
+% \subsubsection{Sorting and Merging Files}
 
-\subsubsection{Matrix Multiplication}
-
-\subsubsection{Sorting and Merging Files}
-
-\subsubsection{Data Mining}
+% \subsubsection{Data Mining}
 
 \section{Threads and Concurrent Programming}
+
+Threads are lightweight processes that can be executed concurrently
+within a single process. They share the same memory space and resources
+of the parent process, allowing for efficient communication and
+synchronization among threads.
+
+Using threads minimizes overhead as they don't require separate memory
+allocation and context switching like full processes do. This makes
+threads ideal for tasks that require frequent communication and
+synchronization, such as in web servers and database management systems.
+
+Each active process thread has its own program counter, stack, and local
+variables, but shares the same code segment, data segment, and other
+resources of the parent process.
 
 \end{document}

@@ -62,7 +62,7 @@ circuits.logic.US, shapes.misc, automata}
 }
 
 \dfn{Multithreading}{
-  Allows applications to manager a separate process with several
+  Allows applications to manage a separate process with several
   threads of control.
 }
 
@@ -97,7 +97,7 @@ circuits.logic.US, shapes.misc, automata}
     \end{description}
 \end{itemize}
 
-Jobs can be views either as a series of global job steps, i.e.
+Jobs can be viewed either as a series of global job steps, i.e.
 compilation, loading and execution, or as one monolithic step, like
 execution. The scheduling of jobs is handled on two levels by most
 operating systems in a hierarchical manner between the Job Scheduler
@@ -117,7 +117,7 @@ and the Process Scheduler.
     \end{itemize}
 \end{itemize}
 
-Scheduling jobs are based on priority, with each job initiated by the
+Scheduling jobs is based on priority, with each job initiated by the
 job scheduler based on certain criteria and characteristics. The Job
 Scheduler's goal is to put the jobs in a sequence that best meets the
 designers or administrator's goals, for example efficient resource
@@ -246,7 +246,7 @@ controlled by the Process Scheduler.
 \end{itemize}
 
 Threads move through five states as they are processed by the system,
-as show n in the state diagram below. When a process creates a thread
+as shown in the state diagram below. When a process creates a thread
 it is made ready by allocating to it the needed resources and placing
 it in the READY queue. The thread state changes from READY to RUNNING
 when the Process Scheduler assigns it to a processor.
@@ -281,14 +281,14 @@ when the Process Scheduler assigns it to a processor.
 \end{figure}
 
 A thread can move from RUNNING to WAITING when it has to wait for an
-event outside it's control to occur, like, an I/O operation or an
+event outside it's control to occur, like, an
 input from the user, then back to READY when the event has occurred.
 Alternatively another thread that is finished running can send a
 signal indicating that the waiting thread can continue processing.
 
 When an application has the ability to delay the processing of a
 thread for some time, it causes the thread to move from RUNNING to
-DELAYED. When he delay time has passed the thread moves from DELAYED
+DELAYED. When the delay time has passed the thread moves from DELAYED
 back to READY, for example the saving of a document every five minutes.
 
 A thread moves from RUNNING to BLOCKED when an I/O request is issued.
@@ -558,7 +558,7 @@ the CPU can accurately predict the CPU time required for each job.
 
 Nonpreemtive algorithm that gives preference to important jobs based
 on some criteria. Important jobs aren't interrupted until their CPU
-cycles are completed or a natural wait occurs.  If two or more jos
+cycles are completed or a natural wait occurs.  If two or more jobs
 with equal priority are present in the READY queue, the processor is
 allocated using FCFS.
 
@@ -891,6 +891,16 @@ However if he interrupt is nonrecoverable the job is terminated in Step 3.
   resources held by the other jobs in the deadlock, none of the jobs
   can proceed. The deadlock is complete if the remainder of the
   system comes to a halt too.
+}
+
+\dfn{Race} {
+  A synchronization problem between two or more processes vying for
+  the same resource.
+}
+
+\dfn{Race Condition}{
+  A situation where the outcome of a program depends on the relative
+  timing of events that are not explicitly controlled by the program.
 }
 
 Fixing deadlocks is critical to maintaining system stability and
@@ -1230,7 +1240,7 @@ has several limitations:
     jobs requests a resource.
 \end{itemize}
 
-\section{Detection}
+\subsection{Detection}
 
 Deadlock detection can be modelled as a directed graph problem,
 allowing use of cycle detection algorithms to identify deadlocks.
@@ -1257,7 +1267,7 @@ Beginning with a system in use, the steps to detect deadlocks are:
 If there are any edges left in the graph this indicates that request
 of the process in question can't be satisfied and the process is deadlocked.
 
-\section{Recovery}
+\subsection{Recovery}
 
 Once a deadlock is detected it must be resolved and the system
 returned to normal as quickly as possible. There are several recovery
@@ -1289,8 +1299,8 @@ The following methods focus on the non-deadlocked jobs and the
 resources they hold
 
 The fifth approach is to select a non-deadlocked job, then preempt
-the resources it's holding, and allocates then to deadlocked process
-so that it can resume execution, resolving the deadlock. This
+the resources it's holding, and allocate them to deadlocked process
+so they can resume execution, resolving the deadlock. This
 approach requires the ability to preempt resources, which may not be
 possible for all resource types.
 
@@ -1300,7 +1310,7 @@ to the deadlocked jobs. This approach is the only one listed that
 doesn't require a sacrifice. This method can be effective if the
 deadlock involves only a few jobs and the non-deadlocked jobs will
 finish in a reasonable amount of time, and is not guaranteed to work
-unless the number of avail be resources is greater than the number
+unless the number of availiable resources is greater than the number
 needed by at least one of the deadlocked jobs.
 
 Several factors must be considered when selecting a sacrifice that

@@ -1,0 +1,225 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Authentication}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+Controlling threats and vulnerabilities to a computer system involves
+a policy that specifies, who can access what and how, i.e. which
+subjects, can access which objects, and by which means. There are
+three key tools to achieve this:
+\begin{itemize}
+  \item Authentication
+  \item Access Control
+  \item Cryptography
+\end{itemize}
+
+\dfn{Authentication}{
+  The property of accurate identification.
+}
+
+\dfn{Access Control}{
+  The selective restriction of access to a place or other resource.
+}
+
+\dfn{Cryptography}{
+  Converting data into a form unreadable to unauthorized users.
+}
+
+Determining an entity's identity consists of two phases:
+\begin{description}
+  \item[Identification] - The act of asserting who an entity is,
+    involving presenting a credential
+  \item[Authentication] - The act of proving that the entity is who
+    it claims to be, involving exchanging authentication information.
+\end{description}
+
+\section{Means of Authentication}
+There are three primary means of authentication:
+\begin{description}
+  \item[Something the users knows / Credentials]  - A piece of
+    private information
+  \item[Something the user is / Biometrics] - A physical
+    characteristic of the user.
+  \item[Something the user has / Tokens] - A physical item possessed
+    by the user.
+\end{description}
+
+\subsection{Credentials}
+
+\dfn{Credentials}{
+  Pieces of information presented by a user to prove their identity
+  during initial authentication.
+}
+
+Credentials are data structures that binds an identity and additional
+attributes to a token.
+
+\subsection{Token}
+
+\dfn{Token}{
+  A digital artefact issued after successful authentication to
+  maintain as session or delegate access without resubmitting credentials.
+}
+
+Tokens can either be hardware or software possessed by a subscriber.
+
+\section{Multi-Factor Authentication (MFA)}
+
+\dfn{Multi-Factor Authentication (MFA)}{
+  An authentication process where a user presents two or more
+  independent pieces of evidence (factors) to verify their identity.
+}
+
+For example, using a password (something you know) and a fingerprint
+(something you are) to access a secure system.
+
+\section{NIST (National Institute of Standards and Technology)
+Assurance Levels for User Authentication}
+
+These levels indicate the degree of confidence in the identity
+proofing and authentication processes. It also provides options for
+organization to choose between depending on the security risk assessment.
+
+It defines three separate levels for Identity Assurance Level (IAL)
+and Authenticator Assurance Level (AAL).
+
+\subsection{Identity Assurance Level (IAL)}
+Focuses on verifying who the user is.
+\begin{description}
+  \item[IAL1]  - No need to link the applicant to a specific
+    real-life identity. Example anonymous discussion forums.
+  \item[IAL2] - Provides evidence for the claimed identity using
+    either remote of physically present identity proofing. Example
+    requiring a National ID card or passport.
+  \item[IAL3] - Requires physical presence (in-person) for identity
+    proofing. Example applying for a security clearance.
+\end{description}
+
+\subsection{Authenticator Assurance Level (AAL)}
+Focuses on verifying how securely the user authenticates.
+\begin{description}
+  \item[AAL1]  - Provides some assurance (low confidence) / Single
+    Factor Authentication.
+    Example password-based authentication.
+  \item[AAL2] - Provides high confidence / Multi-Factor
+    Authentication with proof of possession and control of two factors.
+  \item[AAL3] - Provides very high confidence / MFA using
+    hardware-based cryptographic tokens resistant to phishing and
+    replay attacks. Example using a smart card with a PIN.
+\end{description}
+
+\section{Password Based Authentication}
+
+\dfn{Discretionary Access Control (DAC)}{
+  An access control model where the owner of the resource determines
+  who can access it and what privileges they have, i.e. a user may
+  grant permission to other users to access their files.
+}
+
+Uses a user ID and password pair to authenticate users, where the
+user ID identifies the account and links the account to the user's
+privileges and access permissions under Discretionary Access Control (DAC).
+
+A system using this method maintains a password file indexed by user
+ID, with a one-way has of the password stored in it rather than the
+password itself. This ensures that even if the password file is
+compromised the actual passwords are not immediately exposed.
+
+\subsection{Attacks and Countermeasures}
+
+\subsubsection{Offline Dictionary Attack}
+
+An attack who gains access to the password file and systematically
+compares password hashes against hashes of commonly used passwords.
+If a match is found the attacker can gain access with the corresponding user ID.
+
+\nparagraph{Countermeasures}
+\begin{itemize}
+  \item Prevent unauthorized access to the password file
+  \item Intrusion detection systems to monitor for suspicious activity
+  \item Re-issuance of passwords if compromise is suspected
+\end{itemize}
+
+\subsubsection{Specific Account Attack}
+
+The attacker targets a specific account and submits password guesses
+until the correct password is found.
+
+\nparagraph{Countermeasures}
+\begin{itemize}
+  \item Account lockout after a certain number of failed attempts.
+\end{itemize}
+
+\section{UNIX Password Scheme}
+
+\dfn{Salt}{
+  A random value added to the password before applying the one-way
+  hash function. The salt:
+  \begin{itemize}
+    \item Prevents duplicate passwords from having the same hash value.
+    \item Increases the complexity of dictionary attacks by requiring
+      attackers to compute hashes for each possible salt value.
+    \item Almost impossible to find whether a person with passwords
+      on two or more systems has used the same password on those systems.
+  \end{itemize}
+}
+
+\subsection{Attacks}
+
+\subsubsection{Dictionary Attacks}
+An attacker pre-computes hash values for a large number of
+commonly used passwords and their variations. When the password file
+is compromised, the attacker compares the stored hash values against
+the pre-computed hashes to find matches.
+
+\subsubsection{Rainbow Table Attacks}
+\dfn{Rainbow Table}{
+  A pre-computed hash table used to reverse weakly hashed passwords.
+}
+An attacker uses a rainbow table to look up the hash values from
+the compromised password file to find the corresponding plaintext passwords.
+
+\subsubsection{Brute-Force Attacks}
+An attack uses a tool like John the Ripper to systematically generate
+and hash all possible password combinations until a match is found.
+
+\section{Biometric Authentication}
+
+\dfn{Biometric}{
+  A measurable physical or behavioural characteristic used to
+  uniquely identify individuals.
+}
+
+Authenticates an individual based on their unique physical or
+behavioural characteristics. Harder to implement and more expense
+than password-based or token-based identification. Once compromised,
+biometric data cannot be changed like passwords or tokens.
+Some common biometric modalities include:
+\begin{itemize}
+  \item Facial characteristics
+  \item Fingerprints
+  \item Hand geometry
+  \item Retinal patterns
+  \item Iris patterns
+  \item Signature dynamics
+  \item Voice patterns
+\end{itemize}
+
+\end{document}

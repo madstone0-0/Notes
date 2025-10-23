@@ -1,0 +1,177 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Introduction}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\dfn{Security}{
+  A state of being secure and free from danger or harm, i.e. the
+  actions taken to make someone or something secure.
+  Protection from adversaries (those who would do harm),
+  intentionally or otherwise, is the goal of security.
+}
+
+\section{Key Objectives of Security}
+\dfn{Repudiation}{
+  The ability to deny the authenticity of one's signature on a document
+  or a message that one originated.
+}
+
+\begin{description}
+  \item[Confidentiality] - Covers data confidentiality and privacy.
+    \begin{description}
+      \item[Data Confidentiality]  - Information is not made
+        available or disclosed to unauthorized individuals, entities,
+        or processes.
+      \item[Privacy] - Assures that individuals control or influence
+        what information related to them may be collected and stored,
+        and by whom and whom that information may be disclosed.
+    \end{description}
+  \item[Integrity] - Data Integrity and  System Integrity.
+    \begin{description}
+      \item[Data Integrity]  - The property that data has not been
+        changed, destroyed, or lost in an unauthorized or accidental manner.
+      \item[System Integrity] - Assures  that a system performs its
+        intended function in an unimpaired manner, free from
+        deliberate or inadvertent unauthorized manipulation of the system
+    \end{description}
+  \item[Availability] - Assures that systems work promptly and
+    service is not denied to authorized users.
+  \item[Authenticity] - The property of being genuine and being able
+    to be verified and trusted. Ensures users are who they say they
+    are and that each input arriving at the system came from a trusted source.
+  \item[Accountability] - Assures that the actions of an entity can
+    be traced uniquely to that entity. Supports non-repudiation,
+    deterrence, fault isolation, intrusion detection, and
+    after-the-fact forensic analysis.
+\end{description}
+
+The CIA triad (Confidentiality, Integrity, and Availability) is a
+widely used model for understanding and implementing security measures.
+Additionally Accountability and Authenticity are also important objectives
+in security, making the complete set often referred to as the CIAAA
+triad.
+
+\chapter{Terminology}
+
+\section{Asset}
+\dfn{Asset / System Resource}{
+  Anything that needs to be protected because it has value to an
+  organization, both tangible and intangible.
+}
+
+There are general asset categories:
+\begin{description}
+  \item[Hardware]  - Physical devices that support computing and networking
+  \item[Software] - Programs and system components that run on hardware
+  \item[Data]- Information that organizations store, process and
+    transmit. Generally the most important asset.
+  \item[Communication facilities and Networks] - Infrastructure that
+    enables data transfer and connectivity.
+  \item[People] - Human actors who interact with or affect information systems.
+\end{description}
+
+\section{Vulnerability and Threats}
+\dfn{Vulnerability}{
+  A weakness in an asset that could be exploited or triggered by a
+  threat source.
+}
+
+Examples of vulnerabilities include:
+\begin{itemize}
+  \item Unpatched applications or operating systems
+  \item An unrestricted wireless access point.
+  \item An open port on a firewall.
+\end{itemize}
+
+\dfn{Threat}{
+  Any circumstance or event with the potential to adversely impact
+  organizational operations, assets, or the nation through an
+  information system via unauthorized access, destruction,
+  disclosure, modification of information , and/or denial of service.
+}
+
+\dfn{Threat Agent}{
+  An entity that can cause harm to an asset. Represents the source of
+  a threat. Can be forces of nature, as well as human or non-human actors.
+}
+
+\dfn{Adversary}{
+  An individual, group, organization or government that conducts or
+  has the intent to conduct detrimental activates. Considered a human
+  threat agent or attacker.
+}
+
+\dfn{Attack}{
+  Any kind of malicious activity that attempts to collect, disrupt,
+  deny, degrade or destroy information system resources or the
+  information itself.
+}
+
+\section{Security Controls and Countermeasures}
+
+\dfn{Security Control / Safeguard}{
+  Any measure or mechanism put in place to protect the confidentiality,
+  integrity, and availability of an information system. For example,
+  policies, procedures, technical measures, and physical protections.
+}
+
+\dfn{Countermeasure}{
+  A device or technique with the objective of the impairment of the
+  operation effectiveness of adversarial activities. All
+  countermeasures are security controls,
+  but not all security controls are countermeasures. For example
+  deploying an antivirus in response to a data breach.
+}
+
+Some security control categories are:
+\begin{description}
+  \item[Physical Controls]
+    \begin{itemize}
+      \item Locks
+      \item Walls / Fences
+      \item Guards
+    \end{itemize}
+  \item[Prodedural / Administrative Controls]
+    \begin{itemize}
+      \item Laws
+      \item Regulations
+      \item Policies
+    \end{itemize}
+  \item[Techinical]
+    \begin{itemize}
+      \item Passwords
+      \item Access Controls
+      \item Firewalls
+    \end{itemize}
+\end{description}
+
+\section{Risk and Risk Management}
+
+\dfn{Risk}{
+  A measure of the extent to which an entity it threatened by a
+  potential event. A function of
+  \begin{itemize}
+    \item The adverse impacts that would arise if the circumstance or
+      event occurs
+    \item The likelihood of occurrence.
+  \end{itemize}
+}
+
+\end{document}

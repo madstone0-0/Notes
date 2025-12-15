@@ -1,0 +1,843 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Device Management}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Types of Devices}
+
+\begin{itemize}
+  \item Devices are grouped into three categories:
+    \begin{enumerate}
+      \item Dedicated Devices - Assigned to one job at a time, i.e.
+        must be allocated for the entire duration of the job's execution.
+      \item Shared Devices - Assigned to multiple jobs at a time,
+        i.e. requires device manager supervision to allocate the
+        device to different jobs at different times.
+      \item  Virtual Devices - Combination of dedicated and shared
+        devices. Dedicated devices can be turned into shared devices
+        through the use of spooling.
+    \end{enumerate}
+\end{itemize}
+
+\subsection{Dedicated Devices, Shared Devices and Virtual Devices}
+Dedicated devices are assigned to only one job at a time which they
+serve for the entire time it's active or until realised, e.g.
+monitors, mice, keyboards, printers. The disadvantage of this scheme
+is that devices must be allocated to a single user for the duration
+of a job's execution, which can be inefficient potentially leading to
+low device utilization.
+
+Shared devices can be allocated to several processes at the same time,
+for example, a disk or any other direct access storage device (DASD),
+can be shared by interleaving their requests. The device manager
+supervises the allocation of the device to different jobs at
+different times. The advantage of this scheme is that it increases
+device utilization
+
+Virtual devices are combination of both, i.e. dedicated devices that
+have been transformed into shared devices usually through the use of spooling.
+
+\subsection{USB Controller}
+
+The Universal Serial Bus (USB) Controller acts as an interface
+between the operation system, devices drivers and applications and
+the devices that are attached via the USB host. One USB host
+controller can accommodate as many as 127 devices through the use of
+hubs. Each device is uniquely identified by the USB host controller
+with an identification number, which allows many devices to exchange
+data with the commuter using the same USB connection. Th controller
+does this by assigning bandwidth do each device depending on its priority
+\begin{description}
+  \item[Highest Priority]  - Assigned to real-time exchanges where no
+    interruption in the data flow is allowed, i.e. video and audio streams.
+  \item[Medium Priority] - Assigned to devices that can allow
+    occasional interrupts without affecting the use of the device,
+    e.g. keyboards and mice.
+  \item[Lowest Priority] - Assigned to bulk transfers or exchanges
+    that can accommodate slower data flow, for example file updates.
+\end{description}
+
+\section{Management of I/O Requests}
+\begin{itemize}
+  \item The I/O traffic controller:
+    \begin{itemize}
+      \item Watches the status of devices, control units, and channels
+      \item Determines if path available, Chooses a path out of
+        several available paths, Waits for a path if all paths are busy.
+      \item Maintains a database containing each unit's status and connections.
+    \end{itemize}
+  \item The I/O scheduler:
+    \begin{itemize}
+      \item Functions similarly to the Process scheduler.
+      \item Allocates devices, control units, and channels to I/O requests.
+      \item Decides which requests to allocate based on different criteria
+      \item I/O requests are usually not preemptible in most systems.
+    \end{itemize}
+  \item The I/O device handler:
+    \begin{itemize}
+      \item Performs data transfer handling, i.e. processing device
+        interrupts, handling error conditions, and providing
+        scheduling algorithms for servicing I/O requests.
+      \item Each device handler is device dependent, and each I/O
+        device type has its own handler algorithm
+    \end{itemize}
+  \item I/O requests use control blocks to store information:
+    \begin{itemize}
+      \item Channel Control Block (CCB) - Contains information on channels
+      \item Control Unit Control Block (CUCB) - Contains information
+        on control units
+      \item Device Control Block (DCB) - Contains information on devices
+    \end{itemize}
+\end{itemize}
+
+The Device Manager devices I/O requests into three parts with each
+one handled by a specific component of the device management subsystem.
+\begin{description}
+  \item[I/O traffic controller] - Watches the status of all devices,
+    control units and channels.
+  \item[I/O scheduler]  - Implements the policies that determine the
+    allocation of, and access to the devices, control units and channels.
+  \item[I/O device handler] - Performs the actual transfer of data
+    and processes the device interrupts.
+\end{description}
+
+\subsection{I/O Traffic Controller}
+
+The I/O traffic controller monitors the status of every device,
+control unit and channel, with the complexity of the controller
+depending on the number of units in the I/O subsystem, and the number
+of possible paths between these units. The traffic controller has
+three main tasks to perform for each I/O request:
+\begin{itemize}
+  \item Determine if there's at least one path to a device of the
+    requests type available.
+  \item If there are several paths available, choose which one to use.
+  \item If all paths are busy it must determiner when one will become available.
+\end{itemize}
+To do this the traffic controller maintains a database containing the
+status and connections for each unit in the I/O subsystem grouped
+into Channel Control Blocks (CCB), Control Unit Control Blocks (CUCB)
+and Device Control Blocks (DCB).
+
+\dfn{Channel Control Block (CCB)}{
+  Contains information about each channel in the I/O subsystem, including:
+
+  \begin{itemize}
+    \item Channel ID
+    \item Channel status (busy/free)
+    \item List of control units connected to the channel
+    \item List of processes waiting for the channel
+  \end{itemize}
+}
+
+\dfn{Control Unit Control Block (CUCB)}{
+  Contains information about each control unit in the I/O subsystem, including:
+  \begin{itemize}
+    \item  Control Unit Id
+    \item Control Unit status (busy/free)
+    \item List of channels connected to the control unit
+    \item List of devices connected to the control unit
+    \item List of processes waiting for the control unit
+  \end{itemize}
+}
+
+\dfn{Device Control Block (DCB)}{
+  Contains information about each device in the I/O subsystem, including:
+  \begin{itemize}
+    \item Device ID
+    \item Device Status (busy/free)
+    \item List of control units connected to the device
+    \item List of processes waiting for the device
+  \end{itemize}
+}
+
+\subsection{I/O Scheduler}
+
+The I/O scheduler performs a similar function to the process
+scheduler, i.e allocating the devices, control units and channels to
+I/O requests. Under heavy loads, when the number of requests is
+greater than the number of available paths, the I/O scheduler must
+decide which request to satisfy first, with many of the criteria used
+by the process scheduler being applicable to I/O scheduling as well.
+However, unlike processes, I/O requests are usually not preemptible
+in most systems.
+
+\subsection{I/O Device Handler}
+
+The I/O device handler processes the I/O interrupts, handles error
+conditions, and provides detailed scheduling algorithms, which are
+device dependent. Each type of I/O device has its own device handler algorithm.
+
+\section{Sequential Access Storage Media}
+
+\begin{itemize}
+  \item Records are stored serially, one after another, with the
+    earliest type being the magnetic tape, having:
+    \begin{itemize}
+      \item Record length determined by program
+      \item Records are identified by position on the tape
+      \item Records are accessed by the read/write head moving across
+        the tape to find the desired record.
+      \item Access time is long due to the need to wind through other records.
+    \end{itemize}
+  \item Blocking groups records into blocks to reduce the amount of
+    I/O operations needed, improving efficiency.
+\end{itemize}
+
+One of the earliest types of secondary storage media is magnetic
+tape, which writes and reads records in sequence from the beginning
+of a reel of tape to the end.
+
+The length of each sequential record is usually determined by the
+job, and each record can be identified by its position on the tape.
+Data is recorded on eight of the nine parallel tracks that run the
+length of the tape with the ninth track holding a parity bit that is
+used for routine error checking.
+
+The number of characters that can recorded per inch of tape is
+determined by the density of the tape. For example if you had records
+of 160 characters each, and where storing them on a tape with a
+density of 1,600 bytes per inch (bpi), then you would be able to
+store 10 records per inch of tape.
+
+The tape needs time and space to stop, so a gap is inserted between
+each record, called the inter-record gap (IRG). The size of the IRG
+is about $\frac{1}{2}$ inch long regardless of the sizes of the
+records it separates. Therefore if 10 records are stored
+individually, there will be nine IRGs, between each record. This
+would result in about 5.5 inches of tape required to store 1 inch of
+data, which is inefficient.
+
+\dfn{Blocking}{
+  Grouping several records into blocks before recording them on tape to
+  reduce the amount of I/O operations needed, improving efficiency.
+}
+
+\dfn{Transfer Rate of a Tape Drive}{
+  The speed at which data can be read from or written to the tape,
+  usually measured in inches per second (ips) or bytes per second (Bps), i.e.
+  \[
+    \text{Transfer Rate} = \text{Density} \times \text{Transport Speed}
+  \]
+}
+
+An alternative to storing records individually is to block them, when
+writing and unblock then when reading. The number of records in a
+block is usually determined by the job, with it being set to take
+advantage of the transfer rate of the tape drive.
+
+Blocking requires that the entire block be read into a buffer before
+the records are processed so the size of the buffer must be at least
+as large as the block size.
+
+Blocking has two main advantages:
+\begin{itemize}
+  \item Reduces the number of I/O operations needed as a single READ
+    command can move an entire block into main memory, i.e. a single
+    physical record contains multiple logical records.
+  \item Less storage space is wasted because the size of the physical
+    record exceeds the size of the IRG.
+\end{itemize}
+
+And two main disadvantages:
+\begin{itemize}
+  \item Overhead and software routines are needed for blocking,
+    unblocking and recordkeeping.
+  \item Buffer space may be wasted if you only need logical record
+    but must  read an entire block.
+\end{itemize}
+
+\section{Direct Access Storage Devices (DASD)}
+\begin{itemize}
+  \item Can directly read/write specific disk areas without going
+    through the whole medium, allowing random access.
+  \item There are three categories:
+    \begin{itemize}
+      \item Magnetic Disks
+      \item Optical Disks
+      \item Solid State (Flash) Memory
+    \end{itemize}
+  \item Access time varies based on the location of the record, but
+    usually faster than sequential access.
+\end{itemize}
+
+Direct Access Storage Devices (DASD), include all devices that can
+directly read/write to an arbitrary location on the storage medium
+without having to go through the entire medium. DASDs can be grouped
+into three categories:
+\begin{enumerate}
+  \item Magnetic Disks
+  \item Optical Disc
+  \item Solid State (Flash) Memory
+\end{enumerate}
+The variance in DASD access times is largely dependent on the
+location of the specific record being accessed, but is usually much
+faster than sequential access.
+
+\chapter{Magnetic Disk Storage}
+\begin{itemize}
+  \item Single / Stack of magnetic platter
+  \item Two recording surfaces (top and bottom)
+  \item Each side when formatted is made up concentric tracks
+    numbered from 0 on the outside to the highest track number in the centre.
+  \item Read/write heads move in unison
+  \item To access a record the system needs three things:
+    \begin{itemize}
+      \item Cylinder number
+      \item Surface number
+      \item Sector number
+    \end{itemize}
+  \item Access time is influenced by:
+    \begin{itemize}
+      \item Seek time - Time to position read/write head on track,
+        does not apply to fixed read/write head devices, usually the
+        slowest part of the accessing process.
+      \item Search time - Time to rotate DASD, as the track rotates
+        until the desired record is under the read/write head,
+        influenced by rotational delay.
+      \item Transfer time - Time to transfer data from secondary
+        storage to primary storage, usually the fastest part of the
+        accessing process.
+    \end{itemize}
+\end{itemize}
+
+Magnetic disk drives feature the following characteristics:
+\begin{description}
+  \item[Disk Arm] - Moves the read/write heads, in unison, between each pair of
+    surfaces, i.e. one for the top and one for the bottom of each platter.
+  \item[Read/Write Head / Head]  - Positioned floating over each
+    surface of each disk.
+  \item[Spindle] - Central shaft that holds and spins the platters.
+  \item[Platter] - Circular magnetic disk coated with magnetic
+    material on which data is recorded. A stack of platters is called
+    a disk pack, with several platters stacked on a common spindle.
+    Each platter has two surfaces for recording data (top and
+    bottom), with each surface formatted with a specific number of
+    concentric tracks.
+  \item[Track] - Concentric circles on the surface of a platter,
+    numbered from 0 on the outside to the highest track number in
+    the centre. This is where data is recorded.
+\end{description}
+
+It is slower to fill a disk pack surface-by-surface than it is to
+fill it up track-by-track. If wee fill track 0 of all the surfaces,
+we have a virtual cylinder of data. There can be as many cylinders as
+there are tracks on a surface, and cylinders are as tall as there are
+surfaces in the disk pack. Therefore data is written and read on a
+cylinder basis.
+
+\dfn{Disk Sector}{
+  A subdivision of a track on a magnetic disk or optical disc,
+  usually the smallest unit that can be read or written. On a
+  magnetic disk the sectors are of different sizes, i.e bigger at the
+  rim and smaller towards the centre. The disk spins at a constant
+  angular velocity (CAV) to compensate for this.
+}
+
+To access any given record, the system needs three things:
+\begin{description}
+  \item[Cylinder Number] - So that the arm can move the read/write
+    heads to the correct track.
+  \item[Surface Number] - So that the proper read/write head is activated.
+  \item[Secot r number] - So that the system can wait for the proper
+    sector to rotate under the read/write head.
+\end{description}
+
+\section{Access Times}
+
+There can be as many as three factors that contribute to the time
+required to access a file, depending on whether a disk has fixed or
+movable read/write heads. These are:
+\begin{description}
+  \item[Seek Time]  - The time required to position the head on the
+    proper track.
+  \item[Search Time/ Rotational Delay] - The time it takes to rotate
+    the disk until the requested record is moved under the head.
+  \item[Transfer Time] - The time required to transfer the data from
+    the disk to main memory.
+\end{description}
+Usually the seek time is the slowest part of the access process,
+followed by the search time, with the transfer time being the
+fastest.
+
+\section{Fixed-Head Magnetic Drives}
+
+\begin{itemize}
+  \item Record access only requires search time and transfer time, as the head
+    is fixed to each track.
+  \item Therefore the total access time is given as:
+    \begin{align*}
+      T_{\text{access}} = T_{\text{search}} + T_{\text{transfer}}
+    \end{align*}
+  \item DASDs rotate continuously with three basic positions needed
+    to access a record in relation to the read/write head position.
+  \item Little access variance as there is no seek time.
+  \item Blocking minimizes access time.
+\end{itemize}
+
+Fixed-head disk drives have a separate head for each track on the
+disk, therefore seek time does not apply. The total access time is given as:
+\[
+  T_{\text{access}} = T_{\text{search}} + T_{\text{transfer}}
+\]
+
+Because the disk rotates continuously, there are three basic
+positions for the requested record in relation to the position of the head:
+\begin{description}
+  \item[About to Pass] - The record is next to the head when the I/O
+    command is executed, this gives a rotational delay of nearly
+    zero. This is the best case scenario.
+  \item[Opposite Side] - The record  is directly opposite the head
+    when the I/O command is executed,
+    resulting in a rotational delay of half a revolution, i.e
+    $\frac{t}{2}$, where $t$ is the time for a full revolution. This
+    is the average case scenario.
+  \item[Just Passed] - The record has just passed the head when the
+    I/O command is executed. This gives a rotational delay of nearly
+    a full revolution, i.e $t$. This is the worst case scenario.
+\end{description}
+
+\section{Movable-Head Magnetic Drives}
+
+Movable head disk drives add the computation of the seek time to the
+equation, i.e.
+\[
+  T_{\text{access}} = T_{\text{seek}} + T_{\text{search}} + T_{\text{transfer}}
+\]
+
+The calculation for search time and transfer time is the same as that
+of fixed-head disk drives, with the seek time being dependent on the
+distance the head must move to reach the desired track. The maxium
+seek time which is the time taken to  move the arm can be 10ms or less.
+
+The variance in access time is much higher than that of fixed-head
+drives due to the seek time, with the average seek time being about
+one-third of the maximum seek time. Blocking can be used to minimize
+access time again as it reduces the number of I/O operations needed.
+
+\section{Device Handler Seek Strategies}
+\begin{itemize}
+  \item The device handler determines the device processing order,
+    with the goal of minimizing seek time.
+  \item The goals of a seek strategy are to:
+    \begin{itemize}
+      \item Minimize arm movement
+      \item Minimize mean response time
+      \item  Minimize variance in response time
+    \end{itemize}
+  \item Common strategies include:
+    \begin{itemize}
+      \item First-Come, First-Served (FCFS) - On average does not
+        meet the goals.
+      \item Shortest Seek Time First (SSTF) -
+        \begin{itemize}
+          \item Groups requests by proximity to current head
+            position, i.e the current request being served.
+          \item Minimizes overall seek time, and reduces erratic arm movement.
+        \end{itemize}
+      \item SCAN variants - Uses a directional bit which  indicates
+        if the arm is moving towards/away from the disk centre. Then
+        moves the arm form the outer to inner tracks servicing
+        requests along the way, when the innermost/outermost track is
+        reached the direction bit is flipped and the arm moves in the
+        opposite direction servicing requests along the way.
+        \begin{itemize}
+          \item LOOK (Elevator Algorithm) - Arm does not go to the
+            innermost/outermost track if there are no requests in that
+            direction. This reduces indefinite postponement of
+            requests as the arm only moves in the direction of pending requests.
+          \item N-Step SCAN - Divides the request queue into
+            sub-queues of size N.
+            The arm services all requests in the current sub-queue
+            using SCAN, while new requests are added to other
+            sub-queues. This limits the maximum wait time for a request.
+          \item C-SCAN (Circular SCAN) - Arm only services requests
+            on the inward sweep,
+            when the innermost track is reached the arm jumps to the
+            outermost track and continues servicing requests inwards.
+            This provides a more uniform wait time compared to SCAN.
+          \item C-LOOK - Like C-SCAN but inward sweep stops at the
+            last high-numbered track request, preventing the arm from
+            going all the way to the centre if no requests exist there.
+        \end{itemize}
+    \end{itemize}
+  \item The strat is:
+    \begin{itemize}
+      \item FCFS for light loads
+      \item SSTF for moderate loads
+      \item  Most scan variants for light to moderate loads
+      \item C-SCAN for moderate to heavy loads
+    \end{itemize}
+\end{itemize}
+
+A seek storage for the I/O device handler is the predetermined policy
+that the device handler uses to allocate access to the device among
+many processes that may be waiting for it. It determines the order in
+which the processes git the device with the goal of minimizing seek
+time. The goals of a seek strategy are to:
+\begin{itemize}
+  \item Minimize arm movement
+  \item Minimize mean response time
+  \item Minimize the variance in response time
+\end{itemize}
+
+The broad generalization for selecting a seek strategy is:
+\begin{description}
+  \item[FCFS]  - Works well with light loads
+  \item[SSTF]- Works well with moderate loads
+  \item[SCAN and LOOK] - Works well with light to moderate loads
+  \item[C-SCAN] - Works well with moderate to heavy loads
+\end{description}
+
+\subsection{First-Come, First-Served (FCFS)}
+
+FCFS is the simplest device-scheduling algorithm, however on overt it
+doesn't meet any of the goals of a seek strategy. This is because it
+serves requests in the order they arrive without considering their
+location on the disk, which can lead to long seek times, high
+variance in response times, and extreme arm movement.
+
+\subsection{Shortest Seek Time First (SSTF)}
+
+SSTF works similarly to the Shortest Job Next (SJN) process scheduling
+algorithm, by selecting the request with the track closest to the one
+being served, i.e. the one with the shortest distance to travel (seek time).
+
+This strategy minimizes overall seek time and reduces erratic arm
+movement. However, it can lead to starvation of requests that are
+far from the current head position if there are always closer requests
+to serve.
+
+\subsection{SCAN Variants}
+
+SCAN uses a direction bit to indicate whether the arm is moving
+towards the centre track or the outer track. The algorithm moves the
+arm methodically form the outer to the inner track and back again,
+servicing every request in its path. When the innermost or outermost
+track is reached, the direction bit is flipped and the arm moves in
+the opposite direction servicing requests along the way. It does not
+matter if there re no requests at the extreme tracks, the arm still
+moves from edge-to-edge with each sweep anyway.
+
+\subsubsection{LOOK (Elevator Algorithm)}
+
+The LOOK algorithm is a variant of SCAN where the arm does not go to
+all the way to either edge unless there are requests in that
+direction. Therefore it looks ahead for a request, using a wait queue
+before going to service it.
+
+This eliminates the possibility  of indefinite postponement of
+requests in out-of-the-way places, i.e. at the extreme tracks.
+
+\subsubsection{N-Step SCAN}
+
+N-Step SCAN is another variant of SCAN that holds all new requests
+until the arm starts on its way back, dividing the request queue into $n$
+sized sub-queues. The arm services all requests in the current sub-queue
+using SCAN, while new requests are added to other sub-queues. This
+limits the maximum wait time for a request.
+
+\subsubsection{C-SCAN (Circular SCAN)}
+
+C-Scan is another variant of SCAN where the arm picks up requests
+only on its path during the inward sweep. When the innermost track is
+reached, the arm jumps to the outermost track and starts servicing
+requests that came in during its inward sweep.
+
+This way the system can provide quicker service to those requests
+that accumulated for the low number tracks while the arm was moving
+inward. The guiding concept behind this is that by the time the arm
+reaches the highest-number tracks, there are few requests immediately
+behind it. However there are many requests waiting at the low-number
+tracks, and these have been waiting the longest, i.e. C-SCAN provides
+a more uniform wait time compared to SCAN.
+
+\subsubsection{C-LOOK}
+
+An optimization of C-SCAN where the inward seep stops at the last
+high-numbered track request, so the arm doesn't move all the way to
+the last track unless its required to do so. Also the arm doesn't
+jump return to the outermost track, but rather to the first request
+in the queue.
+
+\subsection{Search Strategies: Rotational Ordering}
+\begin{itemize}
+  \item Rotational ordering optimizes search times by ordering requests
+    based on their position on the disk surface.
+  \item Read/write head movement time is hardware dependent and
+    usually constant.
+  \item  Reduces time wasted due to rotational delay by grouping
+    requests on the same track together.
+\end{itemize}
+
+Rotational ordering is a search time optimization technique that
+reorders pending requests once the heads have been positioned based
+on their position on the disk surface. Since the time taken for the
+
+\chapter{Optical Disk Storage}
+\begin{itemize}
+  \item Single Spiralling track
+  \item Constant sized sectors from centre to disc rim
+  \item Spins at a constant linear velocity (CLV)
+  \item More sectors and disc data than magnetic disk
+  \item Performance measures:
+    \begin{itemize}
+      \item Sustained data-transfer rate - Speed to read massive data
+        mounts from disc, megabytes per second (Mbps), important for
+        sequential access
+      \item Average access time - Average time to move head to
+        specific disc location, milliseconds (ms)
+    \end{itemize}
+\end{itemize}
+
+\section{CD and DVD Technology}
+\begin{itemize}
+  \item CD (Compact Disc)
+    \begin{itemize}
+      \item Data recorded as zeros and ones, Pits (indentations/0),
+        Lands (flat/1)
+      \item Reads with low-power laser where light that strikes land
+        is reflected to the photodetector, and light that strikes a
+        pit is scattered and absorbed. The photodetector then
+        converts light intensity into a digital signal
+    \end{itemize}
+  \item CD-R (Compact Disc-Recordable)
+    \begin{itemize}
+      \item Contains several layers including a gold reflective layer
+        and dye layer
+      \item Requires expensive disc controller
+      \item Records data using write-once technique:
+        \begin{itemize}
+          \item Data is recorded using a high-power laser
+          \item High-power laser makes permanent marks on the dye layer
+        \end{itemize}
+      \item Data cannot be erased or modified
+    \end{itemize}
+  \item CD-RW (Compact Disc Re-Writeable) / DVD-RW (Digital
+    Versatile Disc Re-Writeable)
+    \begin{itemize}
+      \item Data can be recorded, erased, and modified
+      \item Uses phase change technology, using amorphous and crystalline
+        states to represent pits and lands respectively.
+        \begin{itemize}
+          \item High-power laser heats up disc to change from
+            crystalline (land) to
+            amorphous state (pit), recording data
+          \item Low-energy beam heats up pits to allow
+            recrystallization, erasing data
+        \end{itemize}
+    \end{itemize}
+  \item DVD (Digital Versatile Disc)
+    \begin{itemize}
+      \item Higher storage capacity than CD (8.6 GB vs 700 MB)
+      \item Different laser wavelength (Red laser smaller pits,
+          tighter spiral vs
+        Infrared laser)
+    \end{itemize}
+  \item Blu-Ray Disc
+    \begin{itemize}
+      \item Higher storage capacity than DVD (25 GB vs 8.6 GB)
+      \item Smaller pits and tighter spiral than DVD
+      \item Uses blue-violet laser with shorter wavelength than DVD,
+        allowing multiple layers
+        (up to 4) to be stacked on top of each other.
+        \begin{itemize}
+          \item BD-ROM (Blu-Ray Disc Read-Only Memory) - Pre-recorded discs
+          \item BD-R (Blu-Ray Disc Recordable) - Write-once discs
+          \item BD-RE (Blu-Ray Disc Re-Writeable) - Rewritable
+        \end{itemize}
+    \end{itemize}
+
+\end{itemize}
+
+\chapter{Solid State Storage}
+\begin{itemize}
+  \item Implements Fowler-Nordheim tunnelling to store data
+    \begin{itemize}
+      \item Stores elections in a floating gate transistor
+      \item Electrons remain even when power is off
+    \end{itemize}
+  \item Fast but expensive
+  \item No moving parts, more durable than magnetic/optical storage
+  \item Disadvantages:
+    \begin{itemize}
+      \item Catastrophic failure - When one cell fails,
+        it can cause neighbouring cells to fail, and no warning signs.
+      \item Data transfer rate degradation over time
+    \end{itemize}
+\end{itemize}
+
+\section{Flash Memory Storage}
+\begin{itemize}
+  \item Electrically Erasable Programmable Read-Only Memory (EEPROM)
+    \begin{itemize}
+      \item Non-volatile and removable
+      \item Emulates random access
+    \end{itemize}
+  \item Writes data by sending electric charge to the floating gate
+  \item Erases data by applying a strong electric field to remove
+    electrons from the floating gate
+\end{itemize}
+
+\chapter{Components of the I/O Subsystem}
+\begin{itemize}
+  \item I/O Channels
+  \item
+\end{itemize}
+
+\section{I/O Channels}
+\begin{itemize}
+  \item Programmable units positioned between CPU and control unit
+  \item Used to synchronize data transfer between CPU and I/O
+    devices, as the CPU is faster than most I/O devices.
+  \item Used to manage concurrent I/O operations
+  \item Allows CPU and I/O devices to operate simultaneously
+  \item I/O channel program
+    \begin{itemize}
+      \item Specifies actions to be performed by the I/O channel
+      \item Controls data transmission between main memory and control units
+    \end{itemize}
+  \item I/O control unit - Receives and interprets signals
+  \item Disk controller (Disk Drive Interface) - Links disk drive and system bus
+  \item I/O subsystem configuration - Multiple paths increase
+    flexibility and reliability
+\end{itemize}
+
+\chapter{Communication among Devices}
+\begin{itemize}
+  \item Problems to resolve:
+    \begin{itemize}
+      \item Know which components are busy/free - Structure
+        interaction between units
+      \item Accommodate requests during heavy I/O traffic - Buffering
+        records and queuing requests
+      \item Accommodate speed disparity between CPU and I/O devices -
+        Buffering records and queuing requests
+    \end{itemize}
+  \item I/O subsystem units finish independently of others
+  \item CPU processes data while I/O operations are in progress
+  \item Success requires device completion knowledge
+    \begin{itemize}
+      \item Hardware flag tested by CPU - Channel Status Word (CSW)
+        is a three bit flag to represent I/O subsystem components
+        status (channel, control unit, device), one meaning busy,
+        zero meaning free.
+      \item The flag is tested with polling and interrupts, with
+        interrupts being more efficient.
+    \end{itemize}
+  \item Direct Memory Access (DMA)
+    \begin{itemize}
+      \item Allows control unit to access main memory directly
+      \item Transfers data without CPU intervention
+      \item Used for high-speed I/O devices (e.g., disk drives)
+    \end{itemize}
+  \item Buffers
+    \begin{itemize}
+      \item Temporary storage areas in main memory, channels, control units
+      \item Improves data movement synchronization between slow I/O
+        devices and fast CPU/memory
+      \item Double buffering - Record processing by CPU while another
+        is read or written by channel
+    \end{itemize}
+\end{itemize}
+
+\chapter{RAID}
+\begin{itemize}
+  \item Physical disk drive set viewed as a single logical unit, this
+    is preferable to a few large-capacity disk drives.
+  \item Improved I/O performance
+  \item Improved data recovery in the event of a disk failure.
+  \item Introduces redundancy which helps with hardware failure recovery.
+  \item Significant factors in RAID level selection
+    \begin{itemize}
+      \item Cost
+      \item Speed
+      \item The applications of the system
+    \end{itemize}
+  \item Increases hardware cost due to the need for multiple disks.
+\end{itemize}
+
+\section{Level Zero}
+\begin{itemize}
+  \item Uses data striping without redundancy (not considered true RAID)
+  \item No parity and error corrections, i.e. no redundancy
+  \item Devices appear as one logical unit improving performance
+  \item Best for large quantifies of non-critical data
+  \item Minimum of two disks required
+\end{itemize}
+
+\section{Level One}
+\begin{itemize}
+  \item Uses data stripping with mirroring, this is considered true
+    RAID as duplicate sets of data are stored.
+  \item Provides redundancy and fault tolerance
+\end{itemize}
+
+\section{Level Two}
+\begin{itemize}
+  \item Uses small strips and error-correcting codes (ECC) for
+    redundancy, for example Hamming code
+  \item Expensive and complex, as size of strips determines number of
+    disks needed
+\end{itemize}
+
+\section{Level Three}
+\begin{itemize}
+  \item An improvement on Level Two, using a single parity disk for
+    redundancy instead of ECC.
+\end{itemize}
+
+\section{Level Four}
+\begin{itemize}
+  \item Uses data striping with a dedicated parity disk for redundancy
+  \item Computes parity for each strip
+  \item Stores parities in corresponding strip on the parity disk
+\end{itemize}
+
+\section{Level Five}
+\begin{itemize}
+  \item Improvement on Level Four that eliminates the dedicated
+    parity disk distributing parity strips across all disks.
+  \item Avoids Level Four bottleneck by spreading parity information
+    across all disks.
+  \item Complicated to regenerate data from a failed device as parity
+    information is spread across all disks.
+\end{itemize}
+
+\section{Level Six}
+\begin{itemize}
+  \item Provides an extra degree of error protection/correction
+  \item Two different parity schemes are used (double parity)
+  \item Parities are stored on separate disk across array
+\end{itemize}
+
+\section{Nested RAID Levels}
+\begin{itemize}
+  \item Combines two or more standard RAID levels to leverage
+    advantages of each level.
+    \begin{itemize}
+      \item RAID 01 (0+1) - Level 1 system composed of Level 0 arrays
+      \item RAID 10 (1+0) - Level 0 system composed of Level 1 arrays
+      \item RAID 03(0+3) - Level 3 system composed of Level 0 arrays
+      \item RAID 30 (3+0) - Level 0 system composed of Level 3 arrays
+      \item RAID 50 (5+0) - Level 0 system composed of Level 5 arrays
+      \item RAID 60 (6+0) - Level 0 system composed of Level 6 arrays
+    \end{itemize}
+\end{itemize}
+
+\end{document}

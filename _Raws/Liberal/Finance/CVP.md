@@ -102,6 +102,7 @@ $$
 ##### Break-Even Analysis For Single Product
 
 For a single product, the break-even point can be calculated directly using the unit contribution margin. For example
+
 |                          | Total (GHC)           | Per Unit (GHC)     | Percent of Sales |
 | ------------------------ | --------------------- | ------------------ | ---------------- |
 | Sales (500,000 barrels)  | 30,000,000            | 60                 |  100%
@@ -161,6 +162,7 @@ $$
 
 Finally , we can compute the BEP for each product using the sales mix proportions.
 Using the example below:
+
 | Product | Sales (GHC) | Variable Cost (GHC) | CM (GHC) | CM Ratio |
 | ------- | ----------- | ------------------- | -------- | -------- |
 | A       | 50,000      | 30,000              | 20,000  | 40%      |

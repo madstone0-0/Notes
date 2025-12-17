@@ -836,19 +836,7 @@ sure it isn't outside the segment's range.
 \section{Segmented/Demand Paged Memory Allocation}
 
 Each segment is divided into pages, and only the required pages of a
-segment are loaded into memory.
-
-\subsection{Advantages}
-
-\begin{itemize}
-  \item Logical benefits of segmentation, i.e. sharing and protection
-  \item Physical benefits of demand paging, i.e. reduced memory
-    requirements,
-  \item Removes the problems of compaction, external fragmentation,
-    and secondary storage handling due to the fixed page size
-\end{itemize}
-
-This requires four types of tables:
+segment are loaded into memory. This requires four types of tables:
 \begin{description}
   \item[Job Table (JT)] - Lists every job in process, i.e. one JT for
     the whole system
@@ -866,15 +854,6 @@ address, which is composed of three entries:
   \item Segment Number
   \item Page Number within the segment
   \item Displacement within the page
-\end{itemize}
-
-\subsection{Disadvantages}
-
-\begin{itemize}
-  \item Increased overhead required to manage multiple tables
-  \item Increased overhead required for address translation
-  \item More complex to implement than either segmentation or demand
-    paging alone
 \end{itemize}
 
 \dfn{Associative Memory }{
@@ -915,6 +894,25 @@ finishes first, the PMT is loaded into memory and the address
 translation is performed using the page frame number obtained from
 the PMT. In either case, if the page is not in memory a page
 interrupt occurs and the required page is loaded into memory.
+
+\subsection{Advantages}
+
+\begin{itemize}
+  \item Logical benefits of segmentation, i.e. sharing and protection
+  \item Physical benefits of demand paging, i.e. reduced memory
+    requirements,
+  \item Removes the problems of compaction, external fragmentation,
+    and secondary storage handling due to the fixed page size
+\end{itemize}
+
+\subsection{Disadvantages}
+
+\begin{itemize}
+  \item Increased overhead required to manage multiple tables
+  \item Increased overhead required for address translation
+  \item More complex to implement than either segmentation or demand
+    paging alone
+\end{itemize}
 
 \section{Virtual Memory}
 

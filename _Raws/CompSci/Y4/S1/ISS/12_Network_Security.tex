@@ -1,0 +1,300 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Network Security}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+\section{Networks}
+
+\dfn{Computer Network}{
+  A collection of interconnected devices that communicate to share
+  data, resources and services. Examples:
+  \begin{itemize}
+    \item LAN (Local Area Network)
+    \item WAN (Wide Area Network)
+    \item WLAN (Wireless Local Area Network)
+  \end{itemize}
+}
+
+A network consists of:
+\begin{description}
+  \item[Devices] - Computers, services, routers, and switches.
+  \item[Transmission Medium] -
+    \begin{itemize}
+      \item Physical (Ethernet cables, fiber optics)
+      \item Wireless (Wi-Fi, Bluetooth)
+    \end{itemize}
+  \item[Data and Protocols] - Standardized methods for data
+    transmission ensuring communication
+\end{description}
+
+\subsection{Terms}
+
+\dfn{Data Packet}{
+  A subdivision of data formatted for transmission over a network.
+  Packets contain a portion of the original data and necessary
+  metadata for routing and reassembly.
+}
+
+\dfn{Routing}{
+  Directing data packets from source to destination across networks.
+}
+
+\dfn{MAC Address}{
+  Unique identifier of a Network Interface Card (NIC), that connects
+  a computer and a network
+}
+
+\dfn{Port}{
+  A number associated with an application program that serves or
+  monitors for a network service
+}
+
+\dfn{Daemon}{
+  A service program that runs in the background and receives and
+  passes data to the associated program.
+}
+
+\section{Networking Models}
+
+Networking models standardize communications between computers,
+enabling different systems to communicate. There are two main models:
+\begin{itemize}
+  \item OSI Model (Open Systems Interconnection)
+  \item TCP/IP Model (Transmission Control Protocol/Internet Protocol)
+\end{itemize}
+
+\subsection{OSI Model}
+Consists of seven layers:
+\begin{description}
+  \item[Physical] - Hardware, cables, and signals
+  \item[Data Link] - Frames, MAC addresses, switches
+  \item[Network] - IP addresses, routers, routing
+  \item[Transport] - TCP/UDP, ports, data transfers
+  \item[Session] - Establishes, manages and terminates connections
+  \item[Presentation] - Data translation, encryption, compression
+  \item[Application] - User Interfaces, email, web browsers
+\end{description}
+
+\subsection{TCP/IP Model}
+Consists of four layers:
+\begin{description}
+  \item[Link]  - Combination of physical and data link layers, hardware and LAN
+  \item[Internet] - IP addressing and routing
+  \item[Transport] - TCP/UDP, manages end-to-end data transmission
+  \item[Application] - Combines application, presentation and session
+    layers. Handles high-level protocols.
+\end{description}
+
+\section{Domain Name System (DNS)}
+DNS translates human-readable domain names (e.g., www.example.com)
+into IP addresses (e.g., 154.158.23.4) that computers use to identify
+each other on the network.
+
+\chapter{Network Security Concepts}
+
+Involves policies, practices, and tools designed to protect data and
+infrastructure from unauthorized access, misuse, or harm. It's goal
+is to ensure the integrity, confidentiality, and availability of
+network resources.
+
+\section{Common Threats}
+
+\begin{description}
+  \item[Interception] - Eavesdropping and Wiretapping (Confidentiality loss)
+  \item[Modification] - Data Corruption (Integrity loss)
+    \begin{itemize}
+      \item Sequencing
+      \item Substitution
+      \item Insertion
+      \item Replay
+      \item Physical replay
+    \end{itemize}
+  \item[Interruption] - Denial of Service (Availability loss)
+\end{description}
+
+\dfn{Security Perimeter}{
+  A virtual boundary that separates a trusted internal network, i.e a
+  protected zone containing a set of computing resources, and an
+  untrusted external network, i.e the internet.
+}
+
+\subsection{Eavesdropping and Wiretapping}
+\dfn{Wiretapping}{
+  Covert and unauthorized data interception during transmission.
+}
+The things that make a network vulnerable to eavesdropping and
+wiretapping include:
+\begin{description}
+  \item[Anonymity] - Attackers can hide their identity
+  \item[Multiple points of access] - Data may pass through many hosts
+    to get to the user
+  \item[Shared resources] - Networks enable resource and workload
+    sharing giving potential access to more attack vectors
+  \item[Complexity] - More complex systems have more vulnerabilities,
+    as users have no idea of all the processes active in the background
+  \item[No obvious perimeter] - One host may be a node on two
+    different networks.
+\end{description}
+
+Some countermeasures include:
+\begin{itemize}
+  \item Encryption
+  \item Physical security
+  \item Dedicated lines
+  \item Controlled routing, i.e. ensuring that communication travels
+    only along certain paths
+\end{itemize}
+
+\subsection{Data Corruption / Modification}
+This is caused by:
+\begin{description}
+  \item[Modification] - Change of data en route
+  \item[Insertion] - Addition of extra data
+  \item[Replay] - Repeating a previous communication
+\end{description}
+
+\subsubsection{Sequencing}
+\dfn{Sequencing}{
+  A sequencing attack permutes the order of data packets. This can lead to
+  misinterpretation of data, as the receiving system may not be able to
+  correctly reassemble the original message.
+}
+
+Network protocols such as TCP/IP include features to check for and
+correct transmission errors. However application programs do not
+always detect or correct sequencing problems.
+
+\subsubsection{Substitution}
+
+\dfn{Substitution}{
+  A substitution attack is the replacement of one piece of a data
+  stream with another.
+}
+
+\subsubsection{Insertion}
+\dfn{Insertion}{
+  An insertion attack involves the insertion of new data values into
+  a communication stream without replacing or removing the existing
+  data. The attacker doesn't even need to break the encryption scheme
+  as long as they know precisely where to insert the new data.
+}
+
+Countermeasures for both insertion and substitution include:
+\begin{itemize}
+  \item Encryption
+  \item Integrity checks (e.g. checksums, hash functions)
+\end{itemize}
+
+\subsubsection{Replay}
+\dfn{Replay}{
+  A replay attack involves the reuse of legitimate data transmissions.
+}
+
+Countermeasures include:
+\begin{itemize}
+  \item Sequencing
+  \item Timestamps
+\end{itemize}
+
+\subsection{Interruption / Denial of Service (DoS)}
+
+\dfn{Denial of Service (DoS)}{
+  An attack that aims to make a network resource unavailable to its
+  intended users by overwhelming it with a flood of illegitimate requests.
+}
+
+\section{Basic Network Security Measures}
+\begin{description}
+  \item[Firewalls]  - Act as a barrier between a network and external
+    threats, monitoring and controlling incoming and outgoing traffic.
+  \item[Encryption] - Encrypts all data transmissions, making
+    intercepted data unreadable without the correct decryption key.
+  \item[Antivirus and Anti-malware Software] - Detects and removes malicious
+    software that could compromise network security.
+\end{description}
+
+\chapter{Practical Network Security}
+
+\section{Firewalls}
+
+\dfn{Firewall}{
+  A combination of hardware and software that filters or prevents
+  specific types of information from moving between an untrusted
+  network, like the internet and a trusted network, like a private
+  LAN. Firewalls may be a separate computer system, a software
+  service running on an existing router, or server or a separate
+  network that contains several supporting devices.
+}
+
+Firewalls can be categorized based on processing modes:
+\begin{itemize}
+  \item Packet Filtering
+  \item Application layer proxy
+  \item Media access control layer
+  \item Hybrid
+\end{itemize}
+
+\subsection{Packet Filtering Firewalls}
+
+Examines the header information of data packets that come into a
+network. When installed on a TCP/IP based network, it functions at
+the IP layer and denies/drops or allows/forwards the packets to the
+next network connection based on the rules programmed into the firewall.
+
+Restrictions can be based on:
+\begin{itemize}
+  \item IP source and destination addresses
+  \item Direction, i.e. incoming or outgoing
+  \item Protocol type (TCP, UDP, ICMP)
+  \item Port number
+\end{itemize}
+
+Packet filtering firewalls can further be classified into:
+\begin{description}
+  \item[Static packet filtering]
+    \begin{itemize}
+      \item Filters based on rules developed and installed with the firewall
+      \item Rules are created and changed by the firewall administrator
+      \item Common in network routers and gateways
+    \end{itemize}
+  \item[Dynamic packet filtering] -
+  \item Firewall reacts positively or negatively to traffic patterns
+  \item More secure than static filtering
+  \item[Stateful Packet Inspection (SPI)] -
+    \begin{itemize}
+      \item Keeps track of each network connection between internal
+        and external systems using a state table
+    \end{itemize}
+\end{description}
+
+\section{Virtual Private Networks (VPNs)}
+
+\dfn{Virtual Private Network (VPN)}{
+  A private, secure network operated over a public and insecure
+  network, implemented using cryptographic technology by means of a
+  tunnelling protocol coupled with security procedures.
+}
+
+A VPN keeps the contents of the network messages hidden from
+observers who have access to public traffic and is used to securely
+connect remote users to a private network. VPNs often use protocols
+like IPSec to encrypt traffic.
+
+\end{document}

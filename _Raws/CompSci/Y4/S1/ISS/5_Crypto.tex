@@ -1,0 +1,87 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Cryptography}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Public Key Infrastructure}
+
+\dfn{Public Key Infrastructure (PKI) }{
+  The systems the brings cryptography into real world use. Uses
+  certificates, trusted authorities and public key cryptography to
+  securely identify entities on a network.
+}
+
+PKI is the integrated system of software, encryption methodologies,
+protocols, legal agreements, and third-party services enabling users
+to communicate securely over insecure networks like the internet
+using public key cryptography.
+
+PKI solves the problem of \textbf{trust} in public key cryptography by
+using a \textbf{trusted third party} called a \textbf{Certificate
+Authority (CA)} to verify the identity of entities and issue digital
+certificates that bind public keys to those identities.
+
+PKI protections information assets in all forms:
+\begin{description}
+  \item[Authentication]  Validate
+  \item[Integrity]
+  \item[Confidentiality]
+  \item[Authorization]
+  \item[Non-Repudation]
+\end{description}
+
+\section{Components of PKI}
+\begin{description}
+  \item[Certificate Authority (CA)]:
+    \begin{itemize}
+      \item Trusted third party that issues digital certificates
+    \end{itemize}
+  \item[Registration Authority (RA)]
+    \begin{itemize}
+      \item Handles certification functions in collaboration with a
+        CA, verifying registration information, generating end-user
+        keys, and validating and revoking user certificates.
+    \end{itemize}
+  \item[Digital Certificate (X.509)]
+    \begin{itemize}
+      \item Owner's public key
+      \item Owner's identify information
+      \item Digital signature of the CA
+      \item Validity period
+      \item Certificate serial number
+    \end{itemize}
+  \item[Certificate Store/Repository ] - Central location where
+    certificates and CRLS (Certificate Revocation Lists) are stored and managed.
+  \item[Certificate Revocation List (CRL)] - A list of certificates
+    that have been revoked before their expiration date.
+  \item[Management Protocols]
+    \begin{itemize}
+      \item Manages the Lifecycle of keys and certificates
+      \item Organizes and manages communicators among CAs, RAs, and
+        end users, while ensuring secure transmission of certificates
+        and related information.
+    \end{itemize}
+  \item[Policies and Procedures]
+    \begin{itemize}
+      \item Assists an organization in the application and management
+        of certificates in the formalization of legal liabilities and
+        limitations and in business use.
+    \end{itemize}
+\end{description}
+
+\end{document}

@@ -7,6 +7,7 @@
 \author{\huge{Madiba Hudson-Quansah}}
 \date{}
 \usepackage{parskip}
+\usepackage{tabularx}
 
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
@@ -924,26 +925,27 @@ discussed in this chapter are forms of virtual memory, which mostly
 falls into two categories, virtual memory with paging and virtual
 memory with segmentation.
 
-\begin{table}[h!]
-  \begin{center}
-    \begin{tabular}{|c c|}
-      \hline
-      Virtual Memory with Paging & Virtual Memory with Segmentation\\ [0.5ex]
-      \hline
-      \hline
-      Allows internal fragmentation within page frames & Doesn't
-      allows internal fragmentation \\
-      Doesn't allow external fragmentation & Allows external
-      fragmentation between segments \\
-      Programs are divided into equal-sized pages & Programs are
-      divided into unequal-sized segments of logically grouped code \\
-      The absolute address is calculated using the page number and
-      displacement & The absolute address is calculated using the
-      segment number and displacement \\
-      Requires Page Map Table (PMT) & Requires Segment Map Table (SMT) \\
-      \hline
-    \end{tabular}
-  \end{center}
+\begin{table}[H]
+  \centering
+  \begin{tabularx}{\textwidth}{|X|X|} % Force table to span text width
+    \hline
+    \textbf{Virtual Memory with Paging} & \textbf{Virtual Memory with
+    Segmentation} \\ [0.5ex]
+    \hline
+    \hline
+    Allows internal fragmentation within page frames & Doesn't allow
+    internal fragmentation \\ \hline
+    Doesn't allow external fragmentation & Allows external
+    fragmentation between segments \\ \hline
+    Programs are divided into equal-sized pages & Programs are
+    divided into unequal-sized segments of logically grouped code \\ \hline
+    The absolute address is calculated using the page number and
+    displacement & The absolute address is calculated using the
+    segment number and displacement \\ \hline
+    Requires Page Map Table (PMT) & Requires Segment Map Table (SMT) \\
+    \hline
+  \end{tabularx}
+  \caption{Comparison of Paging and Segmentation}
 \end{table}
 
 Segmentation allows users to share program code, with the shared

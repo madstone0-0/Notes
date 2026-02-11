@@ -323,7 +323,7 @@ if __name__ == "__main__":
             ],
         },
         "Y4": {
-            "S1": ["CompSci/ISS", "CompSci/OS", "Liberal/Finance"],
+            "S1": ["CompSci/Y4/S1/ISS", "CompSci/Y4/S1/OS", "Liberal/Finance"],
         },
         "Personal": [
             "CompSci/Personal/Intro_To_Machine_Learning",

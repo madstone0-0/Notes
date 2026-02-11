@@ -1,0 +1,53 @@
+\contentsline {chapter}{\numberline {1}Principles of Network Applications}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Network Application Architectures}{3}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Client-Server Architecture}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Peer-to-Peer Architecture}{3}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Process Communicating}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Client and Server Processes}{4}{subsection.1.2.1}%
+\contentsline {section}{\numberline {1.3}Transport Services Available to Applications}{5}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Reliable Data Transfer}{5}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Throughput}{5}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Timing}{5}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Security}{5}{subsection.1.3.4}%
+\contentsline {subsection}{\numberline {1.3.5}Transport Services Provided by the Internet}{5}{subsection.1.3.5}%
+\contentsline {subsection}{\numberline {1.3.6}TCP Services}{6}{subsection.1.3.6}%
+\contentsline {subsection}{\numberline {1.3.7}UDP Services}{6}{subsection.1.3.7}%
+\contentsline {subsection}{\numberline {1.3.8}Securing TCP}{6}{subsection.1.3.8}%
+\contentsline {section}{\numberline {1.4}Application Layer Protocol}{6}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Web and HTTP}{8}{chapter.2}%
+\contentsline {section}{\numberline {2.1}HyperText Markup Protocol (HTTP)}{8}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Non-Persistent vs Persistent HTTP}{8}{subsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.1}HTTP with Non-Persistent connections}{9}{subsubsection.2.1.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.2}HTTP with Persistent connections}{9}{subsubsection.2.1.1.2}%
+\contentsline {subsection}{\numberline {2.1.2}Message Format}{9}{subsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.2.1}HTTP Request Message}{9}{subsubsection.2.1.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.2.2}HTTP Response Message}{10}{subsubsection.2.1.2.2}%
+\contentsline {subsection}{\numberline {2.1.3}Cookies and State}{10}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Web Caching}{11}{subsection.2.1.4}%
+\contentsline {subsubsection}{\numberline {2.1.4.1}Conditional GET}{11}{subsubsection.2.1.4.1}%
+\contentsline {subsection}{\numberline {2.1.5}HTTP/2}{11}{subsection.2.1.5}%
+\contentsline {subsubsection}{\numberline {2.1.5.1}HTTP/2 Framing}{11}{subsubsection.2.1.5.1}%
+\contentsline {subsubsection}{\numberline {2.1.5.2}Response Message Prioritization and Server Pushing}{11}{subsubsection.2.1.5.2}%
+\contentsline {subsection}{\numberline {2.1.6}HTTP/3}{11}{subsection.2.1.6}%
+\contentsline {chapter}{\numberline {3}Electronic Mail in the Internet}{12}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Simple Mail Transfer Protocol (SMTP)}{12}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Mail Message Formats}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Mail Access Protocols}{12}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Domain Name System (DNS)}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}DNS Services}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}DNS Architecture}{13}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Distributed Hierarchical Database}{13}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}DNS Caching}{13}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}DNS Records and Messages}{13}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}DNS Messages}{13}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Inserting Records into the DNS Database}{13}{subsection.4.3.2}%
+\contentsline {chapter}{\numberline {5}Peer-to-Peer (P2P) File Sharing}{14}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Scalability}{14}{section.5.1}%
+\contentsline {section}{\numberline {5.2}BitTorrent}{14}{section.5.2}%
+\contentsline {chapter}{\numberline {6}Video Streaming and Content Distribution Networks (CDNs)}{15}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Internet Video}{15}{section.6.1}%
+\contentsline {section}{\numberline {6.2}HTTP Streaming and DASH}{15}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Content Distribution Networks (CDNs)}{15}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}CDN Operation}{15}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Cluster Selection Strategies}{15}{subsection.6.3.2}%
+\contentsfinish 

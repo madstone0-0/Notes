@@ -578,37 +578,542 @@ following steps:
     message, to the client browser.
 \end{enumerate}
 
+The cache is both a server and client at the same time. When it
+receives requests from and sends responses to a browser its a server
+and when it sends requests and receives responses from an origin
+server its a client.
+
+A web cache can be used to reduce the response time for a client
+request, particularly if the bottleneck bandwidth between the client
+and the origin server is much less than the bottleneck bandwidth
+between the client and the web cache. A web cache can also be used to
+reduce the traffic on an institution's access link, particularly if
+many clients within the institution request the same object.
+
+Web caches can also reduce the traffic on an access link to the
+internet. By reducing the traffic on the access link, bandwidth is
+not needed as much, reducing the cost of internet access for the
+institution. Additionally, by reducing the traffic on the access
+link, the performance of other applications that use the access link
+can be improved.
+
+A method of calculating the traffic intensity on the LAN is to use the formula:
+\begin{align*}
+  \text{Traffic Intensity} = \frac{\text{Average Request Rate} \times
+  \text{Average Object Size}}{\text{Bottleneck Bandwidth}}
+\end{align*}
+
 \subsubsection{Conditional GET}
+
+Caching introduces the problem of stale objects, where the objects
+stored in a web cache may have been modified since last cache. The
+Conditional GET method allows a cache to verify that its objects are up to data.
+
+An HTTP request message is a conditional GET if:
+\begin{itemize}
+  \item The request verb is GET
+  \item It includes the If-Modified-Since header line
+\end{itemize}
+
+In the case of a conditional GET if the object has not been modified
+since the date specified in the If-Modified-Since header line, the
+origin server responds with a 304 Not Modified status code and does
+not include the object in the response message. This allows the web
+cache to use the stale object without having to download it again
+from the origin server, thus reducing the response time for the
+client request and reducing the traffic on the access link to the internet.
 
 \subsection{HTTP/2}
 
+HTTP/2 introduces several improvements over HTTP/1.1, including:
+\begin{description}
+  \item[Latency Reduction]  - Achieved by enabling request and
+    response multiplexing over a single TCP connection
+  \item[Request Prioritization] - HTTP/2 allows clients to assign a
+    priority level to each request, allowing the server to prioritize
+    the processing of requests based on their importance.
+  \item[Server Push] - HTTP/2 allows servers to proactively send
+    resources to clients before the client requests them, which can
+    improve performance by reducing the number of round trips needed
+    to fetch resources.
+  \item[Header Compression] - HTTP/2 uses a more efficient header
+    compression algorithm, which reduces the size of HTTP headers and
+    improves performance.
+\end{description}
+
+\dfn{Head of Line (HOL) Blocking}{
+  A performance issue that occurs when the processing of one request is
+  blocked by the processing of another request. This can occur when
+  multiple requests are sent over a single TCP connection, and the
+  processing of one request is delayed due to network congestion or
+  other issues.
+}
+
+HTTP/1.1 allows for persistent connections but this comes with the
+caveat that sending all the objects in a web page over a single TCP
+connection could lead to Head of Line (HOL) blocking, where the
+processing of one request is blocked by the processing of another request.
+
+HTTP/2 addresses this issue by allowing for request and response
+multiplexing over multiple TCP connections, which allows for multiple
+requests and responses to be sent simultaneously without being
+blocked by each other. This allows for improved performance and
+reduced latency when fetching resources for a web page.
+
 \subsubsection{HTTP/2 Framing}
+
+HTTP/2 breaks down each HTTP message into smaller units called
+frames, and then interleaves the request and response messages on the
+same TCP connections. This allows for multiple requests and responses
+to be sent simultaneously without being blocked by each other, thus
+improving performance and reducing latency when fetching resources
+for a web page.
+
+This framing mechanism allows for more efficient use of the TCP
+connection, as it allows for multiple requests and responses to be
+sent at the same time without being blocked by each other,
+significantly decreasing user-perceived delay.
+
+Framing is done by the framing sub-layer of the HTTP/2 protocol. When
+a server wants to send an HTTP response, the response is processed by
+the framing sub-layer, where it is broken-down into frames, with the
+header field becoming one frame, and the body being broken down into
+multiple frames if necessary. The response frames are then
+interleaved by the framing sub-layer in the server with the frames of
+other responses and sent over the same TCP connection to the client.
+
+When the client receives the frames, they are first reassembled into
+the original response messages at the framing sub-layer and then
+processed by the browser. Similarly a client's HTTP requests are
+broken into frames and interleaved.
+
+The framing sub layer also binary encodes the frames as binary
+protocols are more efficient to parse, lead to smaller frames, and
+are less error prone.
 
 \subsubsection{Response Message Prioritization and Server Pushing}
 
+Message prioritization allows developers to set the relative priority
+of requests to better optimize application performance. When the
+framing sub-layer breaks messages down into frames and organizes them
+into parallel streams to be sent to the same destination, it can use
+the priority information to determine how to interleave the frames of
+different messages. This allows for more important messages to be
+sent before less important messages, improving the overall
+performance of the application.
+
+Server pushing allows servers to proactively send resources to
+clients before the client requests them. This can improve performance
+by reducing
+the number of round trips needed to fetch resources. For example,
+when a client requests an HTML page, the server can also push the
+associated CSS and JavaScript files to the client before the client
+requests them, thus reducing the latency of fetching these resources
+and improving the overall performance of the application.
+
 \subsection{HTTP/3}
+
+HTTP/3 introduces several improvements over HTTP/2, including:
+\begin{description}
+  \item[Quick UDP Internet Connections (QUIC)]  - HTTP/3 uses QUIC, a
+    new transport
+    protocol that is designed to provide improved performance and
+    security compared to TCP. QUIC is built on top of UDP and provides
+    features such as multiplexing, connection migration, and improved
+    congestion control. QUIC supports message multiplexing,
+    per-stream flow control, and low-latency connection establishment.
+  \item[Improved Performance] - HTTP/3 is designed to provide improved
+    performance compared to HTTP/2, particularly in terms of latency and
+    throughput. This is achieved through the use of QUIC, which provides
+    features such as multiplexing, connection migration, and improved
+    congestion control.
+  \item[Improved Security] - HTTP/3 is designed to provide improved security
+    compared to HTTP/2, particularly in terms of encryption and
+    authentication. This is achieved through the use of QUIC, which provides
+    features such as built-in encryption and improved authentication mechanisms.
+\end{description}
 
 \chapter{Electronic Mail in the Internet}
 
+The internet mail system has three main components:
+\begin{description}
+  \item[User Agent (UA)] -  Allows users to read, reply to, forward,
+    save, and compose messages.
+  \item[Mail Server] - A server that stores and forwards email messages. It
+    typically uses the Simple Mail Transfer Protocol (SMTP) to send
+    and receive email messages. Each user has a mailbox on the mail
+    server, where their email messages are stored until they are
+    retrieved by the user agent. Messages are sent from the user
+    agent to the mail server, and then from the mail server to the
+    recipient's mail server, and finally from the recipient's mail
+    server to the recipient's user agent. If the recipient's mail
+    server is not available, the sender's mail the sender server will
+    store the message in a \textbf{message queue} and attempt to
+    resend the message at a later time.
+  \item[Simple Mail Transfer Protocol (SMTP)] - A protocol used to
+    send and receive email messages. It is a text-based protocol that
+    uses a client-server model, where the client sends email messages
+    to the server, and the server forwards the messages to the
+    appropriate recipients. It uses TCP as its transport protocol,
+    i.e. reliable data transfer, and it typically uses port 25 for
+    communication.
+\end{description}
+
 \section{Simple Mail Transfer Protocol (SMTP)}
+
+SMTP transfers messages from senders' mail servers to the recipients'
+mail servers. It is a text-based protocol that uses a client-server
+model, where the client sends email messages to the
+server, and the server forwards the messages to the appropriate
+recipients. SMTP uses TCP as its transport protocol, i.e. reliable
+data transfer, and it typically uses port 25 for communication.
+
+The order of operations in SMTP is as follows:
+\begin{enumerate}
+  \item The sender's user agent is instructed by the user to send an
+    email to a recipient at a particular email address.
+  \item The sender's user agent sends the message to the sender's
+    mail server where it is placed in a message queue.
+  \item The client side of SMTP running on the sender's mail server
+    initiates a TCP connection a SMTP server running on the
+    recipient's mail server.
+  \item After the TCP connection is established the sender's mail
+    server sends the email message to the recipient's mail server.
+  \item At the recipient's mail server the server side of SMTP
+    receives the message and places it in the recipient's mailbox.
+  \item The recipient invokes their user agent to read the email
+    message, which retrieves the message from the recipient's mail
+    server and displays it to the
+    recipient.
+\end{enumerate}
+
+It is important to note that SMTP does not usually use intermediate
+mail servers for sending mail, even when the two mail servers are not
+directly connected.
+
+From the operation order it is clear that SMTP is a push protocol,
+meaning that it only facilitates the sending of email messages from
+the sender's mail server to the recipient's mail server. It does not
+provide any mechanism for retrieving email messages from the
+recipient's mail server to the recipient's user agent.
+
+Pull protocols, such as Post Office Protocol (POP) and Internet
+Message Access Protocol (IMAP), are used to retrieve email messages from the
+recipient's mail server to the recipient's user agent. These
+protocols allow the recipient's user
+agent to connect to the recipient's mail server and retrieve email
+messages from the recipient's mailbox. POP and IMAP are typically
+used in conjunction with SMTP, where SMTP is used to send email
+messages from the sender's mail server to the recipient's mail
+server, and POP or IMAP is used to retrieve email messages from the
+recipient's mail server to the recipient's user agent.
 
 \section{Mail Message Formats}
 
+SMTP does not specify the format of email messages, but it does
+specify that email messages must be in ASCII text format. All kinds
+of peripheral information can be included in the message header, at
+the top of the message, and the message body, at the bottom of the
+message. The message header contains information about the sender,
+recipient, subject, and other metadata about the email message. The
+message body contains the actual content of the email message.
+
+Similar to HTTP, email messages can also include header fields that provide
+additional information about the email message, such as the sender's
+email address, the recipient's email address, the subject of the
+email message, and the date and time the email message was sent.
+These header fields are used by email clients to organize and display
+email messages to the user.
+
+An example of an email message is as follows:
+\begin{verbatim}
+From: alice@crepes.fr
+To: bob@hamburger.edu
+Subject: Searching for the meaning of life.
+\end{verbatim}
+
 \section{Mail Access Protocols}
+
+A message sent from a sender's user agent is first sent to the
+sender's mail server, before it is sent to the recipient's mail
+server. This two-step procedure allows the sender's mail server to
+store the message in a message queue in the case of an unreachable
+destination mail server.
+
+A recipient user agent can retrieve messages from the recipient's
+mail server using a mail access protocol. There are two common ways
+for a recipient user agent to retrieve messages from the recipient's
+mail server:
+\begin{description}
+  \item[HTTP]  - If the user agent is web based, the recipient can
+    retrieve messages from the recipient's mail server using HTTP. In
+    this case, the recipient's mail server would need to implement an
+    HTTP server that allows the recipient user agent to access the
+    email messages stored in the recipient's mailbox.
+  \item[Internet Mail Access Protocol (IMAP)] - Typically used by
+    mail clients, such as Microsoft Outlook or Apple Mail, to
+    retrieve email messages from the recipient's mail server. IMAP
+    allows the recipient user agent to connect to the recipient's
+    mail server and retrieve email messages from the recipient's
+    mailbox. IMAP also allows the recipient user agent to manage
+    email messages on the recipient's mail server, such as deleting
+    or moving email messages between folders. IMAP is typically used
+    in conjunction with SMTP, where SMTP is used to send email
+    messages from the sender's mail server to the recipient's mail
+    server, and IMAP is used to retrieve email messages from the
+    recipient's mail server to the recipient's user agent.
+\end{description}
 
 \chapter{Domain Name System (DNS)}
 
+\dfn{Hostname}{
+  Human readable name of a host, such as www.someschool.edu. Host
+  names are used to identify hosts on the internet and are typically
+  easier for humans to remember than IP addresses.
+}
+
+The Domain Name System (DNS) is a distributed database that maps
+hostnames to IP addresses. It is an application layer protocol that
+allows hosts to query the distributed database.
+
 \section{DNS Services}
+
+DNS is commonly used by other application layer protocols like HTTP
+and SMTP to resolve hostnames to IP addresses. DNS provides other
+important services in addition to hostname resolution, such as:
+
+\dfn{Canonical Name (CNAME) }{
+  The canonical name that a hostname is an alias for. This allows
+  multiple hostnames to be associated with a single IP address, which
+  can be useful for load balancing and for providing multiple
+  services on the same host.
+}
+
+\begin{description}
+  \item[Host Aliasing]  - DNS allows multiple hostnames to be associated with a
+    single IP address. This is useful for load balancing and for
+    providing multiple services on the same host.
+  \item[Mail Server Aliasing] - DNS allows multiple mail servers to be
+    associated with a single hostname. This is useful for load balancing
+    and for providing redundancy for email services.
+  \item[Load Distrubuton] - DNS allows for the distribution of load
+    across multiple servers by allowing multiple hostnames to be
+    associated with a single IP address. This allows for better
+    performance and reliability for applications that rely on DNS for
+    hostname resolution.
+\end{description}
 
 \section{DNS Architecture}
 
+A naive approach to DNS would have one centralized DNS server that
+contains all the mappings of hostnames to IP addresses. This approach
+has several issues:
+\begin{description}
+  \item[Single Point of Failure] - If the centralized DNS server goes down, then
+    hostname resolution would fail for all clients that rely on that
+    server.
+  \item[Traffic Volume] - A single DNS server would have to handle
+    all DNS queries from all clients, which could lead to performance
+    issues and increased latency for hostname resolution.
+  \item[Distant Centralized Database] - A single DNS server cannot be
+    located close to all clients, which can lead to increased latency
+    for hostname resolution due to the distance between the client
+    and the DNS server.
+  \item[Maintenance] - A single DNS server would have to keep records
+    for all Internet hosts. This would be a huge database that would
+    require a lot of maintenance and updates, which could lead to
+    errors and inconsistencies in the DNS records.
+\end{description}
+
 \subsection{Distributed Hierarchical Database}
+
+To address the issues of a centralized DNS server, the DNS uses a
+large number of servers organized in a hierarchical fashion and
+distributed across the world. There are four general types of DNS servers
+\begin{description}
+  \item[Root DNS Servers]  - Copies of 13 different root servers
+    managed by 12 different organizations. They are responsible for
+    providing the IP addresses of the top level domain (TLD) DNS servers.
+  \item[Top Level Domain (TLD) DNS Servers] - For each top level
+    domain (e.g. .com, .org, .edu) there is a TLD DNS server that is
+    responsible for providing the IP addresses of the authoritative
+    DNS servers for that top level domain.
+  \item[Authoritative DNS Servers] - Every organization with publicly
+    accessible hosts on the Internet must provide publicly accessible
+    DNS records that map the names of those hosts to their IP
+    addresses. The Authoritative DNS server holds these DNS records.
+  \item[Local DNS Servers] - Local DNS servers are typically provided
+    by Internet Service Providers (ISPs) and are responsible for
+    providing DNS resolution services to clients within the ISP's
+    network. Local DNS servers are typically configured to forward
+    DNS queries to the appropriate root, TLD, or authoritative DNS
+    servers as needed to resolve hostnames to IP addresses. Local DNS
+    servers can also cache DNS records to improve performance for
+    frequently accessed hostnames.
+\end{description}
+
+\dfn{Iterative Query}{
+  A DNS query where the local DNS server is responsible for making the
+  necessary requests to the root, TLD, and authoritative DNS servers to
+  resolve a hostname to an IP address. It is iterative in the sense
+  that all the responses from the other DNS servers are returned to
+  the local DNS server, which then makes the next request based on
+the response received. }
+
+\dfn{Recursive Query}{
+  A DNS query where the local DNS server is responsible for resolving a
+  hostname to an IP address and returning the result to the client.
+  It is recursive in the sense that the local DNS server is
+  responsible for making the necessary requests to the root, TLD, and
+  authoritative DNS servers to resolve the hostname to an IP address
+  and returning the final result to the client.
+}
+
+The general process of DNS resolution is as follows (without caching):
+\begin{enumerate}
+  \item The client sends a DNS query to the local DNS server to resolve a
+    hostname to an IP address.
+  \item The local DNS server then makes a request to a root DNS
+    server to get the IP address of the TLD DNS server for the top
+    level domain of the hostname. This response is returned to the
+    local DNS server.
+  \item The local DNS server then makes a request to the TLD DNS
+    server to get the IP address of the authoritative DNS
+    server for the hostname. This response is returned to the local DNS server.
+  \item The local DNS server then makes a request to the authoritative DNS
+    server to get the IP address of the hostname. This response is
+    returned to the local DNS server.
+  \item Finally, the local DNS server returns the IP address of the
+    hostname to the client.
+\end{enumerate}
+This is an iterative DNS resolution process, where the local DNS
+server is responsible for making the necessary requests to the root,
+TLD, and authoritative DNS servers to resolve the hostname to an IP address.
+However the first request sent from the host to the local DNS server
+is a recursive request, meaning that the local DNS server is
+responsible for resolving the hostname to an IP address and returning
+the result to the client.
+
+Sometimes the TLD DNS server may not know the authoritative DNS
+server of the host name, and my only know of an intermediate DNS
+server which knows the authoritative DNS server. In this case, the
+local DNS server would make a request to the intermediate DNS server
+to get the IP address of the authoritative DNS server for the
+hostname, and then make a request to the authoritative DNS server to
+get the IP address of the hostname.
 
 \subsection{DNS Caching}
 
+DNS caching is a technique used to improve the performance of DNS
+resolution by storing previously resolved DNS records in a cache.
+When a client makes a DNS query, the local DNS server first checks
+its cache to see if it has a valid record for the requested hostname.
+If it does, it returns the cached record to the client, which can
+significantly reduce the latency of DNS resolution.
+
+A typical DNS process with caching is as follows:
+\begin{enumerate}
+  \item The client sends a DNS query to the local DNS server to resolve a
+    hostname to an IP address.
+  \item The local DNS server checks its cache to see if it has a valid
+    record for the requested hostname. If it does, it returns the cached
+    record to the client, and the process is complete.
+  \item If the local DNS server does not have a valid record in its cache, it
+    proceeds with the iterative DNS resolution process as described
+    in the previous section, making requests to the root, TLD, and
+    authoritative DNS
+    servers as needed to resolve the hostname to an IP address.
+  \item Once the local DNS server receives the IP address of the
+    hostname from the authoritative DNS server, it stores the record
+    in its cache for future use and returns the IP address to the client.
+\end{enumerate}
+
 \section{DNS Records and Messages}
 
+DNS servers store \textbf{Resource Records (RRs)} in their databases,
+which are used to map hostnames to IP addresses and provide other
+information about the host. A resource record is a four tuple that
+contains the following fields:
+\begin{itemize}
+  \item Name
+  \item Value
+  \item Type
+  \item Time to Live (TTL)
+\end{itemize}
+
+\textbf{TTL} is the time to live of the resource record, i.e. it
+determines when a resource should be removed from a cache.
+
+The meaning of \textbf{Name} and \textbf{Value} fields depend on \textbf{Type}:
+\begin{description}
+  \item[Type=A]  - The Name is a hostname and Value is the IP address
+    for the host name. A Type A record provides the standard hostname
+    to IP address mapping that is used for most DNS queries.
+  \item[Type=NS] - The Name is a domain and Value is the host-name of
+    an authoritative DNS server that knowns how to obtain the IP
+    addresses for hosts in the domain. This record is used to route
+    DNS queries further along the query path to the authoritative DNS
+    server for a particular domain.
+  \item[Type=CNAME] - Value is a canonical hostname for the alias
+    hostname Name. This record is used to provide querying hosts the
+    canonical name for a hostname.
+  \item[Type=MX] - The Value is the canonical name of a mail server
+    that has an alias hostname Name. MX records allow the hostnames
+    of mail servers to have simple aliases.
+\end{description}
+
+If a DNS server is authoritative for a particular hostname, then the
+DNS server will contain a Type A record for that hostname, or even if
+the server is not authoritative it may still contain cached Type A
+records for that hostname.
+
+If a server is not authoritative then it will contain a Type NS
+record for the domain that includes the hostname, it will also
+contain Type A record that provides the IP address of the DNS server
+in the Value field of the NS record.
+
 \subsection{DNS Messages}
+
+There are two kinds of DNS messages: query messages and response
+messages. These messages have the same format and are as follows:
+\begin{description}
+  \item[Header Section] - 12 bytes, which contains identification and
+    control information about the message.
+    \begin{description}
+      \item[Identification] - A 16-bit field that is used to match responses to
+        queries. When a client sends a DNS query, it includes a unique
+        identification number in the query message. When the DNS server
+        responds to the query, it includes the same identification number
+        in the response message, allowing the client to match the response
+        to the original query.
+      \item[Flags] -  A 16-bit field that contains various flags and
+        control bits that
+        provide information about the message, such as whether it is a
+        query or a response, whether the message is authoritative, and
+        whether the message is truncated.
+      \item[Counts] -  Four 16-bit fields that specify the number of
+        entries in the Question, Answer, Authority, and Additional
+        sections of the message. These fields are used to indicate how
+        many resource records are included in each section of the
+        message.
+    \end{description}
+  \item[Question Section] Contains information about the query that
+    is being made. It includes
+    \begin{description}
+      \item[Name] - Contains the name that is being queried, such as
+        a hostname or a domain name.
+      \item[Type] - Indicated the type of question being asked about
+        the name, i.e. the type of resource record being queried for,
+        such as A, NS, CNAME, or MX.
+    \end{description}
+  \item[Answer Section] - In a reply from a DNS server, contains the
+    resource records for the name that was queried in the question
+    section. A reply can return multiple RRs in the answer since a
+    hostname can have multiple IP addresses
+  \item[Authority Section] - Contains records of other authoritative servers
+  \item[Additional Section] - Contains other helpful records, like
+    the IP address of the authoritative server in the authority section
+\end{description}
 
 \subsection{Inserting Records into the DNS Database}
 

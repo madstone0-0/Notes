@@ -964,9 +964,11 @@ the response received. }
   A DNS query where the local DNS server is responsible for resolving a
   hostname to an IP address and returning the result to the client.
   It is recursive in the sense that the local DNS server is
-  responsible for making the necessary requests to the root, TLD, and
-  authoritative DNS servers to resolve the hostname to an IP address
-  and returning the final result to the client.
+  responsible for making the necessary requests to the root, then the
+  root server makes a request to the TLD server, then the TLD server
+  makes a request to the authoritative server, and finally the
+  authoritative server returns the IP address to the local DNS
+  server, which then returns the IP address to the client.
 }
 
 The general process of DNS resolution is as follows (without caching):

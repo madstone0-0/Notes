@@ -448,7 +448,7 @@ The receiver side only has a single state, the waiting for data from
 below layer state. On receiving  packet the receiver transmits either
 an ACK or NAK depending on whether or not the packet is corrupted.
 
-\subsection{Corrupt Acknowledgements}
+\subsubsection{Corrupt Acknowledgements}
 
 rdt2.0 has a major disadvantage however, the fact that it does not
 count for the possibility that that the ACK/NAK sent by the receiver
@@ -985,26 +985,274 @@ The GBN sender must respond to three types of events:
     sequence number $n$ will be taken to be a \textbf{cumulative
     acknowledgement}, indicating that all packets with a sequence
     number up to and including $n$ have been correctly received at the receiver.
-  \item[Timeout] -
+  \item[Timeout] - As in the stop-and-wait protocol, a timer will be
+    used to recover form lost data or acknowledgement packets. If a
+    timeout occurs, the send resends all packets that have been
+    previously sent but have not yet been acknowledged. If an ACK is
+    received but there are still additional transmitted but not yet
+    acknowledged packets, the timer is restarted, if there are no
+    outstanding, unacknowledged packets the timer is stopped.
 \end{description}
 
+The receiver side of GBN is simpler. If a packet with sequence number
+$n$ is received correctly and is in order, i.e. the data last
+delivered to the upper layer came from a packet with sequence number
+$n -1$, the receiver sends an ACK for packet $n$ and delivers the
+data portion of the packet to the above layer. In all other cases the
+receiver discards the packet and resends an ACK for the most recently
+received in-order packet.
+
+The receiver discards out-of-order packets because, since the sender
+only sends packets in order, if a packet with sequence number $n$ is
+received before a packet with sequence number $n - 1$, the packet
+with sequence number $n$ must be a retransmission of a previously
+sent packet, and thus the receiver can simply resend an ACK for the
+most recently received in-order packet.
+
+There are scenarios where GBN suffers from poor performance, for
+example when the window size and bandwidth-delay product are large,
+and the sender can have many packets in the pipeline, if a packet is
+lost, the sender has to retransmit all packets in the pipeline, even
+if only one packet is lost, and the rest of the packets are correctly
+received at the receiver, this is known as the \textbf{TCP meltdown problem}.
+
 \subsection{Selected Repeat (SR)}
+
+Selective Repeat protocols avoid unnecessary retransmissions by only
+retransmitting those packets that it suspects were received in error
+at the receiver. This requires the receiver to individually
+acknowledge correctly received packets, and to buffer out-of-order
+packets until the missing packets are received and can be delivered
+in order to the above layer. A window size if $N$ is again used to
+limit the number of in-transit, unacknowledged packets, however
+unlike GBN the sender will have already  received ACKs for some of
+the packets in the window.
+
+The SR receiver will acknowledge a correctly received packet whether
+or not it is in order. Out-of-order packets are buffered until any
+missing packets are received at which point a batch of packets can be
+delivered in order to the above layer.
+
+The SR sender goes through the following events and actions:
+\begin{description}
+  \item[Data received from above layer]  - When data is received the
+    SR sender checks the next available sequence number for the
+    packet. If the sequence number is within the sender's window, the
+    data is palletized and sent, otherwise it is either buffered or
+    returned to above layer for later transmission.
+  \item[Timeout] - Each packet has its own logical timer, since only
+    a single packet will be transmitted on timeout.
+  \item[ACk received] - If an ACK is received the sender marks that
+    packet as received provided it is in the window. If the packet's
+    sequence number is equal to \lstinline{send_base}, the window
+    base is moved forward to the unacknowledged packet with the
+    smallest sequence number. If the window moves and there are
+    untransmitted packets with sequence numbers within the window
+    those packets are retransmitted.
+\end{description}
+
+The SR receiver goes through the following events and actions:
+\begin{description}
+  \item[Packet with sequence number in rcv\_base, rcv\_base+N-1
+    received] - If the packet is correctly
+    received, the receiver sends an ACK for that packet and
+    buffers the packet if it is out of order. If the packet is in
+    order, i.e. its sequence number is equal to \lstinline{rcv_base},
+    the receiver delivers the data to the above layer and moves the
+    window forward, delivering any buffered packets that are now in
+    order.
+  \item[Packet with sequence number in rcv\_base, rcv\_base-1 is
+    received] - In this case, an ACK is send even though this is a
+    packet that the receiver has already acknowledged.
+  \item[Otherwise] - Ignore the packet
+\end{description}
 
 \chapter{Connection-Oriented Transport: Transmission Control Protocol}
 
 \section{The TCP Connection}
 
+\dfn{Handshaking}{
+  Exchanging preliminary segments to establish a connection before
+  the actual data transfer begins.
+}
+
+TCP is connection oriented because before one process can begin to
+send data to another the two must first establish a connection
+through \textbf{handshaking}. As part this connection both sides must
+initialize many TCP state variables.
+
+\dfn{Full-Duplex Service}{
+  If there is a TCP connection between hosts, both hosts can send
+  data to each other at the same time, i.e. the connection is
+  full-duplex, and the state variables for the two directions of data
+  transfer are maintained independently
+}
+
+\dfn{Point-to-Point}{
+  Connections only exist between a single sender and receiver
+}
+
+A TCP connection is a purely logical one, which common state only
+residing in the TCPs in the two communicating hosts. TCP provides a
+\textbf{full-duplex} service, and is always \textbf{point-to-point}.
+
+A TCP connection is initiated by \textbf{three-way handshake} process
+consisting of the following steps:
+\begin{description}
+  \item[SYN] - A client initiates a connection by sending a TCP
+    segment with the SYN
+    flag set to 1.
+  \item[SYN-ACK] - The server responds to the client's SYN segment by
+    sending a TCP segment with both the SYN and ACK flags set to 1.
+    The ACK flag is set to acknowledge the client's SYN segment, and
+    the SYN flag is set to indicate that the server is also
+    initiating a connection.
+  \item[ACK] - The client responds to the server's SYN-ACK segment by
+    sending a TCP segment with the ACK flag set to 1, acknowledging
+    the server's SYN-ACK segment. At this point, the connection is
+    established and both sides can begin sending data to each other.
+    Usually data is sent with this ACK segment, but it is not required.
+\end{description}
+
+Once data is sent from a client through a socket, the data is sent to
+the connection's \textbf{send buffer}, from time to time TCP will
+take chunks of data from this buffer and pass it to the network
+layer, with its size limited by the \textbf{Maximum Segment Size
+(MSS)}, which is set by determining the length of the largest link
+layer frame that can be sent by the local sending host, i.e. the
+\textbf{Maximum Transmission Unit (MTU)}, and setting the MSS to
+ensure that an encapsulated TCP segment plus the TCP/IP header length
+will fit into a single link layer frame.
+
+TCP pairs each chunk of client data with a TCP header, forming a TCP
+segment, which is then passed to the network layer for transmission.
+
 \section{TCP Segment Structure}
+
+A TCP segment consists of the following fields:
+\begin{description}
+  \item[Source Port] - 16 bits used to identify the sending process
+  \item[Destination Port] - 16 bits used to identify the receiving process
+  \item[Checksum] - 16 bits used for error detection
+  \item[Sequence Number] - 32 bits used for implementing reliable data transfer
+  \item[Acknowledgement Number] - 32 bits used for implementing
+    reliable data transfer
+  \item[Receive Window] - 16 bits used for flow control
+  \item[Header Length] - 4 bits used to indicate the length of the TCP header
+  \item[Options Field] - Optional field used for various purposes,
+    such as indicating the MSS
+    or as a window scaling factor for high speed networks,
+  \item[Flags] - 6 bits used for indicating various control flags such as:
+    \begin{description}
+      \item[ACK]  - Indicates the value carried in the
+        acknowledgement number field is valid
+      \item[RST] - Used in connection setup and teardown
+      \item[SYN] - Used in connection setup
+      \item[FIN] - Used in connection teardown
+      \item[PSH] - Indicates that the receiver should pass the data
+        to the upper layer immediately
+      \item[URG] - Indicates that the urgent pointer field is valid
+    \end{description}
+\end{description}
 
 \subsection{Sequence Number and Acknowledgement Numbers}
 
+The sequence and acknowledgement numbers are used to implement
+reliable data transfer in TCP. TCP views data as an unstructured but
+ordered stream of bytes, sequence numbers follows this view in that
+they are counted over the stream of bytes not over the stream of
+segments, i.e. the sequence number for a segment is the byte steam
+number of the first byte in the segment's data section.
+
+\dfn{Cumulative Acknowledgement}{
+  An acknowledgement that acknowledges not only the segment it is
+  acknowledging but also all segments with a sequence number less than
+  the acknowledged segment.
+}
+
+The acknowledgement number that a host puts in its ACK segment is the
+sequence number of the next byte that it expects to receive from the
+other host, i.e. the byte stream number of the first byte that has
+not yet been received. This follows that if a host receives a segment
+with a sequence number of $n$ and data length of $l$ the
+acknowledgement number that it will send back in its ACK segment is
+\[
+  \text{ACK number} = n + l
+\]
+This TCP provides \textbf{cumulative acknowledgements}
+
 \section{Round Trip Time (RTT) Estimation and Timeout}
+
+TCP uses timeout/retransmission mechanisms to recover from lost
+segments, and thus it is important to set the timeout interval
+appropriately, if the timeout interval is too short, TCP will
+unnecessarily retransmit segments that are not lost, and if it is too
+long, TCP will be slow to recover from lost segments.
 
 \subsection{Estimating the RTT}
 
+TCP estimates the RTT as follows:
+
+Given the sample RTT, denoted as \lstinline{SampleRTT}, for a segment
+is the amount of time between when the segment is sent, and when an
+acknowledgement for the segment is received, most  TCP
+implementations take one \lstinline{SampleRTT} measurement at a time,
+and use an exponentially weighted moving average to compute the
+estimated RTT, denoted as \lstinline{EstimatedRTT}, as follows:
+\begin{align*}
+  \text{\lstinline{EstimatedRTT}} = (1 - \alpha) \times
+  \text{\lstinline{EstimatedRTT}} + \alpha \times \text{\lstinline{SampleRTT}}
+\end{align*}
+This is an iterative process, with the initial value of
+\lstinline{EstimatedRTT} set to the first \lstinline{SampleRTT}
+measurement, and $\alpha = 0.125$ typically.
+
+In addition the \textbf{deviation} of the RTT, denoted as
+\lstinline{DevRTT}, is also estimated like so:
+\begin{align*}
+  \text{\lstinline{DevRTT}} = (1 - \beta) \times
+  \text{\lstinline{DevRTT}} + \beta \times  \mid \text{\lstinline{SampleRTT}} -
+  \text{\lstinline{EstimatedRTT}} \mid
+\end{align*}
+With $\beta = 0.25$ typically.
+
 \subsection{Setting and Managing the Retransmission Timeout Interval}
 
-\section{Reliable Data trans}
+Given the values of \lstinline{EstimatedRTT} and \lstinline{DevRTT},
+the \lstinline{TimeoutInterval} is set as follows:
+\begin{align*}
+  \text{\lstinline{TimeoutInterval}} =
+  \text{\lstinline{EstimatedRTT}} + 4 \times
+  \text{\lstinline{DevRTT}}
+\end{align*}
+
+An initial \lstinline{TimeoutInterval} is set to 1 second, and the
+timeout interval is only updated for segments that are not
+retransmitted, since retransmitted segments may have an artificially
+large \lstinline{SampleRTT} due to the time spent waiting for the
+timeout to occur.
+
+This formula sets the timeout interval to be large enough to account
+for variations in the RTT, thus avoiding unnecessary retransmissions,
+while still being responsive enough to recover from lost segments in
+a timely manner.
+
+\section{Reliable Data Transfer}
+
+TCP creates a reliable data transfer service on top of the unreliable
+IP layer, and thus it must have mechanisms to detect and recover from
+lost segments, corrupted segments and excessively delayed segments.
+
+TCP uses the reliable data transfer mechanisms of checksums, sequence
+numbers, acknowledgements, retransmissions and timers to achieve
+this, but overcomes the theoretical overhead of multiple timers used
+in the most robust reliable data transfer protocols by using a single
+retransmission timer.
+
+A TCP sender generally reacts and responds to three types of events:
+\begin{description}
+  \item[Data received fom above layer] - When data is received
+\end{description}
 
 \subsection{Doubling the Timeout Interval}
 

@@ -3,7 +3,7 @@
 \input{./template/macros}
 \input{./template/letterfonts}
 
-\title{\Huge{Network Layer}}
+\title{\Huge{Network Layer: Data Plane}}
 \author{\huge{Madiba Hudson-Quansah}}
 \date{}
 \usepackage{parskip}
@@ -20,44 +20,615 @@
 
 \chapter{Introduction}
 
+The role of the network layer is to move segments, encapsulated into
+datagrams from the source to the destination. The network layer is
+responsible for forwarding datagrams from one router to the next
+until the destination is reached. The network layer also provides
+logical addressing, which is used to identify devices on the network
+and to route datagrams to their destination.
+
 \section{Forwarding and Routing: Data and Control Planes}
 
-\section{Control Plane}
+The network layers has two primary functions:
+\begin{description}
+  \item[Forwarding]  - The process of moving packets form the input
+    input link of a router to the appropriate output link. Forwarding
+    is the local action taken by a router when it receives a packet.
+    The router examines the packet's header, determines the
+    appropriate output link based on its forwarding table, and then
+    forwards the packet to the next hop. This is implemented in the
+    Data Plane of the network layer.
+  \item[Routing] - The process of determining the route or path taken
+    by packets as they flow from sender to receiver. The algorithms
+    that calculate these paths are called \textbf{routing algorithms}
+    an they determine the path along which packets flow from source
+    router to destination router. This is implemented in the Control
+    Plane of the network layer.
+\end{description}
 
-\subsection{Traditional}
-
-\subsection{SDN Approach}
+% \section{Control Plane}
+%
+% \subsection{Traditional}
+%
+% \subsection{SDN Approach}
 
 \section{Network Service Model}
 
+The \textbf{Network Service Model} defines the characteristics of
+end-to-end delivery of packets between sending and receiving hosts.
+
+The network layer defines different types of services that it can
+offer, these include:
+\begin{description}
+  \item[Guaranteed Delivery] - Guarantees that a packet sent by a
+    source host will eventually arrive at the destination host.
+  \item[Guaranteed Delivery with Bounded Delay] - Guarantees delivery
+    within a specified host-to-host delay bound
+  \item[In-Order Packet Delivery] - Guarantees that packets arrive at
+    the destination in the order they were sent by the source.
+  \item[Guaranteed Minimal Bandwidth] - Guarantees that a certain
+    minimum bandwidth will be
+    available for the transmission of packets between the source and
+    destination.
+  \item[Security] - Provides mechanisms to ensure the
+    confidentiality, integrity, and authenticity of data transmitted
+    between the source and destination.
+\end{description}
+
+The Internet's  network layer provides a single \textbf{best-effort
+service}, i.e.:
+\begin{itemize}
+  \item Packets are not guaranteed to be delivered
+  \item Packets not guaranteed to be delivered in the order they were sent
+  \item There is no guaranteed on the end-to-end delay of packet delivery
+  \item There is no guarantee on the minimum bandwidth available for packet
+    transmission
+\end{itemize}
+
 \chapter{Router Internals}
+
+The components of a router are as follows:
+\begin{description}
+  \item[Input Ports] - Responsible for receiving packets from the
+    incoming links, performing the following functions:
+    \begin{itemize}
+      \item Physical layer function of terminating an incoming
+        physical link at the router.
+      \item Link Layer functions needed to interoperate with the link
+        layer at the other side of the incoming link, such as
+        framing, error detection, and possibly link-layer flow control.
+      \item The lookup function that determines the output port to
+        which the packet should be forwarded, based on the
+        destination IP address in the packet's header and the
+        forwarding table. It is here where the appropriate output
+        port is determined and the packet is forwarded to switching fabric.
+    \end{itemize}
+  \item[Switching Fabric] - Connects the router's input ports to its
+    output ports.
+  \item[Output Ports] - Stores packets received from the switching
+    fabric and transmits these packets on the outgoing link by
+    performing the necessary link-layer, and physical layer functions.
+  \item[Routing Processor] - Performs control-plane function, such as
+    executing routing protocols, maintaining routing tables and
+    attached link state information, and computing forwarding tables,
+    traditionally. In Software Defined Networking (SDN), the routing
+    processor is responsible for communicating with the SDN
+    controller to receive forwarding rules and updates.
+\end{description}
+
+Data plane functions are usually implemented in hardware for
+high-speed packet processing, while Control plane functions are
+typically implemented in software, allowing for flexibility and ease of updates.
+
+Depending on the type of forwarding used different information is
+required to be stored in the forwarding table, for example:
+\begin{description}
+  \item[Destination-Based Forwarding] - The forwarding table contains
+    entries that map destination IP addresses to output ports. When a
+    packet arrives, the router looks up the destination IP address in
+    the forwarding table to determine the appropriate output port for
+    forwarding the packet.
+  \item[Generalized Forwarding] - The forwarding table contains entries that map
+    various packet header fields (such as source and destination IP
+    addresses, protocol type, port numbers, etc.) to specific
+    actions (such as forwarding to a particular output port, dropping
+    the packet, or modifying the packet header). This allows for more
+    flexible and granular control over packet forwarding based on
+    multiple criteria.
+\end{description}
 
 \section{Input Port Processing and Destination-Based Forwarding}
 
+Again the input port is where the forwarding table is consulted to
+determine the appropriate output port for forwarding the packet, via
+the switching fabric. The forwarding table is either computing and
+updated by the routing processor, using a routing protocol, or is
+received from a remote SDN controller.
+
+\dfn{Prefix}{
+  A prefix is a contiguous sequence of bits in an IP address that
+  represents a network or subnet. In the context of IP routing, a
+  prefix is used to identify a group of IP addresses that share a common network
+  portion. For example, in the IP address range
+  \begin{align*}
+    11001000\quad 00010111\quad 00010000 \quad 00000000 \\
+    \text{through} \\
+    11001000\quad 00010111 \quad 00010111 \quad 11111111
+  \end{align*}
+  The prefix would be the first 21 bits, i.e.:
+  \begin{align*}
+    11001000\quad 00010111\quad 00010
+  \end{align*}
+}
+
+In Destination-Based forwarding the router matches a \textbf{prefix}
+of the packet's destination address with the entries in the
+forwarding table, if there's a match, the router forwards the packet
+to a link associated with the match.
+
+Because its possible for multiple entries in the forwarding table to match the
+destination address, the router uses the \textbf{longest prefix
+match}, i.e. the entry with the longest matching prefix is chosen for
+forwarding the packet.
+
+This process of matching the destination address with the forwarding table
+and sending it to the appropriate output port is a specific case of
+the general \textbf{Match, and Action} abstraction model performed in
+many networked devices.
+
 \section{Switching}
+
+\dfn{Non-blocking}{
+  A packet being forwarded to an output port will not be blocked from
+  reaching that output port as long as no other packet is currently
+  being forwarded to that output port.
+}
+
+The switching fabric is responsible for actually switching/forwarding
+packets from an input port to an output port. This can be done in a
+number of ways, i.e.:
+\begin{description}
+  \item[Switching via Memory] - Switching between input and output
+    ports is done under the direct control of the CPU (routing
+    processor), with input and output ports functioning as
+    traditional I/O devices in an operating system. An input port
+    with an arriving packet signals the routing processor via an
+    interrupt, the packet is then copied into processor memory, where
+    the routing processor extracts the destination address, and
+    looked up the appropriate output port in the forwarding table and
+    is then copied to the output port's buffers.
+    In this scenario if the memory  bandwidth is such that a maximum
+    of $B$ packets per second can be written into or read from, then
+    the overall forwarding throughput from input ports to output
+    ports must be less than $\displaystyle{\frac{B}{2}}$. This also
+    comes with the caveat that two packets cannot be forwarded at the
+    same time even of they have different destination ports as only one memory
+    access can be done at a time over the shared system bus.
+  \item[Switching via a Bus] - An input port transfer a packet
+    directly to the output port over a shared bus, without the
+    involvement of the routing processor. This is sufficient for a
+    small local area and enterprise networks where there is a small
+    number of ports and low traffic volume. However, as the number of
+    ports and traffic volume increases, the shared bus can become a
+    bottleneck, limiting the overall throughput of the router.
+  \item[Switching via Interconnection Networks] - An interconnection
+    network is a high-speed switching fabric that connects the input
+    ports to the output ports. A crossbar switch is an
+    interconnection network consisting of $2N$ buses that connect $N$
+    input ports to $N$ output ports, which each bus connecting one
+    input port to one output port. This allows for multiple packets
+    to be switched simultaneously, as long as they are destined for
+    different output ports. The crossbar switch can achieve a maximum
+    throughput of $N$ packets per second, as each of the $N$ input
+    ports can be connected to a different output port at the same time.
+    A crossbar switch is \textbf{non-blocking}, however of two
+    packets are destined for the same output port, one of the packets
+    will be blocked until the output port is free. For larger routers
+    with more ports and higher traffic volumes, more complex
+    interconnection networks, such as multi-stage interconnection
+    networks, may be used to provide higher throughput and scalability.
+\end{description}
 
 \section{Output Port Processing}
 
+Output port processing takes packets that have been stored in the
+output port's memory and transmits them over the output link, this
+includes scheduling, and dequeuing packets for transmission, and
+performing the necessary link-layer and physical layer functions to
+transmit the packet over the outgoing link.
+
 \section{Queuing}
+
+Packet queuing can occur at both the input and output ports of
+router, with the location and extent of which depending on the
+traffic load, the relative speed of the switching fabric and the line
+speed of the outgoing link.
+
+\textbf{Packet Loss} occurs when there is no more memory available to
+store arriving packets, this can occur at both the input and output
+ports of a router, and is typically due to congestion in the network.
+When a router's input or output port is congested, it may drop
+incoming packets, leading to packet loss.
 
 \subsection{Input Queuing}
 
+If the switching fabric is not fast enough, relative to input line
+speeds, to transfer all arriving packets through the fabric without
+delay, then packets will queue up at the input ports, waiting or
+their turn to be transferred through the switch fabric.
+
+Head-of-Line (HOL) blocking occurs when the first packet in the input
+queue is destined for an output port that is currently busy, while subsequent
+packets in the queue are destined for different output ports that are
+free. In this scenario, the first packet blocks the subsequent
+packets from being forwarded, even though they could be forwarded to
+their respective output ports. This can lead to increased latency and
+reduced throughput in the router, as packets are unnecessarily
+delayed due to HOL blocking.
+
 \subsection{Output Queuing}
 
+If the switching fabric is faster than the input line speeds, but the
+output line speeds are slower than the switching fabric, then packets
+will queue up at the output ports, waiting for their turn to be
+transmitted over the outgoing link.
+
+\dfn{Drop-Tail}{
+  A simple packet dropping policy where incoming packets are dropped
+  when the queue is full, i.e. when there is no more memory available
+  to store incoming packets.
+}
+
+\dfn{Drop-Front}{
+  A packet dropping policy where the packet at the front of the queue
+  is dropped to make room for an incoming packet when the queue is full.
+}
+
+When there is not enough memory to buffer an incoming packet, a
+decision must be made to either drop the arriving packet, i.e.
+\textbf{drop-tail}, or to remove one already in the queue to make
+room for the arriving packet, i.e. \textbf{drop-front}.
+
+Active Queue Management (AQM) algorithms can be used to proactively
+manage the queue and prevent congestion, an example is the Random
+Early Detection (RED) algorithm, which randomly drops incoming
+packets with a certain probability when the average queue size
+exceeds a certain threshold, in order to signal congestion to the
+sender and encourage it to reduce its sending rate.
+
+A consequence of output queuing is that a \textbf{packet scheduler}
+at the output port must choose one packet among those queued for transmission.
+
 \subsection{Buffering}
+
+The right buffer size is crucial for the performance of a router, as
+it can help to mitigate the effects of congestion and prevent packet
+loss. Given that
+the buffer size is $\mbold{B}$, the average round-trip time is,
+$\mbold{RTT}$, the link capacity is $\mbold{C}$, and the number of
+concurrent TCP connections is $\mbold{N}$, then the recommended
+amount of buffering is given by the formula:
+\[
+  \mbold{B} = \mbold{RTT} \times \frac{C}{\sqrt{\mbold{N}} }
+\]
+
+Large buffers are not necessarily always better as they could lead to
+longer queuing delays, which can negatively impact the performance of
+real-time applications and increase the overall latency in the
+network. Additionally, large buffers can lead to a phenomenon known
+as \textbf{bufferbloat}, where excessive buffering causes high
+latency and jitter in the network, leading to poor performance for
+applications that require low latency, such as online gaming and
+video conferencing.
 
 \section{Packet Scheduling}
 
 \subsection{First-in-First-Out (FIFO)}
 
+In this approach packets arriving at the output port are transmitted
+in the order the arrived in. If there is no buffer space to hold the
+arriving packet the queue's packet-discarding policy is applied, i.e.
+either drop-tail or drop-front.
+
 \subsection{Priority Queuing}
 
-\section{Round Robin and Weighted Fair Queuing (WFQ)}
+Packets arriving at the output port are given priorities based on
+certain criteria such as packet type i.e., network management
+information packets vs user traffic, real-time vs non real-time, etc.
+Each priority level has its own queue and the scheduler will transmit
+from the highest priority queue in a FIFO manner, then the next
+highest level and so on.
+
+\subsection{Round Robin and Weighted Fair Queuing (WFQ)}
+
+Packets are sorted into classes based on certain criteria, but rather
+than having a FIFO ordering, it alternates among the classes,
+transmitting one packet from each class in a round-robin manner.
+
+A \textbf{work conserving queue} will never allow the link to remain
+idle when there are packets of any class are waiting to be
+transmitted, i.e. such a scheduler will look for a packet in a given
+class, if the class is empty it immediately moves on to the next
+class until it finds a non-empty class, and then transmits a packet
+from that class.
+
+A generalized for of round robin queuing is the \textbf{Weighted Fair
+Queuing} approach, where arriving packets are classified and queued
+in the appropriate per-class waiting area, then serviced in a
+circular manner, i.e. class 1 to class 2 to class 3, etc. coming back
+to class 1 and so on. WFQ differs from round robin in that each class
+may receive a differential amount of service in any interval of time.
+
+Specifically, each class $i$, is assigned a weight $w_i$, during any
+interval of time during which there are class $i$ packets to send,
+class $i$ will then be guaranteed to receive a fraction of service equal to
+\[
+  \displaystyle\frac{w_i}{\displaystyle\Sigma w_j}
+\]
+Where the sum in the denominator is taken over all classes that also
+have packets queues for transmission. In the worst case, even if all
+classes have queued packets class $i$ will still be guaranteed to
+receive the fraction $\displaystyle\frac{w_i}{\Sigma w_j}$ of the
+bandwidth, where in the worst case the sum in the denominator is over
+all classes.
 
 \chapter{Internet Protocol (IP)}
 
 \section{IPv4 Datagram Format}
 
+The IPv4 protocol is comprised of the following fields:
+\begin{description}
+  \item[Version number]  - 4 bits, specifies the IP protocol version
+    of the datagram. Allows the router to determine how to interpret
+    the remainder of the IP datagram.
+  \item[Header Length] - 4 bits, the length of the entire header as
+    it can vary. Helps in determining the start and end of the data payload.
+  \item[Type of Service] - 8 bits, allows different types of IP
+    datagrams to be distinguished from each other, .e.g. real-time
+    datagrams from non real-time ones.
+  \item[Datagram Length] - 16 bits, The total length of the IP
+    datagram (header + data) in bytes.
+  \item[Identifier, flags, fragmentation offset] - 16, 3, 13 bis
+    respectively, relates to IP fragmentation, when a large IP
+    datagram is broken up into several smaller IP datagrams which are
+    then forwarded independently to the destination where they are reassembled.
+  \item[Time-to-live] - 8 bits, ensures that datagrams do not
+    circulate forever in the network
+  \item[Protocol] - 8 bits, used only when an IP datagram reaches its
+    final destination to indicate the specific transport layer
+    protocol to which the data portion of the datagram should be
+    passed, e.g. TCP, UDP, etc.
+  \item[Header checksum] - 16 bits, used for error detection of the IP header.
+  \item[Source and Destination IP addresses] - 32 bits each, used to
+    identify the source and
+    destination hosts of the datagram.
+  \item[Options] - 32 bits, optional field that can be used for
+    various purposes, such as security, routing, and network testing.
+    The options field is not commonly used in practice and is often left empty.
+  \item[Data] - Variable length, contains the payload of the datagram, which
+    can be up to 65,535 bytes in size (including the header).
+\end{description}
+
 \section{IPv4 Addressing}
+
+\dfn{Interface}{
+  The boundary between a host and the physical link to which it is
+  attached, or the boundary between a router and the physical link to
+  which it is attached.
+}
+
+A router has multiple interface, one for each of its links. Because
+every host and router is capable of sending and receiving  IP
+datagrams, IP requires each host and router interface to have its own
+IP address, thus an IP address is technically associated with an
+interface rather than a host or router as a whole.
+
+Each IP address is 32 bits (4 bytes) long, and there are a total of
+$2^{32}$ possible unique public IP addresses. IP addresses are
+displayed in dotted-decimal notation where each byte of the address
+is written in its decimal form and is separated b a period from other
+bytes, i.e:
+\begin{center}
+  10.10.0.1
+\end{center}
+In binary form the above IP address would be represented as:
+\begin{align*}
+  00001010 \quad 00001010 \quad 00000000 \quad 00000001
+\end{align*}
+
+\subsection{Subnetting}
+
+\dfn{Subnet}{
+  A subnet is a logical subdivision of an IP network, created by
+  dividing a larger network into smaller, more manageable segments. Each
+  subnet is identified by a unique subnet mask, which is used to
+  determine the network and host portions of an IP address.
+
+}
+
+\dfn{Subnet Mask}{
+  A subnet mask is a 32-bit number that is used to divide an IP address
+  into a network and host portion. It is typically represented in
+  dotted-decimal notation, similar to an IP address. The subnet mask
+  consists of a series of consecutive 1s followed by a series of
+  consecutive 0s, where the number of 1s indicates the length of the
+  network portion of the IP address, and the number of 0s indicates
+  the length of the host portion.
+}
+
+A portion of an interface's IP address is determined by the
+\textbf{subnet} to which it is connected. Hosts connected to the same
+subnet have the same prefix in their IP addresses, and can
+communicate directly with each other without the need for a router.
+The subnet mask indicates that the left most $n$ bits of the IP
+address define the subnet address. For example, if the subnet mask is
+223.1.1.0/24, then the leftmost 24 bits of the IP address define the
+subnet address, and the remaining 8 bits define the host address
+within that subnet.
+
+Subnets can also exist between routers, in this case the interfaces
+of the routers that are connected to the same subnet will have the
+same subnet address, and can communicate directly with each other
+without the need for additional routing.
+
+To determine the subnets of a network, detach each interface from its
+host/router, creating islands of isolated networks, with interfaces
+terminating the end points of the isolated networks.
+
+The Internet's address assignment strategy, is known as Classes
+Interdomain Routing (CIDR), which generalizes the notion of subnet
+addressing. The 32 bit IP address is divided into two parts and has
+the dotted decimal notation of the form:
+\begin{align*}
+  a.b.c.d/x
+\end{align*}
+Where $x$ indicates the number of bits in the prefix. The $x$ most
+significant bits of an address in this form constitute the network
+portion of the IP address, with an organization typically assigned a
+block of contiguous addresses, i.e., a range of addresses with a common
+prefix.
+
+The remaining 32-$x$ bits of n address can be thought as
+distinguishing among the devices within the organization all of which
+have the same network prefix.
+
+Before CIDR, the network portions of an IP address were constrained
+to be 8, 16, or 24 bits long, known as \textbf{classful addressing},
+since subnets with 8-, 16- and 24-bit subnet addresses were known as
+class A, B and C respectively. CIDR allows for more flexible
+subnetting, as the network portion of an IP address can be of any
+length, allowing for more efficient use of the available IP address
+space and better support for hierarchical routing.
+
+The broadcast address 255.255.255.255 is used when a message is to be
+delivered to all hosts on the same subnet, optionally forwarding the
+message into other subnets, but not to hosts on other subnets.
+
+\subsection{Dynamic Host Configuration Protocol (DHCP)}
+
+The Dynamic Host Configuration Protocol (DHCP) is a network protocol
+that allows hosts to obtain/be allocated an IP address automatically,
+via a DHCP server. A network administrator can configure a DHCP
+server  so that a host is given the same IP address each time it
+connects to the network, or a \textbf{temporary IP address}, that
+changes each time the host connects to the network.
+
+DHCP is often referred to as a \textbf{plug-and-play} / \textbf{zero
+configuration (zeroconf)} protocol. The process by which a host is
+allocated an IP address via DHCP is as follows:
+\begin{description}
+  \item[DHCP Servre Discovery]  - A newly arriving host sends a DHCP
+    discover message via UDP on the network, since the host does not
+    have an IP address yet it uses the broadcast address to send the
+    message, and the source IP address is set to 0.0.0.0.
+  \item[DHCP Server Offer] - DHCP servers on receiving a DHCP
+    discover message responds with a DHCP offer message that is broadcast
+    to all nodes again. Since several DHCP servers can be present on
+    the subnet the client may find itself receiving multiple DHCP
+    offer messages, each containing a different IP address offer from
+    the different DHCP servers. Each server off message contains the
+    transaction ID of the received discover message, the proposed IP
+    address of the client, the network mask ,and an IP address lease
+    time, which is the amount of time for which the client can use
+    the proposed IP address before it must renew the lease.
+  \item[DHCP request] - The client selects one of the DHCP offer
+    messages and responds with a DHCP request message echoing back
+    the configuration parameters, again broadcasted to all.
+  \item[DHCP ACK] - The server responds to the DHCP request message
+    with a DHCP ACK message, confirming the requested parameters.
+\end{description}
+
+\section{Network Address Translation (NAT)}
+
+With the rapid growth of the Internet and the limited availability of
+IPv4 addresses, the availability of public IP addresses has become a
+significant concern. Network Address Translation (NAT) is a technique
+used to address this issue by allowing multiple devices on a private
+network to share a single public IP address when accessing the Internet.
+
+A NAT-enabled router has an interface that is part of the home
+network, and addressing within the home network is done using private
+IP addresses, which are not routable on the public Internet. When a
+device on the home network wants to access the Internet, the NAT
+router translates the private IP address of the device into the
+public IP address of the router, allowing the device to communicate
+with external servers on the Internet.
+
+A NAT-enabled router maintains a translation table used to determine
+the actual host inside the private network to which an incoming
+packet should be forwarded, this table is updated each time a new
+outgoing connection is made from the private network to the Internet,
+and is used to translate the public IP address back to the private IP
+address when a response is received from the Internet.
+
+\section{IPv6}
+
+IPv6 is a 128 bit successor to the IPv4 protocol, designed to address
+the limitations of IPv4, such as:
+\begin{itemize}
+  \item Limited address space as IPv4 only support $2^{32}$ addresses
+    while IPv6 supports $2^{128}$ addresses, providing a much larger
+    address space to accommodate the growing number of devices
+    connected to the Internet.
+  \item Improved security features, such as built-in support for IPsec, which
+    provides confidentiality, integrity, and authentication for IP
+    communications.
+  \item  Better support for Quality of Service (QoS) by allowing for
+    more efficient routing and traffic management, which is important
+    for real-time
+    applications such as video streaming and online gaming.
+\end{itemize}
+
+\subsection{IPv6 Datagram Format}
+
+The IPv6 datagram format is similar to that of IPv4, but with some changes:
+
+\begin{description}
+  \item[Expanded addressing capabilities]  - IPv6 uses 128-bit
+    addresses, allowing for a much larger address space compared to
+    IPv4's 32-bit addresses.
+  \item[40-byte header] - The IPv6 header is fixed at 40 bytes in
+    length, compared to the variable-length header of IPv4, which can
+    be up to 60 bytes long.
+  \item[Flow labeling] - IPv6 includes a flow label field in the
+    header, which can be used to identify and prioritize specific
+    flows of traffic, allowing for better support for real-time applications.
+\end{description}
+
+\subsection{Transitioning from IPv4 to IPv6}
+
+Tunnelling is a technique used to facilitate the transition from IPv4
+to IPv6 by encapsulating IPv6 packets within IPv4 packets, allowing
+them to be transmitted over an IPv4 network infrastructure. This
+allows for the gradual deployment of IPv6 while still maintaining
+compatibility with existing IPv4 networks. The intervening set of
+IPv4 routers between two IPv6 routers are referred to as the
+\textbf{tunnel}, and the IPv4 addresses of the two IPv6 routers are
+referred to as the \textbf{tunnel endpoints}.
+
+\chapter{Generalized Forwarding and Software Defined Networking (SDN)}
+
+In generalized forwarding a match-plus-action table generalizes the
+forwarding table, as forwarding desertions are made based on the
+match of multiple header fields, such as source and destination IP
+addresses, protocol type, port numbers, etc., rather than just the
+destination IP address as in destination based forwarding. This
+allows for more flexible and granular control over packet forwarding
+based on multiple criteria.
+
+The OpenFlow standard is a widely used protocol for implementing
+software-defined networking (SDN), and relies on a match-plus-action
+table known as a \textbf{flow table}, this table includes:
+\begin{description}
+  \item[A set of header field values] -
+\end{description}
+
+\section{Match}
+
+\section{Action}
+
+\section{OpenFlow}
+
+\chapter{Middleboxes}
 
 \end{document}

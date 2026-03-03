@@ -9,6 +9,7 @@
 \usepackage{parskip}
 \usepackage{circuitikz}
 \usepackage{listings}
+\usepackage{tabularx}
 
 \usetikzlibrary{arrows, positioning, shapes.gates.logic.US,
 circuits.logic.US, shapes.misc, automata}
@@ -1042,7 +1043,7 @@ The SR sender goes through the following events and actions:
     returned to above layer for later transmission.
   \item[Timeout] - Each packet has its own logical timer, since only
     a single packet will be transmitted on timeout.
-  \item[ACk received] - If an ACK is received the sender marks that
+  \item[ACK received] - If an ACK is received the sender marks that
     packet as received provided it is in the window. If the packet's
     sequence number is equal to \lstinline{send_base}, the window
     base is moved forward to the unacknowledged packet with the
@@ -1249,20 +1250,280 @@ this, but overcomes the theoretical overhead of multiple timers used
 in the most robust reliable data transfer protocols by using a single
 retransmission timer.
 
-A TCP sender generally reacts and responds to three types of events:
+A TCP sender generally reacts and responds to three types of events,
+disregarding flow or congestion control.
 \begin{description}
-  \item[Data received fom above layer] - When data is received
+  \item[Data received fom above layer] - When data is received from
+    above a TCP segment is created with the sequence number
+    \lstinline{NextSeqNum}, and a checksum, if the retransmit timer
+    is not running it is started and the segment is sent, with
+    \lstinline{NextSeqNum} increasing by the length of the data in the segment.
+  \item[Timeout] - Once a timeout occurs, the unacknowledged segment
+    with the smallest sequence number is retransmitted, and the timer
+    is restarted.
+  \item[ACK received with ACK field value of $y$] - If $y$ is greater
+    than \lstinline{SendBase}
+    \lstinline{SendBase} is set to $y$, and if there are still
+    unacknowledged segments the timer is started.
 \end{description}
+
+The timeout time is \lstinline{TimeoutInterval}, and the timer is
+only started when the first unacknowledged segment is sent, and is
+stopped when all segments are acknowledged, thus only one timer is needed.
 
 \subsection{Doubling the Timeout Interval}
 
+Most TCP implementations use an exponential back off strategy to
+provide a limited form of congestion control, in which once a timeout
+occurs the next timeout interval is set to be twice the previous
+timeout interval. However whenever the timer is started after a
+timeout, i.e. it receives data from the above layer, or it receives
+an ACK for a segment, the timeout interval is reset to the value
+computed from the RTT estimation process.
+
+This works on the logic that the timer expiration is most likely
+caused by congestion in the network, and thus doubling the timeout
+interval will help to reduce the likelihood of another timeout
+occurring, and thus help to reduce congestion in the network.
+
 \subsection{Fast Retransmit}
+
+\dfn{Duplicate ACK}{
+  An ACK that reacknowledges a segment that has already been
+  acknowledged, i.e. an ACK with an ACK number that is less than the
+  ACK number of the most recently acknowledged segment.
+}
+
+A problem with timeout trigged retransmission is that the timeout
+period could be long. To solve this the sender can be made to detect
+packet loss before the timeout event, by recording duplicate ACKs,
+and if three duplicate ACKs are received, i.e. four ACKs with the
+same ACK number, the sender can infer that a segment has been lost and
+retransmit the segment that is suspected to be lost, this is known as
+\textbf{fast retransmit}.
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+      \hline
+      Event & TCP Receiver Action \\
+      \hline
+      Arrival of in order segment with expected sequence number. All
+      data up to expected sequence number already acknowledged  &
+      Delayed ACK. Wait up to 500 ms for arrival of another in order
+      segment. If next in order segment does not arrive within this
+      interval send an ACK  \\
+      \hline
+      Arrival of in order segment with expected sequence number. One
+      other in order segment waiting for ACK transmission &
+      immediately send single cumulative ACK, ACKing both in order segments \\
+      \hline
+      Arrival of out of order segment with higher than expected
+      sequence number. Gap detected & immediately send duplicate ACK,
+      indicating sequence number of next expected byte, i.e. lower
+      end of the gap \\
+      \hline
+      Arrival of segment that partially or completely fills in gap in
+      received data & immediately send ACK, provided that segment
+      starts at the lower end of the gap. \\
+      \hline
+    \end{tabularx}
+  \end{center}
+  \caption{TCP ACK Generation}\label{tab:}
+\end{table}
 
 \subsection{GBN or SN}
 
+TCP has features of both GBN and SN, and is best categorized as a
+hybrid of the two, due to the following features:
+\begin{description}
+  \item[GBN]-
+    \begin{itemize}
+      \item TCP uses cumulative acknowledgements
+      \item Correctly received but out of order segments are not
+        individually ACKed by the receiver
+      \item The TCP sender bys only maintain the smallest sequence
+        number of a transmitted but unacknowledged byte
+        (\lstinline{SendBase}) and the sequence number of the next
+        byte to be sent (\lstinline{NextSeqNum})
+    \end{itemize}
+  \item[SN] -
+    \begin{itemize}
+      \item TCP uses a single retransmission timer, and thus only retransmits
+        one segment at a time, even if multiple segments are suspected
+        to be lost.
+      \item Many TCP implementations buffer correctly received but
+        out of order segments.
+      \item TCP can selectively retransmit segments that are
+        suspected to be lost based on the
+        number of duplicate ACKs received, and thus does not have to
+        wait for a timeout event to occur before retransmitting a
+        segment that is suspected to be lost.
+    \end{itemize}
+\end{description}
+
 \section{Flow Control}
 
+TCP provides flow control to ensure that a sender does not risk
+overflowing the receivers buffer. Flow control is a speed matching
+service, matching the rate at which the sender is sending against the
+rate at which the receiver is reading.
+
+Flow control differs from congestion control in that flow control is
+end-to-end, between hosts, and used to prevent the sender from
+overwhelming the receiver, while congestion control aims to prevent
+the sender from overwhelming the network, and is thus a host-to-network service.
+
+TCP provides flow control by having the sender maintain a
+\textbf{receive window} state variable, which is used to give the
+sender an upper bound of how much free buffers space is available at
+the receiver, and thus how much data the sender can have in transit
+without overwhelming the receiver. Because TCP is full-duplex the
+sender et each side of the connection maintains its own receive window.
+
+Below is how the receive window operates, given a sending host A, and
+a receding host B, sending data over a TCP connection from A to B:
+\begin{itemize}
+  \item Host B allocates a receive buffer to this connection, with
+    its size denoted as \lstinline{RcvBuffer}, intermittently reading
+    from this buffer.
+  \item \lstinline{LastByteRead} is the number of last byte in the
+    data stream read from the buffer by the application process in B.
+  \item \lstinline{LastByteRcvd} is the number of the last byte in
+    the data stream that has arrived from the network and has been
+    placed in the receive buffer at B.
+  \item TCP cannot overflow the receive buffer, therefore
+    \begin{align*}
+      \mbox{\lstinline{LastByteRcvd}} - \mbox{\lstinline{LastByteRead}} \leq
+      \mbox{\lstinline{RcvBuffer}}
+    \end{align*}
+  \item Thus the receive window, denoted by \lstinline{rwnd}, set to
+    the amount of space left in the buffer
+    \begin{align*}
+      \text{\lstinline{rwnd}} = \mbox{\lstinline{RcvBuffer}} -
+      (\mbox{\lstinline{LastByteRcvd}} - \mbox{\lstinline{LastByteRead}})
+    \end{align*}
+  \item Host A keeps track of the last byte sent, denoted as
+    \lstinline{LastByteSent}, and the last byte acknowledged, denoted
+    as \lstinline{LastByteAcked}, and by keeping the amount of
+    unacknowledged data less than the value of \lstinline{rwnd} it
+    can ensure that it does not overflow the buffer at B, i.e. ensuring that
+    \begin{align*}
+      \text{\lstinline{LastByteSent}} -
+      \text{\lstinline{LastByteAcked}} \leq \text{\lstinline{rwnd}}
+    \end{align*}
+\end{itemize}
+
+The value of \lstinline{rwnd} is sent by B to A in the header of ACK
+segments allowing A to adapt its sending rate to the rate at which B
+is reading from the buffer.
+
+This approach however can suffer from the \textbf{zero window
+problem}, where the host B's receive buffer becomes full so that
+$\text{\lstinline{rwnd}} = 0$, and thus host A cannot send any more data
+until B reads from the buffer and sends an ACK with a non-zero
+\lstinline{rwnd} value, but if the ACK with the non-zero
+\lstinline{rwnd} value is lost, then host A will be stuck waiting for
+an ACK that will never arrive, thus causing a deadlock. To solve
+this, host A can periodically send a probe segment to host B to check
+if the receive window has opened up, and thus avoid the zero window problem.
+
 \section{Connection Management}
+
+TCP connections are merely an abstraction and thus must be explicitly
+created and destroyed by the communicating hosts. TCP goes through
+the following process to establish a connection:
+\begin{enumerate}
+  \item  The client sends a SYN segment, containing no application
+    data, with the SYN flag bit set to 1, and a randomly chosen
+    initial sequence number \lstinline{client_isn} to the server.
+  \item The server receives the SYN segment, allocates the TCP
+    buffers and variables and sends a connection-granted segment to
+    the TCP client, with the SYN and ACK flag bits set to 1, with an
+    acknowledgement number of $\text{\lstinline{client_isn}} + 1$, and a
+    randomly chosen initial sequence number \lstinline{server_isn}.
+    This is a SYN-ACK segment.
+  \item The client receives the SYN-ACK segment, allocates the TCP buffers
+    and variables, and sends an ACK segment to the server, with the ACK
+    flag bit set to 1, and an acknowledgement number of
+    $\text{\lstinline{server_isn}} + 1$. This is an ACK segment, and once
+    the server receives this segment the connection is established
+    and both sides can begin sending data to each other, although in
+    practice data is usual sent with the ACK segment in step 3.
+\end{enumerate}
+
+When a TCP connection is no longer needed, it must be explicitly closed by
+the communicating hosts, and TCP goes through the following process to
+close a connection:
+\begin{enumerate}
+  \item Either the client or the server can initiate the connection
+    termination process
+    by sending a FIN segment, with the FIN flag bit set to 1, and an
+    appropriate sequence number.
+  \item The other host receives the FIN segment, and sends an ACK
+    segment to acknowledge the FIN segment, with the ACK flag bit set
+    to 1, and an
+    acknowledgement number of the sequence number of the FIN segment
+    plus 1.
+  \item The host that sent the ACK segment in step 2, sends a FIN segment to
+    the other host, with the FIN flag bit set to 1, and an appropriate
+    sequence number.
+  \item  The host that sent the FIN segment in step 3, receives the FIN
+    segment, and sends an ACK segment to acknowledge the FIN segment, with
+    the ACK flag bit set to 1, and an acknowledgement number of the
+    sequence number of the FIN segment plus 1. Once this ACK segment is
+    received by the host that sent the FIN segment in step 3, the connection is
+    fully closed and all resources allocated to the connection can be
+    released.
+\end{enumerate}
+
+During a connection's lifetime a TCP client can be in one of the
+following states:
+\begin{description}
+  \item[CLOSED]  - No connection exists, the initial state of a TCP connection
+  \item[SYN\_SENT] - A SYN segment has been sent, but the connection is not yet
+    established. The client waits for a SYN-ACK segment from the
+    server. On receiving it it sends an ACK segment and moves to the
+    ESTABLISHED state.
+  \item[ESTABLISHED] - The connection is established and both sides
+    can send data
+  \item[FIN\_WAIT\_1] - A FIN segment has been sent, but the
+    connection is not yet
+    fully closed. The client waits for an ACK segment from the server. On
+    receiving it, the client moves to the FIN\_WAIT\_2 state.
+  \item[FIN\_WAIT\_2] - The client waits for a FIN segment from the server. On
+    receiving it, the client sends an ACK segment and moves to the
+    TIME\_WAIT state.
+  \item[TIME\_WAIT] - The client waits for a period of time, typically
+    2 times the maximum segment lifetime, to ensure that any delayed
+    segments in the network have time to arrive and be discarded
+    before the connection is fully closed and all resources allocated
+    to the connection can be released.
+\end{description}
+
+The server can be in one of the following states:
+\begin{description}
+  \item[CLOSED]  - No connection exists, the initial state of a TCP
+    connection, server creates a listen socket.
+  \item[LISTEN] - The server is waiting for a connection request from
+    any client. On receiving a SYN segment from a client, the server
+    sends a SYN-ACK segment to the client and moves to the SYN\_RCVD state.
+  \item[SYN\_RCVD] - The server has received a SYN segment from a client, and
+    has sent a SYN-ACK segment to the client, but the connection is not yet
+    established. The server waits for an ACK segment from the client. On
+    receiving it, the server moves to the ESTABLISHED state.
+  \item[ESTABLISHED] - The connection is established and both sides
+    can send data
+  \item[CLOSE\_WAIT] - The server has received a FIN segment from the
+    client, and has sent an ACK segment to the client, but the
+    connection is not yet fully closed. The server waits for a FIN
+    segment from the client. On receiving it, the server sends an ACK
+    segment to the client and moves to the LAST\_ACK state.
+  \item[LAST\_ACK] - The server has sent a FIN segment to the
+    client, and is waiting for an ACK segment from the client. On
+    receiving it, the server moves to the CLOSED state and all resources
+    allocated to the connection can be released.
+\end{description}
 
 \section{Congestion Control}
 

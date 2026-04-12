@@ -517,7 +517,7 @@ DHCP is often referred to as a \textbf{plug-and-play} / \textbf{zero
 configuration (zeroconf)} protocol. The process by which a host is
 allocated an IP address via DHCP is as follows:
 \begin{description}
-  \item[DHCP Servre Discovery]  - A newly arriving host sends a DHCP
+  \item[DHCP Server Discovery]  - A newly arriving host sends a DHCP
     discover message via UDP on the network, since the host does not
     have an IP address yet it uses the broadcast address to send the
     message, and the source IP address is set to 0.0.0.0.
@@ -609,7 +609,7 @@ referred to as the \textbf{tunnel endpoints}.
 \chapter{Generalized Forwarding and Software Defined Networking (SDN)}
 
 In generalized forwarding a match-plus-action table generalizes the
-forwarding table, as forwarding desertions are made based on the
+forwarding table, as forwarding decisions are made based on the
 match of multiple header fields, such as source and destination IP
 addresses, protocol type, port numbers, etc., rather than just the
 destination IP address as in destination based forwarding. This

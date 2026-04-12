@@ -1,0 +1,123 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{Wireless and Mobile Networks}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+The following are elements of a wireless network:
+\begin{description}
+  \item[Wireless Hosts]  - End-system devices that run applications,
+    for example smartphones, tablets, laptops, and IoT devices.
+  \item[Wireless links] - A host connects to a base station (BS) or
+    to another wireless host, via a \textbf{wireless communication
+    link}. Different wireless link technologies have different
+    transmission rates and can transmit over different distances.
+  \item[Base Station] - A base station is responsible for sending and
+    receiving data to and from a wireless host that is associated
+    with that base station. A base station is often responsible for
+    coordination the transmission of multiple wireless hosts with
+    which it is associated with. Association in this context means that:
+    \begin{enumerate}
+      \item The host is within the wireless communication distance of
+        the base station
+      \item The use uses that base station to relay data between it,
+        the host, and the larger network.
+    \end{enumerate}
+\end{description}
+
+\chapter{Wireless Links and Network Characteristics}
+
+\section{Code Division Multiple Access (CDMA)}
+
+\chapter{Wireless Fidelity (WiFi): 802.11 Wireless LANs}
+
+\section{The 802.11 Wireless LAN Architecture}
+
+\subsection{Channels and Association}
+
+\section{The 802.11 MAC Protocol}
+
+\subsection{Dealing with Hidden Terminals: Request to Send (RTS) and
+Clear to Send (CTS)}
+
+\subsection{Using 802.11 as a Point-to-Point Link}
+
+\section{The IEEE 802.11 Frame}
+
+\subsection{Payload and CRC Fields}
+
+\subsection{Address Fields}
+
+\subsection{Sequence Number, Duration and Frame Control Fields}
+
+\section{Mobility in the same IP Subnet}
+
+\section{Advanced Features in 802.11}
+
+\subsection{802.11 Rate Adaptation}
+
+\subsection{Power Management}
+
+\section{Personal Area Networks: Bluetooth}
+
+\chapter{Cellular Networks: 4th Generation and 5th Generation}
+
+\section{4th Generation (4G) Long Term Evolution (LTE) Cellular Networks}
+
+\section{LTE Protocol Stacks}
+
+\section{LTE Radio Access Network}
+
+\section{Additional LTE Functions: Network Attachment and Power Management}
+
+\subsection{Network Attachment}
+
+\subsection{Power Management: Sleep Modes}
+
+\section{The Global Cellular Network: A Network of Networks}
+
+\section{5th Generation (5G) Cellular Networks}
+
+\subsection{5G and Millimetre Wave Frequencies}
+
+\subsection{5G Core Network}
+
+\chapter{Mobility Management: Principles}
+
+\section{Device Mobility: A Network Layer Perspective}
+
+\section{Home Networks and Roaming on Visited Networks}
+
+\section{Direct and Indirect Routing to/from a Mobile Device}
+
+\subsection{Leveraging the Existing IP Address Infrastructure}
+
+\subsection{Indirect Routing to a Mobile Device}
+
+\subsection{Direct Routing to a Mobile Device}
+
+\chapter{Mobility Management in Practice}
+
+\section{Mobility Management in 4G/5G Networks}
+
+\section{Mobile IP}
+
+\chapter{Wireless and Mobility: Impact on Higher-Layer Protocols}
+
+\end{document}

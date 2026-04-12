@@ -1,0 +1,1001 @@
+\documentclass[12pt letter]{report}
+\input{./template/preamble}
+\input{./template/macros}
+\input{./template/letterfonts}
+
+\title{\Huge{The Link Layer and LANs}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+\usepackage{parskip}
+\usepackage{tabularx}
+
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\begin{document}
+\maketitle
+\newpage
+\pdfbookmark[section]{\contentsname}{too}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+
+In link layer terminology, any device that runs a link-layer
+protocol, i.e. layer 2 protocol is a \textbf{node}. Nodes include
+hosts, routers, switches and WiFi access points.
+
+The communication channels that connect adjacent nodes along the
+communication path are called \textbf{links}. In order for a datagram
+to be transferred from source node to destination node, it must be
+moved over each of the individual links in the end-to-end path.
+
+Over a given link a transmitting node encapsulates the datagram in a
+link-layer frame and transmits the frame onto the link.
+
+\section{Services provided by the Link Layer}
+
+The possible services that can be offered by a link-layer protocol include:
+\begin{description}
+  \item[Framing]  - Encapsulating network-layer datagrams within a
+    link-layer frame before transmission over the link. A frame
+    consists of a data field, where the network-layer datagram is
+    inserted,  and a number of header fields, with the structure
+    specified by the link-layer protocol.
+  \item[Link Access] - A medium access control (MAC) protocol
+    specifies the rules by which a frame is transmitted onto the
+    link. For point-to-point links that have a single sender and
+    receiver the MAC protocol is trivial/non-existent. For shared
+    links the MAC protocol coordinates the frame transmission by multiple nodes.
+  \item[Reliable Delivery] - Guarantees to move each network-layer
+    datagram across the link without error. This is used for links
+    that are prone to high error rates, such as wireless links, with
+    the goal of correcting the error locally, rather than forcing an
+    end-to-end retransmission.
+  \item[Error Dectection and Correction ] - Can detect and possibly
+    correct errors that occur when a frame is
+    transmitted over the link. This is used for links that are
+    prone to high error rates, such as wireless links.
+\end{description}
+
+\section{Link Layer Implementation}
+
+For the most part link-layer functionality is implemented on a chip
+called the \textbf{Network Adapter} or \textbf{Network Interface
+Card/Controller (NIC)}. This card implemented services including
+framing, link access, error detection, etc.
+
+On the sending side the NIC takes a datagram that has been created
+and stored in host memory by the higher layers of the protocol stack,
+encapsulates it in a link-layer frame, and then transmits the frame
+into the communication link.
+
+On the receiving side the NIC receives the entire frame and extracts
+the network-layer datagram. If the link-layer performs error
+detection, then it is the sending NIC that sets the error-detection
+bits in the frame header, and the receiving NIC that checks these
+bits to determine if an error has occurred.
+
+\chapter{Error Detection and Correction Techniques}
+
+Considering a node sending data $D$ over a link. To be protected
+against but errors the data $D$ is augmented with error-detection and
+correction bits $EDC$. Both $D$ and $EDC$ are sent to a receiving
+node, where at the recipient a sequence of bits $D^{\prime}$ and
+$EDC^{\prime}$ is received, which may differ from the original $D$
+and $EDC$ due to errors that may have occurred during transmission.
+
+The receiver's challenge is to determine whether or not $D^{\prime}$
+is the same as $D$, given that it has only received $D^{\prime}$ and
+$EDC^{\prime}$. Error-detection and correction techniques allow the
+receiver to sometimes detect that bit errors have occurred, however
+there may still be \textbf{undetected but errors}, where the receiver
+may be unaware that $D^{\prime}$ contains bit errors. As a result the
+receiver may deliver a corrupted datagram to the network-layer or be
+unaware that the contents of field in the frame's header has been corrupted.
+
+\section{Parity Checks}
+
+The use of a \textbf{parity bit} is a simple error-detection
+technique that can be used to detect single-bit errors.
+
+Given data $D$ containing $d$ bits, in an \textbf{even parity}
+scheme, the sender includes an additional but and chooses its value
+such that the total number of 1s in the $d + 1$ bits is even. For
+\textbf{odd parity} schemes, the parity but is chosen such that the
+total number of 1s in the $d + 1$ bits is odd.
+
+On receipt the receiver counts the number of 1s in the received $d +
+1$ bits. If an odd number of of 1s are received in an even parity
+scheme, or an even number of 1s are received in an odd parity scheme,
+then the receiver can conclude that a single-bit error has occurred.
+
+This is a simple to implement approach however measurements have
+shown that rather than occurring independently, errors are often
+clustered together in bursts. Under these conditions the probability
+of undetected errors in a parity scheme can approach 50\%.
+
+This parity scheme can however be generalized to use multiple parity
+bits which forms the basis of other error-detection and correction
+techniques, such as the Hamming code.
+
+Again given there are $d$ bits in $D$ which are divided into $i$ and
+$j$ rows and columns, a parity value is computed for each row and
+column. The resulting $i + j + 1$ parity bits comprise the link-layer
+frame's error-detection bits as shown in the figure below.
+
+\begin{figure}[H]
+  \centering
+  \[
+    \begin{array}{cccc|c}
+      d_{1,1} & \cdots & d_{1,j} & & d_{1,j+1} \\
+      d_{2,1} & \cdots & d_{2,j} & & d_{2,j+1} \\
+      \vdots  & \ddots & \vdots  & & \vdots    \\
+      d_{i,1} & \cdots & d_{i,j} & & d_{i,j+1} \\ \hline
+      d_{i+1,1} & \cdots & d_{i+1,j} & & d_{i+1,j+1}
+    \end{array}
+  \]
+  \caption{Two-dimensional parity arrangement with row and column parity bits}
+  \label{fig:parity}
+\end{figure}
+
+Suppose now that a single bit error occurs in the original $d$ bits
+of information, with this parity scheme the parity of both the row
+and column containing the flipped but will be in error. This allows
+the receiver to both detect and correct the error using the indices
+of the row and column parity bits that are in error.
+
+\begin{figure}[H]
+  \centering
+  \[
+    \begin{array}{ccccc|c}
+      1 & 0 & 1 & 0 & 1 & 1\\
+      1 & 1 & 1 & 1 & 0 & 0\\
+      0 & 1 & 1 & 1 & 0& 1 \\
+      \hline
+      0 & 0 & 1 & 0 & 1 & 0
+    \end{array}
+  \]
+  \caption{No errors}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \[
+    \begin{array}{ccccc|c}
+      1 & 0 & 1 & 0 & 1 & 1\\
+      1 & 0 & 1 & 1 & 0 & 0\\
+      0 & 1 & 1 & 1 & 0& 1 \\
+      \hline
+      0 & 0 & 1 & 0 & 1 & 0
+    \end{array}
+  \]
+  \caption{Correctable single-bit error in row 2, column 2}
+\end{figure}
+
+\dfn{Forward Error Correction (FEC)}{
+  The ability of the receiver to both detect and correct errors.
+}
+
+\section{Checksumming}
+
+In checksumming the $d$ bits of data are treated as a sequence if
+$k$-bit integers. A simple checksum can be computed by summing these
+$k$-but integers and then using the resulting sum as the
+error-detection bits. This allows the receiver to check the checksum
+by taking the 1s complement of the sum of the received data,
+including the checksum, and checking whether the result is all 0s.
+This approach can be used to detect burst errors, however it is not
+as robust as cyclic redundancy checks.
+
+\section{Cyclic Redundancy Check (CRC)}
+
+An error-detection technique based on cyclic redundancy check (CRC)
+codes / polynomial codes.
+
+Considering the $d$ bits of data $D$, the sender and receiver must
+first agree on a $r + 1$ bit pattern known as the \textbf{generator},
+$G$. We will require that the most significant bit of $G$ be 1, with
+the key idea of CRC codes being that for the given $D$ the sender
+will choose $r$ addition bits $R$ and append then to $D$ such that
+the resulting $d + r$ bit pattern when interpreted as a binary number
+is exactly divisible by the generator $G$ using modulo-2 arithmetic.
+
+The error checking process then involves the receiver dividing the
+received $d + r$ bits by $G$, if the remainder is nonzero an error
+has occurred, else the receiver can conclude that no errors have occurred, i.e.:
+\[
+  \left(D \cdot 2^r \oplus  R \right) \mod G = 0
+\]
+
+CRC calculations being done in modulo-2 arithmetic means that
+addition and subtraction are performed using the exclusive OR (XOR),
+thus the division process can be implemented using only XOR
+operations, which are simple to implement in hardware.
+
+The sender computes using the following procedure. The sender wants
+to find $R$ such that there is an $n$ such that
+\[
+  D \cdot 2^r \oplus R = nG
+\]
+Making $R$ the subject we have
+\begin{align*}
+  D \cdot 2^r \oplus R &= nG\\
+  D\cdot 2^r &= nG \oplus R \\
+  R &= \text{remainder } \frac{D\cdot 2^r}{G} \\
+\end{align*}
+
+\ex{}{
+  \qs{}{
+    Given $D = 101110$, $d = 6$, $G = 1001$, and $r = 3$, compute the
+    value of $R$ and the resulting $d + r$ bit pattern that is transmitted.
+  }
+
+  \sol{
+    \begin{align*}
+      R &= \text{remainder } \frac{D\cdot 2^r}{G} \\
+      &= \text{remainder } \frac{101110 \cdot 2^{3}}{1001} \\
+      &= \text{remainder } \frac{101110000}{1001} \\
+      &= 011 \\
+      \therefore D \cdot 2^r \oplus R &= 101110000 \oplus 011 \\
+    \end{align*}
+    And the transmitted $d + r$ bit pattern is $101110011$.
+  }
+}
+
+\chapter{Multiple Access Links and Protocols}
+
+There are two types of network links:
+\begin{description}
+  \item[Point-to-Point] - Single sender and receiver, thus no need
+    for a medium access control
+    protocol.
+  \item[Broadcast Link] - Multiple senders and receivers, thus a
+    medium access control protocol is needed to coordinate the access
+    to the shared communication medium.
+\end{description}
+
+The term broadcast is used to refer to the fact that when any one
+node transmits a frame, the channel broadcasts the frame and each of
+the other nodes on the link receives a copy.
+
+The coordination of access of multiple sending and receiving nodes
+defines the \textbf{multiple access problem}. \textbf{Multiple Access
+Protocols} are protocols by which nodes regulate their transmission
+into the shared broadcast channel to resolve the multiple access problem.
+
+Because all nodes are capable of transmitting frames, more than two
+nodes can transmit frames at the same time, when this happens al of
+the nodes receive multiple frames at the same time, i.e. the
+transmitted frames collide at all of the receivers. Typically in the
+event of a collision, none of the receiving nodes can  make any sense
+of any of the frames that were transmitted, thus all the frames
+involved in the collision are lost and the broadcast channel is
+wasted during the collision interval.
+
+In order to ensure that the broadcast channel performs useful work
+when multiple nodes are active is it necessary to coordinate the
+transmissions of the active nodes, thus the need for multiple access protocols.
+
+Ideally, a multiple access protocol for a broadcast channel of rate
+$R$ bits per second should have the following characteristics:
+
+\begin{enumerate}
+  \item  When only one node has data to send that node has a
+    throughput of $R$ bps.
+  \item When $M$ nodes have data to send each of the nodes has a
+    throughput of $R/M$ bps on average.
+  \item The protocol is decentralized, i.e. there is no master node
+    that represents a single point of failure for the network.
+  \item The protocol is simple, so that is inexpensive to implement.
+\end{enumerate}
+
+\section{Channel Partitioning Protocols}
+
+Time-Division Multiplexing (TDM) and Frequency-Division Multiplexing
+(FDM) are examples of channel
+partitioning protocols, where the channel is divided into time slots
+or frequency bands respectively, and each node is allocated a
+specific time slot or frequency band for transmission.
+
+TDM divides time into \textbf{time frames} and further divides each
+frame into $N$ \textbf{time slots}. Each time slot is then assigned
+to one of the $N$ nodes. Whenever a node has a packet to send, it
+transmits the packet's bits during its assigned time slot in the
+revolving TDM frame. TDM is appealing because it eliminates
+collisions and is perfectly fair, which each node receiving a
+dedicated transmission rate of $\frac{R}{N}$ bps during each frame time.
+However, it has two major drawbacks:
+\begin{itemize}
+  \item A node is limited to an average of $\frac{R}{N}$ bps even
+    when it is the only node with packets to send.
+  \item A node must always wait for its turn in the transmission
+    sequence, even if the other nodes have no packets to send.
+\end{itemize}
+
+FDM divides the $R$ bps channel into $N$ different frequencies, each
+with a bandwidth of $\frac{R}{N}$ and assigns each frequency to one
+of $N$ nodes. FDM thus creates $N$ smaller channels of $\frac{R}{N}$
+bps out of the single larger $R$ bps channel. FDM shares the same
+advantages and disadvantages as TDM, however it is more expensive to
+implement than TDM, as it requires more complex hardware to generate
+and filter the
+different frequencies.
+
+Another channel partitioning protocol is Code Division Multiple
+Access (CDMA). CDMA assigns a different code to each node, and then
+uses this code to encode the data bits it sends. If the codes are
+chosen to be orthogonal, then multiple nodes can transmit
+simultaneously without interference, as the receiver can use the code
+to decode the received signal and extract the data bits for each node.
+
+\section{Random Access Protocols}
+
+Random access protocols allow nodes to transmit at the full channel
+rate $R$ bps when they have data to send. When there is a collision
+each node involved in the collision repeatedly retransmits its frame
+until its frame gets through without collision, however this
+retransmission doesn't happen immediately after the collision but
+rather after a random delay independent of the other nodes, thus
+reducing the probability of repeated collisions.
+
+\subsection{Slotted ALOHA}
+
+The following assumptions are made in slotted ALOHA:
+\begin{itemize}
+  \item All frames consist of exactly $L$ bits.
+  \item Time is divided into slots of size $\frac{L}{R}$ seconds, i.e.
+    a slot equals the time to transmit one frame.
+  \item  Nodes start to transmit frames only at the beginning of slots.
+  \item Nodes are synchronized so that each node knows when the slots begin.
+  \item If two or more frames collide in a slot, then all the nodes
+    detect the collision event before the slot ends.
+\end{itemize}
+
+Let $p$ be the probability that a node transmits in a slot, the
+operation of slotted ALOHA can be described as follows:
+\begin{itemize}
+  \item When the node has a fresh frame to send, it waits until the
+    beginning of the next slot and transmits the entire frame in the slot.
+  \item If there isn't a collision, the node has successfully
+    transmitted its frame and thus need not consider retransmitting the frame.
+  \item If there is a collision, the nodes detects the collision
+    before the end of the slot. The node retransmits its frame in
+    each subsequent slot with probability $p$ until the frame is
+    successfully transmitted without collision.
+\end{itemize}
+
+By retransmitting with probability $p$ rather than retransmitting
+immediately after a collision, the probability of repeated collisions
+is reduced, thus improving the efficiency of the protocol.
+
+Slotted ALOHA has the following advantages:
+\begin{itemize}
+  \item Allows a node to transmit continuously at the full rate $R$,
+    when it is the only active node
+  \item  It is highly decentralized, as there is no master node that
+    controls the
+    transmission of the other nodes.
+\end{itemize}
+
+And the following disadvantages:
+\begin{itemize}
+  \item Requires slots to be synchronized, which can be difficult to
+    achieve in practice.
+  \item Collisions still occur, thus the channel is not used to its full
+    capacity, even when there are only a few active nodes.
+  \item When the number of active nodes is large, the efficiency of the
+    protocol degrades significantly, as the probability of collisions
+    increases, thus the channel is used very inefficiently.
+\end{itemize}
+
+In the case of multiple active nodes a certain fraction of the slots
+will have collision and will therefore be wasted. Also another
+fraction of the slots will be empty because all active nodes refrain
+from transmitting as a result of the probabilistic transmission
+policy. The only unwasted slots will be those in which exactly one
+node transmits. This is called a \textbf{successful slot}.
+
+The efficiency of a slotted multiple access protocol is defined as
+the long-run fraction of successful slots in the case when there are
+a large number of active nodes, each always having a large number of
+frames to send.
+
+The maximum efficiency of slotted ALOHA is $\frac{1}{e} \approx
+0.37$, which occurs when $p = \frac{1}{M}$, where $M$ is the number
+of active nodes. This means that even under ideal conditions, slotted
+ALOHA can only
+utilize about 37\% of the channel capacity, thus it is not a very
+efficient protocol, for example given a 100-Mbps channel, the maximum
+throughput of slotted ALOHA is only about 37 Mbps.
+
+\subsection{ALOHA}
+
+ALOHA, also called pure ALOHA, is an earlier variant of slotted ALOHA
+where nodes are not required to synchronize their transmissions to
+slot boundaries. In ALOHA a node transmits a frame whenever it has a
+frame to send, and if there is a collision the node waits for a
+random amount of time before retransmitting the frame.
+
+The maximum efficiency of ALOHA is $\frac{1}{2e} \approx 0.18$, which
+is significantly lower than the maximum efficiency of slotted ALOHA,
+thus the requirement for slot synchronization
+in slotted ALOHA is justified by the significant improvement in efficiency.
+
+\subsection{Carrier Sense Multiple Access (CSMA)}
+
+Carrier Sense Multiple Access (CSMA) is a random access protocol
+in which a node with a frame to send first senses the channel to
+determine whether it is idle or busy. If the channel is idle, the
+node may transmit immediately (depending on the CSMA variant). If
+the channel is busy, the node defers transmission according to the
+protocol’s back off strategy.
+
+Collisions can still occur in CSMA due to non-zero propagation delay.
+Specifically, there is a delay between when one node begins transmitting
+and when other nodes can detect that the channel is busy. As a result,
+another node may sense the channel as idle and begin transmitting before
+the first signal reaches it, leading to a collision.
+
+\subsection{Carrier Sense Multiple Access with Collision Detection (CSMA/CD)}
+
+CSMA with Collision Detection improves upon CSMA by allowing nodes to
+detect collisions while they are transmitting. When a node performs
+collision detection it stops transmission as soon as it detects a collision.
+
+The operation of CSMA/CD can be described as follows:
+\begin{enumerate}
+  \item The node obtains a datagram from the network layer, prepares
+    a link-layer frame and puts the frame in its buffer.
+  \item If the node senses that the channel is idle, it starts to
+    transmit the frame. If the node senses that the channel is busy,
+    it defers transmission until the channel becomes idle.
+  \item While transmitting the node monitors for the presence of an
+    active signal on the channel coming from other active nodes.
+  \item If the node transmits the entire frame without detecting
+    activity from other nodes the node is finished with the frame.
+    Else if the node detects activity from other nodes, it aborts transmission.
+  \item After aborting the node waits a random amount of time and
+    returns to step 2 to try again.
+\end{enumerate}
+
+The random back off time is determined by the \textbf{exponential /
+binary exponential back off} algorithm, which works increases the
+back off time exponentially with the number of collisions that have
+occurred for the frame. Specifically, after $i$ collisions the node
+chooses a random back off time uniformly from the interval $[0, 2^i - 1]$.
+
+\subsubsection{CSMA/CD Efficiency}
+
+The efficiency of CSMA/CD can be approximated by the following formula:
+\[
+  \text{Efficiency} = \frac{1}{1 + 5d_{\text{prop}} / d_{\text{trans}}}
+\]
+
+Where $d_{\text{prop}}$ is the maximum propagation delay between any
+two nodes in the network, and $d_{\text{trans}}$ is the time to
+transmit a frame. This formula shows that the efficiency of CSMA/CD
+decreases as the ratio of propagation delay to transmission time increases.
+
+\section{Taking Turns Protocols}
+
+Taking turns protocols are multiple access protocols designed to
+achieve an average throughput of $\frac{R}{M}$ bps when $M$ nodes
+have data to send, while also allowing a node to transmit at the full
+channel rate $R$ bps when it is the only active node.
+
+\subsection{Polling}
+
+The Polling Protocol requires one of the nodes to be designated the
+master node, which polls each of the nodes in a round-robin fashion
+to determine if they have data to send. If a node has data to send,
+it is allowed to transmit its frame immediately after being polled by
+the master node.
+
+The polling protocol eliminates collision and empty slots allowing it
+to achieve a higher efficiency. However, it has the following disadvantages:
+\begin{itemize}
+  \item There is a polling delay, i.e. the amount of time required to
+    notify a node that it can transmit, which can be significant when
+    the number of nodes is large.
+  \item The master node represents a single point of failure for the
+    network, as if the master node fails, the entire network will fail.
+\end{itemize}
+
+\subsection{Token-Passing}
+
+The Token-Passing Protocol eliminates the need for a master node by
+having nodes exchange a small, special-purpose frame known as a
+\textbf{token} in a fixed order. When a node receives a token it
+holds onto it only if it has some frames to transmit, else it
+immediately passes the token to the next node.
+
+Token passing is decentralized an highly efficient, however it has
+the following disadvantages:
+\begin{itemize}
+  \item The failure of one node can crash the entire channel, as the
+    token can be lost or the token circulation can be disrupted.
+  \item If a node neglects to release the token after transmitting,
+    the entire channel can be disrupted and some recovery procedure
+    must be implemented to restore the token and resume normal operation.
+\end{itemize}
+
+\chapter{Switched Local Area Networks}
+
+\section{Link-Layer Addressing and Address Resolution Protocol (ARP)}
+
+Hosts and routers have link-layer addresses, which are used by the
+link-layer to identify
+the source and destination of a frame. Link-layer addresses are
+attached to \textbf{network interfaces} and not to hosts or routers.
+
+\subsection{Media Access Control (MAC) Addresses}
+
+A host or router with multiple network interfaces will have multiple
+link-layer addresses for each of its interfaces. However link-layer
+switches do not have link-layer addresses associated with their
+interfaces that connect hosts and routers, because the job of the
+link-layer switch is to forward datagrams between hosts and routers,
+which it does transparently, i.e. without the host or router having
+to explicitly address the frame to the intervening switch.
+
+A link-layer address is also called a \textbf{LAN address / Physical
+address / Media Access Control (MAC) address}. The MAC address is 6
+bytes long giving $2^{48}$ possible MAC addresses which is commonly
+represented in hexadecimal notation as 12 hexadecimal digits.
+
+No two network interfaces have the same address as the IEEE manages
+the MAC address space, requiring a company to purchase a chunk of
+address space consisting of $2^{24}$ addresses. An interface's MAC
+address has a flat structure and doesn't change no matter where the
+interface is connected in the network, thus it is not hierarchical
+like IP addresses. A MAC address is analogous to a person's social
+security number, while an IP address is analogous to a person's home address.
+
+When an interface wants to send a frame to some destination
+interface, the sending interface inserts the destination interface's
+MAC address into the frame and sends the frame into the LAN. Due to
+the broadcast nature of the LAN, all interfaces on the LAN receive a
+copy of the frame, however only the destination interface will
+process the frame, while the other interfaces will simply discard the
+frame. However sometimes a sending node wants all nodes on the LAN to
+receive and process a frame, in this case the sending node specifies
+a special MAC \textbf{broadcast address}, i.e FF:FF:FF:FF:FF:FF, as
+the destination address in the frame, which causes all nodes on the
+LAN to process the frame.
+
+\subsection{Address Resolution Protocol (ARP)}
+
+Because there are both network-layer and link-layer addresses, there
+is a need to translate between them, this is done using the Address
+Resolution Protocol (ARP).
+
+ARP resolves the MAC address of a destination host given its IP
+address. Suppose a host with IP address 222.222.222.220 wants to send
+an IP datagram to a host with IP address 222.222.222.222 in the same
+subnet. To send this datagram the source must give its NIC not only
+the IP datagram but also the MAC address for the destination host. An
+ARP module in the sending host takes any IP address on the same LAN
+as input and returns the corresponding MAC address as input.
+
+Each host and route has an \textbf{ARP table}, which contains
+mappings of IP address to MAC addresses. The ARP table also contains
+a \textbf{time-to-live (TTL)} which indicates when each mapping will
+be deleted from the table.
+
+Going back to the earlier example supposed the sending host wants to
+send a datagram that is IP addressed to another host or router on the
+same subnet. IN the case where the sending host's ARP table contains
+a valid mapping for the destination IP address, the sending host can
+simply use the corresponding MAC address to send the datagram.
+However, if the sending host's ARP table doesn't contain a valid
+mapping for the destination host the following process occurs:
+\begin{enumerate}
+  \item First the sender constructs an ARP packet, which contains
+    several fields including the sending and receiving IP and MAC
+    addresses. Both ARP query and response packets have the same
+    format. The purpose of the ARP query packet is to query all the
+    other hosts and routers on the subnet to determine the MAC
+    address corresponding to the destination IP address, while the
+    purpose of the ARP response packet is to respond to an ARP query
+    with the requested MAC address.
+  \item The sender passes the ARP query packet to its NIC along with
+    an indication that the packet should be broadcast to all nodes on
+    the subnet using the broadcast MAC address.
+  \item The ARP query is received by all the other nodes on the
+    subnet and each node checks to see if its IP address matches the
+    destination IP address in the ARP packet. The node that does
+    match sends back to the querying hot a response ARP packet with
+    the desired mapping.
+  \item The querying host then updates its ARP table and sends its IP
+    datagram to the destination host using the newly acquired MAC address.
+\end{enumerate}
+
+It is important to note that the ARP query message is within a
+broadcast frame, whereas the response ARP message is sent within a
+standard frame. This is because at the time of the ARP query the
+sender doesn't know the MAC address of the destination host, thus it
+must use the broadcast MAC address to ensure that all nodes on the
+subnet receive the ARP query, whereas at the time of the ARP response
+the sender knows the MAC address of the destination host, thus it can
+use this MAC address to send the ARP response directly to the destination host.
+
+ARP is also "plug-and-play", i.e. an ARP table gets built
+automatically as hosts and routers send ARP queries and responses,
+thus there is no need for a network administrator to manually
+configure the ARP tables.
+
+ARP is in a grey area between a link-layer and network-layer
+protocol, as it is used by the link-layer to resolve IP addresses to
+MAC addresses, however it is implemented as a network-layer protocol,
+as it uses IP datagrams to carry ARP query and response messages,
+thus it is implemented in software and runs on the host's CPU rather
+than in the NIC hardware.
+
+\subsection{Sending a Datagram off the Subnet}
+
+\dfn{Hop}{
+  A hop is a single step in the path from a source host to a
+  destination host, i.e. the transmission of a datagram from one node
+  to an adjacent node. Denoted by a router in the path, as a datagram
+  is forwarded from one router to the next until it reaches the
+  destination host.
+}
+
+When a host wants to send a datagram to a host that isn't in its
+subnet, the sending host must send the datagram to a router on the
+same subnet as the sending host, which will then forward the datagram
+to the destination host.
+
+The destination IP address of the datagram is still the IP address of
+the final destination host and does not change while traversing the
+network, however the destination MAC address changes at each hop as
+the datagram is forwarded from the sending host to the first-hop
+router, and then from the first-hop router to the second-hop router,
+and so on until the datagram reaches the destination host.
+
+A router has an IP address for each of its interfaces, and for each
+interface there is a corresponding ARP module and NIC. Given a host A
+with IP address 111.111.111.111 and MAC address AA:AA:AA:AA:AA:AA,
+and a router R with two interfaces, one with IP address
+111.111.111.110 and MAC address RR:RR:RR:RR:RR:RR, and the other with
+IP address 222.222.222.220 and MAC address RR:RR:RR:RR:RR:RS, when
+host A wants to send a datagram to host B with IP address
+222.222.222.221 with MAC address BB:BB:BB:BB:BB:BB, the following
+process occurs:
+\begin{enumerate}
+  \item Host A creates a datagram with network-layer destination
+    address 222.222.222.221. It then passes the datagram to its NIC
+    but instead of broadcasting the datagram, host A sends the
+    datagram to router R's interface with IP address 111.111.111.110,
+    i.e. the IP address of the first-hop router on the path to the final
+    destination, with corresponding MAC address RR:RR:RR:RR:RR:RR.
+    The host acquires the MAC address of the first-hop router using
+    ARP if it doesn't have it using ARP within the subnet as
+    described in the previous section.
+  \item Router R receives this frame and processes it as it is
+    addressed to one of its interfaces. Router R now has to determine
+    the correct interface on which the datagram should be forwarded.
+    It does this through forwarding as described in the network layer
+    chapter. Once the correct interface is determined, router R then
+    needs to determine the MAC address of the destination host B,
+    which it does using ARP within the subnet as described in the
+    previous section. Finally, router R sends the datagram to host B
+    using host B MAC address BB:BB:BB:BB:BB:BB as the destination MAC
+    address in the
+    frame.
+  \item Host B receives the frame and processes it as it is addressed
+    to one of its interfaces. Host B then extracts the datagram and
+    delivers it to the network layer.
+\end{enumerate}
+
+\section{Ethernet}
+
+\dfn{Hub}{
+  A physical-layer device that acts on individual bits rather than frames.
+}
+
+Ethernet is the most widely used link-layer protocol for LANs. When a
+bit arrives from one interface the \textbf{hub}  recreates the bit,
+boosts its energy strength and transmits the bit onto all the other
+interfaces. Ethernet with a hub-base star topology is also a
+broadcast LAN, i.e. all nodes receives a copy of all frames
+transmitted across the network. This means collisions can occur when
+two or more nodes transmit at the same time, needing a retransmission
+of the frames involved in the collision.
+
+\subsection{Ethernet Frame Structure}
+
+An Ethernet frame consists of the following fields:
+\begin{description}
+  \item[Data]  - 46 - 1500 bytes. Carries the IP datagram. The
+    maximum transmission unit (MTU) of Ethernet is 1500 bytes, which
+    means that if the datagram exceeds 1500 bytes the host has to
+    fragment the datagram.
+  \item[Destination MAC Address] - 6 bytes. Contains the MAC address
+    of the destination node.
+  \item[Source MAC Address] - 6 bytes. Contains the MAC address of
+    the source node.
+  \item[Type] - 2 bytes. Permits the Ethernet to multiplex
+    network-layer protocols by indicating the type of the
+    network-layer datagram being carried in the data field. This is
+    needed because hosts can use other network-layer protocols
+    besides IP, such as ARP, thus the type field allows the Ethernet
+    to indicate which network-layer protocol is being used in the
+    data field. This allows demultiplexing of the data field to the
+    correct network-layer protocol at the receiving node.
+  \item[Cyclic Redundancy Check (CRC)] - 4 bytes. Used for error detection.
+  \item[Preamble] - 8 bytes. Used to synchronize the receiver's clock
+    to the sender's clock. Each of the first 7 bytes of the preamble
+    has a vale of 10101010, while the last byte has a value of
+    10101011, which allows the receiver to detect the start of the
+    frame and synchronize its clock to the sender's clock.
+    Synchronization is needed because the sender and receiver may
+    have different clock rates, thus the preamble allows the receiver
+    to adjust its clock rate to match that of the sender.
+\end{description}
+
+Ethernet technologies provide:
+\begin{itemize}
+  \item Connectionless service
+  \item Unreliable service
+  \item Best effort delivery
+\end{itemize}
+
+\subsection{Ethernet Technologies}
+
+\dfn{Repeater}{
+  A physical-layer device that receives a signal on the input side
+  and regenerates the signal on the output side.
+}
+
+Ethernet comes in many different varieties, which differ in the
+physical medium they use, the maximum length of the medium, and the
+data rate they support.
+
+Initially Ethernet was designed to run over a segment of coaxial
+cable, however it has evolved to run over twisted pair and optical
+fiber cables. The original Ethernet standard, known as 10BASE5,
+supported a data rate of 10 Mbps and a maximum segment length of 500
+meters. The 10BASE2 standard also supported a data rate of 10 Mbps
+but had a maximum segment length of 200 meters. The 10BASE-T
+standard, which runs over twisted pair cables, also supports a data
+rate of 10 Mbps but has a maximum segment length of 100 meters.
+
+The names of Ethernet standards typically follow the format $X$BASE$Y$, where:
+\begin{description}
+  \item[$X$] - The data rate in Mbps, e.g. 10 for 10 Mbps, 100 for 100
+    Mbps, 1000 for 1 Gbps, etc.
+  \item[BASE] - Indicates that the standard uses baseband signalling, i.e.
+    the entire bandwidth of the medium is used to transmit a single signal.
+  \item[$Y$] - Indicates the type of physical medium used, e.g.
+    T for twisted pair, F for fiber optic, etc.
+\end{description}
+
+\section{Link-Layer Switches}
+
+\dfn{Switch}{
+  A link-layer device that acts on frames rather than bits, i.e. it
+  receives an entire frame, processes the frame and then forwards the
+  frame to the correct outgoing interface.
+}
+
+\dfn{Transparent}{
+  A device is transparent to the hosts and routers connected to it if
+  the hosts and routers are not aware of the presence of the device in
+  the network, i.e. the device operates without the need for any
+  configuration or management by the hosts and routers.
+}
+
+Switches are \textbf{transparent} to the hosts and routers connected to them.
+
+\subsection{Forwarding and Filtering}
+
+\dfn{Filtering}{
+  The switch function that determines whether a frame should be
+  forwarded to some interface or should be dropped.
+}
+
+\dfn{Forwarding}{
+  The switch function that determines the interfaces to which a frame
+  should be direct, and moves the from to those interfaces.
+}
+
+Switch filtering and forwarding are done with a \textbf{switch
+table}. The switch table contains entries for some of the hots and
+routers on a LAN. AN entry in the switch table contains:
+\begin{enumerate}
+  \item A MAC address
+  \item The switch interface that leads toward that MAC address
+  \item The time at which the entry was placed in the table.
+\end{enumerate}
+
+Supposing a frame with destination address D arrives at the switch on
+interface $x$. The switch indexes its table with the MAC address D.
+There are three possible cases:
+\begin{description}
+  \item[There is no entry for D] - The switch forwards copies of the
+    frame to the output buffers preceding all interfaces expect for
+    interface $x$, i.e. broadcasting.
+  \item[There is an entry in the table for D associating it with $x$]
+    - In this case the frame is coming from a LAN segment that
+    contains interface D. Thus there is no need to forward the frame
+    to any other interfaces, the switch performs the filtering action.
+  \item[There is an entry in the table for D associating it with some
+    other interface $y$] - The frame needs to be forwarded to the LAN
+    segment attached to interface $y$. The switch performs its
+    forwarding function by putting the frame in an output buffer that
+    precedes interface $y$.
+\end{description}
+
+In this sense a switch is smarter than a hub, as a switch can filter
+frames and only forward frames to the correct outgoing interface,
+while a hub simply forwards all bits to all interfaces.
+
+\subsection{Self-Learning}
+
+A switch is a \textbf{self-learning} device, i.e. its switch table is
+build automatically, dynamically, and autonomously, without any
+intervention from a network administrator or configuration protocol.
+This is accomplished as follows:
+\begin{enumerate}
+  \item The switch table starts empty.
+  \item  For each incoming frame received on an interface, the switch
+    stores in its table
+    \begin{enumerate}
+      \item The MAC address in the frame's source address field
+      \item The interface from which the frame arrived
+      \item The current time
+    \end{enumerate}
+    In this manner the switch learns the location of the source host
+    or router of the frame, and thus the switch can use this
+    information to forward future frames destined to that host or router.
+  \item The switch deletes an address in the table if no frames are
+    received with that address as the source address after some
+    period of time, \textbf{ageing time}. In this manner if a PC is
+    replaced by another PC the MAC address of the original PC will
+    eventually be deleted from the switch table.
+\end{enumerate}
+
+Switches are plug-and-play devices because they require no manual
+configuration or management, as they are self-learning devices that
+build their switch tables automatically and dynamically.
+
+\subsection{Properties of Link-Layer Switching}
+
+Switches therefore have the following advantages over broadcast links
+such as buses or hub-based star topologies:
+\begin{description}
+  \item[Elimination of collisions]  - There is no wasted bandwidth
+    due to collision, as the switches buffer frames and never
+    transmit more than one frame on a segment at once. As with a
+    router the maximum aggregate throughput of a switch is the sum of
+    all the switch interface rates.
+  \item[Heterogeneous links] - Because a switch isolates one link
+    from another the different  links in the LAN can operate at
+    different speeds and can run over different media.
+  \item[Management] - Switches eases network management as they can
+    detect and disconnect misbehaving nodes, gather statistics on
+    bandwidth usage, collision rates and traffic types, and make it
+    easier to add and move nodes in the network.
+\end{description}
+
+\subsection{Switches vs. Routers}
+
+Although a switch is also a store-and-forward packet switch, it
+differs from a router in that it forwards using MAC addresses rather
+than IP addresses. Where a router is a layer-3 packet switch a switch
+is a layer-2 packet switch.
+
+Even though they are different devices a network admin must often
+choose between then when installing an interconnection device. The
+choice between a switch and a router depends on the specific needs of
+the network, such as the size of the network, the amount of traffic,
+and the need for security and control. In general, switches are more
+suitable for smaller networks with less traffic, while routers are
+more suitable for larger networks with more traffic and a need for
+greater control and security.
+
+A switch has the following advantages over a router:
+\begin{itemize}
+  \item There are plug and play devices that require no
+    configuration, while routers require
+    configuration and management.
+  \item  They can have relatively high filtering and forwarding
+    rates, as they only have to process frames only up to layer 2
+    whereas routers have to process packets up to layer 3, thus
+    switches can be faster than routers.
+\end{itemize}
+
+However a switch has the following disadvantages compared to a router:
+\begin{itemize}
+  \item  The active topology of a switched network is restricted to a
+    spanning tree to prevent the cycling of broadcast frames.
+  \item Large switched networks require large ARP tables in hosts and
+    routers and would generate substantial ARP traffic and processing.
+  \item Switches are also susceptible to broadcast storms, i.e. if
+    one host misbehaves and transmits an endless stream of Ethernet
+    broadcast frames, the switch will forward all these frames
+    causing the entire network to collapse.
+\end{itemize}
+
+A router has the following advantages over a switch:
+\begin{itemize}
+  \item Packets do not normally cycle through routers even with
+    redundant paths, as network addressing is often hierarchical, and
+    thus packets are not restricted to a spanning tree and can use
+    the best path between source and destination.
+  \item Routers provide firewall protection against layer-2 broadcast storms.
+\end{itemize}
+
+However a router has the following disadvantages compared to a switch:
+\begin{itemize}
+  \item Routers are not plug-and-play devices, as they require configuration and
+    management by a network administrator, while switches are
+    plug-and-play devices that require no configuration or management.
+\end{itemize}
+
+\section{Virtual Local Area Networks (VLANs)}
+
+Modern LANs are often configured hierarchically, which each workgroup
+having its own switched LAN connected to the switched LANs of other
+groups via a switch hierarchy. There are drawbacks to this configuration:
+\begin{description}
+  \item[Lack of traffic isolation]  - Because the LAN is shared by
+    all the workgroups, traffic from one
+    workgroup can affect the performance of other workgroups, e.g. if
+    one workgroup generates a large amount of traffic it can cause
+    congestion and delay for the other workgroups.
+  \item[Inefficient use of switches] - Because the LAN is shared by
+    all the workgroups, the switches in the LAN are shared by all the
+    workgroups, thus if one workgroup generates a large amount of
+    traffic it can cause congestion and delay for the other
+    workgroups, and thus the switches in the LAN are not used efficiently.
+  \item[Managing users] - If a user moves from one workgroup to
+    another, the network administrator must reconfigure the switch
+    ports to which the user is connected, which can be time-consuming
+    and error-prone.
+\end{description}
+
+These drawbacks can be addressed by using Virtual Local Area Networks (VLANs).
+
+\dfn{Virtual Local Area Network (VLAN)}{
+  A VLAN is a logical LAN that is created by partitioning a physical
+  LAN into multiple logical LANs. Each VLAN is a separate broadcast
+  domain, i.e. frames sent by a host in one VLAN are not received by
+  hosts in other VLANs, thus providing traffic isolation between
+  different workgroups.
+}
+
+Switches that support VLANs allow multiple VLANs to be defined over a
+single physical LAN infrastructure. Hosts within a VLAN communicate
+with each other as if they were the only hosts connected to the switch.
+
+\chapter{Link Virtualisation}
+
+\section{Multiprotocol Label Switching (MPLS)}
+
+Multiprotocol Label Switching (MPLS) is a link-layer protocol that
+allows for the creation of virtual links between nodes in a network.
+
+\chapter{Data Centre Networking}
+
+\section{Data Centre Architectures}
+
+\subsection{Load Balancing}
+
+\subsection{Hierarchical Architecture}
+
+\section{Trends in Data Centre Networking}
+
+\subsection{Cost Reduction}
+
+\subsection{Centralized SDN Control and Management}
+
+\subsection{Virtualisation}
+
+\subsection{Physical Constraints}
+
+\subsection{Hardware Modularity and Customization}
+
+\end{document}

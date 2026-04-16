@@ -6,6 +6,7 @@
 \title{\Huge{Wireless and Mobile Networks}}
 \author{\huge{Madiba Hudson-Quansah}}
 \date{}
+\usepackage{enumitem}
 \usepackage{parskip}
 
 \setcounter{tocdepth}{4}
@@ -36,14 +37,141 @@ The following are elements of a wireless network:
     \begin{enumerate}
       \item The host is within the wireless communication distance of
         the base station
-      \item The use uses that base station to relay data between it,
+      \item The host uses that base station to relay data between it,
         the host, and the larger network.
     \end{enumerate}
+    Cell towers and access points are examples of base stations.
+    Hosts associated with a base station are often referred to as
+    operating in \textbf{infrastructure mode}, since all traditional
+    network services are provided by the network to which a host is
+    connected via the base station. In \textbf{ad hoc networks},
+    wireless hosts have no such infrastructure with which to connect.
+
+    When a mobile host moves beyond the range of one base station and
+    into the range of another, it will change its point of attachment
+    into the larger network, this is referred to as \textbf{handoff / handover}.
+  \item[Network Infrastructure] - The larger network with which a
+    wireless host may wish to communicate.
 \end{description}
+
+At the highest level we can classify wireless networks based on two criteria:
+\begin{itemize}
+  \item Whether a packet in the wireless network crosses exactly one
+    wireless hop or multiple wireless hops.
+  \item Whether there is infrastructure such as a base station in the network.
+\end{itemize}
 
 \chapter{Wireless Links and Network Characteristics}
 
+Wireless links differ from wired links in several ways:
+\begin{description}
+  \item[Decreasing Signal Strength]  - Even in free space the signal
+    will disperse resulting in decreased signal strength, also called
+    \textbf{path loss}, as the distance between sender and receiver increases.
+  \item[Interference from other sources] - Radio sources transmitting
+    in the same frequency band will interfere with each other.
+  \item[Multipath Propagation] - Occurs when portions of the
+    electromagnetic wave reflect off objects and the ground, taking
+    paths of different lengths between a sender and receiver. This
+    results in the blurring of the received signal at the receiver.
+\end{description}
+
+The \textbf{signal-to-noise ratio (SNR)} is a relative measure of the
+strength of the received signal and this noise. The SNR is measured
+in units of decibels (dB). A larger SNR makes it easier for the
+receiver to extract the transmitted signal from the background noise.
+
+The \textbf{bit error rate (BER)} is the probability that a
+transmitted bit is received in error at the receiver.
+
+There are several physical-layer characteristics that are important
+to understanding higher-layer wireless communication protocols:
+\begin{description}[style=multiline, leftmargin=7cm]
+  \item[For a given modulation scheme, the higher the SNR, the lower
+    the BER]  - Since a sender can increase SNR by increasing its
+    transmission power, a sender can decrease the probability that a
+    frame is received in error by increasing its transmission power.
+  \item[For a given SNR, a modulation technique with a higher bit
+    transmission rate will have a higher BER] - This is because a
+    modulation technique with a higher bit transmission rate will
+    transmit more bits per symbol, and thus the probability that at
+    least one of those bits is received in error will be higher.
+  \item[Dynamic Selection of the physical-layer modulation technique
+      can be used to adapt the modulation technique to channel
+    conditions] - The SNR, and hence BER, may change as a result of
+    mobility or due to changes in the environment. By dynamically
+    selecting the modulation technique, a sender can adapt to changing
+    channel conditions, for example by switching to a modulation technique
+    with a lower bit transmission rate when the SNR is low, and switching
+    to a modulation technique with a higher bit transmission rate when the
+    SNR is high.
+\end{description}
+
+The \textbf{Hidden Terminal Problem}, occurs when physical
+obstructions in the environment prevent two wireless hosts from
+sensing each other's transmissions, even though they are both within
+the communication range of a common base station. This can lead to
+collisions at the base station when both hosts transmit
+simultaneously, as they are unaware of each other's transmissions.
+
+\textbf{Fading} is a phenomenon that occurs when a signal's strength
+as it propagates through the wireless medium experiences variations
+due to factors such as multipath propagation, shadowing, and
+atmospheric conditions. Fading can lead to fluctuations in the
+received signal strength, which can affect the reliability of
+wireless communication.
+
 \section{Code Division Multiple Access (CDMA)}
+
+\dfn{Chipping Rate}{
+  The rate at which the code changes in a CDMA protocol, which is
+  much faster than the bit transmission rate.
+}
+
+In a Code Division Multiple Access (CDMA) protocol each bit being
+sent is encoded by multiplying the bit by a signal (the code) that
+changes at a much faster rate, i.e. \textbf{chipping rate}, than the
+original sequence of data bits.
+
+Supposing that the rate at which original data bits reach the CDMA
+defines the unit of time, i.e. each original data bit to be
+transmitted requires a one-bit slot time. Let $d_i$ be the value of
+the data bit for the $i$-th bit slot. We represent a data bit with a
+0 value as -1. Each bit slot is further subdivided into $M$ mini-slots.
+
+CDMA works by assigning a unique code to each sender, and encoding
+the data bits by multiplying them with the sender's code. The
+receiver can then decode the received signal by multiplying it with
+the code of the sender it wishes to receive data from. This allows
+multiple senders to transmit simultaneously over the same frequency
+band without interfering with each other, as long as their codes are
+orthogonal to each other.
+
+For example suppose that there are two senders, A and B, with codes
+$c_A$ and $c_B$ respectively. If sender A wants to transmit a data
+bit $d_A$ and sender B wants to transmit a data bit $d_B$ at the same
+time, they will both go through the following process:
+\begin{enumerate}
+  \item Sender A encodes its data bit by multiplying it with its
+    code: $s_A = d_A \cdot c_A$.
+  \item Sender B encodes its data bit by multiplying it with its
+    code: $s_B = d_B \cdot c_B$.
+  \item Both senders transmit their encoded signals simultaneously
+    over the same frequency band, resulting in a combined signal at
+    the receiver: $s = s_A + s_B$.
+  \item The receiver can decode the signal from sender A by
+    multiplying the combined signal with sender A's code: $s \cdot
+    c_A = (s_A + s_B) \ cdot c_A = s_A \cdot c_A + s_B \cdot c_A$.
+    Since $c_A$ and $c_B$ are orthogonal, the term $s_B \cdot c_A$
+    will be zero, allowing the receiver to recover sender A's data
+    bit: $s \cdot c_A = s_A \cdot c_A = d_A \cdot (c_A \cdot c_A) = d_A$.
+  \item Similarly, the receiver can decode the signal from sender B by
+    multiplying the combined signal with sender B's code: $s \cdot
+    c_B = (s_A + s_B) \cdot c_B = s_A \cdot c_B + s_B \cdot c_B$.
+    Again, since $c_A$ and $c_B$ are orthogonal, the term $s_A \cdot
+    c_B$ will be zero, allowing the receiver to recover sender B's data
+    bit: $s \cdot c_B = s_B \cdot c_B = d_B \cdot (c_B \cdot c_B) = d_B$.
+\end{enumerate}
 
 \chapter{Wireless Fidelity (WiFi): 802.11 Wireless LANs}
 
@@ -78,7 +206,60 @@ Clear to Send (CTS)}
 
 \chapter{Cellular Networks: 4th Generation and 5th Generation}
 
+Cellular refers to the fact that the region covered by a cellular
+network is divided into a number of geographic coverage areas called
+\textbf{cells}. Each cell contains a \textbf{base station} that
+transmits and receives signals to and from \textbf{mobile devices}
+currently in its cell.
+
 \section{4th Generation (4G) Long Term Evolution (LTE) Cellular Networks}
+
+Fourth Generation (4G) networks implement the Long-Term Evolution
+(LTE) standard. The network broadly divides into the radio network at
+the cellular network's edge and the core network. All network
+elements communicate with each other using IP. The elements that make
+up a 4G LTE network include:
+\begin{description}
+  \item[Mobile Device]  - A smartphone, tablet, laptop, or IoT device
+    that connects into a cellular carrier's network. The mobile
+    device has a globally unique 64-bit identifier called the
+    \textbf{International Mobile Subscriber Identity (IMSI)} which is
+    stored on its \textbf{Subscriber Identity Module (SIM) } card.
+    The IMSI identifies the subscriber in the worldwide cellular
+    carrier network system, including the country and home cellular
+    carrier network to which the subscriber belongs. The mobile
+    device is referred to as \textbf{User Equipment (UE)} in the LTE standard.
+  \item[Base Station] - Base stations sit at the edge of the
+    carrier's network and is responsible for managing the wireless
+    radio resources and the mobile devices within its coverage area.
+    Mobile devices will interact with a base station to attach to the
+    carrier's network. Cellular base station functions are comparable
+    to those of APs in wireless LANs, bit also serve other important
+    roles such as creating device-specific IP tunnels from the mobile
+    device to gateways and interacting amongst themselves to handle
+    device mobility among cells.
+  \item[Home Subscriber Server (HSS)] - A control-plane database that
+    stores information about the mobile devices for which the HSS's
+    network is their home network. Can be used with MME for device
+    authentication
+  \item[Serving Gateway (S-GW), Packet Data Network Gateway (P-GW),
+    and other network routers] - The S-GW and P-GW are two routers
+    that lie on the data path between the mobile device and the
+    Internet. The P-GW also provides NAT IP addresses to mobile
+    devices and performs NAT functions. The P-GW is the last LTE
+    element that a datagram originating at the mobile device will
+    pass before entering the larger Internet. A cellular carrier's
+    all-IP core will have additional routers whose role is similar to
+    that of traditional IP routers, i.e. to forward IP datagrams
+    among themselves along paths that will typically terminate at
+    elements of the LTE core network.
+  \item[Mobility Management Entity (MME)] - A control-plane element
+    that plays an important role in authenticating a device wanting
+    to connect into its network. It also sets up the tunnels on the
+    data path from/to the device and the P-GW, and maintains
+    information about an active mobile device's cell location within
+    the carrier's cellular network.
+\end{description}
 
 \section{LTE Protocol Stacks}
 

@@ -971,6 +971,41 @@ Switches that support VLANs allow multiple VLANs to be defined over a
 single physical LAN infrastructure. Hosts within a VLAN communicate
 with each other as if they were the only hosts connected to the switch.
 
+\dfn{Broadcast Domain}{
+  A logical division of a computer network in which broadcast traffic
+  from one port can only reach other ports in the division.
+}
+
+In a port-based VLAN, the switches ports (interfaces) are divided
+into groups by the network manager, with each group making up a VLAN,
+with the ports in each VLAN forming a broadcast domain.
+
+VLANs solve the above issues by providing traffic isolation between
+different workgroups, allowing for more efficient use of switches,
+and making it easier to manage users as they can be moved from one
+VLAN to another without the need for reconfiguring switch ports.
+
+This isolation can also be a detriment but can be solved by
+connecting a VLAN switch port to an external router and configuring
+that port to belong to multiple VLANs, thus allowing hosts in
+different VLANs to communicate with each other through the router.
+However this solution is not ideal as it can cause congestion and
+delay for the router.
+
+\dfn{VLAN Trunking}{
+  A method of interconnecting VLAN switches that allows multiple VLANs
+  to be carried over a single physical link between switches.
+}
+
+A more scalable approach to interconnecting VLAN switches is using
+\textbf{VLAN trunking}. In VLAN trunking, a special port on each
+switch is configured as a trunk port to carry traffic for multiple
+VLANs. When a frame is sent from one switch to another over the trunk
+link, the sending switch adds a VLAN tag to the frame to indicate
+which VLAN the frame belongs to. The receiving switch then uses this
+VLAN tag to determine which VLAN the frame belongs to and forwards it
+accordingly.
+
 \chapter{Link Virtualisation}
 
 \section{Multiprotocol Label Switching (MPLS)}

@@ -620,12 +620,55 @@ The OpenFlow standard is a widely used protocol for implementing
 software-defined networking (SDN), and relies on a match-plus-action
 table known as a \textbf{flow table}, this table includes:
 \begin{description}
-  \item[A set of header field values] -
+  \item[A set of header field values] - To which an incoming packet
+    will be matched. A packet that matches no flow table entry can be
+    dropped or sent to the remote controller for processing.
+  \item[A set of counters] - These are updated as packets are matched
+    to flow table entries. These counters might include the number of
+    packets that have been matched by that table entry, and the time
+    since the table entry was last updated.
+  \item[A set of actions to be taken] - When a packet matches a flow
+    table entry. These actions may be to forward the packet to a
+    given output port, to drop the packet, make copies of the packet
+    and send them to multiple output ports, and/or to rewrite
+    selected header fields.
 \end{description}
 
 \section{Match}
 
+OpenFlow's match abstraction allows for a match to be made on
+selected fields from three layer layers of protocol headers, i.e.
+Link-layer, network-layer and transport-layer.
+
+Flow table entries may also contain wildcards, for example an IP
+address of 10.0.*.* would match any IP address that starts with 10.0,
+and a wildcard in the transport layer could be used to match any TCP
+or UDP port number. Each flow table entry also has an associated
+priority. If a packet matches multiple flow table entries the
+selected match and corresponding action will be that of the highest
+priority entry with which the packet matches.
+
+Not all fields in the packet header need to be matched, for example a
+flow table entry could be configured to match only on the destination
+IP address, and ignore all other header fields, thus allowing for a
+more flexible and efficient forwarding process.
+
 \section{Action}
+
+Each flow table entry has a list of zero or more actions that
+determine the processing that is to be applied to a packet that
+matches a flow table entry. If there multiple actions they are
+performed in th order specified in the list. The most important actions are:
+\begin{description}
+  \item[Forwarding]  - Forwarding an incoming packet to a particular
+    output port, broadcast over all ports, or multicast over a
+    selected set of ports. The packet may be encapsulated and sent to
+    the remote controller for this device, which may do some more processing.
+  \item[Dropping] - A flow table entry with no action indicates that
+    a matched packet should be dropped.
+  \item[Modify-field] - The values of selected header fields may be
+    re-written before the packet is forwarded to the chosen output port.
+\end{description}
 
 \section{OpenFlow}
 

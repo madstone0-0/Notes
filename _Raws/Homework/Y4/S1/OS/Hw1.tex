@@ -1,0 +1,73 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\title{\Huge{Assignment Chapter 2}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+  \begin{enumerate}
+    \item Use the first-fit algorithm to indicate which memory blocks
+      are allocated to
+      each of the arriving jobs.
+    \item Use the best-fit algorithm to indicate which memory blocks
+      are allocated to
+      each of the arriving jobs.
+    \item Calculate the amount of internal fragmentation in Block 1
+      using the first-fit
+      algorithm.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+      \begin{itemize}
+        \item Block 1 - Job B
+        \item Block 2 - Job C
+        \item Block 3 - Free
+      \end{itemize}
+    \item
+      \begin{itemize}
+        \item Block 1 - Job C
+        \item Block 2 - Free
+        \item Block 3 - Job B
+      \end{itemize}
+    \item $900 \text{K} - 275 \text{K} = 625$, i.e. $625$ K of
+      internal fragmentation
+  \end{enumerate}
+}
+
+\qs{}{
+  \begin{enumerate}
+    \item Indicate which memory blocks are allocated to each of the
+      arriving jobs.
+    \item In this chapter, we introduced external and internal
+      fragmentation. Explain
+      in your own words, which one would be expected in a worst-fit memory
+      allocation scheme.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+      \begin{itemize}
+        \item Block 1 - Free
+        \item Block 2 - Job A
+        \item Block 3 - Job D
+        \item Block 4 - Free
+        \item Block 5 -  Job B
+      \end{itemize}
+    \item In the case of worst-fit allocation -
+  \end{enumerate}
+}
+
+\end{document}

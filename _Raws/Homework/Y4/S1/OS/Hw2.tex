@@ -1,0 +1,50 @@
+\documentclass[12pt letter]{report}
+\input{../template/preamble}
+\input{../template/macros}
+\input{../template/letterfonts}
+
+\usepackage{parskip}
+\title{\Huge{Homework 2}}
+\author{\huge{Madiba Hudson-Quansah}}
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+
+\qs{}{
+  \begin{enumerate}
+    \item Using the FIFO page removal algorithm, indicate the movement of the
+          pages into and out of the available page frames (called a page trace
+          analysis) indicating each page fault with an asterisk (*). Then compute the
+          failure and success ratios.
+    \item Increase the size of memory so it contains four page frames for public use.
+          Using the same page requests as above and FIFO, do another page trace
+          analysis and compute the failure and success ratios.
+    \item What general statement can you make from this example? Explain your
+          answer.
+  \end{enumerate}
+}
+
+\sol{
+  \begin{enumerate}
+    \item
+          \begin{table}[h!]
+            \begin{center}
+              \begin{tabular}{|c c c c c c c c c c c c|}
+                \hline
+                a & b & c & b & d & a & e & f & b & e & d & f \\ [0.5ex]
+                \hline
+                \hline
+
+                \hline
+              \end{tabular}
+            \end{center}
+          \end{table}
+  \end{enumerate}
+}
+
+
+
+\end{document}

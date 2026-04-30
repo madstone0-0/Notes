@@ -197,8 +197,11 @@ def compileOne(dir: str, force: bool, mtime: bool, notebooks: bool = True) -> li
             nowLower = now - datetime.timedelta(minutes=5)
             nowLower = nowLower.timestamp()
 
+            chk = genChecksum(file)
+            existingChk = checksums.get(str(file), None)
             if (
-                genChecksum(file) != checksums[str(file)]
+                chk != existingChk
+                or existingChk is None
                 or force
                 or (mtime and (modTime > nowLower and modTime < nowUpper))
             ):
@@ -282,11 +285,14 @@ if __name__ == "__main__":
     args = argv[1:]
     yearDict: Dict[str, Dict[str, list[str]] | list[str]] = {
         "Y1": {
+            "S1": [
+                "Calc/Y1/S1",
+            ],
             "S2": [
-                "Calc/Y1/Semester_1",
-                "Calc/Y1/Semester_2",
+                "Calc/Y1/S2",
                 "CompSci/Y1/Information_Systems",
-            ]
+                "CompSci/Y1/Runestone",
+            ],
         },
         "Y2": {
             "S1": [
@@ -324,23 +330,26 @@ if __name__ == "__main__":
         },
         "Y4": {
             "S1": ["CompSci/Y4/S1/ISS", "CompSci/Y4/S1/OS", "Liberal/Finance"],
+            "S2": ["CompSci/Y4/S2/Networks"],
         },
         "Personal": [
             "CompSci/Personal/Intro_To_Machine_Learning",
             "CompSci/Personal/Algorithms",
             "Calc/Personal/Calc_I_II",
-            "Calc/Personal/Calc_I_III",
+            "Calc/Personal/Calc_III",
             "CompSci/Personal/Deep_Learning",
         ],
     }
 
     dirs = [
+        *yearDict["Y4"]["S2"],
         *yearDict["Y4"]["S1"],
         *yearDict["Y3"]["S2"],
         *yearDict["Y3"]["S1"],
-        *yearDict["Y2"]["S1"],
         *yearDict["Y2"]["S2"],
-        # *yearDict["Y1"]["S2"],
+        *yearDict["Y2"]["S1"],
+        *yearDict["Y1"]["S2"],
+        *yearDict["Y1"]["S1"],
         *yearDict["Personal"],
     ]
 

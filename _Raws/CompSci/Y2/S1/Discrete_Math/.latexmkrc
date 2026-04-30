@@ -1,1 +1,1 @@
-$out_dir = "../../../_Exported/CompSci/Discrete_Math"
+$out_dir = "../../../../../_Exported/CompSci/Y2/S1/Discrete_Math/"

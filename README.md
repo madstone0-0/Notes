@@ -4,21 +4,62 @@ Welcome to my collection of personal and university notes! Here you'll find a mi
 
 ### What's Inside?
 
-**Lecture Notes**: Notes from my university courses, covering various subjects such as:
+Notes are organized into the following top-level categories:
 
-- Discrete Mathematics and Theory
-- Calculus I and II
-- Linear Algebra
-- Data Structures and Algorithms
-- Machine Learning and AI
-- Statistics and Probability
-- Algorithm Design and Analysis
-- Hardware and System Fundamentals
+#### 🖥️ Computer Science (University — Y1 to Y4)
+
+| Year | Semester | Subjects |
+|------|----------|----------|
+| Y1 | — | Information Systems, Runestone |
+| Y2 | S1 | Discrete Mathematics |
+| Y2 | S2 | Data Structures, Databases, Intro to AI, Linear Algebra |
+| Y3 | S1 | Algorithm Design & Analysis, Hardware & Digital Logic, Machine Learning, Web Development |
+| Y3 | S2 | Computer Organization & Architecture (COA), Software Engineering, Simulation, Research Notes |
+| Y4 | S1 | Information Systems Security (ISS), Operating Systems |
+| Y4 | S2 | Computer Networks |
+
+#### 🖥️ Computer Science (Personal)
+
+- Algorithms
+- Deep Learning
+- Intro to Machine Learning (Decision Trees, SVMs, Linear Models, Naive Bayes)
+- Leetcode Patterns (Prefix Sum, Two Pointers)
+
+#### ∫ Calculus (University — Y1)
+
+- Semester 1: Limits & Continuity, Derivatives, Implicit Differentiation, Optimization, Trigonometry, Exponential & Logarithmic Functions
+- Semester 2: Integration, Differential Equations
+
+#### ∫ Calculus (Personal)
+
+- Calculus I & II
+- Calculus III
+
+#### 📊 Statistics
+
+- Producing Data
+- Exploratory Data Analysis
+- Probability
+- Inference
+
+#### 🎓 Liberal Arts
+
+- Economics (Money, Savings & Investment, Trade)
+- Finance (CVP, Capital, Financial Environment, Financial Statements, Profit, Risk, Tax Environment, Value)
+- Fundamentals of Digital Economy (FDE)
+
+#### 📝 Homework
+
+- Y2 S1: Discrete Mathematics, OOP
+- Y2 S2: Linear Algebra
+- Y3 S1: Algorithms, Hardware, Machine Learning
+- Y3 S2: Computer Organization & Architecture
+- Y4 S1: Operating Systems
 
 ### How to Navigate
 
-- **_Exported**: Contains rendered notes organized in course folders. These are rendered from Latex and Markdown files using the build script `build.py`
-- **_Raws**: Notes are organized by course in folders and by topic in files. File names should give you a good idea of the content within.
+- **_Exported**: Contains rendered notes (PDFs) organized in course folders. These are rendered from LaTeX and Markdown files using the build script `build.py`
+- **_Raws**: Source notes organized by category, year, and semester. File names reflect the topic within.
 
 ### Contributions
 
